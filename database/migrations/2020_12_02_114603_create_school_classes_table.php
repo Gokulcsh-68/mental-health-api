@@ -15,12 +15,12 @@ class CreateSchoolClassesTable extends Migration
     {
         Schema::create('classes', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name', 20);
             $table->unsignedBigInteger('school_id');
-            $table->unsignedBigInteger('in_charge_id')->comment='Staff in-charge to the class';
+            $table->unsignedBigInteger('staff_id')->comment='Staff in-charge to the class';
 
             $table->foreign('school_id')->references('id')->on('schools')->onDelete('restrict')->onUpdate('cascade');
-            $table->foreign('in_charge_id')->references('id')->on('staffs')->onDelete('restrict')->onUpdate('cascade');
+            $table->foreign('staff_id')->references('id')->on('staffs')->onDelete('restrict')->onUpdate('cascade');
         });
     }
 
@@ -32,7 +32,7 @@ class CreateSchoolClassesTable extends Migration
     public function down()
     {
         Schema::table('classes', function (Blueprint $table) {
-            $table->dropForeign(['in_charge_id']);
+            $table->dropForeign(['staff_id']);
         });
 
         Schema::dropIfExists('classes');

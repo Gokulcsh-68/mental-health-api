@@ -16,7 +16,7 @@ class CreateMastersTable extends Migration
         Schema::create('masters', function (Blueprint $table) {
             $table->id();
             $table->string('master_type_slug', 45);
-            $table->string('name');
+            $table->string('name', 255);
             $table->string('slug', 45);
             $table->json('attributes')->nullable();
             $table->boolean('is_active')->default(0)->comment="0-Inactive, 1-Active";
