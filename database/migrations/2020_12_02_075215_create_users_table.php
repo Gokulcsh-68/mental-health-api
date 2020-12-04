@@ -25,7 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('secret');
             $table->string('password')->nullable();
             $table->string('profile_image')->nullable();
-            $table->string('gender')->nullable();
+            $table->string('gender', 45)->nullable();
             $table->date('dob')->nullable();
             $table->string('blood_group', 5)->nullable();
             $table->unsignedInteger('timezone_id');

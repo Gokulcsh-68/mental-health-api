@@ -15,9 +15,10 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             RolesTableSeeder::class,
-            CountriesTableSeeder::class,
+            MasterTypesTableSeeder::class,
+            CountriesSeeder::class,
+            GenderSeeder::class,
             TimezonesTableSeeder::class,
-            GenderTableSeeder::class,
         ]);
     }
 }

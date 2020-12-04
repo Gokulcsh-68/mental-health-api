@@ -18,6 +18,7 @@ class CreateSchoolStudentTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('school_id');
             $table->unsignedBigInteger('class_id');
+            
             $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict')->onUpdate('cascade');
             $table->foreign('school_id')->references('id')->on('schools')->onDelete('restrict')->onUpdate('cascade');
             $table->foreign('class_id')->references('id')->on('classes')->onDelete('restrict')->onUpdate('cascade');

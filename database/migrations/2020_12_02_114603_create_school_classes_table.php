@@ -16,7 +16,10 @@ class CreateSchoolClassesTable extends Migration
         Schema::create('classes', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->unsignedBigInteger('in_charge_id');
+            $table->unsignedBigInteger('school_id');
+            $table->unsignedBigInteger('in_charge_id')->comment='Staff in-charge to the class';
+
+            $table->foreign('school_id')->references('id')->on('schools')->onDelete('restrict')->onUpdate('cascade');
             $table->foreign('in_charge_id')->references('id')->on('staffs')->onDelete('restrict')->onUpdate('cascade');
         });
     }

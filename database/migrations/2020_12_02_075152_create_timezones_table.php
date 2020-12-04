@@ -15,7 +15,7 @@ class CreateTimeZonesTable extends Migration
     public function up()
     {
         Schema::create('timezones', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->char('country_code', 2);
             $table->string('zone_name', 128)->unique();
         });

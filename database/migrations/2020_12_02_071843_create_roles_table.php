@@ -17,7 +17,7 @@ class CreateRolesTable extends Migration
             $table->id('id');
             $table->string('code', 32)->unique();
             $table->string('name', 32)->comment = 'Display name';
-            $table->json('permissions');
+            $table->json('permissions')->nullable();
             $table->boolean('is_active')->default(0)->comment="0-Inactive, 1-Active";
         });
     }

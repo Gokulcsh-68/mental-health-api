@@ -18,10 +18,12 @@ class CreateMastersTable extends Migration
             $table->string('master_type_slug', 45);
             $table->string('name');
             $table->string('slug', 45);
+            $table->json('attributes')->nullable();
             $table->boolean('is_active')->default(0)->comment="0-Inactive, 1-Active";
             $table->timestamps();
 
             $table->unique(['master_type_slug', 'slug']);
+            $table->index('slug');
             $table->foreign('master_type_slug')->references('slug')->on('master_types')->onDelete('restrict')->onUpdate('cascade');
         });
     }
