@@ -23,9 +23,9 @@ $app = new Laravel\Lumen\Application(
     dirname(__DIR__)
 );
 
-// $app->withFacades();
+$app->withFacades();
 
-// $app->withEloquent();
+$app->withEloquent();
 
 /*
 |--------------------------------------------------------------------------
@@ -60,6 +60,10 @@ $app->singleton(
 */
 
 $app->configure('app');
+$app->configure('api');
+$app->configure('database');
+$app->configure('cors');
+
 
 /*
 |--------------------------------------------------------------------------
@@ -79,7 +83,10 @@ $app->configure('app');
 // $app->routeMiddleware([
 //     'auth' => App\Http\Middleware\Authenticate::class,
 // ]);
-
+    $app->routeMiddleware([
+	    'resource' => App\Middleware\ResourceMiddleware::class,
+	]);
+    
 /*
 |--------------------------------------------------------------------------
 | Register Service Providers
@@ -91,9 +98,10 @@ $app->configure('app');
 |
 */
 
-// $app->register(App\Providers\AppServiceProvider::class);
-// $app->register(App\Providers\AuthServiceProvider::class);
-// $app->register(App\Providers\EventServiceProvider::class);
+$app->register(App\Providers\AppServiceProvider::class);
+$app->register(App\Providers\AuthServiceProvider::class);
+$app->register(App\Providers\EventServiceProvider::class);
+$app->register(Pearl\RequestValidate\RequestServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
@@ -107,7 +115,7 @@ $app->configure('app');
 */
 
 $app->router->group([
-    'namespace' => 'App\Http\Controllers',
+    'namespace' => 'App\Services',
 ], function ($router) {
     require __DIR__.'/../routes/web.php';
 });

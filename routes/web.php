@@ -16,3 +16,14 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+	$router->group(['middleware'=>['resource']], function ($router) {
+	    $router->post('{resource}', 'ResourceService@create');
+	    $router->put('{resource}/{id:[0-9]+}', 'ResourceService@update');
+    	$router->patch('{resource}/{id:[0-9]+}', 'ResourceService@partialUpdate');
+    	$router->get('{resource}', 'ResourceService@list');
+	    $router->get('{resource}/first', 'ResourceService@getFirst');
+	    $router->get('{resource}/{id:[0-9]+}', 'ResourceService@fetch');
+	    $router->delete('{resource}/{id:[0-9]+}', 'ResourceService@delete');
+    });
+    
