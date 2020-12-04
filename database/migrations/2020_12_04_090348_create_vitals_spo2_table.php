@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSchoolStaffTable extends Migration
+class CreateVitalsSpo2Table extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateSchoolStaffTable extends Migration
      */
     public function up()
     {
-        Schema::create('staffs', function (Blueprint $table) {
+        Schema::create('vitals_spo2', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('school_id');
-            $table->boolean('is_admin');
+            $table->string('value', 5);
+            $table->char('measurement', 5);
             $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict')->onUpdate('cascade');
-            $table->foreign('school_id')->references('id')->on('schools')->onDelete('restrict')->onUpdate('cascade');
+            $table->timestamps();
         });
     }
 
@@ -30,11 +30,10 @@ class CreateSchoolStaffTable extends Migration
      */
     public function down()
     {
-        Schema::table('staffs', function (Blueprint $table) {
+        Schema::table('vitals_spo2', function (Blueprint $table) {
             $table->dropForeign(['user_id']);
-            $table->dropForeign(['school_id']);
         });
 
-        Schema::dropIfExists('staffs');
+        Schema::dropIfExists('vitals_spo2');
     }
 }

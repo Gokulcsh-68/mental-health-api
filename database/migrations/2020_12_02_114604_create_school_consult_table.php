@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSchoolStaffTable extends Migration
+class CreateSchoolConsultTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,19 @@ class CreateSchoolStaffTable extends Migration
      */
     public function up()
     {
-        Schema::create('staffs', function (Blueprint $table) {
+        Schema::create('consults', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('school_id');
-            $table->boolean('is_admin');
+            $table->unsignedBigInteger('class_id');
+            $table->string('consult_type', 16);
+            $table->string('consult_slot_type');
+            $table->dateTime('consult_date_time', 0);
+            $table->string('consult_date_time');
+
+
             $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict')->onUpdate('cascade');
             $table->foreign('school_id')->references('id')->on('schools')->onDelete('restrict')->onUpdate('cascade');
+            $table->foreign('class_id')->references('id')->on('classes')->onDelete('restrict')->onUpdate('cascade');
         });
     }
 
@@ -30,11 +36,12 @@ class CreateSchoolStaffTable extends Migration
      */
     public function down()
     {
-        Schema::table('staffs', function (Blueprint $table) {
+        Schema::table('consults', function (Blueprint $table) {
             $table->dropForeign(['user_id']);
             $table->dropForeign(['school_id']);
+            $table->dropForeign(['class_id']);
         });
 
-        Schema::dropIfExists('staffs');
+        Schema::dropIfExists('consults');
     }
 }
