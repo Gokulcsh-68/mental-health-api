@@ -16,9 +16,8 @@ class CreateSchoolAdminTable extends Migration
         Schema::create('schools', function (Blueprint $table) {
             $table->id();
             $table->string('reg_no')->comment='Registration Number';
-            $table->string('contact_person')->nullable();
-            $table->string('contact_person_number')->nullable();
-            $table->string('logo')->nullable();
+            $table->string('logo', 255)->nullable();
+            $table->json('additional_info')->nullable();
             $table->timestamps();
         });
     }
