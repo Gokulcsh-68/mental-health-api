@@ -17,7 +17,7 @@ class VitalSeeder extends Seeder
         $seeders = [
     		[
                 'master_type_slug' => 'units', 
-                'slug' => 'Unit', 
+                'slug' => 'unit', 
                 'name' => 'Unit',
                 'attributes' => json_encode([
                     'Weight' => [
@@ -77,7 +77,7 @@ class VitalSeeder extends Seeder
             [
                 'master_type_slug' => 'types', 
                 'slug' => 'type', 
-                'name' => 'type',
+                'name' => 'Type',
                 'attributes' => json_encode([
                     'Temperature' => [
                         ["name"=> "Oral", "code"=> "Oral"],
@@ -96,56 +96,56 @@ class VitalSeeder extends Seeder
             ],
             [
                 'master_type_slug' => 'vitals', 
-                'slug' => 'BMI', 
+                'slug' => 'bmi', 
                 'name' => 'BMI',
                 'attributes' => json_encode([]),
                 'is_active' => 1,
             ],
             [
                 'master_type_slug' => 'vitals', 
-                'slug' => 'Temperature', 
+                'slug' => 'temperature', 
                 'name' => 'Temperature',
                 'attributes' => json_encode([]),
                 'is_active' => 1,
             ],
             [
                 'master_type_slug' => 'vitals', 
-                'slug' => 'BloodSugar', 
+                'slug' => 'blood-sugar', 
                 'name' => 'Blood Sugar',
                 'attributes' => json_encode([]),
                 'is_active' => 1,
             ],
             [
                 'master_type_slug' => 'vitals', 
-                'slug' => 'SpO2', 
+                'slug' => 'spO2', 
                 'name' => 'SpO2',
                 'attributes' => json_encode([]),
                 'is_active' => 1,
             ],
             [
                 'master_type_slug' => 'vitals', 
-                'slug' => 'Urine', 
+                'slug' => 'urine', 
                 'name' => 'Urine',
                 'attributes' => json_encode([]),
                 'is_active' => 1,
             ],
             [
                 'master_type_slug' => 'vitals', 
-                'slug' => 'BloodPressure', 
+                'slug' => 'blood-pressure', 
                 'name' => 'Blood Pressure',
                 'attributes' => json_encode([]),
                 'is_active' => 1,
             ],
             [
                 'master_type_slug' => 'vitals', 
-                'slug' => 'HeartRate', 
+                'slug' => 'heart-rate', 
                 'name' => 'Heart Rate',
                 'attributes' => json_encode([]),
                 'is_active' => 1,
             ],
             [
                 'master_type_slug' => 'vitals', 
-                'slug' => 'LipidProfile', 
+                'slug' => 'lipid-profile', 
                 'name' => 'Lipid Profile',
                 'attributes' => json_encode([]),
                 'is_active' => 1,
