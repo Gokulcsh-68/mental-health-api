@@ -4,9 +4,13 @@ namespace App\Enums;
 
 class UserTypeEnum extends EnumAbstract
 {
-    const Patient = "patient";
+    const SUPERADMIN = "admin";
 
-    const Provider = "provider";
-    
-    const Admin = "admin";
+    const ADMIN = "school";
+
+    const PROVIDER = "provider";
+
+    const STAFF = "staff";
+
+    const PATIENT = "student";
 }

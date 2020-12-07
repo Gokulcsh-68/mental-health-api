@@ -1,8 +1,9 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Factories\Entities;
 
-use App\Models\User;
+use App\Entities\Timezone;
+use App\Entities\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class UserFactory extends Factory
@@ -21,13 +22,19 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+        $email = $this->faker->unique()->safeEmail;
+        $timezone_id = Timezone::first()->id;
         return [
             'first_name' => $this->faker->name,
             'last_name' => $this->faker->name,
-            'email' => $this->faker->unique()->safeEmail,
-            'username' => $this->faker->unique()->safeEmail,
+            'role_id' => 1,
+            'email' => $email,
+            'username' => $email,
             'password' => app('hash')->make('Test123'),
-            'address' => '[{"address":"#78 DHJE"}]'
+            'secret' => 'secret',
+            'address' => json_encode(['address' => '#78 DHJE']),
+            'timezone_id' => $timezone_id,
+            'is_active' => true,
         ];
     }
 }

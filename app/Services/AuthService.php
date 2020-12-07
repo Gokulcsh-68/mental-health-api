@@ -2,21 +2,18 @@
 
 namespace App\Services;
 
-use Carbon\Carbon;
 use App\Entities\User;
+use App\Requests\GeneralLoginRequest;
 use App\Utils\AuthHelper;
-use App\Jobs\SendEmailJob;
-use Illuminate\Http\Request;
-use App\Enums\InternalCodeEnum;
-use App\Enums\EmailTemplateEnum;
-use App\Enums\UserEventTypeEnum;
-use Illuminate\Http\JsonResponse;
+// use Illuminate\Http\Request;
+
 // use App\Requests\VerifyOtpRequest;
 // use App\Requests\ChangeEmailRequest;
 // use App\Requests\VerifyEmailRequest;
 // use App\Requests\SetPasswordRequest;
 // use App\Requests\PatientCheckRequest;
-// use App\Requests\GeneralLoginRequest;
+use Illuminate\Http\JsonResponse;
+
 // use App\Requests\PatientLoginRequest;
 // use App\Requests\ChangePasswordRequest;
 // use App\Requests\ChangeUserPasswordRequest;
@@ -25,7 +22,7 @@ use Illuminate\Http\JsonResponse;
 class AuthService extends BaseService
 {
     use AuthHelper;
-    
+
     /**
      * General login.
      *
@@ -34,7 +31,7 @@ class AuthService extends BaseService
      * @return json
      */
 
-    public function generalLogin(Request $request, User $user): JsonResponse
+    public function generalLogin(GeneralLoginRequest $request, User $user): JsonResponse
     {
         $message = trans('auth.failed');
         $requestedData = $request->json()->all();
@@ -42,38 +39,25 @@ class AuthService extends BaseService
 
         if ($user) {
             if ($user->isValidUser($requestedData)) {
-                $role = $user->role;
+                $result = [];
+                // $role = $user->role;
+                // $result['policy'] = $role ? (object) $role->policy : (object) [];
                 $result['info'] = $user->getBasicInfo();
-                $result['policy'] = $role ? (object) $role->policy : (object)[];
-                $result = array_merge($result, $this->successLogin($user));
-                
+                // $result = array_merge($result, $this->successLogin($user));
+
                 $data['userId'] = $user->id;
-                
+
                 return $this->httpResponse->setHttpData($result)
                     ->setHttpHeader(['Authorization' => $this->getAuthorization($data)])
                     ->jsonResponse();
-            } else if(!$user->active) {
+            } else if (!$user->active) {
                 $message = trans('auth.in_active');
-            } else if ($user->provider) {
-                if (!$user->isSetupOver()) {
-                    $job = (new SendEmailJob(['otp' => $this->generateOtp($user->secret), 'email' => $user->email, 'name' => $user->getFullName(), 'template' => EmailTemplateEnum::Otp]))->onQueue('sendEmail');
-                    dispatch($job);
-
-                    return $this->httpResponse->setHttpCode(409)
-                        ->setHttpHeader(['Authorization' => $this->getAuthorization(['userId' => $user->id])])
-                        ->setHttpData(['internal_code' => InternalCodeEnum::PasswordNotSet])
-                        ->setHttpMessage("Password Not Set")
-                        ->jsonResponse();
-                }
             }
         }
 
         return $this->httpResponse->setHttpMessage($message)->setHttpCode(401)->jsonResponse();
     }
 
- 
-
- 
     // /**
     //  * User Set password.
     //  *
@@ -148,7 +132,7 @@ class AuthService extends BaseService
     //     $user->save();
     //     $tokenPayload['userId'] = $user->id;
     //     $tokenPayload['emailVerifyToken'] = aesEncrypt($user->email_verify_token . ":" . $user->email);
-        
+
     //     return $this->httpResponse->setHttpHeader(['Authorization' => $this->getAuthorization($tokenPayload)])
     //         ->jsonResponse();
     // }
@@ -172,15 +156,15 @@ class AuthService extends BaseService
     //         $user->custom_attributes = $customAttributes;
     //         $user->save();
     //         $emailVerifyToken = aesEncrypt($user->email_verify_token . ":" . $user->email . ":" . EmailTemplateEnum::ForgotPassword);
-            
+
     //         $job = (new SendEmailJob(['token' => $emailVerifyToken, 'email' => $user->email, 'name' => $user->getFullName(), 'template' => EmailTemplateEnum::ForgotPassword]))->onQueue('sendEmail');
     //         dispatch($job);
-            
+
     //         $this->httpResponse->setHttpMessage("Password reset link sent to email.");
     //     } else {
     //         $this->httpResponse->setHttpMessage("Email not found")->setHttpCode(404);
     //     }
-        
+
     //     return $this->httpResponse->jsonResponse();
     // }
 
@@ -221,7 +205,7 @@ class AuthService extends BaseService
     //     } else {
     //         $this->httpResponse->setHttpMessage("Invalid Otp.")->setHttpCode(400);
     //     }
-        
+
     //     return $this->httpResponse->jsonResponse();
     // }
 
@@ -263,7 +247,7 @@ class AuthService extends BaseService
 
     //         $this->httpResponse->setHttpData(['info' => $user->getBasicInfo()]);
     //         $tokenPayload['userId'] = $user->id;
-            
+
     //         $this->httpResponse->setHttpHeader(['Authorization' => $this->getAuthorization($tokenPayload)]);
     //     } else {
     //         $this->httpResponse->setHttpMessage("Invalid Token.")->setHttpCode(400);
@@ -302,16 +286,16 @@ class AuthService extends BaseService
     // {
     //     $user = $user->where('email', $request->get('email'))
     //         ->first();
-    //     if ($user) {            
+    //     if ($user) {
     //         $job = (new SendEmailJob(['otp' => $this->generateOtp($user->secret), 'email' => $user->email, 'name' => $user->getFullName(), 'template' => EmailTemplateEnum::Otp]))->onQueue('sendEmail');
     //         dispatch($job);
-            
+
     //         $this->httpResponse->setHttpMessage("Otp sent to email.")
     //             ->setHttpHeader(['Authorization' => $this->getAuthorization(['userId' => $user->id])]);
     //     } else {
     //         $this->httpResponse->setHttpMessage("Email not found")->setHttpCode(404);
     //     }
-        
+
     //     return $this->httpResponse->jsonResponse();
     // }
 }

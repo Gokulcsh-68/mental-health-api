@@ -2,9 +2,9 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Support\Str;
-use Illuminate\Console\GeneratorCommand;
 use App\Traits\ConsoleCodeAutoGenHelper;
+use Illuminate\Console\GeneratorCommand;
+use Illuminate\Support\Str;
 
 class EntityMakeCommand extends GeneratorCommand
 {
@@ -67,7 +67,7 @@ class EntityMakeCommand extends GeneratorCommand
      */
     protected function buildClass($name)
     {
-        $entityFields = ["fillable" => "", "casts" => "",  "dates" => "", "dispatchesEvents" => ""];
+        $entityFields = ["fillable" => "", "casts" => "", "dates" => "", "dispatchesEvents" => ""];
         $columns = $this->getSchemaDetails($this->argument('name'));
 
         foreach ($columns as $column => $columnType) {

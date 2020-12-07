@@ -3,8 +3,8 @@
 namespace App\Middleware;
 
 use Closure;
-use Illuminate\Contracts\Auth\Factory as Auth;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Contracts\Auth\Factory as Auth;
 
 class UserAuthenticate
 {
@@ -37,7 +37,7 @@ class UserAuthenticate
     public function handle($request, Closure $next, $guard = null)
     {
         if ($this->auth->guard($guard)->guest()) {
-            
+
             throw new AuthorizationException("Unauthorized");
         }
 

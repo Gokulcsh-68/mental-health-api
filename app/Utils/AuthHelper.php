@@ -2,12 +2,11 @@
 
 namespace App\Utils;
 
+use App\Enums\UserEventTypeEnum;
 use Carbon\Carbon;
 use Firebase\JWT\JWT;
-use Illuminate\Http\Request;
-use App\Enums\UserEventTypeEnum;
-use lfkeitel\phptotp\{Totp,Base32};
 use Illuminate\Support\Facades\Cache;
+use lfkeitel\phptotp\Totp;
 
 trait AuthHelper
 {
@@ -20,12 +19,12 @@ trait AuthHelper
         $ttl = config('app.jwt.ttl');
         $tokenId = base64_encode(openssl_random_pseudo_bytes(32));
         $ip = app('request')->get('ip') ? app('request')->get('ip') : app('request')->ip();
-        $expiration = Carbon::now()->addSeconds($ttl+5)->timestamp;
+        $expiration = Carbon::now()->addSeconds($ttl + 5)->timestamp;
         $token = [
             "jti" => $tokenId,
             "iss" => $ip,
             "exp" => $expiration,
-            "data" => $data
+            "data" => $data,
         ];
 
         return aesEncrypt(JWT::encode($token, $key));
