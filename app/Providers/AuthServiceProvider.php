@@ -2,12 +2,13 @@
 
 namespace App\Providers;
 
-use App\Models\User;
-use Illuminate\Support\Facades\Gate;
+use App\Entities\User;
+use App\Utils\AuthHelper;
 use Illuminate\Support\ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
 {
+    use AuthHelper;
     /**
      * Register any application services.
      *
@@ -31,9 +32,31 @@ class AuthServiceProvider extends ServiceProvider
         // the User instance via an API token or any other method necessary.
 
         $this->app['auth']->viaRequest('api', function ($request) {
-            if ($request->input('api_token')) {
-                return User::where('api_token', $request->input('api_token'))->first();
+            if ($request->bearerToken()) {
+                $authorization = $request->bearerToken();
+                $decodedToken = $this->decodeJwt($authorization);
+                if (empty($decodedToken->data->userId) === false) {
+                    $user = User::where('id', $decodedToken->data->userId)->active()->firstOrFail();
+
+                    return $user;
+
+                    /*if ($user->active) {
+                $payload['data'] = $decodedToken->data;
+                if ($user->provider) {
+                $payload['provider'] = $user->provider;
+                }
+                if ($user->patient) {
+                $payload['patient'] = $user->patient;
+                }
+
+                $request->attributes->add($payload);
+
+                return $user;
+                }*/
+                }
             }
+
+            return null;
         });
     }
 }

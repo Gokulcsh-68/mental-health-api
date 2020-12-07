@@ -1,0 +1,1 @@
+{{app('hash')->make('Test123')}}

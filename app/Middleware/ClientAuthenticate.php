@@ -2,27 +2,27 @@
 
 namespace App\Middleware;
 
-use Closure;
+use App\Entities\ApiAccess;
 use Carbon\Carbon;
-// use App\Entities\ApiAccess;
+use Closure;
 use Illuminate\Auth\Access\AuthorizationException;
 
-class ClientAuthenticateMiddleware
+class ClientAuthenticate
 {
     public function handle($request, Closure $next)
     {
         $token = $request->header('x-api-key');
 
         if (empty($token) === true) {
-            
-//            throw new AuthorizationException('Authorization header not found');
+
+            throw new AuthorizationException('Authorization header not found');
         }
 
-        // $apiAccess = ApiAccess::where('token', $token)
-        //     ->first();
+        $apiAccess = ApiAccess::where('token', $token)
+            ->first();
 
-        /*if (!$apiAccess) {
-            
+        if (!$apiAccess) {
+
             throw new AuthorizationException('Invalid token.');
         }
 
@@ -30,8 +30,6 @@ class ClientAuthenticateMiddleware
 
             throw new AuthorizationException('Token expired');
         }
-
-        $request->attributes->add(['apiAccess' => $apiAccess]);*/
 
         return $next($request);
     }

@@ -2,14 +2,14 @@
 
 namespace App\Services;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class ResourceService extends BaseService
 {
     /**
      * Entity Create.
-     *  
+     *
      * @param  \Illuminate\Http\Request  $request
      * @return json
      */
@@ -27,13 +27,12 @@ class ResourceService extends BaseService
 
     /**
      * Entity List.
-     *  
+     *
      * @param  \Illuminate\Http\Request  $request
      * @return json
-    */
-    
-    public function list(Request $request): JsonResponse
-    {
+     */
+
+    function list(Request $request): JsonResponse{
         $resource = $request->attributes->get('resource');
         $entity = $request->attributes->get('entity');
         $collection = callUserFuncArray([$entity, 'getModelList'], [])->paginate($entity->getResourceDataFetchLimit());
@@ -46,11 +45,11 @@ class ResourceService extends BaseService
 
     /**
      * First Entity.
-     *  
+     *
      * @param  \Illuminate\Http\Request  $request
      * @return json
-    */
-    
+     */
+
     public function getFirst(Request $request): JsonResponse
     {
         $resource = $request->attributes->get('resource');
@@ -64,10 +63,10 @@ class ResourceService extends BaseService
 
     /**
      * Entity Fetch.
-     *  
+     *
      * @param  \Illuminate\Http\Request  $request
      * @return json
-    */
+     */
 
     public function fetch($id, Request $request): JsonResponse
     {
@@ -82,10 +81,10 @@ class ResourceService extends BaseService
 
     /**
      * Entity Update.
-     *  
+     *
      * @param  \Illuminate\Http\Request  $request
      * @return json
-    */
+     */
 
     public function update($id, Request $request): JsonResponse
     {
@@ -96,14 +95,14 @@ class ResourceService extends BaseService
         $model = callUserFuncArray([$entity, 'modelUpdateProcess'], [$id, $request]);
 
         return $this->httpResponse->setHttpData([$this->getResourceName($request) => $model["data"]])->setHttpCode($model["success"] ? 200 : 400)->setHttpMessage($model["success"] ? "" : "Unable to update model")->jsonResponse();
-    } 
+    }
 
     /**
      * Entity Partial Update.
-     *  
+     *
      * @param  \Illuminate\Http\Request  $request
      * @return json
-    */
+     */
 
     public function partialUpdate($id, Request $request): JsonResponse
     {
@@ -116,10 +115,10 @@ class ResourceService extends BaseService
 
     /**
      * Entity Delete.
-     *  
+     *
      * @param  \Illuminate\Http\Request  $request
      * @return json
-    */
+     */
 
     public function delete($id, Request $request): JsonResponse
     {
@@ -132,7 +131,7 @@ class ResourceService extends BaseService
 
     /**
      * Entity aggregate.
-     *  
+     *
      * @param  \Illuminate\Http\Request  $request
      * @return json
      */

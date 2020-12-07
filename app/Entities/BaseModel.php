@@ -2,44 +2,45 @@
 
 namespace App\Entities;
 
-use App\Events\AuditLog;
-use App\Entities\Actions\GetEntity;
-use App\Entities\Scopes\PatientScope;
-use App\Entities\Scopes\ProviderScope;
-use App\Entities\Scopes\ConsultScope;
 use App\Entities\Actions\CreateEntity;
-use App\Entities\Actions\UpdateEntity;
 use App\Entities\Actions\DeleteEntity;
+use App\Entities\Actions\GetEntity;
+use App\Entities\Actions\UpdateEntity;
 use App\Entities\Helpers\MutatorHelper;
+use App\Events\AuditLog;
 use Illuminate\Database\Eloquent\Model;
 
 class BaseModel extends Model
 {
-    use CreateEntity, 
-        GetEntity,
-        UpdateEntity,
-        DeleteEntity,
+    use CreateEntity,
+    GetEntity,
+    UpdateEntity,
+    DeleteEntity,
         MutatorHelper;
 
     const VIEW = false;
-    
+
     const CREATE = false;
-    
+
     const UPDATE = false;
-    
+
     const DELETE = false;
-    
+
     const ACTION = false;
 
+    const ACTIVE = 1;
+
+    const INACTIVE = 0;
+
     protected $partialFillable = [];
-    
+
     protected $selectedColumns = ['*'];
 
     /*Temp Fix*/
 
-    const UPDATED_AT = "updated_datetime";
-    
-    const CREATED_AT = "created_datetime";
+    const UPDATED_AT = "updated_at";
+
+    const CREATED_AT = "created_at";
 
     public static function boot()
     {
@@ -77,13 +78,13 @@ class BaseModel extends Model
         });
 
         /*static::deleting(function ($model) {
-            if ($model->isFillable('deleted_by') && app('request')->attributes->get('user')) {
-                logInfo("deleting => " . $model->getTable());
-                $model->deleted_by = app('request')->attributes->get('user')->id;
-                $model->save();
-            }
+        if ($model->isFillable('deleted_by') && app('request')->attributes->get('user')) {
+        logInfo("deleting => " . $model->getTable());
+        $model->deleted_by = app('request')->attributes->get('user')->id;
+        $model->save();
+        }
         });*/
-        
+
         parent::boot();
     }
 
@@ -109,10 +110,10 @@ class BaseModel extends Model
 
     /**
      * Model Response.
-     *  
+     *
      * @param  $model
      * @return array
-    */
+     */
 
     protected function modelResponse($model): array
     {
@@ -121,9 +122,9 @@ class BaseModel extends Model
 
     /**
      * Model Addtiional Process.
-     *  
+     *
      * @return collections
-    */
+     */
 
     public function applyGlobalConditions($model)
     {
