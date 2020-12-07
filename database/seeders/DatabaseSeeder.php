@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             CountriesSeeder::class,
             GenderSeeder::class,
             TimezonesTableSeeder::class,
+            VitalSeeder::class,
         ]);
     }
 }
