@@ -21,7 +21,7 @@ class HttpResponse
         return $this;
     }
 
-    public function setHttpData(array $data): HttpResponse
+    public function setHttpData($data): HttpResponse
     {
         $this->httpData = $data;
 
@@ -45,9 +45,14 @@ class HttpResponse
     public function jsonResponse(): JsonResponse
     {
         return response()->json([
-            'message' => (string) $this->httpMessage,
             'code' => (int) $this->httpCode,
+            'message' => (string) $this->httpMessage,
             'data' => (object) $this->httpData
         ], $this->httpCode, $this->httpHeader);
+    }
+
+    public function streamResponse()
+    {
+        return response($this->httpData, (int) $this->httpCode, $this->httpHeader);
     }
 }

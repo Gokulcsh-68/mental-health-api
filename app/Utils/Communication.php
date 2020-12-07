@@ -2,7 +2,7 @@
 
 namespace App\Utils;
 
-use App\Traits\Api;
+use App\Utils\Api;
 use Twilio\Rest\Client;
 use Illuminate\Http\JsonResponse;
 

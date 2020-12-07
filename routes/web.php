@@ -14,16 +14,48 @@
 */
 
 $router->get('/', function () use ($router) {
+	return view("index");
     return $router->app->version();
 });
 
-	$router->group(['middleware'=>['resource']], function ($router) {
-	    $router->post('{resource}', 'ResourceService@create');
-	    $router->put('{resource}/{id:[0-9]+}', 'ResourceService@update');
-    	$router->patch('{resource}/{id:[0-9]+}', 'ResourceService@partialUpdate');
-    	$router->get('{resource}', 'ResourceService@list');
-	    $router->get('{resource}/first', 'ResourceService@getFirst');
-	    $router->get('{resource}/{id:[0-9]+}', 'ResourceService@fetch');
-	    $router->delete('{resource}/{id:[0-9]+}', 'ResourceService@delete');
-    });
+
+
+$router->group(['prefix' => 'v1/', 'middleware' => 'clientAuth'], function($router) {
+
+
+	$router->group([], function ($router) {
+		$router->group(['prefix' => 'users'], function ($router) {
+			$router->post('authenticate', 'AuthService@generalLogin');
+			$router->post('forgot-password/email', 'AuthService@forgotPasswordEmail');
+			$router->post('forgot-password/email-otp', 'AuthService@forgotPasswordEmailOtp');
+			$router->post('verify-email', 'AuthService@verifyEmail');
+		});
+
+		$router->get('resource/masters/list', 'MasterService@masterList');
+	});
+	
+	$router->group(['middleware' => 'userAuth'], function($router) {
+
+		$router->group(['prefix' => 'users'], function ($router) {
+			$router->patch('set-password', 'AuthService@setPassword');
+			$router->patch('change-password', 'AuthService@changePassword');
+			$router->post('verify-otp', 'AuthService@verifyOtp');
+			$router->post('resend-otp', 'AuthService@resendOtp');
+			$router->patch('{id:[0-9]+}/change-password', ['middleware' => 'acl:users,change-user-password', 'uses' => 'AuthService@changeUserPassword']);
+		});
+		
+		/*Resource Operations*/
+		$router->group(['prefix' => '/resource', 'middleware' => ['resource']], function ($router) {
+			$router->post('{resource}', ['middleware' => 'acl:resource,create', 'uses' => 'ResourceService@create']);
+			$router->put('{resource}/{id:[0-9]+}', ['middleware' => 'acl:resource,update', 'uses' => 'ResourceService@update']);
+			$router->patch('{resource}/{id:[0-9]+}', ['middleware' => 'acl:resource,update', 'uses' => 'ResourceService@partialUpdate']);
+			$router->delete('{resource}/{id:[0-9]+}', ['middleware' => 'acl:resource,delete', 'uses' => 'ResourceService@delete']);
+			$router->get('{resource}', ['middleware' => 'acl:resource,view', 'uses' => 'ResourceService@list']);
+			$router->get('{resource}/first', ['middleware' => 'acl:resource,view', 'uses' => 'ResourceService@getFirst']);
+			$router->get('{resource}/{id:[0-9]+}', ['middleware' => 'acl:resource,view', 'uses' => 'ResourceService@fetch']);
+			$router->get('{resource}/aggregate', ['middleware' => 'acl:resource,view', 'uses' => 'ResourceService@aggregate']);
+		});
+	});
+});
+
     
