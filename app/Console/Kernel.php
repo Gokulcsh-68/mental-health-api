@@ -18,6 +18,7 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\RequestMakeCommand::class,
         \App\Console\Commands\EntitySetGenerateCommand::class,
         \App\Console\Commands\IndexMigrationCommand::class,
+        \App\Console\Commands\ApiAccessCommand::class,
 
     ];
 
