@@ -21,6 +21,9 @@ class MasterTypesTableSeeder extends Seeder
             ['slug' => 'types'],
             ['slug' => 'vitals'],
             ['slug' => 'speciality'],
+            ['slug' => 'ros'],
+            ['slug' => 'physical-examination'],
+            ['slug' => 'stroke-scale'],
     	];
         DB::table('master_types')->insert($master_types);
     }

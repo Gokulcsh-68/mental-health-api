@@ -21,6 +21,8 @@ class DatabaseSeeder extends Seeder
             GenderSeeder::class,
             TimezonesTableSeeder::class,
             VitalSeeder::class,
+            dynamicFormsMasterTableSeeder::class,
+            dynamicFormsTableSeeder::class,
         ]);
     }
 }
