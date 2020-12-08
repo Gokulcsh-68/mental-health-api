@@ -45,6 +45,7 @@ class CreateSchoolConsultTable extends Migration
             $table->dropForeign(['provider_id']);
             $table->dropForeign(['school_id']);
             $table->dropForeign(['class_id']);
+            $table->dropForeign(['speciality']);
         });
 
         Schema::dropIfExists('consults');

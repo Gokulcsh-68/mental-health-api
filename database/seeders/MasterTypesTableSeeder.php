@@ -24,7 +24,9 @@ class MasterTypesTableSeeder extends Seeder
             ['slug' => 'ros'],
             ['slug' => 'physical-examination'],
             ['slug' => 'stroke-scale'],
+            ['slug' => 'assessment_group'],
     	];
+        
         DB::table('master_types')->insert($master_types);
     }
 }

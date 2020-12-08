@@ -23,6 +23,10 @@ class DatabaseSeeder extends Seeder
             VitalSeeder::class,
             dynamicFormsMasterTableSeeder::class,
             dynamicFormsTableSeeder::class,
+            AssessmentGroupSeeder::class,
         ]);
+
+        ini_set('memory_limit', '-1');
+        \DB::unprepared(file_get_contents(__dir__ . '\source\AssessmentDump.sql'));
     }
 }
