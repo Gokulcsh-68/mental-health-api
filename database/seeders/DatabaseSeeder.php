@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
             AssessmentGroupSeeder::class,
         ]);
 
-        ini_set('memory_limit', '-1');
-        \DB::unprepared(file_get_contents(__dir__ . '\source\AssessmentDump.sql'));
+        #ini_set('memory_limit', '-1');
+        #\DB::unprepared(file_get_contents(__dir__ . '\source\AssessmentDump.sql'));
     }
 }
