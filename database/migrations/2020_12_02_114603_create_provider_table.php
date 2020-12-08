@@ -19,7 +19,7 @@ class CreateProviderTable extends Migration
             $table->unsignedBigInteger('school_id');
             $table->date('practicing_since')->nullable();
             $table->string('license_no');
-            $table->json('hospital_info')->nullable();
+            $table->json('specialities')->nullable();
             $table->json('additional_info')->nullable();
             
             $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict')->onUpdate('cascade');
