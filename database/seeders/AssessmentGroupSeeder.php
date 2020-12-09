@@ -17,20 +17,23 @@ class AssessmentGroupSeeder extends Seeder
         $assessmentGroups = [
     		[
                 'master_type_slug' => 'assessment_group', 
-                'slug' => 'Heart', 
-                'name' => 'healthy-heart',
+                'slug' => 'healthy-heart', 
+                'name' => 'Healthy Heart',
+                'attributes' => json_encode([]),
                 'is_active' => 1,
             ],
     		[
                 'master_type_slug' => 'assessment_group', 
-                'slug' => 'Psychiatric', 
-                'name' => 'psychiatric-exam',
+                'slug' => 'psychiatric-exam', 
+                'name' => 'Psychiatric Exam',
+                'attributes' => json_encode([]),
                 'is_active' => 1,
             ],
     		[
                 'master_type_slug' => 'assessment_group', 
-                'slug' => 'Stroke Scale', 
-                'name' => 'stroke-scale',
+                'slug' => 'stroke-scale', 
+                'name' => 'Stroke Scale',
+                'attributes' => json_encode([]),
                 'is_active' => 1,
             ],
     	];
