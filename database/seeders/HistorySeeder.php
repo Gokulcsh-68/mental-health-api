@@ -29,24 +29,28 @@ class HistorySeeder extends Seeder
                 'master_type_slug' => 'history', 
                 'slug' => 'social-history', 
                 'name' => 'Social History',
+                'attributes' => json_encode([]),
                 'is_active' => 1,
             ],
             [
                 'master_type_slug' => 'history', 
                 'slug' => 'medical-history', 
                 'name' => 'Medical History',
+                'attributes' => json_encode([]),
                 'is_active' => 1,
             ],
             [
                 'master_type_slug' => 'history', 
                 'slug' => 'surgical-history', 
                 'name' => 'Surgical History',
+                'attributes' => json_encode([]),
                 'is_active' => 1,
             ],
             [
                 'master_type_slug' => 'history', 
                 'slug' => 'gynecological-history', 
                 'name' => 'Gynecological History',
+                'attributes' => json_encode([]),
                 'is_active' => 1,
             ],
     	];
