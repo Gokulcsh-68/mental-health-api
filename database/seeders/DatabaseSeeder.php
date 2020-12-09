@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             dynamicFormsMasterTableSeeder::class,
             dynamicFormsTableSeeder::class,
             AssessmentGroupSeeder::class,
+            HistorySeeder::class,
         ]);
 
         #ini_set('memory_limit', '-1');
