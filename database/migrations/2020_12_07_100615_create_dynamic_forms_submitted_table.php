@@ -30,7 +30,7 @@ class CreateDynamicFormsSubmittedTable extends Migration
      */
     public function down()
     {
-        Schema::table('dynamic_forms', function (Blueprint $table) {
+        Schema::table('dynamic_forms_submitted', function (Blueprint $table) {
             $table->dropForeign(['slug']);
         });
 
