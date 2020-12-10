@@ -25,20 +25,15 @@ class CreateAvailabilityDetailsTable extends Migration
             $table->string('slot_status');
             $table->string('available_status');
             $table->unsignedBigInteger('created_by');
-            $table->datetime('created_datetime');
             $table->unsignedBigInteger('updated_by');
-            $table->datetime('updated_datetime');
             $table->unsignedBigInteger('deleted_by');
-            $table->datetime('deleted_datetime');
-            $table->unsignedBigInteger('restored_by');
-            $table->datetime('restored_datetime');
             $table->timestamps();
+            $table->datetime('deleted_at');
 
             $table->foreign('provider_id')->references('id')->on('users')->onDelete('restrict')->onUpdate('cascade');
             $table->foreign('created_by')->references('id')->on('users')->onDelete('restrict')->onUpdate('cascade');
             $table->foreign('updated_by')->references('id')->on('users')->onDelete('restrict')->onUpdate('cascade');
             $table->foreign('deleted_by')->references('id')->on('users')->onDelete('restrict')->onUpdate('cascade');
-            $table->foreign('restored_by')->references('id')->on('users')->onDelete('restrict')->onUpdate('cascade');
         });
     }
 
@@ -54,7 +49,6 @@ class CreateAvailabilityDetailsTable extends Migration
             $table->dropForeign(['created_by']);
             $table->dropForeign(['updated_by']);
             $table->dropForeign(['deleted_by']);
-            $table->dropForeign(['restored_by']);
         });
 
         Schema::dropIfExists('availability_details');
