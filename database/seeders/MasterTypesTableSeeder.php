@@ -24,10 +24,11 @@ class MasterTypesTableSeeder extends Seeder
             ['slug' => 'ros'],
             ['slug' => 'physical-examination'],
             ['slug' => 'stroke-scale'],
-            ['slug' => 'assessment_group'],
+            ['slug' => 'assessment-group'],
             ['slug' => 'history'],
             ['slug' => 'health'],
             ['slug' => 'immunisation'],
+            ['slug' => 'consult-menu'],
     	];
         
         DB::table('master_types')->insert($master_types);
