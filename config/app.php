@@ -113,8 +113,8 @@ return [
         'ttl' => env('JWT_TTL', 6000),
     ],
     'slack' => [
-        'url' => env('LOG_SLACK_WEBHOOK_URL', 'https://hooks.slack.com/services/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'),
-        'channel' => env('SLACK_CHANNEL', 'bwc-api'),
+        'url' => env('LOG_SLACK_WEBHOOK_URL', ''),
+        'channel' => env('SLACK_CHANNEL', ''),
     ],
 
 ];

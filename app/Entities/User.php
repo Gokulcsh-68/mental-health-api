@@ -60,9 +60,21 @@ class User extends BaseModel
 
     ];
 
+     public static function boot()
+    {
+        parent::boot();
+
+        parent::observe(new \App\Observers\UserObserver());
+    }
+
     public function role()
     {
         return $this->belongsTo(Role::class);
+    }
+
+    public function school()
+    {
+        return $this->hasOne(School::class);
     }
 
     public function generalLoginAttempt($attributes, $field = "username"):  ? User

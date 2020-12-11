@@ -15,10 +15,13 @@ class CreateSchoolAdminTable extends Migration
     {
         Schema::create('schools', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->string('reg_no')->comment='Registration Number';
             $table->string('logo', 255)->nullable();
             $table->json('additional_info')->nullable();
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict')->onUpdate('cascade');
         });
     }
 
@@ -29,6 +32,11 @@ class CreateSchoolAdminTable extends Migration
      */
     public function down()
     {
+
+        Schema::table('schools', function (Blueprint $table) {
+            $table->dropForeign(['user_id']);
+        });
+
         Schema::dropIfExists('schools');
     }
 }
