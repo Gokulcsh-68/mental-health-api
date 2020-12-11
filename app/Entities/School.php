@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Entities;
+use DB;
 
 class School extends BaseModel
 {
@@ -18,7 +19,7 @@ class School extends BaseModel
      * @var array
      */
     protected $fillable = [
-        "reg_no", "logo", "additional_info"
+        "reg_no", "user_id", "logo", "additional_info"
     ];
 
     /**
@@ -65,4 +66,31 @@ class School extends BaseModel
     protected $dispatchesEvents = [
         
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+     protected function createModel($request)
+    {
+        $data = $this->getModelAttributes($request);
+
+        DB::beginTransaction();
+        try {
+
+            $user = $this->user()->create($data['user']);
+            $data['user_id'] = $user->id;
+            $model = $this->create($data);
+            
+            DB::commit();
+
+            return $model;
+        } catch(Exception $e) {
+            exceptionLogger("school Create Rollback", $e);
+            DB::rollback();
+        }
+        
+        return null;
+    }
 }

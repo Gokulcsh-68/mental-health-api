@@ -17,6 +17,7 @@ class SchoolTransformer extends JsonResource
     {
         return [
             'reg_no' =>  $this->reg_no,
+            'user_id' =>  $this->user_id,
             'logo' =>  $this->logo,
             'additional_info' =>  $this->additional_info
         ];
