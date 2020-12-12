@@ -77,6 +77,11 @@ class User extends BaseModel
         return $this->hasOne(School::class);
     }
 
+    /*public function provider()
+    {
+        return $this->hasOne(Provider::class);
+    }*/
+
     public function generalLoginAttempt($attributes, $field = "username"):  ? User
     {
         $model = self::where($field, $attributes[$field])
