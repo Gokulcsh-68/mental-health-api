@@ -4,9 +4,8 @@ namespace App\Entities;
 
 use DB;
 
-class Staff extends BaseModel
+class Student extends BaseModel
 {
-
     const VIEW = true;
 
     const CREATE = true;
@@ -15,7 +14,7 @@ class Staff extends BaseModel
 
     const ACTION = true;
 
-    protected $table = 'staffs';
+    public $timestamps = false;
 
     /**
      * The attributes that are mass assignable.
@@ -23,7 +22,7 @@ class Staff extends BaseModel
      * @var array
      */
     protected $fillable = [
-        "user_id", "school_id", "is_admin",
+        "user_id", "school_id", "class_id",
     ];
 
     /**
@@ -81,21 +80,24 @@ class Staff extends BaseModel
         return $this->belongsTo(School::class);
     }
 
+    public function schoolclass()
+    {
+        return $this->belongsTo(SchoolClass::class);
+    }
+
     protected function createModel($request)
     {
         $data = $this->getModelAttributes($request);
 
         DB::beginTransaction();
         try {
+
             $user = User::create($data['user']);
 
-            $staff = [
-                'school_id' => $request->user()->staff->school_id,
-                'user_id' => $user->id,
-                'is_admin' => 0,
-            ];
+            $data['school_id'] = $request->get('staff')->school_id;
+            $data['user_id'] = $user->id;
 
-            $model = $this->create($staff);
+            $model = $this->create($data);
             DB::commit();
             return $model;
         } catch (Exception $e) {

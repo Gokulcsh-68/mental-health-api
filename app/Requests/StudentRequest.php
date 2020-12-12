@@ -4,7 +4,7 @@ namespace App\Requests;
 
 use Pearl\RequestValidate\RequestAbstract;
 
-class StaffRequest extends RequestAbstract
+class StudentRequest extends RequestAbstract
 {
     /**
      * Get the validation rules that apply to the request.
@@ -16,7 +16,7 @@ class StaffRequest extends RequestAbstract
         $rules = [
             // 'user_id' => 'required',
             // 'school_id' => 'required',
-            // 'is_admin'  => 'required'
+            'class_id' => 'required',
         ];
 
         $rules['user'] = (new UserRequest())->rules();

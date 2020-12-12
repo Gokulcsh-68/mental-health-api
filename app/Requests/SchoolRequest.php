@@ -15,9 +15,12 @@ class SchoolRequest extends RequestAbstract
     {
         $rules = [
             'reg_no' => 'required',
+            'name' => 'required|unique:schools,name',
             'logo' => 'nullable',
-            'additional_info' => 'nullable'
+            'additional_info' => 'nullable',
         ];
+
+        // $rules += (new StaffRequest())->rules();
 
         $rules['user'] = (new UserRequest())->rules();
 
@@ -32,7 +35,7 @@ class SchoolRequest extends RequestAbstract
     public function messages(): array
     {
         return [
-            //
+            "name.unique" => "School name already taken"
         ];
     }
 }

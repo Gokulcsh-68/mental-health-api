@@ -15,7 +15,7 @@ class CreateSchoolConsultTable extends Migration
     {
         Schema::create('consults', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('patient_id')->comment="user id of staff/student";
+            $table->unsignedBigInteger('patient_id')->comment = "user id of staff/student";
             $table->unsignedBigInteger('provider_id');
             $table->unsignedBigInteger('school_id');
             $table->unsignedBigInteger('class_id');
@@ -28,7 +28,7 @@ class CreateSchoolConsultTable extends Migration
             $table->foreign('patient_id')->references('id')->on('users')->onDelete('restrict')->onUpdate('cascade');
             $table->foreign('provider_id')->references('id')->on('providers')->onDelete('restrict')->onUpdate('cascade');
             $table->foreign('school_id')->references('id')->on('schools')->onDelete('restrict')->onUpdate('cascade');
-            $table->foreign('class_id')->references('id')->on('classes')->onDelete('restrict')->onUpdate('cascade');
+            $table->foreign('class_id')->references('id')->on('school_classes')->onDelete('restrict')->onUpdate('cascade');
             $table->foreign('speciality')->references('slug')->on('masters')->onDelete('restrict')->onUpdate('cascade');
         });
     }
