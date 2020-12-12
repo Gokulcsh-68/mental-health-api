@@ -38,6 +38,14 @@ class AuthServiceProvider extends ServiceProvider
                 if (empty($decodedToken->data->userId) === false) {
                     $user = User::where('id', $decodedToken->data->userId)->active()->firstOrFail();
 
+                    #echo '<pre>' . print_r($user->staff, true) . '</pre>';die;
+
+                    if ($user->staff) {
+                        $payload['staff'] = $user->staff;
+                    }
+
+                    $request->attributes->add($payload);
+
                     return $user;
 
                     /*if ($user->active) {

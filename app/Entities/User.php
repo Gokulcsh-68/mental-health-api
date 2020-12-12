@@ -60,7 +60,7 @@ class User extends BaseModel
 
     ];
 
-     public static function boot()
+    public static function boot()
     {
         parent::boot();
 
@@ -72,9 +72,9 @@ class User extends BaseModel
         return $this->belongsTo(Role::class);
     }
 
-    public function school()
+    public function staff()
     {
-        return $this->hasOne(School::class);
+        return $this->hasOne(Staff::class);
     }
 
     /*public function provider()
@@ -138,6 +138,22 @@ class User extends BaseModel
         return true;
     }
 
+    public function additonal_info()
+    {
+
+        switch ($this->role->code) {
+
+            case 'staff':
+                return $this->staff;
+                break;
+
+            default:
+                return '';
+                break;
+        }
+
+    }
+
     public function getBasicInfo()
     {
         return [
@@ -149,6 +165,7 @@ class User extends BaseModel
             "profile_image" => $this->profile_image,
             "super_admin" => (boolean) $this->super_admin,
             "user_type" => $this->role->code,
+            "additonal_info" => $this->additonal_info(),
         ];
     }
 

@@ -4,7 +4,7 @@ namespace App\Requests;
 
 use Pearl\RequestValidate\RequestAbstract;
 
-class SchoolRequest extends RequestAbstract
+class StaffRequest extends RequestAbstract
 {
     /**
      * Get the validation rules that apply to the request.
@@ -14,13 +14,10 @@ class SchoolRequest extends RequestAbstract
     public function rules(): array
     {
         $rules = [
-            'reg_no' => 'required',
-            'name' => 'required|unique:schools,name',
-            'logo' => 'nullable',
-            'additional_info' => 'nullable',
+            // 'user_id' => 'required',
+            // 'school_id' => 'required',
+            // 'is_admin'  => 'required'
         ];
-
-        // $rules += (new StaffRequest())->rules();
 
         $rules['user'] = (new UserRequest())->rules();
 
@@ -35,7 +32,7 @@ class SchoolRequest extends RequestAbstract
     public function messages(): array
     {
         return [
-            "name.unique" => "School name already taken"
+            //
         ];
     }
 }

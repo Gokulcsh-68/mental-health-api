@@ -4,7 +4,7 @@ namespace App\Entities;
 
 use DB;
 
-class School extends BaseModel
+class SchoolClass extends BaseModel
 {
     const VIEW = true;
 
@@ -14,18 +14,25 @@ class School extends BaseModel
 
     const ACTION = true;
 
+    public $timestamps = false;
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        "reg_no", "name", "user_id", "logo", "additional_info",
+        "name", "school_id", "staff_id",
     ];
+
+    public function school()
+    {
+        return $this->belongsTo(School::class);
+    }
 
     public function staff()
     {
-        return $this->hasMany(Staff::class);
+        return $this->hasOne(Staff::class);
     }
 
     protected function createModel($request)
@@ -33,26 +40,15 @@ class School extends BaseModel
         $data = $this->getModelAttributes($request);
 
         DB::beginTransaction();
-
         try {
 
-            $school = $this->create($data);
+            $data['school_id'] = $request->user()->staff->school_id;
 
-            $user = User::create($data['user']);
-
-            $staff = [
-                'school_id' => $school->id,
-                'is_admin' => 1,
-            ];
-
-            $staff = $user->staff()->create($staff);
-
+            $model = $this->create($data);
             DB::commit();
-
-            return $school;
-
+            return $model;
         } catch (Exception $e) {
-            exceptionLogger("school Create Rollback", $e);
+            exceptionLogger("staffs Create Rollback", $e);
             DB::rollback();
         }
 
