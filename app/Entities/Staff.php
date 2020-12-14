@@ -81,6 +81,11 @@ class Staff extends BaseModel
         return $this->belongsTo(School::class);
     }
 
+    public function scopeAdmin($query)
+    {
+        return $query->where('is_admin', 1);
+    }
+
     protected function createModel($request)
     {
         $data = $this->getModelAttributes($request);
@@ -100,6 +105,35 @@ class Staff extends BaseModel
             return $model;
         } catch (Exception $e) {
             exceptionLogger("staffs Create Rollback", $e);
+            DB::rollback();
+        }
+
+        return null;
+    }
+
+    protected function updateModel($id, $request, $only = [])
+    {
+        $data = $this->getModelAttributes($request, $only);
+
+        DB::beginTransaction();
+        try {
+            // Nothing can update now on staffs table
+            $staff = Staff::find($id);
+
+            /*if (empty(app('request')->attributes->get('staff')->is_admin)) {
+            // Staff
+            if (app('request')->attributes->get('staff')->user_id != $id) {
+
+            }
+            }*/
+
+            unset($data['user']['role_id']);
+            $staff->user->fill($data['user'])->save();
+            DB::commit();
+
+            return $staff;
+        } catch (Exception $e) {
+            exceptionLogger("School Update Rollback", $e);
             DB::rollback();
         }
 
