@@ -54,4 +54,25 @@ class SchoolClass extends BaseModel
 
         return null;
     }
+
+    // @Overwrite
+    protected function updateModel($id, $request, $only = [])
+    {
+        $data = $this->getModelAttributes($request, $only);
+        DB::beginTransaction();
+        try {
+            $model = parent::updateModel($id, $request, $only);
+            $model->user->fill($data)
+                ->save(['touch' => false]);
+
+            DB::commit();
+
+            return $model;
+        } catch (Exception $e) {
+            exceptionLogger("Provider Update Rollback", $e);
+            DB::rollback();
+        }
+
+        return null;
+    }
 }

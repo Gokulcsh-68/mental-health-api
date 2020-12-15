@@ -28,6 +28,11 @@ class School extends BaseModel
         return $this->hasMany(Staff::class);
     }
 
+    public function primaryStaff()
+    {
+        return $this->hasOne(Staff::class)->admin();
+    }
+
     protected function createModel($request)
     {
         $data = $this->getModelAttributes($request);
@@ -53,6 +58,30 @@ class School extends BaseModel
 
         } catch (Exception $e) {
             exceptionLogger("school Create Rollback", $e);
+            DB::rollback();
+        }
+
+        return null;
+    }
+
+    protected function updateModel($id, $request, $only = [])
+    {
+        $data = $this->getModelAttributes($request, $only);
+
+        DB::beginTransaction();
+        try {
+            // Update in School
+            $model = parent::updateModel($id, $request, $only);
+            // Update in users
+            $staff = $this->getModel($id);
+            // Enforce user role not be update
+            unset($data['user']['role_id']);
+            $staff->primaryStaff->user->fill($data['user'])->save();
+            DB::commit();
+
+            return $model;
+        } catch (Exception $e) {
+            exceptionLogger("School Update Rollback", $e);
             DB::rollback();
         }
 
