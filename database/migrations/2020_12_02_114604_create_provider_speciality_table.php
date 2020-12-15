@@ -14,10 +14,11 @@ class CreateProviderSpecialityTable extends Migration
     public function up()
     {
         Schema::create('provider_specialities', function (Blueprint $table) {
-            $table->id();
             $table->unsignedBigInteger('provider_id');
             $table->string('speciality', 45);
             $table->timestamps();
+
+            $table->unique(['provider_id', 'speciality']);
             
             $table->foreign('provider_id')->references('id')->on('providers')->onDelete('restrict')->onUpdate('cascade');
             $table->foreign('speciality')->references('slug')->on('masters')->onDelete('restrict')->onUpdate('cascade');

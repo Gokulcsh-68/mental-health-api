@@ -14,7 +14,6 @@ class ProviderRequest extends RequestAbstract
     public function rules(): array
     {
         $rules = [
-            'school_id' => 'required',
             'practicing_since' => 'nullable',
             'license_no' => 'required',
             'specialities' => 'nullable',
@@ -22,6 +21,17 @@ class ProviderRequest extends RequestAbstract
         ];
 
         $rules['user'] = (new UserRequest())->rules();
+
+        // Edited Rules
+        if ($this->route('id')) {
+            $rules['user'] = array_except($rules['user'], ['role_id', 'timezone_id', 'address', 'is_2fa', 'is_active']);
+            $provider = app('request')->attributes->get('entity')->where('id', $this->route('id'))
+                ->firstOrFail(['user_id']);
+            
+            $rules['user']['username'] = 'required|unique:users,username,' . $provider->user_id . ',id,role_id,' . $provider->user->role_id;
+            $rules['user']['email'] = 'required|unique:users,email,' . $provider->user_id . ',id,role_id,' . $provider->user->role_id;
+            $rules['user']['mobile'] = 'required|unique:users,mobile,' . $provider->user_id . ',id,role_id,' . $provider->user->role_id;
+        }
 
         return array_dot($rules);
     }

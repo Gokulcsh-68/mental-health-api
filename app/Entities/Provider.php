@@ -19,7 +19,7 @@ class Provider extends BaseModel
      * @var array
      */
     protected $fillable = [
-        "user_id", "school_id", "practicing_since", "license_no", "specialities", "additional_info"
+        "user_id", "school_id", "practicing_since", "license_no", "additional_info"
     ];
 
     /**
@@ -85,11 +85,15 @@ class Provider extends BaseModel
         try {
 
             $user = $this->user()->create($data['user']);
-            $data['user_id'] = $user->id;
-            $model = $this->create($data);
 
+            $data['school_id'] = $request->get('staff')->school_id;
+            $data['user_id'] = $user->id;
+            // unset($data['user']);
+            // unset($data['provider_speciality']);
+            // echo "<pre>"; print_r($data);
+            $model = $this->create($data);
             //Provider Specialities add
-            $model->providerSpeciality()->createMany($data['specialities']);
+            $model->providerSpeciality()->createMany($data['provider_speciality']);
             
             DB::commit();
 
@@ -102,18 +106,34 @@ class Provider extends BaseModel
         return null;
     }
 
+    public function multipleArraySearch($arrayValue, $exceptList) {
+        $exceptListKeys = [];
+        foreach ($exceptList as $key => $value) {
+            $exceptListKeys[] = array_search($value, $arrayValue);
+        }
+        return $exceptListKeys;
+    }
+
     protected function updateModel($id, $request, $only = [])
     {
-        $data = $this->getModelAttributes($request, $only);
+
+        $data = $this->getModelAttributes($request);
+
+        //remove strict fields
+        $exceptListKey = $this->multipleArraySearch($this->getFillable(), ['user_id', 'school_id']);
+        $only = array_except($this->getFillable(), $exceptListKey);
 
         DB::beginTransaction();
         try {
+
             $model = parent::updateModel($id, $request, $only);
+
+            $data['user'] = array_except($data['user'], ['role_id']);
             $model->user->fill($data['user'])
                 ->save(['touch' => false]);
 
-            $model->providerSpeciality()->createMany($data['specialities']);
-            // $model->providerSpeciality()->updateOrCreate($data['specialities']);
+            $model->providerSpeciality()->delete();
+            $model->providerSpeciality()->createMany($data['provider_speciality']);
 
             DB::commit();
 
