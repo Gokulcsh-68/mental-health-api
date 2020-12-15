@@ -18,7 +18,6 @@ class ProviderSpecialityTransformer extends JsonResource
         return [
             'provider_id' =>  $this->provider_id,
             'speciality' =>  $this->speciality,
-            'school_id' =>  $this->school_id
         ];
     }
 }
