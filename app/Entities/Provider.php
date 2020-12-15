@@ -88,11 +88,9 @@ class Provider extends BaseModel
 
             $data['school_id'] = $request->get('staff')->school_id;
             $data['user_id'] = $user->id;
-            // unset($data['user']);
-            // unset($data['provider_speciality']);
-            // echo "<pre>"; print_r($data);
             $model = $this->create($data);
-            //Provider Specialities add
+
+            //Provider specialities add
             $model->providerSpeciality()->createMany($data['provider_speciality']);
             
             DB::commit();
@@ -132,6 +130,7 @@ class Provider extends BaseModel
             $model->user->fill($data['user'])
                 ->save(['touch' => false]);
 
+            //Provider specialities delete and add
             $model->providerSpeciality()->delete();
             $model->providerSpeciality()->createMany($data['provider_speciality']);
 
