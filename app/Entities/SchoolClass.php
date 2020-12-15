@@ -48,7 +48,7 @@ class SchoolClass extends BaseModel
             DB::commit();
             return $model;
         } catch (Exception $e) {
-            exceptionLogger("staffs Create Rollback", $e);
+            exceptionLogger("School Class Create Rollback", $e);
             DB::rollback();
         }
 
@@ -61,15 +61,24 @@ class SchoolClass extends BaseModel
         $data = $this->getModelAttributes($request, $only);
         DB::beginTransaction();
         try {
-            $model = parent::updateModel($id, $request, $only);
-            $model->user->fill($data)
-                ->save(['touch' => false]);
+            $logged_in_staff_detail = $request->attributes->get('staff');
 
-            DB::commit();
+            if ($request->staff_id) {
+                $staff = Staff::where('id', $request->staff_id)
+                    ->where('school_id', $logged_in_staff_detail->school_id)
+                    ->first();
 
-            return $model;
+                if ($staff) {
+                    $model = parent::updateModel($id, $request, $only);
+                    DB::commit();
+                    return $model;
+                } else {
+                    // Redirect to Error
+                }
+            }
+
         } catch (Exception $e) {
-            exceptionLogger("Provider Update Rollback", $e);
+            exceptionLogger("School Class Update Rollback", $e);
             DB::rollback();
         }
 

@@ -107,4 +107,41 @@ class Student extends BaseModel
 
         return null;
     }
+
+    protected function updateModel($id, $request, $only = [])
+    {
+        $data = $this->getModelAttributes($request, $only);
+
+        DB::beginTransaction();
+        try {
+            // Find Student
+            $student = Student::find($id);
+            $logged_in_staff_detail = $request->attributes->get('staff');
+
+            if ($student) {
+                if (!empty($request->class_id)) {
+                    $find_class = SchoolClass::where('id', $request->class_id)
+                        ->where('school_id', $logged_in_staff_detail->school_id)->first();
+
+                    // If Class found on the School
+                    if ($find_class) {
+                        $model = parent::updateModel($id, $request, $only);
+                        unset($data['user']['role_id']);
+                        $student->user->fill($data['user'])->save();
+                        DB::commit();
+                        return $student;
+                    }
+                }
+
+            } else {
+                // Error Message
+            }
+
+        } catch (Exception $e) {
+            exceptionLogger("School Update Rollback", $e);
+            DB::rollback();
+        }
+
+        return null;
+    }
 }
