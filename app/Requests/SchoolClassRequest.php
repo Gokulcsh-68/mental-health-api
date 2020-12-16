@@ -15,12 +15,19 @@ class SchoolClassRequest extends RequestAbstract
     {
         $request = app('request');
 
-        return [
+        $rules = [
             #'name' => 'required|unique:,school_id' . $request->get('staff')->school_id,
             'name' => 'required|unique:school_classes,name,null,id,school_id,' . $request->get('staff')->school_id,
             // 'school_id' => 'required',
             'staff_id' => 'required',
         ];
+
+        if ($this->route('id')) {
+
+            $rules['name'] = 'required|unique:school_classes,name,' . $this->route('id') . ',id,school_id,' . $request->get('staff')->school_id;
+        }
+
+        return array_dot($rules);
     }
 
     /**
@@ -31,7 +38,7 @@ class SchoolClassRequest extends RequestAbstract
     public function messages(): array
     {
         return [
-            //
+            "name.unique" => "Class name is already taken",
         ];
     }
 }

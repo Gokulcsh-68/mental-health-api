@@ -2,6 +2,7 @@
 
 namespace App\Requests;
 
+use App\Entities\Student;
 use Pearl\RequestValidate\RequestAbstract;
 
 class StudentRequest extends RequestAbstract
@@ -20,6 +21,22 @@ class StudentRequest extends RequestAbstract
         ];
 
         $rules['user'] = (new UserRequest())->rules();
+
+        if ($this->route('id')) {
+
+            unset($rules['user']['role_id']);
+            unset($rules['user']['timezone_id']);
+            unset($rules['user']['address']);
+            unset($rules['user']['is_2fa']);
+            unset($rules['user']['is_active']);
+
+            $Student = Student::where('id', $this->route('id'))->first();
+
+            // Edited Rules
+            $rules['user']['username'] = 'required|unique:users,username,' . $Student->user_id . ',id,role_id,' . $Student->user->role_id;
+            $rules['user']['email'] = 'required|unique:users,email,' . $Student->user_id . ',id,role_id,' . $Student->user->role_id;
+
+        }
 
         return array_dot($rules);
     }
