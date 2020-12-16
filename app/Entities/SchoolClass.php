@@ -32,7 +32,7 @@ class SchoolClass extends BaseModel
 
     public function staff()
     {
-        return $this->hasOne(Staff::class);
+        return $this->hasOne(Staff::class, 'id', 'staff_id');
     }
 
     protected function createModel($request)
