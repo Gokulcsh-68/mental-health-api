@@ -25,15 +25,10 @@ class CreateAvailabilityDetailsTable extends Migration
             $table->string('slot_status');
             $table->string('available_status');
             $table->unsignedBigInteger('created_by');
-            $table->unsignedBigInteger('updated_by');
-            $table->unsignedBigInteger('deleted_by');
             $table->timestamps();
-            $table->datetime('deleted_at');
 
-            $table->foreign('provider_id')->references('id')->on('users')->onDelete('restrict')->onUpdate('cascade');
+            $table->foreign('provider_id')->references('id')->on('providers')->onDelete('restrict')->onUpdate('cascade');
             $table->foreign('created_by')->references('id')->on('users')->onDelete('restrict')->onUpdate('cascade');
-            $table->foreign('updated_by')->references('id')->on('users')->onDelete('restrict')->onUpdate('cascade');
-            $table->foreign('deleted_by')->references('id')->on('users')->onDelete('restrict')->onUpdate('cascade');
         });
     }
 
@@ -47,8 +42,6 @@ class CreateAvailabilityDetailsTable extends Migration
         Schema::table('availability_details', function (Blueprint $table) {
             $table->dropForeign(['provider_id']);
             $table->dropForeign(['created_by']);
-            $table->dropForeign(['updated_by']);
-            $table->dropForeign(['deleted_by']);
         });
 
         Schema::dropIfExists('availability_details');

@@ -72,6 +72,11 @@ class Provider extends BaseModel
         return $this->belongsTo(User::class);
     }
 
+    public function availabilityDetail()
+    {
+        return $this->hasMany(AvailabilityDetail::class);
+    }
+
     public function providerSpeciality()
     {
         return $this->hasMany(ProviderSpeciality::class);
