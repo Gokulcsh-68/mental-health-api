@@ -11,15 +11,33 @@ class SchoolTransformer extends JsonResource
      *
      * @param  \Illuminate\Http\Request  $request
      * @return array
-    */
+     */
 
     public function toArray($request): array
     {
         return [
-            'reg_no' =>  $this->reg_no,
-            'user_id' =>  $this->user_id,
-            'logo' =>  $this->logo,
-            'additional_info' =>  $this->additional_info
+            'id' => $this->id,
+            'name' => $this->name,
+            'reg_no' => $this->reg_no,
+            'user_id' => $this->user_id,
+            'logo' => $this->logo,
+            'additional_info' => $this->additional_info,
+            'user' => [
+                'first_name' => $this->primaryStaff->user->first_name,
+                'last_name' => $this->primaryStaff->user->last_name,
+                'email' => $this->primaryStaff->user->email,
+                'isd_code' => $this->primaryStaff->user->isd_code,
+                'mobile' => $this->primaryStaff->user->mobile,
+                'username' => $this->primaryStaff->user->username,
+                'profile_image' => $this->primaryStaff->user->profile_image,
+                'gender' => $this->primaryStaff->user->gender,
+                'dob' => $this->primaryStaff->user->dob,
+                'blood_group' => $this->primaryStaff->user->blood_group,
+                'timezone_id' => $this->primaryStaff->user->timezone_id,
+                'address' => $this->primaryStaff->user->address,
+                'country_iso' => $this->primaryStaff->user->country_iso,
+                'emergency_contact_info' => $this->primaryStaff->user->emergency_contact_info,
+            ],
         ];
     }
 }

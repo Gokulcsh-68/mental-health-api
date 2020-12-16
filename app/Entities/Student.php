@@ -80,6 +80,11 @@ class Student extends BaseModel
         return $this->belongsTo(School::class);
     }
 
+    public function getschoolclass()
+    {
+        return $this->hasOne(SchoolClass::class, 'id', 'class_id');
+    }
+
     public function schoolclass()
     {
         return $this->belongsTo(SchoolClass::class);
@@ -143,5 +148,17 @@ class Student extends BaseModel
         }
 
         return null;
+    }
+
+    public function applyFilters($model, $isPluck)
+    {
+        $model = parent::applyFilters($model, $isPluck);
+        $request = app('request');
+
+        if ($request->get('staff')->school_id) {
+            $model->where('students.school_id', $request->get('staff')->school_id);
+        }
+
+        return $model;
     }
 }
