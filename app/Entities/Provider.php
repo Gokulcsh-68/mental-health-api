@@ -132,9 +132,11 @@ class Provider extends BaseModel
             $model->user->fill($data['user'])
                 ->save(['touch' => false]);
 
-            //Provider specialities delete and add
-            $model->providerSpeciality()->delete();
-            $model->providerSpeciality()->createMany($data['provider_speciality']);
+            if (!empty($data['provider_speciality'])) {
+                //Provider specialities delete and add
+                $model->providerSpeciality()->delete();
+                $model->providerSpeciality()->createMany($data['provider_speciality']);
+            }
 
             DB::commit();
 
@@ -152,7 +154,9 @@ class Provider extends BaseModel
         $model = parent::applyFilters($model, $isPluck);
         $request = app('request');
 
-        $model->where('providers.school_id', $request->get('staff')->school_id);
+        if ($request->get('staff')->school_id) {
+            $model->where('providers.school_id', $request->get('staff')->school_id);
+        }
 
         return $model;
     }
