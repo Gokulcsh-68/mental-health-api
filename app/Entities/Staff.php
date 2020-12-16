@@ -95,7 +95,7 @@ class Staff extends BaseModel
             $user = User::create($data['user']);
 
             $staff = [
-                'school_id' => $request->user()->staff->school_id,
+                'school_id' => $request->get('staff')->school_id,
                 'user_id' => $user->id,
                 'is_admin' => 0,
             ];
