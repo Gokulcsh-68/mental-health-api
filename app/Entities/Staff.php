@@ -95,7 +95,7 @@ class Staff extends BaseModel
             $user = User::create($data['user']);
 
             $staff = [
-                'school_id' => $request->user()->staff->school_id,
+                'school_id' => $request->get('staff')->school_id,
                 'user_id' => $user->id,
                 'is_admin' => 0,
             ];
@@ -138,5 +138,17 @@ class Staff extends BaseModel
         }
 
         return null;
+    }
+
+    public function applyFilters($model, $isPluck)
+    {
+        $model = parent::applyFilters($model, $isPluck);
+        $request = app('request');
+
+        if ($request->get('staff')->school_id) {
+            $model->where('staffs.school_id', $request->get('staff')->school_id);
+        }
+
+        return $model;
     }
 }

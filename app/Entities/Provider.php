@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Entities;
+
 use DB;
 
 class Provider extends BaseModel
@@ -19,7 +20,7 @@ class Provider extends BaseModel
      * @var array
      */
     protected $fillable = [
-        "user_id", "school_id", "practicing_since", "license_no", "additional_info"
+        "user_id", "school_id", "practicing_since", "license_no", "additional_info",
     ];
 
     /**
@@ -28,7 +29,7 @@ class Provider extends BaseModel
      * @var array
      */
     protected $casts = [
-        
+
     ];
 
     /**
@@ -37,34 +38,34 @@ class Provider extends BaseModel
      * @var array
      */
     protected $hidden = [
-        
+
     ];
 
     /**
      * The attributes that should be updated on patch method.
      *
      * @var array
-    */
+     */
     protected $partialFillable = [
-        
+
     ];
 
     /**
      * The attributes that should be mutated to dates.
      *
      * @var array
-    */
+     */
     protected $dates = [
-        
+
     ];
 
     /**
      * The event map for the model.
      *
      * @var array
-    */
+     */
     protected $dispatchesEvents = [
-        
+
     ];
 
     public function user()
@@ -97,19 +98,20 @@ class Provider extends BaseModel
 
             //Provider specialities add
             $model->providerSpeciality()->createMany($data['provider_speciality']);
-            
+
             DB::commit();
 
             return $model;
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             exceptionLogger("Provider Create Rollback", $e);
             DB::rollback();
         }
-        
+
         return null;
     }
 
-    public function multipleArraySearch($arrayValue, $exceptList) {
+    public function multipleArraySearch($arrayValue, $exceptList)
+    {
         $exceptListKeys = [];
         foreach ($exceptList as $key => $value) {
             $exceptListKeys[] = array_search($value, $arrayValue);
@@ -141,11 +143,10 @@ class Provider extends BaseModel
                 $model->providerSpeciality()->createMany($data['provider_speciality']);
             }
 
-
             DB::commit();
 
             return $model;
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             exceptionLogger("Provider Update Rollback", $e);
             DB::rollback();
         }
@@ -153,18 +154,16 @@ class Provider extends BaseModel
         return null;
     }
 
-
     public function applyFilters($model, $isPluck)
     {
         $model = parent::applyFilters($model, $isPluck);
         $request = app('request');
 
-        if ($request->get("id")) {
-            $model = $model->where($this->getTable() . "." . $this->getKeyName(), $request->get("id"));
+        if ($request->get('staff')->school_id) {
+            $model->where('providers.school_id', $request->get('staff')->school_id);
         }
 
         return $model;
     }
-
 
 }
