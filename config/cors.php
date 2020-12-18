@@ -15,7 +15,7 @@ return [
     | If array('*') is provided to allowed_methods, allowed_origins or allowed_headers
     | all methods / origins / headers are allowed.
     |
-    */
+     */
 
     /*
      * You can enable CORS for 1 or multiple paths.
@@ -24,8 +24,8 @@ return [
     'paths' => ['api/*'],
 
     /*
-    * Matches the request method. `[*]` allows all methods.
-    */
+     * Matches the request method. `[*]` allows all methods.
+     */
     'allowed_methods' => ['*'],
 
     /*
