@@ -76,8 +76,7 @@ $app->configure('cors');
  */
 
 $app->middleware([
-    App\Middleware\CorsMiddleware::class,
-    // Fruitcake\Cors\HandleCors::class,
+    Fruitcake\Cors\HandleCors::class
 ]);
 
 // $app->routeMiddleware([
@@ -106,6 +105,7 @@ $app->register(App\Providers\AppServiceProvider::class);
 $app->register(App\Providers\AuthServiceProvider::class);
 $app->register(App\Providers\EventServiceProvider::class);
 $app->register(Pearl\RequestValidate\RequestServiceProvider::class);
+$app->register(Fruitcake\Cors\CorsServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
