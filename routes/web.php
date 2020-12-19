@@ -13,6 +13,10 @@
 |
  */
 
+$router->get('/key', function() {
+    return \Illuminate\Support\Str::random(32);
+});
+
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
@@ -28,6 +32,7 @@ $router->group(['prefix' => 'v1/', 'middleware' => 'clientAuth'], function ($rou
         });
 
         $router->get('resource/masters/list', 'MasterService@masterList');
+        $router->get('resource/available-providers/list', 'ProviderService@list');
     });
 
     $router->group(['middleware' => 'userAuth'], function ($router) {

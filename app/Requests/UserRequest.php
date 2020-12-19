@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Requests;
+use App\Entities\Role;
 
 use Pearl\RequestValidate\RequestAbstract;
 
@@ -16,14 +17,20 @@ class UserRequest extends RequestAbstract
         $request = app('request');
         $user = $request->user;
 
+        $role_id = 0;
+
+        if(!empty($user['role_type'])){
+            $role_id = Role::where("code", $user['role_type'])->pluck('id')->first();
+        } 
+
         return [
-            'role_id' => 'required',
+            'role_type' => 'required',
             'first_name' => 'required',
             'last_name' => 'required',
-            'email' => 'required|unique:users,email,null,id,role_id,' . $user['role_id'],
+            'email' => 'required|unique:users,email,null,id,role_id,' . $role_id,
             'isd_code' => 'nullable',
             'mobile' => 'nullable|unique:users,mobile',
-            'username' => 'required|unique:users,username,null,id,role_id,' . $user['role_id'],
+            'username' => 'required|unique:users,username,null,id,role_id,' . $role_id,
             'password' => 'nullable',
             'profile_image' => 'nullable',
             'gender' => 'nullable',

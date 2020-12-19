@@ -92,12 +92,16 @@ class Staff extends BaseModel
 
         DB::beginTransaction();
         try {
+
+            // Take role_id
+            $data['user']['role_id'] = Role::where("code", $data['user']['role_type'])->pluck('id')->first();
+
             $user = User::create($data['user']);
 
             $staff = [
                 'school_id' => $request->get('staff')->school_id,
-                'user_id' => $user->id,
-                'is_admin' => 0,
+                'user_id'   => $user->id,
+                'is_admin'  => 0,
             ];
 
             $model = $this->create($staff);
@@ -127,13 +131,18 @@ class Staff extends BaseModel
             }
             }*/
 
-            unset($data['user']['role_id']);
+            if(!empty($data['user']['role_type'])){
+                $data['user']['role_id'] = Role::where("code", $data['user']['role_type'])->pluck('id')->first();
+            }else{
+                unset($data['user']['role_id']);
+            }
+            
             $staff->user->fill($data['user'])->save();
             DB::commit();
 
             return $staff;
         } catch (Exception $e) {
-            exceptionLogger("School Update Rollback", $e);
+            exceptionLogger("staff Update Rollback", $e);
             DB::rollback();
         }
 
@@ -147,6 +156,7 @@ class Staff extends BaseModel
 
         if ($request->get('staff')->school_id) {
             $model->where('staffs.school_id', $request->get('staff')->school_id);
+            $model->where('staffs.is_admin', 0);
         }
 
         return $model;

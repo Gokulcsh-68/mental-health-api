@@ -97,6 +97,8 @@ class Student extends BaseModel
         DB::beginTransaction();
         try {
 
+            $data['user']['role_id'] = Role::where("code", "student")->pluck('id')->first();
+
             $user = User::create($data['user']);
 
             $data['school_id'] = $request->get('staff')->school_id;
