@@ -32,7 +32,7 @@ class SchoolClass extends BaseModel
 
     public function staff()
     {
-        return $this->hasOne(Staff::class);
+        return $this->hasOne(Staff::class, 'id', 'staff_id');
     }
 
     protected function createModel($request)
@@ -83,5 +83,17 @@ class SchoolClass extends BaseModel
         }
 
         return null;
+    }
+
+    public function applyFilters($model, $isPluck)
+    {
+        $model = parent::applyFilters($model, $isPluck);
+        $request = app('request');
+
+        if ($request->get('staff')->school_id) {
+            $model->where('school_classes.school_id', $request->get('staff')->school_id);
+        }
+
+        return $model;
     }
 }

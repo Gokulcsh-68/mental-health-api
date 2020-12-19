@@ -46,9 +46,14 @@ class AuthService extends BaseService
                 // $result = array_merge($result, $this->successLogin($user));
 
                 $data['userId'] = $user->id;
+                $Authorization  = $result['token'] =  $this->getAuthorization($data);
+
+                $token_details = $this->decodeJwt($Authorization);
+                if($token_details->exp)
+                    $result['token_expiration_time'] = $token_details->exp;
 
                 return $this->httpResponse->setHttpData($result)
-                    ->setHttpHeader(['Authorization' => $this->getAuthorization($data)])
+                    ->setHttpHeader(['Authorization' => $Authorization])
                     ->jsonResponse();
             } else if (!$user->active) {
                 $message = trans('auth.in_active');
