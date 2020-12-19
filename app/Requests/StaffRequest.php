@@ -25,8 +25,6 @@ class StaffRequest extends RequestAbstract
         $rules['user'] = (new UserRequest())->rules();
 
         if ($this->route('id')) {
-
-            unset($rules['user']['role_id']);
             unset($rules['user']['timezone_id']);
             unset($rules['user']['address']);
             unset($rules['user']['is_2fa']);

@@ -36,12 +36,12 @@ class School extends BaseModel
     protected function createModel($request)
     {
         $data = $this->getModelAttributes($request);
-
         DB::beginTransaction();
-
         try {
 
             $school = $this->create($data);
+
+            $data['user']['role_id'] = Role::where("code", "school")->pluck('id')->first();
 
             $user = User::create($data['user']);
 
