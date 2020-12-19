@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use DB;
 use Illuminate\Database\Seeder;
 
-class dynamicFormsTableSeeder extends Seeder
+class DynamicFormsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
