@@ -19,12 +19,12 @@ class UserRequest extends RequestAbstract
 
         $role_id = 0;
 
-        if(!empty($user['role_type'])){
-            $role_id = Role::where("code", $user['role_type'])->pluck('id')->first();
+        if(!empty($user['role'])){
+            $role_id = Role::where("code", $user['role'])->pluck('id')->first();
         } 
 
         return [
-            'role_type' => 'required',
+            'role' => 'required',
             'first_name' => 'required',
             'last_name' => 'required',
             'email' => 'required|unique:users,email,null,id,role_id,' . $role_id,
