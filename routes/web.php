@@ -29,10 +29,12 @@ $router->group(['prefix' => 'v1/', 'middleware' => 'clientAuth'], function ($rou
             $router->post('forgot-password/email', 'AuthService@forgotPasswordEmail');
             $router->post('forgot-password/email-otp', 'AuthService@forgotPasswordEmailOtp');
             $router->post('verify-email', 'AuthService@verifyEmail');
+            $router->post('verify-otp', 'AuthService@verifyOtp');
+            $router->post('resend-otp', 'AuthService@resendOtp');
         });
 
         $router->get('resource/masters/list', 'MasterService@masterList');
-        $router->get('resource/available-providers/list', 'ProviderService@list');
+        
     });
 
     $router->group(['middleware' => 'userAuth'], function ($router) {
@@ -40,10 +42,13 @@ $router->group(['prefix' => 'v1/', 'middleware' => 'clientAuth'], function ($rou
         $router->group(['prefix' => 'users'], function ($router) {
             $router->patch('set-password', 'AuthService@setPassword');
             $router->patch('change-password', 'AuthService@changePassword');
-            $router->post('verify-otp', 'AuthService@verifyOtp');
-            $router->post('resend-otp', 'AuthService@resendOtp');
+            // $router->post('verify-otp', 'AuthService@verifyOtp');
+            // $router->post('resend-otp', 'AuthService@resendOtp');
             $router->patch('{id:[0-9]+}/change-password', ['middleware' => 'acl:users,change-user-password', 'uses' => 'AuthService@changeUserPassword']);
         });
+
+        // Consult provider list
+        $router->get('resource/available-providers/list', 'ProviderService@list');
 
         /*Resource Operations*/
         $router->group(['prefix' => '/resource', 'middleware' => ['resource']], function ($router) {

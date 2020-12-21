@@ -5,9 +5,12 @@ namespace App\Services;
 use App\Entities\User;
 use App\Requests\GeneralLoginRequest;
 use App\Utils\AuthHelper;
-// use Illuminate\Http\Request;
-
-// use App\Requests\VerifyOtpRequest;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use App\Enums\InternalCodeEnum;
+use App\Enums\EmailTemplateEnum;
+use App\Requests\VerifyOtpRequest;
+use App\Jobs\SendEmailJob;
 // use App\Requests\ChangeEmailRequest;
 // use App\Requests\VerifyEmailRequest;
 // use App\Requests\SetPasswordRequest;
@@ -38,13 +41,20 @@ class AuthService extends BaseService
         $user = $user->generalLoginAttempt($requestedData);
 
         if ($user) {
+            if (!empty($user->is_2fa)) {
+                $job = (new SendEmailJob(['otp' => $this->generateOtp($user->secret), 'email' => $user->email, 'name' => $user->getFullName(), 'template' => EmailTemplateEnum::Otp]))->onQueue('sendEmail');
+                    dispatch($job);
+
+                return $this->httpResponse->setHttpCode(409)
+                    ->setHttpData(['2fa' => 'active'])
+                    ->setHttpData(['reference_otp' => $this->generateOtp($user->secret)])
+                    ->setHttpMessage("Otp sent to your registered mobile and email.")
+                    ->jsonResponse();
+            }
+
             if ($user->isValidUser($requestedData)) {
                 $result = [];
-                // $role = $user->role;
-                // $result['policy'] = $role ? (object) $role->policy : (object) [];
                 $result['info'] = $user->getBasicInfo();
-                // $result = array_merge($result, $this->successLogin($user));
-
                 $data['userId'] = $user->id;
                 $Authorization  = $result['token'] =  $this->getAuthorization($data);
 
@@ -173,46 +183,44 @@ class AuthService extends BaseService
     //     return $this->httpResponse->jsonResponse();
     // }
 
-    // /**
-    //  * Verify Email OTP.
-    //  *
-    //  * @param  \App\Requests\VerifyOtpRequest  $request
-    //  * @return json
-    //  */
+    /**
+     * Verify Email OTP.
+     *
+     * @param  \App\Requests\VerifyOtpRequest  $request
+     * @return json
+     */
 
-    // public function verifyOtp(VerifyOtpRequest $request, User $user)
-    // {
-    //     $user = $request->user();
+    public function verifyOtp(VerifyOtpRequest $request, User $user): JsonResponse
+    {
+        $message = trans('auth.failed');
+        $requestedData = $request->json()->all();
+        $user = $user->generalLoginAttempt($requestedData);
 
-    //     if ($this->validateOtp($user->secret, $request->get('otp'))) {
-    //         $this->httpResponse->setHttpMessage("Otp Verified Successfully.");
-    //         $user->email_verified_on = Carbon::now();
-    //         $user->email_verified = 1;
+        if ($user) {
 
-    //         if (isset($user->custom_attributes['change_email'])) {
-    //             $user->email = $user->custom_attributes['change_email'];
-    //             $emailUser = User::where('email', $user->custom_attributes['change_email'])
-    //                 ->where('id', '!=', $user->id)
-    //                 ->first();
-    //             if ($emailUser) {
-    //                 $emailUser->email = $emailUser->email . '__' . $emailUser->id;
-    //                 $emailUser->save();
-    //             }
-    //             $customAttributes = $user->custom_attributes;
-    //             unset($customAttributes['change_email']);
-    //             $user->custom_attributes = $customAttributes;
-    //         }
+            if ($this->validateOtp($user->secret, $request->get('otp'))) {
+                $this->httpResponse->setHttpMessage("OTP Verified Successfully.");
 
-    //         $user->save();
+                $result = [];
+                $result['info'] = $user->getBasicInfo();
+                $data['userId'] = $user->id;
+                $Authorization  = $result['token'] =  $this->getAuthorization($data);
 
-    //         $this->httpResponse->setHttpData(['info' => $user->getBasicInfo()])
-    //             ->setHttpHeader(['Authorization' => $this->getAuthorization(['userId' => $user->id])]);
-    //     } else {
-    //         $this->httpResponse->setHttpMessage("Invalid Otp.")->setHttpCode(400);
-    //     }
+                $token_details = $this->decodeJwt($Authorization);
+                if($token_details->exp)
+                    $result['token_expiration_time'] = $token_details->exp;
 
-    //     return $this->httpResponse->jsonResponse();
-    // }
+                return $this->httpResponse->setHttpData($result)
+                    ->setHttpHeader(['Authorization' => $Authorization])
+                    ->jsonResponse();
+
+            } else {
+                $this->httpResponse->setHttpMessage("Invalid OTP.")->setHttpCode(400);
+                return $this->httpResponse->jsonResponse();
+            }
+        }
+        return $this->httpResponse->setHttpMessage($message)->setHttpCode(401)->jsonResponse();
+    }
 
     // /**
     //  * Verify Email.
@@ -269,15 +277,25 @@ class AuthService extends BaseService
     //  * @return json
     //  */
 
-    // public function resendOtp(Request $request, User $user): JsonResponse
-    // {
-    //     $user = $request->user();
+    public function resendOtp(Request $request, User $user): JsonResponse
+    {
+        $message = trans('auth.failed');
+        $requestedData = $request->json()->all();
+        $user = $user->generalLoginAttempt($requestedData);
 
-    //     $job = (new SendEmailJob(['otp' => $this->generateOtp($user->secret), 'email' => $user->email, 'name' => $user->getFullName(), 'template' => EmailTemplateEnum::Otp]))->onQueue('sendEmail');
-    //     dispatch($job);
+        if ($user) {
+            $job = (new SendEmailJob(['otp' => $this->generateOtp($user->secret), 'email' => $user->email, 'name' => $user->getFullName(), 'template' => EmailTemplateEnum::Otp]))->onQueue('sendEmail');
+            dispatch($job);
 
-    //     return $this->httpResponse->jsonResponse();
-    // }
+            return $this->httpResponse->setHttpCode(409)
+                ->setHttpData(['2fa' => 'active'])
+                ->setHttpData(['reference_otp' => $this->generateOtp($user->secret)])
+                ->setHttpMessage("Resend OTP sent.")
+                ->jsonResponse();
+
+        }
+        return $this->httpResponse->setHttpMessage($message)->setHttpCode(401)->jsonResponse();
+    }
 
     // /**
     //  * Forgot Password Email Otp.

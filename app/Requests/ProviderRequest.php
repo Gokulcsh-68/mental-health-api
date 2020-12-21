@@ -24,7 +24,7 @@ class ProviderRequest extends RequestAbstract
 
         // Edited Rules
         if ($this->route('id')) {
-            $rules['user'] = array_except($rules['user'], ['role_id', 'timezone_id', 'address', 'is_2fa', 'is_active']);
+            $rules['user'] = array_except($rules['user'], ['role_id', 'timezone_id', 'address', 'is_2fa', 'is_active', 'role_type']);
             $provider = app('request')->attributes->get('entity')->where('id', $this->route('id'))
                 ->firstOrFail(['user_id']);
             

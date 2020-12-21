@@ -21,7 +21,7 @@ class User extends BaseModel
      * @var array
      */
     protected $casts = [
-
+        'address' => 'object',
     ];
 
     /**
@@ -70,6 +70,11 @@ class User extends BaseModel
     public function role()
     {
         return $this->belongsTo(Role::class);
+    }
+
+    public function timeZone()
+    {
+        return $this->belongsTo(Timezone::class);
     }
 
     public function staff()
