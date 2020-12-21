@@ -65,4 +65,9 @@ class ProviderSpeciality extends BaseModel
     protected $dispatchesEvents = [
         
     ];
+
+    public function providers()
+    {
+        return $this->belongsTo(Provider::class);
+    }
 }

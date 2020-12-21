@@ -25,7 +25,7 @@ class CreateConsultMenusTable extends Migration
             $table->timestamps();
             $table->datetime('deleted_at');
 
-            $table->foreign('provider_id')->references('id')->on('users')->onDelete('restrict')->onUpdate('cascade');
+            $table->foreign('provider_id')->references('id')->on('providers')->onDelete('restrict')->onUpdate('cascade');
             $table->foreign('speciality')->references('slug')->on('masters')->onDelete('restrict')->onUpdate('cascade');
             $table->foreign('created_by')->references('id')->on('users');
             $table->foreign('updated_by')->references('id')->on('users');
