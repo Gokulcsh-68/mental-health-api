@@ -39,7 +39,7 @@ class Timezone extends BaseModel
      * @var array
     */
     protected $partialFillable = [
-        
+        "country_code", "zone_name"
     ];
 
     /**

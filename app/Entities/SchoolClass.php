@@ -25,6 +25,15 @@ class SchoolClass extends BaseModel
         "name", "school_id", "staff_id",
     ];
 
+    /**
+     * The attributes that should be updated on patch method.
+     *
+     * @var array
+    */
+    protected $partialFillable = [
+        "name", "staff_id",
+    ];
+
     public function school()
     {
         return $this->belongsTo(School::class);
