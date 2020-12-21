@@ -58,7 +58,7 @@ class AvailabilityDetail extends BaseModel
      * @var array
     */
     protected $dates = [
-        
+        'from_date_time'
     ];
 
     /**

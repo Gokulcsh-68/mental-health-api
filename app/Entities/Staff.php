@@ -94,7 +94,7 @@ class Staff extends BaseModel
         try {
 
             // Take role_id
-            $data['user']['role_id'] = Role::where("code", $data['user']['role_type'])->pluck('id')->first();
+            $data['user']['role_id'] = Role::where("code", $data['user']['role'])->pluck('id')->first();
 
             $user = User::create($data['user']);
 
@@ -131,8 +131,8 @@ class Staff extends BaseModel
             }
             }*/
 
-            if(!empty($data['user']['role_type'])){
-                $data['user']['role_id'] = Role::where("code", $data['user']['role_type'])->pluck('id')->first();
+            if(!empty($data['user']['role'])){
+                $data['user']['role_id'] = Role::where("code", $data['user']['role'])->pluck('id')->first();
             }else{
                 unset($data['user']['role_id']);
             }

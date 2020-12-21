@@ -4,6 +4,8 @@ namespace App\Entities;
 
 class Timezone extends BaseModel
 {
+    const VIEW = true;
+    
     /**
      * The attributes that are mass assignable.
      *
@@ -37,7 +39,7 @@ class Timezone extends BaseModel
      * @var array
     */
     protected $partialFillable = [
-        
+        "country_code", "zone_name"
     ];
 
     /**

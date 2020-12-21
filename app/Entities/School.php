@@ -23,6 +23,15 @@ class School extends BaseModel
         "reg_no", "name", "user_id", "logo", "additional_info",
     ];
 
+    /**
+     * The attributes that should be updated on patch method.
+     *
+     * @var array
+    */
+    protected $partialFillable = [
+        "reg_no", "name", "logo", "additional_info",
+    ];
+
     public function staff()
     {
         return $this->hasMany(Staff::class);
