@@ -39,7 +39,7 @@ class User extends BaseModel
      * @var array
      */
     protected $partialFillable = [
-
+        "first_name", "last_name", "email", "isd_code", "mobile", "username", "secret", "password", "profile_image", "gender", "dob", "blood_group", "timezone_id", "address", "country_iso", "emergency_contact_info", "is_2fa", "is_active"
     ];
 
     /**
@@ -74,7 +74,12 @@ class User extends BaseModel
 
     public function staff()
     {
-        return $this->hasOne(Staff::class);
+        return $this->hasOne(Staff::class, 'user_id');
+    }
+
+    public function timezone()
+    {
+        return $this->hasOne(Timezone::class, 'id', 'timezone_id');
     }
 
     /*public function provider()
@@ -145,7 +150,7 @@ class User extends BaseModel
 
             case 'staff':
                 return $this->staff;
-                break;
+            break;
 
             default:
                 return '';
@@ -166,6 +171,7 @@ class User extends BaseModel
             "super_admin" => (boolean) $this->super_admin,
             "user_type" => $this->role->code,
             "additonal_info" => $this->additonal_info(),
+            "timezone" => $this->timezone(),
         ];
     }
 

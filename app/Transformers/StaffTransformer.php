@@ -32,7 +32,7 @@ class StaffTransformer extends JsonResource
                 'gender' => $this->user->gender,
                 'dob' => $this->user->dob,
                 'blood_group' => $this->user->blood_group,
-                'timezone_id' => $this->user->timezone_id,
+                'timezone' => $this->user->timezone,
                 'address' => $this->user->address,
                 'country_iso' => $this->user->country_iso,
                 'emergency_contact_info' => $this->user->emergency_contact_info,
