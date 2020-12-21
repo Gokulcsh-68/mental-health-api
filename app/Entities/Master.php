@@ -4,6 +4,8 @@ namespace App\Entities;
 
 class Master extends BaseModel
 {
+    const VIEW = true;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -57,4 +59,18 @@ class Master extends BaseModel
     protected $dispatchesEvents = [
         
     ];
+
+    public function applyFilters($model, $isPluck)
+    {
+        $model = parent::applyFilters($model, $isPluck);
+        $request = app('request');
+
+        if ($request->get('slug')) {
+            $model->where('masters.master_type_slug', $request->get('slug'));
+        }
+
+        // dd($model->toSql());
+
+        return $model;
+    }
 }

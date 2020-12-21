@@ -51,6 +51,7 @@ $router->group(['prefix' => 'v1/', 'middleware' => 'clientAuth'], function ($rou
             $router->patch('{resource}/{id:[0-9]+}', ['middleware' => 'acl:resource,update', 'uses' => 'ResourceService@partialUpdate']);
             $router->delete('{resource}/{id:[0-9]+}', ['middleware' => 'acl:resource,delete', 'uses' => 'ResourceService@delete']);
             $router->get('{resource}', ['middleware' => 'acl:resource,view', 'uses' => 'ResourceService@list']);
+            $router->get('{resource}/all', ['middleware' => 'acl:resource,view', 'uses' => 'ResourceService@getAll']);
             $router->get('{resource}/first', ['middleware' => 'acl:resource,view', 'uses' => 'ResourceService@getFirst']);
             $router->get('{resource}/{id:[0-9]+}', ['middleware' => 'acl:resource,view', 'uses' => 'ResourceService@fetch']);
             $router->get('{resource}/aggregate', ['middleware' => 'acl:resource,view', 'uses' => 'ResourceService@aggregate']);

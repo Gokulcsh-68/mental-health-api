@@ -4,6 +4,8 @@ namespace App\Entities;
 
 class Timezone extends BaseModel
 {
+    const VIEW = true;
+    
     /**
      * The attributes that are mass assignable.
      *
