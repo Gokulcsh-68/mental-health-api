@@ -77,6 +77,11 @@ class User extends BaseModel
         return $this->hasOne(Staff::class);
     }
 
+    public function genderMaster()
+    {
+        return $this->belongsTo(Master::class, 'gender', 'slug')->where('master_type_slug', 'gender');
+    }
+
     /*public function provider()
     {
         return $this->hasOne(Provider::class);
@@ -116,6 +121,11 @@ class User extends BaseModel
     public function setUsernameAttribute($value): void
     {
         $this->attributes['username'] = strtolower(strip_tags($value));
+    }
+
+    public function getGenderTextAttribute()
+    {
+        return optional($this->genderMaster)->name ?? '';
     }
 
     public function getFullName(): string
@@ -162,10 +172,10 @@ class User extends BaseModel
             "username" => $this->username,
             "email" => $this->email,
             "mobile" => $this->mobile_number,
-            "profile_image" => $this->profile_image,
-            "super_admin" => (boolean) $this->super_admin,
-            "user_type" => $this->role->code,
-            "additonal_info" => $this->additonal_info(),
+            "profileImage" => $this->profile_image ?? false,
+            "is2FA" => (boolean) $this->is_2fa,
+            "role" => $this->role->code,
+            "gender" => $this->gender_text,
         ];
     }
 
