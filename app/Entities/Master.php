@@ -21,6 +21,7 @@ class Master extends BaseModel
      * @var array
      */
     protected $casts = [
+        'attributes' => 'object'
         
     ];
 

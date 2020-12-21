@@ -21,6 +21,7 @@ class User extends BaseModel
      * @var array
      */
     protected $casts = [
+        'address' => 'object'
 
     ];
 
