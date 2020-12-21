@@ -44,6 +44,24 @@ class ResourceService extends BaseService
     }
 
     /**
+     * Get All.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return json
+     */
+
+    public function getAll(Request $request): JsonResponse
+    {
+        $resource = $request->attributes->get('resource');
+        $entity = $request->attributes->get('entity');
+        $collection = callUserFuncArray([$entity, 'getModelList'], [])->get();
+
+        $result[$this->getResourceName($request)] = $collection->isNotEmpty() ? $this->collectionTransform($resource, $collection) : [];
+
+        return $this->httpResponse->setHttpData($result)->jsonResponse();
+    }
+
+    /**
      * First Entity.
      *
      * @param  \Illuminate\Http\Request  $request

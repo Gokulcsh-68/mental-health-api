@@ -49,7 +49,7 @@ class Student extends BaseModel
      * @var array
      */
     protected $partialFillable = [
-
+        "class_id",
     ];
 
     /**
