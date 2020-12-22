@@ -72,11 +72,6 @@ class User extends BaseModel
         return $this->belongsTo(Role::class);
     }
 
-    public function timeZone()
-    {
-        return $this->belongsTo(Timezone::class);
-    }
-
     public function staff()
     {
         return $this->hasOne(Staff::class, 'user_id');
@@ -84,7 +79,7 @@ class User extends BaseModel
 
     public function timezone()
     {
-        return $this->hasOne(Timezone::class, 'id', 'timezone_id');
+        return $this->belongsTo(Timezone::class);
     }
 
     public function genderMaster()
