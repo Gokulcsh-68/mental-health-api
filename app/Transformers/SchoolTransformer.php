@@ -19,7 +19,6 @@ class SchoolTransformer extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'reg_no' => $this->reg_no,
-            'user_id' => $this->user_id,
             'logo' => $this->logo,
             'additional_info' => $this->additional_info,
             'user' => [
@@ -36,6 +35,7 @@ class SchoolTransformer extends JsonResource
                 'address' => $this->primaryStaff->user->address,
                 'timezone' => $this->primaryStaff->user->timezone,
                 'country_iso' => $this->primaryStaff->user->country_iso,
+                'is_active' => $this->primaryStaff->user->is_active,
                 'emergency_contact_info' => $this->primaryStaff->user->emergency_contact_info,
             ],
         ];

@@ -96,4 +96,16 @@ class School extends BaseModel
 
         return null;
     }
+
+    public function applyFilters($model, $isPluck)
+    {
+        $model = parent::applyFilters($model, $isPluck);
+        $request = app('request');
+
+        if ($request->get('searchkey')) {
+            $model->where('schools.name', 'LIKE',"%".$request->get('searchkey')."%");
+        }
+
+        return $model;
+    }
 }
