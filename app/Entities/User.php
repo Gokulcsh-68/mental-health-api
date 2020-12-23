@@ -2,9 +2,12 @@
 
 namespace App\Entities;
 
+use DB;
+
 class User extends BaseModel
 {
     const VIEW = true;
+    const ACTION = true;
 
     /**
      * The attributes that are mass assignable.

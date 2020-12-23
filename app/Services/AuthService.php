@@ -18,7 +18,8 @@ use App\Jobs\SendEmailJob;
 use Illuminate\Http\JsonResponse;
 
 // use App\Requests\PatientLoginRequest;
-// use App\Requests\ChangePasswordRequest;
+use App\Requests\ChangePasswordRequest;
+use App\Requests\TwofaRequest;
 // use App\Requests\ChangeUserPasswordRequest;
 // use App\Requests\ForgotPasswordEmailRequest;
 
@@ -101,14 +102,31 @@ class AuthService extends BaseService
     //  * @return json
     //  */
 
-    // public function changePassword(ChangePasswordRequest $request): JsonResponse
-    // {
-    //     $user = $request->user();
-    //     $user->update(['password' => $request->get('password')]);
-    //     $user->captureEvent(UserEventTypeEnum::PasswordChange);
+    public function changePassword(ChangePasswordRequest $request): JsonResponse
+    {
+        $user = $request->user();
+        $user->update(['password' => $request->get('password')]);
+        // $user->captureEvent(UserEventTypeEnum::PasswordChange);
 
-    //     return $this->httpResponse->jsonResponse();
-    // }
+        return $this->httpResponse
+                    ->setHttpMessage("Password Updated Successfully!...")
+                    ->jsonResponse();
+    }
+
+    public function twofa(TwofaRequest $request): JsonResponse
+    {
+        $user = $request->user();
+        $user->update(['is_2fa' => $request->get('is_2fa')]);
+
+        return $this->httpResponse->jsonResponse();
+    }
+
+    public function info(Request $request): JsonResponse
+    {
+        $user = $request->user();
+
+        return $this->httpResponse->setHttpData($user)->jsonResponse();
+    }
 
     // /**
     //  * Change User password.
