@@ -33,7 +33,7 @@ class CreateUsersTable extends Migration
             $table->json('address')->comment="line,city,state,zipcode";
             $table->char('country_iso', 2)->nullable();
             $table->json('emergency_contact_info')->nullable();
-
+            $table->string('communication_channel')->comment="email,sms,both";
             $table->boolean('is_2fa')->default(0)->comment="0-Disabled, 1-Enabled";
             $table->boolean('is_active')->default(0)->comment="0-Inactive, 1-Active";
 
