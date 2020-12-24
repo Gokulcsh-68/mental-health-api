@@ -34,7 +34,6 @@ class StudentRequest extends RequestAbstract
 
             // Edited Rules
             $rules['user']['username'] = 'required|unique:users,username,' . $Student->user_id . ',id,role_id,' . $Student->user->role_id;
-            $rules['user']['email'] = 'required|unique:users,email,' . $Student->user_id . ',id,role_id,' . $Student->user->role_id;
 
         }
 

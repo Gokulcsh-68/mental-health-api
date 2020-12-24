@@ -29,8 +29,6 @@ class ProviderRequest extends RequestAbstract
                 ->firstOrFail(['user_id']);
             
             $rules['user']['username'] = 'required|unique:users,username,' . $provider->user_id . ',id,role_id,' . $provider->user->role_id;
-            $rules['user']['email'] = 'required|unique:users,email,' . $provider->user_id . ',id,role_id,' . $provider->user->role_id;
-            $rules['user']['mobile'] = 'required|unique:users,mobile,' . $provider->user_id . ',id,role_id,' . $provider->user->role_id;
         }
 
         return array_dot($rules);
