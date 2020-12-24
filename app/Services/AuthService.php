@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Entities\User;
+use App\Entities\Role;
 use App\Requests\GeneralLoginRequest;
 use App\Utils\AuthHelper;
 use Carbon\Carbon;
@@ -10,7 +11,11 @@ use Illuminate\Http\Request;
 use App\Enums\InternalCodeEnum;
 use App\Enums\EmailTemplateEnum;
 use App\Requests\VerifyOtpRequest;
+use App\Requests\ResendOtpRequest;
 use App\Jobs\SendEmailJob;
+use Illuminate\Notifications\Notifiable;
+use App\Notifications\InvoicePaid;
+use App\Notifications\OtpNotification;
 // use App\Requests\ChangeEmailRequest;
 // use App\Requests\VerifyEmailRequest;
 // use App\Requests\SetPasswordRequest;
@@ -20,7 +25,7 @@ use Illuminate\Http\JsonResponse;
 // use App\Requests\PatientLoginRequest;
 // use App\Requests\ChangePasswordRequest;
 // use App\Requests\ChangeUserPasswordRequest;
-// use App\Requests\ForgotPasswordEmailRequest;
+use App\Requests\ForgotPasswordEmailRequest;
 
 class AuthService extends BaseService
 {
@@ -42,12 +47,11 @@ class AuthService extends BaseService
 
         if ($user) {
             if (!empty($user->is_2fa)) {
-                $job = (new SendEmailJob(['otp' => $this->generateOtp($user->secret), 'email' => $user->email, 'name' => $user->getFullName(), 'template' => EmailTemplateEnum::Otp]))->onQueue('sendEmail');
-                    dispatch($job);
-
-                return $this->httpResponse->setHttpCode(409)
-                    ->setHttpData(['2fa' => 'active'])
-                    ->setHttpData(['reference_otp' => $this->generateOtp($user->secret)])
+                $data['otp_type'] = "2faAuthentication";
+                $this->otpNotification($data, $user);
+                return $this->httpResponse->setHttpCode(200)
+                    ->setHttpData(['is_2fa' => $user->is_2fa, 'status' => 'OTP_SENT'])
+                    // ->setHttpData(['reference_otp' => $this->generateOtp($user->secret)])
                     ->setHttpMessage("Otp sent to your registered mobile and email.")
                     ->jsonResponse();
             }
@@ -160,28 +164,23 @@ class AuthService extends BaseService
     //  * @return json
     //  */
 
-    // public function forgotPasswordEmail(ForgotPasswordEmailRequest $request, User $user): JsonResponse
-    // {
-    //     $user = $user->where('email', $request->get('email'))
-    //         ->first();
-    //     if ($user) {
-    //         $user->email_verify_token = base64_encode(openssl_random_pseudo_bytes(32));
-    //         $customAttributes = (array) $user->custom_attributes;
-    //         $customAttributes['email_verify_send_on'] = Carbon::now()->toDateTimeString();
-    //         $user->custom_attributes = $customAttributes;
-    //         $user->save();
-    //         $emailVerifyToken = aesEncrypt($user->email_verify_token . ":" . $user->email . ":" . EmailTemplateEnum::ForgotPassword);
+    public function forgotPasswordEmail(ForgotPasswordEmailRequest $request, User $user): JsonResponse
+    {
+        $roleId = Role::where("code", $request->get('role'))->pluck('id')->first();
+        $user = $user->where('email', $request->get('email'))
+            ->where('role_id', $roleId)
+            ->first();
+        if (!empty($user)) {
+            $data['otp_type'] = "forgotPassword";
+            $this->otpNotification($data, $user);
+            // $this->httpResponse->setHttpData(['reference_otp' => $this->generateOtp($user->secret)]);
+            $this->httpResponse->setHttpMessage("Otp sent to your registered mobile and email.");
+        } else {
+            $this->httpResponse->setHttpMessage("Email not found")->setHttpCode(404);
+        }
 
-    //         $job = (new SendEmailJob(['token' => $emailVerifyToken, 'email' => $user->email, 'name' => $user->getFullName(), 'template' => EmailTemplateEnum::ForgotPassword]))->onQueue('sendEmail');
-    //         dispatch($job);
-
-    //         $this->httpResponse->setHttpMessage("Password reset link sent to email.");
-    //     } else {
-    //         $this->httpResponse->setHttpMessage("Email not found")->setHttpCode(404);
-    //     }
-
-    //     return $this->httpResponse->jsonResponse();
-    // }
+        return $this->httpResponse->jsonResponse();
+    }
 
     /**
      * Verify Email OTP.
@@ -194,31 +193,68 @@ class AuthService extends BaseService
     {
         $message = trans('auth.failed');
         $requestedData = $request->json()->all();
-        $user = $user->generalLoginAttempt($requestedData);
+        $roleId = Role::where("code", $request->get('role'))->pluck('id')->first();
+        if ($request->get('action') == 'forgotPassword') {
+            $user = User::where('email', $request->get('email'))
+                ->where('role_id', $roleId)
+                ->first();
 
-        if ($user) {
-
-            if ($this->validateOtp($user->secret, $request->get('otp'))) {
-                $this->httpResponse->setHttpMessage("OTP Verified Successfully.");
-
-                $result = [];
-                $result['info'] = $user->getBasicInfo();
-                $data['userId'] = $user->id;
-                $Authorization  = $result['token'] =  $this->getAuthorization($data);
-
-                $token_details = $this->decodeJwt($Authorization);
-                if($token_details->exp)
-                    $result['token_expiration_time'] = $token_details->exp;
-
-                return $this->httpResponse->setHttpData($result)
-                    ->setHttpHeader(['Authorization' => $Authorization])
-                    ->jsonResponse();
-
+            if (!empty($user)) {
+                if ($this->validateOtp($user->secret, $request->get('otp'))) {
+                    $this->httpResponse->setHttpMessage("OTP Verified Successfully.")
+                        ->setHttpHeader(['Authorization' => $this->getAuthorization(['userId' => $user->id])]);
+                } else {
+                    $this->httpResponse->setHttpMessage("Invalid OTP.")->setHttpCode(400);
+                }
             } else {
-                $this->httpResponse->setHttpMessage("Invalid OTP.")->setHttpCode(400);
-                return $this->httpResponse->jsonResponse();
+                $this->httpResponse->setHttpMessage("Email not found")->setHttpCode(404);
+            }
+            return $this->httpResponse->jsonResponse();
+        }
+
+        if ($request->get('action') == 'resetPassword') {
+            $user = User::where('email', $request->get('email'))
+                ->where('role_id', $roleId)
+                ->first();
+            if (!empty($user)) {
+                if ($this->validateOtp($user->secret, $request->get('otp'))) {
+                    $user->update(['password' => $request->get('password')]);
+                    $this->httpResponse->setHttpMessage("Successfully password changed");
+                } else {
+                    $this->httpResponse->setHttpMessage("Invalid OTP.")->setHttpCode(400);
+                }
+            } else {
+                $this->httpResponse->setHttpMessage("Email not found")->setHttpCode(404);
+            }
+            return $this->httpResponse->jsonResponse();
+        }
+
+        if ($request->get('action') == '2faAuthentication') {
+            $user = $user->generalLoginAttempt($requestedData);
+            if (!empty($user)) {
+                if ($this->validateOtp($user->secret, $request->get('otp'))) {
+                    $this->httpResponse->setHttpMessage("OTP Verified Successfully.");
+                    $result = [];
+                    $result['info'] = $user->getBasicInfo();
+                    $data['userId'] = $user->id;
+                    $Authorization  = $result['token'] =  $this->getAuthorization($data);
+
+                    $token_details = $this->decodeJwt($Authorization);
+                    if($token_details->exp)
+                        $result['token_expiration_time'] = $token_details->exp;
+
+                    return $this->httpResponse->setHttpData($result)
+                        ->setHttpData(['status' => 'OTP_VERIFIED'])
+                        ->setHttpHeader(['Authorization' => $Authorization])
+                        ->jsonResponse();
+
+                } else {
+                    $this->httpResponse->setHttpMessage("Invalid OTP.")->setHttpCode(400);
+                    return $this->httpResponse->jsonResponse();
+                }
             }
         }
+
         return $this->httpResponse->setHttpMessage($message)->setHttpCode(401)->jsonResponse();
     }
 
@@ -269,30 +305,78 @@ class AuthService extends BaseService
     //     return $this->httpResponse->jsonResponse();
     // }
 
-    // /**
-    //  * Resend Otp.
-    //  *
-    //  * @param  \Illuminate\Http\Request  $request
-    //  * @param  \App\Entities\User  $user
-    //  * @return json
-    //  */
+    public function otpNotification($data, $user) {
+        $data += $user->toArray();
+        $data['message'] = '';
+        switch ($data['otp_type']) {
+            case 'resendOtp':
+                $data['message'] = "Otp resent";
+                break;
 
-    public function resendOtp(Request $request, User $user): JsonResponse
+            case 'forgotPassword':
+                $data['message'] = "Forget password otp";
+                break;
+
+            case '2faAuthentication':
+                $data['message'] = "2faAuthentication Otp sent";
+                break;
+        }
+        $data += [
+            'otp' => $this->generateOtp($data['secret']),
+            'email' => $data['email'],
+            'name' => $user->getFullName(),
+            'template' => EmailTemplateEnum::Otp
+        ];
+        $user->notify(new OtpNotification($data));
+        return true;
+    }
+
+    /**
+     * Resend Otp.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Entities\User  $user
+     * @return json
+     */
+
+    public function resendOtp(ResendOtpRequest $request, User $user): JsonResponse
     {
         $message = trans('auth.failed');
         $requestedData = $request->json()->all();
-        $user = $user->generalLoginAttempt($requestedData);
+        $roleId = Role::where("code", $request->get('role'))->pluck('id')->first();
 
-        if ($user) {
-            $job = (new SendEmailJob(['otp' => $this->generateOtp($user->secret), 'email' => $user->email, 'name' => $user->getFullName(), 'template' => EmailTemplateEnum::Otp]))->onQueue('sendEmail');
-            dispatch($job);
+        if ($request->get('action') == 'forgotPassword') {
+            $user = User::where('email', $request->get('email'))
+                ->where('role_id', $roleId)
+                ->first();
 
-            return $this->httpResponse->setHttpCode(409)
-                ->setHttpData(['2fa' => 'active'])
-                ->setHttpData(['reference_otp' => $this->generateOtp($user->secret)])
-                ->setHttpMessage("Resend OTP sent.")
-                ->jsonResponse();
+            if (!empty($user)) {
+                $data['otp_type'] = "resendOtp";
+                $this->otpNotification($data, $user);
+                return $this->httpResponse->setHttpCode(200)
+                    ->setHttpData(['status' => 'OTP_SENT'])
+                    // ->setHttpData(['reference_otp' => $this->generateOtp($user->secret)])
+                    ->setHttpMessage("Resend OTP sent.")
+                    ->jsonResponse();
+            } else {
+                $this->httpResponse->setHttpMessage("Email not found")->setHttpCode(404);
+            }
+            return $this->httpResponse->jsonResponse();
 
+        } elseif ($request->get('action') == '2faAuthentication') {
+
+            $user = $user->generalLoginAttempt($requestedData);
+
+            if ($user) {
+                $data['otp_type'] = "resendOtp";
+                $this->otpNotification($data, $user);
+                return $this->httpResponse->setHttpCode(200)
+                    ->setHttpData(['2fa' => 'active', 'status' => 'OTP_SENT'])
+                    // ->setHttpData(['reference_otp' => $this->generateOtp($user->secret)])
+                    ->setHttpMessage("Resend OTP sent.")
+                    ->jsonResponse();
+
+            }
         }
         return $this->httpResponse->setHttpMessage($message)->setHttpCode(401)->jsonResponse();
     }

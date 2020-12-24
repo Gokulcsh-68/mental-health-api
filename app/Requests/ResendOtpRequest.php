@@ -4,7 +4,7 @@ namespace App\Requests;
 
 use Pearl\RequestValidate\RequestAbstract;
 
-class VerifyOtpRequest extends RequestAbstract
+class ResendOtpRequest extends RequestAbstract
 {
     /**
      * Get the validation rules that apply to the request.
@@ -17,8 +17,6 @@ class VerifyOtpRequest extends RequestAbstract
         $rules = [
             "role" => "required",
             "action" => "required",
-            "otp" => "required|string",
-            "verify_mode" => "required|in:email,phone"
         ];
 
         if ($request->action == '2faAuthentication') {
@@ -31,13 +29,6 @@ class VerifyOtpRequest extends RequestAbstract
         if ($request->action == 'forgotPassword') {
             $rules += [
                 "email" => "required|string",
-            ];
-        }
-
-        if ($request->action == 'resetPassword') {
-            $rules += [
-                "email" => "required|string",
-                "password" => "required"
             ];
         }
 
