@@ -4,26 +4,26 @@ namespace App\Services;
 
 use App\Entities\User;
 use App\Entities\Role;
+use App\Requests\ChangePasswordRequest;
 use App\Requests\GeneralLoginRequest;
-use App\Utils\AuthHelper;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
-use App\Enums\InternalCodeEnum;
-use App\Enums\EmailTemplateEnum;
+use App\Requests\TwofaRequest;
 use App\Requests\VerifyOtpRequest;
 use App\Requests\ResendOtpRequest;
+use App\Transformers\UserTransformer;
+use App\Utils\AuthHelper;
+use Carbon\Carbon;
+use App\Enums\InternalCodeEnum;
+use App\Enums\EmailTemplateEnum;
 use App\Jobs\SendEmailJob;
-use Illuminate\Notifications\Notifiable;
 use App\Notifications\InvoicePaid;
 use App\Notifications\OtpNotification;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Notifications\Notifiable;
 // use App\Requests\ChangeEmailRequest;
 // use App\Requests\VerifyEmailRequest;
 // use App\Requests\SetPasswordRequest;
 // use App\Requests\PatientCheckRequest;
-use Illuminate\Http\JsonResponse;
-
-// use App\Requests\PatientLoginRequest;
-// use App\Requests\ChangePasswordRequest;
 // use App\Requests\ChangeUserPasswordRequest;
 use App\Requests\ForgotPasswordEmailRequest;
 
@@ -105,14 +105,31 @@ class AuthService extends BaseService
     //  * @return json
     //  */
 
-    // public function changePassword(ChangePasswordRequest $request): JsonResponse
-    // {
-    //     $user = $request->user();
-    //     $user->update(['password' => $request->get('password')]);
-    //     $user->captureEvent(UserEventTypeEnum::PasswordChange);
+    public function changePassword(ChangePasswordRequest $request): JsonResponse
+    {
+        $user = $request->user();
+        $user->update(['password' => $request->get('password')]);
+        // $user->captureEvent(UserEventTypeEnum::PasswordChange);
 
-    //     return $this->httpResponse->jsonResponse();
-    // }
+        return $this->httpResponse
+                    ->setHttpMessage("Password Updated Successfully!...")
+                    ->jsonResponse();
+    }
+
+    public function twofa(TwofaRequest $request): JsonResponse
+    {
+        $user = $request->user();
+        $user->update(['is_2fa' => $request->get('is_2fa')]);
+
+        return $this->httpResponse->jsonResponse();
+    }
+
+    public function info(Request $request): JsonResponse
+    {
+        $user = (new UserTransformer($request->user())) ;
+
+        return $this->httpResponse->setHttpData($user)->jsonResponse();
+    }
 
     // /**
     //  * Change User password.

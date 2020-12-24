@@ -37,7 +37,6 @@ class SchoolRequest extends RequestAbstract
             // Edited Rules
             $rules['name'] = $rules['name'] . "," . $this->route('id');
             $rules['user']['username'] = 'required|unique:users,username,' . $staff->user_id . ',id,role_id,' . $staff->user->role_id;
-            $rules['user']['email'] = 'required|unique:users,email,' . $staff->user_id . ',id,role_id,' . $staff->user->role_id;
 
         }
 
@@ -53,6 +52,7 @@ class SchoolRequest extends RequestAbstract
     {
         return [
             "name.unique" => "School name already taken",
+            "user.username.unique" => "Username already taken",
         ];
     }
 }

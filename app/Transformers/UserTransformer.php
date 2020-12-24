@@ -16,6 +16,7 @@ class UserTransformer extends JsonResource
     public function toArray($request): array
     {
         return [
+            'id' =>  $this->id,
             'role_id' =>  $this->role_id,
             'first_name' =>  $this->first_name,
             'last_name' =>  $this->last_name,
@@ -28,7 +29,7 @@ class UserTransformer extends JsonResource
             'gender' =>  $this->gender,
             'dob' =>  $this->dob,
             'blood_group' =>  $this->blood_group,
-            'timezone_id' =>  $this->timezone_id,
+            'timezone' =>  $this->timezone,
             'address' =>  $this->address,
             'country_iso' =>  $this->country_iso,
             'emergency_contact_info' =>  $this->emergency_contact_info,

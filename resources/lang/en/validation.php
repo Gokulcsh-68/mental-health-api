@@ -98,5 +98,5 @@ return [
 
     'attributes' => [
     ],
-    'merchant_validate' => 'The :attribute must be valid.'
+    'merchant_validate' => 'The :attribute must be valid.',
 ];

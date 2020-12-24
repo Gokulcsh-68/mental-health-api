@@ -2,6 +2,7 @@
 
 namespace App\Transformers;
 
+use App\Transformers\UserTransformer;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class StaffTransformer extends JsonResource

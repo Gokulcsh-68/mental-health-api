@@ -126,6 +126,7 @@ class ResourceService extends BaseService
     {
         $resource = $request->attributes->get('resource');
         $entity = $request->attributes->get('entity');
+       
         $model = callUserFuncArray([$entity, 'modelUpdateProcess'], [$id, $request, $entity->getParitialFillable()]);
 
         return $this->httpResponse->setHttpData([$this->getResourceName($request) => $model["data"]])->setHttpCode($model["success"] ? 200 : 400)->setHttpMessage($model["success"] ? "" : "Unable to update model")->jsonResponse();

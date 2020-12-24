@@ -16,21 +16,17 @@ class UserRequest extends RequestAbstract
     public function rules(): array
     {
         $request = app('request');
-        $user = $request->user;
 
-        $role_id = 0;
+        $user = $request->user();
+        $role_id = $user->role_id;
 
-        if(!empty($user['role'])){
-            $role_id = Role::where("code", $user['role'])->pluck('id')->first();
-        } 
-
-        return [
+        $rules = [
             'role' => 'required',
             'first_name' => 'required',
             'last_name' => 'required',
-            'email' => 'required|unique:users,email,null,id,role_id,' . $role_id,
-            'mobile' => 'required|unique:users,mobile,null,id,role_id,' . $role_id,
+            'email' => 'required',
             'isd_code' => 'nullable',
+            'mobile' => 'nullable',
             'username' => 'required|unique:users,username,null,id,role_id,' . $role_id,
             'password' => 'nullable',
             'profile_image' => 'nullable',
@@ -54,13 +50,9 @@ class UserRequest extends RequestAbstract
             unset($rules['user']['is_active']);
 
             $user = User::where('id', $this->route('id'))->first();
-
-            // Edited Rules
-            $rules['username'] = 'required|unique:users,username,' . $user->id . ',id,role_id,' . $user->role_id;
-            $rules['email'] = 'required|unique:users,email,' . $user->id . ',id,role_id,' . $user->role_id;
-            $rules['mobile'] = 'required|unique:users,mobile,' . $user->id . ',id,role_id,' . $user->role_id;
-
+            $rules['username'] = 'required|unique:users,username,'.$user->id.',id,role_id,' . $role_id;
         }
+        return $rules;
     }
 
     /**
