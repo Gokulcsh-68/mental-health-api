@@ -2,6 +2,7 @@
 
 namespace App\Transformers;
 
+use App\Transformers\UserTransformer;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class StaffTransformer extends JsonResource
@@ -21,7 +22,8 @@ class StaffTransformer extends JsonResource
             'school_name' => $this->school->name,
             'school_id' => $this->school_id,
             'is_admin' => $this->is_admin,
-            'user' => [
+            'user' => (new UserTransformer($this->user)),
+/*            'user' => [
                 'first_name' => $this->user->first_name,
                 'last_name' => $this->user->last_name,
                 'email' => $this->user->email,
@@ -36,7 +38,7 @@ class StaffTransformer extends JsonResource
                 'address' => $this->user->address,
                 'country_iso' => $this->user->country_iso,
                 'emergency_contact_info' => $this->user->emergency_contact_info,
-            ],
+            ],*/
         ];
     }
 }

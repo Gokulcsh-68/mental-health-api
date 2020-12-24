@@ -15,13 +15,16 @@ class SchoolTransformer extends JsonResource
 
     public function toArray($request): array
     {
+        // $user = $this->primaryStaff->user->load('timezone')->toArray();
+
         return [
             'id' => $this->id,
             'name' => $this->name,
             'reg_no' => $this->reg_no,
             'logo' => $this->logo,
             'additional_info' => $this->additional_info,
-            'user' => [
+            'user' => (new UserTransformer($this->primaryStaff->user)),
+            /*'user' => [
                 'first_name' => $this->primaryStaff->user->first_name,
                 'last_name' => $this->primaryStaff->user->last_name,
                 'email' => $this->primaryStaff->user->email,
@@ -37,7 +40,7 @@ class SchoolTransformer extends JsonResource
                 'country_iso' => $this->primaryStaff->user->country_iso,
                 'is_active' => $this->primaryStaff->user->is_active,
                 'emergency_contact_info' => $this->primaryStaff->user->emergency_contact_info,
-            ],
+            ],*/
         ];
     }
 }

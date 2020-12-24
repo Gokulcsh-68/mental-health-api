@@ -3,23 +3,18 @@
 namespace App\Services;
 
 use App\Entities\User;
+use App\Enums\EmailTemplateEnum;
+use App\Enums\InternalCodeEnum;
+use App\Jobs\SendEmailJob;
+use App\Requests\ChangePasswordRequest;
 use App\Requests\GeneralLoginRequest;
+use App\Requests\TwofaRequest;
+use App\Requests\VerifyOtpRequest;
+use App\Transformers\UserTransformer;
 use App\Utils\AuthHelper;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
-use App\Enums\InternalCodeEnum;
-use App\Enums\EmailTemplateEnum;
-use App\Requests\VerifyOtpRequest;
-use App\Jobs\SendEmailJob;
-// use App\Requests\ChangeEmailRequest;
-// use App\Requests\VerifyEmailRequest;
-// use App\Requests\SetPasswordRequest;
-// use App\Requests\PatientCheckRequest;
 use Illuminate\Http\JsonResponse;
-
-// use App\Requests\PatientLoginRequest;
-use App\Requests\ChangePasswordRequest;
-use App\Requests\TwofaRequest;
+use Illuminate\Http\Request;
 // use App\Requests\ChangeUserPasswordRequest;
 // use App\Requests\ForgotPasswordEmailRequest;
 
@@ -123,7 +118,7 @@ class AuthService extends BaseService
 
     public function info(Request $request): JsonResponse
     {
-        $user = $request->user();
+        $user = (new UserTransformer($request->user())) ;
 
         return $this->httpResponse->setHttpData($user)->jsonResponse();
     }

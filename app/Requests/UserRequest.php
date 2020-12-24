@@ -15,21 +15,17 @@ class UserRequest extends RequestAbstract
     public function rules(): array
     {
         $request = app('request');
-        $user = $request->user;
 
-        $role_id = 0;
+        $user = $request->user();
+        $role_id = $user->role_id;
 
-        if(!empty($user['role'])){
-            $role_id = Role::where("code", $user['role'])->pluck('id')->first();
-        } 
-
-        return [
+        $rules = [
             'role' => 'required',
             'first_name' => 'required',
             'last_name' => 'required',
-            'email' => 'required|unique:users,email,null,id,role_id,' . $role_id,
+            'email' => 'required',
             'isd_code' => 'nullable',
-            'mobile' => 'nullable|unique:users,mobile',
+            'mobile' => 'nullable',
             'username' => 'required|unique:users,username,null,id,role_id,' . $role_id,
             'password' => 'nullable',
             'profile_image' => 'nullable',
@@ -43,6 +39,15 @@ class UserRequest extends RequestAbstract
             'is_2fa' => 'required',
             'is_active' => 'required',
         ];
+
+        if ($this->route('id')) {
+            
+            $rules['username'] = 'required|unique:users,username,'.$user->id.',id,role_id,' . $role_id;
+        }
+
+
+
+        return $rules;
     }
 
     /**
