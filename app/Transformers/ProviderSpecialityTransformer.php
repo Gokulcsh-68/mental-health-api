@@ -16,7 +16,7 @@ class ProviderSpecialityTransformer extends JsonResource
     public function toArray($request): array
     {
         return [
-            'provider_id' =>  $this->provider_id,
+            // 'provider_id' =>  $this->provider_id,
             'speciality' =>  $this->speciality,
         ];
     }

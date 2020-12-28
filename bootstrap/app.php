@@ -23,7 +23,21 @@ $app = new Laravel\Lumen\Application(
     dirname(__DIR__)
 );
 
-$app->withFacades();
+
+$app->register(\Illuminate\Notifications\NotificationServiceProvider::class);
+
+// optional: register the Facade
+$app->withFacades(true, [
+    'Illuminate\Support\Facades\Notification' => 'Notification',
+]);
+
+$app->configure('mail');
+$app->register(\Illuminate\Mail\MailServiceProvider::class);
+
+$app->alias('mail.manager', Illuminate\Mail\MailManager::class);
+$app->alias('mail.manager', Illuminate\Contracts\Mail\Factory::class);
+
+// $app->withFacades();
 
 $app->withEloquent();
 

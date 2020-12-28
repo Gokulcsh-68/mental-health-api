@@ -2,6 +2,7 @@
 
 namespace App\Requests;
 use App\Entities\Role;
+use App\Entities\User;
 
 use Pearl\RequestValidate\RequestAbstract;
 

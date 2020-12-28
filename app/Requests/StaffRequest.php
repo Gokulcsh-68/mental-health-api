@@ -45,7 +45,6 @@ class StaffRequest extends RequestAbstract
 
             // Edited Rules
             $rules['user']['username'] = 'required|unique:users,username,' . $staff->user_id . ',id,role_id,' . $staff->user->role_id;
-            $rules['user']['email'] = 'required|unique:users,email,' . $staff->user_id . ',id,role_id,' . $staff->user->role_id;
 
         }
 

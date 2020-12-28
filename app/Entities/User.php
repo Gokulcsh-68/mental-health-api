@@ -1,11 +1,14 @@
 <?php
 
 namespace App\Entities;
+use \Illuminate\Notifications\Notifiable;
 
 use DB;
 
 class User extends BaseModel
 {
+    use Notifiable;
+
     const VIEW = true;
 
     const CREATE = true;
