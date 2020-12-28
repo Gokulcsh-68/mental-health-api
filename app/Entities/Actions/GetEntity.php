@@ -33,11 +33,11 @@ trait GetEntity
             $model = $model->where($this->getTable() . "." . $this->getKeyName(), $request->get("id"));
         }
 
-        if ($request->get("order_by")) {
-            $model = $model->orderBy($this->getTable() . "." . $request->get("order_by"), $this->getOrderByDir());
-        } else {
-            $model = $model->orderBy($this->getTable() . "." . $this->getKeyName(), "desc" );
-        }
+            if ($request->get("order_by")) {
+                $model = $model->orderBy($this->getTable() . "." . $request->get("order_by"), $this->getOrderByDir());
+            } else {
+                $model = $model->orderBy($this->getTable() . "." . $this->getKeyName(), "desc" );
+            }
 
         if ($request->query('from_date')) {
             $model = $model->createdAt();
@@ -57,7 +57,7 @@ trait GetEntity
             $model = $this->getAdditionalData($model);
             $model = $this->selectedColumns($model);
         }
-
+       
         return $model;
     }
 

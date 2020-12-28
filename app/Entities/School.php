@@ -24,6 +24,14 @@ class School extends BaseModel
     ];
 
     /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'additional_info' => 'object'
+    ];
+    /**
      * The attributes that should be updated on patch method.
      *
      * @var array
@@ -97,14 +105,34 @@ class School extends BaseModel
         return null;
     }
 
+    public function getOrderByDir(): string
+    {
+        return app('request')->get('dir') == 1 ? 'asc' : 'desc';
+    }
+
     public function applyFilters($model, $isPluck)
     {
         $model = parent::applyFilters($model, $isPluck);
         $request = app('request');
+        $status_key = $request->get('searchkey');
+        if(strtolower($request->get('searchkey')) == "inactive" || strtolower($request->get('searchkey')) == "active"){
+        $status_key = (strtolower($request->get('searchkey')) == "inactive")?"2":"1";
+
+        }
 
         if ($request->get('searchkey')) {
-            $model->where('schools.name', 'LIKE',"%".$request->get('searchkey')."%");
+            $model->where(function ($query) use ($request) {
+            $query->Where('schools.name', 'LIKE',"%".$request->get('searchkey')."%")
+                ->orWhere('schools.additional_info', 'LIKE',"%".$request->get('searchkey')."%");
+            })->orwhereHas('staff', function ($query) use ($request,$status_key) {
+                $query->whereHas('user', function ($subquery) use ($request,$status_key) {
+                    $subquery->Where('users.email', 'LIKE',"%".$request->get('searchkey')."%")
+                    ->orWhere('users.mobile', 'LIKE',"%".$request->get('searchkey')."%")
+                    ->orWhere('users.is_active', 'LIKE',"%".$status_key."%");
+                });
+            });
         }
+
 
         return $model;
     }

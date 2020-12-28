@@ -225,6 +225,12 @@ class User extends BaseModel
         $model = parent::applyFilters($model, $isPluck);
         $request = app('request');
         
+        $status_key = $request->get('searchkey');
+
+        if(strtolower($request->get('searchkey')) == "inactive" || strtolower($request->get('searchkey')) == "active"){
+            $status_key = (strtolower($request->get('searchkey')) == "inactive")?"2":"1";
+
+        }
 
             $model->where('users.id','!=', app('request')->user()->id);
 
@@ -233,13 +239,15 @@ class User extends BaseModel
         }
 
         if ($request->get('searchkey')) {
-            $model->where(function ($query) use ($request) {
+
+            $model->where(function ($query) use ($request,$status_key) {
             $query->orWhere('users.first_name', 'LIKE',"%".$request->get('searchkey')."%")
                 ->orWhere('users.last_name', 'LIKE',"%".$request->get('searchkey')."%")
                 ->orWhere('users.email', 'LIKE',"%".$request->get('searchkey')."%")
                 ->orWhere('users.address', 'LIKE',"%".$request->get('searchkey')."%")
                 ->orWhere('users.gender', 'LIKE',"%".$request->get('searchkey')."%")
-                ->orWhere('users.mobile', 'LIKE',"%".$request->get('searchkey')."%");
+                ->orWhere('users.mobile', 'LIKE',"%".$request->get('searchkey')."%")
+                ->orWhere('users.is_active', 'LIKE',"%".$status_key."%");
             });
            
         }

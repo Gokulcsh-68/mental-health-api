@@ -36,7 +36,7 @@ class UserRequest extends RequestAbstract
             'dob' => 'nullable',
             'blood_group' => 'nullable',
             'timezone_id' => 'required',
-            'address' => 'required',
+            // 'address' => 'required',
             'country_iso' => 'nullable',
             'emergency_contact_info' => 'nullable',
             'is_2fa' => 'required',
