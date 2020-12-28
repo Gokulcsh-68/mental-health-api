@@ -16,8 +16,10 @@ class UserRequest extends RequestAbstract
     {
         $request = app('request');
 
-        $user = $request->user();
-        $role_id = $user->role_id;
+
+        $role_id = Role::where("code", $request['role'])->value('id');
+      
+
 
         $rules = [
             'role' => 'required',
@@ -38,13 +40,19 @@ class UserRequest extends RequestAbstract
             'emergency_contact_info' => 'nullable',
             'is_2fa' => 'required',
             'is_active' => 'required',
-        ];
+        ];  
+        
 
         if ($this->route('id')) {
-            
-            $rules['username'] = 'required|unique:users,username,'.$user->id.',id,role_id,' . $role_id;
+           
+            $role_id = app('request')
+                ->attributes->get('entity')
+                ->where('id', $this->route('id'))
+                ->value('role_id');
+     
+              
+            $rules['username'] = 'required|unique:users,username,'.$this->route('id').',id,role_id,' . $role_id;
         }
-
 
 
         return $rules;

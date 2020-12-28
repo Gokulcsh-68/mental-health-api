@@ -7,6 +7,11 @@ use DB;
 class User extends BaseModel
 {
     const VIEW = true;
+
+    const CREATE = true;
+
+    const UPDATE = true;
+
     const ACTION = true;
 
     /**
@@ -186,6 +191,57 @@ class User extends BaseModel
             "gender" => $this->gender_text,
             "timezone" => $this->timezone(),
         ];
+    }
+
+    protected function createModel($request)
+    {
+        $data = $this->getModelAttributes($request);
+
+        DB::beginTransaction();
+        try {
+
+            // Take role_id
+
+            $data['role_id'] = Role::where("code", $data['role'])->pluck('id')->first();
+
+            $user = User::create($data);
+
+           
+            DB::commit();
+            return $user;
+        } catch (Exception $e) {
+            exceptionLogger("Users Create Rollback", $e);
+            DB::rollback();
+        }
+
+        return null;
+    }
+
+    public function applyFilters($model, $isPluck)
+    {
+        $model = parent::applyFilters($model, $isPluck);
+        $request = app('request');
+        
+
+            $model->where('users.id','!=', app('request')->user()->id);
+
+        if ($request->get('role_id')) {
+            $model->where('users.role_id', $request->get('role_id'));
+        }
+
+        if ($request->get('searchkey')) {
+            $model->where(function ($query) use ($request) {
+            $query->orWhere('users.first_name', 'LIKE',"%".$request->get('searchkey')."%")
+                ->orWhere('users.last_name', 'LIKE',"%".$request->get('searchkey')."%")
+                ->orWhere('users.email', 'LIKE',"%".$request->get('searchkey')."%")
+                ->orWhere('users.address', 'LIKE',"%".$request->get('searchkey')."%")
+                ->orWhere('users.gender', 'LIKE',"%".$request->get('searchkey')."%")
+                ->orWhere('users.mobile', 'LIKE',"%".$request->get('searchkey')."%");
+            });
+           
+        }
+
+        return $model;
     }
 
 }
