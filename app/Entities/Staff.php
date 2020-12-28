@@ -75,6 +75,7 @@ class Staff extends BaseModel
     {
         return $this->belongsTo(User::class);
     }
+    
 
     public function school()
     {
@@ -157,6 +158,24 @@ class Staff extends BaseModel
         if ($request->get('staff')->school_id) {
             $model->where('staffs.school_id', $request->get('staff')->school_id);
             $model->where('staffs.is_admin', 0);
+        }
+
+        $status_key = $request->get('searchkey');
+        if(strtolower($request->get('searchkey')) == "inactive" || strtolower($request->get('searchkey')) == "active"){
+        $status_key = (strtolower($request->get('searchkey')) == "inactive")?"2":"1";
+
+        }
+
+        if ($request->get('searchkey')) {
+            $model->whereHas('user', function ($subquery) use ($request,$status_key) {
+                    $subquery->Where('users.email', 'LIKE',"%".$request->get('searchkey')."%")
+                    ->orWhere('users.mobile', 'LIKE',"%".$request->get('searchkey')."%")
+                    ->orWhere('users.first_name', 'LIKE',"%".$request->get('searchkey')."%")
+                    ->orWhere('users.last_name', 'LIKE',"%".$request->get('searchkey')."%")
+                    ->orWhere('users.address', 'LIKE',"%".$request->get('searchkey')."%")
+                    ->orWhere('users.gender', 'LIKE',"%".$request->get('searchkey')."%")
+                    ->orWhere('users.is_active', 'LIKE',"%".$status_key."%");
+            });
         }
 
         return $model;
