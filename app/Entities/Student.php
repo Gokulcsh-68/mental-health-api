@@ -97,8 +97,8 @@ class Student extends BaseModel
         DB::beginTransaction();
         try {
 
-            $data['user']['role_id'] = Role::where("code", "student")->pluck('id')->first();
 
+$data['user']['role_id'] = Role::where("code", $data['user']['role'])->pluck('id')->first();
             $user = User::create($data['user']);
 
             $data['school_id'] = $request->get('staff')->school_id;
@@ -108,7 +108,7 @@ class Student extends BaseModel
             DB::commit();
             return $model;
         } catch (Exception $e) {
-            exceptionLogger("staffs Create Rollback", $e);
+            exceptionLogger("students Create Rollback", $e);
             DB::rollback();
         }
 

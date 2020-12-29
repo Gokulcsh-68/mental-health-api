@@ -16,9 +16,16 @@ class UserRequest extends RequestAbstract
     public function rules(): array
     {
         $request = app('request');
+            
 
+            if(isset($request['role'])){
+                $role =  $request['role'];
+            }
+            else{
+               $role =  $request['user']['role'];
+            }
 
-        $role_id = Role::where("code", $request['role'])->value('id');
+        $role_id = Role::where("code", $role)->value('id');
       
 
 

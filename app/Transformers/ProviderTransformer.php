@@ -16,6 +16,7 @@ class ProviderTransformer extends JsonResource
 
     public function toArray($request): array
     {
+        // dd();
         return [
             'id' => $this->id,
             'user_id' => $this->user_id,

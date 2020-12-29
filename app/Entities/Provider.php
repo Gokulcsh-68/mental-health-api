@@ -29,6 +29,7 @@ class Provider extends BaseModel
      * @var array
      */
     protected $casts = [
+        'additional_info' => 'object'
 
     ];
 
@@ -89,15 +90,22 @@ class Provider extends BaseModel
 
         DB::beginTransaction();
         try {
-
+            // dd($data);
+            $data['user']['role_id'] = Role::where("code", $data['user']['role'])->pluck('id')->first();
             $user = $this->user()->create($data['user']);
 
             $data['school_id'] = $request->get('staff')->school_id;
             $data['user_id'] = $user->id;
+
             $model = $this->create($data);
 
             //Provider specialities add
-            $model->providerSpeciality()->createMany($data['provider_speciality']);
+            $provider_speciality = [];
+            foreach ($data['provider_speciality'] as $key => $value) {
+               $provider_speciality[$key] = ['speciality'=>$value];
+            }
+
+            $model->providerSpeciality()->createMany($provider_speciality);
 
             DB::commit();
 
@@ -140,7 +148,15 @@ class Provider extends BaseModel
             if (!empty($data['provider_speciality'])) {
                 //Provider specialities delete and add
                 $model->providerSpeciality()->delete();
-                $model->providerSpeciality()->createMany($data['provider_speciality']);
+                $provider_speciality = [];
+                foreach ($data['provider_speciality'] as $key => $value) {
+                   $provider_speciality[$key] = ['speciality'=>$value];
+                }
+                
+                if(!empty($provider_speciality)){
+                $model->providerSpeciality()->createMany($provider_speciality);
+
+                }
             }
 
             DB::commit();
@@ -163,6 +179,33 @@ class Provider extends BaseModel
             $model->where('providers.school_id', $request->get('staff')->school_id);
         }
 
+        $status_key = $request->get('searchkey');
+        if(strtolower($request->get('searchkey')) == "inactive" || strtolower($request->get('searchkey')) == "active"){
+        $status_key = (strtolower($request->get('searchkey')) == "inactive")?"2":"1";
+
+        }
+
+
+        if ($request->get('searchkey')) {
+
+            $model->where(function($query) use ($request,$status_key) {
+                $query->whereHas('user', function ($subquery) use ($request,$status_key) {
+                        $subquery->Where('users.email', 'LIKE',"%".$request->get('searchkey')."%")
+                        ->orWhere('users.mobile', 'LIKE',"%".$request->get('searchkey')."%")
+                        ->orWhere('users.first_name', 'LIKE',"%".$request->get('searchkey')."%")
+                        ->orWhere('users.last_name', 'LIKE',"%".$request->get('searchkey')."%")
+                        ->orWhere('users.address', 'LIKE',"%".$request->get('searchkey')."%")
+                        ->orWhere('users.gender', 'LIKE',"%".$request->get('searchkey')."%")
+                        ->orWhere('users.is_active', 'LIKE',"%".$status_key."%");
+                });
+
+                $query->orwhereHas('providerSpeciality', function ($subquery) use ($request) {
+                        $subquery->Where('provider_specialities.speciality', 'LIKE',"%".$request->get('searchkey')."%");
+                });
+            });
+
+        }
+        
         return $model;
     }
 
