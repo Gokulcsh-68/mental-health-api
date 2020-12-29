@@ -205,9 +205,21 @@ class User extends BaseModel
 
             // Take role_id
 
+
             $data['role_id'] = Role::where("code", $data['role'])->pluck('id')->first();
 
             $user = User::create($data);
+
+            if($data['role'] == "school"){
+                
+                $staff = [
+                    'school_id' => $request->get('staff')->school_id,
+                    'is_admin' => 1,
+                ];
+                
+                $staff = $user->staff()->create($staff);
+            }
+            
 
            
             DB::commit();
@@ -234,8 +246,22 @@ class User extends BaseModel
 
             $model->where('users.id','!=', app('request')->user()->id);
 
-        if ($request->get('role_id')) {
-            $model->where('users.role_id', $request->get('role_id'));
+
+
+        if ($request->get('role')) {
+            $role_id = Role::where("code", $request->get('role'))->value('id');
+            $model->where('users.role_id', $role_id);
+        }
+
+
+         if ($request->get('role') == "school") {
+          
+            $school_id = $request->get('staff')->school_id;
+
+            $model->whereHas('staff', function ($subquery) use ($request,$school_id) {
+                    $subquery->Where('staffs.is_admin', 1)
+                    ->Where('staffs.school_id', $school_id);
+            });
         }
 
         if ($request->get('searchkey')) {

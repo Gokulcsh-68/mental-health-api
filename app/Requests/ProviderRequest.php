@@ -13,6 +13,7 @@ class ProviderRequest extends RequestAbstract
      */
     public function rules(): array
     {
+
         $rules = [
             'practicing_since' => 'nullable',
             'license_no' => 'required',
