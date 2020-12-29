@@ -22,7 +22,7 @@ class SchoolClass extends BaseModel
      * @var array
      */
     protected $fillable = [
-        "name", "school_id", "staff_id",
+        "name", "school_id", "staff_id", "is_active"
     ];
 
     /**
@@ -31,7 +31,7 @@ class SchoolClass extends BaseModel
      * @var array
     */
     protected $partialFillable = [
-        "name", "staff_id",
+        "name", "staff_id", "is_active"
     ];
 
     public function school()
@@ -101,6 +101,16 @@ class SchoolClass extends BaseModel
 
         if ($request->get('staff')->school_id) {
             $model->where('school_classes.school_id', $request->get('staff')->school_id);
+        }
+
+        $status_key = $request->get('searchkey');
+        if(strtolower($request->get('searchkey')) == "inactive" || strtolower($request->get('searchkey')) == "active"){
+            $status_key = (strtolower($request->get('searchkey')) == "inactive")?"0":"1";
+            $model->where('school_classes.is_active', $status_key);
+        }
+
+        if ($request->get('searchkey')) {
+            $model->where('school_classes.name', 'like', "%".$request->get('searchkey')."%");
         }
 
         return $model;
