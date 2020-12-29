@@ -3,7 +3,6 @@
 namespace App\Entities;
 use DB;
 use Carbon\Carbon;
-use Carbon\CarbonPeriod;
 use App\Entities\Provider;
 
 class AvailabilityDetail extends BaseModel
@@ -22,7 +21,7 @@ class AvailabilityDetail extends BaseModel
      * @var array
      */
     protected $fillable = [
-        "provider_id", "from_date_time", "to_date_time", "duration", "slot_group", "available_type", "slot_type", "slot_status", "available_status", "created_by",
+        "provider_id", "day", "timing", "created_by",
     ];
 
     /**
@@ -58,7 +57,7 @@ class AvailabilityDetail extends BaseModel
      * @var array
     */
     protected $dates = [
-        'from_date_time'
+
     ];
 
     /**
@@ -78,14 +77,10 @@ class AvailabilityDetail extends BaseModel
         try {
             
             $model = Provider::find($request->provider_id);
-            if ($responseData['status']) {
-                if (!empty($responseData['dataSlotGroup'])) {
-                    $model->availabilityDetail()->createMany($responseData['dataSlotGroup']);
-                } else {
-                    $model->availabilityDetail()->createMany($responseData['dataQueue']);
-                }
-            }
 
+            if (!empty($responseData)) {
+                $model->availabilityDetail()->createMany($responseData);
+            }
             DB::commit();
 
             return $model;
@@ -110,7 +105,7 @@ class AvailabilityDetail extends BaseModel
 
             return $model;
         } catch(Exception $e) {
-            exceptionLogger("Provider Update Rollback", $e);
+            exceptionLogger("Availability Detail Update Rollback", $e);
             DB::rollback();
         }
 
@@ -122,19 +117,54 @@ class AvailabilityDetail extends BaseModel
         $data = $this->getModelAttributes($request);
         $responseData = [
             'status' => true,
+            'error_type' => '',
         ];
 
-        $details = AvailabilityDetail::where('provider_id','=', $data['provider_id'])
-                                ->where('id','!=', $request->id)
-                                ->where('from_date_time','=', $data['from_date_time'])
-                                ->where('to_date_time','=', $data['to_date_time'])
+        $authorized = AvailabilityDetail::where('provider_id','=', $data['provider_id'])
+                                ->where('id','=', $request->id)
                                 ->get()->count();
 
-        if ($details == 1) {
+
+        if ($authorized == 1) {
+            $details = AvailabilityDetail::where('provider_id','=', $data['provider_id'])
+                                ->where('id','!=', $request->id)
+                                ->where('day','=', $data['day'])
+                                ->get()->count();
+            if ($details == 1) {
+                $responseData = [
+                    'status'     => false,
+                    'error_type' => 'Already',
+                ];
+            }
+        } else {
             $responseData = [
-                'status'    => false,
-                'message'   => 'Above selected time is already exist.'
+                'status'     => false,
+                'error_type' => 'Unauthorized',
             ];
+        }
+
+        
+        return $responseData;
+    }
+
+    protected function availabilityCheck($request) {
+
+        $data = $this->getModelAttributes($request);
+        $responseData = [
+            'status' => true,
+            'error_type' => '',
+        ];
+
+        foreach ($data['availabilityDetails'] as $key => $value) {
+            $details = AvailabilityDetail::where('provider_id','=', $data['provider_id'])
+                            ->where('day','=', $value['day'])
+                            ->get()->count();
+            if ($details >= 1) {
+                return $responseData = [
+                    'status'     => false,
+                    'error_type' => 'Already',
+                ];
+            }
         }
         return $responseData;
     }
@@ -158,20 +188,6 @@ class AvailabilityDetail extends BaseModel
 
         $data = $this->getModelAttributes($request);
 
-        $dataSlotGroup = $dataQueue  = [];
-
-        $responseData = [
-            'status' => false,
-            'message' => '',
-            'dataQueue' => $dataQueue,
-            'dataSlotGroup' => $dataSlotGroup,
-        ];
-
-        if(!empty($data['from_date'])) 
-            $data['from_date']   = Carbon::parse($data['from_date'])->toDateTimeString();
-        if(!empty($data['to_date'])) 
-            $data['to_date']   = Carbon::parse($data['to_date'])->toDateTimeString();
-
         $createdBy = $request->user()->id;
         if (!empty($data['provider_id'])) {
             $data['provider_id']    = $data['provider_id'];
@@ -180,150 +196,15 @@ class AvailabilityDetail extends BaseModel
             $createdBy = $request->user()->provider->user_id;
         }
 
-
-        $start  = Carbon::parse($data['from_date']);
-        $end    = Carbon::parse($data['to_date']);
-        $period = CarbonPeriod::create($start, $end);
-            
-        $dates = $period->toArray();
-
-        if($data['available_type'] == 'weekdays'){
-
-            $week = [
-                'week_days_sun' => 'Sunday',
-                'week_days_mon' => 'Monday',
-                'week_days_tue' => 'Tuesday',
-                'week_days_wed' => 'Wednesday',
-                'week_days_thu' => 'Thursday',
-                'week_days_fri' => 'Friday',
-                'week_days_sat' => 'Saturday'
-            ];
-
-            $weekday_filter =[];
-            foreach ($week as $key => $value) {
-                if(!empty($data[$key]) && $data[$key]){
-                    $weekday_filter[] = $value;
-                }
-            }
-
-            foreach ($dates as $key => $value) {
-                if(!in_array($value->format('l') , $weekday_filter)){
-                    unset($dates[$key]);
-                }
-            }
+        $slotArray = [];
+        foreach ($data['availabilityDetails'] as $key => $value) {
+            $value['provider_id'] = $data['provider_id'];
+            $value['created_by'] = $createdBy;
+            $value['timing'] = json_encode($value['timing']);
+            $slotArray[] = $value;
         }
 
-        if (empty($dates)) {
-            return $responseData = [
-                'status' => false,
-                'dataQueue' => $dataQueue,
-                'dataSlotGroup' => $dataSlotGroup,
-                'dates' => "Dates are not available"
-            ];
-        }
-
-        foreach ($dates as $key => $value) {
-            
-            //Queue slots
-            if ($data['slot_type']==2) {
-                if(is_array($data['queue_slots']) && sizeof($data['queue_slots'])) {
-                    foreach ($data['queue_slots'] as $queueSlot) {
-
-                        $availabiltyData = [];
-                        $availabiltyData['provider_id']     = $provider;
-                        $availabiltyData['from_date_time']  = $value->format('Y-m-d') . ' '. $queueSlot['from_time'] . ':00';
-                        $availabiltyData['to_date_time']    = $value->format('Y-m-d') . ' ' . $queueSlot['to_time'] . ':59';
-                        $availabiltyData['slot_status']     = 'Open';
-                        $availabiltyData['slot_group']      = 1;
-                        $availabiltyData['slot_type']       = $data['slot_type'];
-                        $availabiltyData['available_type']  = $data['available_type'];
-                        $availabiltyData['created_by']       = $createdBy;
-                        array_push($dataQueue, $availabiltyData);
-                    }
-                }
-            }
-
-            // Time slots
-            if ($data['slot_type']==1) {
-                foreach ($data['queue_slots'] as $queueSlot) {
-
-                    $duration =  preg_replace("/[^0-9]/", '', $queueSlot['duration_display']);
-
-                    if(!empty($queueSlot['from_time']) && $queueSlot['from_time']){
-
-                        $date_start_time    = Carbon::parse($value)->toDateString() . ' ' . Carbon::parse($queueSlot['from_time'])->toTimeString();
-                        $date_end_time      = Carbon::parse(Carbon::parse($value)->toDateString() . ' ' . Carbon::parse($queueSlot['to_time'])->toTimeString())->toDateTimeString();
-                        $new_slot =  Carbon::parse($date_start_time);
-
-                        $avail_info = AvailabilityDetail::where('from_date_time',$date_start_time)
-                                         ->where('to_date_time', $date_end_time)->first();
-
-                        $st_time = date("H:i:s",strtotime($date_start_time));
-                        $st_t_time = date("H:i:01",strtotime($date_start_time));
-                        $ed_time = date("H:i:s",strtotime($date_end_time));
-                                        
-                        $st_date = date("Y-m-d",strtotime($date_start_time));
-                        $ed_date = date("Y-m-d",strtotime($date_end_time));
-
-                        $details = AvailabilityDetail::where('provider_id',$data['provider_id'])
-                        ->whereRaw("DATE(from_date_time) BETWEEN '".$st_date."' AND '".$ed_date."'")
-                        ->whereRaw("TIME(from_date_time) BETWEEN '".$st_time."' AND '".$ed_time."'")
-                        ->get();
-                        
-                        
-                        $details_totime = AvailabilityDetail::where('provider_id',$data['provider_id'])
-                        //->whereBetween("from_date_time",[$date_start_time, $date_end_time])
-                        ->whereRaw("DATE(to_date_time) BETWEEN '".$st_date."' AND '".$ed_date."'")
-                        ->whereRaw("TIME(to_date_time) BETWEEN '".$st_t_time."' AND '".$ed_time."'")
-                        ->get();
-
-                        if(sizeof($details)>0){
-                            return $responseData += [
-                                'status' => false,
-                                'message' => 'Above selected time is already exist.',
-                            ];
-                        }
-                        if(sizeof($details_totime)>0){
-                            return $responseData += [
-                                'status' => false,
-                                'message' => 'Above selected time is already exist.',
-                            ];
-                        }
-                        
-                        while($new_slot < $date_end_time) {
-                            $new_slot = $new_slot->addMinutes($duration);
-                            $availabiltyData = [];
-                            $availabiltyData['provider_id']     = $data['provider_id'];
-                            $availabiltyData['from_date_time']  = Carbon::parse($new_slot)->toDateTimeString();
-                            $availabiltyData['to_date_time']    = Carbon::parse($new_slot)->toDateTimeString();
-                            $availabiltyData['slot_status']     = 'Open';
-                            $availabiltyData['duration']        = $duration;
-                            $availabiltyData['slot_group']      = 2;
-                            $availabiltyData['available_type']  = $data['available_type'];
-                            $availabiltyData['slot_type']       = $data['slot_type'];
-                            $availabiltyData['created_by']       = $createdBy;
-                            array_push($dataSlotGroup, $availabiltyData);
-                        }
-                        
-                    }   
-                }
-            }
-        }
-
-        /*if (empty($dataQueue) && empty($dataSlotGroup)) {
-            return $responseData += [
-                'status' => false,
-                'message' => 'Once again check given details',
-                'dataQueue' => $dataQueue,
-                'dataSlotGroup' => $dataSlotGroup,
-            ];
-        }*/
-
-        return $responseData = [
-            'status' => true,
-            'dataQueue' => $dataQueue,
-            'dataSlotGroup' => $dataSlotGroup,
-        ];
+        return $slotArray;
     }
 
     public function applyFilters($model, $isPluck) {
@@ -332,13 +213,6 @@ class AvailabilityDetail extends BaseModel
 
         if ($request->get("provider_id")) {
             $model = $model->where("provider_id", $request->get("provider_id"));
-        }
-
-        if ($request->get("from_date") && $request->get("to_date")) {
-            $data['from_date']  = Carbon::parse($request->get("from_date"))->toDateString(). " 00:00:00";
-            $data['to_date']    = Carbon::parse($request->get("to_date"))->toDateString(). " 23:59:59";
-            
-            $model = $model->whereRaw("from_date_time >= '" . $data['from_date'] ."' AND to_date_time <= '" . $data['to_date'] . "'");
         }
         
         return $model;
