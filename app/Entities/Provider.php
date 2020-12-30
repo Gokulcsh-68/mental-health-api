@@ -147,6 +147,7 @@ class Provider extends BaseModel
 
             if (!empty($data['provider_speciality'])) {
                 //Provider specialities delete and add
+              
                 $model->providerSpeciality()->delete();
                 $provider_speciality = [];
                 foreach ($data['provider_speciality'] as $key => $value) {

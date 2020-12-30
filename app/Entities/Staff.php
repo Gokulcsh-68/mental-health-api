@@ -157,7 +157,13 @@ class Staff extends BaseModel
 
         if ($request->get('staff')->school_id) {
             $model->where('staffs.school_id', $request->get('staff')->school_id);
-            $model->where('staffs.is_admin', 0);
+        }
+
+        if($request->get('is_admin')){
+            $model->where('staffs.is_admin', 1);
+        }
+        else{
+            $model->where('staffs.id', '!=',$request->get('staff')->id);
         }
 
         $status_key = $request->get('searchkey');
@@ -166,12 +172,18 @@ class Staff extends BaseModel
 
         }
 
+
+        if ($request->get('searchkey')) {
+
+        }
+
         if ($request->get('searchkey')) {
             $model->whereHas('user', function ($subquery) use ($request,$status_key) {
                     $subquery->Where('users.email', 'LIKE',"%".$request->get('searchkey')."%")
                     ->orWhere('users.mobile', 'LIKE',"%".$request->get('searchkey')."%")
-                    ->orWhere('users.first_name', 'LIKE',"%".$request->get('searchkey')."%")
-                    ->orWhere('users.last_name', 'LIKE',"%".$request->get('searchkey')."%")
+                    ->orWhere(DB::raw("CONCAT(`first_name`, ' ', `last_name`)"), 'LIKE',"%".$request->get('searchkey')."%")
+                    // ->orWhere('users.first_name', 'LIKE',"%".$request->get('searchkey')."%")
+                    // ->orWhere('users.last_name', 'LIKE',"%".$request->get('searchkey')."%")
                     ->orWhere('users.address', 'LIKE',"%".$request->get('searchkey')."%")
                     ->orWhere('users.gender', 'LIKE',"%".$request->get('searchkey')."%")
                     ->orWhere('users.is_active', 'LIKE',"%".$status_key."%");
