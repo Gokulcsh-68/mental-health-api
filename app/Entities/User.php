@@ -192,7 +192,7 @@ class User extends BaseModel
             "is2FA" => (boolean) $this->is_2fa,
             "role" => $this->role->code,
             "gender" => $this->gender_text,
-            "timezone" => $this->timezone(),
+            "timezone" => $this->timezone,
         ];
     }
 
