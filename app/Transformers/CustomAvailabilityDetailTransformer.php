@@ -4,7 +4,7 @@ namespace App\Transformers;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class AvailabilityDetailTransformer extends JsonResource
+class CustomAvailabilityDetailTransformer extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -18,8 +18,9 @@ class AvailabilityDetailTransformer extends JsonResource
         return [
             'id' =>  $this->id,
             'provider_id' =>  $this->provider_id,
-            'day' =>  $this->day,
-            'timing' =>  $this->timing,
+            'from_date' =>  $this->from_date,
+            'to_date' =>  $this->to_date,
+            'timing' =>  $this->timing
         ];
     }
 }

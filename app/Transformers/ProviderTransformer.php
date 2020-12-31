@@ -23,6 +23,7 @@ class ProviderTransformer extends JsonResource
             'license_no' => $this->license_no,
             'specialities' => $this->specialities,
             'additional_info' => $this->additional_info,
+            'availabilities' => $this->availabilities,
             'user' => (new UserTransformer($this->user)),
             'provider_speciality' => $this->providerSpeciality,
         ];
