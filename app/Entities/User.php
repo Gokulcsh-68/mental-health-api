@@ -214,7 +214,7 @@ class User extends BaseModel
                 
                 $staff = [
                     'school_id' => $request->get('staff')->school_id,
-                    'is_admin' => 1,
+                    'is_admin' => 0,
                 ];
                 
                 $staff = $user->staff()->create($staff);
@@ -259,7 +259,7 @@ class User extends BaseModel
             $school_id = $request->get('staff')->school_id;
 
             $model->whereHas('staff', function ($subquery) use ($request,$school_id) {
-                    $subquery->Where('staffs.is_admin', 1)
+                    $subquery->Where('staffs.is_admin', 0)
                     ->Where('staffs.school_id', $school_id);
             });
         }
