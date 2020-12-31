@@ -68,6 +68,7 @@ class UserRequest extends RequestAbstract
     {
         return [
             //
+             'username.unique' => 'username already taken'
         ];
     }
 }

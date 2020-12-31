@@ -20,6 +20,8 @@ class StudentTransformer extends JsonResource
             'user_id' => $this->user_id,
             'school_id' => $this->school_id,
             'class_id' => $this->class_id,
+            'enroll_number' => $this->enroll_number,
+            'additional_info' => $this->additional_info,
             'school_name' => $this->school->name,
             'class_name' => $this->getschoolclass->name,
             'user' => (new UserTransformer($this->user)),

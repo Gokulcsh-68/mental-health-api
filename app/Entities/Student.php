@@ -22,7 +22,7 @@ class Student extends BaseModel
      * @var array
      */
     protected $fillable = [
-        "user_id", "school_id", "class_id",
+        "user_id", "school_id", "class_id", "enroll_number", "additional_info"
     ];
 
     /**
@@ -31,7 +31,7 @@ class Student extends BaseModel
      * @var array
      */
     protected $casts = [
-
+        "additional_info" => 'object',
     ];
 
     /**
@@ -49,7 +49,7 @@ class Student extends BaseModel
      * @var array
      */
     protected $partialFillable = [
-        "class_id",
+        "class_id", "enroll_number", "additional_info"
     ];
 
     /**

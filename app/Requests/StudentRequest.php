@@ -18,6 +18,8 @@ class StudentRequest extends RequestAbstract
             // 'user_id' => 'required',
             // 'school_id' => 'required',
             'class_id' => 'required',
+            'enroll_number' => 'required',
+            'additional_info' => 'nullable'
         ];
 
         $rules['user'] = (new UserRequest())->rules();
