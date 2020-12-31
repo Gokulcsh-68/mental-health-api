@@ -20,7 +20,7 @@ class Provider extends BaseModel
      * @var array
      */
     protected $fillable = [
-        "user_id", "school_id", "practicing_since", "license_no", "additional_info",
+        "user_id", "school_id", "practicing_since", "license_no", "additional_info", "availabilities"
     ];
 
     /**
@@ -48,7 +48,7 @@ class Provider extends BaseModel
      * @var array
      */
     protected $partialFillable = [
-
+        "availabilities"
     ];
 
     /**
@@ -74,9 +74,9 @@ class Provider extends BaseModel
         return $this->belongsTo(User::class);
     }
 
-    public function availabilityDetail()
+    public function customAvailabilityDetail()
     {
-        return $this->hasMany(AvailabilityDetail::class);
+        return $this->hasMany(CustomAvailabilityDetail::class);
     }
 
     public function providerSpeciality()
@@ -90,8 +90,9 @@ class Provider extends BaseModel
 
         DB::beginTransaction();
         try {
-            // dd($data);
+            $data['availabilities']  = json_encode($data['availabilities']);
             $data['user']['role_id'] = Role::where("code", $data['user']['role'])->pluck('id')->first();
+
             $user = $this->user()->create($data['user']);
 
             $data['school_id'] = $request->get('staff')->school_id;

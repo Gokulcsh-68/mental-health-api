@@ -117,9 +117,11 @@ class CustomAvailabilityDetail extends BaseModel
         $data['to_date']    = Carbon::parse($data['to_date'])->toDateString();
 
         $details = CustomAvailabilityDetail::where('provider_id','=', $data['provider_id'])
-                            ->where('from_date','<=', $data['from_date'])
-                            ->where('to_date','>=', $data['to_date'])
-                            ->get()->count();
+                    ->where(function($query) use ($data){
+                        $query->whereBetween('from_date', [$data['from_date'], $data['to_date']])
+                            ->orWhereBetween('to_date', [$data['from_date'], $data['to_date']]);
+                    })
+                    ->get()->count();
 
         if ($details >= 1) {
             $responseData = [
@@ -127,8 +129,6 @@ class CustomAvailabilityDetail extends BaseModel
                 'error_type' => 'Already',
             ];
         }
-
-        
         return $responseData;
     }
 
@@ -140,8 +140,8 @@ class CustomAvailabilityDetail extends BaseModel
         ];
 
         $authorized = CustomAvailabilityDetail::where('provider_id','=', $data['provider_id'])
-                            ->where('id','=', $request->id)
-                            ->get()->count();
+                ->where('id','=', $request->id)
+                ->get()->count();
 
 
         if ($authorized == 1) {
@@ -149,10 +149,12 @@ class CustomAvailabilityDetail extends BaseModel
             $data['to_date']    = Carbon::parse($data['to_date'])->toDateString();
             
             $details = CustomAvailabilityDetail::where('provider_id','=', $data['provider_id'])
-                            ->where('id','!=', $request->id)
-                            ->where('from_date','<=', $data['from_date'])
-                            ->where('to_date','>=', $data['to_date'])
-                            ->get()->count();
+                        ->where('id','!=', $request->id)
+                        ->where(function($query) use ($data){
+                            $query->whereBetween('from_date', [$data['from_date'], $data['to_date']])
+                                ->orWhereBetween('to_date', [$data['from_date'], $data['to_date']]);
+                        })
+                        ->get()->count();
             if ($details >= 1) {
                 $responseData = [
                     'status'     => false,
