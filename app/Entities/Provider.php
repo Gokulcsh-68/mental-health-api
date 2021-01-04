@@ -90,7 +90,10 @@ class Provider extends BaseModel
 
         DB::beginTransaction();
         try {
-            $data['availabilities']  = json_encode($data['availabilities']);
+            if(!empty($data['availabilities'])){
+                $data['availabilities']  = json_encode($data['availabilities']);
+            }
+            
             $data['user']['role_id'] = Role::where("code", $data['user']['role'])->pluck('id')->first();
 
             $user = $this->user()->create($data['user']);

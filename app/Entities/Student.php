@@ -152,13 +152,33 @@ $data['user']['role_id'] = Role::where("code", $data['user']['role'])->pluck('id
         return null;
     }
 
-    public function applyFilters($model, $isPluck)
+
+     public function applyFilters($model, $isPluck)
     {
         $model = parent::applyFilters($model, $isPluck);
         $request = app('request');
 
         if ($request->get('staff')->school_id) {
             $model->where('students.school_id', $request->get('staff')->school_id);
+        }
+
+        $status_key = $request->get('searchkey');
+        if(strtolower($request->get('searchkey')) == "inactive" || strtolower($request->get('searchkey')) == "active"){
+            $status_key = (strtolower($request->get('searchkey')) == "inactive")?"0":"1";
+        }
+
+
+        if ($request->get('searchkey')) {
+            $model->whereHas('user', function ($subquery) use ($request, $status_key) {
+                    $subquery->Where('users.email', 'LIKE',"%".$request->get('searchkey')."%")
+                    ->orWhere('users.mobile', 'LIKE',"%".$request->get('searchkey')."%")
+                    ->orWhere(DB::raw("CONCAT(`first_name`, ' ', `last_name`)"), 'LIKE',"%".$request->get('searchkey')."%")
+                    // ->orWhere('users.first_name', 'LIKE',"%".$request->get('searchkey')."%")
+                    // ->orWhere('users.last_name', 'LIKE',"%".$request->get('searchkey')."%")
+                    ->orWhere('users.address', 'LIKE',"%".$request->get('searchkey')."%")
+                    ->orWhere('users.gender', 'LIKE',"%".$request->get('searchkey')."%")
+                    ->orWhere('users.is_active', 'LIKE',"%".$status_key."%");
+            });
         }
 
         return $model;

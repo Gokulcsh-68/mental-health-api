@@ -168,8 +168,7 @@ class Staff extends BaseModel
 
         $status_key = $request->get('searchkey');
         if(strtolower($request->get('searchkey')) == "inactive" || strtolower($request->get('searchkey')) == "active"){
-        $status_key = (strtolower($request->get('searchkey')) == "inactive")?"2":"1";
-
+            $status_key = (strtolower($request->get('searchkey')) == "inactive")?"0":"1";
         }
 
 
