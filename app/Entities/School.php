@@ -114,6 +114,7 @@ class School extends BaseModel
     {
         $model = parent::applyFilters($model, $isPluck);
         $request = app('request');
+
         $status_key = $request->get('searchkey');
         if(strtolower($request->get('searchkey')) == "inactive" || strtolower($request->get('searchkey')) == "active"){
         $status_key = (strtolower($request->get('searchkey')) == "inactive")?"2":"1";
@@ -121,14 +122,18 @@ class School extends BaseModel
         }
 
         if ($request->get('searchkey')) {
-            $model->where(function ($query) use ($request) {
-            $query->Where('schools.name', 'LIKE',"%".$request->get('searchkey')."%")
-                ->orWhere('schools.additional_info', 'LIKE',"%".$request->get('searchkey')."%");
-            })->orwhereHas('staff', function ($query) use ($request,$status_key) {
-                $query->whereHas('user', function ($subquery) use ($request,$status_key) {
-                    $subquery->Where('users.email', 'LIKE',"%".$request->get('searchkey')."%")
-                    ->orWhere('users.mobile', 'LIKE',"%".$request->get('searchkey')."%")
-                    ->orWhere('users.is_active', 'LIKE',"%".$status_key."%");
+            $model->where(function ($mquery) use ($request,$status_key) {
+                $mquery->where(function ($query) use ($request) {
+                        $query->Where('schools.name', 'LIKE',"%".$request->get('searchkey')."%")
+                        ->orWhere('schools.additional_info', 'LIKE',"%".$request->get('searchkey')."%");
+                    });
+                $mquery->orwhereHas('primaryStaff', function ($query) use ($request,$status_key) {
+                        $query->whereHas('user', function ($subquery) use ($request,$status_key) {
+                            $subquery->Where('users.email', 'LIKE',"%".$request->get('searchkey')."%")
+                            ->orWhere('users.mobile', 'LIKE',"%".$request->get('searchkey')."%")
+                            ->orWhere(DB::raw("CONCAT(`first_name`, ' ', `last_name`)"), 'LIKE',"%".$request->get('searchkey')."%")
+                            ->orWhere('users.is_active', 'LIKE',"%".$status_key."%");
+                    });
                 });
             });
         }

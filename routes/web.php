@@ -43,6 +43,7 @@ $router->group(['prefix' => 'v1/', 'middleware' => 'clientAuth'], function ($rou
             $router->patch('set-password', 'AuthService@setPassword');
             $router->patch('change-password', 'AuthService@changePassword');
             $router->patch('twofa', 'AuthService@twofa');
+            $router->patch('communication', 'AuthService@communication');
             $router->get('info', 'AuthService@info');
             // $router->post('verify-otp', 'AuthService@verifyOtp');
             // $router->post('resend-otp', 'AuthService@resendOtp');

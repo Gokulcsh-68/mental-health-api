@@ -23,7 +23,7 @@ class User extends BaseModel
      * @var array
      */
     protected $fillable = [
-        "role_id", "first_name", "last_name", "email", "isd_code", "mobile", "username", "secret", "password", "profile_image", "gender", "dob", "blood_group", "timezone_id", "address", "country_iso", "emergency_contact_info", "is_2fa", "is_active", "created_by", "updated_by",
+        "role_id", "first_name", "last_name", "email", "isd_code", "mobile", "username", "secret", "password", "profile_image", "gender", "dob", "blood_group", "timezone_id", "address", "country_iso", "emergency_contact_info", "is_2fa", "is_active", "created_by", "updated_by","communication_channel"
     ];
 
     /**
@@ -32,7 +32,8 @@ class User extends BaseModel
      * @var array
      */
     protected $casts = [
-        'address' => 'object'
+        'address' => 'object',
+        'communication_channel' => 'object',
     ];
 
     /**
@@ -50,7 +51,7 @@ class User extends BaseModel
      * @var array
      */
     protected $partialFillable = [
-        "first_name", "last_name", "email", "isd_code", "mobile", "username", "secret", "password", "profile_image", "gender", "dob", "blood_group", "timezone_id", "address", "country_iso", "emergency_contact_info", "is_2fa", "is_active"
+        "first_name", "last_name", "email", "isd_code", "mobile", "username", "secret", "password", "profile_image", "gender", "dob", "blood_group", "timezone_id", "address", "country_iso", "emergency_contact_info", "is_2fa", "is_active","communication_channel"
     ];
 
     /**
@@ -267,8 +268,9 @@ class User extends BaseModel
         if ($request->get('searchkey')) {
 
             $model->where(function ($query) use ($request,$status_key) {
-            $query->orWhere('users.first_name', 'LIKE',"%".$request->get('searchkey')."%")
+            $query->Where('users.first_name', 'LIKE',"%".$request->get('searchkey')."%")
                 ->orWhere('users.last_name', 'LIKE',"%".$request->get('searchkey')."%")
+                ->orWhere(DB::raw("CONCAT(`first_name`, ' ', `last_name`)"), 'LIKE',"%".$request->get('searchkey')."%")
                 ->orWhere('users.email', 'LIKE',"%".$request->get('searchkey')."%")
                 ->orWhere('users.address', 'LIKE',"%".$request->get('searchkey')."%")
                 ->orWhere('users.gender', 'LIKE',"%".$request->get('searchkey')."%")

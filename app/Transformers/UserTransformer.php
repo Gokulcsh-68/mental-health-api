@@ -34,7 +34,8 @@ class UserTransformer extends JsonResource
             'country_iso' =>  $this->country_iso,
             'emergency_contact_info' =>  $this->emergency_contact_info,
             'is_2fa' =>  $this->is_2fa,
-            'is_active' =>  $this->is_active
+            'is_active' =>  $this->is_active,
+            'communication_channel' =>  $this->communication_channel,
         ];
     }
 }

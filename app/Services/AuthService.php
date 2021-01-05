@@ -7,6 +7,7 @@ use App\Entities\Role;
 use App\Requests\ChangePasswordRequest;
 use App\Requests\GeneralLoginRequest;
 use App\Requests\TwofaRequest;
+use App\Requests\CommunicationRequest;
 use App\Requests\VerifyOtpRequest;
 use App\Requests\ResendOtpRequest;
 use App\Transformers\UserTransformer;
@@ -115,6 +116,16 @@ class AuthService extends BaseService
                     ->setHttpMessage("Password Updated Successfully!...")
                     ->jsonResponse();
     }
+
+    public function communication(CommunicationRequest $request): JsonResponse
+    {
+        $user = $request->user();
+        $val = $request->get('communication_channel');
+        $user->update(['communication_channel' => $val]);
+
+        return $this->httpResponse->jsonResponse();
+    }
+
 
     public function twofa(TwofaRequest $request): JsonResponse
     {
