@@ -15,7 +15,7 @@ class CreateAnswersTable extends Migration
     {
         Schema::create('answers', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
+            $table->string('name', 512)->unique();
             $table->boolean('is_active')->default(1)->comment="0-Inactive, 1-Active";
             $table->timestamps();
         });

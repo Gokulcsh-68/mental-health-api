@@ -16,7 +16,7 @@ class CreateQuestionsTable extends Migration
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('parent_id')->nullable();
-            $table->string('name')->unique();
+            $table->string('name', 512)->unique();
             $table->enum('type', ['input', 'select', 'checkbox', 'radio', 'sub_question'])->default('input');
             $table->boolean('is_active')->default(1)->comment="0-Inactive, 1-Active";
             $table->timestamps();
