@@ -24,7 +24,7 @@ class CreateFormQuestionAnswersTable extends Migration
             $table->text('label')->nullable();
             $table->timestamps();
 
-            $table->foreign('form_question_id')->references('id')->on('forms')->onDelete('restrict')->onUpdate('cascade');
+            $table->foreign('form_question_id')->references('id')->on('questions')->onDelete('restrict')->onUpdate('cascade');
             $table->foreign('answer_id')->references('id')->on('answers')->onDelete('restrict')->onUpdate('cascade');
         });
     }

@@ -17,13 +17,13 @@ class CreateFormsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->string('slug');
-            $table->string('name');
+            $table->string('name', 512)->unique();
             $table->text('desc');
             $table->string('assessment_group', 45)->nullable();
             $table->enum('type', ['normal', 'score'])->default('normal');
             $table->json('images')->nullable();
             $table->boolean('is_active')->default(1)->comment="0-Inactive, 1-Active";
-            $table->unsignedBigInteger('created_by');
+            $table->unsignedBigInteger('created_by')->nullable();
             $table->timestamps();
 
             $table->unique(['parent_id', 'slug']);
