@@ -69,15 +69,16 @@ class AvailabilityDetail extends BaseModel
         
     ];
 
+
+
     protected function createModel($request) {
         $data = $this->getModelAttributes($request);
         $responseData = $this->slotArray($request, $data);
 
-        DB::beginTransaction();
         try {
             
             $model = Provider::find($request->provider_id);
-
+          
             if (!empty($responseData)) {
                 $model->availabilityDetail()->createMany($responseData);
             }

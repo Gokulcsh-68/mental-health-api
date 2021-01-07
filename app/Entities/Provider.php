@@ -29,7 +29,8 @@ class Provider extends BaseModel
      * @var array
      */
     protected $casts = [
-        'additional_info' => 'object'
+        'additional_info' => 'object',
+        'availabilities' => 'object'
 
     ];
 
@@ -79,6 +80,12 @@ class Provider extends BaseModel
         return $this->hasMany(CustomAvailabilityDetail::class);
     }
 
+
+    public function availabilityDetail()
+    {
+        return $this->hasMany(AvailabilityDetail::class);
+    }
+
     public function providerSpeciality()
     {
         return $this->hasMany(ProviderSpeciality::class);
@@ -93,7 +100,7 @@ class Provider extends BaseModel
             if(!empty($data['availabilities'])){
                 $data['availabilities']  = json_encode($data['availabilities']);
             }
-            
+
             $data['user']['role_id'] = Role::where("code", $data['user']['role'])->pluck('id')->first();
 
             $user = $this->user()->create($data['user']);
@@ -136,31 +143,37 @@ class Provider extends BaseModel
 
         $data = $this->getModelAttributes($request);
 
+        if(!empty($data['availabilities'])){
+                $data['availabilities']  = json_encode($data['availabilities']);
+            }
+
         //remove strict fields
         $exceptListKey = $this->multipleArraySearch($this->getFillable(), ['user_id', 'school_id']);
         $only = array_except($this->getFillable(), $exceptListKey);
-
+       
         DB::beginTransaction();
         try {
 
             $model = parent::updateModel($id, $request, $only);
 
-            $data['user'] = array_except($data['user'], ['role_id']);
-            $model->user->fill($data['user'])
-                ->save(['touch' => false]);
+            if($request->method() == "PUT"){
+                $data['user'] = array_except($data['user'], ['role_id']);
+                $model->user->fill($data['user'])
+                    ->save(['touch' => false]);
 
-            if (!empty($data['provider_speciality'])) {
-                //Provider specialities delete and add
-              
-                $model->providerSpeciality()->delete();
-                $provider_speciality = [];
-                foreach ($data['provider_speciality'] as $key => $value) {
-                   $provider_speciality[$key] = ['speciality'=>$value];
-                }
-                
-                if(!empty($provider_speciality)){
-                $model->providerSpeciality()->createMany($provider_speciality);
+                if (!empty($data['provider_speciality'])) {
+                    //Provider specialities delete and add
+                  
+                    $model->providerSpeciality()->delete();
+                    $provider_speciality = [];
+                    foreach ($data['provider_speciality'] as $key => $value) {
+                       $provider_speciality[$key] = ['speciality'=>$value];
+                    }
+                    
+                    if(!empty($provider_speciality)){
+                    $model->providerSpeciality()->createMany($provider_speciality);
 
+                    }
                 }
             }
 
