@@ -15,7 +15,7 @@ class CreateFormQuestionAnswersTable extends Migration
     {
         Schema::create('form_question_answers', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('form_question_id');
+            $table->unsignedBigInteger('question_id');
             $table->unsignedBigInteger('answer_id')->nullable();
             $table->integer('jump_to_question_id')->nullable();
             $table->integer('score')->nullable();
@@ -24,7 +24,7 @@ class CreateFormQuestionAnswersTable extends Migration
             $table->text('label')->nullable();
             $table->timestamps();
 
-            $table->foreign('form_question_id')->references('id')->on('questions')->onDelete('restrict')->onUpdate('cascade');
+            $table->foreign('question_id')->references('id')->on('questions')->onDelete('restrict')->onUpdate('cascade');
             $table->foreign('answer_id')->references('id')->on('answers')->onDelete('restrict')->onUpdate('cascade');
         });
     }
@@ -37,7 +37,7 @@ class CreateFormQuestionAnswersTable extends Migration
     public function down()
     {
         Schema::table('form_question_answers', function (Blueprint $table) {
-            $table->dropForeign(['form_question_id']);
+            $table->dropForeign(['question_id']);
             $table->dropForeign(['answer_id']);
         });
         Schema::dropIfExists('form_question_answers');

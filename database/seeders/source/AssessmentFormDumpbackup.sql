@@ -140,7 +140,7 @@ cholesterol is high?','radio', 1);
 
  insert into `questions` (`name`, `type`, `is_active`)
  values( 'Thinking back on the past 30 days, please check yes or no for each statement. You may
-choose “yes” for more than one statement.','sub_question', 1);
+    choose “yes” for more than one statement.','sub_question', 1);
 
  insert into `questions` (`name`, `type`, `is_active`)
  values( 'Over the past 30 days in general, how many hours per day did you usually spend watching
@@ -2698,7 +2698,7 @@ insert into `form_question_answers` (`form_question_id`,`answer_id`,`jump_to_que
  ((SELECT current_question.id FROM questions as current_question WHERE current_question.name="Language/aphasia" LIMIT 1), 
  	(SELECT id FROM answers WHERE name="Mild-moderate aphasia: some obvious changes, without significant limitation" LIMIT 1), null,1),
  ((SELECT current_question.id FROM questions as current_question WHERE current_question.name="Language/aphasia" LIMIT 1), 
- 	(SELECT id FROM answers WHERE name="Severe aphasia: fragmentary expression, inference needed, cannot identify materials+2" LIMIT 1), null,2),
+ 	(SELECT id FROM answers WHERE name="Severe aphasia: fragmentary expression, inference needed, cannot identify materials+" LIMIT 1), null,2),
  ((SELECT current_question.id FROM questions as current_question WHERE current_question.name="Language/aphasia" LIMIT 1), 
  	(SELECT id FROM answers WHERE name="Mute/global aphasia: no usable speech/auditory comprehension" LIMIT 1), null,3),
  ((SELECT current_question.id FROM questions as current_question WHERE current_question.name="Language/aphasia" LIMIT 1), 
