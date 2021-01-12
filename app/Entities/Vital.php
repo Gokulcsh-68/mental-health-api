@@ -105,6 +105,10 @@ class Vital extends BaseModel
         if($request->get('user_id')){
             $model->where('vitals.user_id', $request->get('user_id'));
         }
+        
+        if($request->get('slug')){
+            $model->where('vitals.slug', $request->get('slug'));
+        }
 
 
         if($request->get('from') && $request->get('to')){
