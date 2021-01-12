@@ -16,6 +16,7 @@ class VitalTransformer extends JsonResource
     public function toArray($request): array
     {
         return [
+            'id' =>  $this->id,
             'user_id' =>  $this->user_id,
             'consult_id' =>  $this->consult_id,
             'peripheral_id' =>  $this->peripheral_id,

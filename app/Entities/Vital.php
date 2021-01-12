@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Entities;
+use DB;
 
 class Vital extends BaseModel
 {
@@ -67,6 +68,34 @@ class Vital extends BaseModel
         
     ];
 
+
+    protected function createModel($request)
+    {
+        $data = $this->getModelAttributes($request);
+
+        if(isset($data['details']['date'])){
+            $data['details']['date'] = date('Y-m-d',strtotime($data['details']['date']));
+        }
+
+        return $this->create($data);
+    }
+
+
+    protected function updateModel($id, $request, $only = [])
+    {
+        $data = $this->getModelAttributes($request, $only);
+
+        if(isset($data['details']['date'])){
+            $data['details']['date'] = date('Y-m-d',strtotime($data['details']['date']));
+        }
+
+        $instance = $this->getModel($id);
+        $instance->fill($data);
+        $instance->save(['touch' => false]);
+
+        return $instance;
+    }
+
     public function applyFilters($model, $isPluck)
     {
         $model = parent::applyFilters($model, $isPluck);
@@ -78,10 +107,18 @@ class Vital extends BaseModel
         }
 
 
+        if($request->get('from') && $request->get('to')){
+
+            $from = date('Y-m-d',strtotime($request->get('from')));
+                $to = date('Y-m-d',strtotime($request->get('to')));
+            $model->whereBetween('details->date', [$from,$to]);
+        }
+
+
         if ($request->get('searchkey')) {
 
         }
-        
+        // $model->where('ids','s');
         return $model;
     }
 }
