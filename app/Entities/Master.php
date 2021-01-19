@@ -69,6 +69,10 @@ class Master extends BaseModel
         if ($request->get('slug')) {
             $model->where('masters.master_type_slug', $request->get('slug'));
         }
+        
+        if ($request->get('searchkey')) {
+            $model->where('masters.name', 'LIKE',"%".$request->get('searchkey')."%");
+        }
 
         // dd($model->toSql());
 
