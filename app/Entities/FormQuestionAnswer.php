@@ -2,7 +2,7 @@
 
 namespace App\Entities;
 
-class Question extends BaseModel
+class FormQuestionAnswer extends BaseModel
 {
     /**
      * The attributes that are mass assignable.
@@ -10,7 +10,7 @@ class Question extends BaseModel
      * @var array
      */
     protected $fillable = [
-        "parent_id", "name", "type", "is_active"
+        "question_id", "answer_id", "jump_to_question_id", "score", "order", "type", "label"
     ];
 
     /**
@@ -58,13 +58,8 @@ class Question extends BaseModel
         
     ];
 
-    public function formQuestionAnswers()
+    public function Answer()
     {
-        return $this->belongsToMany(Answer::class, 'form_question_answers', 'question_id', 'answer_id', 'id');
-    }
-
-    public function parent()
-    {
-        return $this->hasMany(Question::class, 'parent_id', 'id');
+        return $this->hasOne(Answer::class, 'id', 'answer_id');
     }
 }

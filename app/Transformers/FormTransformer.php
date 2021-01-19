@@ -15,6 +15,7 @@ class FormTransformer extends JsonResource
 
     public function toArray($request): array
     {
+        
         return [
             'parent_id' =>  $this->parent_id,
             'slug' =>  $this->slug,
@@ -23,7 +24,9 @@ class FormTransformer extends JsonResource
             'assessment_group' =>  $this->assessment_group,
             'type' =>  $this->type,
             'images' =>  $this->images,
-            'is_active' =>  $this->is_active
+            'is_active' =>  $this->is_active,
+            'latest_form_submisson' =>  $this->FormSubmittedAnswer()->latest()->first(),
+            'questions' =>   FormQuestionTransformer::collection($this->formQuestions),
         ];
     }
 }

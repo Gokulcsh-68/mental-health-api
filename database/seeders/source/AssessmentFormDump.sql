@@ -1,5 +1,5 @@
 #forms
-insert into `forms`( `name`, `desc`,  `assessment_group`, `type`)
+insert into `forms`( `name`, `desc`,  `assessment_group`, `type`, `slug`)
  values('Healthy Heart','Thank you for participating in the Urban Indian Heart Health Program. The purpose of this
 survey is to learn about the heart health of patients at this clinic. The following pages ask
 questions about heart attack and stroke, and about your blood pressure, cholesterol, physical
@@ -7,13 +7,13 @@ activity, diet, and tobacco use.
 The survey should take about 20-30 minutes to complete. Answering these questions is
 voluntary and your answers will be kept private. This is not a test. Just mark the answers that
 best reflect what you think. If you have questions, please feel free to ask a project staff member
-for help. Thank you for completing this survey!', 'healthy-heart', 'normal'),
+for help. Thank you for completing this survey!', 'healthy-heart', 'normal', 'healthy-heart'),
 ('Physical Symptoms','On the DSM-5 Level 1 cross-cutting questionnaire that you just completed, you indicated that during the
 past 2 weeks you (the individual receiving care) have been bothered by “unexplained aches and pains”, and/or “feeling
 that your illnesses are not being taken seriously enough” at a mild or greater level of severity. The questions below ask
 about these feelings in more detail and especially how often you (the individual receiving care) have been bothered by
 a list of symptoms during the past 7 days. Please respond to each item by marking ( or x) one box per row.',
-'psychiatric-exam', 'score'),
+'psychiatric-exam', 'score', 'psychiatric-exam-symptoms'),
 ('Anger','On the DSM-5 Level 1 cross-cutting questionnaire that you just completed,
   you indicated that during the past 2 weeks you (individual receiving care) have been bothered by
    “feeling nervous, anxious, frightened, worried, or on edge”, “feeling panic or being frightened”,
@@ -21,7 +21,7 @@ a list of symptoms during the past 7 days. Please respond to each item by markin
      The questions below ask about these feelings in more detail and especially how often you 
      (individual receiving care) have been bothered by a list of symptoms during the past 7 days.
       Please respond to each item by marking (&#10004; or &#10006;) one box per row. Clinician',
-'psychiatric-exam', 'score'),
+'psychiatric-exam', 'score', 'psychiatric-exam-anger'),
 ('Anxiety','On the DSM-5 Level 1 cross-cutting questionnaire that you just completed,
   you indicated that during the past 2 weeks you (individual receiving care) have been bothered by “feeling nervous,
    anxious, frightened, worried, or on edge”, “feeling panic or being frightened”,
@@ -29,14 +29,14 @@ a list of symptoms during the past 7 days. Please respond to each item by markin
      The questions below ask about these feelings in more detail and especially how often you 
      (individual receiving care) have been bothered by a list of symptoms during the past 7 days.
       Please respond to each item by marking (&#10004; or &#10006;) one box per row.',
-'psychiatric-exam', 'score'),
+'psychiatric-exam', 'score', 'psychiatric-exam-anxiety'),
 ('Depression','On the DSM-5 Level 1 cross-cutting questionnaire that you just completed, 
  	you indicated that during the past 2 weeks you (the individual receiving care) have been bothered by 
  	“no interest or pleasure in doing things” and/or “feeling down, depressed, or hopeless” at a mild or greater level of severity.
  	The questions below ask about these feelings in more detail and especially how often you (the individual receiving care) 
  	have been bothered by a list of symptoms during the past 7 days. 
  	Please respond to each item by marking (&#10004; or &#10006;) one box per row.',
-'psychiatric-exam', 'score'),
+'psychiatric-exam', 'score', 'psychiatric-exam-depression'),
 ('Mania','On the DSM-5 Level 1 cross-cutting questionnaire you just completed, you indicated that during the past 2 weeks you (the
 individual receiving care) have been bothered by “sleeping less than usual, but still having a lot of energy” and/or “starting lots more
 projects than usual or doing more risky things than usual” at a mild or greater level of severity. The five statement groups or questions
@@ -47,24 +47,24 @@ the past week.
 3. Check the box ( or x) next to the number/statement selected.
 4. Please note: The word “occasionally” when used here means once or twice; “often” means several times or more and
 “frequently” means most of the time.',
-'psychiatric-exam', 'score'),
-('Symptoms & Signs',"Symptoms & Signs",'stroke-scale', 'normal'),
+'psychiatric-exam', 'score', 'psychiatric-exam-mania'),
+('Symptoms & Signs',"Symptoms & Signs",'stroke-scale', 'normal', 'stroke-scale-symptoms-signs'),
 ('NIH Stroke Scale/Score (NIHSS)',"The NIH Stroke Scale has many caveats buried within it. 
  	If your patient has prior known neurologic deficits e.g. prior weakness,
  	hemi- or quadriplegia, blindness, etc. or is intubated, has a language barrier, etc.,
  	it becomes especially complicated. In those cases, consult the NIH Stroke Scale website.
  	MDCalc's version is an attempt to clarify many of these confusing caveats,
  	but cannot and should not be substituted for the official protocol.",
-'stroke-scale', 'score'),
+'stroke-scale', 'score', 'stroke-scale-nih'),
 ('TPA Contraindications for Ischemic Stroke','Institutions may have slightly 
  	different absolute and relative contraindications to Tissue Plasminogen Activator (tPA);
  	 this list is meant to be a quick reference, but practice should be guided by institutional protocol 
  	 and consultation with neurology. Reflects recommendations from Demaerschalk et al, Stroke 2015.',
-'stroke-scale', 'score'),
+'stroke-scale', 'score', 'stroke-scale-tpa-contraindications'),
 ('THRIVE Score for Stroke Outcome',
  	'The THRIVE score can help physicians predict several key outcomes 
  	in patients suffering an ischemic stroke.',
-'stroke-scale', 'score');
+'stroke-scale', 'score', 'stroke-scale-ischemic');
 
 
 # Questions
