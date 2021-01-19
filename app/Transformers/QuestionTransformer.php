@@ -15,11 +15,26 @@ class QuestionTransformer extends JsonResource
 
     public function toArray($request): array
     {
-        return [
+
+        if($this->type == 'sub_question'){
+            return [
+            'id' =>  $this->id,
             'parent_id' =>  $this->parent_id,
             'name' =>  $this->name,
             'type' =>  $this->type,
-            'is_active' =>  $this->is_active
-        ];
+            'is_active' =>  $this->is_active,
+            'sub_questions' => $this->parent
+            ];
+
+        }else{
+            return [
+                'id' =>  $this->id,
+                // 'parent_id' =>  $this->parent_id,
+                'name' =>  $this->name,
+                'type' =>  $this->type,
+                'is_active' =>  $this->is_active
+            ];
+        }
+        
     }
 }
