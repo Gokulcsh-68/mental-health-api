@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
             SuperAdminUserSeeder::class,
             AssementFormSeeder::class,
             AllergySeeder::class,
+            ReactionSeeder::class,
         ]);
 
         #ini_set('memory_limit', '-1');

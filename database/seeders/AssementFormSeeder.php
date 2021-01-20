@@ -604,7 +604,7 @@ class AssementFormSeeder extends Seeder
 		 DB::table('form_question_answers')->insert($form_question_answers);
 
 		#6
-		$current_question_id 	= $questions['Are you currently taking medicine for your high blood pressure?'];
+		$current_question_id 	= $questions['Are you changing your eating habits to help lower or control your blood pressure?'];
 
 		 $form_question_answers = [
 		 ['question_id' => $current_question_id, 

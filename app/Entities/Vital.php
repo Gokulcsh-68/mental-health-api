@@ -99,29 +99,23 @@ class Vital extends BaseModel
 
 
         if($data['slug'] == 'blood-pressure'){
-
             $data['details'] += self::blood_pressure_flag($data['details']);
         }
 
         if($data['slug'] == 'lipid-profile'){
-
             $data['details'] += self::cholesterol_flag($data['details']);
         }
 
         if($data['slug'] == 'spO2'){
-
             $data['details'] += self::spo2_flag($data['details']);
         }
 
         if($data['slug'] == 'urine'){
-
             $data['details'] += self::urine_flag($data['details']);
         }
 
 
         if($data['slug'] == 'heart-rate'){
-            
-
             $dateOfBirth = user::Where('id',$data['user_id'])->value('dob');
 
             $years = Carbon::parse($dateOfBirth)->diff(Carbon::now())->format('%y');
@@ -129,6 +123,10 @@ class Vital extends BaseModel
             $days = Carbon::parse($dateOfBirth)->diff(Carbon::now())->format('%d');
            
            $data['details'] += self::heart_rate_flag($data['details'], $years, $months, $days);
+        }
+
+        if($data['slug'] == 'allergy'){
+            $data['details'] += self::allergy_flag($data['details']);
         }
 
         return $this->create($data);
@@ -142,7 +140,6 @@ class Vital extends BaseModel
         if(isset($data['details']['date'])){
             $data['details']['date'] = date('Y-m-d',strtotime($data['details']['date']));
         }
-
 
         if($data['slug'] == 'bmi'){
             unset($data['details']['bmiFlag'], $data['details']['bmiFlagColor'], $data['details']['range_code']);
@@ -187,7 +184,6 @@ class Vital extends BaseModel
         }
 
         if($data['slug'] == 'heart-rate'){
-            
             unset($data['details']['heartRateFlag'],
                 $data['details']['heartRateFlagColor'],
                 $data['details']['range_code']);
@@ -202,8 +198,6 @@ class Vital extends BaseModel
         }
 
         if($data['slug'] == 'spO2'){
-
-
             unset($data['details']['spo2Flag'],
                 $data['details']['spo2FlagColor'],
                 $data['details']['range_code']);
@@ -212,8 +206,6 @@ class Vital extends BaseModel
         }
 
         if($data['slug'] == 'urine'){
-
-
             unset($data['details']['leukocytes_message'],
                     $data['details']['leukocytes_flag'],
                     $data['details']['leukocytes_range_code'],
@@ -234,6 +226,11 @@ class Vital extends BaseModel
             $data['details'] += self::urine_flag($data['details']);
         }
 
+        if($data['slug'] == 'allergy'){
+            unset($data['details']['severityFlagColor'],$data['details']['range_code']);
+            $data['details'] += self::allergy_flag($data['details']);
+        }
+
         $instance = $this->getModel($id);
         $instance->fill($data);
         $instance->save(['touch' => false]);
@@ -241,6 +238,7 @@ class Vital extends BaseModel
         return $instance;
     }
 
+    
     public function applyFilters($model, $isPluck)
     {
         $model = parent::applyFilters($model, $isPluck);
@@ -255,7 +253,6 @@ class Vital extends BaseModel
             $model->where('vitals.slug', $request->get('slug'));
         }
 
-
         if($request->get('from') && $request->get('to')){
 
             $from = date('Y-m-d',strtotime($request->get('from')));
@@ -265,10 +262,58 @@ class Vital extends BaseModel
 
 
         if ($request->get('searchkey')) {
+            // Allergy
+            if($request->get('slug') == 'allergy'){
 
+                $status_key = $request->get('searchkey');
+                if(strtolower($request->get('searchkey')) == "inactive" 
+                    || strtolower($request->get('searchkey')) == "active"){
+                    $status_key = (strtolower($request->get('searchkey')) == "inactive")?"0":"1";
+                }
+
+                $model->Where('details->name', 'LIKE',"%".$request->get('searchkey')."%")
+                    ->orWhere('details->type', 'LIKE',"%".$request->get('searchkey')."%")
+                    ->orWhere('details->category', 'LIKE',"%".$request->get('searchkey')."%")
+                    ->orWhere('details->reaction', 'LIKE',"%".$request->get('searchkey')."%")
+                    ->orWhere('details->severity', 'LIKE',"%".$request->get('searchkey')."%")
+                    ->orWhere('details->is_active', 'LIKE',"%".$status_key."%");
+            }
         }
+
+
         // $model->where('ids','s');
         return $model;
+    }
+
+
+    public static function allergy_flag($current_value)
+    {
+        $input_data['severityFlagColor']        = 'success';
+        $input_data['severity_range_code']      = '#008000';
+
+        switch ($current_value['severity']) {
+            case 'Severe':
+                $input_data['severityFlagColor']    = 'danger';
+                $input_data['severity_range_code']  = '#ff0000';
+            break;
+
+            case 'Moderate':
+                $input_data['severityFlagColor']    = 'warning';
+                $input_data['severity_range_code']  = '#FFA800';
+            break;
+
+            case 'Mild':
+                $input_data['severityFlagColor']    = 'primary';
+                $input_data['severity_range_code']  = '#0000ff';
+            break;
+            
+            default:
+                $input_data['severityFlagColor']    = 'success';
+                $input_data['severity_range_code']  = '#008000';
+            break;
+        }
+        
+        return $input_data;
     }
 
 

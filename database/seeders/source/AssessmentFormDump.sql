@@ -1,4 +1,15 @@
 #forms
+
+SET FOREIGN_KEY_CHECKS = 0;
+TRUNCATE form_submitted_answers;
+TRUNCATE form_question_answers;
+TRUNCATE form_questions;
+TRUNCATE answers;
+TRUNCATE questions;
+TRUNCATE forms;
+SET FOREIGN_KEY_CHECKS = 1;
+
+
 insert into `forms`( `name`, `desc`,  `assessment_group`, `type`, `slug`)
  values('Healthy Heart','Thank you for participating in the Urban Indian Heart Health Program. The purpose of this
 survey is to learn about the heart health of patients at this clinic. The following pages ask
