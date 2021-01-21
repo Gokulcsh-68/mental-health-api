@@ -1,9 +1,17 @@
 <?php
 
 namespace App\Entities;
+use DB;
 
 class FormSubmittedAnswer extends BaseModel
 {
+    const VIEW = true;
+
+    const CREATE = true;
+
+    const UPDATE = true;
+
+    const ACTION = true;
     /**
      * The attributes that are mass assignable.
      *
@@ -20,6 +28,7 @@ class FormSubmittedAnswer extends BaseModel
      */
     protected $casts = [
         
+        'answers' => 'object',
     ];
 
     /**
@@ -57,6 +66,43 @@ class FormSubmittedAnswer extends BaseModel
     protected $dispatchesEvents = [
         
     ];
+
+
+    protected function createModel($request)
+    {
+        $data = $this->getModelAttributes($request);
+
+        DB::beginTransaction();
+        try {
+
+            $this->Where('patient_id',$data['patient_id'])
+                ->Where('form_id',$data['form_id'])
+                ->delete();
+
+            $data['score'] = 0;
+
+            $answers = [];
+
+            foreach ($data['answers'] as $key => $value) {
+               $data['score'] =  $data['score'] + $value['score'];
+               $answers[$key] = $value['answer'];
+            }
+
+            $data['answers'] = $answers;
+            $data['created_by'] = $request->user()->id;
+            $model = $this->create($data);
+
+
+            DB::commit();
+
+            return $model;
+        } catch (Exception $e) {
+            exceptionLogger("Assessment Create Rollback", $e);
+            DB::rollback();
+        }
+
+        return null;
+    }
 
     public static function Anger_score_fields()
   {
