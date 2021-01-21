@@ -4,6 +4,13 @@ namespace App\Entities;
 
 class FormQuestionAnswer extends BaseModel
 {
+    const VIEW = true;
+
+    const CREATE = true;
+
+    const UPDATE = true;
+
+    const ACTION = true;
     /**
      * The attributes that are mass assignable.
      *
