@@ -60,7 +60,9 @@ class Question extends BaseModel
 
     public function formQuestionAnswers()
     {
-        return $this->belongsToMany(Answer::class, 'form_question_answers', 'question_id', 'answer_id', 'id');
+        // return $this->belongsToMany(Answer::class, 'form_question_answers', 'question_id', 'answer_id', 'id');
+
+        return $this->hasMany(FormQuestionAnswer::class, 'question_id', 'id');
     }
 
     public function parent()
