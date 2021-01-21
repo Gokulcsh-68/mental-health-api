@@ -15,6 +15,7 @@ class FormQuestionAnswerTransformer extends JsonResource
 
     public function toArray($request): array
     {
+        // dd($this);
         return [
             'question_id' =>  $this->question_id,
             'answer_id' =>  $this->answer_id,
@@ -23,7 +24,7 @@ class FormQuestionAnswerTransformer extends JsonResource
             'order' =>  $this->order,
             'type' =>  $this->type,
             'label' =>  $this->label,
-            'answer' =>  (new AnswerTransformer($this)),
+            'answer' =>  $this->Answer,
         ];
     }
 }

@@ -30,7 +30,7 @@ class PatientHealth extends BaseModel
      * @var array
      */
     protected $casts = [
-        
+        'values' => 'object'
     ];
 
     /**
@@ -71,7 +71,7 @@ class PatientHealth extends BaseModel
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'patient_id', 'id');
+        return $this->hasOne(User::class, 'id', 'patient_id');
     }
 
     public function master()
@@ -88,27 +88,24 @@ class PatientHealth extends BaseModel
     {
         $data = $this->getModelAttributes($request);
 
-        DB::beginTransaction();
-        try {
-            $model = $this->create($data);
-            DB::commit();
-            return $model;
-        } catch (Exception $e) {
-            exceptionLogger("Patient health Create Rollback", $e);
-            DB::rollback();
+        if($data['slug'] == 'allergy'){
+            $data['values'] += self::allergy_flag($data['values']);
         }
-
-        return null;
+        
+        return $this->create($data);
     }
 
-    protected function updateModel($id, $request, $only = [])
-    {
-
+    protected function updateModel($id, $request, $only = []){
         $data = $this->getModelAttributes($request);
 
         DB::beginTransaction();
         try {
-             unset($request['patient_id']);
+            if($data['slug'] == 'allergy'){
+                unset($data['values']['severityFlagColor'],$data['values']['range_code']);
+                $data['values'] += self::allergy_flag($data['values']);
+            }
+
+            unset($request['patient_id']);
             $model = parent::updateModel($id, $request, $only);
             DB::commit();
 
@@ -122,8 +119,7 @@ class PatientHealth extends BaseModel
     }
 
 
-    public function applyFilters($model, $isPluck)
-    {
+    public function applyFilters($model, $isPluck){
         $model = parent::applyFilters($model, $isPluck);
         $request = app('request');
 
@@ -139,6 +135,61 @@ class PatientHealth extends BaseModel
             $model->where('patient_health.slug', $request->get('slug'));
         }
 
+        if($request->get('from') && $request->get('to')){
+            $from   = date('Y-m-d',strtotime($request->get('from')));
+            $to     = date('Y-m-d',strtotime($request->get('to')));
+            $model->whereBetween('values->date', [$from,$to]);
+        }
+
+
+        if ($request->get('searchkey')) {
+            // Allergy
+            if($request->get('slug') == 'allergy'){
+
+                $status_key = $request->get('searchkey');
+                if(strtolower($request->get('searchkey')) == "inactive" 
+                    || strtolower($request->get('searchkey')) == "active"){
+                    $status_key = (strtolower($request->get('searchkey')) == "inactive")?"0":"1";
+                }
+
+                $model->Where('values->name', 'LIKE',"%".$request->get('searchkey')."%")
+                    ->orWhere('values->type', 'LIKE',"%".$request->get('searchkey')."%")
+                    ->orWhere('values->category', 'LIKE',"%".$request->get('searchkey')."%")
+                    ->orWhere('values->reaction', 'LIKE',"%".$request->get('searchkey')."%")
+                    ->orWhere('values->severity', 'LIKE',"%".$request->get('searchkey')."%")
+                    ->orWhere('values->is_active', 'LIKE',"%".$status_key."%");
+            }
+        }
+
         return $model;
+    }
+
+    public static function allergy_flag($current_value){
+        $input_data['severityFlagColor']        = 'success';
+        $input_data['severity_range_code']      = '#008000';
+
+        switch ($current_value['severity']) {
+            case 'Severe':
+                $input_data['severityFlagColor']    = 'danger';
+                $input_data['severity_range_code']  = '#ff0000';
+            break;
+
+            case 'Moderate':
+                $input_data['severityFlagColor']    = 'warning';
+                $input_data['severity_range_code']  = '#FFA800';
+            break;
+
+            case 'Mild':
+                $input_data['severityFlagColor']    = 'primary';
+                $input_data['severity_range_code']  = '#0000ff';
+            break;
+            
+            default:
+                $input_data['severityFlagColor']    = 'success';
+                $input_data['severity_range_code']  = '#008000';
+            break;
+        }
+        
+        return $input_data;
     }
 }

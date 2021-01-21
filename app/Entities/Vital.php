@@ -125,9 +125,7 @@ class Vital extends BaseModel
            $data['details'] += self::heart_rate_flag($data['details'], $years, $months, $days);
         }
 
-        if($data['slug'] == 'allergy'){
-            $data['details'] += self::allergy_flag($data['details']);
-        }
+        
 
         return $this->create($data);
     }
@@ -226,10 +224,7 @@ class Vital extends BaseModel
             $data['details'] += self::urine_flag($data['details']);
         }
 
-        if($data['slug'] == 'allergy'){
-            unset($data['details']['severityFlagColor'],$data['details']['range_code']);
-            $data['details'] += self::allergy_flag($data['details']);
-        }
+        
 
         $instance = $this->getModel($id);
         $instance->fill($data);
@@ -283,37 +278,6 @@ class Vital extends BaseModel
 
         // $model->where('ids','s');
         return $model;
-    }
-
-
-    public static function allergy_flag($current_value)
-    {
-        $input_data['severityFlagColor']        = 'success';
-        $input_data['severity_range_code']      = '#008000';
-
-        switch ($current_value['severity']) {
-            case 'Severe':
-                $input_data['severityFlagColor']    = 'danger';
-                $input_data['severity_range_code']  = '#ff0000';
-            break;
-
-            case 'Moderate':
-                $input_data['severityFlagColor']    = 'warning';
-                $input_data['severity_range_code']  = '#FFA800';
-            break;
-
-            case 'Mild':
-                $input_data['severityFlagColor']    = 'primary';
-                $input_data['severity_range_code']  = '#0000ff';
-            break;
-            
-            default:
-                $input_data['severityFlagColor']    = 'success';
-                $input_data['severity_range_code']  = '#008000';
-            break;
-        }
-        
-        return $input_data;
     }
 
 
