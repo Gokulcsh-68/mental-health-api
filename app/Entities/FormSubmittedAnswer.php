@@ -84,8 +84,17 @@ class FormSubmittedAnswer extends BaseModel
             $answers = [];
 
             foreach ($data['answers'] as $key => $value) {
+              if(isset($value['score'])){
                $data['score'] =  $data['score'] + $value['score'];
+
+              }
+
+              if(isset($value['answer'])){
                $answers[$key] = $value['answer'];
+              }
+              else{
+                $answers[$key] =  $value;
+              }
             }
 
             $data['answers'] = $answers;
