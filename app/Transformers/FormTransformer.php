@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Transformers;
-
+use DB;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class FormTransformer extends JsonResource
@@ -16,6 +16,7 @@ class FormTransformer extends JsonResource
     public function toArray($request): array
     {
         
+
         return [
             'id' =>  $this->id,
             'parent_id' =>  $this->parent_id,
@@ -26,7 +27,7 @@ class FormTransformer extends JsonResource
             'type' =>  $this->type,
             'images' =>  $this->images,
             'is_active' =>  $this->is_active,
-            'latest_form_submisson' =>  $this->FormSubmittedAnswer()->latest()->first(),
+            'latest_form_submisson' =>  new FormSubmittedAnswerTransformer($this->FormSubmittedAnswer()->latest()->first()),
             'questions' =>   FormQuestionTransformer::collection($this->formQuestions),
         ];
     }

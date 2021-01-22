@@ -15,11 +15,15 @@ class FormSubmittedAnswerTransformer extends JsonResource
 
     public function toArray($request): array
     {
+        $data['name'] = $this->form->name; 
+        $data['score'] = $this->score; 
         return [
-            'form_id' =>  $this->form_id,
-            'patient_id' =>  $this->patient_id,
-            'answers' =>  $this->answers,
-            'score' =>  $this->score
+            'form_id'       =>  $this->form_id,
+            'patient_id'    =>  $this->patient_id,
+            'answers'       =>  $this->answers,
+            'score'         =>  $this->score,
+            'created_at'    =>  date('Y-m-d',strtotime($this->created_at)),
+            'message'       =>  $this->calculate_score($data)
         ];
     }
 }
