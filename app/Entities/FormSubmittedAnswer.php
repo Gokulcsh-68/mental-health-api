@@ -350,10 +350,12 @@ class FormSubmittedAnswer extends BaseModel
         case 'Mania':
           $score = (int)$data['score'];
 
+          // dd($data);
+
           $score_message = '';
 
           if(!empty($data['answers'])){
-            $written_answers = json_decode($data['answers']);
+            $written_answers = ($data['answers']);
             unset($written_answers->feedback);
             $total_answered_questions = count((array)$written_answers);
 

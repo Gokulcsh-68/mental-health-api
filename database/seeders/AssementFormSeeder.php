@@ -221,7 +221,7 @@ class AssementFormSeeder extends Seeder
 
 		 DB::table('questions')->insert($new_sub_questions);
 
-		 $current_question_id = $questions["In the past SEVEN (7) DAYS...."];
+		 $current_question_id = $questions["Anger In the past SEVEN (7) DAYS...."];
 
 		 $new_sub_questions = [
 			 ['parent_id' => $current_question_id, 'name' => 
@@ -233,7 +233,14 @@ class AssementFormSeeder extends Seeder
 			 ['parent_id' => $current_question_id, 'name' => 
 			 	'I was grouchy.','type' => $radio_type,'is_active' => 1],
 			 ['parent_id' => $current_question_id, 'name' => 
-			 	'I felt annoyed.','type' => $radio_type,'is_active' => 1],
+			 	'I felt annoyed.','type' => $radio_type,'is_active' => 1]
+		 ];
+
+		 DB::table('questions')->insert($new_sub_questions);
+
+		 $current_question_id = $questions["Anxiety In the past SEVEN (7) DAYS...."];
+
+		 $new_sub_questions = [
 			 ['parent_id' => $current_question_id, 'name' =>
 			 	'I felt fearful.','type' => $radio_type,'is_active' => 1],
 			 ['parent_id' => $current_question_id, 'name' =>
@@ -247,7 +254,14 @@ class AssementFormSeeder extends Seeder
 			 ['parent_id' => $current_question_id, 'name' =>
 			 	'I felt uneasy.','type' => $radio_type,'is_active' => 1],
 			 ['parent_id' => $current_question_id, 'name' =>
-			 	'I felt tense.','type' => $radio_type,'is_active' => 1],
+			 	'I felt tense.','type' => $radio_type,'is_active' => 1]
+		 ];
+
+		 DB::table('questions')->insert($new_sub_questions);
+
+		 $current_question_id = $questions["Depression In the past SEVEN (7) DAYS...."];
+
+		 $new_sub_questions = [
 			 ['parent_id' => $current_question_id, 'name' =>
 			 	'I felt worthless.','type' => $radio_type,'is_active' => 1],
 			 ['parent_id' => $current_question_id, 'name' =>
@@ -473,9 +487,9 @@ class AssementFormSeeder extends Seeder
 
 		$form_questions = [
 		 ['question_id' => $questions["During the past 7 days, how much have you been bothered by any of the following problems?"],'form_id' => $forms["Physical Symptoms"]],
-		 ['question_id' => $questions["In the past SEVEN (7) DAYS...."],'form_id' => $forms["Anger"]],
-		 ['question_id' => $questions["In the past SEVEN (7) DAYS...."],'form_id' => $forms["Anxiety"]],
-		 ['question_id' => $questions["In the past SEVEN (7) DAYS...."],'form_id' => $forms["Depression"]],
+		 ['question_id' => $questions["Anger In the past SEVEN (7) DAYS...."],'form_id' => $forms["Anger"]],
+		 ['question_id' => $questions["Anxiety In the past SEVEN (7) DAYS...."],'form_id' => $forms["Anxiety"]],
+		 ['question_id' => $questions["Depression In the past SEVEN (7) DAYS...."],'form_id' => $forms["Depression"]],
 		 ['question_id' => $questions["Question 1"],'form_id' => $forms["Mania"]],
 		 ['question_id' => $questions["Question 2"],'form_id' => $forms["Mania"]],
 		 ['question_id' => $questions["Question 3"],'form_id' => $forms["Mania"]],
@@ -1773,9 +1787,38 @@ class AssementFormSeeder extends Seeder
 		];
 		DB::table('form_question_answers')->insert($form_question_answers);
 
-		# PsychiatricAnger & PsychiatricAnxiety & PsychiatricDepression
+		# PsychiatricAnger 
 
-		$current_question_id 	= $questions['In the past SEVEN (7) DAYS....'];
+		$current_question_id 	= $questions['Anger In the past SEVEN (7) DAYS....'];
+
+		$form_question_answers = [
+		 ['question_id' => $current_question_id, 'answer_id' => $answers["Never"], 'jump_to_question_id' => null, 'score' => 1],
+		 ['question_id' => $current_question_id, 'answer_id' => $answers["Rarely"], 'jump_to_question_id' => null, 'score' => 2],
+		 ['question_id' => $current_question_id, 'answer_id' => $answers["Sometimes"], 'jump_to_question_id' => null, 'score' => 3],
+		 ['question_id' => $current_question_id, 'answer_id' => $answers["Often"], 'jump_to_question_id' => null, 'score' => 4],
+		 ['question_id' => $current_question_id, 'answer_id' => $answers["Always"], 'jump_to_question_id' => null,'score' => 5],
+		];
+		 
+		DB::table('form_question_answers')->insert($form_question_answers);
+
+		# PsychiatricAnxiety
+
+		$current_question_id 	= $questions['Depression In the past SEVEN (7) DAYS....'];
+
+		$form_question_answers = [
+		 ['question_id' => $current_question_id, 'answer_id' => $answers["Never"], 'jump_to_question_id' => null, 'score' => 1],
+		 ['question_id' => $current_question_id, 'answer_id' => $answers["Rarely"], 'jump_to_question_id' => null, 'score' => 2],
+		 ['question_id' => $current_question_id, 'answer_id' => $answers["Sometimes"], 'jump_to_question_id' => null, 'score' => 3],
+		 ['question_id' => $current_question_id, 'answer_id' => $answers["Often"], 'jump_to_question_id' => null, 'score' => 4],
+		 ['question_id' => $current_question_id, 'answer_id' => $answers["Always"], 'jump_to_question_id' => null,'score' => 5],
+		];
+
+		 
+		DB::table('form_question_answers')->insert($form_question_answers);
+
+		# PsychiatricDepression
+
+		$current_question_id 	= $questions['Anxiety In the past SEVEN (7) DAYS....'];
 
 		$form_question_answers = [
 		 ['question_id' => $current_question_id, 'answer_id' => $answers["Never"], 'jump_to_question_id' => null, 'score' => 1],
@@ -2097,7 +2140,7 @@ class AssementFormSeeder extends Seeder
 
 		DB::table('form_question_answers')->insert($form_question_answers);
 
-		$current_question_id 	= $questions['Blink eyes & squeeze hands'];
+		$current_question_id 	= $questions['Visual fields'];
 
 		 $form_question_answers = [
 		 ['question_id' => $current_question_id, 
@@ -2114,7 +2157,7 @@ class AssementFormSeeder extends Seeder
 
 		 DB::table('form_question_answers')->insert($form_question_answers);
 
-		$current_question_id 	= $questions['Blink eyes & squeeze hands'];
+		$current_question_id 	= $questions['Facial palsy'];
 
 		$form_question_answers = [
 		['question_id' => $current_question_id, 
@@ -2131,7 +2174,7 @@ class AssementFormSeeder extends Seeder
 
 		DB::table('form_question_answers')->insert($form_question_answers);
 
-		$current_question_id 	= $questions['Blink eyes & squeeze hands'];
+		$current_question_id 	= $questions['Left arm motor drift'];
 
 		$form_question_answers = [
 		['question_id' => $current_question_id, 
