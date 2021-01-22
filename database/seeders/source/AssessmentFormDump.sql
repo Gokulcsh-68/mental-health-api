@@ -258,7 +258,9 @@ insert into `questions` (`name`, `type`, `is_active`)
 
  ('During the past 7 days, how much have you been bothered by any of the following problems?','sub_question', 1),
 
- ('In the past SEVEN (7) DAYS....','sub_question', 1),
+ ('Anger In the past SEVEN (7) DAYS....','sub_question', 1),
+ ('Anxiety In the past SEVEN (7) DAYS....','sub_question', 1),
+ ('Depression In the past SEVEN (7) DAYS....','sub_question', 1),
  ('Question 1','radio', 1),
  ('Question 2','radio', 1),
  ('Question 3','radio', 1),

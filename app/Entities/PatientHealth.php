@@ -48,7 +48,7 @@ class PatientHealth extends BaseModel
      * @var array
     */
     protected $partialFillable = [
-         "values"
+        
     ];
 
     /**
@@ -98,24 +98,17 @@ class PatientHealth extends BaseModel
     protected function updateModel($id, $request, $only = []){
         $data = $this->getModelAttributes($request);
 
-        DB::beginTransaction();
-        try {
-            if($data['slug'] == 'allergy'){
-                unset($data['values']['severityFlagColor'],$data['values']['range_code']);
-                $data['values'] += self::allergy_flag($data['values']);
-            }
-
-            unset($request['patient_id']);
-            $model = parent::updateModel($id, $request, $only);
-            DB::commit();
-
-            return $model;
-        } catch (Exception $e) {
-            exceptionLogger("Patient health Update Rollback", $e);
-            DB::rollback();
+        if($data['slug'] == 'allergy'){
+            unset($data['values']['severityFlagColor'],$data['values']['range_code']);
+            $data['values'] += self::allergy_flag($data['values']);
         }
 
-        return null;
+        unset($request['patient_id']);
+
+        $instance = $this->getModel($id);
+        $instance->fill($data);
+        $instance->save(['touch' => false]);
+        return $instance;
     }
 
 
