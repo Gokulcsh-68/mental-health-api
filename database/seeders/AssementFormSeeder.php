@@ -2140,7 +2140,7 @@ class AssementFormSeeder extends Seeder
 
 		DB::table('form_question_answers')->insert($form_question_answers);
 
-		$current_question_id 	= $questions['Blink eyes & squeeze hands'];
+		$current_question_id 	= $questions['Visual fields'];
 
 		 $form_question_answers = [
 		 ['question_id' => $current_question_id, 
@@ -2157,7 +2157,7 @@ class AssementFormSeeder extends Seeder
 
 		 DB::table('form_question_answers')->insert($form_question_answers);
 
-		$current_question_id 	= $questions['Blink eyes & squeeze hands'];
+		$current_question_id 	= $questions['Facial palsy'];
 
 		$form_question_answers = [
 		['question_id' => $current_question_id, 
@@ -2174,7 +2174,7 @@ class AssementFormSeeder extends Seeder
 
 		DB::table('form_question_answers')->insert($form_question_answers);
 
-		$current_question_id 	= $questions['Blink eyes & squeeze hands'];
+		$current_question_id 	= $questions['Left arm motor drift'];
 
 		$form_question_answers = [
 		['question_id' => $current_question_id, 
