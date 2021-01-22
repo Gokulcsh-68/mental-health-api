@@ -68,6 +68,12 @@ class FormSubmittedAnswer extends BaseModel
     ];
 
 
+    public function form()
+    {
+        return $this->belongsTo(Form::class);
+    }
+
+
     protected function createModel($request)
     {
         $data = $this->getModelAttributes($request);
@@ -229,18 +235,20 @@ class FormSubmittedAnswer extends BaseModel
       switch ($data['name']) {
         case 'Physical Symptoms':
           $score = (int)$data['score'];
-          $score_message = "PHQ-15 Score is $score, Levels of Somatic Symptom Severity is";         
+          $score_message = "@span PHQ-15 - Levels of Somatic Symptom Severity is @c";         
+
+          $txt_score = '@f'.$score.'@c score';
 
           if($score == 0 || $score <= 4){
-            $score_message = $score_message.' "Minimal"';
+            $score_message = $score_message.'  !success!'.$txt_score.'  @br @f Minimal @c !';
           } else if($score == 5 || $score <= 9){
-            $score_message = $score_message.' "Low"';
+            $score_message = $score_message.'  !primary!'.$txt_score.'  @br @f Low @c !';
           } else if($score == 10 || $score <= 14){
-            $score_message = $score_message.' "Medium"';
+            $score_message = $score_message.' !warning!'.$txt_score.'  @br @f Medium @c !';
           } else if($score == 15 || $score <= 30){
-            $score_message = $score_message.' "High"';
+            $score_message = $score_message.' !danger!'.$txt_score.'  @br @f High @c !';
           }else{
-            $score_message = $score_message.' "Unknown"';
+            $score_message = $score_message.' !secondary!'.$txt_score.'  @br @f Unknown @c !';
           }
 
           return $score_message;
@@ -248,24 +256,28 @@ class FormSubmittedAnswer extends BaseModel
 
         case 'Anger':
           $pre_score  = self::Anger_score_fields();
+          
           $score      = (int)$data['score'];
 
           if(!empty($pre_score[$score])){
             $t_score    = $pre_score[$score]['T-Score'];
             $se_score   = $pre_score[$score]['SE'];
 
-            $score_message = "Raw Score is $score, SE is $se_score, T-Score is $t_score are interpreted as";         
+            $score_message = "Raw Score is $score, SE is $se_score, T-Score is ";
+
+
+          $txt_score = '@f'.$t_score.'@c score';         
 
             if($t_score == 0 || $t_score < 55){
-              $score_message = $score_message.' "None to slight"';
+              $score_message = $score_message.' !success!'.$txt_score.'@br @f None @c !';
             } else if($t_score == 55 || $t_score <= 59.9){
-              $score_message = $score_message.' "Mild"';
+              $score_message = $score_message.' !primary!'.$txt_score.'@br @f Mild @c !';
             } else if($t_score == 60 || $t_score <= 69.9){
-              $score_message = $score_message.' "Moderate"';
+              $score_message = $score_message.' !warning!'.$txt_score.'@br @f Moderate @c !';
             } else if($t_score >= 70){
-              $score_message = $score_message.' "Severe"';
+              $score_message = $score_message.' !danger!'.$txt_score.'@br @f Severe @c !';
             }else{
-              $score_message = $score_message.' "Unknown"';
+              $score_message = $score_message.' !secondary!'.$txt_score.'@br @f Unknown @c !';
             }
 
             return $score_message;
@@ -282,18 +294,21 @@ class FormSubmittedAnswer extends BaseModel
             $t_score    = $pre_score[$score]['T-Score'];
             $se_score   = $pre_score[$score]['SE'];
 
-            $score_message = "Raw Score is $score, SE is $se_score, T-Score is $t_score are interpreted as";         
+            $score_message = "Raw Score is $score, SE is $se_score, T-Score is ";      
+
+          $txt_score = '@f'.$t_score.'@c score';    
+
 
             if($t_score == 0 || $t_score < 55){
-              $score_message = $score_message.' "None to slight"';
+              $score_message = $score_message.' !success!'.$txt_score.'@br @f None @c !';
             } else if($t_score == 55 || $t_score <= 59.9){
-              $score_message = $score_message.' "Mild"';
+              $score_message = $score_message.' !primary!'.$txt_score.'@br @f Mild @c !';
             } else if($t_score == 60 || $t_score <= 69.9){
-              $score_message = $score_message.' "Moderate"';
+              $score_message = $score_message.' !warning!'.$txt_score.'@br @f Moderate @c !';
             } else if($t_score >= 70){
-              $score_message = $score_message.' "Severe"';
+              $score_message = $score_message.' !danger!'.$txt_score.'@br @f Severe @c !';
             }else{
-              $score_message = $score_message.' "Unknown"';
+              $score_message = $score_message.' !secondary!'.$txt_score.'@br @f Unknown @c !';
             }
 
             return $score_message;
@@ -310,18 +325,20 @@ class FormSubmittedAnswer extends BaseModel
             $t_score    = $pre_score[$score]['T-Score'];
             $se_score   = $pre_score[$score]['SE'];
 
-            $score_message = "Raw Score is $score, SE is $se_score, T-Score is $t_score are interpreted as";
+            $score_message = "Raw Score is $score, SE is $se_score, T-Score is ";
+
+          $txt_score = '@f'.$t_score.'@c score';  
 
             if($t_score == 0 || $t_score < 55){
-              $score_message = $score_message.' "None to slight"';
+              $score_message = $score_message.' !success!'.$txt_score.'@br @f None @c !';
             } else if($t_score == 55 || $t_score <= 59.9){
-              $score_message = $score_message.' "Mild"';
+              $score_message = $score_message.' !primary!'.$txt_score.'@br @f Mild @c !';
             } else if($t_score == 60 || $t_score <= 69.9){
-              $score_message = $score_message.' "Moderate"';
+              $score_message = $score_message.' !warning!'.$txt_score.'@br @f Moderate @c !';
             } else if($t_score >= 70){
-              $score_message = $score_message.' "Severe"';
+              $score_message = $score_message.' !danger!'.$txt_score.'@br @f Severe @c !';
             }else{
-              $score_message = $score_message.' "Unknown"';
+              $score_message = $score_message.' !secondary!'.$txt_score.'@br @f Unknown @c !';
             }
 
             return $score_message;
@@ -343,7 +360,7 @@ class FormSubmittedAnswer extends BaseModel
             $prorated_score = ($score * 5)/$total_answered_questions;
             $prorated_score = number_format($prorated_score,2);
 
-            $score_message = "Raw Score is $score, Total Answered Questions is $total_answered_questions, Pro Rated Score is $prorated_score ";
+            $score_message = "Raw Score is $score!, Total Answered Questions is $total_answered_questions, Pro Rated Score is !!$prorated_score! ";
           }
 
           return $score_message;
