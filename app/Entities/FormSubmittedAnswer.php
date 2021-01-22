@@ -362,7 +362,7 @@ class FormSubmittedAnswer extends BaseModel
             $prorated_score = ($score * 5)/$total_answered_questions;
             $prorated_score = number_format($prorated_score,2);
 
-            $score_message = "@span Raw Score is $score, Total Answered Questions is $total_answered_questions, Pro Rated Score is !secondary! $prorated_score ! @c ";
+            $score_message = "@span Raw Score is $score, Total Answered Questions is $total_answered_questions, Pro Rated is !secondary! $prorated_score @br score ! @c ";
           }
 
           return $score_message;
