@@ -2,17 +2,22 @@
 
 namespace App\Entities;
 
-class Master extends BaseModel
+class ActivityWellness extends BaseModel
 {
     const VIEW = true;
 
+    const CREATE = true;
+
+    const UPDATE = true;
+
+    const ACTION = true;
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        "master_type_slug", "name", "slug", "attributes", "is_active"
+        "act_catagory", "act_date", "act_duration", "act_intake", "act_intensity", "act_time", "act_type", "patient_id", "status", "unit"
     ];
 
     /**
@@ -21,11 +26,8 @@ class Master extends BaseModel
      * @var array
      */
     protected $casts = [
-        'attributes' => 'object'
         
     ];
-
-    protected $appends = ['details'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -62,28 +64,4 @@ class Master extends BaseModel
     protected $dispatchesEvents = [
         
     ];
-
-
-    public function applyFilters($model, $isPluck)
-    {
-        $model = parent::applyFilters($model, $isPluck);
-        $request = app('request');
-
-        if ($request->get('master_type')) {
-            $model->where('masters.master_type_slug', $request->get('master_type'));
-        }
-
-        if ($request->get('slug')) {
-            $model->where('masters.master_type_slug', $request->get('slug'));
-        }
-        
-        if ($request->get('searchkey')) {
-            $model->where('masters.name', 'LIKE',"%".$request->get('searchkey')."%");
-        }
-
-        // dd($model->toSql());
-
-        return $model;
-    }
-
 }
