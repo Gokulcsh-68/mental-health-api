@@ -256,14 +256,14 @@ class FormSubmittedAnswer extends BaseModel
 
         case 'Anger':
           $pre_score  = self::Anger_score_fields();
-          
+
           $score      = (int)$data['score'];
 
           if(!empty($pre_score[$score])){
             $t_score    = $pre_score[$score]['T-Score'];
             $se_score   = $pre_score[$score]['SE'];
 
-            $score_message = "Raw Score is $score, SE is $se_score, T-Score is ";
+            $score_message = "@span Raw Score is $score, SE is $se_score, T-Score is @c";
 
 
           $txt_score = '@f'.$t_score.'@c score';         
@@ -294,7 +294,7 @@ class FormSubmittedAnswer extends BaseModel
             $t_score    = $pre_score[$score]['T-Score'];
             $se_score   = $pre_score[$score]['SE'];
 
-            $score_message = "Raw Score is $score, SE is $se_score, T-Score is ";      
+            $score_message = "@span Raw Score is $score, SE is $se_score, T-Score is @c";      
 
           $txt_score = '@f'.$t_score.'@c score';    
 
@@ -325,7 +325,7 @@ class FormSubmittedAnswer extends BaseModel
             $t_score    = $pre_score[$score]['T-Score'];
             $se_score   = $pre_score[$score]['SE'];
 
-            $score_message = "Raw Score is $score, SE is $se_score, T-Score is ";
+            $score_message = "@span Raw Score is $score, SE is $se_score, T-Score is @c";
 
           $txt_score = '@f'.$t_score.'@c score';  
 
@@ -343,7 +343,7 @@ class FormSubmittedAnswer extends BaseModel
 
             return $score_message;
           }else{
-            return "Please Retake the Assement";
+            return "@span Please Retake the Assement @c";
           }
         break;
 
@@ -362,7 +362,7 @@ class FormSubmittedAnswer extends BaseModel
             $prorated_score = ($score * 5)/$total_answered_questions;
             $prorated_score = number_format($prorated_score,2);
 
-            $score_message = "Raw Score is $score!, Total Answered Questions is $total_answered_questions, Pro Rated Score is !!$prorated_score! ";
+            $score_message = "@span Raw Score is $score, Total Answered Questions is $total_answered_questions, Pro Rated is !secondary! $prorated_score @br score ! @c ";
           }
 
           return $score_message;
