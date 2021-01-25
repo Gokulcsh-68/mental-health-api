@@ -18,10 +18,7 @@ class ImmunisationTransformer extends JsonResource
     {
         
 
-        // dd($collection);
-
         return [
-            // 'details' => $this->masters($this->slug),
             'details' => $this->details,
             'patient_id' =>  $this->patient_id,
             'slug' =>  $this->slug
