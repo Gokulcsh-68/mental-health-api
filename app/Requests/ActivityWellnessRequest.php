@@ -15,14 +15,14 @@ class ActivityWellnessRequest extends RequestAbstract
     {
         return [
             'act_catagory' => 'nullable',
-            'act_date' => 'required',
+            'act_date' => 'nullable',
             'act_duration' => 'nullable',
             'act_intake' => 'nullable',
             'act_intensity' => 'nullable',
             'act_time' => 'nullable',
             'act_type' => 'nullable',
-            'patient_id' => 'required',
-            'status' => 'required',
+            'patient_id' => 'nullable',
+            'status' => 'nullable',
             'unit' => 'nullable'
         ];
     }

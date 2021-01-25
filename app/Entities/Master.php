@@ -89,15 +89,6 @@ class Master extends BaseModel
             $model->where('masters.name', 'LIKE',"%".$request->get('searchkey')."%");
         }
 
-        // if ($request->get('slug')) {
-        //     // dd($this->immunisation());
-        //     $model->whereHas('immunisation', function ($subquery) use ($request) {
-        //                 $subquery->Where('immunisations.patient_id', 'LIKE',"%".$request->get('patient_id')."%");
-        //         });
-        // }
-
-
-        // dd($model->toSql());
 
         return $model;
     }

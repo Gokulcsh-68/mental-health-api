@@ -15,16 +15,16 @@ class CreateActivityWellnessTable extends Migration
     {
         Schema::create('activity_wellness', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('patient_id')->unique();
-            $table->date('act_date')->unique();
-            $table->time('act_time')->unique()->nullable();
-            $table->string('act_catagory')->unique()->nullable();
-            $table->string('act_type')->unique()->nullable();
+            $table->unsignedBigInteger('patient_id');
+            $table->date('act_date');
+            $table->time('act_time')->nullable();
+            $table->string('act_catagory')->nullable();
+            $table->string('act_type')->nullable();
             $table->string('act_duration')->nullable();
             $table->string('act_intensity')->nullable();
             $table->string('act_intake')->nullable();
             $table->string('unit')->nullable();
-            $table->integer('status')->unique()->default(1);
+            $table->integer('status')->default(1);
             $table->timestamps();
 
 
