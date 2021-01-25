@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Entities;
+use App\Services\MasterService;
 use DB;
 
 class Immunisation extends BaseModel
@@ -79,7 +80,20 @@ class Immunisation extends BaseModel
                             ->Where('patient_id',$data['patient_id'])
                             ->value('details');
 
-            $getData[] = $data['details'];
+            if($getData == null){ $getData = []; }
+
+
+            if($data['status'] == true){
+
+                if (($key = array_search($data['details'], $getData)) !== false) {
+                   
+                    unset($getData[$key]);
+                }
+            }
+
+            if($data['status'] == false){
+                $getData[] = $data['details'];
+            }
 
             $data['details'] = $getData;
 
@@ -111,5 +125,29 @@ class Immunisation extends BaseModel
         }
 
         return $model;
+    }
+
+    public function masters($slug){
+        global $collection;
+        $collection = [];
+
+        $master_service = new MasterService;
+        $immunisation_master = $master_service->getMasterData('immunisation');
+        $patient_dosages = $this->details;
+
+        $immunisation_master->each(function($item, $key) use ($patient_dosages) {
+            global $collection;
+            $values = []; 
+            foreach ($item->attributes->values as $index => $value) {
+                $newValue = $value;
+                $newValue->status = in_array($value->periods, $patient_dosages);
+                $values[] = $newValue;
+            }
+            
+            $item['attributes'] = ["values"=>$values];
+            $collection[] = $item;
+        });
+
+        return $collection;
     }
 }

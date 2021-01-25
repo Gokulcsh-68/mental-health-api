@@ -16,10 +16,10 @@ class MasterTransformer extends JsonResource
     public function toArray($request): array
     {
         $data =  [
+            'attributes' =>  $this->getResult($this->slug,$this->master_type_slug,$this->attributes),
             'master_type_slug' =>  $this->master_type_slug,
             'name' =>  $this->name,
             'slug' =>  $this->slug,
-            'attributes' =>  $this->attributes,
             'is_active' =>  $this->is_active,
         ];
 
