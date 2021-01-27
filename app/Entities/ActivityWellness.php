@@ -84,6 +84,15 @@ class ActivityWellness extends BaseModel
                 }
 
             }
+            else if($request->get('act_intake')){
+
+                $act_intake = $request->get('act_intake');
+                foreach ($act_intake as $key => $value) {
+                    $data['act_intake'] = $value * 100;
+                    $data['act_type'] = $key;
+                    $model = $this->create($data);
+                }
+            }
             else{
                 $model = $this->create($data);
             }
