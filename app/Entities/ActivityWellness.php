@@ -84,6 +84,9 @@ class ActivityWellness extends BaseModel
                 }
 
             }
+            else{
+                $model = $this->create($data);
+            }
 
             
             DB::commit();
@@ -107,8 +110,8 @@ class ActivityWellness extends BaseModel
             $model->where('activity_wellness.patient_id', $request->get('patient_id'));
         }
         
-        if($request->get('slug')){
-            $model->where('activity_wellness.slug', $request->get('slug'));
+        if($request->get('act_catagory')){
+            $model->where('activity_wellness.act_catagory', $request->get('act_catagory'));
         }
 
         if($request->get('from') && $request->get('to')){
