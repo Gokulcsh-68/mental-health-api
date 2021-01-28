@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             RolesTableSeeder::class,
             MasterTypesTableSeeder::class,
             CountriesSeeder::class,
+            DietMasterTableSeeder::class,
             SpecialityTableSeeder::class,
             GenderSeeder::class,
             TimezonesTableSeeder::class,
@@ -33,10 +34,8 @@ class DatabaseSeeder extends Seeder
             AllergySeeder::class,
             ReactionSeeder::class,
             ConditionSeeder::class,
+            ProcedureSeeder::class,
             ActivitySeeder::class,
         ]);
-
-        #ini_set('memory_limit', '-1');
-        #\DB::unprepared(file_get_contents(__dir__ . '\source\AssessmentDump.sql'));
     }
 }

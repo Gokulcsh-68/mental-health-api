@@ -20,7 +20,6 @@ class CreateMastersTable extends Migration
             $table->string('slug', 45);
             $table->json('attributes')->nullable();
             $table->boolean('is_active')->default(0)->comment="0-Inactive, 1-Active";
-            $table->timestamps();
 
             $table->unique(['master_type_slug', 'slug']);
             $table->index('slug');
