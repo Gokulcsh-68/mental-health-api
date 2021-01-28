@@ -91,6 +91,11 @@ class PatientHealth extends BaseModel
         if($data['slug'] == 'allergy'){
             $data['values'] += self::allergy_flag($data['values']);
         }
+
+        if(isset($data['values']['date'])){
+            $data['values']['date'] = date('Y-m-d',strtotime($data['values']['date']));
+            
+        }
         
         return $this->create($data);
     }
@@ -103,6 +108,10 @@ class PatientHealth extends BaseModel
             $data['values'] += self::allergy_flag($data['values']);
         }
 
+        if(isset($data['values']['date'])){
+            $data['values']['date'] = date('Y-m-d',strtotime($data['values']['date']));
+
+        }
         unset($request['patient_id']);
 
         $instance = $this->getModel($id);
