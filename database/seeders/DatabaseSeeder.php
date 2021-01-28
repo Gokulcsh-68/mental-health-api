@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             RolesTableSeeder::class,
             MasterTypesTableSeeder::class,
             CountriesSeeder::class,
+            DietMasterTableSeeder::class,
             SpecialityTableSeeder::class,
             GenderSeeder::class,
             TimezonesTableSeeder::class,
@@ -33,6 +34,7 @@ class DatabaseSeeder extends Seeder
             AllergySeeder::class,
             ReactionSeeder::class,
             ConditionSeeder::class,
+            ProcedureSeeder::class,
         ]);
 
         #ini_set('memory_limit', '-1');
