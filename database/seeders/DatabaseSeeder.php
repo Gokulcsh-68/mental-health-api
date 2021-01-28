@@ -35,9 +35,7 @@ class DatabaseSeeder extends Seeder
             ReactionSeeder::class,
             ConditionSeeder::class,
             ProcedureSeeder::class,
+            ActivitySeeder::class,
         ]);
-
-        #ini_set('memory_limit', '-1');
-        #\DB::unprepared(file_get_contents(__dir__ . '\source\AssessmentDump.sql'));
     }
 }

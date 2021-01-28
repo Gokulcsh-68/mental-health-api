@@ -24,14 +24,19 @@ class MasterService extends BaseService
         $result = [];
         if (is_array($masterTypes)) {
             foreach ($masterTypes as $key => $masterType) {
-                $result[$masterType] = Cache::remember("MASTER-CACHE-" . camel_case(strtolower($masterType)), 86400, function() use ($masterType){
-                    app('request')->merge(['master_type' => $masterType]);
-                    $masterData = app(Master::class)->getModelList()->limit(25)->get();
-                    return $masterData->isNotEmpty() ? $this->collectionTransform("Master", $masterData) : [];
-                });
+                $result[$masterType] = $this->getMasterData($masterType);
             }
         }
 
         return $this->httpResponse->setHttpData($result)->jsonResponse();
+    }
+
+    public function getMasterData($masterType)
+    {
+        return Cache::remember("MASTER-CACHE-" . camel_case(strtolower($masterType)), 86400, function() use ($masterType){
+                    app('request')->merge(['master_type' => $masterType]);
+                    $masterData = app(Master::class)->getModelList()->get();
+                    return $masterData->isNotEmpty() ? $this->collectionTransform("Master", $masterData) : [];
+                });
     }
 }
