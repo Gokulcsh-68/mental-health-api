@@ -92,6 +92,21 @@ class PatientHealth extends BaseModel
             $data['values'] += self::allergy_flag($data['values']);
         }
 
+        if($data['slug'] == 'diet'){
+
+            $dietmaster = $data['values']['nutritian_values'];
+            
+            foreach ($dietmaster as $key => $value) {
+                if(is_numeric($value)){ 
+                    $data['values']['nutritian_values'][$key] = round($value * $data['values']['intake'],2);
+                 }
+                 else{
+                    $data['values']['nutritian_values'][$key] = $value;
+                }
+            }
+
+        }
+
         if(isset($data['values']['date'])){
             $data['values']['date'] = date('Y-m-d',strtotime($data['values']['date']));
             
@@ -106,6 +121,21 @@ class PatientHealth extends BaseModel
         if($data['slug'] == 'allergy'){
             unset($data['values']['severityFlagColor'],$data['values']['range_code']);
             $data['values'] += self::allergy_flag($data['values']);
+        }
+
+        if($data['slug'] == 'diet'){
+
+            $dietmaster = $data['values']['nutritian_values'];
+            
+            foreach ($dietmaster as $key => $value) {
+                if(is_numeric($value)){ 
+                    $data['values']['nutritian_values'][$key] = round($value * $data['values']['intake'],2);
+                 }
+                 else{
+                    $data['values']['nutritian_values'][$key] = $value;
+                }
+            }
+
         }
 
         if(isset($data['values']['date'])){
@@ -160,6 +190,10 @@ class PatientHealth extends BaseModel
                     ->orWhere('values->reaction', 'LIKE',"%".$request->get('searchkey')."%")
                     ->orWhere('values->severity', 'LIKE',"%".$request->get('searchkey')."%")
                     ->orWhere('values->is_active', 'LIKE',"%".$status_key."%");
+            }
+            // Diet
+            if($request->get('slug') == 'diet' && $request->get('searchkey') != 'all'){
+                $model->where('values->category',$request->get('searchkey'));
             }
         }
 
