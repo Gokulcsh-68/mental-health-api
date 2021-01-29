@@ -16,11 +16,11 @@ class CreateDocsTable extends Migration
         Schema::create('docs', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('consult_id');
-            $table->string('document_source', 45);
+            $table->unsignedBigInteger('consult_id')->nullable();
+            $table->string('document_source', 45)->nullable();
             
-            $table->json('properties')->comment='ext,name,mime_type,original_name,url';
-            $table->json('addition_info')->comment='title,notes,peripheral_id';
+            $table->json('properties')->nullable()->comment='ext,name,mime_type,original_name,url';
+            $table->json('addition_info')->nullable()->comment='title,notes,peripheral_id';
             
             $table->unsignedBigInteger('created_by');
             $table->timestamps();
