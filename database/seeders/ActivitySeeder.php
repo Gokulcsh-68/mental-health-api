@@ -14,7 +14,13 @@ class ActivitySeeder extends Seeder
      */
     public function run()
     {
-         $health_types = [
+		$master_types = [
+    		['slug' => 'activity'],
+    	];
+
+		DB::table('master_types')->insert($master_types);
+		
+        $health_types = [
     		[
 			'master_type_slug' => 'activity', 
 			'slug' => 'aerobic', 

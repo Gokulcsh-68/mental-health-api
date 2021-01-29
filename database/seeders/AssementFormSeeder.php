@@ -20,7 +20,7 @@ class AssementFormSeeder extends Seeder
     public function run()
     {
 
-        DB::unprepared(file_get_contents(__DIR__ . '\source\AssessmentFormDump.sql'));
+        DB::unprepared(file_get_contents(__DIR__ . '/source/AssessmentFormDump.sql'));
 
     	$questions 				= json_decode(Question::pluck('id', 'name')->toJson(JSON_UNESCAPED_UNICODE) , true);
 		$answers 				= json_decode(Answer::pluck('id', 'name')->toJson(JSON_UNESCAPED_UNICODE) , true);
