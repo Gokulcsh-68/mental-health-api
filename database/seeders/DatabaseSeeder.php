@@ -36,6 +36,8 @@ class DatabaseSeeder extends Seeder
             ConditionSeeder::class,
             ProcedureSeeder::class,
             ActivitySeeder::class,
+            OccupationSeeder::class,
+            LivingRelationshipSeeder::class,
         ]);
     }
 }
