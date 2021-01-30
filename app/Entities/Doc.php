@@ -97,7 +97,10 @@ class Doc extends BaseModel
         $request = app('request');
 
         if ($request->get('slug')) {
-            $model->where('docs.slug', $request->get('slug'));
+
+            if ($request->get('slug') == 'imaging' || $request->get('slug') == 'lab') {
+                $model->where('docs.document_source', $request->get('slug'));
+            }
         }
 
         if ($request->get('consult_id')) {
@@ -114,8 +117,18 @@ class Doc extends BaseModel
 
         if ($request->get('searchkey')) {
             
-            if($request->get('searchkey') != 'All'){
-                $model->where('docs.document_source',$request->get('searchkey'));
+            if ($request->get('slug')) {
+                if($request->get('searchkey') != 'All' && $request->get('slug') == 'documents'){
+                    $model->where('docs.document_source',$request->get('searchkey'));
+                }
+
+
+                if ($request->get('slug') == 'imaging' || $request->get('slug') == 'lab') {
+                    $model->where(function ($query) use ($request) {
+                            $query->Where('addition_info->notes', 'LIKE',"%".$request->get('searchkey')."%")
+                            ->orWhere('addition_info->title', 'LIKE',"%".$request->get('searchkey')."%");
+                        });
+                }
             }
         }
 
