@@ -45,6 +45,7 @@ $router->group(['prefix' => 'v1/', 'middleware' => 'clientAuth'], function ($rou
             $router->patch('twofa', 'AuthService@twofa');
             $router->patch('communication', 'AuthService@communication');
             $router->get('info', 'AuthService@info');
+            $router->post('uploadDocs', 'AuthService@uploadDocs');
             // $router->post('verify-otp', 'AuthService@verifyOtp');
             // $router->post('resend-otp', 'AuthService@resendOtp');
             $router->patch('{id:[0-9]+}/change-password', ['middleware' => 'acl:users,change-user-password', 'uses' => 'AuthService@changeUserPassword']);

@@ -16,7 +16,9 @@ class DietMasterTableSeeder extends Seeder
     {
     	$master_types = [
     		['slug' => 'food-diet'],
-    	];
+        ];
+        
+        DB::table('master_types')->where($master_types)->delete();
 
         DB::table('master_types')->insert($master_types);
 

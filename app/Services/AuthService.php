@@ -2,31 +2,27 @@
 
 namespace App\Services;
 
-use App\Entities\User;
 use App\Entities\Role;
-use App\Requests\ChangePasswordRequest;
-use App\Requests\GeneralLoginRequest;
-use App\Requests\TwofaRequest;
-use App\Requests\CommunicationRequest;
-use App\Requests\VerifyOtpRequest;
-use App\Requests\ResendOtpRequest;
-use App\Transformers\UserTransformer;
-use App\Utils\AuthHelper;
-use Carbon\Carbon;
-use App\Enums\InternalCodeEnum;
+use App\Entities\User;
 use App\Enums\EmailTemplateEnum;
+use App\Enums\InternalCodeEnum;
 use App\Jobs\SendEmailJob;
 use App\Notifications\InvoicePaid;
 use App\Notifications\OtpNotification;
+use App\Requests\ChangePasswordRequest;
+use App\Requests\CommunicationRequest;
+use App\Requests\ForgotPasswordEmailRequest;
+use App\Requests\GeneralLoginRequest;
+use App\Requests\ResendOtpRequest;
+use App\Requests\TwofaRequest;
+use App\Requests\VerifyOtpRequest;
+use App\Transformers\UserTransformer;
+use App\Utils\AuthHelper;
+use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
-// use App\Requests\ChangeEmailRequest;
-// use App\Requests\VerifyEmailRequest;
-// use App\Requests\SetPasswordRequest;
-// use App\Requests\PatientCheckRequest;
-// use App\Requests\ChangeUserPasswordRequest;
-use App\Requests\ForgotPasswordEmailRequest;
+use Illuminate\Support\Facades\Input;
 
 class AuthService extends BaseService
 {
@@ -140,6 +136,22 @@ class AuthService extends BaseService
         $user = (new UserTransformer($request->user())) ;
 
         return $this->httpResponse->setHttpData($user)->jsonResponse();
+    }
+
+    public function uploadDocs(Request $request): JsonResponse
+    {
+
+            $data = $request->all();
+
+            // dd($data,$request->input('file'));
+
+          $imageName = time().'.'.$request->file('image')->getClientOriginalExtension();
+        $destinationPath = storage_path('/app/images');
+       $status = $request->file('image')->move($destinationPath, $imageName);
+       //    dd($status);
+       
+
+        return $this->httpResponse->setHttpData($request->input('file'))->jsonResponse();
     }
 
     // /**
