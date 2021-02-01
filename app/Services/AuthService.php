@@ -141,17 +141,24 @@ class AuthService extends BaseService
     public function uploadDocs(Request $request): JsonResponse
     {
 
-            $data = $request->all();
+        try{
 
-            // dd($data,$request->input('file'));
+        $data = $request->all();
 
-          $imageName = time().'.'.$request->file('image')->getClientOriginalExtension();
-        $destinationPath = storage_path('/app/images');
-       $status = $request->file('image')->move($destinationPath, $imageName);
-       //    dd($status);
-       
+        // dd($data,$request->input('file'));
 
-        return $this->httpResponse->setHttpData($request->input('file'))->jsonResponse();
+
+        $imageName = rand(9999,9999999).rand(100,1999).time().'.'.$request->file('file')->getClientOriginalExtension();
+        $destinationPath = storage_path('/app/uploadDocs');
+        $request->file('file')->move($destinationPath, $imageName);
+        
+        return $this->httpResponse->setHttpData($imageName)->jsonResponse();
+
+        } catch (Exception $e) {
+            exceptionLogger("Failed to upload document", $e);
+            return false;
+        }
+
     }
 
     // /**
