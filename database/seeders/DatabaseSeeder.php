@@ -39,6 +39,7 @@ class DatabaseSeeder extends Seeder
             ActivitySeeder::class,
             OccupationSeeder::class,
             LivingRelationshipSeeder::class,
+            FamilyHistoryRelationshipSeeder::class,
             ImagingSeeder::class,
             LabSeeder::class,
         ]);

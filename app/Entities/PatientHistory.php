@@ -25,6 +25,7 @@ class PatientHistory extends BaseModel
      */
     protected $casts = [
         'values' => 'object'
+        
     ];
 
     /**
