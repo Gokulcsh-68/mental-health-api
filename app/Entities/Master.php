@@ -57,7 +57,11 @@ class Master extends BaseModel
         }
         
         if ($request->get('searchkey')) {
-            $model->where('masters.name', 'LIKE',"%".$request->get('searchkey')."%");
+
+            $model->where(function ($subquery) use ($request) {
+                        $subquery->Where('masters.name', 'LIKE',"%".$request->get('searchkey')."%")
+                        ->orWhere('masters.slug', 'LIKE',"%".$request->get('searchkey')."%");
+                });
         }
 
 
