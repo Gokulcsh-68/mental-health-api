@@ -4,6 +4,7 @@ namespace App\Entities;
 
 use App\Services\MasterService;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class Master extends BaseModel
 {
@@ -37,6 +38,11 @@ class Master extends BaseModel
         return $this->belongsTo(Immunisation::class, 'slug', 'slug');
     }
 
+    public function familyHistory()
+    {
+        return $this->belongsTo(FamilyHistory::class, 'slug', 'slug');
+    }
+
     public function applyFilters($model, $isPluck)
     {
         $model = parent::applyFilters($model, $isPluck);
@@ -47,9 +53,7 @@ class Master extends BaseModel
         }
 
         if ($request->get('slug')) {
-
             $model->where('masters.master_type_slug', $request->get('slug'));
-            
         }
         
         if ($request->get('searchkey')) {
@@ -76,10 +80,25 @@ class Master extends BaseModel
             if($patient_dosages == null){ $patient_dosages = []; }
 
             foreach ($attributes->values as $key => $value) {
-                $newValue = $value;
-                $newValue->status = in_array($value->periods, $patient_dosages);
+                $newValue           = $value;
+                $newValue->status   = in_array($value->periods, $patient_dosages);
             }
+        }else if($type == 'family_history_diseases'){
+            $patient_family_history = [];
 
+            $patient_family_history = DB::table('family_histories')
+                    ->Where('family_histories.patient_id', $request->get('patient_id'))
+                    ->Where('family_histories.slug', $slug)
+                    ->value('details');
+            $patient_family_history = json_decode($patient_family_history);
+            // $attributes->results    = $patient_family_history;
+
+            if($patient_family_history == null){ $patient_family_history = []; }
+
+            foreach ($attributes->values as $key => $value) {
+                $newValue           = $value;
+                $newValue->status   = in_array($value->relationship, $patient_family_history);
+            }
         }
 
         return $attributes;        
