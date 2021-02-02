@@ -16,6 +16,8 @@ use App\Requests\GeneralLoginRequest;
 use App\Requests\ResendOtpRequest;
 use App\Requests\TwofaRequest;
 use App\Requests\VerifyOtpRequest;
+use App\Services\UtilService;
+use App\Traits\DicomUploadTrait;
 use App\Transformers\UserTransformer;
 use App\Utils\AuthHelper;
 use Carbon\Carbon;
@@ -27,6 +29,7 @@ use Illuminate\Support\Facades\Input;
 class AuthService extends BaseService
 {
     use AuthHelper;
+    use DicomUploadTrait;
 
     /**
      * General login.
@@ -145,14 +148,41 @@ class AuthService extends BaseService
 
         $data = $request->all();
 
-        // dd($data,$request->input('file'));
+         $res['file_path'] = "";
+         $res['file_name'] = "";
+
+        $ext = strtolower($request->file('file')->getClientOriginalExtension());
+
+            $user = (new UserTransformer($request->user()));
+            $request['id'] =  $user->id;
+        if($ext == 'dcm'){
+            
+                $dicom_response = $this->initiateDicomUpload($request->file('file'), $ext, $request['id']);
+              
+                 $res['file_path'] = $dicom_response['file_path'];
+                 $res['file_name'] = $dicom_response['file_name'];
+        }
+        else{     
+
+            $request['type'] = Role::Where('id',$user->role_id)->value('code');
+            $request['file_name'] = rand(9999,9999999).rand(100,1999).time().'.'.$request->file('file')->getClientOriginalExtension();
 
 
-        $imageName = rand(9999,9999999).rand(100,1999).time().'.'.$request->file('file')->getClientOriginalExtension();
-        $destinationPath = storage_path('/app/uploadDocs');
-        $request->file('file')->move($destinationPath, $imageName);
-        
-        return $this->httpResponse->setHttpData($imageName)->jsonResponse();
+            // $other_response = new UtilService();
+            // $other_response->postSignedUrl($request);
+
+            // dd($other_response);     
+            $imageName = rand(9999,9999999).rand(100,1999).time().'.'.$request->file('file')->getClientOriginalExtension();
+            $destinationPath = storage_path('/app/uploadDocs');
+            $request->file('file')->move($destinationPath, $imageName);
+
+
+             $res['file_path'] = "";
+             $res['file_name'] = $imageName;
+        }
+
+
+        return $this->httpResponse->setHttpData($res)->jsonResponse();
 
         } catch (Exception $e) {
             exceptionLogger("Failed to upload document", $e);
