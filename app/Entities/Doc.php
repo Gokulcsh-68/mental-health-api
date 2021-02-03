@@ -96,6 +96,11 @@ class Doc extends BaseModel
         $model = parent::applyFilters($model, $isPluck);
         $request = app('request');
 
+
+        if($request->get('user_id')){
+            $model->where('user_id', $request->get('user_id'));
+        }
+
         if ($request->get('slug')) {
 
             if ($request->get('slug') == 'imaging' || $request->get('slug') == 'lab') {

@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Entities\Doc;
 use App\Entities\Role;
 use App\Entities\User;
 use App\Enums\EmailTemplateEnum;
@@ -25,6 +26,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Storage;
 
 class AuthService extends BaseService
 {
@@ -141,6 +143,48 @@ class AuthService extends BaseService
         return $this->httpResponse->setHttpData($user)->jsonResponse();
     }
 
+
+    public function uploadAvatar(Request $request): JsonResponse
+    {
+
+        try{
+
+            $data = $request->all();
+
+            $ext =  explode('/', mime_content_type($request->get('file')))[1];
+                   
+            $imageName = 'Avatar'.rand(9999,9999999).rand(100,1999).time().'.'.$ext;
+            
+            $image = $request->get('file'); 
+            $image = str_replace('data:image/png;base64,', '', $image);
+            $image = str_replace(' ', '+', $image);
+            Storage::put('uploadDocs/'.$imageName,  base64_decode($image));
+
+
+             // $pro['file_path'] = $imageName;
+             // $pro['file_name'] = $imageName;
+             // $add['title'] = 'profile-photo';
+
+             // $res['properties'] = $pro;
+             // $res['addition_info'] = $add;
+             // $res['user_id'] = $request->user()->id;
+             // $res['created_by'] = $request->user()->id;
+             // $res['document_source'] = 'profile-photo';
+        
+             // Doc::Create($res);
+
+             $user['profile_image'] = $imageName;
+             User::Where('id',$request->user()->id)->update($user);
+
+            return $this->httpResponse->setHttpData($user)->jsonResponse();
+
+        } catch (Exception $e) {
+            exceptionLogger("Failed to upload document", $e);
+            return false;
+        }
+
+    }
+
     public function uploadDocs(Request $request): JsonResponse
     {
 
@@ -151,10 +195,13 @@ class AuthService extends BaseService
          $res['file_path'] = "";
          $res['file_name'] = "";
 
+
         $ext = strtolower($request->file('file')->getClientOriginalExtension());
+        
 
             $user = (new UserTransformer($request->user()));
             $request['id'] =  $user->id;
+            $request['filetype'] =  'item_image';
         if($ext == 'dcm'){
             
                 $dicom_response = $this->initiateDicomUpload($request->file('file'), $ext, $request['id']);
@@ -164,20 +211,23 @@ class AuthService extends BaseService
         }
         else{     
 
-            $request['type'] = Role::Where('id',$user->role_id)->value('code');
-            $request['file_name'] = rand(9999,9999999).rand(100,1999).time().'.'.$request->file('file')->getClientOriginalExtension();
+            // $request['type'] = Role::Where('id',$user->role_id)->value('code');
+            // $request['file_name'] = rand(9999,9999999).rand(100,1999).time().'.'.$request->file('file')->getClientOriginalExtension();
 
 
             // $other_response = new UtilService();
-            // $other_response->postSignedUrl($request);
+            // $status = $other_response->postSignedUrl($request);
 
-            // dd($other_response);     
-            $imageName = rand(9999,9999999).rand(100,1999).time().'.'.$request->file('file')->getClientOriginalExtension();
+
+            //  $res['file_path'] = $status['file_path'];
+            //  $res['file_name'] = $status['file_name'];  
+            //  $res['file_tmp'] = $status['file_tmp'];  
+           
+                $imageName = 'Document'.rand(9999,9999999).rand(100,1999).time().'.'.$request->file('file')->getClientOriginalExtension();
+            
             $destinationPath = storage_path('/app/uploadDocs');
             $request->file('file')->move($destinationPath, $imageName);
-
-
-             $res['file_path'] = "";
+             $res['file_path'] = $imageName;
              $res['file_name'] = $imageName;
         }
 

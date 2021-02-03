@@ -20,7 +20,7 @@ class UtilService extends BaseService
      * @return json
      */
 
-    public  function postSignedUrl(Request $request): JsonResponse
+    public  function postSignedUrl(Request $request)
     {
         $path =  config('api.fileSystem.' . $request->get('type')) . $request->get('file_name');
         
@@ -31,10 +31,14 @@ class UtilService extends BaseService
             $path = sprintf($path, $request->get('type'));
         }
 
+        $url = $this->getAwsTemporaryUrl($path, Carbon::now()->addMinute(10), $this->getUploadOptions($request->get('filetype'), $request->get('content_type')), "post");
 
-        $url = $this->getAwsTemporaryUrl($path, Carbon::now()->addMinute(10), $this->getUploadOptions($request->get('type'), $request->get('content_type')), "post");
+        $response['file_path'] = $url;
+        $response['file_tmp'] = $path;
+        $response['file_name'] = $request->get('file_name');
+        return $response;
 
-        return $this->httpResponse->setHttpData(['url' => $url, 'path' => $path])->jsonResponse();
+        // return $this->httpResponse->setHttpData(['url' => $url, 'path' => $path])->jsonResponse();
     }
 
     /**

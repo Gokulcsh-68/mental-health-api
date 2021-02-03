@@ -167,6 +167,11 @@ class PatientHealth extends BaseModel
             $model->where('patient_health.slug', $request->get('slug'));
         }
 
+        
+        if($request->get('user_id')){
+            $model->where('patient_id', $request->get('user_id'));
+        }
+
         if($request->get('from') && $request->get('to')){
             $from   = date('Y-m-d',strtotime($request->get('from')));
             $to     = date('Y-m-d',strtotime($request->get('to')));
