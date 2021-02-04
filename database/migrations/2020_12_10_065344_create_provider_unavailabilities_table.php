@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAvailabilityDetailsTable extends Migration
+class CreateProviderUnavailabilitiesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,13 @@ class CreateAvailabilityDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('availability_details', function (Blueprint $table) {
+        Schema::create('provider_unavailabilities', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('provider_id');
             $table->datetime('from_date_time');
-            $table->datetime('to_date_time');
-            $table->integer('duration');
-            $table->integer('slot_group')->comment="1-Queue Slot, 2-Time Slot";
-            $table->string('available_type');
-            $table->tinyInteger('slot_type')->comment="1-appointment, 2-queue";
-            $table->string('slot_status');
-            $table->string('available_status');
+            $table->datetime('to_date_time')->nullable();
+            $table->string('available_type')->nullable();
+            $table->integer('available_status')->default(1);
             $table->unsignedBigInteger('created_by');
             $table->timestamps();
 
@@ -39,11 +35,11 @@ class CreateAvailabilityDetailsTable extends Migration
      */
     public function down()
     {
-        Schema::table('availability_details', function (Blueprint $table) {
+        Schema::table('provider_unavailabilities', function (Blueprint $table) {
             $table->dropForeign(['provider_id']);
             $table->dropForeign(['created_by']);
         });
 
-        Schema::dropIfExists('availability_details');
+        Schema::dropIfExists('provider_unavailabilities');
     }
 }
