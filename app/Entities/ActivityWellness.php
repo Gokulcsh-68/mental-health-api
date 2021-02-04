@@ -115,8 +115,8 @@ class ActivityWellness extends BaseModel
         $request = app('request');
 
 
-        if($request->get('patient_id')){
-            $model->where('activity_wellness.patient_id', $request->get('patient_id'));
+        if($request->get('user_id')){
+            $model->where('activity_wellness.patient_id', $request->get('user_id'));
         }
         
         if($request->get('act_catagory')){

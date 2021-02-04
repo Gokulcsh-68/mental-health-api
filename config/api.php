@@ -83,6 +83,9 @@ return [
     'fileSystem' => [
         'provider' => env('S3_BASE_PATH') . 'folio-patient/%s/',
         'patient' => env('S3_BASE_PATH') . 'folio-patient/%s/',
+        'student' => env('S3_BASE_PATH') . 'folio-patient/%s/',
+        'staff' => env('S3_BASE_PATH') . 'folio-patient/%s/',
+        'school' => env('S3_BASE_PATH') . 'folio-patient/%s/',
     ],
     'slack' => [
         'url' => env('SLACK_WEBHOOK', 'https://hooks.slack.com/services/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'),
