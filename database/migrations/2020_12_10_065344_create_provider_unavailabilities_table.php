@@ -16,14 +16,14 @@ class CreateProviderUnavailabilitiesTable extends Migration
         Schema::create('provider_unavailabilities', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('provider_id');
-            $table->datetime('from_date_time');
-            $table->datetime('to_date_time')->nullable();
+            $table->date('from_date');
+            $table->json('timing')->nullable();
             $table->string('available_type')->nullable();
             $table->integer('available_status')->default(1);
             $table->unsignedBigInteger('created_by');
             $table->timestamps();
 
-            $table->foreign('provider_id')->references('id')->on('providers')->onDelete('restrict')->onUpdate('cascade');
+            $table->foreign('provider_id')->references('user_id')->on('providers')->onDelete('restrict')->onUpdate('cascade');
             $table->foreign('created_by')->references('id')->on('users')->onDelete('restrict')->onUpdate('cascade');
         });
     }
