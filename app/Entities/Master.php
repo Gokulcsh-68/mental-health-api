@@ -103,6 +103,22 @@ class Master extends BaseModel
                 $newValue           = $value;
                 $newValue->status   = in_array($value->relationship, $patient_family_history);
             }
+        }else if($type == 'ros'){
+
+            $slug_data = DB::table('review_of_systems')
+                    ->Where('review_of_systems.patient_id', $request->get('patient_id'))
+                    ->Where('review_of_systems.slug', $slug)->first();
+
+            if(empty($attributes)){
+                $attributes = new \stdClass();
+                $attributes->ros_available = (!empty($slug_data) ? false : true);
+            }
+
+            // foreach ($attributes->values as $key => $value) {
+            //     dd($value);
+            //     $newValue                   = $value;
+            //     $newValue->ros_available    = (!empty($slug_data) ? false : true);
+            // }
         }
 
         return $attributes;        

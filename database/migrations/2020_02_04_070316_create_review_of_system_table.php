@@ -17,6 +17,7 @@ class CreateReviewOfSystemTable extends Migration
             $table->id();
             $table->unsignedBigInteger('patient_id')->comment="user id of staff/student";
             $table->unsignedBigInteger('consult_id')->nullable();
+            $table->string('name');
             $table->string('slug', 45);
             $table->string('status', 45);
             $table->json('values');

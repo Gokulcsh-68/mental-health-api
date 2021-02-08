@@ -19,7 +19,9 @@ class ReviewOfSystemTransformer extends JsonResource
             'id'            =>  $this->id,
             'patient_id'    =>  $this->patient_id,
             'consult_id'    =>  $this->consult_id,
+            'name'          =>  $this->name,
             'slug'          =>  $this->slug,
+            'created_at'    =>  $this->created_at,
             'status'        =>  $this->status,
             'values'        =>  $this->values
         ];

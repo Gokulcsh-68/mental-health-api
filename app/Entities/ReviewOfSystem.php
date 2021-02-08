@@ -2,6 +2,7 @@
 
 namespace App\Entities;
 use Illuminate\Support\Facades\DB;
+use log;
 
 class ReviewOfSystem extends BaseModel
 {
@@ -19,7 +20,7 @@ class ReviewOfSystem extends BaseModel
      * @var array
      */
     protected $fillable = [
-        "patient_id", "consult_id", "slug", "status", "values"
+        "patient_id", "consult_id", "name", "slug", "status", "values"
     ];
 
     /**
@@ -28,7 +29,7 @@ class ReviewOfSystem extends BaseModel
      * @var array
      */
     protected $casts = [
-         'values' => 'array'
+         'values' => 'object'
     ];
 
     /**
@@ -67,73 +68,32 @@ class ReviewOfSystem extends BaseModel
         
     ];
 
-    protected function createModel($request)
-    {
+    protected function createModel($request){
         $data = $this->getModelAttributes($request);
-
-        DB::beginTransaction();
-        try {
-
-            $getData = $this->Where('slug',$data['slug'])
-                            ->Where('patient_id',$data['patient_id'])
-                            ->value('values');
-
-            if($getData == null){ $getData = []; }
-
-
-            if($data['status'] == 'normal'){
-
-                if (($key = array_search($data['values'], $getData)) !== false) {
-                   
-                    unset($getData[$key]);
-                }
-            }
-
-            if($data['status'] == 'abnormal'){
-                $getData[] = $data['values'];
-            }
-
-            $data['values'] = $getData;
-
-
-
-            $matchThese = ['slug' => $data['slug'],'patient_id' => $data['patient_id']];
-            $model = $this->create($matchThese, $data);
-
-            DB::commit();
-
-            return $model;
-        } catch (Exception $e) {
-            exceptionLogger("ROS Create Rollback", $e);
-            DB::rollback();
-        }
-
-        return null;
-    }
-
-
-
-    protected function  updateModel($id, $request, $only = []) {
-    
-        $data = $this->getModelAttributes($request);
-
-        DB::beginTransaction();
 
         if($data['status'] == 'normal'){
-            $data['values'] = [];
+            $data['values'] = (object) [];
+        }
+        
+        return $this->create($data);
+    }
+
+    protected function updateModel($id, $request, $only = []){
+        $data = $this->getModelAttributes($request);
+
+        if($data['status'] == 'normal'){
+            $data['values'] = (object) [];
         }
 
         unset($request['patient_id']);
-        
+        unset($request['slug']);
+        unset($request['name']);
+
         $instance = $this->getModel($id);
         $instance->fill($data);
         $instance->save(['touch' => false]);
         return $instance;
-
-        return null;
     }
-
-
 
 
     public function applyFilters($model, $isPluck)
@@ -147,6 +107,13 @@ class ReviewOfSystem extends BaseModel
 
         if($request->get('filter_slug')){
             $model->where('slug', $request->get('filter_slug'));
+        }
+
+        if($request->get('from') && $request->get('to')){
+            $from   = date('Y-m-d',strtotime($request->get('from')));
+            $to     = date('Y-m-d',strtotime($request->get('to')));
+
+            $model->whereBetween('created_at', [$from,$to]);            
         }
 
         return $model;
