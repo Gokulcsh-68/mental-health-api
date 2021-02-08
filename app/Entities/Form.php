@@ -2,6 +2,9 @@
 
 namespace App\Entities;
 
+use App\Entities\Role;
+use App\Entities\User;
+
 class Form extends BaseModel
 {
     const VIEW = true;
@@ -12,7 +15,7 @@ class Form extends BaseModel
      * @var array
      */
     protected $fillable = [
-        "parent_id", "slug", "name", "desc", "assessment_group", "type", "images", "is_active", "created_by"
+        "parent_id", "slug", "name", "desc", "assessment_group", "type", "images", "is_active", "created_by","role_code"
     ];
 
     /**
@@ -21,7 +24,7 @@ class Form extends BaseModel
      * @var array
      */
     protected $casts = [
-        
+        "role_code" => "object"
     ];
 
     /**
@@ -75,6 +78,14 @@ class Form extends BaseModel
         $request    = app('request');
 
         $status_key = $request->get('searchkey');
+
+        if($request->get('user_id')){
+            $role_id = User::where('id',$request->get('user_id'))->value('role_id');
+            $role_code = Role::where('id',$role_id)->value('code');
+            $model->whereJsonContains('role_code', $role_code);
+
+        }
+
         if(strtolower($request->get('searchkey')) == "inactive" || strtolower($request->get('searchkey')) == "active"){
             $status_key = (strtolower($request->get('searchkey')) == "inactive")?"0":"1";
             $model->where('forms.is_active', $status_key);
