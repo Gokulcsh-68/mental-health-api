@@ -39,9 +39,10 @@ class CreateActivityWellnessTable extends Migration
      */
     public function down()
     {
-        Schema::table('immunisation', function (Blueprint $table) {
+        Schema::table('activity_wellness', function (Blueprint $table) {
             $table->dropForeign(['patient_id']);
         });
+        
         Schema::dropIfExists('activity_wellness');
     }
 }
