@@ -214,12 +214,17 @@ class Vital extends BaseModel
                     $data['details']['rbc_flag'],
                     $data['details']['rbc_range_code'],
                     $data['details']['value_message'],
+                    $data['details']['value'],
                     $data['details']['value_flag'],
                     $data['details']['value_range_code'],
                     $data['details']['sugar_message'],
                     $data['details']['sugar_flag'],
+                    $data['details']['sugar_range_code'],
+                    $data['details']['sugar_message'],
+                    $data['details']['sugar_flag'],
                     $data['details']['sugar_range_code']
                 );
+            
 
             $data['details'] += self::urine_flag($data['details']);
         }
