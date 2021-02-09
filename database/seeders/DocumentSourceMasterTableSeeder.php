@@ -31,12 +31,6 @@ class DocumentSourceMasterTableSeeder extends Seeder
         $document_types = [
             [
                 'master_type_slug' => 'document-source', 
-                'slug' => 'profile-photo', 
-                'name' => 'Profile Photo',
-                'is_active' => 1,
-            ],
-            [
-                'master_type_slug' => 'document-source', 
                 'slug' => 'lab', 
                 'name' => 'Lab Results',
                 'is_active' => 1,
