@@ -42,6 +42,9 @@ class DatabaseSeeder extends Seeder
             FamilyHistoryRelationshipSeeder::class,
             ImagingSeeder::class,
             LabSeeder::class,
+            MeasurementStrengthSeeder::class,
+            MedicationBrandSeeder::class,
+            MedicationGenericSeeder::class,
         ]);
     }
 }
