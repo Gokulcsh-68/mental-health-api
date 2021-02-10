@@ -200,6 +200,20 @@ class PatientHealth extends BaseModel
             if($request->get('slug') == 'diet' && $request->get('searchkey') != 'all'){
                 $model->where('values->category',$request->get('searchkey'));
             }
+
+            // Medicine
+            if($request->get('slug') == 'medicine'){
+
+                $status_key = $request->get('searchkey');
+                if(strtolower($request->get('searchkey')) == "inactive" 
+                    || strtolower($request->get('searchkey')) == "active"){
+                    $status_key = (strtolower($request->get('searchkey')) == "inactive")?"0":"1";
+                }
+
+                $model->Where('values->name', 'LIKE',"%".$request->get('searchkey')."%")
+                    ->orWhere('values->type', 'LIKE',"%".$request->get('searchkey')."%")
+                    ->orWhere('values->is_active', 'LIKE',"%".$status_key."%");
+            }
         }
 
         return $model;
