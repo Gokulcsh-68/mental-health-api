@@ -93,7 +93,7 @@ class Vital extends BaseModel
             $data['details'] += self::temp_flag($data['details']);
         }
 
-        if($data['slug'] == 'blood_sugar'){
+        if($data['slug'] == 'blood-sugar'){
             $data['details'] += self::blood_sugar_flag($data['details']);
         }
 
@@ -151,7 +151,7 @@ class Vital extends BaseModel
             $data['details'] += self::temp_flag($data['details']);
         }
 
-        if($data['slug'] == 'blood_sugar'){
+        if($data['slug'] == 'blood-sugar'){
             unset($data['details']['bsFlag'], $data['details']['bsFlagColor'], $data['details']['range_code']);
 
             $data['details'] += self::blood_sugar_flag($data['details']);
@@ -381,7 +381,7 @@ class Vital extends BaseModel
                         $input_data['range_code']    = '#0000ff';
                     }
                     
-                    if (($input_data['temperature'] > 36.5) && ($input_data['temperature'] <= 37.5)) {
+                    if (($input_data['temperature'] > 35) && ($input_data['temperature'] <= 37.5)) {
                         $input_data['temperatureFlag']      = 'Normal';
                         $input_data['temperatureFlagColor'] = 'success';
                         $input_data['range_code']    = '#008000';
@@ -413,6 +413,7 @@ class Vital extends BaseModel
     {
         $input_data['bsFlag']      = '';
         $input_data['bsFlagColor'] = '';
+        $input_data['range_code']  = '';
         if (!empty($input_data['blood_sugar'])) {
             
         if ($input_data['unit'] == 'mg/dL') {
