@@ -67,6 +67,7 @@ class AuthService extends BaseService
                 $token_details = $this->decodeJwt($Authorization);
                 if($token_details->exp)
                     $result['token_expiration_time'] = $token_details->exp;
+                $result['status'] = 'verified_user';
 
                 return $this->httpResponse->setHttpData($result)
                     ->setHttpHeader(['Authorization' => $Authorization])
@@ -321,6 +322,8 @@ class AuthService extends BaseService
         $message = trans('auth.failed');
         $requestedData = $request->json()->all();
         $roleId = Role::where("code", $request->get('role'))->pluck('id')->first();
+
+        // Forgot Password Change
         if ($request->get('action') == 'forgotPassword') {
             $user = User::where('email', $request->get('email'))
                 ->where('role_id', $roleId)
@@ -328,7 +331,8 @@ class AuthService extends BaseService
 
             if (!empty($user)) {
                 if ($this->validateOtp($user->secret, $request->get('otp'))) {
-                    $this->httpResponse->setHttpMessage("OTP Verified Successfully.")
+                    $user->update(['password' => $request->get('password')]);
+                    $this->httpResponse->setHttpMessage("Password changed Successfully.")
                         ->setHttpHeader(['Authorization' => $this->getAuthorization(['userId' => $user->id])]);
                 } else {
                     $this->httpResponse->setHttpMessage("Invalid OTP.")->setHttpCode(400);
@@ -369,9 +373,10 @@ class AuthService extends BaseService
                     $token_details = $this->decodeJwt($Authorization);
                     if($token_details->exp)
                         $result['token_expiration_time'] = $token_details->exp;
+                    $result['status'] = 'OTP_VERIFIED';
 
                     return $this->httpResponse->setHttpData($result)
-                        ->setHttpData(['status' => 'OTP_VERIFIED'])
+                        // ->setHttpData(['status' => 'OTP_VERIFIED'])
                         ->setHttpHeader(['Authorization' => $Authorization])
                         ->jsonResponse();
 
@@ -380,6 +385,7 @@ class AuthService extends BaseService
                     return $this->httpResponse->jsonResponse();
                 }
             }
+
         }
 
         return $this->httpResponse->setHttpMessage($message)->setHttpCode(401)->jsonResponse();
@@ -454,7 +460,12 @@ class AuthService extends BaseService
             'name' => $user->getFullName(),
             'template' => EmailTemplateEnum::Otp
         ];
-        $user->notify(new OtpNotification($data));
+
+        dispatch(new SendEmailJob($data));
+
+        // SendEmailJob::dispatch($data);
+
+        // $user->notify(new OtpNotification($data));
         return true;
     }
 
