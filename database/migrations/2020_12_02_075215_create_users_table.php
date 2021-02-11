@@ -35,6 +35,7 @@ class CreateUsersTable extends Migration
             $table->json('emergency_contact_info')->nullable();
             $table->boolean('is_2fa')->default(0)->comment="0-Disabled, 1-Enabled";
             $table->boolean('is_active')->default(0)->comment="0-Inactive, 1-Active";
+            $table->text('communication_channel')->nullable()->comment='json:sms,email,phone | boolean';
 
             $table->unsignedBigInteger('created_by')->nullable();
             $table->unsignedBigInteger('updated_by')->nullable();
