@@ -176,7 +176,12 @@ class Vital extends BaseModel
                 $data['details']['vldl_message'],
                 $data['details']['vldl_message_flag'],
                 $data['details']['total_message'],
-                $data['details']['total_message_flag']);
+                $data['details']['total_message_flag'],
+                $data['details']['ldl_range_code'],
+                $data['details']['total_range_code'],
+                $data['details']['vldl_range_code'],
+                $data['details']['triglycerides_range_code'],
+                $data['details']['hdl_ldl_range_code']);
 
             $data['details'] += self::cholesterol_flag($data['details']);
         }
@@ -340,6 +345,7 @@ class Vital extends BaseModel
         if (!empty($input_data['unit']) && !empty($input_data['temperature'])) {
             $input_data['temperatureFlag']      = '';
             $input_data['temperatureFlagColor'] = '';
+            $input_data['range_code'] = '';
             
             switch ($input_data['unit']) {
                 case 'Fahrenheit':
@@ -504,18 +510,19 @@ class Vital extends BaseModel
     {
         $input_data['spo2Flag']      = '';
         $input_data['spo2FlagColor'] = '';
+        $input_data['range_code']    = '';
         if (!empty($input_data['spo2'])) {
             
             if ($input_data['spo2'] < 75) {
                 $input_data['spo2Flag']      = 'Severe Hypoxemia';
-                $input_data['spo2FlagColor'] = 'primary';
-                $input_data['range_code']    = '#0000ff';
+                $input_data['spo2FlagColor'] = 'danger';
+                $input_data['range_code']    = '#ff0000';
             }
             
             if (($input_data['spo2'] >= 75) && ($input_data['spo2'] <= 89)) {
                 $input_data['spo2Flag']      = 'Moderate Hypoxemia';
-                $input_data['spo2FlagColor'] = 'primary';
-                $input_data['range_code']    = '#0000ff';
+                $input_data['spo2FlagColor'] = 'warning';
+                $input_data['range_code']    = '#ffc107';
             }
             
             if (($input_data['spo2'] >= 90) && ($input_data['spo2'] <= 94)) {
@@ -541,12 +548,15 @@ class Vital extends BaseModel
         $input_data['leukocytes_message']            = '';
         $input_data['leukocytes_flag']       = '';
         $input_data['leukocytes_range_code'] = '';
+
         $input_data['protein_message']               = '';
         $input_data['protein_flag']          = '';
         $input_data['protein_range_code']    = '';
+
         $input_data['rbc_message']              = '';
         $input_data['rbc_flag']         = '';
         $input_data['rbc_range_code']   = '';
+
         $input_data['value']              = '';
         $input_data['value_flag']         = '';
         $input_data['value_range_code']   = '';
@@ -629,6 +639,7 @@ class Vital extends BaseModel
             }
 
         }
+
         if (!empty($input_data['urine'])) {
         
             if ($input_data['urine'] > 0) {
@@ -675,8 +686,9 @@ class Vital extends BaseModel
     
     public static function blood_pressure_flag($input_data)
     {
-        $input_data['bpFlag']      = 'NORMAL';
-        $input_data['bpFlagColor'] = 'success';
+        $input_data['bpFlag']      = '';
+        $input_data['bpFlagColor'] = '';
+        $input_data['range_code'] = '';
         if (!empty($input_data['systolic']) && !empty($input_data['diastolic'])) {
             if (($input_data['systolic'] < 120) && ($input_data['diastolic'] < 80)) {
                 $input_data['bpFlag']      = 'NORMAL';
@@ -718,6 +730,7 @@ class Vital extends BaseModel
     {
         $input_data['heartRateFlag']      = '';
         $input_data['heartRateFlagColor'] = '';
+        $input_data['range_code'] = '';
         
         if (!empty($input_data['heart'])) {
             
@@ -880,21 +893,27 @@ class Vital extends BaseModel
     {
         $input_data['ldl_message']      = '';
         $input_data['ldl_message_flag'] = '';
+        $input_data['ldl_range_code'] = '';
 
         $input_data['vldl_message']      = '';
         $input_data['vldl_message_flag'] = '';
+        $input_data['vldl_range_code'] = '';
         
         $input_data['hdl_message']      = '';
         $input_data['hdl_message_flag'] = '';
+        $input_data['hdl_range_code'] = '';
         
         $input_data['triglycerides_message']      = '';
         $input_data['triglycerides_message_flag'] = '';
+        $input_data['triglycerides_range_code'] = '';
         
         $input_data['hdl_ldl_message']      = '';
         $input_data['hdl_ldl_message_flag'] = '';
+        $input_data['hdl_ldl_range_code'] = '';
         
         $input_data['total_message']      = '';
         $input_data['total_message_flag'] = '';
+        $input_data['total_range_code'] = '';
         
         
         if (!empty($input_data['total']) && !empty($input_data['total_unit'])) {
