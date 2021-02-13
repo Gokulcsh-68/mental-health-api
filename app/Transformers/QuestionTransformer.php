@@ -18,20 +18,20 @@ class QuestionTransformer extends JsonResource
 
         if($this->type == 'sub_question'){
             return [
-            'id' =>  $this->id,
-            'parent_id' =>  $this->parent_id,
-            'name' =>  $this->name,
-            'type' =>  $this->type,
-            'is_active' =>  $this->is_active,
-            'sub_questions' => $this->parent
+                'id'            => $this->id,
+                'parent_id'     => $this->parent_id,
+                'name'          => $this->name,
+                'type'          => $this->type,
+                'is_active'     => $this->is_active,
+                'sub_questions' => $this->parent
             ];
 
         }else{
             return [
-                'id' =>  $this->id,
+                'id'        =>  $this->id,
                 // 'parent_id' =>  $this->parent_id,
-                'name' =>  $this->name,
-                'type' =>  $this->type,
+                'name'      =>  $this->name,
+                'type'      =>  $this->type,
                 'is_active' =>  $this->is_active
             ];
         }
