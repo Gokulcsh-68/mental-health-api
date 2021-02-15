@@ -92,24 +92,21 @@ class FormSubmittedAnswer extends BaseModel
             foreach ($data['answers'] as $key => $value) {
               if(isset($value['score'])){
                $data['score'] =  $data['score'] + $value['score'];
-
               }
 
               if(isset($value['answer'])){
-               $answers[$key] = $value['answer'];
-              }
-              else{
-                $answers[$key] =  $value;
+               $value['answer']['score']  = $value['score']; 
+               $answers[$key]   = $value['answer'];
+              } else {
+                $answers[$key]  =  $value;
               }
             }
 
-            $data['answers'] = $answers;
+            $data['answers']    = $answers;
             $data['created_by'] = $request->user()->id;
             $model = $this->create($data);
 
-
             DB::commit();
-
             return $model;
         } catch (Exception $e) {
             exceptionLogger("Assessment Create Rollback", $e);
@@ -235,9 +232,8 @@ class FormSubmittedAnswer extends BaseModel
       switch ($data['name']) {
         case 'Physical Symptoms':
           $score = (int)$data['score'];
-          $score_message = "@span PHQ-15 - Levels of Somatic Symptom Severity is @c";         
-
-          $txt_score = '@f'.$score.'@c score';
+          $score_message  = "@span PHQ-15 - Levels of Somatic Symptom Severity is @c";
+          $txt_score      = '@f'.$score.'@c score';
 
           if($score == 0 || $score <= 4){
             $score_message = $score_message.'  !success!'.$txt_score.'  @br @f Minimal @c !';
@@ -263,10 +259,8 @@ class FormSubmittedAnswer extends BaseModel
             $t_score    = $pre_score[$score]['T-Score'];
             $se_score   = $pre_score[$score]['SE'];
 
-            $score_message = "@span Raw Score is $score, SE is $se_score, T-Score is @c";
-
-
-          $txt_score = '@f'.$t_score.'@c score';         
+            $score_message  = "@span Raw Score is $score, SE is $se_score, T-Score is @c";
+            $txt_score      = '@f'.$t_score.'@c score';
 
             if($t_score == 0 || $t_score < 55){
               $score_message = $score_message.' !success!'.$txt_score.'@br @f None @c !';
@@ -294,10 +288,8 @@ class FormSubmittedAnswer extends BaseModel
             $t_score    = $pre_score[$score]['T-Score'];
             $se_score   = $pre_score[$score]['SE'];
 
-            $score_message = "@span Raw Score is $score, SE is $se_score, T-Score is @c";      
-
-          $txt_score = '@f'.$t_score.'@c score';    
-
+            $score_message  = "@span Raw Score is $score, SE is $se_score, T-Score is @c";
+            $txt_score      = '@f'.$t_score.'@c score';
 
             if($t_score == 0 || $t_score < 55){
               $score_message = $score_message.' !success!'.$txt_score.'@br @f None @c !';
@@ -325,9 +317,8 @@ class FormSubmittedAnswer extends BaseModel
             $t_score    = $pre_score[$score]['T-Score'];
             $se_score   = $pre_score[$score]['SE'];
 
-            $score_message = "@span Raw Score is $score, SE is $se_score, T-Score is @c";
-
-          $txt_score = '@f'.$t_score.'@c score';  
+            $score_message  = "@span Raw Score is $score, SE is $se_score, T-Score is @c";
+            $txt_score      = '@f'.$t_score.'@c score';  
 
             if($t_score == 0 || $t_score < 55){
               $score_message = $score_message.' !success!'.$txt_score.'@br @f None @c !';
@@ -350,8 +341,6 @@ class FormSubmittedAnswer extends BaseModel
         case 'Mania':
           $score = (int)$data['score'];
 
-          // dd($data);
-
           $score_message = '';
 
           if(!empty($data['answers'])){
@@ -366,6 +355,238 @@ class FormSubmittedAnswer extends BaseModel
           }
 
           return $score_message;
+        break;
+
+        case 'Assessment Scale - Parent Informant':
+            $score_message = '';
+            if(!empty($data['answers'])){
+              $index = 1;
+              $one_to_nine_answers = $ten_to_eighteen = 0;
+              $nineteen_to_twentysix = $twentyseven_to_forty = $fortyone_to_fortyseven = 0;
+              $forthyeight_to_fiftyfive = 0;
+
+              $msg_occured = false;
+              $inattention = $hyperactivity_impulsivity = false;
+
+              $score_message = "Parent Assessment Scale :";
+              foreach ($data['answers'] as $key => $value) {
+                
+                if($index <= 9){
+                  if($value->score > 2){
+                    $one_to_nine_answers = $one_to_nine_answers+1;
+                  }
+                }
+
+                if($index > 9 && $index <= 18){
+                  if($value->score > 2){
+                    $ten_to_eighteen = $ten_to_eighteen+1;
+                  }
+                }
+
+                if($index > 18 && $index <= 26){
+                  if($value->score > 2){
+                    $nineteen_to_twentysix = $nineteen_to_twentysix+1;
+                  }
+                }
+
+                if($index > 26 && $index <= 40){
+                  if($value->score > 2){
+                    $twentyseven_to_forty = $twentyseven_to_forty+1;
+                  }
+                }
+
+                if($index > 40 && $index <= 47){
+                  if($value->score > 2){
+                    $fortyone_to_fortyseven = $fortyone_to_fortyseven+1;
+                  }
+                }
+
+                if($index > 47 && $index <= 55){
+                  if($value->score > 3){
+                    $forthyeight_to_fiftyfive = $forthyeight_to_fiftyfive+1;
+                  }
+                }
+
+                $index++;
+              }
+
+              if($one_to_nine_answers >=6 && $forthyeight_to_fiftyfive >= 1){
+                $inattention = true;
+                $score_message = $score_message." Predominantly Inattentive subtype";
+                $msg_occured = true;
+              }
+
+              if($ten_to_eighteen >=6 && $forthyeight_to_fiftyfive >= 1){
+                $hyperactivity_impulsivity = true;
+                $score_message = $score_message." Predominantly Hyperactive/Impulsive subtype";
+                $msg_occured = true;
+              }
+
+              if(!empty($inattention) && !empty($hyperactivity_impulsivity)){
+                $score_message = $score_message." ADHD Combined Inattention/Hyperactivity";
+              }
+
+              if($nineteen_to_twentysix >=6 && $forthyeight_to_fiftyfive >= 1){
+                $score_message = $score_message." Oppositional-Defiant Disorder Screen";
+                $msg_occured = true;
+              }
+
+              if($twentyseven_to_forty >=6 && $forthyeight_to_fiftyfive >= 1){
+                $score_message = $score_message." Conduct Disorder Screen";
+                $msg_occured = true;
+              }
+
+              if($fortyone_to_fortyseven >=6 && $forthyeight_to_fiftyfive >= 1){
+                $score_message = $score_message." Anxiety/Depression Screen";
+                $msg_occured = true;
+              }
+            }
+            
+           if(!empty($msg_occured)){
+              return $score_message;
+            }else{
+              return '';
+            }
+        break;
+
+        case 'Assessment Follow-up - Parent Informant':
+            $score_message = '';
+            if(!empty($data['answers'])){
+              $index = 1;
+              $total_symptoms_score = $performance_score = $average_performance_score = 0;
+
+              $msg_occured = false;
+              $inattention = $hyperactivity_impulsivity = false;
+
+              $score_message = "Parent Assessment Follow-up :";
+              foreach ($data['answers'] as $key => $value) {
+                
+                if($index <= 18){
+                  $total_symptoms_score = $total_symptoms_score+(!empty($value->score) ? $value->score : 0);
+                }
+                
+                if($index > 18 && $index <= 26){
+                  $performance_score = $performance_score+(!empty($value->score) ? $value->score : 0);
+                }
+
+                $index++;
+              }
+
+              $score_message = 'Total Symptom Score for questions 1–18 :'.$total_symptoms_score;
+              $score_message = $score_message.' Average Performance : '.round($performance_score/8,2);
+            }
+            return $score_message;
+        break;
+
+        case 'Assessment Scale - Teacher Informant':
+            $score_message = '';
+            if(!empty($data['answers'])){
+              $index = 1;
+              $one_to_nine_answers = $ten_to_eighteen = 0;
+              $nineteen_to_twentyeight = $twentynine_to_thirtyFive = $fortyone_to_fortyseven = 0;
+              $thirtyfive_to_fortythree = 0;
+
+              $msg_occured = false;
+              $inattention = $hyperactivity_impulsivity = false;
+
+              $score_message = "Teacher Assessment Scale :";
+              foreach ($data['answers'] as $key => $value) {
+                
+                if($index <= 9){
+                  if($value->score > 2){
+                    $one_to_nine_answers = $one_to_nine_answers+1;
+                  }
+                }
+
+                if($index > 9 && $index <= 18){
+                  if($value->score > 2){
+                    $ten_to_eighteen = $ten_to_eighteen+1;
+                  }
+                }
+
+                if($index > 18 && $index <= 28){
+                  if($value->score > 2){
+                    $nineteen_to_twentyeight = $nineteen_to_twentyeight+1;
+                  }
+                }
+
+                if($index > 28 && $index <= 35){
+                  if($value->score > 2){
+                    $twentynine_to_thirtyFive = $twentynine_to_thirtyFive+1;
+                  }
+                }
+
+                if($index > 35 && $index <= 43){
+                  if($value->score > 3){
+                    $thirtyfive_to_fortythree = $thirtyfive_to_fortythree+1;
+                  }
+                }
+
+                $index++;
+              }
+
+              if($one_to_nine_answers >=6 && $thirtyfive_to_fortythree >= 1){
+                $inattention = true;
+                $score_message = $score_message." Predominantly Inattentive subtype";
+                $msg_occured = true;
+              }
+
+              if($ten_to_eighteen >=6 && $thirtyfive_to_fortythree >= 1){
+                $hyperactivity_impulsivity = true;
+                $score_message = $score_message." Predominantly Hyperactive/Impulsive subtype";
+                $msg_occured = true;
+              }
+
+              if(!empty($inattention) && !empty($hyperactivity_impulsivity)){
+                $score_message = $score_message." ADHD Combined Inattention/Hyperactivity";
+              }
+
+              if($nineteen_to_twentyeight >=6 && $thirtyfive_to_fortythree >= 1){
+                $score_message = $score_message." Oppositional-Defiant/Conduct Disorder Screen";
+                $msg_occured = true;
+              }
+
+              if($twentynine_to_thirtyFive >=6 && $thirtyfive_to_fortythree >= 1){
+                $score_message = $score_message." Anxiety/Depression Screen";
+                $msg_occured = true;
+              }
+            }
+
+            if(!empty($msg_occured)){
+              return $score_message;
+            }else{
+              return '';
+            }
+            
+        break;
+
+        case 'Assessment Follow-up - Teacher Informant':
+            $score_message = '';
+            if(!empty($data['answers'])){
+              $index = 1;
+              $total_symptoms_score = $performance_score = $average_performance_score = 0;
+
+              $msg_occured = false;
+              $inattention = $hyperactivity_impulsivity = false;
+
+              $score_message = "Parent Assessment Follow-up :";
+              foreach ($data['answers'] as $key => $value) {
+                
+                if($index <= 18){
+                  $total_symptoms_score = $total_symptoms_score+(!empty($value->score) ? $value->score : 0);
+                }
+                
+                if($index > 18 && $index <= 26){
+                  $performance_score = $performance_score+(!empty($value->score) ? $value->score : 0);
+                }
+
+                $index++;
+              }
+
+              $score_message = 'Total Symptom Score for questions 1–18 : '.$total_symptoms_score;
+              $score_message = $score_message.' Average Performance : '.round($performance_score/8,2);
+            }
+            return $score_message;
         break;
         
         default:

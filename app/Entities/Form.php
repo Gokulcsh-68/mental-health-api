@@ -83,7 +83,6 @@ class Form extends BaseModel
             $role_id = User::where('id',$request->get('user_id'))->value('role_id');
             $role_code = Role::where('id',$role_id)->value('code');
             $model->whereJsonContains('role_code', $role_code);
-
         }
 
         if(strtolower($request->get('searchkey')) == "inactive" || strtolower($request->get('searchkey')) == "active"){

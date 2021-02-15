@@ -1192,7 +1192,7 @@ class AssementFormADHDSeeder extends Seeder
 
         DB::table('questions')->insert($new_sub_questions);
 
-        $current_question_id = $questions['Side Effects: Has your child experienced any of the following side effects or problems in the past week?'];
+        $current_question_id = $questions['Side Effects: Has the child experienced any of the following side effects or problems in the past week?'];
 
         $new_sub_questions = [
         	[

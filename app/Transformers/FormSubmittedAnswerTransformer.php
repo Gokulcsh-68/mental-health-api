@@ -15,9 +15,9 @@ class FormSubmittedAnswerTransformer extends JsonResource
 
     public function toArray($request): array
     {
-        $data['name'] = $this->form->name; 
-        $data['score'] = $this->score;
-        $data['answers'] = $this->answers;
+        $data['name']       = $this->form->name;
+        $data['score']      = $this->score;
+        $data['answers']    = $this->answers;
         return [
             'form_id'       =>  $this->form_id,
             'patient_id'    =>  $this->patient_id,
