@@ -126,11 +126,33 @@ class ActivityWellness extends BaseModel
         if($request->get('from') && $request->get('to')){
 
             $from = date('Y-m-d',strtotime($request->get('from')));
-                $to = date('Y-m-d',strtotime($request->get('to')));
+            $to = date('Y-m-d',strtotime($request->get('to')));
             $model->whereBetween('act_date', [$from,$to]);
         }
 
+        if($request->get('chart')){
+           
+            if(!$request->get('from') || !$request->get('to')){
+                $last_date = $this->where('act_catagory',$request->get('act_catagory'))
+                ->limit(1)
+                ->orderBy('act_date','desc')
+                ->value('act_date');
+               
+                $from = date('Y-m-d', strtotime("-10 days",strtotime($last_date))); // -10  days 
+                $to = date('Y-m-d',strtotime($last_date));
+                $model->whereBetween('act_date', [$from,$to]);
+            }
 
+            if($request->get('act_catagory') == 'mood'){
+            $model->select(DB::raw('id,act_catagory,act_date,SUM(act_duration) as act_duration,act_intensity,act_time,act_type,patient_id,status,unit,count(act_type) as act_intake'));
+
+            }
+            else{
+            $model->select(DB::raw('id,act_catagory,act_date,SUM(act_duration) as act_duration,act_intensity,act_time,act_type,patient_id,status,unit,SUM(act_intake) as act_intake'));
+
+            }
+            $model->groupBy('act_type');
+        }
 
 
         // $model->where('ids','s');
