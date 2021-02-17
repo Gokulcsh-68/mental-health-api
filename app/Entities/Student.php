@@ -97,12 +97,12 @@ class Student extends BaseModel
         DB::beginTransaction();
         try {
 
-
-$data['user']['role_id'] = Role::where("code", $data['user']['role'])->pluck('id')->first();
+            $data['user']['role_id'] = Role::where("code", $data['user']['role'])
+                                            ->pluck('id')->first();
             $user = User::create($data['user']);
 
-            $data['school_id'] = $request->get('staff')->school_id;
-            $data['user_id'] = $user->id;
+            $data['school_id']  = $request->get('staff')->school_id;
+            $data['user_id']    = $user->id;
 
             $model = $this->create($data);
             DB::commit();
@@ -160,6 +160,15 @@ $data['user']['role_id'] = Role::where("code", $data['user']['role'])->pluck('id
 
         if ($request->get('staff')->school_id) {
             $model->where('students.school_id', $request->get('staff')->school_id);
+        }
+
+        $role_code = Role::where('id', $request->user()->role_id)->value('code');
+
+        if ($role_code == 'staff') {
+            $classes = SchoolClass::where("staff_id", $request->get('staff')->id)
+                                ->where('school_id', $request->get('staff')->school_id)
+                                ->get()->pluck('id')->toArray();
+            $model->whereIn('students.class_id', $classes);
         }
 
         $status_key = $request->get('searchkey');

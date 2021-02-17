@@ -18,17 +18,17 @@ class FormTransformer extends JsonResource
         
 
         return [
-            'id' =>  $this->id,
-            'parent_id' =>  $this->parent_id,
-            'slug' =>  $this->slug,
-            'name' =>  $this->name,
-            'desc' =>  $this->desc,
-            'assessment_group' =>  $this->assessment_group,
-            'type' =>  $this->type,
-            'images' =>  $this->images,
-            'is_active' =>  $this->is_active,
+            'id'                    =>  $this->id,
+            'parent_id'             =>  $this->parent_id,
+            'slug'                  =>  $this->slug,
+            'name'                  =>  $this->name,
+            'desc'                  =>  $this->desc,
+            'assessment_group'      =>  $this->assessment_group,
+            'type'                  =>  $this->type,
+            'images'                =>  $this->images,
+            'is_active'             =>  $this->is_active,
             'latest_form_submisson' =>  new FormSubmittedAnswerTransformer($this->FormSubmittedAnswer()->Where('patient_id',$request->get('user_id'))->latest()->first()),
-            'questions' =>   FormQuestionTransformer::collection($this->formQuestions),
+            'questions'             =>   FormQuestionTransformer::collection($this->formQuestions),
         ];
     }
 }

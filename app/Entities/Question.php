@@ -65,8 +65,8 @@ class Question extends BaseModel
         return $this->hasMany(FormQuestionAnswer::class, 'question_id', 'id');
     }
 
-    public function parent()
+    public function subQuestions()
     {
-        return $this->hasMany(Question::class, 'parent_id', 'id');
+        return $this->hasMany(Question::class, 'parent_id', 'id')->orderBy('id', 'asc');
     }
 }

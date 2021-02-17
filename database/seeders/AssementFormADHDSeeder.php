@@ -28,7 +28,7 @@ class AssementFormADHDSeeder extends Seeder
             ]
     	];
 
-       DB::table('masters')->insert($assessmentGroups);
+       #DB::table('masters')->insert($assessmentGroups);
 
     	$forms = [
     		[
@@ -208,8 +208,6 @@ class AssementFormADHDSeeder extends Seeder
             ['question_id' => $questions["Performance (Assessment Follow-up Parent)"],'form_id' => $current_form_id],
             ['question_id' => $questions["Side Effects: Has your child experienced any of the following side effects or problems in the past week?"],'form_id' => $current_form_id],
         ];
-
-        DB::table('form_questions')->insert($form_questions);
 
 
         DB::table('form_questions')->insert($form_questions);
@@ -1021,6 +1019,85 @@ class AssementFormADHDSeeder extends Seeder
 
         DB::table('questions')->insert($new_sub_questions);
 
+        $current_question_id = $questions['Side Effects: Has your child experienced any of the following side effects or problems in the past week?'];
+
+        $new_sub_questions = [
+            [
+                'name' => 'Headache',
+                'type' => $radio_type,
+                'is_active' => 1,
+                'parent_id' => $current_question_id
+            ],
+            [
+                'name' => 'Stomachache',
+                'type' => $radio_type,
+                'is_active' => 1,
+                'parent_id' => $current_question_id
+            ],
+            [
+                'name' => 'Change of appetite—explain below',
+                'type' => $radio_type,
+                'is_active' => 1,
+                'parent_id' => $current_question_id
+            ],
+            [
+                'name' => 'Trouble sleeping',
+                'type' => $radio_type,
+                'is_active' => 1,
+                'parent_id' => $current_question_id
+            ],
+            [
+                'name' => 'Irritability in the late morning, late afternoon, or evening—explain below',
+                'type' => $radio_type,
+                'is_active' => 1,
+                'parent_id' => $current_question_id
+            ],
+            [
+                'name' => 'Socially withdrawn—decreased interaction with others',
+                'type' => $radio_type,
+                'is_active' => 1,
+                'parent_id' => $current_question_id
+            ],
+            [
+                'name' => 'Extreme sadness or unusual crying',
+                'type' => $radio_type,
+                'is_active' => 1,
+                'parent_id' => $current_question_id
+            ],
+            [
+                'name' => 'Dull, tired, listless behavior',
+                'type' => $radio_type,
+                'is_active' => 1,
+                'parent_id' => $current_question_id
+            ],
+            [
+                'name' => 'Tremors/feeling shaky',
+                'type' => $radio_type,
+                'is_active' => 1,
+                'parent_id' => $current_question_id
+            ],
+            [
+                'name' => 'Repetitive movements, tics, jerking, twitching, eye blinking—explain below',
+                'type' => $radio_type,
+                'is_active' => 1,
+                'parent_id' => $current_question_id
+            ],
+            [
+                'name' => 'Picking at skin or fingers, nail biting, lip or cheek chewing—explain below',
+                'type' => $radio_type,
+                'is_active' => 1,
+                'parent_id' => $current_question_id
+            ],
+            [
+                'name' => 'Sees or hears things that aren’t there',
+                'type' => $radio_type,
+                'is_active' => 1,
+                'parent_id' => $current_question_id
+            ]
+        ];
+
+        DB::table('questions')->insert($new_sub_questions);
+
 
         $current_question_id = $questions['Symptoms (Assessment Follow-up Teacher)'];
 
@@ -1354,28 +1431,6 @@ class AssementFormADHDSeeder extends Seeder
         DB::table('form_question_answers')->insert($form_question_answers);
 
 
-		$current_question_id 	= $questions['Symptoms (Assessment Follow-up Parent)'];
-
-		$form_question_answers = [
-			['question_id' => $current_question_id, 'answer_id' => $answers["Never"], 'jump_to_question_id' => null, 'score' => 0],
-			['question_id' => $current_question_id, 'answer_id' => $answers["Occasionally"], 'jump_to_question_id' => null, 'score' => 1],
-			['question_id' => $current_question_id, 'answer_id' => $answers["Often"], 'jump_to_question_id' => null, 'score' => 2],
-			['question_id' => $current_question_id, 'answer_id' => $answers["Very Often"], 'jump_to_question_id' => null, 'score' => 3]
-		];
-
-		DB::table('form_question_answers')->insert($form_question_answers);
-
-		$current_question_id 	= $questions['Performance (Assessment Follow-up Parent)'];
-
-		$form_question_answers = [
-			['question_id' => $current_question_id, 'answer_id' => $answers["Excellent"], 'jump_to_question_id' => null, 'score' => 1],
-			['question_id' => $current_question_id, 'answer_id' => $answers["Above Average"], 'jump_to_question_id' => null, 'score' => 2],
-			['question_id' => $current_question_id, 'answer_id' => $answers["Average"], 'jump_to_question_id' => null, 'score' => 3],
-			['question_id' => $current_question_id, 'answer_id' => $answers["Somewhat of a Problem"], 'jump_to_question_id' => null, 'score' => 4],
-			['question_id' => $current_question_id, 'answer_id' => $answers["Problematic"], 'jump_to_question_id' => null, 'score' => 5]
-		];
-
-		DB::table('form_question_answers')->insert($form_question_answers);
 
 		$current_question_id  = $questions['Side Effects: Has your child experienced any of the following side effects or problems in the past week?'];
 
