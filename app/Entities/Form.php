@@ -79,11 +79,35 @@ class Form extends BaseModel
 
         $status_key = $request->get('searchkey');
 
-        if($request->get('user_id')){
-            $role_id = User::where('id',$request->get('user_id'))->value('role_id');
-            $role_code = Role::where('id',$role_id)->value('code');
-            $model->whereJsonContains('role_code', $role_code);
+        if($request->user()->role_id){
+            // Role Based Current User id not Passing user id error will occur on staff login
+            $logged_in_role_code = Role::where('id', $request->user()->role_id)->value('code');
+
+            // ["admin", "provider", "school", "staff", "student", "staffStudentAssement"]
+
+            if(in_array($logged_in_role_code , ['school', 'staff']) ){
+
+                $form_user_id   = User::where('id',$request->get('user_id'))->value('role_id');
+                $form_role_code = Role::where('id',$form_user_id)->value('code');
+
+                if($logged_in_role_code == 'staff' && $form_role_code == 'student'){
+                    $model->whereJsonContains('role_code', 'staffStudentAssement');
+                }else{
+                    $model->whereJsonContains('role_code', $logged_in_role_code);
+                }
+
+            }else{
+                $model->whereJsonContains('role_code', $logged_in_role_code);
+            }
+            
         }
+
+
+        // if($request->get('user_id')){
+        //     $role_id = User::where('id',$request->get('user_id'))->value('role_id');
+        //     $role_code = Role::where('id',$role_id)->value('code');
+        //     $model->whereJsonContains('role_code', $role_code);
+        // }
 
         if(strtolower($request->get('searchkey')) == "inactive" || strtolower($request->get('searchkey')) == "active"){
             $status_key = (strtolower($request->get('searchkey')) == "inactive")?"0":"1";

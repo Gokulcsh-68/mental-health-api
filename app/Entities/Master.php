@@ -54,6 +54,44 @@ class Master extends BaseModel
 
         if ($request->get('slug')) {
             $model->where('masters.master_type_slug', $request->get('slug'));
+
+            // Forms Access
+            if($request->get('slug') == 'assessment-group'){
+                $logged_in_role_code = Role::where('id', $request->user()->role_id)->value('code');
+
+                $form_user_id   = User::where('id',$request->get('patient_id'))->value('role_id');
+                $form_role_code = Role::where('id',$form_user_id)->value('code');
+
+                $form_slug = '';
+
+                switch ($logged_in_role_code) {
+
+                    case 'staff':
+                       if($form_role_code == 'staff'){
+                        $form_slug = ['healthy-heart', 'psychiatric-exam', 'stroke-scale'];
+                       }else if($form_role_code == 'student'){
+                        $form_slug = ['adhd'];
+                       }
+                    break;
+
+                    case 'school':
+                       if($form_role_code == 'staff'){
+                        $form_slug = ['healthy-heart', 'psychiatric-exam', 'stroke-scale'];
+                       }
+                    break;
+                    
+                    default:
+                       $form_slug = ['adhd', 'healthy-heart', 'psychiatric-exam', 'stroke-scale'];
+                    break;
+                }
+
+                // dd($form_slug);
+
+                if(!empty($form_slug)){
+                    $model->whereIn('masters.slug', $form_slug);
+                }
+
+            }
         }
         
         if ($request->get('searchkey')) {
