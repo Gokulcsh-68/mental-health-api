@@ -65,8 +65,19 @@ class PatientHistory extends BaseModel
 
     protected function createModel($request){
         $data = $this->getModelAttributes($request);
-        
-        return $this->create($data);
+            
+            if($request->get('additional')){
+                $values = $data['values'];
+                unset($data['values']);
+                $data['values']['relationship'] = $values;
+                $data['values']['additional'] = $data['additional'];
+            }
+
+            $matchThese = ['slug'=>$data['slug'],'patient_id'=>$data['patient_id']];
+
+            $model = $this->updateOrCreate($matchThese,$data);
+
+        return $model;
     }
 
     protected function updateModel($id, $request, $only = []){
