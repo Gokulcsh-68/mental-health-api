@@ -46,6 +46,7 @@ class DatabaseSeeder extends Seeder
             MedicationBrandSeeder::class,
             MedicationGenericSeeder::class,
             AssementFormADHDSeeder::class,
+            AssementFormApgarSeeder::class,
         ]);
     }
 }

@@ -28,7 +28,7 @@ class AssementFormADHDSeeder extends Seeder
             ]
     	];
 
-       #DB::table('masters')->insert($assessmentGroups);
+       DB::table('masters')->insert($assessmentGroups);
 
     	$forms = [
     		[

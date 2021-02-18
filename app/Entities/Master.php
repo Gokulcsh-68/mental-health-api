@@ -81,7 +81,7 @@ class Master extends BaseModel
                     break;
                     
                     default:
-                       $form_slug = ['adhd', 'healthy-heart', 'psychiatric-exam', 'stroke-scale'];
+                       $form_slug = ['apgar', 'adhd', 'healthy-heart', 'psychiatric-exam', 'stroke-scale'];
                     break;
                 }
 
