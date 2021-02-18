@@ -53,6 +53,13 @@ class HistorySeeder extends Seeder
                 'attributes' => json_encode([]),
                 'is_active' => 1,
             ],
+            [
+                'master_type_slug' => 'history', 
+                'slug' => 'student-history', 
+                'name' => 'Student History',
+                'attributes' => json_encode([]),
+                'is_active' => 1,
+            ],
     	];
 
         DB::table('masters')->insert($histories);
