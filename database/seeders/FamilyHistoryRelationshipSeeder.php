@@ -27,10 +27,10 @@ class FamilyHistoryRelationshipSeeder extends Seeder
       ['relationship' => 'Grandparents'],
       ['relationship' => 'Father'],
       ['relationship' => 'Mother'],
-      ['relationship' => 'Brothers'],
-      ['relationship' => 'Sisters'],
-      ['relationship' => 'Daughters'],
-      ['relationship' => 'Sons']
+      ['relationship' => 'Brother(s)'],
+      ['relationship' => 'Sister(s)'],
+      ['relationship' => 'Daughter(s)'],
+      ['relationship' => 'Son(s)']
     ]
   ]), 'is_active' => 1],
             ['master_type_slug' => 'family_history_diseases', 'name' =>'Heart Disease', 'slug' => str_slug('Heart Disease'), 
@@ -39,10 +39,10 @@ class FamilyHistoryRelationshipSeeder extends Seeder
       ['relationship' => 'Grandparents'],
       ['relationship' => 'Father'],
       ['relationship' => 'Mother'],
-      ['relationship' => 'Brothers'],
-      ['relationship' => 'Sisters'],
-      ['relationship' => 'Daughters'],
-      ['relationship' => 'Sons']
+      ['relationship' => 'Brother(s)'],
+      ['relationship' => 'Sister(s)'],
+      ['relationship' => 'Daughter(s)'],
+      ['relationship' => 'Son(s)']
     ]
   ]), 'is_active' => 1],
             ['master_type_slug' => 'family_history_diseases', 'name' =>'Diabetes', 'slug' => str_slug('Diabetes'), 
@@ -51,10 +51,10 @@ class FamilyHistoryRelationshipSeeder extends Seeder
       ['relationship' => 'Grandparents'],
       ['relationship' => 'Father'],
       ['relationship' => 'Mother'],
-      ['relationship' => 'Brothers'],
-      ['relationship' => 'Sisters'],
-      ['relationship' => 'Daughters'],
-      ['relationship' => 'Sons']
+      ['relationship' => 'Brother(s)'],
+      ['relationship' => 'Sister(s)'],
+      ['relationship' => 'Daughter(s)'],
+      ['relationship' => 'Son(s)']
     ]
   ]), 'is_active' => 1],
             ['master_type_slug' => 'family_history_diseases', 'name' =>'Stroke', 'slug' => str_slug('Stroke'), 
@@ -63,10 +63,10 @@ class FamilyHistoryRelationshipSeeder extends Seeder
       ['relationship' => 'Grandparents'],
       ['relationship' => 'Father'],
       ['relationship' => 'Mother'],
-      ['relationship' => 'Brothers'],
-      ['relationship' => 'Sisters'],
-      ['relationship' => 'Daughters'],
-      ['relationship' => 'Sons']
+      ['relationship' => 'Brother(s)'],
+      ['relationship' => 'Sister(s)'],
+      ['relationship' => 'Daughter(s)'],
+      ['relationship' => 'Son(s)']
     ]
   ]), 'is_active' => 1],
             ['master_type_slug' => 'family_history_diseases', 'name' =>'High Blood Pressure', 'slug' => str_slug('High Blood Pressure'), 
@@ -75,10 +75,10 @@ class FamilyHistoryRelationshipSeeder extends Seeder
       ['relationship' => 'Grandparents'],
       ['relationship' => 'Father'],
       ['relationship' => 'Mother'],
-      ['relationship' => 'Brothers'],
-      ['relationship' => 'Sisters'],
-      ['relationship' => 'Daughters'],
-      ['relationship' => 'Sons']
+      ['relationship' => 'Brother(s)'],
+      ['relationship' => 'Sister(s)'],
+      ['relationship' => 'Daughter(s)'],
+      ['relationship' => 'Son(s)']
     ]
   ]), 'is_active' => 1],
             ['master_type_slug' => 'family_history_diseases', 'name' =>'High Cholestrol', 'slug' => str_slug('High Cholestrol'), 
@@ -87,10 +87,10 @@ class FamilyHistoryRelationshipSeeder extends Seeder
       ['relationship' => 'Grandparents'],
       ['relationship' => 'Father'],
       ['relationship' => 'Mother'],
-      ['relationship' => 'Brothers'],
-      ['relationship' => 'Sisters'],
-      ['relationship' => 'Daughters'],
-      ['relationship' => 'Sons']
+      ['relationship' => 'Brother(s)'],
+      ['relationship' => 'Sister(s)'],
+      ['relationship' => 'Daughter(s)'],
+      ['relationship' => 'Son(s)']
     ]
   ]), 'is_active' => 1],
             ['master_type_slug' => 'family_history_diseases', 'name' =>'Liver Disease', 'slug' => str_slug('Liver Disease'), 
@@ -99,10 +99,10 @@ class FamilyHistoryRelationshipSeeder extends Seeder
       ['relationship' => 'Grandparents'],
       ['relationship' => 'Father'],
       ['relationship' => 'Mother'],
-      ['relationship' => 'Brothers'],
-      ['relationship' => 'Sisters'],
-      ['relationship' => 'Daughters'],
-      ['relationship' => 'Sons']
+      ['relationship' => 'Brother(s)'],
+      ['relationship' => 'Sister(s)'],
+      ['relationship' => 'Daughter(s)'],
+      ['relationship' => 'Son(s)']
     ]
   ]), 'is_active' => 1],
             ['master_type_slug' => 'family_history_diseases', 'name' =>'Alcohol or Drug Abuse', 'slug' => str_slug('Alcohol or Drug Abuse'), 
@@ -111,10 +111,10 @@ class FamilyHistoryRelationshipSeeder extends Seeder
       ['relationship' => 'Grandparents'],
       ['relationship' => 'Father'],
       ['relationship' => 'Mother'],
-      ['relationship' => 'Brothers'],
-      ['relationship' => 'Sisters'],
-      ['relationship' => 'Daughters'],
-      ['relationship' => 'Sons']
+      ['relationship' => 'Brother(s)'],
+      ['relationship' => 'Sister(s)'],
+      ['relationship' => 'Daughter(s)'],
+      ['relationship' => 'Son(s)']
     ]
   ]), 'is_active' => 1],
             ['master_type_slug' => 'family_history_diseases', 'name' =>'Anxiety,Depression or Psychiatric Illness', 'slug' => str_slug('Anxiety,Depression or Psychiatric Illness'), 
@@ -123,10 +123,10 @@ class FamilyHistoryRelationshipSeeder extends Seeder
       ['relationship' => 'Grandparents'],
       ['relationship' => 'Father'],
       ['relationship' => 'Mother'],
-      ['relationship' => 'Brothers'],
-      ['relationship' => 'Sisters'],
-      ['relationship' => 'Daughters'],
-      ['relationship' => 'Sons']
+      ['relationship' => 'Brother(s)'],
+      ['relationship' => 'Sister(s)'],
+      ['relationship' => 'Daughter(s)'],
+      ['relationship' => 'Son(s)']
     ]
   ]), 'is_active' => 1],
             ['master_type_slug' => 'family_history_diseases', 'name' =>'Tuberculosis', 'slug' => str_slug('Tuberculosis'), 
@@ -135,10 +135,10 @@ class FamilyHistoryRelationshipSeeder extends Seeder
       ['relationship' => 'Grandparents'],
       ['relationship' => 'Father'],
       ['relationship' => 'Mother'],
-      ['relationship' => 'Brothers'],
-      ['relationship' => 'Sisters'],
-      ['relationship' => 'Daughters'],
-      ['relationship' => 'Sons']
+      ['relationship' => 'Brother(s)'],
+      ['relationship' => 'Sister(s)'],
+      ['relationship' => 'Daughter(s)'],
+      ['relationship' => 'Son(s)']
     ]
   ]), 'is_active' => 1],
             ['master_type_slug' => 'family_history_diseases', 'name' =>'Anesthesia', 'slug' => str_slug('Anesthesia'), 
@@ -147,10 +147,10 @@ class FamilyHistoryRelationshipSeeder extends Seeder
       ['relationship' => 'Grandparents'],
       ['relationship' => 'Father'],
       ['relationship' => 'Mother'],
-      ['relationship' => 'Brothers'],
-      ['relationship' => 'Sisters'],
-      ['relationship' => 'Daughters'],
-      ['relationship' => 'Sons']
+      ['relationship' => 'Brother(s)'],
+      ['relationship' => 'Sister(s)'],
+      ['relationship' => 'Daughter(s)'],
+      ['relationship' => 'Son(s)']
     ]
   ]), 'is_active' => 1],
             ['master_type_slug' => 'family_history_diseases', 'name' =>'Genetic Disorder', 'slug' => str_slug('Genetic Disorder'), 
@@ -159,10 +159,10 @@ class FamilyHistoryRelationshipSeeder extends Seeder
       ['relationship' => 'Grandparents'],
       ['relationship' => 'Father'],
       ['relationship' => 'Mother'],
-      ['relationship' => 'Brothers'],
-      ['relationship' => 'Sisters'],
-      ['relationship' => 'Daughters'],
-      ['relationship' => 'Sons']
+      ['relationship' => 'Brother(s)'],
+      ['relationship' => 'Sister(s)'],
+      ['relationship' => 'Daughter(s)'],
+      ['relationship' => 'Son(s)']
     ]
   ]), 'is_active' => 1],
             ['master_type_slug' => 'family_history_diseases', 'name' =>'Allergies', 'slug' => str_slug('Allergies'), 
@@ -171,10 +171,10 @@ class FamilyHistoryRelationshipSeeder extends Seeder
       ['relationship' => 'Grandparents'],
       ['relationship' => 'Father'],
       ['relationship' => 'Mother'],
-      ['relationship' => 'Brothers'],
-      ['relationship' => 'Sisters'],
-      ['relationship' => 'Daughters'],
-      ['relationship' => 'Sons']
+      ['relationship' => 'Brother(s)'],
+      ['relationship' => 'Sister(s)'],
+      ['relationship' => 'Daughter(s)'],
+      ['relationship' => 'Son(s)']
     ]
   ]), 'is_active' => 1],
             ['master_type_slug' => 'family_history_diseases', 'name' =>'Sinus', 'slug' => str_slug('Sinus'), 
@@ -183,10 +183,10 @@ class FamilyHistoryRelationshipSeeder extends Seeder
       ['relationship' => 'Grandparents'],
       ['relationship' => 'Father'],
       ['relationship' => 'Mother'],
-      ['relationship' => 'Brothers'],
-      ['relationship' => 'Sisters'],
-      ['relationship' => 'Daughters'],
-      ['relationship' => 'Sons']
+      ['relationship' => 'Brother(s)'],
+      ['relationship' => 'Sister(s)'],
+      ['relationship' => 'Daughter(s)'],
+      ['relationship' => 'Son(s)']
     ]
   ]), 'is_active' => 1],
             ['master_type_slug' => 'family_history_diseases', 'name' =>'Asthma', 'slug' => str_slug('Asthma'), 
@@ -195,10 +195,10 @@ class FamilyHistoryRelationshipSeeder extends Seeder
       ['relationship' => 'Grandparents'],
       ['relationship' => 'Father'],
       ['relationship' => 'Mother'],
-      ['relationship' => 'Brothers'],
-      ['relationship' => 'Sisters'],
-      ['relationship' => 'Daughters'],
-      ['relationship' => 'Sons']
+      ['relationship' => 'Brother(s)'],
+      ['relationship' => 'Sister(s)'],
+      ['relationship' => 'Daughter(s)'],
+      ['relationship' => 'Son(s)']
     ]
   ]), 'is_active' => 1],
             ['master_type_slug' => 'family_history_diseases', 'name' =>'Eczema', 'slug' => str_slug('Eczema'), 
@@ -207,10 +207,10 @@ class FamilyHistoryRelationshipSeeder extends Seeder
       ['relationship' => 'Grandparents'],
       ['relationship' => 'Father'],
       ['relationship' => 'Mother'],
-      ['relationship' => 'Brothers'],
-      ['relationship' => 'Sisters'],
-      ['relationship' => 'Daughters'],
-      ['relationship' => 'Sons']
+      ['relationship' => 'Brother(s)'],
+      ['relationship' => 'Sister(s)'],
+      ['relationship' => 'Daughter(s)'],
+      ['relationship' => 'Son(s)']
     ]
   ]), 'is_active' => 1],
             ['master_type_slug' => 'family_history_diseases', 'name' =>'Hay Fever', 'slug' => str_slug('Hay Fever'), 
@@ -219,10 +219,10 @@ class FamilyHistoryRelationshipSeeder extends Seeder
       ['relationship' => 'Grandparents'],
       ['relationship' => 'Father'],
       ['relationship' => 'Mother'],
-      ['relationship' => 'Brothers'],
-      ['relationship' => 'Sisters'],
-      ['relationship' => 'Daughters'],
-      ['relationship' => 'Sons']
+      ['relationship' => 'Brother(s)'],
+      ['relationship' => 'Sister(s)'],
+      ['relationship' => 'Daughter(s)'],
+      ['relationship' => 'Son(s)']
     ]
   ]), 'is_active' => 1],
             ['master_type_slug' => 'family_history_diseases', 'name' =>'Hives', 'slug' => str_slug('Hives'), 
@@ -231,10 +231,10 @@ class FamilyHistoryRelationshipSeeder extends Seeder
       ['relationship' => 'Grandparents'],
       ['relationship' => 'Father'],
       ['relationship' => 'Mother'],
-      ['relationship' => 'Brothers'],
-      ['relationship' => 'Sisters'],
-      ['relationship' => 'Daughters'],
-      ['relationship' => 'Sons']
+      ['relationship' => 'Brother(s)'],
+      ['relationship' => 'Sister(s)'],
+      ['relationship' => 'Daughter(s)'],
+      ['relationship' => 'Son(s)']
     ]
   ]), 'is_active' => 1],
             ['master_type_slug' => 'family_history_diseases', 'name' =>'Migraine', 'slug' => str_slug('Migraine'), 
@@ -243,10 +243,10 @@ class FamilyHistoryRelationshipSeeder extends Seeder
       ['relationship' => 'Grandparents'],
       ['relationship' => 'Father'],
       ['relationship' => 'Mother'],
-      ['relationship' => 'Brothers'],
-      ['relationship' => 'Sisters'],
-      ['relationship' => 'Daughters'],
-      ['relationship' => 'Sons']
+      ['relationship' => 'Brother(s)'],
+      ['relationship' => 'Sister(s)'],
+      ['relationship' => 'Daughter(s)'],
+      ['relationship' => 'Son(s)']
     ]
   ]), 'is_active' => 1],
             ['master_type_slug' => 'family_history_diseases', 'name' =>'Thyroid Disease', 'slug' => str_slug('Thyroid Disease'), 
@@ -255,10 +255,10 @@ class FamilyHistoryRelationshipSeeder extends Seeder
       ['relationship' => 'Grandparents'],
       ['relationship' => 'Father'],
       ['relationship' => 'Mother'],
-      ['relationship' => 'Brothers'],
-      ['relationship' => 'Sisters'],
-      ['relationship' => 'Daughters'],
-      ['relationship' => 'Sons']
+      ['relationship' => 'Brother(s)'],
+      ['relationship' => 'Sister(s)'],
+      ['relationship' => 'Daughter(s)'],
+      ['relationship' => 'Son(s)']
     ]
   ]), 'is_active' => 1],
             ['master_type_slug' => 'family_history_diseases', 'name' =>'Emphysema', 'slug' => str_slug('Emphysema'), 
@@ -267,10 +267,10 @@ class FamilyHistoryRelationshipSeeder extends Seeder
       ['relationship' => 'Grandparents'],
       ['relationship' => 'Father'],
       ['relationship' => 'Mother'],
-      ['relationship' => 'Brothers'],
-      ['relationship' => 'Sisters'],
-      ['relationship' => 'Daughters'],
-      ['relationship' => 'Sons']
+      ['relationship' => 'Brother(s)'],
+      ['relationship' => 'Sister(s)'],
+      ['relationship' => 'Daughter(s)'],
+      ['relationship' => 'Son(s)']
     ]
   ]), 'is_active' => 1],
             ['master_type_slug' => 'family_history_diseases', 'name' =>'Cystic Fibrosis', 'slug' => str_slug('Cystic Fibrosis'), 
@@ -279,10 +279,10 @@ class FamilyHistoryRelationshipSeeder extends Seeder
       ['relationship' => 'Grandparents'],
       ['relationship' => 'Father'],
       ['relationship' => 'Mother'],
-      ['relationship' => 'Brothers'],
-      ['relationship' => 'Sisters'],
-      ['relationship' => 'Daughters'],
-      ['relationship' => 'Sons']
+      ['relationship' => 'Brother(s)'],
+      ['relationship' => 'Sister(s)'],
+      ['relationship' => 'Daughter(s)'],
+      ['relationship' => 'Son(s)']
     ]
   ]), 'is_active' => 1],
             ['master_type_slug' => 'family_history_diseases', 'name' =>'Pneumococcal Vaccine', 'slug' => str_slug('Pneumococcal Vaccine'), 
@@ -291,22 +291,22 @@ class FamilyHistoryRelationshipSeeder extends Seeder
       ['relationship' => 'Grandparents'],
       ['relationship' => 'Father'],
       ['relationship' => 'Mother'],
-      ['relationship' => 'Brothers'],
-      ['relationship' => 'Sisters'],
-      ['relationship' => 'Daughters'],
-      ['relationship' => 'Sons']
+      ['relationship' => 'Brother(s)'],
+      ['relationship' => 'Sister(s)'],
+      ['relationship' => 'Daughter(s)'],
+      ['relationship' => 'Son(s)']
     ]
   ]), 'is_active' => 1],
-            ['master_type_slug' => 'family_history_diseases', 'name' =>'Alive', 'slug' => str_slug('Alive'), 
+            ['master_type_slug' => 'family_history_diseases', 'name' =>'Not Alive', 'slug' => str_slug('Alive'), 
             'attributes' =>json_encode([
     "values" => [
       ['relationship' => 'Grandparents'],
       ['relationship' => 'Father'],
       ['relationship' => 'Mother'],
-      ['relationship' => 'Brothers'],
-      ['relationship' => 'Sisters'],
-      ['relationship' => 'Daughters'],
-      ['relationship' => 'Sons']
+      ['relationship' => 'Brother(s)'],
+      ['relationship' => 'Sister(s)'],
+      ['relationship' => 'Daughter(s)'],
+      ['relationship' => 'Son(s)']
     ]
   ]), 'is_active' => 1],
         ];

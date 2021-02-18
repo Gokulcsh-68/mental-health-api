@@ -73,9 +73,15 @@ class PatientHistory extends BaseModel
                 $data['values']['additional'] = $data['additional'];
             }
 
+            if($data['slug'] == 'student-history'){
+
             $matchThese = ['slug'=>$data['slug'],'patient_id'=>$data['patient_id']];
 
             $model = $this->updateOrCreate($matchThese,$data);
+            }
+            else{
+                $model = $this->create($data);
+            }
 
         return $model;
     }
