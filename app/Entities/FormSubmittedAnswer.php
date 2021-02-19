@@ -588,6 +588,22 @@ class FormSubmittedAnswer extends BaseModel
             }
             return $score_message;
         break;
+
+        case 'Apgar Scoring System':
+          $score = (int)$data['score'];
+          $score_message  = "@span Apgar Score of @c";
+          $txt_score      = '@f'.$score.'@c are';
+
+          if($score == 0 || $score <= 3){
+            $score_message = $score_message.'  !danger!'.$txt_score.'  @br @f Critical Low @c !';
+          } else if($score == 4 || $score <= 6){
+            $score_message = $score_message.'  !warning!'.$txt_score.'  @br @f Below normal @c !';
+          } else{
+            $score_message = $score_message.' !primary!'.$txt_score.'  @br @f Considered Normal @c !';
+          }
+
+          return $score_message;
+        break;
         
         default:
           $score = (int)$data['score'];
