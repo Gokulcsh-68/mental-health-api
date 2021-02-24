@@ -20,7 +20,7 @@ class ConsultRequest extends RequestAbstract
         $rules = [];
 
         // Edited Rules
-        if ($this->route('id')) {
+        /*if ($this->route('id')) {
 
         } else {
 
@@ -41,7 +41,7 @@ class ConsultRequest extends RequestAbstract
                     return $errorRules;
                 }
             }
-        }
+        }*/
             
 
         return array_dot($rules);

@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Entities;
-use DB;
-
-use Carbon\Carbon;
-use App\Enums\ConsultStatusTypeEnum;
 use App\Entities\AvailabilityDetail;
+use App\Enums\ConsultStatusTypeEnum;
+use App\Services\CureselectApis\TeleConsultApiService;
+use Carbon\Carbon;
+use DB;
 
 class Consult extends BaseModel
 {
@@ -76,14 +76,42 @@ class Consult extends BaseModel
     {
         $data = $this->getModelAttributes($request);
 
+        dd($a);
+
         DB::beginTransaction();
         try {
 
-            $data['status'] = ConsultStatusTypeEnum::FRESH;
-            $data['unique_id'] = chr(rand(65, 90)) . $data['provider_id'] . time() . rand(999999, 99999999) . $data['patient_id'];
-            $data['school_id'] = $request->get('staff')->school_id;
+            $patient = User::find($data['patient_id']);
+            $provider = User::find($data['provider_id']);
 
-            $data['unit'] = 1;
+            $payload = [
+                'consult_date_time' => $data['consult_date_time'],
+                'consult_type' => 'virtual',
+                'consult_reason' => $data['reason_for_consult'],
+                'service_provider' => 'tokbox',
+
+                'provider' => [
+                    'id' => $provider->id,
+                    'name' => $provider->getFullName(),
+                    'email' => $provider->email,
+                    'phone' => $provider->mobile_number,
+                    'gender' => $provider->gender,
+                    'profile_pic' => $provider->profile_image,
+                ],
+
+                'patient' => [
+                    'id' => $patient->id,
+                    'name' => $patient->getFullName(),
+                    'email' => $patient->email,
+                    'phone' => $patient->mobile_number,
+                    'gender' => $patient->gender,
+                    'profile_pic' => $patient->profile_image,
+                ],
+            ];
+
+            $TeleConsultApiService = new TeleConsultApiService;
+            $a = $TeleConsultApiService->create($payload);
+
             if (is_array($data['slots'])) {
 
                 $selectedSlots = $data['slots'];
@@ -91,15 +119,11 @@ class Consult extends BaseModel
                 $data['slots'] = json_encode($data['slots']);
 
                 AvailabilityDetail::where('provider_id', $data['provider_id'])
-                                ->whereIn('id', $selectedSlots)
-                                ->update(array("slot_status" => 'Booked'));
-            } else {
-                $data['slots'] = json_encode(["slot_id"=>"custom"]);
+                    ->whereIn('id', $selectedSlots)
+                    ->update(array("slot_status" => 'Booked'));
+
+                DB::commit();
             }
-
-            $model = $this->create($data);
-
-            DB::commit();
 
             return $model;
         } catch(Exception $e) {
