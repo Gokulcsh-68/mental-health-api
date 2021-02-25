@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Entities\User;
 use App\Entities\Vital;
+use App\Entities\Doc;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use SimpleXMLElement;
@@ -86,25 +87,23 @@ class Hms6500 extends BaseService
 
             if (!empty($file)){
 
-                // $filename  = $patient_details['id'].'_'. \Carbon\Carbon::now()->timestamp .'.png';
+                $insert_data = array();
+                $insert_data['created_by']      = $patient_details['id'];
+                $insert_data['user_id']         = $patient_details['id'];
+                $insert_data['document_source'] = 'imaging';
 
-                // $user = (new UserTransformer($request->user()));
-                $request['id']          =  $patient_details['id'];
-                $request['filetype']    =  'png';
-
-                /*
-                $ldi_data['docs_type']      = "png";
-                $ldi_data['title']          = 'ECG';
-                $ldi_data['notes']          = 'ECG';
-                $ldi_data['file_name']      = $filename;
-                $ldi_data['page_id']        = 786;
-                $ldi_data['patient_id']     = $patient_details['patient_id'];
-                */
-
-                $imageName = 'Document'.rand(9999,9999999).rand(100,1999).time().'.'.$request->file('filename')->getClientOriginalExtension();
+                $insert_data['addition_info']['title']          = 'ECG';
+                $insert_data['addition_info']['notes']          = 'ECG';
+                
+                $imageName  = $patient_details['id'].'_'. \Carbon\Carbon::now()->timestamp .'.png';
             
                 $destinationPath = storage_path('/app/uploadDocs');
                 $request->file('filename')->move($destinationPath, $imageName);
+
+                $insert_data['properties']['file_path'] = $imageName;
+                $insert_data['properties']['file_name'] = $imageName;
+
+                Doc::create($insert_data);
             }
 
             return "HTTP_SUCCESS:";
