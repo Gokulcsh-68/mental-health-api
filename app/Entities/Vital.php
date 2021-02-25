@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Entities;
-use DB;
+use App\Entities\User;
 use Carbon\Carbon;
+use DB;
+use Illuminate\Support\Facades\Log;
 
 class Vital extends BaseModel
 {
@@ -76,9 +78,11 @@ class Vital extends BaseModel
     }
 
 
-    protected function createModel($request)
+    protected function createModel($request, $data = false)
     {
-        $data = $this->getModelAttributes($request);
+        if(empty($data)){
+            $data = $this->getModelAttributes($request);
+        }
 
         if(isset($data['details']['date'])){
             $data['details']['date'] = date('Y-m-d',strtotime($data['details']['date']));
@@ -88,7 +92,6 @@ class Vital extends BaseModel
             $data['details'] += self::bmi_flag($data['details']['bmi']);
         }
 
-
         if($data['slug'] == 'temperature'){
             $data['details'] += self::temp_flag($data['details']);
         }
@@ -96,7 +99,6 @@ class Vital extends BaseModel
         if($data['slug'] == 'blood-sugar'){
             $data['details'] += self::blood_sugar_flag($data['details']);
         }
-
 
         if($data['slug'] == 'blood-pressure'){
             $data['details'] += self::blood_pressure_flag($data['details']);
@@ -114,18 +116,15 @@ class Vital extends BaseModel
             $data['details'] += self::urine_flag($data['details']);
         }
 
-
         if($data['slug'] == 'heart-rate'){
-            $dateOfBirth = user::Where('id',$data['user_id'])->value('dob');
+            $dateOfBirth = User::Where('id', $data['user_id'])->value('dob');
 
-            $years = Carbon::parse($dateOfBirth)->diff(Carbon::now())->format('%y');
+            $years  = Carbon::parse($dateOfBirth)->diff(Carbon::now())->format('%y');
             $months = Carbon::parse($dateOfBirth)->diff(Carbon::now())->format('%m');
-            $days = Carbon::parse($dateOfBirth)->diff(Carbon::now())->format('%d');
+            $days   = Carbon::parse($dateOfBirth)->diff(Carbon::now())->format('%d');
            
            $data['details'] += self::heart_rate_flag($data['details'], $years, $months, $days);
         }
-
-        
 
         return $this->create($data);
     }
