@@ -121,6 +121,9 @@ class Consult extends BaseModel
                     'phone' => $provider->mobile_number,
                     'gender' => $provider->gender,
                     'profile_pic' => $provider->profile_image,
+                    'additional_info' => [
+                        'consult_speciality' => $data['speciality']
+                    ],
                 ],
 
                 'patient' => [
