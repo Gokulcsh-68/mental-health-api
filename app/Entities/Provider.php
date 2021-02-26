@@ -196,7 +196,12 @@ class Provider extends BaseModel
         if($request->get('staff')){
             if ($request->get('staff')->school_id) {
                 $model->where('providers.school_id', $request->get('staff')->school_id);
-            }            
+            }       
+
+
+            if ($request->get('user_id')) {
+                $model->where('providers.user_id', $request->get('user_id'));
+            }         
         }
         else{
             $model->where('providers.user_id', $request->user()->id);
