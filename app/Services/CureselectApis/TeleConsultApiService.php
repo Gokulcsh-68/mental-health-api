@@ -162,6 +162,8 @@ class TeleConsultApiService extends BaseService {
         	throw ValidationException::withMessages($validation->errors()->all());
         }
 
+		$params = $params + ['limit' => $per_page, 'page' => $page_number];
+
 		$headers = [
 			'Authorization' => 'Bearer ' . $this->getToken(),        
 		];
@@ -186,21 +188,21 @@ class TeleConsultApiService extends BaseService {
 
 		return $response;
 
-		// return Cache::rememberForever('philip', function() use ($options) {
-		// 	try {
-		// 		$url = $this->endpoint_url;
-		// 		$this->apiCall($url, $options, $method = "GET");
-		// 		$response = $this->toGuzzleArray();
-		// 	}
-		// 	catch(\Exception $e) {
-		// 		Log::error('Cureselect Teleconsult API ERROR ------- ', ['errorDetails' => $e->getMessage()]);
+		return Cache::rememberForever('philip', function() use ($options) {
+			try {
+				$url = $this->endpoint_url;
+				$this->apiCall($url, $options, $method = "GET");
+				$response = $this->toGuzzleArray();
+			}
+			catch(\Exception $e) {
+				Log::error('Cureselect Teleconsult API ERROR ------- ', ['errorDetails' => $e->getMessage()]);
 	
-		// 		throw new BadRequestHttpException($e->getMessage(), $e);
-		// 		$response = [ $e->getMessage() ];
-		// 	}
+				throw new BadRequestHttpException($e->getMessage(), $e);
+				$response = [ $e->getMessage() ];
+			}
 
-		// 	return $response;
-		// });
+			return $response;
+		});
 
 		// return $response;
 	}

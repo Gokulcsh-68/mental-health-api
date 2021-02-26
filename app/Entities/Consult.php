@@ -72,6 +72,32 @@ class Consult extends BaseModel
         
     ];
 
+    protected $_teleconsult_service;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->_teleconsult_service = new TeleConsultApiService;
+    }
+
+    public function getModelList()
+    {
+        $request = app('request');
+
+        $filters = [];
+
+        if ($request->query('from_date')) {
+            $filters['scheduled_from_date'] = $request->get("from_date");
+        }
+
+        $limit = $this->getResourceDataFetchLimit();
+        $page = app('request')->get('page') ? app('request')->get('page') : 1;
+
+        // dd(app('request')->all(), $limit, $page);
+
+        return $this->_teleconsult_service->fetch($filters, $limit, $page);
+    }
+
     protected function createModel($request)
     {
         $data = $this->getModelAttributes($request);
@@ -107,8 +133,7 @@ class Consult extends BaseModel
                 ],
             ];
 
-            $TeleConsultApiService = new TeleConsultApiService;
-            $teleconsult_response = $TeleConsultApiService->create($payload);
+            $teleconsult_response = $this->_teleconsult_service->create($payload);
 
             if(isset($teleconsult_response['consult_id']) && is_array($data['slots'])) {
                 $selectedSlots = $data['slots'];
