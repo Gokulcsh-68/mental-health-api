@@ -20,7 +20,7 @@ class ConsultRequest extends RequestAbstract
         $rules = [];
 
         // Edited Rules
-        /*if ($this->route('id')) {
+        if ($this->route('id')) {
 
         } else {
 
@@ -34,14 +34,14 @@ class ConsultRequest extends RequestAbstract
                 'speciality' => 'required'
             ];
 
-            if (empty($errorRules)) {
-                $booked = Consult::bookedSlotChecked($request);
-                if (empty($booked['status'])) {
-                    $errorRules['booked'] = 'required';
-                    return $errorRules;
-                }
-            }
-        }*/
+            // if (empty($errorRules)) {
+            //     $booked = Consult::bookedSlotChecked($request);
+            //     if (empty($booked['status'])) {
+            //         $errorRules['booked'] = 'required';
+            //         return $errorRules;
+            //     }
+            // }
+        }
             
 
         return array_dot($rules);

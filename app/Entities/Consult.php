@@ -76,8 +76,6 @@ class Consult extends BaseModel
     {
         $data = $this->getModelAttributes($request);
 
-        dd($a);
-
         DB::beginTransaction();
         try {
 
@@ -88,7 +86,7 @@ class Consult extends BaseModel
                 'consult_date_time' => $data['consult_date_time'],
                 'consult_type' => 'virtual',
                 'consult_reason' => $data['reason_for_consult'],
-                'service_provider' => 'tokbox',
+                'service_provider' => 'jitsi',
 
                 'provider' => [
                     'id' => $provider->id,
@@ -110,25 +108,25 @@ class Consult extends BaseModel
             ];
 
             $TeleConsultApiService = new TeleConsultApiService;
-            $a = $TeleConsultApiService->create($payload);
+            $teleconsult_response = $TeleConsultApiService->create($payload);
 
-            if (is_array($data['slots'])) {
-
+            if(isset($teleconsult_response['consult_id']) && is_array($data['slots'])) {
                 $selectedSlots = $data['slots'];
                 $data['unit'] = count($data['slots']);
                 $data['slots'] = json_encode($data['slots']);
 
-                AvailabilityDetail::where('provider_id', $data['provider_id'])
-                    ->whereIn('id', $selectedSlots)
-                    ->update(array("slot_status" => 'Booked'));
+                // AvailabilityDetail::where('provider_id', $data['provider_id'])
+                //     ->whereIn('id', $selectedSlots)
+                //     ->update(array("slot_status" => 'Booked'));
 
-                DB::commit();
+                // DB::commit();
             }
 
-            return $model;
+            return true;
+
         } catch(Exception $e) {
             exceptionLogger("Consult Create Rollback", $e);
-            DB::rollback();
+            // DB::rollback();
         }
         
         return null;
