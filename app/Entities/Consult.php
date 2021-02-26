@@ -139,7 +139,7 @@ class Consult extends BaseModel
             $teleconsult_response = $this->_teleconsult_service->create($payload);
             // dd($teleconsult_response);
 
-            if(isset($teleconsult_response['consult_id']) && is_array($data['slots'])) {
+            if(isset($teleconsult_response['consult_id']) && is_array($request->get('slots'))) {
                 $selectedSlots = $data['slots'];
                 $data['unit'] = count($data['slots']);
                 $data['slots'] = json_encode($data['slots']);
