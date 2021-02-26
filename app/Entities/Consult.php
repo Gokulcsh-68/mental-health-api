@@ -80,23 +80,23 @@ class Consult extends BaseModel
         $this->_teleconsult_service = new TeleConsultApiService;
     }
 
-    public function getModelList()
-    {
-        $request = app('request');
+    // public function getModelList()
+    // {
+    //     $request = app('request');
 
-        $filters = [];
+    //     $filters = [];
 
-        if ($request->query('from_date')) {
-            $filters['scheduled_from_date'] = $request->get("from_date");
-        }
+    //     if ($request->query('from_date')) {
+    //         $filters['scheduled_from_date'] = $request->get("from_date");
+    //     }
 
-        $limit = $this->getResourceDataFetchLimit();
-        $page = app('request')->get('page') ? app('request')->get('page') : 1;
+    //     $limit = $this->getResourceDataFetchLimit();
+    //     $page = app('request')->get('page') ? app('request')->get('page') : 1;
 
-        // dd(app('request')->all(), $limit, $page);
+    //     // dd(app('request')->all(), $limit, $page);
 
-        return $this->_teleconsult_service->fetch($filters, $limit, $page);
-    }
+    //     return $this->_teleconsult_service->fetch($filters, $limit, $page);
+    // }
 
     protected function createModel($request)
     {
@@ -137,6 +137,7 @@ class Consult extends BaseModel
             ];
 
             $teleconsult_response = $this->_teleconsult_service->create($payload);
+            // dd($teleconsult_response);
 
             if(isset($teleconsult_response['consult_id']) && is_array($data['slots'])) {
                 $selectedSlots = $data['slots'];
@@ -150,7 +151,10 @@ class Consult extends BaseModel
                 // DB::commit();
             }
 
-            return true;
+            $model = new Consult;
+            $model->id = $teleconsult_response['consult_id'];
+
+            return $model;
 
         } catch(Exception $e) {
             exceptionLogger("Consult Create Rollback", $e);
