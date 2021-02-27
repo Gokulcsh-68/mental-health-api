@@ -68,6 +68,11 @@ class ProviderUnavailability extends BaseModel
     protected $dispatchesEvents = [
         
     ];
+    
+    public function providers()
+    {
+        return $this->belongsTo(Provider::class);
+    }
 
 
     protected function createModel($request)
