@@ -90,7 +90,7 @@ class Consult extends BaseModel
 
 
         if($request->get('participant_ref_number')){
-            $filters['participant_ref_number'] = $request->get('participant_ref_number');
+            $filters['participant_ref_number'] = [$request->get('participant_ref_number')];
 
         }else if($request->user()->role->code == 'school'){
             
@@ -99,15 +99,13 @@ class Consult extends BaseModel
 
         }else{
 
-            $filters['participant_ref_number'] = $request->user()->id;
+            $filters['participant_ref_number'] = [$request->user()->id];
         }
 
 
         if ($request->query('from_date')) {
             $filters['scheduled_from_date'] = $request->get("from_date");
         }
-
-
        
         $limit = $this->getResourceDataFetchLimit();
         $page = app('request')->get('page') ? app('request')->get('page') : 1;
