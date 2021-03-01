@@ -21,6 +21,7 @@ class TeleConsultService extends ResourceService
 
         $response = app(Consult::class)->getModelList();
 
+      
         $result = [];
         if($response['data']) {
             $result['consults'] = $response['data']['consults'];

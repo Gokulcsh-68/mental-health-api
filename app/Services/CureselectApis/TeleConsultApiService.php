@@ -146,6 +146,7 @@ class TeleConsultApiService extends BaseService {
 
 	public function fetch($params = [], $per_page = 10, $page_number = 1)
 	{
+		// dd($params);
 		$params = array_only($params, ['participant_ref_number', 'consult_status_id', 'consult_type', 'consult_status', 'scheduled_from_date', 'scheduled_to_date']);
 
 		$validation = Validator::make($params, [
@@ -173,6 +174,8 @@ class TeleConsultApiService extends BaseService {
 			'query' => $params
 			// 'body' => json_encode($form_data),
 		];
+
+		
 
 		try {
 			$url = $this->endpoint_url;

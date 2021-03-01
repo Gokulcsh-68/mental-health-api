@@ -2,6 +2,7 @@
 
 namespace App\Entities;
 use App\Entities\AvailabilityDetail;
+use App\Entities\Provider;
 use App\Enums\ConsultStatusTypeEnum;
 use App\Services\CureselectApis\TeleConsultApiService;
 use Carbon\Carbon;
@@ -80,23 +81,41 @@ class Consult extends BaseModel
         $this->_teleconsult_service = new TeleConsultApiService;
     }
 
-    // public function getModelList()
-    // {
-    //     $request = app('request');
+    public function getModelList()
+    {
+        $request = app('request');
 
-    //     $filters = [];
+        $filters = [];
 
-    //     if ($request->query('from_date')) {
-    //         $filters['scheduled_from_date'] = $request->get("from_date");
-    //     }
 
-    //     $limit = $this->getResourceDataFetchLimit();
-    //     $page = app('request')->get('page') ? app('request')->get('page') : 1;
 
-    //     // dd(app('request')->all(), $limit, $page);
+        if($request->get('participant_ref_number')){
+            $filters['participant_ref_number'] = $request->get('participant_ref_number');
 
-    //     return $this->_teleconsult_service->fetch($filters, $limit, $page);
-    // }
+        }else if($request->user()->role->code == 'school'){
+            
+             $provider_id = Provider::where('school_id',$request->get('staff')->school_id)->pluck('user_id')->toArray();
+             $filters['participant_ref_number'] = $provider_id;
+
+        }else{
+
+            $filters['participant_ref_number'] = $request->user()->id;
+        }
+
+
+        if ($request->query('from_date')) {
+            $filters['scheduled_from_date'] = $request->get("from_date");
+        }
+
+
+       
+        $limit = $this->getResourceDataFetchLimit();
+        $page = app('request')->get('page') ? app('request')->get('page') : 1;
+
+        // dd(app('request')->all(), $limit, $page);
+
+        return $this->_teleconsult_service->fetch($filters, $limit, $page);
+    }
 
     protected function createModel($request)
     {
