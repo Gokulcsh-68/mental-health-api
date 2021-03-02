@@ -106,7 +106,9 @@ class Consult extends BaseModel
         if ($request->query('from_date')) {
             $filters['scheduled_from_date'] = $request->get("from_date");
         }
-       
+
+        // $filters['participant_ref_number'] = [64];
+       // dd($filters);
         $limit = $this->getResourceDataFetchLimit();
         $page = app('request')->get('page') ? app('request')->get('page') : 1;
 
@@ -189,15 +191,14 @@ class Consult extends BaseModel
         DB::beginTransaction();
         try {
 
-            if (!empty($data['started_date_time'])) {
+            if ($request->get('started_date_time')) {
                 $request->merge(['started_date_time' => Carbon::parse($data['started_date_time'])->toDateTimeString()]);
             }
 
-            if (!empty($data['ended_date_time'])) {
+            if ($request->get('ended_date_time')) {
                 $request->merge(['ended_date_time' => Carbon::parse($data['ended_date_time'])->toDateTimeString()]);
             }
-
-            if (!empty($data['status'])) {
+            if ($request->get('status')) {
                 switch (strtoupper($data['status'])) {
 
                     case 'STARTED':
@@ -215,6 +216,10 @@ class Consult extends BaseModel
                     case 'FAILED':
                         $request->merge(['status' => ConsultStatusTypeEnum::FAILED]);
                         break;
+
+                    case 'CANCELLED':
+                        $request->merge(['status' => ConsultStatusTypeEnum::CANCELLED]);
+                        break;
                     
                     default:
                         $request->merge(['status' => ConsultStatusTypeEnum::FRESH]);
@@ -222,22 +227,32 @@ class Consult extends BaseModel
                 }
             }
 
-            if (!empty($data['consent'])) {
+            $request->merge(['id' => $id]);
 
-                $consentData = Consult::find($request->id)->toArray();
+            $teleconsult_response = $this->_teleconsult_service->patch($request);
+            
+
+            // if (!empty($data['consent'])) {
+
+            //     $consentData = Consult::find($request->id)->toArray();
                 
-                if (!empty($consentData['consent'])) {
+            //     if (!empty($consentData['consent'])) {
 
-                    $alreadyConsentData = json_decode($consentData['consent'], true);
-                    $alreadyConsentData[$data['approved_by']] = $data['consent'][$data['approved_by']];
-                    $request->merge(['consent' => json_encode($alreadyConsentData)]);
-                }
-            }
-            $model = parent::updateModel($id, $request, $only);
+            //         $alreadyConsentData = json_decode($consentData['consent'], true);
+            //         $alreadyConsentData[$data['approved_by']] = $data['consent'][$data['approved_by']];
+            //         $request->merge(['consent' => json_encode($alreadyConsentData)]);
+            //     }
+            // }
 
-            DB::commit();
+            // $model = parent::updateModel($id, $request, $only);
+
+            // DB::commit();
+
+            $model = new Consult;
+            $model->id = $teleconsult_response['consult_id'];
 
             return $model;
+
         } catch(Exception $e) {
             exceptionLogger("Provider Update Rollback", $e);
             DB::rollback();

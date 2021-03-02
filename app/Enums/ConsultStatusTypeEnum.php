@@ -13,4 +13,6 @@ class ConsultStatusTypeEnum extends EnumAbstract
     const ENDED = "Ended";
 
     const STARTED = "Started";
+
+    const CANCELLED = "Cancelled";
 }
