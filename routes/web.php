@@ -1,5 +1,6 @@
 <?php
 
+use App\Services\CureselectApis\TeleConsultApiService;
 use Illuminate\Http\Request;
 /** @var \Laravel\Lumen\Routing\Router $router */
 
@@ -64,6 +65,9 @@ $router->group(['prefix' => 'v1/', 'middleware' => 'clientAuth'], function ($rou
 
         // Consult provider list
         $router->get('resource/available-providers/list', 'ProviderService@list');
+
+        // Teleconsult List
+        $router->get('resource/consults', 'TeleConsultService@list');
 
         /*Resource Operations*/
         $router->group(['prefix' => '/resource', 'middleware' => ['resource']], function ($router) {

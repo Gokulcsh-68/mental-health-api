@@ -24,23 +24,23 @@ class ConsultRequest extends RequestAbstract
 
         } else {
 
-            $rules = [
-                'patient_id' => 'required',
-                'provider_id' => 'required',
-                'class_id' => 'required',
-                'consult_type' => 'required',
-                'consult_slot_type' => 'required',
-                'consult_date_time' => 'required',
-                'speciality' => 'required'
-            ];
+            // $rules = [
+            //     'patient_id' => 'required',
+            //     'provider_id' => 'required',
+            //     'class_id' => 'required',
+            //     'consult_type' => 'required',
+            //     'consult_slot_type' => 'required',
+            //     'consult_date_time' => 'required',
+            //     'speciality' => 'required'
+            // ];
 
-            if (empty($errorRules)) {
-                $booked = Consult::bookedSlotChecked($request);
-                if (empty($booked['status'])) {
-                    $errorRules['booked'] = 'required';
-                    return $errorRules;
-                }
-            }
+            // if (empty($errorRules)) {
+            //     $booked = Consult::bookedSlotChecked($request);
+            //     if (empty($booked['status'])) {
+            //         $errorRules['booked'] = 'required';
+            //         return $errorRules;
+            //     }
+            // }
         }
             
 

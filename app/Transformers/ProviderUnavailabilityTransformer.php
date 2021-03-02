@@ -15,6 +15,7 @@ class ProviderUnavailabilityTransformer extends JsonResource
 
     public function toArray($request): array
     {
+        
         return [
             'id' =>  $this->id,
             'available_status' =>  $this->available_status,

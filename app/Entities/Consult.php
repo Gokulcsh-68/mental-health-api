@@ -1,11 +1,12 @@
 <?php
 
 namespace App\Entities;
-use DB;
-
-use Carbon\Carbon;
-use App\Enums\ConsultStatusTypeEnum;
 use App\Entities\AvailabilityDetail;
+use App\Entities\Provider;
+use App\Enums\ConsultStatusTypeEnum;
+use App\Services\CureselectApis\TeleConsultApiService;
+use Carbon\Carbon;
+use DB;
 
 class Consult extends BaseModel
 {
@@ -72,6 +73,48 @@ class Consult extends BaseModel
         
     ];
 
+    protected $_teleconsult_service;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->_teleconsult_service = new TeleConsultApiService;
+    }
+
+    public function getModelList()
+    {
+        $request = app('request');
+
+        $filters = [];
+
+
+
+        if($request->get('participant_ref_number')){
+            $filters['participant_ref_number'] = [$request->get('participant_ref_number')];
+
+        }else if($request->user()->role->code == 'school'){
+            
+             $provider_id = Provider::where('school_id',$request->get('staff')->school_id)->pluck('user_id')->toArray();
+             $filters['participant_ref_number'] = $provider_id;
+
+        }else{
+
+            $filters['participant_ref_number'] = [$request->user()->id];
+        }
+
+
+        if ($request->query('from_date')) {
+            $filters['scheduled_from_date'] = $request->get("from_date");
+        }
+       
+        $limit = $this->getResourceDataFetchLimit();
+        $page = app('request')->get('page') ? app('request')->get('page') : 1;
+
+        // dd(app('request')->all(), $limit, $page);
+
+        return $this->_teleconsult_service->fetch($filters, $limit, $page);
+    }
+
     protected function createModel($request)
     {
         $data = $this->getModelAttributes($request);
@@ -79,32 +122,60 @@ class Consult extends BaseModel
         DB::beginTransaction();
         try {
 
-            $data['status'] = ConsultStatusTypeEnum::FRESH;
-            $data['unique_id'] = chr(rand(65, 90)) . $data['provider_id'] . time() . rand(999999, 99999999) . $data['patient_id'];
-            $data['school_id'] = $request->get('staff')->school_id;
+            $patient = User::find($data['patient_id']);
+            $provider = User::find($data['provider_id']);
 
-            $data['unit'] = 1;
-            if (is_array($data['slots'])) {
+            $payload = [
+                'consult_date_time' => $data['consult_date_time'],
+                'consult_type' => 'virtual',
+                'consult_reason' => $data['reason_for_consult'],
+                'service_provider' => 'jitsi',
 
+                'provider' => [
+                    'id' => $provider->id,
+                    'name' => $provider->getFullName(),
+                    'email' => $provider->email,
+                    'phone' => $provider->mobile_number,
+                    'gender' => $provider->gender,
+                    'profile_pic' => $provider->profile_image,
+                    'additional_info' => [
+                        'consult_speciality' => $data['speciality']
+                    ],
+                ],
+
+                'patient' => [
+                    'id' => $patient->id,
+                    'name' => $patient->getFullName(),
+                    'email' => $patient->email,
+                    'phone' => $patient->mobile_number,
+                    'gender' => $patient->gender,
+                    'profile_pic' => $patient->profile_image,
+                ],
+            ];
+
+            $teleconsult_response = $this->_teleconsult_service->create($payload);
+            // dd($teleconsult_response);
+
+            if(isset($teleconsult_response['consult_id']) && is_array($request->get('slots'))) {
                 $selectedSlots = $data['slots'];
                 $data['unit'] = count($data['slots']);
                 $data['slots'] = json_encode($data['slots']);
 
-                AvailabilityDetail::where('provider_id', $data['provider_id'])
-                                ->whereIn('id', $selectedSlots)
-                                ->update(array("slot_status" => 'Booked'));
-            } else {
-                $data['slots'] = json_encode(["slot_id"=>"custom"]);
+                // AvailabilityDetail::where('provider_id', $data['provider_id'])
+                //     ->whereIn('id', $selectedSlots)
+                //     ->update(array("slot_status" => 'Booked'));
+
+                // DB::commit();
             }
 
-            $model = $this->create($data);
-
-            DB::commit();
+            $model = new Consult;
+            $model->id = $teleconsult_response['consult_id'];
 
             return $model;
+
         } catch(Exception $e) {
             exceptionLogger("Consult Create Rollback", $e);
-            DB::rollback();
+            // DB::rollback();
         }
         
         return null;

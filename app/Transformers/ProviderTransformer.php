@@ -3,6 +3,7 @@
 namespace App\Transformers;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\DB;
 
 class ProviderTransformer extends JsonResource
 {
@@ -16,6 +17,15 @@ class ProviderTransformer extends JsonResource
 
     public function toArray($request): array
     {
+
+        $unavailable = [];
+        if($request->get('cdate')){
+            if($request->get('cdate') != ''){
+                $condition_date = date('Y-m-d',strtotime($request->get('cdate')));
+                $unavailable = $this->providerUnavailability->where('from_date',$condition_date);
+            }
+        }
+
         return [
             'id' => $this->id,
             'user_id' => $this->user_id,
@@ -24,8 +34,9 @@ class ProviderTransformer extends JsonResource
             'specialities' => $this->specialities,
             'additional_info' => $this->additional_info,
             'availabilities' => $this->availabilities,
-            'user' => (new UserTransformer($this->user)),
             'provider_speciality' => $this->providerSpeciality,
+            'unavailabilities' => $unavailable,
+            'user' => (new UserTransformer($this->user)),
         ];
     }
 }

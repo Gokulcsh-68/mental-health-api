@@ -91,6 +91,12 @@ class Provider extends BaseModel
         return $this->hasMany(ProviderSpeciality::class);
     }
 
+    public function providerUnavailability()
+    {
+        return $this->hasMany(ProviderUnavailability::class,'provider_id','user_id');
+        
+    }
+
     protected function createModel($request)
     {
         $data = $this->getModelAttributes($request);
@@ -196,7 +202,12 @@ class Provider extends BaseModel
         if($request->get('staff')){
             if ($request->get('staff')->school_id) {
                 $model->where('providers.school_id', $request->get('staff')->school_id);
-            }            
+            }       
+
+
+            if ($request->get('user_id')) {
+                $model->where('providers.user_id', $request->get('user_id'));
+            }         
         }
         else{
             $model->where('providers.user_id', $request->user()->id);
