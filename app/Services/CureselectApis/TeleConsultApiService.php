@@ -191,22 +191,65 @@ class TeleConsultApiService extends BaseService {
 
 		return $response;
 
-		return Cache::rememberForever('philip', function() use ($options) {
-			try {
-				$url = $this->endpoint_url;
-				$this->apiCall($url, $options, $method = "GET");
-				$response = $this->toGuzzleArray();
-			}
-			catch(\Exception $e) {
-				Log::error('Cureselect Teleconsult API ERROR ------- ', ['errorDetails' => $e->getMessage()]);
+		// return Cache::rememberForever('philip', function() use ($options) {
+		// 	try {
+		// 		$url = $this->endpoint_url;
+		// 		$this->apiCall($url, $options, $method = "GET");
+		// 		$response = $this->toGuzzleArray();
+		// 	}
+		// 	catch(\Exception $e) {
+		// 		Log::error('Cureselect Teleconsult API ERROR ------- ', ['errorDetails' => $e->getMessage()]);
 	
-				throw new BadRequestHttpException($e->getMessage(), $e);
-				$response = [ $e->getMessage() ];
-			}
+		// 		throw new BadRequestHttpException($e->getMessage(), $e);
+		// 		$response = [ $e->getMessage() ];
+		// 	}
 
-			return $response;
-		});
+		// 	return $response;
+		// });
 
 		// return $response;
 	}
+
+
+
+	public function patch($request)
+    {
+
+
+    	try {
+
+    		$url = $this->endpoint_url.'/'.$request->get('id');
+
+
+    		$form_data = [
+    			"consult_status" => $request->get('status'),
+    		];
+
+    		$headers = [
+			    'Authorization' => 'Bearer ' . $this->getToken(),        
+			    'Accept'        => 'application/json',
+			    'Content-Type' => 'application/json',
+			];
+
+    		$options = [
+    			'headers' => $headers,
+    			'body' => json_encode($form_data),
+    		];
+
+    		$this->apiCall($url, $options, $method = "patch");
+    		$api_response = $this->toGuzzleArray();
+    		
+
+    		$response = ['consult_id' => $api_response['data']['consults']['id']];
+
+    	} 
+    	catch(\Exception $e) {
+			Log::error('Cureselect Teleconsult API ERROR ------- ', ['errorDetails' => $e->getMessage()]);
+
+			throw new BadRequestHttpException($e->getMessage(), $e);
+			$response = [ $e->getMessage() ];
+		}
+
+        return $response;
+    }
 }
