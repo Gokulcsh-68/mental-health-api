@@ -1,7 +1,7 @@
 <?php
 
 use App\Services\CureselectApis\TeleConsultApiService;
-
+use Illuminate\Http\Request;
 /** @var \Laravel\Lumen\Routing\Router $router */
 
 /*
@@ -21,6 +21,15 @@ $router->get('/key', function() {
 
 $router->get('/', function () use ($router) {
     return $router->app->version();
+});
+
+$router->group(['prefix' => 'peripheral/', 'middleware' => 'peripheralAuth'], function ($router) {
+    $router->post('{access_token}/deviceLogin', 'Hms6500@loginBackground');
+    $router->post('{access_token}/basicInfo', 'Hms6500@basicInfo');
+    $router->post('{access_token}/physicalReport', 'Hms6500@physicalReport');
+    $router->post('{access_token}/controlFile', 'Hms6500@controlFile');
+    $router->post('{access_token}/originalData', 'Hms6500@originalData');
+    $router->post('{access_token}/trendData', 'Hms6500@trendData');
 });
 
 $router->group(['prefix' => 'v1/', 'middleware' => 'clientAuth'], function ($router) {

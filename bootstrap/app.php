@@ -100,8 +100,8 @@ $app->routeMiddleware([
     'resource' => App\Middleware\ResourceMiddleware::class,
     'userAuth' => App\Middleware\UserAuthenticate::class,
     'clientAuth' => App\Middleware\ClientAuthenticate::class,
+    'peripheralAuth' => App\Middleware\PeripheralAuthenticate::class,
     'acl' => App\Middleware\ACLMiddleware::class,
-
 ]);
 
 /*
