@@ -89,6 +89,11 @@ class User extends BaseModel
         return $this->hasOne(Staff::class, 'user_id');
     }
 
+    public function student()
+    {
+        return $this->hasOne(Student::class, 'user_id');
+    }
+
     public function timezone()
     {
         return $this->belongsTo(Timezone::class);
@@ -103,6 +108,17 @@ class User extends BaseModel
     {
         return $this->hasOne(Provider::class);
     }*/
+
+    public function consultLoginAttempt($attributes, $field = "username"):  ? User
+    {
+        $model = self::where($field, $attributes[$field])
+            ->whereHas('role', function ($query) use ($attributes) {
+                $query->where('code', $attributes['role']);
+            })
+            ->first();
+
+        return isset($model->id) ? $model : null;
+    }
 
     public function generalLoginAttempt($attributes, $field = "username"):  ? User
     {

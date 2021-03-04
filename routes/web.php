@@ -34,6 +34,11 @@ $router->group(['prefix' => 'peripheral/', 'middleware' => 'peripheralAuth'], fu
 
 $router->group(['prefix' => 'v1/', 'middleware' => 'clientAuth'], function ($router) {
 
+
+    $router->get('teleconsult/token-validate', 'AuthService@consultTokenValidate');
+
+   
+
     $router->group([], function ($router) {
         $router->group(['prefix' => 'users'], function ($router) {
             $router->post('authenticate', 'AuthService@generalLogin');
@@ -47,6 +52,7 @@ $router->group(['prefix' => 'v1/', 'middleware' => 'clientAuth'], function ($rou
         $router->get('resource/masters/list', 'MasterService@masterList');
         
     });
+
 
     $router->group(['middleware' => 'userAuth'], function ($router) {
 

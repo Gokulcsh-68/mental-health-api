@@ -98,6 +98,7 @@ $app->middleware([
 // ]);
 $app->routeMiddleware([
     'resource' => App\Middleware\ResourceMiddleware::class,
+    'auth' => App\Middleware\Authenticate::class,
     'userAuth' => App\Middleware\UserAuthenticate::class,
     'clientAuth' => App\Middleware\ClientAuthenticate::class,
     'peripheralAuth' => App\Middleware\PeripheralAuthenticate::class,

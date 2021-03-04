@@ -14,10 +14,11 @@ class ACLMiddleware
     		$parent = $request->attributes->get('resource');
     	}
 
-        if (!$request->user()->canAccess($parent, $access)) {
+            if (!$request->user()->canAccess($parent, $access)) {
 
-            throw new AccessDeniedHttpException();
-        }
+                throw new AccessDeniedHttpException();
+            }
+
 
         return $next($request);
     }

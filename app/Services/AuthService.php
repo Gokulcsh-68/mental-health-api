@@ -7,11 +7,13 @@ use App\Entities\Role;
 use App\Entities\User;
 use App\Enums\EmailTemplateEnum;
 use App\Enums\InternalCodeEnum;
+use App\Enums\UserTypeEnum;
 use App\Jobs\SendEmailJob;
 use App\Notifications\InvoicePaid;
 use App\Notifications\OtpNotification;
 use App\Requests\ChangePasswordRequest;
 use App\Requests\CommunicationRequest;
+use App\Requests\ConsultTokenValidateRequest;
 use App\Requests\ForgotPasswordEmailRequest;
 use App\Requests\GeneralLoginRequest;
 use App\Requests\ResendOtpRequest;
@@ -41,12 +43,36 @@ class AuthService extends BaseService
      * @return json
      */
 
+
+    public function consultTokenValidate(ConsultTokenValidateRequest $request, User $user): JsonResponse
+    {
+        $userInfo = User::where('id', $request->get('token'))
+            ->first();
+        $requestedData['username'] = $userInfo->username;
+        $requestedData['id'] = $userInfo->id;
+        $requestedData['role'] = Role::Where('id',$userInfo->role_id)->value('code');
+       
+        $user = $user->consultLoginAttempt($requestedData);
+           
+        if ($user) {
+            $result['userInfo'] = $user->getBasicInfo();
+            $data['userId'] = $user->id;
+            $Authorization  = $result['token'] =  $this->getAuthorization($data);
+
+            return $this->httpResponse->setHttpData($result)
+                    ->setHttpHeader(['Authorization' => $Authorization])
+                    ->jsonResponse();
+        }
+
+        return $this->httpResponse->setHttpCode(401)->jsonResponse();
+    }
+
     public function generalLogin(GeneralLoginRequest $request, User $user): JsonResponse
     {
         $message = trans('auth.failed');
         $requestedData = $request->json()->all();
         $user = $user->generalLoginAttempt($requestedData);
-
+        
         if ($user) {
             if (!empty($user->is_2fa)) {
                 $data['otp_type'] = "2faAuthentication";

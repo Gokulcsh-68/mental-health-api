@@ -248,7 +248,6 @@ class Vital extends BaseModel
         $model = parent::applyFilters($model, $isPluck);
         $request = app('request');
 
-
         if($request->get('user_id')){
             $model->where('vitals.user_id', $request->get('user_id'));
         }
