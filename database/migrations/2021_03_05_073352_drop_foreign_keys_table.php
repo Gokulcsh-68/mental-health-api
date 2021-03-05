@@ -16,14 +16,17 @@ class DropForeignKeysTable extends Migration
         
         Schema::table('patient_histories', function (Blueprint $table) {
             $table->dropForeign(['consult_id']);
+            $table->string('consult_id')->nullable()->change();
         });
 
         Schema::table('patient_health', function (Blueprint $table) {
             $table->dropForeign(['consult_id']);
+            $table->string('consult_id')->nullable()->change();
         });
-        
+
         Schema::table('vitals', function (Blueprint $table) {
             $table->dropForeign(['consult_id']);
+            $table->string('consult_id')->nullable()->change();
         });
     }
 
