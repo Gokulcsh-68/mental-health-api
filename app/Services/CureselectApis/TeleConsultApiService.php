@@ -20,6 +20,7 @@ class TeleConsultApiService extends BaseService {
 	 * @var string
 	 */
 	protected $endpoint_url;
+	protected $teleconsult_url;
 
 	public static $default_virtual_service_provider = 'tokbox';
 
@@ -27,6 +28,7 @@ class TeleConsultApiService extends BaseService {
 	{
 		parent::__construct();
 		$this->endpoint_url = $this->_base_url . 'v1/resource/consults';
+		$this->teleconsult_url = $this->_base_url . 'v1/consults/token-validate';
 	}
 
 	protected function consultCreateValidate($payload) {
@@ -252,4 +254,53 @@ class TeleConsultApiService extends BaseService {
 
         return $response;
     }
+
+
+
+
+	public function consultDetails($request)
+	{
+		
+		$headers = [
+			'Authorization' => 'Bearer ' . $this->getToken(),     
+		];
+
+		$options = [
+			'headers' => $headers
+		];
+
+		
+
+		try {
+			$url = $this->teleconsult_url.'?token='.$request->get('token');
+			$this->apiCall($url, $options, $method = "GET");
+			$response = $this->toGuzzleArray();
+		}
+		catch(\Exception $e) {
+			Log::error('Cureselect Teleconsult API ERROR ------- ', ['errorDetails' => $e->getMessage()]);
+
+			throw new BadRequestHttpException($e->getMessage(), $e);
+			$response = [ $e->getMessage() ];
+		}
+
+		return $response;
+
+		// return Cache::rememberForever('philip', function() use ($options) {
+		// 	try {
+		// 		$url = $this->endpoint_url;
+		// 		$this->apiCall($url, $options, $method = "GET");
+		// 		$response = $this->toGuzzleArray();
+		// 	}
+		// 	catch(\Exception $e) {
+		// 		Log::error('Cureselect Teleconsult API ERROR ------- ', ['errorDetails' => $e->getMessage()]);
+	
+		// 		throw new BadRequestHttpException($e->getMessage(), $e);
+		// 		$response = [ $e->getMessage() ];
+		// 	}
+
+		// 	return $response;
+		// });
+
+		// return $response;
+	}
 }

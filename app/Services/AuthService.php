@@ -19,6 +19,7 @@ use App\Requests\GeneralLoginRequest;
 use App\Requests\ResendOtpRequest;
 use App\Requests\TwofaRequest;
 use App\Requests\VerifyOtpRequest;
+use App\Services\CureselectApis\TeleConsultApiService;
 use App\Services\UtilService;
 use App\Traits\DicomUploadTrait;
 use App\Transformers\UserTransformer;
@@ -42,26 +43,49 @@ class AuthService extends BaseService
      * @param  \App\Entities\User  $user
      * @return json
      */
+    protected $_teleconsult_service;
 
 
     public function consultTokenValidate(ConsultTokenValidateRequest $request, User $user): JsonResponse
     {
-        $userInfo = User::where('id', $request->get('token'))
-            ->first();
-        $requestedData['username'] = $userInfo->username;
-        $requestedData['id'] = $userInfo->id;
-        $requestedData['role'] = Role::Where('id',$userInfo->role_id)->value('code');
-       
-        $user = $user->consultLoginAttempt($requestedData);
-           
-        if ($user) {
-            $result['userInfo'] = $user->getBasicInfo();
-            $data['userId'] = $user->id;
-            $Authorization  = $result['token'] =  $this->getAuthorization($data);
 
-            return $this->httpResponse->setHttpData($result)
-                    ->setHttpHeader(['Authorization' => $Authorization])
-                    ->jsonResponse();
+        $this->_teleconsult_service = new TeleConsultApiService;
+
+        $consultInfo = $this->_teleconsult_service->consultDetails($request);
+        
+        $patient_id = '';
+        if(!empty($consultInfo)){
+            if(isset($consultInfo['data']['participants'])){
+                $consultPatient = $consultInfo['data']['participants'];
+                
+                foreach ($consultPatient as $key => $value) {
+                    if(!$value['is_guest']){
+                        $patient_id = $value['ref_number'];
+                    }
+                }
+            }
+
+            if($patient_id > 0){
+        
+                $userInfo = User::where('id', $patient_id)
+                    ->first();
+                $requestedData['username'] = $userInfo->username;
+                $requestedData['id'] = $userInfo->id;
+                $requestedData['role'] = Role::Where('id',$userInfo->role_id)->value('code');
+               
+                $user = $user->consultLoginAttempt($requestedData);
+                   
+                if ($user) {
+                    $result['userInfo'] = $user->getBasicInfo();
+                    $data['userId'] = $user->id;
+                    $Authorization  = $result['token'] =  $this->getAuthorization($data);
+
+                    return $this->httpResponse->setHttpData($result)
+                            ->setHttpHeader(['Authorization' => $Authorization])
+                            ->jsonResponse();
+                }
+                
+            }
         }
 
         return $this->httpResponse->setHttpCode(401)->jsonResponse();
