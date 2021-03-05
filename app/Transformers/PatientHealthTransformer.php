@@ -18,6 +18,7 @@ class PatientHealthTransformer extends JsonResource
         $data = [
             "id"                => $this->id,
             'slug'              => $this->slug,
+            'consult_id'        =>  $this->consult_id,
             // 'slug-display-name' => $this->master->name,
             'values'            => $this->values,
             'user' => (new UserTransformer($this->user)),
