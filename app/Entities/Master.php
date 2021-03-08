@@ -157,6 +157,16 @@ class Master extends BaseModel
             //     $newValue                   = $value;
             //     $newValue->ros_available    = (!empty($slug_data) ? false : true);
             // }
+        }else if($type == 'physical-examination'){
+
+            $slug_data = DB::table('physical_examinations')
+                    ->Where('physical_examinations.patient_id', $request->get('patient_id'))
+                    ->Where('physical_examinations.slug', $slug)->first();
+
+            if(empty($attributes)){
+                $attributes = new \stdClass();
+                $attributes->pe_available = (!empty($slug_data) ? false : true);
+            }
         }
 
         return $attributes;        
