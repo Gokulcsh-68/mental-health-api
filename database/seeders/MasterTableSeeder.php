@@ -52,6 +52,13 @@ class MasterTableSeeder extends Seeder
                 'name' => 'HPI',
                 'attributes' => json_encode([]),
                 'is_active' => 1,
+            ],
+            [
+                'master_type_slug' => 'procedure', 
+                'slug' => 'procedure', 
+                'name' => 'Procedure',
+                'attributes' => json_encode([]),
+                'is_active' => 1,
             ]
         ];
 
