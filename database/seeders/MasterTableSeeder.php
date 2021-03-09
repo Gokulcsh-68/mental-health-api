@@ -18,6 +18,7 @@ class MasterTableSeeder extends Seeder
             [ 'slug' => 'chief-complaints'],
             [ 'slug' => 'icd'],
             [ 'slug' => 'notes'],
+            [ 'slug' => 'hpi'],
         ];
         
         DB::table('master_types')->insert($master_types);
@@ -42,6 +43,13 @@ class MasterTableSeeder extends Seeder
                 'master_type_slug' => 'notes', 
                 'slug' => 'notes', 
                 'name' => 'Notes',
+                'attributes' => json_encode([]),
+                'is_active' => 1,
+            ],
+            [
+                'master_type_slug' => 'hpi', 
+                'slug' => 'hpi', 
+                'name' => 'HPI',
                 'attributes' => json_encode([]),
                 'is_active' => 1,
             ]

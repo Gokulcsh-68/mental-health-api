@@ -200,6 +200,10 @@ class PatientHealth extends BaseModel
             if($request->get('slug') == 'diet' && $request->get('searchkey') != 'all'){
                 $model->where('values->category',$request->get('searchkey'));
             }
+            // HPI
+            if($request->get('slug') == 'hpi' && $request->get('searchkey') != 'all'){
+                $model->where('values->severity',$request->get('searchkey'));
+            }
 
             // Medicine
             if($request->get('slug') == 'medicine'){

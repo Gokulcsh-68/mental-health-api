@@ -19,7 +19,7 @@ class PhysicalExaminationRequest extends RequestAbstract
             'patient_id' => 'required',
             'slug' => 'required',
             'status' => 'required',
-            'values' => 'required'
+            // 'values' => 'required'
         ];
     }
 

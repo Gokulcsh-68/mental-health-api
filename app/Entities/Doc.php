@@ -96,7 +96,7 @@ class Doc extends BaseModel
         $model = parent::applyFilters($model, $isPluck);
         $request = app('request');
 
-        $forms_expect = ['imaging','lab','notes','icd'];
+        $forms_expect = ['imaging','lab','notes','icd','chief-complaints'];
 
 
         if($request->get('user_id')){
