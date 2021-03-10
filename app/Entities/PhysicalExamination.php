@@ -1,10 +1,8 @@
 <?php
 
 namespace App\Entities;
-use Illuminate\Support\Facades\DB;
-use log;
 
-class ReviewOfSystem extends BaseModel
+class PhysicalExamination extends BaseModel
 {
     const VIEW = true;
 
@@ -13,14 +11,14 @@ class ReviewOfSystem extends BaseModel
     const UPDATE = true;
 
     const ACTION = true;
-
+    
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        "patient_id", "consult_id", "name", "slug", "status", "values"
+        "consult_id", "name", "patient_id", "slug", "status", "values"
     ];
 
     /**
@@ -30,6 +28,7 @@ class ReviewOfSystem extends BaseModel
      */
     protected $casts = [
          'values' => 'object'
+        
     ];
 
     /**

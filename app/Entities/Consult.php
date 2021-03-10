@@ -96,6 +96,12 @@ class Consult extends BaseModel
             
              $provider_id = Provider::where('school_id',$request->get('staff')->school_id)->pluck('user_id')->toArray();
              $filters['participant_ref_number'] = $provider_id;
+             if(empty($provider_id)){
+
+                $model = new Consult;
+                return $model;
+
+             }
 
         }else{
 

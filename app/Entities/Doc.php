@@ -96,6 +96,8 @@ class Doc extends BaseModel
         $model = parent::applyFilters($model, $isPluck);
         $request = app('request');
 
+        $forms_expect = ['imaging','lab','notes','icd','chief-complaints'];
+
 
         if($request->get('user_id')){
             $model->where('user_id', $request->get('user_id'));
@@ -103,7 +105,7 @@ class Doc extends BaseModel
 
         if ($request->get('slug')) {
 
-            if ($request->get('slug') == 'imaging' || $request->get('slug') == 'lab') {
+            if(in_array($request->get('slug'), $forms_expect)) {
                 $model->where('docs.document_source', $request->get('slug'));
             }
         }
@@ -128,7 +130,7 @@ class Doc extends BaseModel
                 }
 
 
-                if ($request->get('slug') == 'imaging' || $request->get('slug') == 'lab') {
+                if (in_array($request->get('slug'), $forms_expect)) {
                     $model->where(function ($query) use ($request) {
                             $query->Where('addition_info->notes', 'LIKE',"%".$request->get('searchkey')."%")
                             ->orWhere('addition_info->title', 'LIKE',"%".$request->get('searchkey')."%");
