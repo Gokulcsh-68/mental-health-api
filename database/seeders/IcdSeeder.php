@@ -13,11 +13,18 @@ class IcdSeeder extends Seeder
      * @return void
      */
     public function run()
-    {
+    {  
         
-        DB::table('masters')->Where('master_type_slug','icd')
-                        ->Where('slug','!=','icd')
-                        ->delete();
+        DB::table('masters')->Where('master_type_slug','icd')->delete();
+        
+        DB::table('master_types')->Where('slug','icd')->delete();
+
+        $master_types = [
+            [ 'slug' => 'icd'],
+        ];
+        
+        DB::table('master_types')->insert($master_types);
+
         $health_types = [
             [
                 'master_type_slug' => 'icd', 
