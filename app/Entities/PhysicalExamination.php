@@ -100,8 +100,8 @@ class PhysicalExamination extends BaseModel
         $model = parent::applyFilters($model, $isPluck);
         $request = app('request');
 
-        if($request->get('patient_id')){
-            $model->where('patient_id', $request->get('patient_id'));
+        if($request->get('user_id')){
+            $model->where('patient_id', $request->get('user_id'));
         }
 
         if($request->get('filter_slug')){
