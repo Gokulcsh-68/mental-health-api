@@ -44,26 +44,26 @@ class BaseModel extends Model
 
     public static function boot()
     {
-        static::updated(function ($model) {
-            if ($model->isFillable('updated_by') && app('request')->attributes->get('user') && count(array_except($model->getDirty(), ['updated_by', 'updated_datetime'])) > 0) {
-                logInfo("AuditLog updated => " . $model->getTable());
-                event(new AuditLog($model, "update"));
-            }
-        });
+        // static::updated(function ($model) {
+        //     if ($model->isFillable('updated_by') && app('request')->attributes->get('user') && count(array_except($model->getDirty(), ['updated_by', 'updated_datetime'])) > 0) {
+        //         logInfo("AuditLog updated => " . $model->getTable());
+        //         event(new AuditLog($model, "update"));
+        //     }
+        // });
 
-        static::created(function ($model) {
-            if ($model->isFillable('created_by') && app('request')->attributes->get('user')) {
-                logInfo("AuditLog created => " . $model->getTable());
-                event(new AuditLog($model, "create"));
-            }
-        });
+        // static::created(function ($model) {
+        //     if ($model->isFillable('created_by') && app('request')->attributes->get('user')) {
+        //         logInfo("AuditLog created => " . $model->getTable());
+        //         event(new AuditLog($model, "create"));
+        //     }
+        // });
 
-        static::deleted(function ($model) {
-            if ($model->isFillable('deleted_by') && app('request')->attributes->get('user')) {
-                logInfo("AuditLog deleted => " . $model->getTable());
-                event(new AuditLog($model, "delete"));
-            }
-        });
+        // static::deleted(function ($model) {
+        //     if ($model->isFillable('deleted_by') && app('request')->attributes->get('user')) {
+        //         logInfo("AuditLog deleted => " . $model->getTable());
+        //         event(new AuditLog($model, "delete"));
+        //     }
+        // });
 
         static::creating(function ($model) {
             if ($model->isFillable('created_by') && app('request')->attributes->get('user')) {

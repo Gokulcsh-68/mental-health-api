@@ -21,7 +21,7 @@ class SuperAdminUserSeeder extends Seeder
             'role_id' => 1,
             'email' => "admin@a2z.health",
             'username' => "admin@a2z.health",
-            'password' => app('hash')->make('Test12345'),
+            'password' => 'Test12345',
             'address' => json_encode(['address' => 'kamdarnagar']),
             'timezone_id' => 1,
             'is_active' => 1,

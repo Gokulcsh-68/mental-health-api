@@ -31,7 +31,7 @@ class Authenticate
                 throw new AuthorizationException("Transaction key not found");                    
             }
 
-            $payload['user'] = User::where('id', $decodedToken->data)
+            $payload['user'] = User::where('id', $decodedToken->data->userId)
                 ->firstOrFail();
 
             /*if ($payload['user']->status !== 'Active') {

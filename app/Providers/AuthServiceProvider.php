@@ -41,6 +41,8 @@ class AuthServiceProvider extends ServiceProvider
                     #echo '<pre>' . print_r($user->staff, true) . '</pre>';die;
 
                     $payload = [];
+                    
+                    $payload['user'] = $user;
 
                     if ($user->staff) {
                         $payload['staff'] = $user->staff;
