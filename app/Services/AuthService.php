@@ -45,7 +45,6 @@ class AuthService extends BaseService
      */
     protected $_teleconsult_service;
 
-
     public function consultTokenValidate(ConsultTokenValidateRequest $request, User $user): JsonResponse
     {
 
@@ -490,7 +489,9 @@ class AuthService extends BaseService
 
     public function otpNotification($data, $user) {
         $data += $user->toArray();
-        $data['message'] = '';
+
+        // $subject = 'A2Z ' . ucwords($user->role->name) . ' Telehealth';
+
         switch ($data['otp_type']) {
             case 'resendOtp':
                 $data['message'] = "Otp resent";
@@ -503,6 +504,9 @@ class AuthService extends BaseService
             case '2faAuthentication':
                 $data['message'] = "2faAuthentication Otp sent";
                 break;
+
+            default:
+                $data['message'] = '';
         }
         $data += [
             'otp' => $this->generateOtp($data['secret']),

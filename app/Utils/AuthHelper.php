@@ -30,6 +30,16 @@ trait AuthHelper
         return aesEncrypt(JWT::encode($token, $key));
     }
 
+    public function refreshToken($request, $decoded_token)
+    {
+        $key = config('app.jwt.key');
+        $ttl = config('app.jwt.ttl');
+        $expiration = Carbon::now()->addSeconds($ttl + 5)->timestamp;
+        $decoded_token->exp = $expiration;
+
+        return aesEncrypt(JWT::encode($decoded_token, $key));
+    }
+
     protected function decodeJwt($token, $keyConfig = 'key')
     {
         $key = config("app.jwt.$keyConfig");

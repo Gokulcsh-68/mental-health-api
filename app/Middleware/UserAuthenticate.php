@@ -3,11 +3,14 @@
 namespace App\Middleware;
 
 use Closure;
-use Illuminate\Auth\Access\AuthorizationException;
+use App\Utils\AuthHelper;
 use Illuminate\Contracts\Auth\Factory as Auth;
+use Illuminate\Auth\Access\AuthorizationException;
+use Carbon\Carbon;
 
 class UserAuthenticate
 {
+    use AuthHelper;
     /**
      * The authentication guard factory instance.
      *
@@ -41,6 +44,19 @@ class UserAuthenticate
             throw new AuthorizationException("Unauthorized");
         }
 
-        return $next($request);
+        $response = $next($request)->getOriginalContent();
+
+        // Check for token to refresh or not
+        $authorization = $request->bearerToken();
+        $decodedToken = $this->decodeJwt($authorization);
+        $expiration_time = Carbon::createFromTimestamp($decodedToken->exp)->toDateTimeString(); 
+
+        $diffrence = Carbon::now()->diffInMinutes($expiration_time);
+        // $response['diff'] = $diffrence;
+        if($diffrence < 5) {
+            $response['refresh_token'] = $this->refreshToken($request, $decodedToken);
+        }
+
+        return $response;
     }
 }
