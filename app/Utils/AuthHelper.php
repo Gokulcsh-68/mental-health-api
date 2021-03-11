@@ -37,7 +37,10 @@ trait AuthHelper
         $expiration = Carbon::now()->addSeconds($ttl + 5)->timestamp;
         $decoded_token->exp = $expiration;
 
-        return aesEncrypt(JWT::encode($decoded_token, $key));
+        return [
+            'token' => aesEncrypt(JWT::encode($decoded_token, $key)),
+            'token_expiration_time' => $decoded_token->exp
+        ];
     }
 
     protected function decodeJwt($token, $keyConfig = 'key')
