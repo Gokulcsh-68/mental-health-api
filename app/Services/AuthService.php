@@ -53,21 +53,8 @@ class AuthService extends BaseService
     public function consultTokenValidate(ConsultTokenValidateRequest $request, User $user): JsonResponse
     {
 
-        $this->_teleconsult_service = new TeleConsultApiService;
-
-        $consultInfo = $this->_teleconsult_service->consultDetails($request);
         
-        $patient_id = '';
-        if(!empty($consultInfo)){
-            if(isset($consultInfo['data']['participants'])){
-                $consultPatient = $consultInfo['data']['participants'];
-                
-                foreach ($consultPatient as $key => $value) {
-                    if(!$value['is_guest']){
-                        $patient_id = $value['ref_number'];
-                    }
-                }
-            }
+            $patient_id = self::getConsultInfo($request);
 
             if($patient_id > 0){
         
@@ -90,7 +77,7 @@ class AuthService extends BaseService
                 }
                 
             }
-        }
+      
 
         return $this->httpResponse->setHttpCode(401)->jsonResponse();
     }
@@ -162,14 +149,12 @@ class AuthService extends BaseService
     //  * @return json
     //  */
 
-    public function consultSummary(Request $request): JsonResponse
-    {
-
+    public function getConsultInfo(Request $request){
         $this->_teleconsult_service = new TeleConsultApiService;
 
         $consultInfo = $this->_teleconsult_service->consultDetails($request);
-       
 
+        
         $patient_id = '-1';
 
         if(!empty($consultInfo)){
@@ -177,12 +162,22 @@ class AuthService extends BaseService
                 $consultPatient = $consultInfo['data']['participants'];
                 
                 foreach ($consultPatient as $key => $value) {
-                    if(!$value['is_guest']){
+                    if(!$value['is_guest'] && !str_contains($value['ref_number'], 'guest')){
                         $patient_id = $value['ref_number'];
                     }
                 }
             }
         }
+
+        return $patient_id;
+    }
+
+    public function consultSummary(Request $request): JsonResponse
+    {
+
+
+        $patient_id = self::getConsultInfo($request);
+
 
         $summary['1_profile'] = $request->user()->Where('id',$patient_id)->first(['first_name','last_name','dob','gender','blood_group']);
 
