@@ -22,6 +22,7 @@ class StaffTransformer extends JsonResource
             'school_name' => $this->school->name,
             'school_id' => $this->school_id,
             'is_admin' => $this->is_admin,
+            'additional_info' => $this->additional_info,
             'user' => (new UserTransformer($this->user)),
         ];
     }

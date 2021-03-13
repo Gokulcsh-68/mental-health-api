@@ -15,8 +15,8 @@ class UserTransformer extends JsonResource
 
     public function toArray($request): array
     {
-        return [
-            'id' =>  $this->id,
+
+        $return_val = ['id' =>  $this->id,
             'role_id' =>  $this->role_id,
             'first_name' =>  $this->first_name,
             'last_name' =>  $this->last_name,
@@ -35,7 +35,12 @@ class UserTransformer extends JsonResource
             'emergency_contact_info' =>  $this->emergency_contact_info,
             'is_2fa' =>  $this->is_2fa,
             'is_active' =>  $this->is_active,
-            'communication_channel' =>  $this->communication_channel,
-        ];
+            'communication_channel' =>  $this->communication_channel];
+
+        if($request->user()->role->code == 'school'){
+            $return_val['school_name'] = $request->get('staff')->school->name;
+        }
+
+        return $return_val;
     }
 }

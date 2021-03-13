@@ -23,7 +23,7 @@ class Staff extends BaseModel
      * @var array
      */
     protected $fillable = [
-        "user_id", "school_id", "is_admin",
+        "user_id", "school_id", "is_admin","additional_info"
     ];
 
     /**
@@ -32,7 +32,7 @@ class Staff extends BaseModel
      * @var array
      */
     protected $casts = [
-
+        "additional_info"=>"object"
     ];
 
     /**
@@ -103,6 +103,7 @@ class Staff extends BaseModel
                 'school_id' => $request->get('staff')->school_id,
                 'user_id'   => $user->id,
                 'is_admin'  => 0,
+                'additional_info' => $request->get('additional_info')
             ];
 
             $model = $this->create($staff);
@@ -123,6 +124,8 @@ class Staff extends BaseModel
         DB::beginTransaction();
         try {
             // Nothing can update now on staffs table
+
+            $model = parent::updateModel($id, $request, $only);
             $staff = Staff::find($id);
 
             /*if (empty(app('request')->attributes->get('staff')->is_admin)) {
@@ -137,6 +140,7 @@ class Staff extends BaseModel
             }else{
                 unset($data['user']['role_id']);
             }
+            
             
             $staff->user->fill($data['user'])->save();
             DB::commit();
