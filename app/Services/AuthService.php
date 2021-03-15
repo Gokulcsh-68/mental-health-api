@@ -263,27 +263,29 @@ class AuthService extends BaseService
 
             $data = $request->all();
 
+
+
+        // S3
+        // $ext = strtolower($request->file('file')->getClientOriginalExtension());
+            // $request['file_name'] = 'Avatar'.rand(9999,9999999).rand(100,1999).time().'.'.$ext;
+
+            // $request['type'] =  'school';
+            // $request['filetype'] =  'profile_image';
+
+
+            // $other_response = new UtilService();
+            // $status = $other_response->postSignedUrl($request);
+            // dd($status);
+                  
+                   // Local 
+            
             $ext =  explode('/', mime_content_type($request->get('file')))[1];
-                   
             $imageName = 'Avatar'.rand(9999,9999999).rand(100,1999).time().'.'.$ext;
             
             $image = $request->get('file'); 
             $image = str_replace('data:image/png;base64,', '', $image);
             $image = str_replace(' ', '+', $image);
             Storage::put('uploadDocs/'.$imageName,  base64_decode($image));
-
-
-             // $pro['file_path'] = $imageName;
-             // $pro['file_name'] = $imageName;
-             // $add['title'] = 'profile-photo';
-
-             // $res['properties'] = $pro;
-             // $res['addition_info'] = $add;
-             // $res['user_id'] = $request->user()->id;
-             // $res['created_by'] = $request->user()->id;
-             // $res['document_source'] = 'profile-photo';
-        
-             // Doc::Create($res);
 
              $user['profile_image'] = $imageName;
              User::Where('id',$request->user()->id)->update($user);
