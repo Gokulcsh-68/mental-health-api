@@ -54,8 +54,11 @@ class AuthService extends BaseService
     {
 
         
-            $patient_id = self::getConsultInfo($request);
+        $getpatient_id = self::getConsultInfo($request);
 
+        $patient_id = $getpatient_id['patient_id'];
+        $consult_id = $getpatient_id['consult_id'];
+        
             if($patient_id > 0){
         
                 $userInfo = User::where('id', $patient_id)
@@ -154,10 +157,15 @@ class AuthService extends BaseService
 
         $consultInfo = $this->_teleconsult_service->consultDetails($request);
 
+         $consult_id = '-1';
+         $patient_id = '-1';
         
-        $patient_id = '-1';
 
         if(!empty($consultInfo)){
+            if(isset($consultInfo['data']['consult'])){
+                $consult_id = $consultInfo['data']['consult']['id'];
+            }
+
             if(isset($consultInfo['data']['participants'])){
                 $consultPatient = $consultInfo['data']['participants'];
                 
@@ -169,37 +177,39 @@ class AuthService extends BaseService
             }
         }
 
-        return $patient_id;
+        return ["patient_id"=>$patient_id, "consult_id"=> $consult_id];
     }
 
     public function consultSummary(Request $request): JsonResponse
     {
 
 
-        $patient_id = self::getConsultInfo($request);
+        $getpatient_id = self::getConsultInfo($request);
 
+        $patient_id = $getpatient_id['patient_id'];
+        $consult_id = $getpatient_id['consult_id'];
 
         $summary['1_profile'] = $request->user()->Where('id',$patient_id)->first(['first_name','last_name','dob','gender','blood_group']);
 
-        $summary['3_health'] = PatientHealth::Where('consult_id',$request->get('token'))
+        $summary['3_health'] = PatientHealth::Where('consult_id',$consult_id)
                             ->orderBy('slug','asc')->get();
 
-        $summary['6_stroke_scale'] = PatientHistory::Where('consult_id',$request->get('token'))
+        $summary['6_stroke_scale'] = PatientHistory::Where('consult_id',$consult_id)
                             ->Where('slug','stroke-scale')
                             ->orderBy('slug','asc')->get();
 
-        $summary['4_ros'] = ReviewOfSystem::Where('consult_id',$request->get('token'))
+        $summary['4_ros'] = ReviewOfSystem::Where('consult_id',$consult_id)
                             ->orderBy('slug','asc')->get();
 
-        $summary['5_pe'] = PhysicalExamination::Where('consult_id',$request->get('token'))
+        $summary['5_pe'] = PhysicalExamination::Where('consult_id',$consult_id)
                             ->orderBy('slug','asc')->get();
 
-        $summary['8_doc'] = Doc::Where('consult_id',$request->get('token'))
+        $summary['8_doc'] = Doc::Where('consult_id',$consult_id)
                             ->orderBy('document_source','asc')->get();
 
-        $summary['2_vital'] = Vital::Where('consult_id',$request->get('token'))
+        $summary['2_vital'] = Vital::Where('consult_id',$consult_id)
                             ->orderBy('slug','asc')->get();
-        $summary['7_history'] = PatientHistory::Where('consult_id',$request->get('token'))
+        $summary['7_history'] = PatientHistory::Where('consult_id',$consult_id)
                             ->Where('slug','!=','stroke-scale')
                             ->orderBy('slug','asc')->get();
 
