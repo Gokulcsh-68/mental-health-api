@@ -16,7 +16,7 @@ class CreatePhysicalExaminationTable extends Migration
         Schema::create('physical_examinations', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('patient_id')->comment="user id of staff/student";
-            $table->string('consult_id')->nullable();
+            $table->unsignedBigInteger('consult_id')->nullable();
             $table->string('name');
             $table->string('slug', 45);
             $table->string('status', 45);
