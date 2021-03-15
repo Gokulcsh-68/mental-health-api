@@ -3,8 +3,13 @@
 namespace App\Services;
 
 use App\Entities\Doc;
+use App\Entities\PatientHealth;
+use App\Entities\PatientHistory;
+use App\Entities\PhysicalExamination;
+use App\Entities\ReviewOfSystem;
 use App\Entities\Role;
 use App\Entities\User;
+use App\Entities\Vital;
 use App\Enums\EmailTemplateEnum;
 use App\Enums\InternalCodeEnum;
 use App\Enums\UserTypeEnum;
@@ -48,21 +53,8 @@ class AuthService extends BaseService
     public function consultTokenValidate(ConsultTokenValidateRequest $request, User $user): JsonResponse
     {
 
-        $this->_teleconsult_service = new TeleConsultApiService;
-
-        $consultInfo = $this->_teleconsult_service->consultDetails($request);
         
-        $patient_id = '';
-        if(!empty($consultInfo)){
-            if(isset($consultInfo['data']['participants'])){
-                $consultPatient = $consultInfo['data']['participants'];
-                
-                foreach ($consultPatient as $key => $value) {
-                    if(!$value['is_guest']){
-                        $patient_id = $value['ref_number'];
-                    }
-                }
-            }
+            $patient_id = self::getConsultInfo($request);
 
             if($patient_id > 0){
         
@@ -85,7 +77,7 @@ class AuthService extends BaseService
                 }
                 
             }
-        }
+      
 
         return $this->httpResponse->setHttpCode(401)->jsonResponse();
     }
@@ -156,6 +148,66 @@ class AuthService extends BaseService
     //  * @param  \App\Requests\ChangePasswordRequest  $request
     //  * @return json
     //  */
+
+    public function getConsultInfo(Request $request){
+        $this->_teleconsult_service = new TeleConsultApiService;
+
+        $consultInfo = $this->_teleconsult_service->consultDetails($request);
+
+        
+        $patient_id = '-1';
+
+        if(!empty($consultInfo)){
+            if(isset($consultInfo['data']['participants'])){
+                $consultPatient = $consultInfo['data']['participants'];
+                
+                foreach ($consultPatient as $key => $value) {
+                    if(!$value['is_guest'] && !str_contains($value['ref_number'], 'guest')){
+                        $patient_id = $value['ref_number'];
+                    }
+                }
+            }
+        }
+
+        return $patient_id;
+    }
+
+    public function consultSummary(Request $request): JsonResponse
+    {
+
+
+        $patient_id = self::getConsultInfo($request);
+
+
+        $summary['1_profile'] = $request->user()->Where('id',$patient_id)->first(['first_name','last_name','dob','gender','blood_group']);
+
+        $summary['3_health'] = PatientHealth::Where('consult_id',$request->get('token'))
+                            ->orderBy('slug','asc')->get();
+
+        $summary['6_stroke_scale'] = PatientHistory::Where('consult_id',$request->get('token'))
+                            ->Where('slug','stroke-scale')
+                            ->orderBy('slug','asc')->get();
+
+        $summary['4_ros'] = ReviewOfSystem::Where('consult_id',$request->get('token'))
+                            ->orderBy('slug','asc')->get();
+
+        $summary['5_pe'] = PhysicalExamination::Where('consult_id',$request->get('token'))
+                            ->orderBy('slug','asc')->get();
+
+        $summary['8_doc'] = Doc::Where('consult_id',$request->get('token'))
+                            ->orderBy('document_source','asc')->get();
+
+        $summary['2_vital'] = Vital::Where('consult_id',$request->get('token'))
+                            ->orderBy('slug','asc')->get();
+        $summary['7_history'] = PatientHistory::Where('consult_id',$request->get('token'))
+                            ->Where('slug','!=','stroke-scale')
+                            ->orderBy('slug','asc')->get();
+
+
+
+        return $this->httpResponse->setHttpData($summary)
+                    ->jsonResponse();
+    }
 
     public function changePassword(ChangePasswordRequest $request): JsonResponse
     {

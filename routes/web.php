@@ -36,6 +36,7 @@ $router->group(['prefix' => 'v1/', 'middleware' => 'clientAuth'], function ($rou
 
 
     $router->get('teleconsult/token-validate', 'AuthService@consultTokenValidate');
+    $router->get('teleconsult/summary', 'AuthService@consultSummary');
 
    
 
