@@ -6,6 +6,7 @@ use App\Entities\Doc;
 use App\Entities\PatientHealth;
 use App\Entities\PatientHistory;
 use App\Entities\PhysicalExamination;
+use App\Entities\Provider;
 use App\Entities\ReviewOfSystem;
 use App\Entities\Role;
 use App\Entities\User;
@@ -253,6 +254,14 @@ class AuthService extends BaseService
         $user = (new UserTransformer($request->user())) ;
 
         return $this->httpResponse->setHttpData($user)->jsonResponse();
+    }
+
+    
+    public function providerinfo(Request $request): JsonResponse
+    {
+        $providerinfo = app(Provider::class)->where('user_id',$request->user()->id)->first()->toArray();
+
+        return $this->httpResponse->setHttpData($providerinfo)->jsonResponse();
     }
 
 

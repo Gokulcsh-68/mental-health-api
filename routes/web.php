@@ -63,6 +63,7 @@ $router->group(['prefix' => 'v1/', 'middleware' => 'clientAuth'], function ($rou
             $router->patch('twofa', 'AuthService@twofa');
             $router->patch('communication', 'AuthService@communication');
             $router->get('info', 'AuthService@info');
+            $router->get('providerinfo', 'AuthService@providerinfo');
             $router->post('uploadDocs', 'AuthService@uploadDocs');
             $router->post('uploadAvatar', 'AuthService@uploadAvatar');
             // $router->post('verify-otp', 'AuthService@verifyOtp');
