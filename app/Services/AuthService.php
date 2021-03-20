@@ -259,7 +259,13 @@ class AuthService extends BaseService
     
     public function providerinfo(Request $request): JsonResponse
     {
-        $providerinfo = app(Provider::class)->where('user_id',$request->user()->id)->first()->toArray();
+       $uid = $request->user()->id;
+        if($request->get('user_id')){
+            if($request->get('user_id') > 0){
+                $uid = $request->get('user_id');
+            }
+        }
+        $providerinfo = app(Provider::class)->where('user_id',$uid)->first()->toArray();
 
         return $this->httpResponse->setHttpData($providerinfo)->jsonResponse();
     }
