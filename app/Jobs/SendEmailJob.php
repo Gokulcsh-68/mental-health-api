@@ -23,7 +23,7 @@ class SendEmailJob extends Job
         $this->subject = $subject;
         $this->message = $message;
         $this->iso_code = $iso_code;
-        $this->onQueue('default');
+        $this->onQueue('sendEmail');
     }
 
     public function handle()

@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Entities\User;
 use App\Jobs\SendSmsJob;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
@@ -33,25 +34,24 @@ class CommunicationJob
     public function handle()
     {
         $communication_channel = $this->_user->communication_channel;
-        dd($communication_channel);
-        $iso_code = $user->timezone->country_code;
+        $iso_code = $this->_user->timezone->country_code;
 
         // EMAIL COMMUNICATION
         if(
             (isset($communication_channel->email) && $communication_channel->email) 
+            || !is_object($communication_channel)
             || sizeof($communication_channel) < 1
         ) {
-            $email_data = $payload['email'];
+            $email_data = $this->_payload['email'];
             $to = $email_data['to'];
             $subject = $email_data['subject'];
             $message = $email_data['message'];
             dispatch(new SendEmailJob($to, $subject, $message, $iso_code));
-
         }
 
         // SMS Communication
         if(isset($communication_channel->sms) && $communication_channel->sms) {
-            $sms_data = $payload['sms'];
+            $sms_data = $this->_payload['sms'];
             $mobile = $sms_data['mobile'];
             $isd_code = $sms_data['isd_code'];
             $message = $sms_data['message'];

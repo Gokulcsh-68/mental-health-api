@@ -22,6 +22,7 @@ class SendSmsJob extends Job
         $this->isd_code = $isd_code;
         $this->message = $mobile;
         $this->iso_code = $mobile;
+        $this->onQueue('sendSms');
     }
 
     public function handle()

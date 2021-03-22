@@ -14,8 +14,8 @@ return [
         'student' => env('S3_BASE_PATH') . 'school-folio/%s/',
     ],
     'communication_sms_template' => [
-        'forgotPassword' => 'Your forget {{otp}} is the OTP for',
-        '2faAuthentication' => '{{otp}} is your {{app_name}} verification code',
+        'forgotPassword' => 'Your ' . config('app.name') . ' forget OTP is {{otp}}',
+        '2faAuthentication' => '{{otp}} is your ' . config('app.name') . ' verification code',
     ],
     'slack' => [
         'url' => env('SLACK_WEBHOOK', 'https://hooks.slack.com/services/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'),

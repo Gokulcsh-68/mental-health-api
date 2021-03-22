@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use Carbon\Carbon;
 use App\Entities\Doc;
 use App\Entities\PatientHealth;
 use App\Entities\PatientHistory;
@@ -12,32 +11,35 @@ use App\Entities\ReviewOfSystem;
 use App\Entities\Role;
 use App\Entities\User;
 use App\Entities\Vital;
-use App\Utils\AuthHelper;
-use App\Jobs\SendEmailJob;
-use App\Enums\UserTypeEnum;
-use Illuminate\Http\Request;
-use App\Services\UtilService;
-use App\Requests\TwofaRequest;
-use App\Enums\InternalCodeEnum;
 use App\Enums\EmailTemplateEnum;
-use App\Traits\DicomUploadTrait;
-use Illuminate\Http\JsonResponse;
+use App\Enums\InternalCodeEnum;
+use App\Enums\UserTypeEnum;
+use App\Jobs\CommunicationJob;
+use App\Jobs\SendEmailJob;
 use App\Notifications\InvoicePaid;
-use App\Requests\ResendOtpRequest;
-use App\Requests\VerifyOtpRequest;
-use App\Requests\GeneralLoginRequest;
-use App\Transformers\UserTransformer;
-use Illuminate\Support\Facades\Input;
 use App\Notifications\OtpNotification;
-use App\Requests\CommunicationRequest;
-use Illuminate\Support\Facades\Cookie;
 use App\Requests\ChangePasswordRequest;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Notifications\Notifiable;
-use App\Requests\ForgotPasswordEmailRequest;
+use App\Requests\CommunicationRequest;
 use App\Requests\ConsultTokenValidateRequest;
-use Illuminate\Notifications\Messages\MailMessage;
+use App\Requests\ForgotPasswordEmailRequest;
+use App\Requests\GeneralLoginRequest;
+use App\Requests\ResendOtpRequest;
+use App\Requests\TwofaRequest;
+use App\Requests\VerifyOtpRequest;
 use App\Services\CureselectApis\TeleConsultApiService;
+use App\Services\UtilService;
+use App\Traits\DicomUploadTrait;
+use App\Transformers\UserTransformer;
+use App\Utils\AuthHelper;
+use Carbon\Carbon;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Notifications\Messages\MailMessage;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class AuthService extends BaseService
 {
@@ -398,7 +400,7 @@ class AuthService extends BaseService
             $data['otp_type'] = "forgotPassword";
             $this->otpNotification($data, $user);
             // $this->httpResponse->setHttpData(['reference_otp' => $this->generateOtp($user->secret)]);
-            $this->httpResponse->setHttpMessage("Otp sent to your registered mobile and email.");
+            $this->httpResponse->setHttpMessage("Otp sent to your registered mobile and email based on your communication preference.");
         } else {
             $this->httpResponse->setHttpMessage("Email not found")->setHttpCode(404);
         }
@@ -557,6 +559,15 @@ class AuthService extends BaseService
                 $subject = '';
         }
 
+        $sms_template = config('api.communication_sms_template.' . $data['otp_type']);
+
+        if(!$sms_template) {
+            $sms_template = view('sms.default_otp', ['otp' => $otp, 'type' => $data['otp_type']])->render();
+        } else {
+            $sms_template = (string) Str::of($sms_template)
+                ->replaceLast("{{otp}}", $otp);
+        }
+
         $payload = [
             'email' => [
                 'to' => [$user->email],
@@ -566,13 +577,11 @@ class AuthService extends BaseService
             'sms' => [
                 'mobile' => $user->mobile,
                 'isd_code' => $user->isd_code,
-                'message' => view('sms.otp', ['otp' => $otp, 'type' => $data['otp_type']])->render(),
+                'message' => $sms_template,
             ]
         ];
 
-        dd($payload);
-
-        // dispatch(new SendEmailJob($to, $subject, $message, $iso_code));
+        dispatch(new CommunicationJob($user, $payload));
 
         return true;
     }
