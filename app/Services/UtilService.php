@@ -63,6 +63,7 @@ class UtilService extends BaseService
         }
         switch ($type) {
             case 'item_image':
+            case 'profile-image':
                 $options['ACL'] = 'public-read';
                 break;
         }

@@ -31,11 +31,11 @@ $app->withFacades(true, [
     'Illuminate\Support\Facades\Notification' => 'Notification',
 ]);
 
-$app->configure('mail');
-$app->register(\Illuminate\Mail\MailServiceProvider::class);
 
-$app->alias('mail.manager', Illuminate\Mail\MailManager::class);
-$app->alias('mail.manager', Illuminate\Contracts\Mail\Factory::class);
+$app->register(Illuminate\Mail\MailServiceProvider::class);
+
+$app->configure('mail');
+
 
 // $app->withFacades();
 

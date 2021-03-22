@@ -2,39 +2,41 @@
 
 namespace App\Services;
 
+use Carbon\Carbon;
 use App\Entities\Doc;
-use App\Entities\PatientHealth;
-use App\Entities\PatientHistory;
-use App\Entities\PhysicalExamination;
-use App\Entities\ReviewOfSystem;
 use App\Entities\Role;
 use App\Entities\User;
 use App\Entities\Vital;
-use App\Enums\EmailTemplateEnum;
-use App\Enums\InternalCodeEnum;
-use App\Enums\UserTypeEnum;
-use App\Jobs\SendEmailJob;
-use App\Notifications\InvoicePaid;
-use App\Notifications\OtpNotification;
-use App\Requests\ChangePasswordRequest;
-use App\Requests\CommunicationRequest;
-use App\Requests\ConsultTokenValidateRequest;
-use App\Requests\ForgotPasswordEmailRequest;
-use App\Requests\GeneralLoginRequest;
-use App\Requests\ResendOtpRequest;
-use App\Requests\TwofaRequest;
-use App\Requests\VerifyOtpRequest;
-use App\Services\CureselectApis\TeleConsultApiService;
-use App\Services\UtilService;
-use App\Traits\DicomUploadTrait;
-use App\Transformers\UserTransformer;
 use App\Utils\AuthHelper;
-use Carbon\Carbon;
-use Illuminate\Http\JsonResponse;
+use App\Jobs\SendEmailJob;
+use App\Enums\UserTypeEnum;
 use Illuminate\Http\Request;
-use Illuminate\Notifications\Notifiable;
+use App\Services\UtilService;
+use App\Requests\TwofaRequest;
+use App\Entities\PatientHealth;
+use App\Enums\InternalCodeEnum;
+use App\Entities\PatientHistory;
+use App\Entities\ReviewOfSystem;
+use App\Enums\EmailTemplateEnum;
+use App\Traits\DicomUploadTrait;
+use Illuminate\Http\JsonResponse;
+use App\Notifications\InvoicePaid;
+use App\Requests\ResendOtpRequest;
+use App\Requests\VerifyOtpRequest;
+use App\Entities\PhysicalExamination;
+use App\Requests\GeneralLoginRequest;
+use App\Transformers\UserTransformer;
 use Illuminate\Support\Facades\Input;
+use App\Notifications\OtpNotification;
+use App\Requests\CommunicationRequest;
+use Illuminate\Support\Facades\Cookie;
+use App\Requests\ChangePasswordRequest;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Notifications\Notifiable;
+use App\Requests\ForgotPasswordEmailRequest;
+use App\Requests\ConsultTokenValidateRequest;
+use Illuminate\Notifications\Messages\MailMessage;
+use App\Services\CureselectApis\TeleConsultApiService;
 
 class AuthService extends BaseService
 {
@@ -52,31 +54,29 @@ class AuthService extends BaseService
 
     public function consultTokenValidate(ConsultTokenValidateRequest $request, User $user): JsonResponse
     {
+        $patient_id = self::getConsultInfo($request);
 
-        
-            $patient_id = self::getConsultInfo($request);
-
-            if($patient_id > 0){
-        
-                $userInfo = User::where('id', $patient_id)
-                    ->first();
-                $requestedData['username'] = $userInfo->username;
-                $requestedData['id'] = $userInfo->id;
-                $requestedData['role'] = Role::Where('id',$userInfo->role_id)->value('code');
-               
-                $user = $user->consultLoginAttempt($requestedData);
-                   
-                if ($user) {
-                    $result['userInfo'] = $user->getBasicInfo();
-                    $data['userId'] = $user->id;
-                    $Authorization  = $result['token'] =  $this->getAuthorization($data);
-
-                    return $this->httpResponse->setHttpData($result)
-                            ->setHttpHeader(['Authorization' => $Authorization])
-                            ->jsonResponse();
-                }
+        if($patient_id > 0){
+    
+            $userInfo = User::where('id', $patient_id)
+                ->first();
+            $requestedData['username'] = $userInfo->username;
+            $requestedData['id'] = $userInfo->id;
+            $requestedData['role'] = Role::Where('id',$userInfo->role_id)->value('code');
+            
+            $user = $user->consultLoginAttempt($requestedData);
                 
+            if ($user) {
+                $result['userInfo'] = $user->getBasicInfo();
+                $data['userId'] = $user->id;
+                $Authorization  = $result['token'] =  $this->getAuthorization($data);
+
+                return $this->httpResponse->setHttpData($result)
+                        ->setHttpHeader(['Authorization' => $Authorization])
+                        ->jsonResponse();
             }
+            
+        }
       
 
         return $this->httpResponse->setHttpCode(401)->jsonResponse();
@@ -121,40 +121,11 @@ class AuthService extends BaseService
         return $this->httpResponse->setHttpMessage($message)->setHttpCode(401)->jsonResponse();
     }
 
-    // /**
-    //  * User Set password.
-    //  *
-    //  * @param  \App\Requests\SetPasswordRequest  $request
-    //  * @return json
-    //  */
-
-    // public function setPassword(SetPasswordRequest $request): JsonResponse
-    // {
-    //     $user = $request->user();
-    //     if (!$user->isSetupOver()) {
-    //         $user->update(['password' => $request->get('password')]);
-    //         $user->captureEvent(UserEventTypeEnum::PasswordSet);
-    //         $this->httpResponse->setHttpHeader(['Authorization' => $this->getAuthorization(['userId' => $user->id])]);
-    //     } else {
-    //         $this->httpResponse->setHttpCode(400);
-    //     }
-
-    //     return $this->httpResponse->jsonResponse();
-    // }
-
-    // /**
-    //  * Logged in User Change password.
-    //  *
-    //  * @param  \App\Requests\ChangePasswordRequest  $request
-    //  * @return json
-    //  */
-
     public function getConsultInfo(Request $request){
         $this->_teleconsult_service = new TeleConsultApiService;
 
         $consultInfo = $this->_teleconsult_service->consultDetails($request);
 
-        
         $patient_id = '-1';
 
         if(!empty($consultInfo)){
@@ -174,10 +145,7 @@ class AuthService extends BaseService
 
     public function consultSummary(Request $request): JsonResponse
     {
-
-
         $patient_id = self::getConsultInfo($request);
-
 
         $summary['1_profile'] = $request->user()->Where('id',$patient_id)->first(['first_name','last_name','dob','gender','blood_group']);
 
@@ -202,8 +170,6 @@ class AuthService extends BaseService
         $summary['7_history'] = PatientHistory::Where('consult_id',$request->get('token'))
                             ->Where('slug','!=','stroke-scale')
                             ->orderBy('slug','asc')->get();
-
-
 
         return $this->httpResponse->setHttpData($summary)
                     ->jsonResponse();
@@ -253,32 +219,30 @@ class AuthService extends BaseService
 
             $data = $request->all();
 
-            $ext =  explode('/', mime_content_type($request->get('file')))[1];
+            return response()->json([
+                'asdf' => $request->file('file'),
+                'asdf1' => $request->all(),
+                'files' => $_FILES,
+            ], 404);
                    
-            $imageName = 'Avatar'.rand(9999,9999999).rand(100,1999).time().'.'.$ext;
-            
+            $imageName = rand(9999,9999999).rand(100,1999).time().'.'.$request->file('file')->getClientOriginalExtension();
+
             $image = $request->get('file'); 
-            $image = str_replace('data:image/png;base64,', '', $image);
-            $image = str_replace(' ', '+', $image);
-            Storage::put('uploadDocs/'.$imageName,  base64_decode($image));
 
+            $request['type'] = $request->user()->role->code;
+            $request['filetype'] = 'profile-image';
+            $request['file_name'] = $imageName;
 
-             // $pro['file_path'] = $imageName;
-             // $pro['file_name'] = $imageName;
-             // $add['title'] = 'profile-photo';
+            $status = (new UtilService())->postSignedUrl($request);
 
-             // $res['properties'] = $pro;
-             // $res['addition_info'] = $add;
-             // $res['user_id'] = $request->user()->id;
-             // $res['created_by'] = $request->user()->id;
-             // $res['document_source'] = 'profile-photo';
-        
-             // Doc::Create($res);
+            $res['file_path'] = $status['file_path'];
+            $res['file_name'] = $status['file_name'];
+            $res['file_tmp'] = $status['file_tmp']; 
 
-             $user['profile_image'] = $imageName;
-             User::Where('id',$request->user()->id)->update($user);
+            $user['profile_image'] = $res['file_name'];            
+            User::Where('id',$request->user()->id)->update($user);
 
-            return $this->httpResponse->setHttpData($user)->jsonResponse();
+            return $this->httpResponse->setHttpData($res)->jsonResponse();
 
         } catch (Exception $e) {
             exceptionLogger("Failed to upload document", $e);
@@ -297,13 +261,12 @@ class AuthService extends BaseService
          $res['file_path'] = "";
          $res['file_name'] = "";
 
-
         $ext = strtolower($request->file('file')->getClientOriginalExtension());
         
 
-            $user = (new UserTransformer($request->user()));
-            $request['id'] =  $user->id;
-            $request['filetype'] =  'item_image';
+        $user = (new UserTransformer($request->user()));
+        $request['id'] =  $user->id;
+        $request['filetype'] =  'item_image';
         if($ext == 'dcm'){
             
                 $dicom_response = $this->initiateDicomUpload($request->file('file'), $ext, $request['id']);
@@ -311,7 +274,22 @@ class AuthService extends BaseService
                  $res['file_path'] = $dicom_response['file_path'];
                  $res['file_name'] = $dicom_response['file_name'];
         }
-        else{     
+        else{
+
+            $imageName = 'Document'.rand(9999,9999999).rand(100,1999).time().'.'.$request->file('file')->getClientOriginalExtension();
+
+            $image = $request->get('file'); 
+
+            $request['type'] = $request->user()->role->code;
+            $request['file_name'] = $imageName;
+
+            $status = (new UtilService())->postSignedUrl($request);
+
+            $res['file_path'] = $status['file_path'];
+            $res['file_name'] = $status['file_name'];
+            $res['file_tmp'] = $status['file_tmp'];
+            $res['upload'] = 1; // for s3 signed url upload in angular
+
 
             // $request['type'] = Role::Where('id',$user->role_id)->value('code');
             // $request['file_name'] = rand(9999,9999999).rand(100,1999).time().'.'.$request->file('file')->getClientOriginalExtension();
@@ -324,13 +302,12 @@ class AuthService extends BaseService
             //  $res['file_path'] = $status['file_path'];
             //  $res['file_name'] = $status['file_name'];  
             //  $res['file_tmp'] = $status['file_tmp'];  
-           
-                $imageName = 'Document'.rand(9999,9999999).rand(100,1999).time().'.'.$request->file('file')->getClientOriginalExtension();
+        
             
-            $destinationPath = storage_path('/app/uploadDocs');
+            /* $destinationPath = storage_path('/app/uploadDocs');
             $request->file('file')->move($destinationPath, $imageName);
-             $res['file_path'] = $imageName;
-             $res['file_name'] = $imageName;
+            $res['file_path'] = $imageName;
+            $res['file_name'] = $imageName; */
         }
 
 
@@ -542,36 +519,43 @@ class AuthService extends BaseService
     public function otpNotification($data, $user) {
         $data += $user->toArray();
 
-        // $subject = 'A2Z ' . ucwords($user->role->name) . ' Telehealth';
+        $otp = $this->generateOtp($data['secret']);
+
+        $subject_prefix = 'A2Z Health';
 
         switch ($data['otp_type']) {
-            case 'resendOtp':
-                $data['message'] = "Otp resent";
-                break;
-
             case 'forgotPassword':
-                $data['message'] = "Forget password otp";
+                $heading = 'Forget password OTP';
+                $subject = $subject_prefix . ' - Forget Password';
                 break;
 
             case '2faAuthentication':
-                $data['message'] = "2faAuthentication Otp sent";
+                $heading = '2faAuthentication OTP sent';
+                $subject = $subject_prefix . ' - 2FA OTP';
                 break;
 
             default:
-                $data['message'] = '';
+                $heading = '';
+                $subject = '';
         }
-        $data += [
-            'otp' => $this->generateOtp($data['secret']),
-            'email' => $data['email'],
-            'name' => $user->getFullName(),
-            'template' => EmailTemplateEnum::Otp
+
+        $payload = [
+            'email' => [
+                'to' => [$user->email],
+                'subject' => $subject,
+                'message' => (new MailMessage)->markdown('mail.otp', ['heading' => $heading, 'otp' => $otp])->render(),
+            ],
+            'sms' => [
+                'mobile' => $user->mobile,
+                'isd_code' => $user->isd_code,
+                'message' => view('sms.otp', ['otp' => $otp, 'type' => $data['otp_type']])->render(),
+            ]
         ];
 
-        dispatch(new SendEmailJob($data));
+        dd($payload);
 
-        // SendEmailJob::dispatch($data);
+        // dispatch(new SendEmailJob($to, $subject, $message, $iso_code));
 
-        // $user->notify(new OtpNotification($data));
         return true;
     }
 

@@ -1,0 +1,1 @@
+Please enter following OTP {{ $otp }} for accessing
