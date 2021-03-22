@@ -20,7 +20,7 @@ class SendSmsJob extends Job
     {
         $this->mobile = $mobile;
         $this->isd_code = $isd_code;
-        $this->message = $mobile;
+        $this->message = $message;
         $this->iso_code = $mobile;
         $this->onQueue('sendSms');
     }
