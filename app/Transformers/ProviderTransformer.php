@@ -22,7 +22,7 @@ class ProviderTransformer extends JsonResource
         if($request->get('cdate')){
             if($request->get('cdate') != ''){
                 $condition_date = date('Y-m-d',strtotime($request->get('cdate')));
-                $unavailable = $this->providerUnavailability->where('from_date',$condition_date);
+                $unavailable = $this->providerUnavailability->where('from_date',$condition_date)->toArray();
             }
         }
 
