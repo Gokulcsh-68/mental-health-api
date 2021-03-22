@@ -245,23 +245,46 @@ class AuthService extends BaseService
         try{
 
             $data = $request->all();
-                   
-            $imageName = rand(9999,9999999).rand(100,1999).time().'.'.$request->file('file')->getClientOriginalExtension();
 
-            $image = $request->get('file'); 
+            $imageFile = $request->all();
+            // return $this->httpResponse->setHttpData(['adsf' => $imageFile, 'a' => $request->file('file')])->jsonResponse();
 
-            $request['type'] = $request->user()->role->code;
-            $request['filetype'] = 'profile-image';
+            $imageName = 'profile_' . rand(9999,9999999).rand(100,1999).time().'.png';
+
+            $user =  $request->user();
+
+            $request['type'] = $user->role->code;
+            $request['filetype'] = 'profile_image';
             $request['file_name'] = $imageName;
 
-            $status = (new UtilService())->postSignedUrl($request);
 
+            /* $path =  config('api.fileSystem.' . $request->get('type'));
+            $path = sprintf($path, $request->get('type'));
+            $status = (new UtilService())->diskStorage($request->file('file'), $path, 'profile_');
+            */
+
+            
+            $status = (new UtilService())->postSignedUrl($request);
             $res['file_path'] = $status['file_path'];
             $res['file_name'] = $status['file_name'];
-            $res['file_tmp'] = $status['file_tmp']; 
+            $res['file_tmp'] = $status['file_tmp'];
 
-            $user['profile_image'] = $res['file_name'];            
-            User::Where('id',$request->user()->id)->update($user);
+            $user->profile_image = $res['file_name'];
+            $user->save();
+
+
+            /* 
+            $response = ['status' => false];
+            if ($status['success']) {
+                $user->profile_image = $status['filename'];
+                $user->save();
+
+                $response['status'] = true;
+                $response['profile_image'] = $user->profile_image;
+                $response['message'] = 'Profile Image Updated';
+            } else {
+                $response['message'] = 'Something went wrong. Please try later';
+            } */
 
             return $this->httpResponse->setHttpData($res)->jsonResponse();
 
@@ -291,8 +314,8 @@ class AuthService extends BaseService
             
                 $dicom_response = $this->initiateDicomUpload($request->file('file'), $ext, $request['id']);
               
-                 $res['file_path'] = $dicom_response['file_path'];
-                 $res['file_name'] = $dicom_response['file_name'];
+                $res['file_path'] = $dicom_response['file_path'];
+                $res['file_name'] = $dicom_response['file_name'];
         }
         else{
 
@@ -305,10 +328,10 @@ class AuthService extends BaseService
 
             $status = (new UtilService())->postSignedUrl($request);
 
-            $res['file_path'] = $status['file_path'];
+            $res['s3_signed_url'] = $status['file_path'];
             $res['file_name'] = $status['file_name'];
-            $res['file_tmp'] = $status['file_tmp'];
-            $res['upload'] = 1; // for s3 signed url upload in angular
+            $res['file_path'] = $status['file_tmp'];
+            $res['s3_upload'] = 1; // for s3 signed url upload in angular
 
 
             // $request['type'] = Role::Where('id',$user->role_id)->value('code');

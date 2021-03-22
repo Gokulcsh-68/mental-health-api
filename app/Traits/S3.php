@@ -28,11 +28,11 @@ trait S3
 	{
         $ext = $file->getClientOriginalExtension();
     	$s3 = app('filesystem')->disk('s3');
-    	$filename = sprintf('%s%s.%s', $filenamePrefix, md5(time().uniqid(rand(), true)), $file->getClientOriginalExtension());
-  		$filePath = sprintf('%s/%s', $path, $filename);
+		$filename = sprintf('%s%s.%s', $filenamePrefix, md5(time().uniqid(rand(), true)), $file->getClientOriginalExtension());
+  		$filePath = sprintf('%s%s', $path, $filename);
 
   		try{
-	  		if ($s3->put($filePath, file_get_contents($file->getRealPath()))) {
+	  		if ($s3->put($filePath, file_get_contents($file->getRealPath()), 'public')) {
 
 	  			return ["success" => true, "filename" => $filename, "fullPath" => $filePath];
 	  		}

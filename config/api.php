@@ -21,4 +21,8 @@ return [
         'url' => env('SLACK_WEBHOOK', 'https://hooks.slack.com/services/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'),
         'channels' => env('SLACK_CHANNELS', 'api-logs'),
     ],
+    's3_images' => [
+        'public_url' => env('S3_PUBLIC_BASE_PATH', 'https://a2ztelehealth.s3.amazonaws.com/')
+    ]
+
 ];

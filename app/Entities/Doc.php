@@ -76,9 +76,7 @@ class Doc extends BaseModel
         DB::beginTransaction();
         try {
 
-            $data['created_by'] = $request->user()->id;
             $model = $this->create($data);
-
 
             DB::commit();
 

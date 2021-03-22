@@ -8,6 +8,7 @@ use App\Traits\S3;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class UtilService extends BaseService
 {  
@@ -50,7 +51,10 @@ class UtilService extends BaseService
 
     public function getSignedUrl(Request $request): JsonResponse
     {
-        $url = $this->getAwsTemporaryUrl($request->query('path'), Carbon::now()->addMinute(10));
+        $path = $request->query('path');
+        $url = Cache::remember("MASTER-CACHE-" . camel_case(strtolower($path)), Carbon::now()->addMinute(9), function () use ($path) {
+            return $this->getAwsTemporaryUrl($path, Carbon::now()->addMinute(10));
+        });
 
         return $this->httpResponse->setHttpData(['url' => $url])->jsonResponse();
     }
@@ -64,7 +68,6 @@ class UtilService extends BaseService
         switch ($type) {
             case 'profile_image':
             case 'item_image':
-            case 'profile-image':
                 $options['ACL'] = 'public-read';
                 break;
         }

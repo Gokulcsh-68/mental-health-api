@@ -205,7 +205,7 @@ class User extends BaseModel
             "username" => $this->username,
             "email" => $this->email,
             "mobile" => $this->mobile_number,
-            "profileImage" => $this->profile_image ?? false,
+            "profileImage" => $this->profile_image_url ?? false,
             "is2FA" => (boolean) $this->is_2fa,
             "role" => $this->role->code,
             "gender" => $this->gender_text,
@@ -288,6 +288,20 @@ class User extends BaseModel
         }
 
         return $model;
+    }
+
+    public function getProfileImageUrlAttribute()
+    {
+        if(trim($this->profile_image) != '') {
+            $role = $this->role->code;
+
+            $path =  config('api.fileSystem.' . $role);
+            $path = sprintf($path, $role);
+
+            return config('api.s3_images.public_url') . $path . $this->profile_image;
+        }
+
+        return false;
     }
 
 }

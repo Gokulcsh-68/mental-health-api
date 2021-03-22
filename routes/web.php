@@ -36,9 +36,7 @@ $router->group(['prefix' => 'v1/', 'middleware' => 'clientAuth'], function ($rou
 
 
     $router->get('teleconsult/token-validate', 'AuthService@consultTokenValidate');
-    $router->get('teleconsult/summary', 'AuthService@consultSummary');
-
-   
+    $router->get('teleconsult/summary', 'AuthService@consultSummary');   
 
     $router->group([], function ($router) {
         $router->group(['prefix' => 'users'], function ($router) {
@@ -70,6 +68,9 @@ $router->group(['prefix' => 'v1/', 'middleware' => 'clientAuth'], function ($rou
             // $router->post('resend-otp', 'AuthService@resendOtp');
             $router->patch('{id:[0-9]+}/change-password', ['middleware' => 'acl:users,change-user-password', 'uses' => 'AuthService@changeUserPassword']);
         });
+
+        // Get Document File URL
+        $router->get('/get-document-url', 'UtilService@getSignedUrl');
 
         // Consult provider list
         $router->get('resource/available-providers/list', 'ProviderService@list');

@@ -25,7 +25,7 @@ class UserTransformer extends JsonResource
             'mobile' =>  $this->mobile,
             'username' =>  $this->username,
             'secret' =>  $this->secret,
-            'profile_image' =>  $this->profile_image,
+            'profile_image' =>  $this->profile_image_url,
             'gender' =>  $this->gender,
             'dob' =>  $this->dob,
             'blood_group' =>  $this->blood_group,
