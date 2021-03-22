@@ -62,6 +62,7 @@ class UtilService extends BaseService
             $options['ContentType'] = $contentType;
         }
         switch ($type) {
+            case 'profile_image':
             case 'item_image':
             case 'profile-image':
                 $options['ACL'] = 'public-read';

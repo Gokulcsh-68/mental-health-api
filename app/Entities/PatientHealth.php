@@ -81,7 +81,7 @@ class PatientHealth extends BaseModel
 
     public function consult()
     {
-        return $this->belongsTo(consult::class, 'consult_id', 'id');
+        return $this->belongsTo(Consult::class, 'consult_id', 'id');
     }
 
     protected function createModel($request)

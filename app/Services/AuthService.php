@@ -4,6 +4,11 @@ namespace App\Services;
 
 use Carbon\Carbon;
 use App\Entities\Doc;
+use App\Entities\PatientHealth;
+use App\Entities\PatientHistory;
+use App\Entities\PhysicalExamination;
+use App\Entities\Provider;
+use App\Entities\ReviewOfSystem;
 use App\Entities\Role;
 use App\Entities\User;
 use App\Entities\Vital;
@@ -13,17 +18,13 @@ use App\Enums\UserTypeEnum;
 use Illuminate\Http\Request;
 use App\Services\UtilService;
 use App\Requests\TwofaRequest;
-use App\Entities\PatientHealth;
 use App\Enums\InternalCodeEnum;
-use App\Entities\PatientHistory;
-use App\Entities\ReviewOfSystem;
 use App\Enums\EmailTemplateEnum;
 use App\Traits\DicomUploadTrait;
 use Illuminate\Http\JsonResponse;
 use App\Notifications\InvoicePaid;
 use App\Requests\ResendOtpRequest;
 use App\Requests\VerifyOtpRequest;
-use App\Entities\PhysicalExamination;
 use App\Requests\GeneralLoginRequest;
 use App\Transformers\UserTransformer;
 use Illuminate\Support\Facades\Input;
@@ -56,6 +57,11 @@ class AuthService extends BaseService
     {
         $patient_id = self::getConsultInfo($request);
 
+        $getpatient_id = self::getConsultInfo($request);
+
+        $patient_id = $getpatient_id['patient_id'];
+        $consult_id = $getpatient_id['consult_id'];
+        
         if($patient_id > 0){
     
             $userInfo = User::where('id', $patient_id)
@@ -75,9 +81,7 @@ class AuthService extends BaseService
                         ->setHttpHeader(['Authorization' => $Authorization])
                         ->jsonResponse();
             }
-            
         }
-      
 
         return $this->httpResponse->setHttpCode(401)->jsonResponse();
     }
@@ -126,9 +130,15 @@ class AuthService extends BaseService
 
         $consultInfo = $this->_teleconsult_service->consultDetails($request);
 
-        $patient_id = '-1';
+         $consult_id = '-1';
+         $patient_id = '-1';
+        
 
         if(!empty($consultInfo)){
+            if(isset($consultInfo['data']['consult'])){
+                $consult_id = $consultInfo['data']['consult']['id'];
+            }
+
             if(isset($consultInfo['data']['participants'])){
                 $consultPatient = $consultInfo['data']['participants'];
                 
@@ -140,34 +150,37 @@ class AuthService extends BaseService
             }
         }
 
-        return $patient_id;
+        return ["patient_id"=>$patient_id, "consult_id"=> $consult_id];
     }
 
     public function consultSummary(Request $request): JsonResponse
     {
-        $patient_id = self::getConsultInfo($request);
+        $getpatient_id = self::getConsultInfo($request);
+
+        $patient_id = $getpatient_id['patient_id'];
+        $consult_id = $getpatient_id['consult_id'];
 
         $summary['1_profile'] = $request->user()->Where('id',$patient_id)->first(['first_name','last_name','dob','gender','blood_group']);
 
-        $summary['3_health'] = PatientHealth::Where('consult_id',$request->get('token'))
+        $summary['3_health'] = PatientHealth::Where('consult_id',$consult_id)
                             ->orderBy('slug','asc')->get();
 
-        $summary['6_stroke_scale'] = PatientHistory::Where('consult_id',$request->get('token'))
+        $summary['6_stroke_scale'] = PatientHistory::Where('consult_id',$consult_id)
                             ->Where('slug','stroke-scale')
                             ->orderBy('slug','asc')->get();
 
-        $summary['4_ros'] = ReviewOfSystem::Where('consult_id',$request->get('token'))
+        $summary['4_ros'] = ReviewOfSystem::Where('consult_id',$consult_id)
                             ->orderBy('slug','asc')->get();
 
-        $summary['5_pe'] = PhysicalExamination::Where('consult_id',$request->get('token'))
+        $summary['5_pe'] = PhysicalExamination::Where('consult_id',$consult_id)
                             ->orderBy('slug','asc')->get();
 
-        $summary['8_doc'] = Doc::Where('consult_id',$request->get('token'))
+        $summary['8_doc'] = Doc::Where('consult_id',$consult_id)
                             ->orderBy('document_source','asc')->get();
 
-        $summary['2_vital'] = Vital::Where('consult_id',$request->get('token'))
+        $summary['2_vital'] = Vital::Where('consult_id',$consult_id)
                             ->orderBy('slug','asc')->get();
-        $summary['7_history'] = PatientHistory::Where('consult_id',$request->get('token'))
+        $summary['7_history'] = PatientHistory::Where('consult_id',$consult_id)
                             ->Where('slug','!=','stroke-scale')
                             ->orderBy('slug','asc')->get();
 
@@ -195,7 +208,6 @@ class AuthService extends BaseService
         return $this->httpResponse->jsonResponse();
     }
 
-
     public function twofa(TwofaRequest $request): JsonResponse
     {
         $user = $request->user();
@@ -211,6 +223,19 @@ class AuthService extends BaseService
         return $this->httpResponse->setHttpData($user)->jsonResponse();
     }
 
+    public function providerinfo(Request $request): JsonResponse
+    {
+       $uid = $request->user()->id;
+        if($request->get('user_id')){
+            if($request->get('user_id') > 0){
+                $uid = $request->get('user_id');
+            }
+        }
+        $providerinfo = app(Provider::class)->where('user_id',$uid)->first()->toArray();
+
+        return $this->httpResponse->setHttpData($providerinfo)->jsonResponse();
+    }
+
 
     public function uploadAvatar(Request $request): JsonResponse
     {
@@ -218,12 +243,6 @@ class AuthService extends BaseService
         try{
 
             $data = $request->all();
-
-            return response()->json([
-                'asdf' => $request->file('file'),
-                'asdf1' => $request->all(),
-                'files' => $_FILES,
-            ], 404);
                    
             $imageName = rand(9999,9999999).rand(100,1999).time().'.'.$request->file('file')->getClientOriginalExtension();
 
@@ -253,8 +272,7 @@ class AuthService extends BaseService
 
     public function uploadDocs(Request $request): JsonResponse
     {
-
-        try{
+        try {
 
         $data = $request->all();
 
