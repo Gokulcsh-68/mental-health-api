@@ -31,11 +31,11 @@ $app->withFacades(true, [
     'Illuminate\Support\Facades\Notification' => 'Notification',
 ]);
 
-$app->configure('mail');
-$app->register(\Illuminate\Mail\MailServiceProvider::class);
 
-$app->alias('mail.manager', Illuminate\Mail\MailManager::class);
-$app->alias('mail.manager', Illuminate\Contracts\Mail\Factory::class);
+$app->register(Illuminate\Mail\MailServiceProvider::class);
+
+$app->configure('mail');
+
 
 // $app->withFacades();
 
@@ -119,6 +119,7 @@ $app->routeMiddleware([
 $app->register(App\Providers\AppServiceProvider::class);
 $app->register(App\Providers\AuthServiceProvider::class);
 $app->register(App\Providers\EventServiceProvider::class);
+$app->register(Illuminate\Redis\RedisServiceProvider::class);
 $app->register(Pearl\RequestValidate\RequestServiceProvider::class);
 $app->register(Fruitcake\Cors\CorsServiceProvider::class);
 
