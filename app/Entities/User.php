@@ -301,7 +301,7 @@ class User extends BaseModel
             return config('api.s3_images.public_url') . $path . $this->profile_image;
         }
 
-        return false;
+        return null;
     }
 
 }
