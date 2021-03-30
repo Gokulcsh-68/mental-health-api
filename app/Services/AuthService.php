@@ -192,13 +192,22 @@ class AuthService extends BaseService
 
     public function changePassword(ChangePasswordRequest $request): JsonResponse
     {
-        $user = $request->user();
-        $user->update(['password' => $request->get('password')]);
-        // $user->captureEvent(UserEventTypeEnum::PasswordChange);
+            $requestedData['password'] = $request->get('currentpassword');
+                $user = $request->user();
+            if ($user->isValidUser($requestedData)) {
 
-        return $this->httpResponse
-                    ->setHttpMessage("Password Updated Successfully!...")
-                    ->jsonResponse();
+                $user->update(['password' => $request->get('password')]);
+                // $user->captureEvent(UserEventTypeEnum::PasswordChange);
+
+                return $this->httpResponse
+                            ->setHttpMessage("Password Updated Successfully!...")
+                            ->jsonResponse();
+            }
+            else{
+                 return $this->httpResponse->setHttpCode(401)
+                            ->setHttpMessage("Current Password not match!...")
+                            ->jsonResponse();
+            }
     }
 
     public function communication(CommunicationRequest $request): JsonResponse
