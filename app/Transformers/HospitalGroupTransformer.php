@@ -4,7 +4,7 @@ namespace App\Transformers;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class StaffTransformer extends JsonResource
+class HospitalGroupTransformer extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,11 +17,10 @@ class StaffTransformer extends JsonResource
     {
         return [
             'id' => $this->id,
+            'name' =>  $this->name,
+            'reg_no' =>  $this->reg_no,
             'user_id' =>  $this->user_id,
-            'hospital_id' =>  $this->hospital_id,
-            'is_admin' =>  $this->is_admin,
-            'additional_info' =>  $this->additional_info,
-            'user' => (new UserTransformer($this->user))
+            'additional_info' =>  $this->additional_info
         ];
     }
 }

@@ -4,7 +4,7 @@ namespace App\Entities;
 
 use DB;
 
-class School extends BaseModel
+class Hospital extends BaseModel
 {
     const VIEW = true;
 
@@ -20,7 +20,7 @@ class School extends BaseModel
      * @var array
      */
     protected $fillable = [
-        "reg_no", "name", "user_id", "logo", "additional_info",
+        "name", "group_id", "reg_no", "logo", "additional_info"
     ];
 
     /**
@@ -30,14 +30,43 @@ class School extends BaseModel
      */
     protected $casts = [
         'additional_info' => 'object'
+        
     ];
+
+    /**
+     * The attributes excluded from the model's JSON form.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        
+    ];
+
     /**
      * The attributes that should be updated on patch method.
      *
      * @var array
     */
     protected $partialFillable = [
-        "reg_no", "name", "logo", "additional_info",
+        
+    ];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+    */
+    protected $dates = [
+        
+    ];
+
+    /**
+     * The event map for the model.
+     *
+     * @var array
+    */
+    protected $dispatchesEvents = [
+        
     ];
 
     public function staff()
@@ -56,14 +85,14 @@ class School extends BaseModel
         DB::beginTransaction();
         try {
 
-            $school = $this->create($data);
+            $hospital = $this->create($data);
 
-            $data['user']['role_id'] = Role::where("code", "school")->pluck('id')->first();
+            $data['user']['role_id'] = Role::where("code", "hospital")->pluck('id')->first();
 
             $user = User::create($data['user']);
 
             $staff = [
-                'school_id' => $school->id,
+                'hospital_id' => $hospital->id,
                 'is_admin' => 1,
             ];
 
@@ -71,10 +100,10 @@ class School extends BaseModel
 
             DB::commit();
 
-            return $school;
+            return $hospital;
 
         } catch (Exception $e) {
-            exceptionLogger("school Create Rollback", $e);
+            exceptionLogger("hospital Create Rollback", $e);
             DB::rollback();
         }
 
@@ -87,7 +116,7 @@ class School extends BaseModel
 
         DB::beginTransaction();
         try {
-            // Update in School
+            // Update in hospital
             $model = parent::updateModel($id, $request, $only);
             // Update in users
             $staff = $this->getModel($id);
@@ -98,7 +127,7 @@ class School extends BaseModel
 
             return $model;
         } catch (Exception $e) {
-            exceptionLogger("School Update Rollback", $e);
+            exceptionLogger("hospital Update Rollback", $e);
             DB::rollback();
         }
 
@@ -124,8 +153,8 @@ class School extends BaseModel
         if ($request->get('searchkey')) {
             $model->where(function ($mquery) use ($request,$status_key) {
                 $mquery->where(function ($query) use ($request) {
-                        $query->Where('schools.name', 'LIKE',"%".$request->get('searchkey')."%")
-                        ->orWhere('schools.additional_info', 'LIKE',"%".$request->get('searchkey')."%");
+                        $query->Where('hospitals.name', 'LIKE',"%".$request->get('searchkey')."%")
+                        ->orWhere('hospitals.additional_info', 'LIKE',"%".$request->get('searchkey')."%");
                     });
                 $mquery->orwhereHas('primaryStaff', function ($query) use ($request,$status_key) {
                         $query->whereHas('user', function ($subquery) use ($request,$status_key) {

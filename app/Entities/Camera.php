@@ -2,7 +2,7 @@
 
 namespace App\Entities;
 
-class Consult extends BaseModel
+class Camera extends BaseModel
 {
     /**
      * The attributes that are mass assignable.
@@ -10,7 +10,7 @@ class Consult extends BaseModel
      * @var array
      */
     protected $fillable = [
-        "unique_id", "patient_in_room", "provider_in_room", "patient_id", "provider_id", "hospital_id", "consult_type", "consult_slot_type", "consult_date_time", "consult_duration", "speciality", "unit", "slots", "started_date_time", "ended_date_time", "consent", "camera_id", "consult_notes", "Addendum_notes", "reason_for_consult", "status"
+        "hospital_id", "camera_name", "camera_ip", "camera_type"
     ];
 
     /**

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProviderTable extends Migration
+class CreateHospitalGroupsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,15 @@ class CreateProviderTable extends Migration
      */
     public function up()
     {
-        Schema::create('providers', function (Blueprint $table) {
+        Schema::create('hospital_groups', function (Blueprint $table) {
             $table->id();
+            $table->string('name', 20);
+            $table->string('reg_no')->nullable()->comment='Registration Number';
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('hospital_id');
-            $table->date('practicing_since')->nullable();
-            $table->string('license_no');
             $table->json('additional_info')->nullable();
-            $table->json('availabilities')->nullable();
             $table->timestamps();
-            
+
             $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict')->onUpdate('cascade');
-            $table->foreign('hospital_id')->references('id')->on('hospitals')->onDelete('restrict')->onUpdate('cascade');
         });
     }
 
@@ -35,11 +32,10 @@ class CreateProviderTable extends Migration
      */
     public function down()
     {
-        Schema::table('providers', function (Blueprint $table) {
+        Schema::table('hospital_groups', function (Blueprint $table) {
             $table->dropForeign(['user_id']);
-            $table->dropForeign(['hospital_id']);
         });
 
-        Schema::dropIfExists('providers');
+        Schema::dropIfExists('hospital_groups');
     }
 }

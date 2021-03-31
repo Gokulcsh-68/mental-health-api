@@ -23,7 +23,6 @@ class CreatePatientHealthTable extends Migration
 
             $table->foreign('slug')->references('slug')->on('masters')->onDelete('restrict')->onUpdate('cascade');
             $table->foreign('patient_id')->references('id')->on('users')->onDelete('restrict')->onUpdate('cascade');
-            $table->foreign('consult_id')->references('id')->on('consults')->onDelete('restrict')->onUpdate('cascade');
         });
     }
 
@@ -37,7 +36,6 @@ class CreatePatientHealthTable extends Migration
         Schema::table('patient_health', function (Blueprint $table) {
             $table->dropForeign(['slug']);
             $table->dropForeign(['patient_id']);
-            $table->dropForeign(['consult_id']);
         });
         
         Schema::dropIfExists('patient_health');

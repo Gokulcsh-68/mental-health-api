@@ -21,7 +21,7 @@ class CreateVitalsTable extends Migration
             $table->string('slug', 45)->nullable();
             $table->json('details');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict')->onUpdate('cascade');
-            $table->foreign('consult_id')->references('id')->on('consults')->onDelete('restrict')->onUpdate('cascade');
+            
             $table->foreign('slug')->references('slug')->on('masters')->onDelete('restrict')->onUpdate('cascade');
             $table->timestamps();
         });
@@ -36,7 +36,6 @@ class CreateVitalsTable extends Migration
     {
         Schema::table('vitals', function (Blueprint $table) {
             $table->dropForeign(['user_id']);
-            $table->dropForeign(['consult_id']);
             $table->dropForeign(['slug']);
         });
 

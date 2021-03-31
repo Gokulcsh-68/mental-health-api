@@ -23,6 +23,7 @@ class CreateFormsTable extends Migration
             $table->enum('type', ['normal', 'score'])->default('normal');
             $table->json('images')->nullable();
             $table->boolean('is_active')->default(1)->comment="0-Inactive, 1-Active";
+            $table->json('role_code')->nullable()->comment('JSON Type: ["student", "staff"]');
             $table->unsignedBigInteger('created_by')->nullable();
             $table->timestamps();
 

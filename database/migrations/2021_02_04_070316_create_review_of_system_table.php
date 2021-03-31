@@ -25,7 +25,7 @@ class CreateReviewOfSystemTable extends Migration
 
             $table->foreign('slug')->references('slug')->on('masters')->onDelete('restrict')->onUpdate('cascade');
             $table->foreign('patient_id')->references('id')->on('users')->onDelete('restrict')->onUpdate('cascade');
-            $table->foreign('consult_id')->references('id')->on('consults')->onDelete('restrict')->onUpdate('cascade');
+            
         });
     }
 
@@ -39,7 +39,6 @@ class CreateReviewOfSystemTable extends Migration
         Schema::table('review_of_systems', function (Blueprint $table) {
             $table->dropForeign(['slug']);
             $table->dropForeign(['patient_id']);
-            $table->dropForeign(['consult_id']);
         });
 
         Schema::dropIfExists('review_of_systems');

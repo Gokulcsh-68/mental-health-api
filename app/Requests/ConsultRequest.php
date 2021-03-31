@@ -2,7 +2,6 @@
 
 namespace App\Requests;
 
-use App\Entities\Consult;
 use Pearl\RequestValidate\RequestAbstract;
 
 class ConsultRequest extends RequestAbstract
@@ -14,38 +13,29 @@ class ConsultRequest extends RequestAbstract
      */
     public function rules(): array
     {
-        $request = app('request');
-        $errorRules = [];
-
-        $rules = [];
-
-        // Edited Rules
-        if ($this->route('id')) {
-
-        } else {
-
-            // $rules = [
-            //     'patient_id' => 'required',
-            //     'provider_id' => 'required',
-            //     'class_id' => 'required',
-            //     'consult_type' => 'required',
-            //     'consult_slot_type' => 'required',
-            //     'consult_date_time' => 'required',
-            //     'speciality' => 'required'
-            // ];
-
-            // if (empty($errorRules)) {
-            //     $booked = Consult::bookedSlotChecked($request);
-            //     if (empty($booked['status'])) {
-            //         $errorRules['booked'] = 'required';
-            //         return $errorRules;
-            //     }
-            // }
-        }
-            
-
-        return array_dot($rules);
-
+        return [
+            'unique_id' => 'required',
+            'patient_in_room' => 'required',
+            'provider_in_room' => 'required',
+            'patient_id' => 'required',
+            'provider_id' => 'required',
+            'hospital_id' => 'required',
+            'consult_type' => 'required',
+            'consult_slot_type' => 'required',
+            'consult_date_time' => 'required',
+            'consult_duration' => 'required',
+            'speciality' => 'required',
+            'unit' => 'required',
+            'slots' => 'required',
+            'started_date_time' => 'required',
+            'ended_date_time' => 'required',
+            'consent' => 'nullable',
+            'camera_id' => 'nullable',
+            'consult_notes' => 'required',
+            'Addendum_notes' => 'required',
+            'reason_for_consult' => 'required',
+            'status' => 'required'
+        ];
     }
 
     /**
@@ -56,7 +46,7 @@ class ConsultRequest extends RequestAbstract
     public function messages(): array
     {
         return [
-            'booked.required' => 'Slots are booked already!'
+            //
         ];
     }
 }

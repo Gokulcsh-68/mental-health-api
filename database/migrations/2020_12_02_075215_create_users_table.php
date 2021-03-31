@@ -29,6 +29,7 @@ class CreateUsersTable extends Migration
             $table->date('dob')->nullable();
             $table->string('blood_group', 5)->nullable();
             $table->unsignedInteger('timezone_id');
+            $table->string('peripheral_secret', 100);
 
             $table->json('address')->comment="line,city,state,zipcode";
             $table->char('country_iso', 2)->nullable();

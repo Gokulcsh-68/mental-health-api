@@ -23,7 +23,7 @@ class Staff extends BaseModel
      * @var array
      */
     protected $fillable = [
-        "user_id", "school_id", "is_admin","additional_info"
+        "user_id", "hospital_id", "is_admin", "additional_info"
     ];
 
     /**
@@ -32,6 +32,7 @@ class Staff extends BaseModel
      * @var array
      */
     protected $casts = [
+        
         "additional_info"=>"object"
     ];
 
@@ -41,34 +42,34 @@ class Staff extends BaseModel
      * @var array
      */
     protected $hidden = [
-
+        
     ];
 
     /**
      * The attributes that should be updated on patch method.
      *
      * @var array
-     */
+    */
     protected $partialFillable = [
-
+        
     ];
 
     /**
      * The attributes that should be mutated to dates.
      *
      * @var array
-     */
+    */
     protected $dates = [
-
+        
     ];
 
     /**
      * The event map for the model.
      *
      * @var array
-     */
+    */
     protected $dispatchesEvents = [
-
+        
     ];
 
     public function user()
@@ -77,9 +78,9 @@ class Staff extends BaseModel
     }
     
 
-    public function school()
+    public function hospital()
     {
-        return $this->belongsTo(School::class);
+        return $this->belongsTo(Hospital::class);
     }
 
     public function scopeAdmin($query)
@@ -100,7 +101,7 @@ class Staff extends BaseModel
             $user = User::create($data['user']);
 
             $staff = [
-                'school_id' => $request->get('staff')->school_id,
+                'hospital_id' => $request->get('staff')->hospital_id,
                 'user_id'   => $user->id,
                 'is_admin'  => 0,
                 'additional_info' => $request->get('additional_info')
@@ -159,8 +160,8 @@ class Staff extends BaseModel
         $model = parent::applyFilters($model, $isPluck);
         $request = app('request');
 
-        if ($request->get('staff')->school_id) {
-            $model->where('staffs.school_id', $request->get('staff')->school_id);
+        if ($request->get('staff')->hospital_id) {
+            $model->where('staffs.hospital_id', $request->get('staff')->hospital_id);
         }
 
         if($request->get('is_admin')){
@@ -176,9 +177,6 @@ class Staff extends BaseModel
         }
 
 
-        if ($request->get('searchkey')) {
-
-        }
 
         if ($request->get('searchkey')) {
             $model->whereHas('user', function ($subquery) use ($request,$status_key) {

@@ -14,12 +14,8 @@ class StaffRequest extends RequestAbstract
      */
     public function rules(): array
     {
-        $rules = [
-            // 'user_id' => 'required',
-            // 'school_id' => 'required',
-            // 'is_admin'  => 'required'
-        ];
-
+        
+        
         $error_rules = [];
 
         $rules['user'] = (new UserRequest())->rules();

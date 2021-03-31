@@ -2,15 +2,23 @@
 
 namespace App\Entities;
 
-class Consult extends BaseModel
+class HospitalGroup extends BaseModel
 {
+     const VIEW = true;
+
+    const CREATE = true;
+
+    const UPDATE = true;
+
+    const ACTION = true;
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        "unique_id", "patient_in_room", "provider_in_room", "patient_id", "provider_id", "hospital_id", "consult_type", "consult_slot_type", "consult_date_time", "consult_duration", "speciality", "unit", "slots", "started_date_time", "ended_date_time", "consent", "camera_id", "consult_notes", "Addendum_notes", "reason_for_consult", "status"
+        "name", "reg_no", "user_id", "additional_info"
     ];
 
     /**
@@ -19,6 +27,7 @@ class Consult extends BaseModel
      * @var array
      */
     protected $casts = [
+        'additional_info' => 'object'
         
     ];
 

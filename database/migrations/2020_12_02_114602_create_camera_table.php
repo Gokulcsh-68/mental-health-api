@@ -15,13 +15,13 @@ class CreateCameraTable extends Migration
     {
         Schema::create('cameras', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('school_id');
+            $table->unsignedBigInteger('hospital_id');
             $table->string('camera_name');
             $table->string('camera_ip');
             $table->string('camera_type');
             $table->timestamps();
 
-            $table->foreign('school_id')->references('id')->on('schools')->onDelete('restrict')->onUpdate('cascade');
+            $table->foreign('hospital_id')->references('id')->on('hospitals')->onDelete('restrict')->onUpdate('cascade');
         });
     }
 
@@ -33,7 +33,7 @@ class CreateCameraTable extends Migration
     public function down()
     {
         Schema::table('cameras', function (Blueprint $table) {
-            $table->dropForeign(['school_id']);
+            $table->dropForeign(['hospital_id']);
         });
         Schema::dropIfExists('cameras');
     }

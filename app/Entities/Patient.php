@@ -4,7 +4,7 @@ namespace App\Entities;
 
 use DB;
 
-class Student extends BaseModel
+class Patient extends BaseModel
 {
     const VIEW = true;
 
@@ -13,16 +13,13 @@ class Student extends BaseModel
     const UPDATE = true;
 
     const ACTION = true;
-
-    public $timestamps = false;
-
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        "user_id", "school_id", "class_id", "enroll_number", "additional_info"
+        "user_id", "hospital_id", "additional_info"
     ];
 
     /**
@@ -31,7 +28,8 @@ class Student extends BaseModel
      * @var array
      */
     protected $casts = [
-        "additional_info" => 'object',
+        'additional_info' => 'object'
+        
     ];
 
     /**
@@ -40,34 +38,34 @@ class Student extends BaseModel
      * @var array
      */
     protected $hidden = [
-
+        
     ];
 
     /**
      * The attributes that should be updated on patch method.
      *
      * @var array
-     */
+    */
     protected $partialFillable = [
-        "class_id", "enroll_number", "additional_info"
+        
     ];
 
     /**
      * The attributes that should be mutated to dates.
      *
      * @var array
-     */
+    */
     protected $dates = [
-
+        
     ];
 
     /**
      * The event map for the model.
      *
      * @var array
-     */
+    */
     protected $dispatchesEvents = [
-
+        
     ];
 
     public function user()
@@ -75,20 +73,11 @@ class Student extends BaseModel
         return $this->belongsTo(User::class);
     }
 
-    public function school()
+    public function hospital()
     {
-        return $this->belongsTo(School::class);
+        return $this->belongsTo(Hospital::class);
     }
 
-    public function getschoolclass()
-    {
-        return $this->hasOne(SchoolClass::class, 'id', 'class_id');
-    }
-
-    public function schoolclass()
-    {
-        return $this->belongsTo(SchoolClass::class);
-    }
 
     protected function createModel($request)
     {
@@ -101,48 +90,36 @@ class Student extends BaseModel
                                             ->pluck('id')->first();
             $user = User::create($data['user']);
 
-            $data['school_id']  = $request->get('staff')->school_id;
+            $data['hospital_id']  = $request->get('staff')->hospital_id;
             $data['user_id']    = $user->id;
 
             $model = $this->create($data);
             DB::commit();
             return $model;
         } catch (Exception $e) {
-            exceptionLogger("students Create Rollback", $e);
+            exceptionLogger("patients Create Rollback", $e);
             DB::rollback();
         }
 
         return null;
     }
 
+  
     protected function updateModel($id, $request, $only = [])
     {
         $data = $this->getModelAttributes($request, $only);
 
         DB::beginTransaction();
         try {
-            // Find Student
-            $student = Student::find($id);
-            $logged_in_staff_detail = $request->attributes->get('staff');
+            
 
-            if ($student) {
-                if (!empty($request->class_id)) {
-                    $find_class = SchoolClass::where('id', $request->class_id)
-                        ->where('school_id', $logged_in_staff_detail->school_id)->first();
+            $model = parent::updateModel($id, $request, $only);
+            unset($data['user']['role_id']);
+            $patient->user->fill($data['user'])->save();
+            DB::commit();
+            return $patient;
 
-                    // If Class found on the School
-                    if ($find_class) {
-                        $model = parent::updateModel($id, $request, $only);
-                        unset($data['user']['role_id']);
-                        $student->user->fill($data['user'])->save();
-                        DB::commit();
-                        return $student;
-                    }
-                }
 
-            } else {
-                // Error Message
-            }
 
         } catch (Exception $e) {
             exceptionLogger("School Update Rollback", $e);
@@ -158,18 +135,13 @@ class Student extends BaseModel
         $model = parent::applyFilters($model, $isPluck);
         $request = app('request');
 
-        if ($request->get('staff')->school_id) {
-            $model->where('students.school_id', $request->get('staff')->school_id);
+        if ($request->get('staff')->hospital_id) {
+            $model->where('patients.hospital_id', $request->get('staff')->hospital_id);
         }
 
         $role_code = Role::where('id', $request->user()->role_id)->value('code');
 
-        if ($role_code == 'staff') {
-            $classes = SchoolClass::where("staff_id", $request->get('staff')->id)
-                                ->where('school_id', $request->get('staff')->school_id)
-                                ->get()->pluck('id')->toArray();
-            $model->whereIn('students.class_id', $classes);
-        }
+        
 
         $status_key = $request->get('searchkey');
         if(strtolower($request->get('searchkey')) == "inactive" || strtolower($request->get('searchkey')) == "active"){
@@ -182,8 +154,6 @@ class Student extends BaseModel
                     $subquery->Where('users.email', 'LIKE',"%".$request->get('searchkey')."%")
                     ->orWhere('users.mobile', 'LIKE',"%".$request->get('searchkey')."%")
                     ->orWhere(DB::raw("CONCAT(`first_name`, ' ', `last_name`)"), 'LIKE',"%".$request->get('searchkey')."%")
-                    // ->orWhere('users.first_name', 'LIKE',"%".$request->get('searchkey')."%")
-                    // ->orWhere('users.last_name', 'LIKE',"%".$request->get('searchkey')."%")
                     ->orWhere('users.address', 'LIKE',"%".$request->get('searchkey')."%")
                     ->orWhere('users.gender', 'LIKE',"%".$request->get('searchkey')."%")
                     ->orWhere('users.is_active', 'LIKE',"%".$status_key."%");
