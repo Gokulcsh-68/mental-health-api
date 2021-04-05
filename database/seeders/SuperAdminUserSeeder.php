@@ -20,7 +20,7 @@ class SuperAdminUserSeeder extends Seeder
             'last_name' => "admin",
             'role_id' => 1,
             'email' => "admin@a2z.health",
-            'username' => "admin@a2z.health",
+            'username' => "admin",
             'password' => 'Test12345',
             'address' => json_encode(['address' => 'kamdarnagar']),
             'timezone_id' => 1,

@@ -23,7 +23,7 @@ class Staff extends BaseModel
      * @var array
      */
     protected $fillable = [
-        "user_id", "hospital_id", "is_admin", "additional_info"
+        "user_id", "hospital_id","group_id", "is_admin", "additional_info"
     ];
 
     /**
@@ -81,6 +81,12 @@ class Staff extends BaseModel
     public function hospital()
     {
         return $this->belongsTo(Hospital::class);
+    }
+
+
+    public function hospitalgroup()
+    {
+        return $this->belongsTo(HospitalGroup::class,'id','group_id');
     }
 
     public function scopeAdmin($query)
@@ -162,6 +168,11 @@ class Staff extends BaseModel
 
         if ($request->get('staff')->hospital_id) {
             $model->where('staffs.hospital_id', $request->get('staff')->hospital_id);
+        }
+
+
+        if($request->get('staff')->group_id){
+            $model->Where('staffs.group_id', $request->get('staff')->group_id);
         }
 
         if($request->get('is_admin')){

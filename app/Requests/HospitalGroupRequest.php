@@ -16,7 +16,6 @@ class HospitalGroupRequest extends RequestAbstract
         return [
             'name' => 'required',
             'reg_no' => 'nullable',
-            'user_id' => 'required',
             'additional_info' => 'nullable'
         ];
     }

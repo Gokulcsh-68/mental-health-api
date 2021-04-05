@@ -88,11 +88,12 @@ class User extends BaseModel
     {
         return $this->hasOne(Staff::class, 'user_id');
     }
-
-    public function student()
+    
+    public function patient()
     {
-        return $this->hasOne(Student::class, 'user_id');
+        return $this->hasOne(Patient::class, 'user_id');
     }
+
 
     public function timezone()
     {
@@ -108,6 +109,18 @@ class User extends BaseModel
     {
         return $this->hasOne(Provider::class);
     }*/
+
+
+    public function guestLoginAttempt($attributes, $field = "username"):  ? User
+    {
+        $model = self::where($field, $attributes[$field])
+            ->whereHas('role', function ($query) use ($attributes) {
+                $query->where('code', $attributes['role']);
+            })
+            ->first();
+
+        return isset($model->id) ? $model : null;
+    }
 
     public function consultLoginAttempt($attributes, $field = "username"):  ? User
     {
@@ -186,8 +199,8 @@ class User extends BaseModel
 
         switch ($this->role->code) {
 
-            case 'staff':
-                return $this->staff;
+            case 'patient':
+                return $this->patient;
             break;
 
             default:
@@ -224,15 +237,7 @@ class User extends BaseModel
 
             $user = User::create($data);
 
-            if($data['role'] == "school"){
-                
-                $staff = [
-                    'school_id' => $request->get('staff')->school_id,
-                    'is_admin' => 0,
-                ];
-                
-                $staff = $user->staff()->create($staff);
-            }
+            
             
             DB::commit();
             return $user;
@@ -262,15 +267,6 @@ class User extends BaseModel
             $model->where('users.role_id', $role_id);
         }
 
-        if ($request->get('role') == "school") {
-          
-            $school_id = $request->get('staff')->school_id;
-
-            $model->whereHas('staff', function ($subquery) use ($request,$school_id) {
-                    $subquery->Where('staffs.is_admin', 0)
-                    ->Where('staffs.school_id', $school_id);
-            });
-        }
 
         if ($request->get('searchkey')) {
 
@@ -292,7 +288,7 @@ class User extends BaseModel
 
     public function getProfileImageUrlAttribute()
     {
-        if(trim($this->profile_image) != '') {
+        if(trim($this->profile_image) != '' && $this->profile_image != null) {
             $role = $this->role->code;
 
             $path =  config('api.fileSystem.' . $role);

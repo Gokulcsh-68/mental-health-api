@@ -3,12 +3,15 @@
 namespace App\Services;
 
 use App\Entities\Doc;
+use App\Entities\Master;
+use App\Entities\Patient;
 use App\Entities\PatientHealth;
 use App\Entities\PatientHistory;
 use App\Entities\PhysicalExamination;
 use App\Entities\Provider;
 use App\Entities\ReviewOfSystem;
 use App\Entities\Role;
+use App\Entities\Timezone;
 use App\Entities\User;
 use App\Entities\Vital;
 use App\Enums\EmailTemplateEnum;
@@ -29,6 +32,8 @@ use App\Requests\VerifyOtpRequest;
 use App\Services\CureselectApis\TeleConsultApiService;
 use App\Services\UtilService;
 use App\Traits\DicomUploadTrait;
+use App\Transformers\MasterTransformer;
+use App\Transformers\ProviderTransformer;
 use App\Transformers\UserTransformer;
 use App\Utils\AuthHelper;
 use Carbon\Carbon;
@@ -37,6 +42,7 @@ use Illuminate\Http\Request;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -55,9 +61,42 @@ class AuthService extends BaseService
      */
     protected $_teleconsult_service;
 
+
+    public function authGuestx(Request $request, User $user): JsonResponse
+    {
+
+            $roleId = Role::Where('code',$request->get('role'))->value('id');
+            $userInfo = User::where('username', $request->get('username'))
+                ->where('role_id', $roleId)
+                ->first();
+            $requestedData['username'] = $userInfo->username;
+            $requestedData['id'] = $userInfo->id;
+            $requestedData['role'] = Role::Where('id',$userInfo->role_id)->value('code');
+            
+            $user = $user->guestLoginAttempt($requestedData);
+                
+            if ($user) {
+                $result['info'] = $user->getBasicInfo();
+                $data['userId'] = $user->id;
+                $Authorization  = $result['token'] =  $this->getAuthorization($data);
+                
+                $token_details = $this->decodeJwt($Authorization);
+                
+                if($token_details->exp)
+                    $result['token_expiration_time'] = $token_details->exp;
+
+                return $this->httpResponse->setHttpData($result)
+                        ->setHttpHeader(['Authorization' => $Authorization])
+                        ->jsonResponse();
+            }
+        
+
+        return $this->httpResponse->setHttpCode(401)->jsonResponse();
+    }
+
     public function consultTokenValidate(ConsultTokenValidateRequest $request, User $user): JsonResponse
     {
-        $patient_id = self::getConsultInfo($request);
+
 
         $getpatient_id = self::getConsultInfo($request);
 
@@ -247,6 +286,110 @@ class AuthService extends BaseService
         return $this->httpResponse->setHttpData($providerinfo)->jsonResponse();
     }
 
+    public function getMasterx(Request $request): JsonResponse
+    {
+
+        $resource = 'Master';
+        $entity = new Master();
+        $collection = callUserFuncArray([$entity, 'getModelList'], [])->get();
+  
+        $res_name = snake_case(camel_case(str_plural($resource)));
+ 
+        $result[$res_name] = $collection->isNotEmpty() ? $this->collectionTransform($resource, $collection) : [];
+
+        return $this->httpResponse->setHttpData($result)->jsonResponse();
+
+    }
+
+
+    public function getTimezonex(Request $request): JsonResponse
+    {
+
+        $resource = 'Timezone';
+        $entity = new Timezone();
+        $collection = callUserFuncArray([$entity, 'getModelList'], [])->get();
+  
+        $res_name = snake_case(camel_case(str_plural($resource)));
+ 
+        $result[$res_name] = $collection->isNotEmpty() ? $this->collectionTransform($resource, $collection) : [];
+
+        return $this->httpResponse->setHttpData($result)->jsonResponse();
+
+    }
+
+    public function savePatientsx(Request $request): JsonResponse
+    {
+
+        $requestClass = sprintf('\App\Requests\%sRequest', 'Patient');
+        class_exists($requestClass) ? app()->make($requestClass) : $request;
+
+        $patient_request = $request;
+        $patient_request->merge(['register' => true]);
+
+        $patient = Patient::createModel($patient_request)->toArray();
+    
+        $user = User::where('id', $patient['user_id'])
+            ->first();
+        if (!empty($user)) {
+            $data['otp_type'] = "activation";
+            $this->otpNotification($data, $user);
+
+            return $this->httpResponse->setHttpMessage("Success, Check!... registered mail-id to activate your account")->jsonResponse();
+        }
+
+        return $this->httpResponse
+                    ->setHttpMessage("Registered Successfully!... Activation Mail Failed,Please Contact Support...")->jsonResponse();
+
+    }
+
+    public function saveProvidersx(Request $request): JsonResponse
+    {
+
+        $requestClass = sprintf('\App\Requests\%sRequest', 'Provider');
+
+        class_exists($requestClass) ? app()->make($requestClass) : $request;
+
+        $provider_request = $request;
+        $provider_request->merge(['register' => true]);
+
+
+        $provider = Provider::createModel($provider_request)->toArray();
+ 
+        $user = User::where('id', $provider['user_id'])
+            ->first();
+        if (!empty($user)) {
+            $data['otp_type'] = "registered";
+            $this->otpNotification($data, $user);
+
+            return $this->httpResponse->setHttpMessage("Success, Check!... Your account will be activated within 24 hours,Further updates please contact support...")->jsonResponse();
+        }
+
+        return $this->httpResponse
+                    ->setHttpMessage("Registered Successfully!... Your account will be activated within 24 hours,Further updates please contact support...")->jsonResponse();
+
+    }
+
+    public function activateAccountsx(Request $request)
+    {
+
+       
+        if($request->get('token')){
+        $token = base64_decode($request->get('token'));
+            User::Where('id',$token)->update(['is_active'=>1]);
+            return redirect('activated');
+            // return $this->httpResponse
+            //         ->setHttpMessage("Account Activated Successfully!...")
+            //         ->jsonResponse();
+        }
+
+
+        return $this->httpResponse
+                    ->setHttpMessage("Try Again")
+                    ->jsonResponse();
+
+
+    }
+
 
     public function uploadAvatar(Request $request): JsonResponse
     {
@@ -265,6 +408,10 @@ class AuthService extends BaseService
             $request['type'] = $user->role->code;
             $request['filetype'] = 'profile_image';
             $request['file_name'] = $imageName;
+
+            // $request['type'] =  'patient';
+            // $request['filetype'] =  'profile_image';
+
 
 
             /* $path =  config('api.fileSystem.' . $request->get('type'));
@@ -571,7 +718,9 @@ class AuthService extends BaseService
     public function otpNotification($data, $user) {
         $data += $user->toArray();
 
+
         $otp = $this->generateOtp($data['secret']);
+        $uid = base64_encode($user->id);
 
         $subject_prefix = 'A2Z Health';
 
@@ -586,6 +735,21 @@ class AuthService extends BaseService
                 $subject = $subject_prefix . ' - 2FA OTP';
                 break;
 
+            case 'activation':
+                $heading = 'User Account Activation';
+                $subject = $subject_prefix . ' - Activation';
+                break;
+
+            case 'provider_activated':
+                $heading = 'Your Account Activated';
+                $subject = $subject_prefix . ' - Activated';
+                break;
+
+            case 'registered':
+                $heading = 'Account Under Verification';
+                $subject = $subject_prefix . ' - Verification';
+                break;
+
             default:
                 $heading = '';
                 $subject = '';
@@ -594,17 +758,42 @@ class AuthService extends BaseService
         $sms_template = config('api.communication_sms_template.' . $data['otp_type']);
 
         if(!$sms_template) {
-            $sms_template = view('sms.default_otp', ['otp' => $otp, 'type' => $data['otp_type']])->render();
+            if($data['otp_type'] == 'activation'){
+                $sms_template = view('sms.activation', [ 'uid' => $uid])->render();
+
+            }else if($data['otp_type'] == 'provider_activated'){
+                $sms_template = view('sms.provider_activated', [ 'uid' => $uid])->render();
+
+            }else if($data['otp_type'] == 'registered'){
+                $sms_template = view('sms.registered', [ 'uid' => $uid])->render();
+
+            }else{
+                $sms_template = view('sms.default_otp', ['otp' => $otp, 'type' => $data['otp_type']])->render();                
+            }
         } else {
             $sms_template = (string) Str::of($sms_template)
-                ->replaceLast("{{otp}}", $otp);
+                ->replaceLast("{{otp}}", $otp)->replaceLast("{{uid}}", $uid);
         }
+
+        if($data['otp_type'] == 'activation'){
+                $mail_template = (new MailMessage)->markdown('mail.activation', ['heading' => $heading, 'uid' => $uid])->render();
+
+            }else if($data['otp_type'] == 'provider_activated'){
+                $mail_template = (new MailMessage)->markdown('mail.provider_activated', ['heading' => $heading, 'uid' => $uid])->render();
+
+            }else if($data['otp_type'] == 'registered'){
+                $mail_template = (new MailMessage)->markdown('mail.registered', ['heading' => $heading])->render();
+
+            }else{
+                $mail_template = (new MailMessage)->markdown('mail.otp', ['heading' => $heading, 'otp' => $otp])->render();             
+            }
+
 
         $payload = [
             'email' => [
                 'to' => [$user->email],
                 'subject' => $subject,
-                'message' => (new MailMessage)->markdown('mail.otp', ['heading' => $heading, 'otp' => $otp])->render(),
+                'message' => $mail_template,
             ],
             'sms' => [
                 'mobile' => $user->mobile,

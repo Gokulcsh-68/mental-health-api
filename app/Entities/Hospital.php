@@ -79,6 +79,12 @@ class Hospital extends BaseModel
         return $this->hasOne(Staff::class)->admin();
     }
 
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     protected function createModel($request)
     {
         $data = $this->getModelAttributes($request);
@@ -87,7 +93,7 @@ class Hospital extends BaseModel
 
             $hospital = $this->create($data);
 
-            $data['user']['role_id'] = Role::where("code", "hospital")->pluck('id')->first();
+            $data['user']['role_id'] = Role::where("code",  $data['user']['role'])->pluck('id')->first();
 
             $user = User::create($data['user']);
 
@@ -148,6 +154,10 @@ class Hospital extends BaseModel
         if(strtolower($request->get('searchkey')) == "inactive" || strtolower($request->get('searchkey')) == "active"){
         $status_key = (strtolower($request->get('searchkey')) == "inactive")?"2":"1";
 
+        }
+
+        if($request->user()->role->code == 'hospitalgroup'){
+            $model->Where('hospitals.group_id', $request->user()->id);
         }
 
         if ($request->get('searchkey')) {

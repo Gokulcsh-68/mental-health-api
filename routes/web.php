@@ -22,6 +22,12 @@ $router->get('/key', function() {
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+$router->get('/activated', function () use ($router) {
+    return view('activated');
+});
+
+
+$router->get('v1/users/activate-accounts-x', 'AuthService@activateAccountsx');
 
 $router->group(['prefix' => 'peripheral/', 'middleware' => 'peripheralAuth'], function ($router) {
     $router->post('{access_token}/deviceLogin', 'Hms6500@loginBackground');
@@ -46,6 +52,11 @@ $router->group(['prefix' => 'v1/', 'middleware' => 'clientAuth'], function ($rou
             $router->post('verify-email', 'AuthService@verifyEmail');
             $router->post('verify-otp', 'AuthService@verifyOtp');
             $router->post('resend-otp', 'AuthService@resendOtp');
+            $router->get('get-master-x', 'AuthService@getMasterx');
+            $router->get('get-timezone-x', 'AuthService@getTimezonex');
+            $router->post('save-patients-x', 'AuthService@savePatientsx');
+            $router->post('save-providers-x', 'AuthService@saveProvidersx');
+            $router->get('auth-guest-x', 'AuthService@authGuestx');
         });
 
         $router->get('resource/masters/list', 'MasterService@masterList');
