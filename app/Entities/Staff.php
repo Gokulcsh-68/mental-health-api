@@ -86,7 +86,7 @@ class Staff extends BaseModel
 
     public function hospitalgroup()
     {
-        return $this->belongsTo(HospitalGroup::class,'id','group_id');
+        return $this->belongsTo(HospitalGroup::class,'group_id','id');
     }
 
     public function scopeAdmin($query)

@@ -17,10 +17,13 @@ class CreateHospitalPatientTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('hospital_id');
+            $table->unsignedBigInteger('group_id')->nullable();
             $table->json('additional_info')->nullable();
+            $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict')->onUpdate('cascade');
             $table->foreign('hospital_id')->references('id')->on('hospitals')->onDelete('restrict')->onUpdate('cascade');
+            $table->foreign('group_id')->references('id')->on('hospital_groups')->onDelete('restrict')->onUpdate('cascade');
         });
     }
 
@@ -34,6 +37,7 @@ class CreateHospitalPatientTable extends Migration
         Schema::table('patients', function (Blueprint $table) {
             $table->dropForeign(['user_id']);
             $table->dropForeign(['hospital_id']);
+            $table->dropForeign(['group_id']);
         });
 
         Schema::dropIfExists('patients');

@@ -19,7 +19,7 @@ class Patient extends BaseModel
      * @var array
      */
     protected $fillable = [
-        "user_id", "hospital_id", "additional_info"
+        "user_id", "hospital_id", "additional_info","group_id"
     ];
 
     /**
@@ -75,7 +75,7 @@ class Patient extends BaseModel
 
     public function hospital()
     {
-        return $this->belongsTo(Hospital::class);
+        return $this->belongsTo(Hospital::class,'hospital_id','id');
     }
 
 
@@ -85,13 +85,20 @@ class Patient extends BaseModel
 
         DB::beginTransaction();
         try {
-
+            
             $data['user']['role_id'] = Role::where("code", $data['user']['role'])
                                             ->pluck('id')->first();
             $user = User::create($data['user']);
 
-            $data['hospital_id']  = $request->get('staff')->hospital_id;
+            if(!$request->get('hospital_id')){
+                $data['hospital_id']  = $request->user()->staff->hospital_id;
+            }
+
             $data['user_id']    = $user->id;
+
+            if($request->user()->role->code == 'hospitalgroup'){
+                $data['group_id'] = $request->user()->staff->group_id;
+            }
 
             $model = $this->create($data);
             DB::commit();
@@ -111,18 +118,24 @@ class Patient extends BaseModel
 
         DB::beginTransaction();
         try {
-            
+            // Nothing can update now on patients table
 
             $model = parent::updateModel($id, $request, $only);
-            unset($data['user']['role_id']);
+            $patient = Patient::find($id);
+
+            if(!empty($data['user']['role'])){
+                $data['user']['role_id'] = Role::where("code", $data['user']['role'])->pluck('id')->first();
+            }else{
+                unset($data['user']['role_id']);
+            }
+            
+            
             $patient->user->fill($data['user'])->save();
             DB::commit();
+
             return $patient;
-
-
-
         } catch (Exception $e) {
-            exceptionLogger("School Update Rollback", $e);
+            exceptionLogger("patient Update Rollback", $e);
             DB::rollback();
         }
 
@@ -138,6 +151,10 @@ class Patient extends BaseModel
         if ($request->get('staff')->hospital_id) {
             $model->where('patients.hospital_id', $request->get('staff')->hospital_id);
         }
+     
+        if ($request->get('staff')->group_id) { 
+            $model->where('patients.group_id', $request->get('staff')->group_id);
+        } 
 
         $role_code = Role::where('id', $request->user()->role_id)->value('code');
 

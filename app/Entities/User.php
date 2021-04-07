@@ -237,7 +237,15 @@ class User extends BaseModel
 
             $user = User::create($data);
 
-            
+            if($request->user()->role->code == 'hospitalgroup'){
+                $staff = [
+                    'group_id' => $request->user()->staff->group_id,
+                    'user_id' => $user->id,
+                    'is_admin' => 0,
+                ];
+
+                $staff = $user->staff()->create($staff);
+            }
             
             DB::commit();
             return $user;

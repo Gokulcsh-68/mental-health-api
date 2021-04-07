@@ -694,13 +694,13 @@ class Vital extends BaseModel
                 $input_data['range_code']             = '#008000';
             }
             
-            if ((($input_data['systolic'] > 120) && ($input_data['systolic'] <= 129)) && ($input_data['diastolic'] < 80)) {
+            if ((($input_data['systolic'] > 120) && ($input_data['systolic'] <= 129)) && ($input_data['diastolic'] <= 80)) {
                 $input_data['bpFlag']      = 'Elevated';
                 $input_data['bpFlagColor'] = 'success';
                 $input_data['range_code']             = '#008000';
             }
             
-            if ((($input_data['systolic'] >= 130) && ($input_data['systolic'] <= 139)) || (($input_data['diastolic'] > 80) && ($input_data['diastolic'] < 89))) {
+            if ((($input_data['systolic'] >= 130) && ($input_data['systolic'] <= 139)) || (($input_data['diastolic'] > 80) && ($input_data['diastolic'] <= 89))) {
                 $input_data['bpFlag']      = 'HIGH BLOOD PRESSURE(HYPERTENSION) STAGE 1';
                 $input_data['bpFlagColor'] = 'danger';
                 $input_data['range_code']             = '#ff0000';
@@ -825,7 +825,7 @@ class Vital extends BaseModel
                         $input_data['range_code']         = '#0000ff';
                     }
                     
-                    if (($input_data['heart'] > 40) && ($input_data['heart'] <= 60)) {
+                    if (($input_data['heart'] >= 40) && ($input_data['heart'] <= 60)) {
                         $input_data['heartRateFlag']      = 'Athlete';
                         $input_data['heartRateFlagColor'] = 'success';
                         $input_data['range_code']         = '#008000';

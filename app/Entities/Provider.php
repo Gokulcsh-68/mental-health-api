@@ -20,7 +20,7 @@ class Provider extends BaseModel
      * @var array
      */
     protected $fillable = [
-        "user_id", "school_id", "practicing_since", "license_no", "additional_info", "availabilities"
+        "user_id", "hospital_id", "practicing_since", "license_no", "additional_info", "availabilities","group_id"
     ];
 
     /**
@@ -111,7 +111,11 @@ class Provider extends BaseModel
 
             $user = $this->user()->create($data['user']);
 
-            $data['school_id'] = $request->get('staff')->school_id;
+
+            if($request->user()->role->code == 'hospitalgroup'){
+                $data['group_id'] = $request->user()->staff->group_id;
+            }
+
             $data['user_id'] = $user->id;
 
             $model = $this->create($data);
@@ -154,7 +158,15 @@ class Provider extends BaseModel
             }
 
         //remove strict fields
-        $exceptListKey = $this->multipleArraySearch($this->getFillable(), ['user_id', 'school_id']);
+
+            if($request->user()->role->code == 'hospitalgroup'){
+                $exceptKey = ['user_id'];
+            }
+            else{
+                $exceptKey = ['user_id', 'hospital_id'];
+            }
+            
+        $exceptListKey = $this->multipleArraySearch($this->getFillable(), $exceptKey);
         $only = array_except($this->getFillable(), $exceptListKey);
        
         DB::beginTransaction();
@@ -200,16 +212,20 @@ class Provider extends BaseModel
         $request = app('request');
 
         if($request->get('staff')){
-            if ($request->get('staff')->school_id) {
-                $model->where('providers.school_id', $request->get('staff')->school_id);
+
+            if ($request->get('staff')->hospital_id) { 
+                $model->where('providers.hospital_id', $request->get('staff')->hospital_id);
             }       
+            if ($request->get('staff')->group_id) { 
+                $model->where('providers.group_id', $request->get('staff')->group_id);
+            }   
 
 
-            if ($request->get('user_id')) {
+            if ($request->get('user_id')) { 
                 $model->where('providers.user_id', $request->get('user_id'));
             }         
         }
-        else{
+        else{ 
             $model->where('providers.user_id', $request->user()->id);
         }
 
@@ -220,8 +236,7 @@ class Provider extends BaseModel
                 $query->whereHas('user', function ($subquery) use ($request) {
                         $subquery->Where('users.email', 'LIKE',"%".$request->get('searchkey')."%")
                         ->orWhere('users.mobile', 'LIKE',"%".$request->get('searchkey')."%")
-                        ->orWhere('users.first_name', 'LIKE',"%".$request->get('searchkey')."%")
-                        ->orWhere('users.last_name', 'LIKE',"%".$request->get('searchkey')."%")
+                        ->orWhere(DB::raw("CONCAT(`first_name`, ' ', `last_name`)"), 'LIKE',"%".$request->get('searchkey')."%")
                         ->orWhere('users.address', 'LIKE',"%".$request->get('searchkey')."%")
                         ->orWhere('users.gender', 'LIKE',"%".$request->get('searchkey')."%");
                 });

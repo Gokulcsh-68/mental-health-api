@@ -64,28 +64,8 @@ class Master extends BaseModel
 
                 $form_slug = '';
 
-                switch ($logged_in_role_code) {
-
-                    case 'staff':
-                       if($form_role_code == 'staff'){
-                        $form_slug = ['healthy-heart', 'psychiatric-exam', 'stroke-scale'];
-                       }else if($form_role_code == 'student'){
-                        $form_slug = ['adhd'];
-                       }
-                    break;
-
-                    case 'school':
-                       if($form_role_code == 'staff'){
-                        $form_slug = ['healthy-heart', 'psychiatric-exam', 'stroke-scale'];
-                       }
-                    break;
-                    
-                    default:
-                       $form_slug = ['apgar', 'adhd', 'healthy-heart', 'psychiatric-exam', 'stroke-scale'];
-                    break;
-                }
-
-                // dd($form_slug);
+                 // ['apgar', 'adhd', 'healthy-heart', 'psychiatric-exam', 'stroke-scale'];
+                $form_slug = ['healthy-heart', 'psychiatric-exam', 'stroke-scale'];
 
                 if(!empty($form_slug)){
                     $model->whereIn('masters.slug', $form_slug);

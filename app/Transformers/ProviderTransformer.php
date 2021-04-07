@@ -29,6 +29,8 @@ class ProviderTransformer extends JsonResource
         return [
             'id' => $this->id,
             'user_id' => $this->user_id,
+            'hospital_id' => $this->hospital_id,
+            'group_id' => $this->group_id,
             'practicing_since' => $this->practicing_since,
             'license_no' => $this->license_no,
             'specialities' => $this->specialities,

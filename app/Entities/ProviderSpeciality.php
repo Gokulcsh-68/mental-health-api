@@ -18,7 +18,7 @@ class ProviderSpeciality extends BaseModel
      * @var array
      */
     protected $fillable = [
-        "provider_id", "speciality", "school_id"
+        "provider_id", "speciality"
     ];
 
     /**
