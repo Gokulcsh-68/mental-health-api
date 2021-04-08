@@ -2,6 +2,7 @@
 
 namespace App\Entities;
 
+use App\Entities\Hospital;
 use DB;
 
 class Patient extends BaseModel
@@ -94,10 +95,15 @@ class Patient extends BaseModel
                 $data['hospital_id']  = $request->user()->staff->hospital_id;
             }
 
+           
+
             $data['user_id']    = $user->id;
 
             if($request->user()->role->code == 'hospitalgroup'){
                 $data['group_id'] = $request->user()->staff->group_id;
+            }
+            else{
+                $data['group_id'] = Hospital::Where('id',$request->user()->staff->hospital_id)->value('group_id');
             }
 
             $model = $this->create($data);

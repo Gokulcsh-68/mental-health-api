@@ -111,9 +111,15 @@ class Provider extends BaseModel
 
             $user = $this->user()->create($data['user']);
 
+             if(!$request->get('hospital_id')){
+                $data['hospital_id']  = $request->user()->staff->hospital_id;
+            }
 
             if($request->user()->role->code == 'hospitalgroup'){
                 $data['group_id'] = $request->user()->staff->group_id;
+            }
+            else{
+                $data['group_id'] = Hospital::Where('id',$request->user()->staff->hospital_id)->value('group_id');
             }
 
             $data['user_id'] = $user->id;
