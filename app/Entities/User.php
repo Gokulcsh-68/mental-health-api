@@ -275,6 +275,26 @@ class User extends BaseModel
             $model->where('users.role_id', $role_id);
         }
 
+        if ($request->get('role') == "hospitalgroup") {
+          
+            $group_id = $request->user()->staff->group_id;
+
+            $model->whereHas('staff', function ($subquery) use ($request,$group_id) {
+                    $subquery->Where('staffs.is_admin', 0)
+                    ->Where('staffs.group_id', $group_id);
+            });
+        }
+
+        if ($request->get('role') == "hospital") {
+          
+            $hospital_id = $request->user()->staff->hospital_id;
+
+            $model->whereHas('staff', function ($subquery) use ($request,$hospital_id) {
+                    $subquery->Where('staffs.is_admin', 0)
+                    ->Where('staffs.hospital_id', $hospital_id);
+            });
+        }
+
 
         if ($request->get('searchkey')) {
 
