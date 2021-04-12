@@ -61,11 +61,13 @@ trait AuthHelper
         return $otp;
     }
 
-    protected function validateOtp($secret, $otp): bool
+     protected function validateOtp($secret, $otp)
     {
         $startTime = 0;
         if (Cache::has($secret)) {
             $startTime = Cache::get($secret);
+        }else{
+            return 'expired';
         }
 
         return $this->generateOtp($secret, $startTime) === $otp;

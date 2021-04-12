@@ -623,6 +623,7 @@ class AuthService extends BaseService
      * @return json
      */
 
+   
     public function verifyOtp(VerifyOtpRequest $request, User $user): JsonResponse
     {
         $message = trans('auth.failed');
@@ -634,12 +635,19 @@ class AuthService extends BaseService
             $user = User::where('email', $request->get('email'))
                 ->where('role_id', $roleId)
                 ->first();
-
             if (!empty($user)) {
-                if ($this->validateOtp($user->secret, $request->get('otp'))) {
-                    $user->update(['password' => $request->get('password')]);
-                    $this->httpResponse->setHttpMessage("Password changed Successfully.")
+                $check_otp_token = $this->validateOtp($user->secret, $request->get('otp'));
+
+                // dd($check_otp_token);
+
+                if (!empty($check_otp_token)) {
+                    if($check_otp_token === true){
+                        $user->update(['password' => $request->get('password')]);
+                        $this->httpResponse->setHttpMessage("Password changed Successfully.")
                         ->setHttpHeader(['Authorization' => $this->getAuthorization(['userId' => $user->id])]);
+                    }else{
+                        $this->httpResponse->setHttpMessage("OTP Expired.")->setHttpCode(400);
+                    }
                 } else {
                     $this->httpResponse->setHttpMessage("Invalid OTP.")->setHttpCode(400);
                 }
@@ -651,12 +659,17 @@ class AuthService extends BaseService
 
         if ($request->get('action') == 'resetPassword') {
             $user = User::where('email', $request->get('email'))
-                ->where('role_id', $roleId)
-                ->first();
+                        ->where('role_id', $roleId)->first();
             if (!empty($user)) {
-                if ($this->validateOtp($user->secret, $request->get('otp'))) {
-                    $user->update(['password' => $request->get('password')]);
-                    $this->httpResponse->setHttpMessage("Successfully password changed");
+                $check_otp_token = $this->validateOtp($user->secret, $request->get('otp'));
+
+                if (!empty($check_otp_token)) {
+                    if($check_otp_token === true){
+                        $user->update(['password' => $request->get('password')]);
+                        $this->httpResponse->setHttpMessage("Successfully password changed");
+                    }else{
+                        $this->httpResponse->setHttpMessage("OTP Expired.")->setHttpCode(400);
+                    }
                 } else {
                     $this->httpResponse->setHttpMessage("Invalid OTP.")->setHttpCode(400);
                 }
@@ -669,23 +682,29 @@ class AuthService extends BaseService
         if ($request->get('action') == '2faAuthentication') {
             $user = $user->generalLoginAttempt($requestedData);
             if (!empty($user)) {
-                if ($this->validateOtp($user->secret, $request->get('otp'))) {
-                    $this->httpResponse->setHttpMessage("OTP Verified Successfully.");
-                    $result = [];
-                    $result['info'] = $user->getBasicInfo();
-                    $data['userId'] = $user->id;
-                    $Authorization  = $result['token'] =  $this->getAuthorization($data);
+                $check_otp_token = $this->validateOtp($user->secret, $request->get('otp'));
 
-                    $token_details = $this->decodeJwt($Authorization);
-                    if($token_details->exp)
-                        $result['token_expiration_time'] = $token_details->exp;
-                    $result['status'] = 'OTP_VERIFIED';
+                if (!empty($check_otp_token)) {
+                    if($check_otp_token === true){
+                        $this->httpResponse->setHttpMessage("OTP Verified Successfully.");
+                        $result = [];
+                        $result['info'] = $user->getBasicInfo();
+                        $data['userId'] = $user->id;
+                        $Authorization  = $result['token'] =  $this->getAuthorization($data);
 
-                    return $this->httpResponse->setHttpData($result)
-                        // ->setHttpData(['status' => 'OTP_VERIFIED'])
-                        ->setHttpHeader(['Authorization' => $Authorization])
-                        ->jsonResponse();
+                        $token_details = $this->decodeJwt($Authorization);
+                        if($token_details->exp)
+                            $result['token_expiration_time'] = $token_details->exp;
+                        $result['status'] = 'OTP_VERIFIED';
 
+                        return $this->httpResponse->setHttpData($result)
+                            // ->setHttpData(['status' => 'OTP_VERIFIED'])
+                            ->setHttpHeader(['Authorization' => $Authorization])
+                            ->jsonResponse();
+                    }else{
+                        $this->httpResponse->setHttpMessage("OTP Expired.")->setHttpCode(400);
+                        return $this->httpResponse->jsonResponse();
+                    }
                 } else {
                     $this->httpResponse->setHttpMessage("Invalid OTP.")->setHttpCode(400);
                     return $this->httpResponse->jsonResponse();
@@ -696,6 +715,7 @@ class AuthService extends BaseService
 
         return $this->httpResponse->setHttpMessage($message)->setHttpCode(401)->jsonResponse();
     }
+
 
     // /**
     //  * Verify Email.
