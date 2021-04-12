@@ -1,0 +1,1 @@
+Your Activation link is {{ config('app.url') }}/{{ config('app.current_version') }}/users/activate-accounts-x?token={{$uid}}

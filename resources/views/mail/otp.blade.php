@@ -1,5 +1,5 @@
 @component('mail::message')
-# {{ $heading }}
+
 
 Dear User,
 

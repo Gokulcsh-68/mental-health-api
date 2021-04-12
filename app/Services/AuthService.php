@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Entities\Doc;
+use App\Entities\Hospital;
 use App\Entities\Master;
 use App\Entities\Patient;
 use App\Entities\PatientHealth;
@@ -11,6 +12,7 @@ use App\Entities\PhysicalExamination;
 use App\Entities\Provider;
 use App\Entities\ReviewOfSystem;
 use App\Entities\Role;
+use App\Entities\Staff;
 use App\Entities\Timezone;
 use App\Entities\User;
 use App\Entities\Vital;
@@ -317,6 +319,33 @@ class AuthService extends BaseService
 
     }
 
+    public function saveHospitalsx(Request $request): JsonResponse
+    {
+
+        $requestClass = sprintf('\App\Requests\%sRequest', 'Hospital');
+        class_exists($requestClass) ? app()->make($requestClass) : $request;
+
+
+        $hospital_request = $request;
+        $hospital_request->merge(['register' => true]);
+
+        $hospital = Hospital::createModel($hospital_request)->toArray();
+        $user_id = Staff::where('user_id',$hospital['id'])->value('user_id');
+    
+        $user = User::where('id', $user_id)
+            ->first();
+        if (!empty($user)) {
+            $data['otp_type'] = "registered";
+            $this->otpNotification($data, $user);
+
+            return $this->httpResponse->setHttpMessage("Success, Check!... Your account will be activated within 24 hours,Further updates please contact support...")->jsonResponse();
+        }
+
+        return $this->httpResponse
+                    ->setHttpMessage("Registered Successfully!... Your account will be activated within 24 hours,Further updates please contact support...")->jsonResponse();
+
+    }
+
     public function savePatientsx(Request $request): JsonResponse
     {
 
@@ -376,10 +405,10 @@ class AuthService extends BaseService
         if($request->get('token')){
         $token = base64_decode($request->get('token'));
             User::Where('id',$token)->update(['is_active'=>1]);
-            return redirect('activated');
-            // return $this->httpResponse
-            //         ->setHttpMessage("Account Activated Successfully!...")
-            //         ->jsonResponse();
+            // return redirect('activated');
+            return $this->httpResponse
+                    ->setHttpMessage("Account Activated Successfully!...")
+                    ->jsonResponse();
         }
 
 

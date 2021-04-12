@@ -53,6 +53,8 @@ return [
      */
 
     'url' => env('APP_URL', 'http://localhost'),
+    'current_version' => 'v1',
+    'web_url' => 'https://v3.folio.a2zhealth.in',
 
     /*
     |--------------------------------------------------------------------------

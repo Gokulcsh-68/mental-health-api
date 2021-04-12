@@ -171,6 +171,13 @@ class Patient extends BaseModel
             $status_key = (strtolower($request->get('searchkey')) == "inactive")?"0":"1";
         }
 
+        if(strtolower($request->get('status')) == "inactive" || strtolower($request->get('status')) == "active"){
+            $status = (strtolower($request->get('status')) == "inactive")?"0":"1";
+            $model->whereHas('user', function ($subquery) use ($request, $status) {
+                    $subquery->Where('users.is_active', 'LIKE',"%".$status."%");
+            });
+        }
+
 
         if ($request->get('searchkey')) {
             $model->whereHas('user', function ($subquery) use ($request, $status_key) {

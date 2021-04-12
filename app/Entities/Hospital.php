@@ -92,9 +92,15 @@ class Hospital extends BaseModel
         try {
 
             $data['group_id'] = null;
-            if($request->user()->role->code == 'hospitalgroup'){
+
+            if(!$request->filled('register')) {
+               
+                if($request->user()->role->code == 'hospitalgroup'){
                 $data['group_id'] = $request->user()->staff->group_id;
+                }
             }
+
+            
 
             if($request->get('group_id')){
                 $data['group_id'] = $request->get('group_id');

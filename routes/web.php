@@ -56,6 +56,7 @@ $router->group(['prefix' => 'v1/', 'middleware' => 'clientAuth'], function ($rou
             $router->get('get-timezone-x', 'AuthService@getTimezonex');
             $router->post('save-patients-x', 'AuthService@savePatientsx');
             $router->post('save-providers-x', 'AuthService@saveProvidersx');
+            $router->post('save-hospitals-x', 'AuthService@saveHospitalsx');
             $router->get('auth-guest-x', 'AuthService@authGuestx');
         });
 

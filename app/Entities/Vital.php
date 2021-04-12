@@ -455,6 +455,12 @@ class Vital extends BaseModel
                 $input_data['range_code']  = '#ff0000';
             }
 
+            if ($input_data['blood_sugar'] < 20) {
+                $input_data['bsFlag']      = 'Dangerously low';
+                $input_data['bsFlagColor'] = 'danger';
+                $input_data['range_code']  = '#ff0000';
+            }
+
 
         }
 
@@ -489,6 +495,12 @@ class Vital extends BaseModel
 
             if ($input_data['blood_sugar'] >= 13.9) {
                 $input_data['bsFlag']      = 'Dangerous';
+                $input_data['bsFlagColor'] = 'danger';
+                $input_data['range_code']  = '#ff0000';
+            }
+
+            if ($input_data['blood_sugar'] < 1.1) {
+                $input_data['bsFlag']      = 'Dangerously low';
                 $input_data['bsFlagColor'] = 'danger';
                 $input_data['range_code']  = '#ff0000';
             }
@@ -543,7 +555,7 @@ class Vital extends BaseModel
     
     public static function urine_flag($input_data)
     {
-        $input_data['leukocytes_message']            = '';
+        $input_data['leukocytes_message']    = '';
         $input_data['leukocytes_flag']       = '';
         $input_data['leukocytes_range_code'] = '';
 
@@ -588,7 +600,7 @@ class Vital extends BaseModel
             
             switch ($input_data['protein']) {
                 case '+':
-                    $input_data['protein_message']            = 'Small';
+                    $input_data['protein_message']    = 'Small';
                     $input_data['protein_flag']       = 'success';
                     $input_data['protein_range_code'] = '#008000';
                     break;
@@ -641,9 +653,6 @@ class Vital extends BaseModel
         if (!empty($input_data['urine'])) {
         
             if ($input_data['urine'] > 0) {
-                
-                
-                
                 if ($input_data['urine'] < 6.0) {
                     $input_data['value']            = 'Very Acidic';
                     $input_data['value_flag']       = 'danger';
@@ -691,39 +700,46 @@ class Vital extends BaseModel
             if (($input_data['systolic'] < 120) && ($input_data['diastolic'] < 80)) {
                 $input_data['bpFlag']      = 'NORMAL';
                 $input_data['bpFlagColor'] = 'success';
-                $input_data['range_code']             = '#008000';
+                $input_data['range_code']  = '#008000';
             }
             
             if ((($input_data['systolic'] > 120) && ($input_data['systolic'] <= 129)) && ($input_data['diastolic'] <= 80)) {
                 $input_data['bpFlag']      = 'Elevated';
                 $input_data['bpFlagColor'] = 'success';
-                $input_data['range_code']             = '#008000';
+                $input_data['range_code']  = '#008000';
             }
             
             if ((($input_data['systolic'] >= 130) && ($input_data['systolic'] <= 139)) || (($input_data['diastolic'] > 80) && ($input_data['diastolic'] <= 89))) {
                 $input_data['bpFlag']      = 'HIGH BLOOD PRESSURE(HYPERTENSION) STAGE 1';
                 $input_data['bpFlagColor'] = 'danger';
-                $input_data['range_code']             = '#ff0000';
+                $input_data['range_code']  = '#ff0000';
             }
             
             if (($input_data['systolic'] >= 140) || ($input_data['diastolic'] >= 90)) {
                 $input_data['bpFlag']      = 'HIGH BLOOD PRESSURE(HYPERTENSION) STAGE 2';
                 $input_data['bpFlagColor'] = 'danger';
-                $input_data['range_code']             = '#ff0000';
+                $input_data['range_code']  = '#ff0000';
             }
             
             if (($input_data['systolic'] > 180) || ($input_data['diastolic'] > 120)) {
                 $input_data['bpFlag']      = 'HYPERTENSIVE CRISIS(consult your doctor immediately)';
                 $input_data['bpFlagColor'] = 'danger';
-                $input_data['range_code']             = '#ff0000';
+                $input_data['range_code']  = '#ff0000';
             }
-            
+
+            // Abnormal Level
+            if (($input_data['systolic'] < 90) && ($input_data['diastolic'] < 60)) {
+                $input_data['bpFlag']      = 'LOW BLOOD PRESSURE';
+                $input_data['bpFlagColor'] = 'danger';
+                $input_data['range_code']  = '#ff0000';
+            }
         }
         
         return $input_data;
     }
     
         
+         
     public static function heart_rate_flag($input_data, $years, $months, $days)
     {
         $input_data['heartRateFlag']      = '';
@@ -868,7 +884,7 @@ class Vital extends BaseModel
                         $input_data['range_code']         = '#0000ff';
                     }
                     
-                    if (($input_data['heart'] > 100) && ($input_data['heart'] <= 205)) {
+                    if (($input_data['heart'] >= 100) && ($input_data['heart'] <= 205)) {
                         $input_data['heartRateFlag']      = 'Neonate';
                         $input_data['heartRateFlagColor'] = 'success';
                         $input_data['range_code']         = '#008000';
@@ -933,7 +949,7 @@ class Vital extends BaseModel
             
             if ($input_data['total_unit'] == 'mmol/L') {
                 
-                if ($input_data['total'] < 5.2) {
+                if ($input_data['total'] < 5.3) {
                     $input_data['total_message'] = 'Optimal';
                 }
 
@@ -950,15 +966,15 @@ class Vital extends BaseModel
                 case 'Optimal':
                     $input_data['total_message_flag'] = 'success';
                     $input_data['total_range_code']   = '#008000';
-                    break;
+                break;
                 case 'Intermediate':
                     $input_data['total_message_flag'] = 'success';
                     $input_data['total_range_code']   = '#008000';
-                    break;
+                break;
                 case 'High':
                     $input_data['total_message_flag'] = 'danger';
                     $input_data['total_range_code']   = '#ff0000';
-                    break;
+                break;
             }
         }
 
@@ -1182,15 +1198,15 @@ class Vital extends BaseModel
                 case 'Optimal':
                     $input_data['hdl_ldl_message_flag'] = 'success';
                     $input_data['hdl_ldl_range_code']   = '#008000';
-                    break;
+                break;
                 case 'Intermediate':
                     $input_data['hdl_ldl_message_flag'] = 'success';
                     $input_data['hdl_ldl_range_code']   = '#008000';
-                    break;
+                break;
                 case 'High':
                     $input_data['hdl_ldl_message_flag'] = 'danger';
                     $input_data['hdl_ldl_range_code']   = '#ff0000';
-                    break;
+                break;
             }
         }
 
