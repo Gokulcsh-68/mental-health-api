@@ -19,10 +19,15 @@ class ProviderTransformer extends JsonResource
     {
 
         $unavailable = [];
+        $advance_available = [];
         if($request->get('cdate')){
             if($request->get('cdate') != ''){
                 $condition_date = date('Y-m-d',strtotime($request->get('cdate')));
                 $unavailable = $this->providerUnavailability->where('from_date',$condition_date)->toArray();
+                $advance_available = $this->customAvailabilityDetail
+                                    ->where('from_date','<=',$condition_date)
+                                    ->where('to_date','>=',$condition_date)
+                                    ->toArray();
             }
         }
 
@@ -38,6 +43,7 @@ class ProviderTransformer extends JsonResource
             'availabilities' => $this->availabilities,
             'provider_speciality' => $this->providerSpeciality,
             'unavailabilities' => $unavailable,
+            'advance_available' => $advance_available,
             'user' => (new UserTransformer($this->user)),
         ];
     }
