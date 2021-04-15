@@ -19,7 +19,7 @@ class CustomAvailabilityDetail extends BaseModel
      * @var array
      */
     protected $fillable = [
-        "provider_id", "from_date", "to_date", "timing"
+        "provider_id", "from_date", "timing"
     ];
 
     /**
@@ -28,6 +28,7 @@ class CustomAvailabilityDetail extends BaseModel
      * @var array
      */
     protected $casts = [
+        "timing"=>"object"
         
     ];
 
@@ -66,107 +67,34 @@ class CustomAvailabilityDetail extends BaseModel
     protected $dispatchesEvents = [
         
     ];
+    
+    public function providers()
+    {
+        return $this->belongsTo(Provider::class);
+    }
 
-    protected function createModel($request) {
-        $data = $this->getModelAttributes($request);
 
-        DB::beginTransaction();
-        try {
 
-            // $data['from_date']  = Carbon::parse($data['from_date'])->toDate();
-            // $data['to_date']    = Carbon::parse($data['to_date'])->toDate();
-            $data['timing']    = json_encode($data['timing']);
+    public function applyFilters($model, $isPluck)
+    {
+        $model = parent::applyFilters($model, $isPluck);
+        $request = app('request');
 
-            $model = $this->create($data);
-            DB::commit();
-
-            return $model;
-        } catch(Exception $e) {
-            exceptionLogger("Custom Availability Detail Create Rollback", $e);
-            DB::rollback();
+        if($request->get('user_id')){
+            $model->where('provider_id', $request->get('user_id'));
+        }
+        else{
+            $model->where('provider_id', $request->user()->id);
         }
         
-        return null;
-    }
+        if($request->get('from') && $request->get('to')){
 
-    protected function updateModel($id, $request, $only = []) {
-
-        $data = $this->getModelAttributes($request);
-
-        DB::beginTransaction();
-        try {
-            $model = parent::updateModel($id, $request, $only);
-            DB::commit();
-            return $model;
-        } catch(Exception $e) {
-            exceptionLogger("Custom Availability Detail Update Rollback", $e);
-            DB::rollback();
+            $from = date('Y-m-d',strtotime($request->get('from')));
+            $to = date('Y-m-d',strtotime($request->get('to')));
+            $model->whereBetween('from_date', [$from,$to]);
         }
 
-        return null;
-    }
 
-    protected function customAvailabilityCheck($request) {
-        $data = $this->getModelAttributes($request);
-        $responseData = [
-            'status' => true,
-            'error_type' => '',
-        ];
-
-        $data['from_date']  = Carbon::parse($data['from_date'])->toDateString();
-        $data['to_date']    = Carbon::parse($data['to_date'])->toDateString();
-
-        $details = CustomAvailabilityDetail::where('provider_id','=', $data['provider_id'])
-                    ->where(function($query) use ($data){
-                        $query->whereBetween('from_date', [$data['from_date'], $data['to_date']])
-                            ->orWhereBetween('to_date', [$data['from_date'], $data['to_date']]);
-                    })
-                    ->get()->count();
-
-        if ($details >= 1) {
-            $responseData = [
-                'status'     => false,
-                'error_type' => 'Already',
-            ];
-        }
-        return $responseData;
-    }
-
-    protected function editCustomAvailabilityCheck($request) {
-        $data = $this->getModelAttributes($request);
-        $responseData = [
-            'status' => true,
-            'error_type' => '',
-        ];
-
-        $authorized = CustomAvailabilityDetail::where('provider_id','=', $data['provider_id'])
-                ->where('id','=', $request->id)
-                ->get()->count();
-
-
-        if ($authorized == 1) {
-            $data['from_date']  = Carbon::parse($data['from_date'])->toDateString();
-            $data['to_date']    = Carbon::parse($data['to_date'])->toDateString();
-            
-            $details = CustomAvailabilityDetail::where('provider_id','=', $data['provider_id'])
-                        ->where('id','!=', $request->id)
-                        ->where(function($query) use ($data){
-                            $query->whereBetween('from_date', [$data['from_date'], $data['to_date']])
-                                ->orWhereBetween('to_date', [$data['from_date'], $data['to_date']]);
-                        })
-                        ->get()->count();
-            if ($details >= 1) {
-                $responseData = [
-                    'status'     => false,
-                    'error_type' => 'Already',
-                ];
-            }
-        } else {
-            $responseData = [
-                'status'     => false,
-                'error_type' => 'Unauthorized',
-            ];
-        }   
-        return $responseData;
+        return $model;
     }
 }

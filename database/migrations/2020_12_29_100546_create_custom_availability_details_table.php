@@ -17,6 +17,7 @@ class CreateCustomAvailabilityDetailsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('provider_id');
             $table->date('from_date');
+            $table->date('to_date');
             $table->json('timing')->nullable();
             $table->timestamps();
 
