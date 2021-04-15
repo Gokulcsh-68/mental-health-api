@@ -19,7 +19,7 @@ class CustomAvailabilityDetail extends BaseModel
      * @var array
      */
     protected $fillable = [
-        "provider_id", "from_date", "timing"
+        "provider_id", "from_date","to_date", "timing"
     ];
 
     /**
