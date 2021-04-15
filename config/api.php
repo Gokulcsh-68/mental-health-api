@@ -7,11 +7,11 @@ return [
         "jwtTtl" => env('JWT_TTL', 864000000),
     ],
     'fileSystem' => [
-        'admin' => env('S3_BASE_PATH') . 'school-folio/%s/',
-        'school' => env('S3_BASE_PATH') . 'school-folio/%s/',
-        'staff' => env('S3_BASE_PATH') . 'school-folio/%s/',
-        'provider' => env('S3_BASE_PATH') . 'school-folio/%s/',
-        'student' => env('S3_BASE_PATH') . 'school-folio/%s/',
+        'admin' => env('S3_BASE_PATH') . 'a2z-telegaruda-v2/%s/',
+        'hospitalgroup' => env('S3_BASE_PATH') . 'a2z-telegaruda-v2/%s/',
+        'hospital' => env('S3_BASE_PATH') . 'a2z-telegaruda-v2/%s/',
+        'provider' => env('S3_BASE_PATH') . 'a2z-telegaruda-v2/%s/',
+        'folio' => env('S3_BASE_PATH') . 'a2z-telegaruda-v2/%s/',
     ],
     'communication_sms_template' => [
         'forgotPassword' => 'Your ' . config('app.name') . ' forget OTP is {{otp}}',
