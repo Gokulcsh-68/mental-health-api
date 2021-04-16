@@ -49,6 +49,8 @@ class DatabaseSeeder extends Seeder
             AssementFormApgarSeeder::class,
             HealthFormSeeder::class,
             IcdSeeder::class,
+            SigSeeder::class,
+            UpdateImmunisationSeeder::class,
         ]);
     }
 }
