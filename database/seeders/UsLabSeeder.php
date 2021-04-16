@@ -44,6 +44,7 @@ class UsLabSeeder extends Seeder
                 $data = explode(',', $item);
                 $slug = trim($data[0]);
                 $name = trim($data[1]);
+                $name = str_replace('^', ',', $name);
                 
                 $us_labs_data[] = [
                     'master_type_slug' => 'lab-us', 
