@@ -1,708 +1,708 @@
 Test ID,Test Order Name
-Oct-02,OCT-2 Immunostain ^  Technical Component Only
-Oct-04,OCT3/4 Immunostain ^  Technical Component Only
-17BFP,Fluticasone 17-Beta-Carboxylic Acid ^  Urine
-17OHP,17-Hydroxypregnenolone ^  Serum
-199PT,Carbohydrate Antigen 19-9 (CA 19-9) ^  Peritoneal Fluid
-21DOC,21-Deoxycortisol ^  Serum
-21OH,21-Hydroxylase Antibodies ^  Serum
-22C3,Programmed Death-Ligand 1 (PD-L1) (22C3) ^  Semi-Quantitative Immunohistochemistry ^  Manual
-23BPG,2 ^ 3-Dinor-11Beta-Prostaglandin F2 Alpha ^  Urine
-2C19V,Cytochrome P450 2C19 Genotype ^  Varies
-2C9GV,Cytochrome P450 2C9 Genotype ^  Varies
-2D6CV,Cytochrome P450 2D6 (CYP2D6) Comprehensive Cascade ^  Varies
-3A5V,CYP3A5 Genotype ^  Varies
-3MT,3-Methoxytyramine ^  24 Hour ^  Urine
-7AC4,7AC4 ^  Bile Acid Synthesis ^  Serum
-A1AF,Alpha-1-Antitrypsin ^  Random ^  Feces
-A1R,A1 Antigen Subtype ^  Whole Blood
-A2M,Alpha-2-Macroglobulin ^  Serum
-A2PI,Alpha-2 Plasmin Inhibitor ^  Plasma
-AAH,Amyloid A (Hepatic) Immunostain ^  Technical Component Only
-AAMY,Alpha-Amylase ^  IgE ^  Serum
-AAT,Alpha-1-Antitrypsin ^  Serum
-AATRP,Alpha-1-Antitrypsin (AAT) Immunostain ^  Technical Component Only
-AB2GP,Beta-2 Glycoprotein 1 Antibodies ^  IgA ^  Serum
-ABCRS,Alpha/Beta Crystallin IHC ^  Technical Component Only
-ABIDR,Antibody Identification ^  RBC
-ABOMR,ABORh ^  RBC
-ABONR,ABO/Rh Newborn ^  RBC
-ABTIR,Antibody Titer ^  Whole Blood and Serum
-ABYSR,Antibody Screen with Reflexed Antibody Identification ^  RBC
-ACAC,Acacia ^  IgE ^  Serum
-ACAR,Acarus siro ^  IgE ^  Serum
-ACARP,Acanthamoeba species Molecular Detection ^  PCR ^  Ocular
-ACASM,Pernicious Anemia Cascade ^  Serum
-ACE,Angiotensin Converting Enzyme ^  Serum
-ACHS,Acetylcholinesterase ^  Erythrocytes
-ACLIP,Phospholipid (Cardiolipin) Antibodies ^  IgA ^  Serum
-ACMA,Acetaminophen ^  Serum
-ACT,Actinomyces Culture ^  Varies
-ACTH,Adrenocorticotropic Hormone ^  Plasma
-ACTHI,Adrenocorticotropic Hormone (ACTH) Immunostain ^  Technical Component Only
-ADALX,Adalimumab Quantitative with Reflex to Antibody ^  Serum
-ADEVL,Alzheimer Disease Evaluation ^  Spinal Fluid
-ADMA,Asymmetric Dimethylarginine ^  Plasma
+Oct-02,"OCT-2 Immunostain,  Technical Component Only"
+Oct-03,"OCT3/4 Immunostain,  Technical Component Only"
+17BFP,"Fluticasone 17-Beta-Carboxylic Acid,  Urine"
+17OHP,"17-Hydroxypregnenolone,  Serum"
+199PT,"Carbohydrate Antigen 19-9 (CA 19-9),  Peritoneal Fluid"
+21DOC,"21-Deoxycortisol,  Serum"
+21OH,"21-Hydroxylase Antibodies,  Serum"
+22C3,"Programmed Death-Ligand 1 (PD-L1) (22C3),  Semi-Quantitative Immunohistochemistry,  Manual"
+23BPG,"2, 3-Dinor-11Beta-Prostaglandin F2 Alpha,  Urine"
+2C19V,"Cytochrome P450 2C19 Genotype,  Varies"
+2C9GV,"Cytochrome P450 2C9 Genotype,  Varies"
+2D6CV,"Cytochrome P450 2D6 (CYP2D6) Comprehensive Cascade,  Varies"
+3A5V,"CYP3A5 Genotype,  Varies"
+3MT,"3-Methoxytyramine,  24 Hour,  Urine"
+7AC4,"7AC4,  Bile Acid Synthesis,  Serum"
+A1AF,"Alpha-1-Antitrypsin,  Random,  Feces"
+A1R,"A1 Antigen Subtype,  Whole Blood"
+A2M,"Alpha-2-Macroglobulin,  Serum"
+A2PI,"Alpha-2 Plasmin Inhibitor,  Plasma"
+AAH,"Amyloid A (Hepatic) Immunostain,  Technical Component Only"
+AAMY,"Alpha-Amylase,  IgE,  Serum"
+AAT,"Alpha-1-Antitrypsin,  Serum"
+AATRP,"Alpha-1-Antitrypsin (AAT) Immunostain,  Technical Component Only"
+AB2GP,"Beta-2 Glycoprotein 1 Antibodies,  IgA,  Serum"
+ABCRS,"Alpha/Beta Crystallin IHC,  Technical Component Only"
+ABIDR,"Antibody Identification,  RBC"
+ABOMR,"ABORh,  RBC"
+ABONR,"ABO/Rh Newborn,  RBC"
+ABTIR,"Antibody Titer,  Whole Blood and Serum"
+ABYSR,"Antibody Screen with Reflexed Antibody Identification,  RBC"
+ACAC,"Acacia,  IgE,  Serum"
+ACAR,"Acarus siro,  IgE,  Serum"
+ACARP,"Acanthamoeba species Molecular Detection,  PCR,  Ocular"
+ACASM,"Pernicious Anemia Cascade,  Serum"
+ACE,"Angiotensin Converting Enzyme,  Serum"
+ACHS,"Acetylcholinesterase,  Erythrocytes"
+ACLIP,"Phospholipid (Cardiolipin) Antibodies,  IgA,  Serum"
+ACMA,"Acetaminophen,  Serum"
+ACT,"Actinomyces Culture,  Varies"
+ACTH,"Adrenocorticotropic Hormone,  Plasma"
+ACTHI,"Adrenocorticotropic Hormone (ACTH) Immunostain,  Technical Component Only"
+ADALX,"Adalimumab Quantitative with Reflex to Antibody,  Serum"
+ADEVL,"Alzheimer Disease Evaluation,  Spinal Fluid"
+ADMA,"Asymmetric Dimethylarginine,  Plasma"
 ADMBU,ADAMTS13 Inhibitor Bethesda Titer
 ADMIS,ADAMTS13 Inhibitor Screen Assay
-ADNA,DNA Double-Stranded Antibodies ^  IgG ^  Serum
-ADNAR,DNA Double-Stranded (dsDNA) Antibodies with Reflex ^  IgG ^  Serum
-ADNAS,Anti-DNase B Titer ^  Serum
-ADV,Adenovirus Immunostain ^  Technical Component Only
-AERMC,Aeromonas Culture ^  Feces
-AFP,Alpha-Fetoprotein (AFP) Tumor Marker ^  Serum
-AFPPT,Alpha-Fetoprotein (AFP) ^  Peritoneal Fluid
-AFPSF,Alpha-Fetoprotein (AFP) ^  Spinal Fluid
-AFSH,Alpha FSH Immunostain ^  Technical Component Only
-AGAW,Alpha-Galactosidase ^  Leukocytes
-AH50,Complement ^  Alternate Pathway (AH50) ^  Functional ^  Serum
-AHDV,Hepatitis D Virus Total Antibodies ^  Serum
-AIVC,Aldosterone ^  Inferior Vena Cava ^  Serum
-AL,Aluminum ^  Serum
-ALAV,Aldosterone ^  Left Adrenal Vein ^  Serum
-ALB,Albumin ^  Serum
-ALBFL,Albumin ^  Body Fluid
-ALBPS,Albumin ^  Plasma
-ALBSF,Albumin ^  Spinal Fluid
-ALC,Ethanol ^  Blood
-ALCX,Ethanol ^  Chain of Custody ^  Blood
-ALDEF,Alpha Defensin ^  Lateral Flow Assay ^  Synovial Fluid
-ALDR,Grey Alder ^  IgE ^  Serum
-ALDS,Aldosterone ^  Serum
-ALFA,Alpha-Lactoalbumin ^  IgE ^  Serum
-ALFP,Alpha-Fetoprotein (AFP) Immunostain ^  Technical Component Only
-ALK,Anaplastic Lymphoma Kinase (ALK) Immunostain ^  Technical Component Only
-ALM,Almond ^  IgE ^  Serum
-ALP,Alkaline Phosphatase ^  Serum
-ALS,Aldolase ^  Serum
-ALT,Alanine Aminotransferase (ALT) (GPT) ^  Serum
-ALTN,Alternaria tenuis ^  IgE ^  Serum
-AMA,Mitochondrial Antibodies (M2) ^  Serum
-AMH,Antimullerian Hormone ^  Serum
-AMIO,Amiodarone ^  Serum
-AMLPC,Amylase ^  Pancreatic Cyst Fluid
-AMMO,Ammonium ^  24 Hour ^  Urine
-AMOBS,Amobarbital ^  Serum
-AMOXY,Amoxicillin ^  IgE ^  Serum
-AMP,Ampicillin ^  IgE ^  Serum
-AMPHU,Amphetamines Confirmation ^  Random ^  Urine
-AMPHX,Amphetamines Confirmation ^  Chain of Custody ^  Urine
-AMPMX,Amphetamine-Type Stimulants Confirmation ^  Chain of Custody ^  Meconium
-AMS,Amylase ^  Total ^  Serum
-AMSU,Amylase ^  Timed Collection ^  Urine
-AMYA,Amyloid A (SAA) Immunostain ^  Technical Component Only
-AMYPI,Amyloid P (SAP) Immunostain ^  Technical Component Only
-ANA2,Antinuclear Antibodies (ANA) ^  Serum
-ANAE,Bacterial Culture ^  Anaerobic ^  Varies
-ANAES,Bacterial Culture ^  Anaerobic with Antimicrobial Susceptibilities ^  Varies
-ANAP,Anaplasma phagocytophilum (Human Granulocytic Ehrlichiosis) Antibody ^  Serum
-ANCA,Cytoplasmic Neutrophil Antibodies ^  Serum
-ANCH,Anchovy ^  IgE ^  Serum
-ANIDE,Organism Referred for Identification ^  Anaerobic Bacteria
-ANISP,Anisakis ^  Parasite ^  IgE ^  Serum
-ANNEX,Annexin-1 Immunostain ^  Technical Component Only
-ANSE,Anise ^  IgE ^  Serum
-ANST,Androstenedione ^  Serum
-APGH,Alpha-Subunit Pituitary Tumor Marker ^  Serum
-APIN,Australian Pine ^  IgE ^  Serum
-APIVC,Aldosterone ^  Inferior Vena Cava ^  Plasma
-APIXA,Apixaban ^  Anti-Xa ^  Plasma
-APLAV,Aldosterone ^  Left Adrenal Vein ^  Plasma
-APOA1,Apolipoprotein A1 ^  Serum
-APOLB,Apolipoprotein B ^  Serum
-APPI,Amyloid Precursor Protein (APP) Immunostain ^  Technical Component Only
-APPL,Apple ^  IgE ^  Serum
-APR,Apricot ^  IgE ^  Serum
-APRAV,Aldosterone ^  Right Adrenal Vein ^  Plasma
-APTSC,Activated Partial Thromboplastin Time (APTT) ^  Plasma
-APTTP,Activated Partial Thromboplastin Time ^  Plasma
-ARAV,Aldosterone ^  Right Adrenal Vein ^  Serum
-ARBI,Acetylcholine Receptor (Muscle AChR) Binding Antibody ^  Serum
-AREC,Androgen Receptor (AR) Immunostain ^  Technical Component Only
-ARGIN,Arginase-1 Immunostain ^  Technical Component Only
-ARSC,Arsenic/Creatinine Ratio ^  Urine
-ARSO,Arsenic Occupational Exposure ^  Random ^  Urine
-ASB,Arsenic ^  Blood
-ASCL1,Achaete-Scute Homolog 1 (ACSL1) (hASH1) Immunostain ^  Technical Component Only
-ASCRI,Ascaris ^  IgE ^  Serum
-ASHW,White Ash ^  IgE ^  Serum
-ASMW,Acid Sphingomyelinase ^  Leukocytes
-ASO,Antistrep-O Titer ^  Serum
-ASP,Aspergillus fumigatus ^  IgE ^  Serum
-ASPAG,Aspergillus (Galactomannan) Antigen ^  Serum
-ASPAR,Asparagus ^  IgE ^  Serum
-ASPBA,Aspergillus Antigen ^  Bronchoalveolar Lavage
-ASPG,Aspergillus niger ^  IgE ^  Serum
-AST,Aspartate Aminotransferase (AST) (GOT) ^  Serum
-ASYN,Alpha Synuclein Immunostain ^  Technical Component Only
-ATR,Isoagglutinin Titer ^  Anti-A ^  Serum
-ATRX,ATRX Immunostain ^  Technical Component Only
-ATTF,Antithrombin Activity ^  Plasma
-ATTI,Antithrombin Antigen ^  Plasma
-AUPU,Aureobasidium pullulans ^  IgE ^  Serum
-AVOC,Avocado ^  IgE ^  Serum
-B12,Vitamin B12 Assay ^  Serum
-B2M,Beta-2-Microglobulin ^  Serum
-B2MC,Beta-2-Microglobulin (Beta-2-M) ^  Spinal Fluid
-B2MU,Beta-2 Microglobulin (B2M) ^  Random ^  Urine
-B6PA,Pyridoxic Acid (PA) ^  Plasma
-BABG,Babesia microti IgG Antibodies ^  Serum
-BAHG,Bahia Grass ^  IgE ^  Serum
-BALLM,B-Cell Lymphoblastic Leukemia Monitoring ^  Minimal Residual Disease Detection ^  Flow Cytometry ^  Bone Marrow
-BAMB,Bamboo Shoot ^  IgE ^  Serum
-BAMY,Beta-Amyloid Immunostain ^  Technical Component Only
-BANA,Banana ^  IgE ^  Serum
-BAP,Bone Alkaline Phosphatase ^  Serum
-BAP1,BAP1 Immunostain ^  Technical Component Only
-BAPS,Bile Acid Profile ^  Serum
-BARBX,Barbiturates Confirmation ^  Chain of Custody ^  Urine
-BARRP,Bartonella ^  Molecular Detection ^  PCR ^  Varies
-BART,Bartonella Antibody Panel ^  IgG and IgM ^  Serum
-BARTB,Bartonella ^  Molecular Detection ^  PCR ^  Blood
-BASL,Basil ^  IgE ^  Serum
-BAYL,Bay Leaf ^  IgE ^  Serum
-BBEET,Berlin Beetle ^  IgE ^  Serum
-BCATN,Beta-Catenin Immunostain ^  Technical Component Only
-BCGBM,Immunoglobulin Gene Rearrangement ^  Bone Marrow
-BCGR,Immunoglobulin Gene Rearrangement ^  Blood
-BCGRV,Immunoglobulin Gene Rearrangement ^  Varies
-BCL2,BCL-2 Immunostain ^  Technical Component Only
-BCL6,BCL-6 Immunostain ^  Technical Component Only
-BCOR,BCOR Immunostain ^  Technical Component Only
-BCRAB,BCR/ABL1 ^  p210 ^  mRNA Detection ^  Reverse Transcription-PCR (RT-PCR) ^  Quantitative ^  Monitoring Chronic Myeloid Leukemia (CML) ^  Varies
-BCYP,Bald Cypress ^  IgE ^  Serum
-BDRP,Budgerigar Droppings ^  IgE ^  Serum
-BECH,Beech ^  IgE ^  Serum
-BEEF,Beef ^  IgE ^  Serum
-BEETS,Beets (Beetroot) ^  IgE ^  Serum
-BENW,White Bean ^  IgE ^  Serum
-BENZX,Benzodiazepines Confirmation ^  Chain of Custody ^  Urine
-BEREP,Ber-EP4 (Epithelial Cell Adhesion Molecule/EPCAM) Immunostain ^  Technical Component Only
-BERG,Bermuda Grass ^  IgE ^  Serum
+ADNA,"DNA Double-Stranded Antibodies,  IgG,  Serum"
+ADNAR,"DNA Double-Stranded (dsDNA) Antibodies with Reflex,  IgG,  Serum"
+ADNAS,"Anti-DNase B Titer,  Serum"
+ADV,"Adenovirus Immunostain,  Technical Component Only"
+AERMC,"Aeromonas Culture,  Feces"
+AFP,"Alpha-Fetoprotein (AFP) Tumor Marker,  Serum"
+AFPPT,"Alpha-Fetoprotein (AFP),  Peritoneal Fluid"
+AFPSF,"Alpha-Fetoprotein (AFP),  Spinal Fluid"
+AFSH,"Alpha FSH Immunostain,  Technical Component Only"
+AGAW,"Alpha-Galactosidase,  Leukocytes"
+AH50,"Complement,  Alternate Pathway (AH50),  Functional,  Serum"
+AHDV,"Hepatitis D Virus Total Antibodies,  Serum"
+AIVC,"Aldosterone,  Inferior Vena Cava,  Serum"
+AL,"Aluminum,  Serum"
+ALAV,"Aldosterone,  Left Adrenal Vein,  Serum"
+ALB,"Albumin,  Serum"
+ALBFL,"Albumin,  Body Fluid"
+ALBPS,"Albumin,  Plasma"
+ALBSF,"Albumin,  Spinal Fluid"
+ALC,"Ethanol,  Blood"
+ALCX,"Ethanol,  Chain of Custody,  Blood"
+ALDEF,"Alpha Defensin,  Lateral Flow Assay,  Synovial Fluid"
+ALDR,"Grey Alder,  IgE,  Serum"
+ALDS,"Aldosterone,  Serum"
+ALFA,"Alpha-Lactoalbumin,  IgE,  Serum"
+ALFP,"Alpha-Fetoprotein (AFP) Immunostain,  Technical Component Only"
+ALK,"Anaplastic Lymphoma Kinase (ALK) Immunostain,  Technical Component Only"
+ALM,"Almond,  IgE,  Serum"
+ALP,"Alkaline Phosphatase,  Serum"
+ALS,"Aldolase,  Serum"
+ALT,"Alanine Aminotransferase (ALT) (GPT),  Serum"
+ALTN,"Alternaria tenuis,  IgE,  Serum"
+AMA,"Mitochondrial Antibodies (M2),  Serum"
+AMH,"Antimullerian Hormone,  Serum"
+AMIO,"Amiodarone,  Serum"
+AMLPC,"Amylase,  Pancreatic Cyst Fluid"
+AMMO,"Ammonium,  24 Hour,  Urine"
+AMOBS,"Amobarbital,  Serum"
+AMOXY,"Amoxicillin,  IgE,  Serum"
+AMP,"Ampicillin,  IgE,  Serum"
+AMPHU,"Amphetamines Confirmation,  Random,  Urine"
+AMPHX,"Amphetamines Confirmation,  Chain of Custody,  Urine"
+AMPMX,"Amphetamine-Type Stimulants Confirmation,  Chain of Custody,  Meconium"
+AMS,"Amylase,  Total,  Serum"
+AMSU,"Amylase,  Timed Collection,  Urine"
+AMYA,"Amyloid A (SAA) Immunostain,  Technical Component Only"
+AMYPI,"Amyloid P (SAP) Immunostain,  Technical Component Only"
+ANA2,"Antinuclear Antibodies (ANA),  Serum"
+ANAE,"Bacterial Culture,  Anaerobic,  Varies"
+ANAES,"Bacterial Culture,  Anaerobic with Antimicrobial Susceptibilities,  Varies"
+ANAP,"Anaplasma phagocytophilum (Human Granulocytic Ehrlichiosis) Antibody,  Serum"
+ANCA,"Cytoplasmic Neutrophil Antibodies,  Serum"
+ANCH,"Anchovy,  IgE,  Serum"
+ANIDE,"Organism Referred for Identification,  Anaerobic Bacteria"
+ANISP,"Anisakis,  Parasite,  IgE,  Serum"
+ANNEX,"Annexin-1 Immunostain,  Technical Component Only"
+ANSE,"Anise,  IgE,  Serum"
+ANST,"Androstenedione,  Serum"
+APGH,"Alpha-Subunit Pituitary Tumor Marker,  Serum"
+APIN,"Australian Pine,  IgE,  Serum"
+APIVC,"Aldosterone,  Inferior Vena Cava,  Plasma"
+APIXA,"Apixaban,  Anti-Xa,  Plasma"
+APLAV,"Aldosterone,  Left Adrenal Vein,  Plasma"
+APOA1,"Apolipoprotein A1,  Serum"
+APOLB,"Apolipoprotein B,  Serum"
+APPI,"Amyloid Precursor Protein (APP) Immunostain,  Technical Component Only"
+APPL,"Apple,  IgE,  Serum"
+APR,"Apricot,  IgE,  Serum"
+APRAV,"Aldosterone,  Right Adrenal Vein,  Plasma"
+APTSC,"Activated Partial Thromboplastin Time (APTT),  Plasma"
+APTTP,"Activated Partial Thromboplastin Time,  Plasma"
+ARAV,"Aldosterone,  Right Adrenal Vein,  Serum"
+ARBI,"Acetylcholine Receptor (Muscle AChR) Binding Antibody,  Serum"
+AREC,"Androgen Receptor (AR) Immunostain,  Technical Component Only"
+ARGIN,"Arginase-1 Immunostain,  Technical Component Only"
+ARSC,"Arsenic/Creatinine Ratio,  Urine"
+ARSO,"Arsenic Occupational Exposure,  Random,  Urine"
+ASB,"Arsenic,  Blood"
+ASCL1,"Achaete-Scute Homolog 1 (ACSL1) (hASH1) Immunostain,  Technical Component Only"
+ASCRI,"Ascaris,  IgE,  Serum"
+ASHW,"White Ash,  IgE,  Serum"
+ASMW,"Acid Sphingomyelinase,  Leukocytes"
+ASO,"Antistrep-O Titer,  Serum"
+ASP,"Aspergillus fumigatus,  IgE,  Serum"
+ASPAG,"Aspergillus (Galactomannan) Antigen,  Serum"
+ASPAR,"Asparagus,  IgE,  Serum"
+ASPBA,"Aspergillus Antigen,  Bronchoalveolar Lavage"
+ASPG,"Aspergillus niger,  IgE,  Serum"
+AST,"Aspartate Aminotransferase (AST) (GOT),  Serum"
+ASYN,"Alpha Synuclein Immunostain,  Technical Component Only"
+ATR,"Isoagglutinin Titer,  Anti-A,  Serum"
+ATRX,"ATRX Immunostain,  Technical Component Only"
+ATTF,"Antithrombin Activity,  Plasma"
+ATTI,"Antithrombin Antigen,  Plasma"
+AUPU,"Aureobasidium pullulans,  IgE,  Serum"
+AVOC,"Avocado,  IgE,  Serum"
+B12,"Vitamin B12 Assay,  Serum"
+B2M,"Beta-2-Microglobulin,  Serum"
+B2MC,"Beta-2-Microglobulin (Beta-2-M),  Spinal Fluid"
+B2MU,"Beta-2 Microglobulin (B2M),  Random,  Urine"
+B6PA,"Pyridoxic Acid (PA),  Plasma"
+BABG,"Babesia microti IgG Antibodies,  Serum"
+BAHG,"Bahia Grass,  IgE,  Serum"
+BALLM,"B-Cell Lymphoblastic Leukemia Monitoring,  Minimal Residual Disease Detection,  Flow Cytometry,  Bone Marrow"
+BAMB,"Bamboo Shoot,  IgE,  Serum"
+BAMY,"Beta-Amyloid Immunostain,  Technical Component Only"
+BANA,"Banana,  IgE,  Serum"
+BAP,"Bone Alkaline Phosphatase,  Serum"
+BAP1,"BAP1 Immunostain,  Technical Component Only"
+BAPS,"Bile Acid Profile,  Serum"
+BARBX,"Barbiturates Confirmation,  Chain of Custody,  Urine"
+BARRP,"Bartonella,  Molecular Detection,  PCR,  Varies"
+BART,"Bartonella Antibody Panel,  IgG and IgM,  Serum"
+BARTB,"Bartonella,  Molecular Detection,  PCR,  Blood"
+BASL,"Basil,  IgE,  Serum"
+BAYL,"Bay Leaf,  IgE,  Serum"
+BBEET,"Berlin Beetle,  IgE,  Serum"
+BCATN,"Beta-Catenin Immunostain,  Technical Component Only"
+BCGBM,"Immunoglobulin Gene Rearrangement,  Bone Marrow"
+BCGR,"Immunoglobulin Gene Rearrangement,  Blood"
+BCGRV,"Immunoglobulin Gene Rearrangement,  Varies"
+BCL2,"BCL-2 Immunostain,  Technical Component Only"
+BCL6,"BCL-6 Immunostain,  Technical Component Only"
+BCOR,"BCOR Immunostain,  Technical Component Only"
+BCRAB,"BCR/ABL1,  p210,  mRNA Detection,  Reverse Transcription-PCR (RT-PCR),  Quantitative,  Monitoring Chronic Myeloid Leukemia (CML),  Varies"
+BCYP,"Bald Cypress,  IgE,  Serum"
+BDRP,"Budgerigar Droppings,  IgE,  Serum"
+BECH,"Beech,  IgE,  Serum"
+BEEF,"Beef,  IgE,  Serum"
+BEETS,"Beets (Beetroot),  IgE,  Serum"
+BENW,"White Bean,  IgE,  Serum"
+BENZX,"Benzodiazepines Confirmation,  Chain of Custody,  Urine"
+BEREP,"Ber-EP4 (Epithelial Cell Adhesion Molecule/EPCAM) Immunostain,  Technical Component Only"
+BERG,"Bermuda Grass,  IgE,  Serum"
 BETA2,Beta-2 Transferrin: Detection of Spinal Fluid in Other Body Fluid
-BFBL,Bilirubin ^  Body Fluid
-BFOS,FosB ^  Immunostain ^  Technical Component Only
-BFTH,Budgerigar Feathers ^  IgE ^  Serum
-BGRS,Barley Grass ^  IgE ^  Serum
-BHCG,Beta-Human Chorionic Gonadotropin ^  Quantitative ^  Serum
-BHSF,Beta-Human Chorionic Gonadotropin ^  Quantitative ^  Spinal Fluid
-BHYD,Beta-Hydroxybutyrate ^  Serum
-BILEA,Bile Acids ^  Total ^  Serum
-BILHA,Schistosoma species Antibody ^  IgG ^  Serum
-BILID,Bilirubin Direct ^  Serum
-BILIT,Bilirubin ^  Total ^  Serum
-BIR,Silver Birch ^  IgE ^  Serum
-BIWB,Bismuth ^  Blood
-BLAC,Beta-Lactoglobulin ^  IgE ^  Serum
-BLACK,Blackberry ^  IgE ^  Serum
+BFBL,"Bilirubin,  Body Fluid"
+BFOS,"FosB,  Immunostain,  Technical Component Only"
+BFTH,"Budgerigar Feathers,  IgE,  Serum"
+BGRS,"Barley Grass,  IgE,  Serum"
+BHCG,"Beta-Human Chorionic Gonadotropin,  Quantitative,  Serum"
+BHSF,"Beta-Human Chorionic Gonadotropin,  Quantitative,  Spinal Fluid"
+BHYD,"Beta-Hydroxybutyrate,  Serum"
+BILEA,"Bile Acids,  Total,  Serum"
+BILHA,"Schistosoma species Antibody,  IgG,  Serum"
+BILID,"Bilirubin Direct,  Serum"
+BILIT,"Bilirubin,  Total,  Serum"
+BIR,"Silver Birch,  IgE,  Serum"
+BIWB,"Bismuth,  Blood"
+BLAC,"Beta-Lactoglobulin,  IgE,  Serum"
+BLACK,"Blackberry,  IgE,  Serum"
 BLACT,Beta-Lactamase
-BLAST,Blastomyces Antibody ^  Enzyme Immunoassay ^  Serum
-BLPEP,Black/White Pepper ^  IgE ^  Serum
-BLUE,Blueberry ^  IgE ^  Serum
-BLW,Walnut-Food ^  IgE ^  Serum
-BMIYB,Borrelia miyamotoi Detection PCR ^  Blood
-BMIYC,Borrelia miyamotoi Detection PCR ^  Spinal Fluid
-BNP,B-Type Natriuretic Peptide ^  Plasma
-BOB1,BOB-1 Immunostain ^  Technical Component Only
-BORDG,Bordetella pertussis Antibody ^  IgG ^  Serum
-BOT,Botrytis cinerea ^  IgE ^  Serum
-BOV,Bovine Serum Albumin ^  IgE ^  Serum
-BPAB,Bullous Pemphigoid ^  BP180 and BP230 ^  IgG Antibodies ^  Serum
-BPGMM,2 ^ 3-Bisphosphoglycerate Mutase ^  Full Gene Sequencing Analysis ^  Varies
-BRACH,Brachyury Immunostain ^  Technical Component Only
-BRAFV,BRAF V600E Immunostain ^  Technical Component Only
-BRAZ,Brazil Nut ^  IgE ^  Serum
-BRBPS,Broad Range Bacterial PCR and Sequencing ^  Varies
-BRG1,BRG1 (SMARCA4) Immunostain ^  Technical Component Only
-BRLY,Barley ^  IgE ^  Serum
-BROC,Broccoli ^  IgE ^  Serum
-BROM,Brome Grass ^  IgE ^  Serum
-BRUC,Brucella Culture ^  Varies
-BRUCB,Brucella Culture ^  Blood
-BRUTA,Brucella Total Antibody Confirmation ^  Agglutination ^  Serum
-BSPR,Brussel Sprouts ^  IgE ^  Serum
-BTB46,ZBTB46 Immunostain ^  Technical Component Only
-BTIA1,T-Cell Intracellular Antigen 1 (TIA-1) Immunostain ^  Bone Marrow ^  Technical Component Only
-BTK,Bruton Tyrosine Kinase (Btk) ^  Protein Expression ^  Flow Cytometry ^  Blood
-BTR,Isoagglutinin Titer ^  Anti-B ^  Serum
-BTROP,Blomia tropicalis ^  IgE ^  Serum
-BTWGS,Bacterial Typing by Whole Genome Sequencing ^  Varies
-BUCW,Buckwheat ^  IgE ^  Serum
-BUN,Blood Urea Nitrogen (BUN) ^  Serum
-BUPM,Buprenorphine and Norbuprenorphine ^  Random ^  Urine
-BUPS,Buprenorphine Screen ^  Random ^  Urine
-BUTAS,Butalbital ^  Serum
-BWOR,Blood Worm ^  IgE ^  Serum
-BXMPL,Box Elder/Maple ^  IgE ^  Serum
-BYST,Baker's Yeast ^  IgE ^  Serum
-C19BM,CD19 Immunostain ^  Bone Marrow ^  Technical Component Only
-C1ES,C1 Esterase (C1ES) Inhibitor Antigen ^  Serum
-C1Q,Complement C1q ^  Serum
-C1QFX,C1q Complement ^  Functional ^  Serum
-C2,C2 Complement ^  Functional ^  with Reflex ^  Serum
-C2729,Breast Carcinoma-Associated Antigen ^  Serum
-C2FXN,C2 Complement ^  Functional ^  Serum
-C3,Complement C3 ^  Serum
-C3FX,C3 Complement ^  Functional ^  Serum
-C4,Complement C4 ^  Serum
-C4FX,C4 Complement ^  Functional ^  Serum
-C5AG,C5 Complement ^  Antigen ^  Serum
-C5FX,C5 Complement ^  Functional ^  Serum
-C5OHU,C5-OH Acylcarnitine ^  Quantitative ^  Urine
-C6FX,C6 Complement ^  Functional ^  Serum
-C7FX,C7 Complement ^  Functional ^  Serum
-C8FX,C8 Complement ^  Functional ^  Serum
-C9FX,C9 Complement ^  Functional ^  Serum
-CA,Calcium ^  Total ^  Serum
-CA153,Cancer Antigen 15-3 (CA 15-3) ^  Serum
-CA19,Carbohydrate Antigen 19-9 (CA 19-9) ^  Serum
-CA25,Cancer Antigen 125 (CA 125) ^  Serum
-CABB,Cabbage ^  IgE ^  Serum
-CACR1,Calcium ^  Random ^  Urine
-CACR2,Calcium ^  Random ^  Urine
-CAFF,Caffeine ^  Serum
-CAGR,Canary Grass ^  IgE ^  Serum
-CAI,Calcium ^  Ionized ^  Serum
-CAIX,Carbonic Anhydrase IX (CA-IX) Immunostain ^  Technical Component Only
-CALCI,Calcitonin (CALCI) Immunostain ^  Technical Component Only
-CALD,Caldesmon Immunostain ^  Technical Component Only
-CALFL,Cauliflower ^  IgE ^  Serum
-CALNN,Calretinin Immunostain ^  Technical Component Only
-CALPN,Calponin Immunostain ^  Technical Component Only
-CALPR,Calprotectin ^  Feces
-CALRC,Calreticulin ex9mut Immunostain ^  Technical Component Only
-CAMPC,Campylobacter Culture ^  Feces
-CAMTA,Calmodulin-Binding Transcription Activator 1 (CAMTA1) ^  Immunostain ^  Technical Component Only
-CARD,Cardamom ^  IgE ^  Serum
-CARF,Carbamazepine ^  Free ^  Serum
-CARN,Carnitine ^  Plasma
-CARNP,Carbapenemase Detection-Carba NP Test ^  Varies
-CARNS,Carnitine ^  Serum
-CAROB,Carob ^  IgE ^  Serum
-CARTA,Carbamazepine ^  Total ^  Serum
-CASE,Casein ^  IgE ^  Serum
-CASH,Cashew ^  IgE ^  Serum
-CAT,Cat Epithelium ^  IgE ^  Serum
-CATLN,Calcitonin ^  Fine-Needle Aspiration Biopsy (FNAB)-Needle Wash ^  Lymph Node
-CATN,Calcitonin ^  Serum
-CATR,Cold Agglutinin Titer ^  Serum
-CAURB,Candida auris ^  Molecular Detection ^  PCR ^  Whole Blood
-CAURP,Candida auris ^  Molecular Detection ^  PCR ^  Random ^  Urine
-CAURS,Candida auris Surveillance ^  Molecular Detection ^  PCR
-CAVP,California Virus (La Crosse) IgG and IgM ^  Serum
-CBL,Blastomyces Antibody by Immunodiffusion ^  Spinal Fluid
-CBUR,Cocklebur ^  IgE ^  Serum
-CCHZ,Cheese ^  Cheddar ^  IgE ^  Serum
-CCNT,Coconut ^  IgE ^  Serum
-CCP,Cyclic Citrullinated Peptide Antibodies ^  IgG ^  Serum
-CD10,CD10 Immunostain ^  Technical Component Only
-CD103,CD103 Immunostain ^  Technical Component Only
-CD11C,CD11c Immunostain ^  Technical Component Only
-CD123,CD123 Immunostain ^  Technical Component Only
-CD13,CD13 Immunostain ^  Technical Component Only
-CD138,CD138 (Syndecan) Immunostain ^  Technical Component Only
-CD14I,CD14 Immunostain ^  Technical Component Only
-CD15,CD15 Immunostain ^  Technical Component Only
-CD163,CD163 Immunostain ^  Technical Component Only
-CD19I,CD19 Immunostain ^  Technical Component Only
-CD1A,CD1a Immunostain ^  Technical Component Only
-CD2,CD2 Immunostain ^  Technical Component Only
-CD21,CD21 Immunostain ^  Technical Component Only
-CD22I,CD22 Immunostain ^  Technical Component Only
-CD23,CD23 Immunostain ^  Technical Component Only
-CD25,CD25 Immunostain ^  Technical Component Only
-CD273,CD273 (PD-L2) Immunostain ^  Technical Component Only
-CD279,CD279 (PD-1) Immunostain ^  Technical Component Only
-CD2B,CD2 Immunostain ^  Bone Marrow ^  Technical Component Only
-CD30,CD30 Immunostain ^  Technical Component Only
-CD303,CD303 (BDCA-2) Immunostain ^  Technical Component Only
-CD31,CD31 Immunostain ^  Technical Component Only
-CD33,CD33 Immunostain ^  Technical Component Only
-CD34I,CD34 Immunostain ^  Technical Component Only
-CD35,CD35 Immunostain ^  Technical Component Only
-CD38,CD38 Immunostain ^  Technical Component Only
-CD3I,CD3 Immunostain ^  Technical Component Only
-CD43,CD43 Immunostain ^  Technical Component Only
-CD45I,CD45 Leukocyte Common Antigen (LCA) Immunostain ^  Technical Component Only
-CD4I,CD4 Immunostain ^  Technical Component Only
-CD4RT,CD4 T-Cell Recent Thymic Emigrants ^  Blood
-CD5,CD5 Immunostain ^  Technical Component Only
-CD56,CD56 Immunostain ^  Technical Component Only
-CD57,CD57 Immunostain ^  Technical Component Only
-CD61,CD61 Immunostain ^  Technical Component Only
-CD7,CD7 Immunostain ^  Technical Component Only
-CD71,CD71 Immunostain ^  Technical Component Only
-CD79,CD79a Immunostain ^  Technical Component Only
-CD8I,CD8 Immunostain ^  Technical Component Only
-CD99,CD99 (MIC-2) Immunostain ^  Technical Component Only
-CDAB,Candida albicans (Monilia) ^  IgE ^  Serum
-CDB,Cadmium ^  Blood
-CDFRP,Clostridium difficile Toxin ^  Molecular Detection ^  PCR ^  Feces
-CDGN,Congenital Disorders of N-Glycosylation ^  Serum
-CDGP,Congenital Disorders of Glycosylation Genetic Panels ^  Next-Generation Sequencing ^  Varies
-CDIF,Clostridioides (Clostridium) difficile Culture ^  Varies
-CDIP,Corynebacterium diphtheriae Culture ^  Varies
-CDKP1,CD68 (KP1) Immunostain ^  Tissue ^  Technical Component Only
-CDKPB,CD68 (KP1) Immunostain ^  Bone Marrow ^  Technical Component Only
-CDOE,Cadmium Occupational Exposure ^  Random ^  Urine
-CDOMB,Cadmium for Occupational Monitoring ^  Blood
-CDP,Chlordiazepoxide and Metabolite ^  Serum
-CDRC,Cadmium/Creatinine Ratio ^  Urine
-CDROP,Chicken Droppings ^  IgE ^  Serum
-CDTA,Carbohydrate Deficient Transferrin ^  Adult ^  Serum
-CDX2,CDX2 Immunostain ^  Technical Component Only
-CEA,Carcinoembryonic Antigen (CEA) ^  Serum
-CEAC,Cephalosporium acremonium ^  IgE ^  Serum
-CEAPT,Carcinoembryonic Antigen (CEA) ^  Peritoneal Fluid
-CEASF,Carcinoembryonic Antigen (CEA) ^  Spinal Fluid
-CEBPA,CEBPA Mutations ^  Gene Sequencing ^  Varies
-CED,Mountain Cedar ^  IgE ^  Serum
-CEDR,Cedar ^  IgE ^  Serum
-CEE20,CD20 Cell Expression Evaluation ^  Varies
-CEE49,CD49d Cell Expression Evaluation ^  Varies
-CEE52,CD52 Cell Expression Evaluation ^  Varies
-CELI,Celiac Associated HLA-DQ Alpha 1 and DQ Beta 1 DNA Typing ^  Blood
-CELY,Celery ^  IgE ^  Serum
-CERS,Ceruloplasmin ^  Serum
-CFRC,Bacterial Culture ^  Cystic Fibrosis ^  Respiratory
-CFRCS,Bacterial Culture ^  Cystic Fibrosis with Antimicrobial Susceptibilities ^  Varies
-CFTH,Canary Feathers ^  IgE ^  Serum
-CFX,Protein C Activity ^  Plasma
-CGAK,Chromogranin A ^  Serum
-CGAS,Group A Streptococcus (Streptococcus pyogenes) Culture ^  Varies
-CGBS,Group B Streptococcus (Streptococcus agalactiae) Culture ^  Varies
-CH8,Chromogenic Factor VIII Activity Assay ^  Plasma
-CH9,Chromogenic Factor IX Activity Assay ^  Plasma
-CHCK,Chicken Feathers ^  IgE ^  Serum
-CHER,Cherry ^  IgE ^  Serum
-CHGL,Chaetomium globosum ^  IgE ^  Serum
-CHIC,Chicken ^  IgE ^  Serum
-CHIDB,Chimerism-Donor ^  Varies
-CHIKC,Chikungunya Virus ^  PCR ^  Molecular Detection ^  Spinal Fluid
-CHIKG,Chikungunya IgG ^  Antibody ^  Serum
+BLAST,"Blastomyces Antibody,  Enzyme Immunoassay,  Serum"
+BLPEP,"Black/White Pepper,  IgE,  Serum"
+BLUE,"Blueberry,  IgE,  Serum"
+BLW,"Walnut-Food,  IgE,  Serum"
+BMIYB,"Borrelia miyamotoi Detection PCR,  Blood"
+BMIYC,"Borrelia miyamotoi Detection PCR,  Spinal Fluid"
+BNP,"B-Type Natriuretic Peptide,  Plasma"
+BOB1,"BOB-1 Immunostain,  Technical Component Only"
+BORDG,"Bordetella pertussis Antibody,  IgG,  Serum"
+BOT,"Botrytis cinerea,  IgE,  Serum"
+BOV,"Bovine Serum Albumin,  IgE,  Serum"
+BPAB,"Bullous Pemphigoid,  BP180 and BP230,  IgG Antibodies,  Serum"
+BPGMM,"2, 3-Bisphosphoglycerate Mutase,  Full Gene Sequencing Analysis,  Varies"
+BRACH,"Brachyury Immunostain,  Technical Component Only"
+BRAFV,"BRAF V600E Immunostain,  Technical Component Only"
+BRAZ,"Brazil Nut,  IgE,  Serum"
+BRBPS,"Broad Range Bacterial PCR and Sequencing,  Varies"
+BRG1,"BRG1 (SMARCA4) Immunostain,  Technical Component Only"
+BRLY,"Barley,  IgE,  Serum"
+BROC,"Broccoli,  IgE,  Serum"
+BROM,"Brome Grass,  IgE,  Serum"
+BRUC,"Brucella Culture,  Varies"
+BRUCB,"Brucella Culture,  Blood"
+BRUTA,"Brucella Total Antibody Confirmation,  Agglutination,  Serum"
+BSPR,"Brussel Sprouts,  IgE,  Serum"
+BTB46,"ZBTB46 Immunostain,  Technical Component Only"
+BTIA1,"T-Cell Intracellular Antigen 1 (TIA-1) Immunostain,  Bone Marrow,  Technical Component Only"
+BTK,"Bruton Tyrosine Kinase (Btk),  Protein Expression,  Flow Cytometry,  Blood"
+BTR,"Isoagglutinin Titer,  Anti-B,  Serum"
+BTROP,"Blomia tropicalis,  IgE,  Serum"
+BTWGS,"Bacterial Typing by Whole Genome Sequencing,  Varies"
+BUCW,"Buckwheat,  IgE,  Serum"
+BUN,"Blood Urea Nitrogen (BUN),  Serum"
+BUPM,"Buprenorphine and Norbuprenorphine,  Random,  Urine"
+BUPS,"Buprenorphine Screen,  Random,  Urine"
+BUTAS,"Butalbital,  Serum"
+BWOR,"Blood Worm,  IgE,  Serum"
+BXMPL,"Box Elder/Maple,  IgE,  Serum"
+BYST,"Baker's Yeast,  IgE,  Serum"
+C19BM,"CD19 Immunostain,  Bone Marrow,  Technical Component Only"
+C1ES,"C1 Esterase (C1ES) Inhibitor Antigen,  Serum"
+C1Q,"Complement C1q,  Serum"
+C1QFX,"C1q Complement,  Functional,  Serum"
+C2,"C2 Complement,  Functional,  with Reflex,  Serum"
+C2729,"Breast Carcinoma-Associated Antigen,  Serum"
+C2FXN,"C2 Complement,  Functional,  Serum"
+C3,"Complement C3,  Serum"
+C3FX,"C3 Complement,  Functional,  Serum"
+C4,"Complement C4,  Serum"
+C4FX,"C4 Complement,  Functional,  Serum"
+C5AG,"C5 Complement,  Antigen,  Serum"
+C5FX,"C5 Complement,  Functional,  Serum"
+C5OHU,"C5-OH Acylcarnitine,  Quantitative,  Urine"
+C6FX,"C6 Complement,  Functional,  Serum"
+C7FX,"C7 Complement,  Functional,  Serum"
+C8FX,"C8 Complement,  Functional,  Serum"
+C9FX,"C9 Complement,  Functional,  Serum"
+CA,"Calcium,  Total,  Serum"
+CA153,"Cancer Antigen 15-3 (CA 15-3),  Serum"
+CA19,"Carbohydrate Antigen 19-9 (CA 19-9),  Serum"
+CA25,"Cancer Antigen 125 (CA 125),  Serum"
+CABB,"Cabbage,  IgE,  Serum"
+CACR1,"Calcium,  Random,  Urine"
+CACR2,"Calcium,  Random,  Urine"
+CAFF,"Caffeine,  Serum"
+CAGR,"Canary Grass,  IgE,  Serum"
+CAI,"Calcium,  Ionized,  Serum"
+CAIX,"Carbonic Anhydrase IX (CA-IX) Immunostain,  Technical Component Only"
+CALCI,"Calcitonin (CALCI) Immunostain,  Technical Component Only"
+CALD,"Caldesmon Immunostain,  Technical Component Only"
+CALFL,"Cauliflower,  IgE,  Serum"
+CALNN,"Calretinin Immunostain,  Technical Component Only"
+CALPN,"Calponin Immunostain,  Technical Component Only"
+CALPR,"Calprotectin,  Feces"
+CALRC,"Calreticulin ex9mut Immunostain,  Technical Component Only"
+CAMPC,"Campylobacter Culture,  Feces"
+CAMTA,"Calmodulin-Binding Transcription Activator 1 (CAMTA1),  Immunostain,  Technical Component Only"
+CARD,"Cardamom,  IgE,  Serum"
+CARF,"Carbamazepine,  Free,  Serum"
+CARN,"Carnitine,  Plasma"
+CARNP,"Carbapenemase Detection-Carba NP Test,  Varies"
+CARNS,"Carnitine,  Serum"
+CAROB,"Carob,  IgE,  Serum"
+CARTA,"Carbamazepine,  Total,  Serum"
+CASE,"Casein,  IgE,  Serum"
+CASH,"Cashew,  IgE,  Serum"
+CAT,"Cat Epithelium,  IgE,  Serum"
+CATLN,"Calcitonin,  Fine-Needle Aspiration Biopsy (FNAB)-Needle Wash,  Lymph Node"
+CATN,"Calcitonin,  Serum"
+CATR,"Cold Agglutinin Titer,  Serum"
+CAURB,"Candida auris,  Molecular Detection,  PCR,  Whole Blood"
+CAURP,"Candida auris,  Molecular Detection,  PCR,  Random,  Urine"
+CAURS,"Candida auris Surveillance,  Molecular Detection,  PCR"
+CAVP,"California Virus (La Crosse) IgG and IgM,  Serum"
+CBL,"Blastomyces Antibody by Immunodiffusion,  Spinal Fluid"
+CBUR,"Cocklebur,  IgE,  Serum"
+CCHZ,"Cheese,  Cheddar,  IgE,  Serum"
+CCNT,"Coconut,  IgE,  Serum"
+CCP,"Cyclic Citrullinated Peptide Antibodies,  IgG,  Serum"
+CD10,"CD10 Immunostain,  Technical Component Only"
+CD103,"CD103 Immunostain,  Technical Component Only"
+CD11C,"CD11c Immunostain,  Technical Component Only"
+CD123,"CD123 Immunostain,  Technical Component Only"
+CD13,"CD13 Immunostain,  Technical Component Only"
+CD138,"CD138 (Syndecan) Immunostain,  Technical Component Only"
+CD14I,"CD14 Immunostain,  Technical Component Only"
+CD15,"CD15 Immunostain,  Technical Component Only"
+CD163,"CD163 Immunostain,  Technical Component Only"
+CD19I,"CD19 Immunostain,  Technical Component Only"
+CD1A,"CD1a Immunostain,  Technical Component Only"
+CD2,"CD2 Immunostain,  Technical Component Only"
+CD21,"CD21 Immunostain,  Technical Component Only"
+CD22I,"CD22 Immunostain,  Technical Component Only"
+CD23,"CD23 Immunostain,  Technical Component Only"
+CD25,"CD25 Immunostain,  Technical Component Only"
+CD273,"CD273 (PD-L2) Immunostain,  Technical Component Only"
+CD279,"CD279 (PD-1) Immunostain,  Technical Component Only"
+CD2B,"CD2 Immunostain,  Bone Marrow,  Technical Component Only"
+CD30,"CD30 Immunostain,  Technical Component Only"
+CD303,"CD303 (BDCA-2) Immunostain,  Technical Component Only"
+CD31,"CD31 Immunostain,  Technical Component Only"
+CD33,"CD33 Immunostain,  Technical Component Only"
+CD34I,"CD34 Immunostain,  Technical Component Only"
+CD35,"CD35 Immunostain,  Technical Component Only"
+CD38,"CD38 Immunostain,  Technical Component Only"
+CD3I,"CD3 Immunostain,  Technical Component Only"
+CD43,"CD43 Immunostain,  Technical Component Only"
+CD45I,"CD45 Leukocyte Common Antigen (LCA) Immunostain,  Technical Component Only"
+CD4I,"CD4 Immunostain,  Technical Component Only"
+CD4RT,"CD4 T-Cell Recent Thymic Emigrants,  Blood"
+CD5,"CD5 Immunostain,  Technical Component Only"
+CD56,"CD56 Immunostain,  Technical Component Only"
+CD57,"CD57 Immunostain,  Technical Component Only"
+CD61,"CD61 Immunostain,  Technical Component Only"
+CD7,"CD7 Immunostain,  Technical Component Only"
+CD71,"CD71 Immunostain,  Technical Component Only"
+CD79,"CD79a Immunostain,  Technical Component Only"
+CD8I,"CD8 Immunostain,  Technical Component Only"
+CD99,"CD99 (MIC-2) Immunostain,  Technical Component Only"
+CDAB,"Candida albicans (Monilia),  IgE,  Serum"
+CDB,"Cadmium,  Blood"
+CDFRP,"Clostridium difficile Toxin,  Molecular Detection,  PCR,  Feces"
+CDGN,"Congenital Disorders of N-Glycosylation,  Serum"
+CDGP,"Congenital Disorders of Glycosylation Genetic Panels,  Next-Generation Sequencing,  Varies"
+CDIF,"Clostridioides (Clostridium) difficile Culture,  Varies"
+CDIP,"Corynebacterium diphtheriae Culture,  Varies"
+CDKP1,"CD68 (KP1) Immunostain,  Tissue,  Technical Component Only"
+CDKPB,"CD68 (KP1) Immunostain,  Bone Marrow,  Technical Component Only"
+CDOE,"Cadmium Occupational Exposure,  Random,  Urine"
+CDOMB,"Cadmium for Occupational Monitoring,  Blood"
+CDP,"Chlordiazepoxide and Metabolite,  Serum"
+CDRC,"Cadmium/Creatinine Ratio,  Urine"
+CDROP,"Chicken Droppings,  IgE,  Serum"
+CDTA,"Carbohydrate Deficient Transferrin,  Adult,  Serum"
+CDX2,"CDX2 Immunostain,  Technical Component Only"
+CEA,"Carcinoembryonic Antigen (CEA),  Serum"
+CEAC,"Cephalosporium acremonium,  IgE,  Serum"
+CEAPT,"Carcinoembryonic Antigen (CEA),  Peritoneal Fluid"
+CEASF,"Carcinoembryonic Antigen (CEA),  Spinal Fluid"
+CEBPA,"CEBPA Mutations,  Gene Sequencing,  Varies"
+CED,"Mountain Cedar,  IgE,  Serum"
+CEDR,"Cedar,  IgE,  Serum"
+CEE20,"CD20 Cell Expression Evaluation,  Varies"
+CEE49,"CD49d Cell Expression Evaluation,  Varies"
+CEE52,"CD52 Cell Expression Evaluation,  Varies"
+CELI,"Celiac Associated HLA-DQ Alpha 1 and DQ Beta 1 DNA Typing,  Blood"
+CELY,"Celery,  IgE,  Serum"
+CERS,"Ceruloplasmin,  Serum"
+CFRC,"Bacterial Culture,  Cystic Fibrosis,  Respiratory"
+CFRCS,"Bacterial Culture,  Cystic Fibrosis with Antimicrobial Susceptibilities,  Varies"
+CFTH,"Canary Feathers,  IgE,  Serum"
+CFX,"Protein C Activity,  Plasma"
+CGAK,"Chromogranin A,  Serum"
+CGAS,"Group A Streptococcus (Streptococcus pyogenes) Culture,  Varies"
+CGBS,"Group B Streptococcus (Streptococcus agalactiae) Culture,  Varies"
+CH8,"Chromogenic Factor VIII Activity Assay,  Plasma"
+CH9,"Chromogenic Factor IX Activity Assay,  Plasma"
+CHCK,"Chicken Feathers,  IgE,  Serum"
+CHER,"Cherry,  IgE,  Serum"
+CHGL,"Chaetomium globosum,  IgE,  Serum"
+CHIC,"Chicken,  IgE,  Serum"
+CHIDB,"Chimerism-Donor,  Varies"
+CHIKC,"Chikungunya Virus,  PCR,  Molecular Detection,  Spinal Fluid"
+CHIKG,"Chikungunya IgG,  Antibody,  Serum"
 CHIKI,Chikungunya Interpretation
-CHIKM,Chikungunya IgM ^  Antibody ^  Serum
-CHIKS,Chikungunya Virus ^  PCR ^  Molecular Detection ^  Serum
-CHILI,Chili Pepper ^  IgE ^  Serum
-CHIMS,Chimerism Transplant Sorted Cells ^  Varies
-CHIMU,Chimerism Transplant No Cell Sort ^  Varies
-CHLBF,Cholesterol ^  Body Fluid
-CHLE,Cholesteryl Esters ^  Serum
-CHOL,Cholesterol ^  Total ^  Serum
-CHOU,Carbohydrate ^  Urine
-CHRGB,Chimerism-Recipient Germline (Pretransplant) ^  Varies
-CHRO,Chromogranin Immunostain ^  Technical Component Only
-CHUB,Chub Mackerel ^  IgE ^  Serum
-CHXP,Chick Pea ^  IgE ^  Serum
-CIB,Cutaneous Direct Immunofluorescence Assay (IFA) ^  Varies
-CIMRP,Coccidioides immitis/posadasii ^  Molecular Detection ^  PCR ^  Varies
-CINN,Cinnamon ^  IgE ^  Serum
-CINP,Cortisol ^  Serum ^  LC-MS/MS
-CITAL,Citalopram ^  Serum
-CITR,Citrate Excretion ^  24 Hour ^  Urine
-CIVC,Cortisol ^  Inferior Vena Cava ^  Serum
-CK,Creatine Kinase (CK) ^  Serum
-CKP,Creatine Kinase (CK) ^  Plasma
-CL,Chloride ^  Serum
-CLAD,Cladosporium ^  IgE ^  Serum
-CLAM,Clam ^  IgE ^  Serum
-CLAUD,Claudin-1 Immunostain ^  Technical Component Only
-CLAV,Cortisol ^  Left Adrenal Vein ^  Serum
-CLDN4,Claudin-4 Immunostain ^  Technical Component Only
-CLFA,Cryptococcus Antigen Screen with Titer ^  Spinal Fluid
-CLFAT,Cryptococcus Antigen Titer ^  LFA ^  Spinal Fluid
-CLFIB,Fibrinogen ^  Clauss ^  Plasma
+CHIKM,"Chikungunya IgM,  Antibody,  Serum"
+CHIKS,"Chikungunya Virus,  PCR,  Molecular Detection,  Serum"
+CHILI,"Chili Pepper,  IgE,  Serum"
+CHIMS,"Chimerism Transplant Sorted Cells,  Varies"
+CHIMU,"Chimerism Transplant No Cell Sort,  Varies"
+CHLBF,"Cholesterol,  Body Fluid"
+CHLE,"Cholesteryl Esters,  Serum"
+CHOL,"Cholesterol,  Total,  Serum"
+CHOU,"Carbohydrate,  Urine"
+CHRGB,"Chimerism-Recipient Germline (Pretransplant),  Varies"
+CHRO,"Chromogranin Immunostain,  Technical Component Only"
+CHUB,"Chub Mackerel,  IgE,  Serum"
+CHXP,"Chick Pea,  IgE,  Serum"
+CIB,"Cutaneous Direct Immunofluorescence Assay (IFA),  Varies"
+CIMRP,"Coccidioides immitis/posadasii,  Molecular Detection,  PCR,  Varies"
+CINN,"Cinnamon,  IgE,  Serum"
+CINP,"Cortisol,  Serum,  LC-MS/MS"
+CITAL,"Citalopram,  Serum"
+CITR,"Citrate Excretion,  24 Hour,  Urine"
+CIVC,"Cortisol,  Inferior Vena Cava,  Serum"
+CK,"Creatine Kinase (CK),  Serum"
+CKP,"Creatine Kinase (CK),  Plasma"
+CL,"Chloride,  Serum"
+CLAD,"Cladosporium,  IgE,  Serum"
+CLAM,"Clam,  IgE,  Serum"
+CLAUD,"Claudin-1 Immunostain,  Technical Component Only"
+CLAV,"Cortisol,  Left Adrenal Vein,  Serum"
+CLDN4,"Claudin-4 Immunostain,  Technical Component Only"
+CLFA,"Cryptococcus Antigen Screen with Titer,  Spinal Fluid"
+CLFAT,"Cryptococcus Antigen Titer,  LFA,  Spinal Fluid"
+CLFIB,"Fibrinogen,  Clauss,  Plasma"
 CLIR,CLIR Supplemental Report
-CLLMV,Chronic Lymphocytic Leukemia (CLL) Monitoring Minimal Residual Disease (MRD) Detection ^  Varies
-CLOBZ,Clobazam and Metabolite ^  Serum
-CLOM,Clomipramine ^  Serum
-CLOV,Clove ^  IgE ^  Serum
-CLUS,Clusterin Immunostain ^  Technical Component Only
-CLZ,Clozapine ^  Serum
-CMA,Centromere Antibodies ^  IgG ^  Serum
-CMET,cMET Immunostain ^  Technical Component Only
-CMIL,Common Millet ^  IgE ^  Serum
-CMUMP,Mumps Virus Antibodies ^  IgG and IgM (Separate Determinations) ^  Spinal Fluid
-CMVG,Cytomegalovirus (CMV) Antibodies ^  IgG ^  Serum
-CMVI,Cytomegalovirus (CMV) Immunostain ^  Technical Component Only
-CMVM,Cytomegalovirus (CMV) Antibodies ^  IgM ^  Serum
-CMVQN,Cytomegalovirus (CMV) DNA Detection and Quantification by Real-Time PCR ^  Plasma
-CNUT,Chestnut ^  Sweet ^  IgE ^  Serum
-CO4D,Complement 4d (C4d ^  Comp 4d) Immunostain ^  Technical Component Only
-COCOA,Cacao/Cocoa ^  IgE ^  Serum
-COCOU,Cortisol/Cortisone ^  Free ^  24 Hour ^  Urine
-COCR,Cockroach ^  IgE ^  Serum
-COD,Codfish ^  IgE ^  Serum
-COHBB,Carbon Monoxide ^  Blood
-COKEX,Cocaine and Metabolite Confirmation ^  Chain of Custody ^  Urine
-COKMX,Cocaine and Metabolite Confirmation ^  Chain of Custody ^  Meconium
-COLIV,Collagen IV (COL4) Immunostain ^  Technical Component Only
-COM,Complement ^  Total ^  Serum
-CORAB,Hepatitis B Core Total Antibodies ^  with Reflex to Hepatitis B Core Antibody IgM ^  Serum
-CORI,Coriander ^  IgE ^  Serum
-CORN,Corn-Food ^  IgE ^  Serum
-CORT,Cortisol ^  Serum
-CORTC,Corticosterone ^  Serum
-CORTF,Cortisol ^  Free ^  Serum
-CORTU,Cortisol ^  Free ^  24 Hour ^  Urine
-CORU,Cobalt ^  Random ^  Urine
-COS,Cobalt ^  Serum
-COSY,Cobalt ^  Synovial Fluid
-COTT,Cotton Fiber ^  IgE ^  Serum
-COVID-TEST,Severe Acute Respiratory Syndrome Coronavirus 2 (SARS-CoV-2) RNA Detection ^  Varies
-COW,Cow Epithelium ^  IgE ^  Serum
-COWB,Cobalt ^  Blood
-COX2,COX-2 Immunostain ^  Technical Component Only
-COXIS,Coccidioides Antibody with Reflex ^  Serum
-CPAVP,Copeptin proAVP ^  Plasma
-CPDOE,Convalescent Plasma Donor Evaluation ^  Serum
-CPOXZ,CPOX Gene ^  Full Gene Analysis ^  Varies
-CPR,C-Peptide ^  Serum
-CR,Chromium ^  Random ^  Urine
-CRAB,Crab ^  IgE ^  Serum
-CRANB,Cranberry ^  IgE ^  Serum
-CRAV,Cortisol ^  Right Adrenal Vein ^  Serum
-CRAY,Crayfish ^  IgE ^  Serum
-CRITH,DNA Double-Stranded (dsDNA) Antibodies by Crithidia luciliae IFA ^  IgG ^  Serum
-CRMWC,Collapsin Response-Mediator Protein-5-IgG ^  Western Blot ^  Spinal Fluid
-CRMWS,Collapsin Response-Mediator Protein-5-IgG ^  Western Blot ^  Serum
-CRNP,Corn Pollen ^  IgE ^  Serum
-CROT,Carrot ^  IgE ^  Serum
-CRP,C-Reactive Protein (CRP) ^  Serum
-CRPRO,C-Reactive Protein (CRP) Immunostain ^  Technical Component Only
-CRS,Chromium ^  Serum
-CRWB,Chromium ^  Blood
-CRY_S,Cryoglobulin ^  Serum
-CRYE,Cultivated Rye ^  IgE ^  Serum
-CRYP,Cryptosporidium Antigen ^  Feces
-CRYPS,Cryptosporidium Antigen ^  Feces
-CSED,Cottonseed ^  IgE ^  Serum
-CSPR,Chicken Serum Proteins ^  IgE ^  Serum
-CTB,Mycobacteria and Nocardia Culture ^  Varies
-CTBBL,Mycobacterial Culture ^  Blood
-CTBID,Culture Referred for Identification ^  Mycobacterium and Nocardia ^  Varies
-CTRCZ,CTRC Gene ^  Full Gene Analysis ^  Varies
-CTRE,Chestnut Tree ^  IgE ^  Serum
-CTSK,Cathepsin K Immunostain ^  Technical Component Only
-CTSU,Ceramide Trihexosides and Sulfatides ^  Random ^  Urine
-CTWD,Cottonwood ^  IgE ^  Serum
-CTX,Beta-CrossLaps ^  Serum
-CUKE,Cucumber ^  IgE ^  Serum
-CURL,Curvularia lunata ^  IgE ^  Serum
-CURR,Curry ^  IgE ^  Serum
-CUS,Copper ^  Serum
-CUT,Copper ^  Liver Tissue
-CVID,Common Variable Immunodeficiency Confirmation Flow Panel ^  Blood
-CVNFS,Severe Acute Respiratory Syndrome Coronavirus 2 (SARS-CoV-2) Neutralizing Antibody ^  Follow up ^  Serum
+CLLMV,"Chronic Lymphocytic Leukemia (CLL) Monitoring Minimal Residual Disease (MRD) Detection,  Varies"
+CLOBZ,"Clobazam and Metabolite,  Serum"
+CLOM,"Clomipramine,  Serum"
+CLOV,"Clove,  IgE,  Serum"
+CLUS,"Clusterin Immunostain,  Technical Component Only"
+CLZ,"Clozapine,  Serum"
+CMA,"Centromere Antibodies,  IgG,  Serum"
+CMET,"cMET Immunostain,  Technical Component Only"
+CMIL,"Common Millet,  IgE,  Serum"
+CMUMP,"Mumps Virus Antibodies,  IgG and IgM (Separate Determinations),  Spinal Fluid"
+CMVG,"Cytomegalovirus (CMV) Antibodies,  IgG,  Serum"
+CMVI,"Cytomegalovirus (CMV) Immunostain,  Technical Component Only"
+CMVM,"Cytomegalovirus (CMV) Antibodies,  IgM,  Serum"
+CMVQN,"Cytomegalovirus (CMV) DNA Detection and Quantification by Real-Time PCR,  Plasma"
+CNUT,"Chestnut,  Sweet,  IgE,  Serum"
+CO4D,"Complement 4d (C4d,  Comp 4d) Immunostain,  Technical Component Only"
+COCOA,"Cacao/Cocoa,  IgE,  Serum"
+COCOU,"Cortisol/Cortisone,  Free,  24 Hour,  Urine"
+COCR,"Cockroach,  IgE,  Serum"
+COD,"Codfish,  IgE,  Serum"
+COHBB,"Carbon Monoxide,  Blood"
+COKEX,"Cocaine and Metabolite Confirmation,  Chain of Custody,  Urine"
+COKMX,"Cocaine and Metabolite Confirmation,  Chain of Custody,  Meconium"
+COLIV,"Collagen IV (COL4) Immunostain,  Technical Component Only"
+COM,"Complement,  Total,  Serum"
+CORAB,"Hepatitis B Core Total Antibodies,  with Reflex to Hepatitis B Core Antibody IgM,  Serum"
+CORI,"Coriander,  IgE,  Serum"
+CORN,"Corn-Food,  IgE,  Serum"
+CORT,"Cortisol,  Serum"
+CORTC,"Corticosterone,  Serum"
+CORTF,"Cortisol,  Free,  Serum"
+CORTU,"Cortisol,  Free,  24 Hour,  Urine"
+CORU,"Cobalt,  Random,  Urine"
+COS,"Cobalt,  Serum"
+COSY,"Cobalt,  Synovial Fluid"
+COTT,"Cotton Fiber,  IgE,  Serum"
+COVID,"Severe Acute Respiratory Syndrome Coronavirus 2 (SARS-CoV-2) RNA Detection,  Varies"
+COW,"Cow Epithelium,  IgE,  Serum"
+COWB,"Cobalt,  Blood"
+COX2,"COX-2 Immunostain,  Technical Component Only"
+COXIS,"Coccidioides Antibody with Reflex,  Serum"
+CPAVP,"Copeptin proAVP,  Plasma"
+CPDOE,"Convalescent Plasma Donor Evaluation,  Serum"
+CPOXZ,"CPOX Gene,  Full Gene Analysis,  Varies"
+CPR,"C-Peptide,  Serum"
+CR,"Chromium,  Random,  Urine"
+CRAB,"Crab,  IgE,  Serum"
+CRANB,"Cranberry,  IgE,  Serum"
+CRAV,"Cortisol,  Right Adrenal Vein,  Serum"
+CRAY,"Crayfish,  IgE,  Serum"
+CRITH,"DNA Double-Stranded (dsDNA) Antibodies by Crithidia luciliae IFA,  IgG,  Serum"
+CRMWC,"Collapsin Response-Mediator Protein-5-IgG,  Western Blot,  Spinal Fluid"
+CRMWS,"Collapsin Response-Mediator Protein-5-IgG,  Western Blot,  Serum"
+CRNP,"Corn Pollen,  IgE,  Serum"
+CROT,"Carrot,  IgE,  Serum"
+CRP,"C-Reactive Protein (CRP),  Serum"
+CRPRO,"C-Reactive Protein (CRP) Immunostain,  Technical Component Only"
+CRS,"Chromium,  Serum"
+CRWB,"Chromium,  Blood"
+CRY_S,"Cryoglobulin,  Serum"
+CRYE,"Cultivated Rye,  IgE,  Serum"
+CRYP,"Cryptosporidium Antigen,  Feces"
+CRYPS,"Cryptosporidium Antigen,  Feces"
+CSED,"Cottonseed,  IgE,  Serum"
+CSPR,"Chicken Serum Proteins,  IgE,  Serum"
+CTB,"Mycobacteria and Nocardia Culture,  Varies"
+CTBBL,"Mycobacterial Culture,  Blood"
+CTBID,"Culture Referred for Identification,  Mycobacterium and Nocardia,  Varies"
+CTRCZ,"CTRC Gene,  Full Gene Analysis,  Varies"
+CTRE,"Chestnut Tree,  IgE,  Serum"
+CTSK,"Cathepsin K Immunostain,  Technical Component Only"
+CTSU,"Ceramide Trihexosides and Sulfatides,  Random,  Urine"
+CTWD,"Cottonwood,  IgE,  Serum"
+CTX,"Beta-CrossLaps,  Serum"
+CUKE,"Cucumber,  IgE,  Serum"
+CURL,"Curvularia lunata,  IgE,  Serum"
+CURR,"Curry,  IgE,  Serum"
+CUS,"Copper,  Serum"
+CUT,"Copper,  Liver Tissue"
+CVID,"Common Variable Immunodeficiency Confirmation Flow Panel,  Blood"
+CVNFS,"Severe Acute Respiratory Syndrome Coronavirus 2 (SARS-CoV-2) Neutralizing Antibody,  Follow up,  Serum"
 CVSPC,Physician Interpretation Conventional
-CWAY,Caraway ^  IgE ^  Serum
-CXC13,CXCL13 Immunostain ^  Technical Component Only
-CYC1,Cyclin D1 (CCND1 ^  CYCD1) Immunostain ^  Technical Component Only
-CYCL,Cyclospora Stain ^  Feces
-CYCPK,Cyclosporine ^  Peak ^  Blood
-CYSPR,Cyclosporine ^  Blood
-CYSTC,Cystatin C with Estimated GFR ^  Serum
-CYSTS,Cysticercosis Antibody ^  IgG ^  Serum
-CZPS,Clonazepam and 7-Aminoclonazepam ^  Serum
-D240,Podoplanin (D2-D40) Immunostain ^  Technical Component Only
-DAGL,Gliadin (Deamidated) Antibody ^  IgA ^  Serum
-DAND,Dandelion ^  IgE ^  Serum
-DATE,Date ^  Fruit ^  IgE ^  Serum
-DATRE,Date ^  Tree ^  IgE ^  Serum
-DBA4,Hairy Cell Leukemia (DBA44) Immunostain ^  Technical Component Only
-DCORT,11-Deoxycortisol ^  Serum
-DCP,Des-Gamma-Carboxy Prothrombin ^  Serum
-DCTR,Direct Antiglobulin Test (Polyspecific) ^  Blood
-DDITT,D-Dimer ^  Plasma
-DENGC,Dengue Virus ^  Molecular Detection ^  PCR ^  Spinal Fluid
-DENGS,Dengue Virus ^  Molecular Detection ^  PCR ^  Serum
-DESG3,Desmoglein 3 (DSG3) Immunostain ^  Technical Component Only
-DESMN,Desmin Immunostain ^  Technical Component Only
-DESPR,Desipramine ^  Serum
-DEXT,DermPath Consultation ^  Wet Tissue
-DF,House Dust Mites/Dermatophagoides farinae ^  IgE ^  Serum
-DFIR,Douglas Fir ^  IgE ^  Serum
-DGGL,Gliadin (Deamidated) Antibody ^  IgG ^  Serum
-DHEA_,Dehydroepiandrosterone (DHEA) ^  Serum
-DHES1,Dehydroepiandrosterone Sulfate ^  Serum
-DHTS,Dihydrotestosterone ^  Serum
-DHVD,1 ^ 25-Dihydroxyvitamin D ^  Serum
-DIA,Diazepam and Nordiazepam ^  Serum
-DIG,Digoxin ^  Serum
-DILL,Dill ^  IgE ^  Serum
-DIMER,D-Dimer ^  Plasma
-DIPGS,Diphtheria Toxoid IgG Antibody ^  Serum
-DLAC,D-Lactate ^  Plasma
-DLAU,D-Lactate ^  Urine
-DMIC,Dermatophagoides microceras ^  IgE ^  Serum
-DNJB9,DNAJB9 Immunostain ^  Technical Component Only
-DOCK8,Dedicator of Cytokinesis 8 (DOCK8) Deficiency ^  Blood
-DOCS,11-Deoxycorticosterone ^  Serum
-DOG1,DOG-1 Immunostain ^  Technical Component Only
-DOGD,Dog Dander ^  IgE ^  Serum
-DOXA1,Oxalate Analysis ^  Hemodialysate
-DP,House Dust Mites/Dermatophagoides pteronyssinus ^  IgE ^  Serum
-DRV1,Dilute Russell Viper Venom Time (DRVVT) ^  Plasma
-DRVI1,Dilute Russell Viper Venom Time (DRVVT) ^  with Reflex ^  Plasma
-DSGAB,Desmoglein 1 (DSG1) and Desmoglein 3 (DSG3) ^  IgG Antibodies ^  Serum
-DSM4X,Drugs of Abuse Screen 4 ^  Chain of Custody ^  Meconium
-DSM5X,Drugs of Abuse Screen 5 ^  Chain of Custody ^  Meconium
-DSS,Drug Screen ^  Prescription/OTC ^  Serum
-DSSX,Drug Screen ^  Prescription/OTC ^  Chain of Custody ^  Serum
-DUCK,Duck Feathers ^  IgE ^  Serum
-DULOX,Duloxetine ^  Serum
-E1,Estrone ^  Serum
-E157C,Escherichia coli O157:H7 Culture ^  Feces
-EAG,Hepatitis B e-Antigen ^  Serum
-EBNA2,Epstein Barr Nuclear Antigen 2 (EBNA2) Immunostain ^  Technical Component Only
-EBV,Epstein-Barr Virus (EBV) In Situ Hybridization ^  Technical Component Only
-EBVE,Epstein-Barr Virus (EBV) ^  IgG Antibody to Early Antigen ^  Serum
-EBVQU,Epstein-Barr Virus DNA Detection and Quantification ^  Plasma
-ECAD,E-Cadherin Immunostain ^  Technical Component Only
-ECADB,E-Cadherin Immunostain ^  Bone Marrow ^  Technical Component Only
-ECHNO,Echinococcus Antibody ^  IgG ^  Serum
-ECOLI,Shiga Toxin Escherichia coli Antigen ^  Feces
-ECULI,Eculizumab ^  Serum
-EDOXA,Edoxaban ^  Anti-Xa ^  Plasma
-EEPC,Eastern Equine Encephalitis Antibody Panel ^  IgG and IgM ^  Spinal Fluid
-EEST,Estradiol ^  Serum
-EGG,Egg White ^  IgE ^  Serum
-EGGP,Eggplant ^  IgE ^  Serum
-EGPL,English Plantain ^  IgE ^  Serum
-EHOR,European Hornet ^  IgE ^  Serum
-EHRC,Ehrlichia chaffeensis (HME) Antibody ^  IgG ^  Serum
-ELDR,Elder ^  IgE ^  Serum
-ELM,Elm ^  IgE ^  Serum
-ELYME,Lyme Disease European Antibody Screen ^  Serum
-EM,Electron Microscopy ^  Varies
-EMA,Endomysial Antibodies (IgA) ^  Serum
-EMAI,Epithelial Membrane Antigen (EMA) Immunostain ^  Technical Component Only
-EMAT,Endomysial (IgA) ^  Titer ^  Serum
-EMAY,Euroglyphus maynei ^  IgE ^  Serum
-ENTP,Enterovirus ^  Molecular Detection ^  PCR ^  Plasma
-EOSU,Eosinophils ^  Random ^  Urine
-EOXD,Ethylene Oxide ^  IgE ^  Serum
-EPIP1,Epithelia Panel # 1 ^  Serum
-EPIP2,Epithelia Panel # 2 ^  Serum
-EPO,Erythropoietin ^  Serum
-EPOR,Erythropoietin Receptor (EPOR) Gene ^  Exon 8 Sequencing
-EPUR,Epicoccum purpurascens ^  IgE ^  Serum
-ERBE1,Estrogen Receptor Beta-1 Immunostain ^  Technical Component Only
-ERG,ERG Immunostain ^  Technical Component Only
-ESTR,Estrogen Receptor (ER) Immunostain ^  Technical Component Only
-ESTS,Estradiol ^  Rapid ^  Immunoassay ^  Serum
-ESYC,Eastern Sycamore ^  IgE ^  Serum
-ETGC,Ethyl Glucuronide Confirmation ^  Random ^  Urine
-ETGL,Ethylene Glycol ^  Serum
-ETGS,Ethyl Glucuronide Screen ^  Random ^  Urine
-ETGX,Ethyl Glucuronide Confirmation ^  Chain of Custody ^  Random ^  Urine
+CWAY,"Caraway,  IgE,  Serum"
+CXC13,"CXCL13 Immunostain,  Technical Component Only"
+CYC1,"Cyclin D1 (CCND1,  CYCD1) Immunostain,  Technical Component Only"
+CYCL,"Cyclospora Stain,  Feces"
+CYCPK,"Cyclosporine,  Peak,  Blood"
+CYSPR,"Cyclosporine,  Blood"
+CYSTC,"Cystatin C with Estimated GFR,  Serum"
+CYSTS,"Cysticercosis Antibody,  IgG,  Serum"
+CZPS,"Clonazepam and 7-Aminoclonazepam,  Serum"
+D240,"Podoplanin (D2-D40) Immunostain,  Technical Component Only"
+DAGL,"Gliadin (Deamidated) Antibody,  IgA,  Serum"
+DAND,"Dandelion,  IgE,  Serum"
+DATE,"Date,  Fruit,  IgE,  Serum"
+DATRE,"Date,  Tree,  IgE,  Serum"
+DBA4,"Hairy Cell Leukemia (DBA44) Immunostain,  Technical Component Only"
+DCORT,"11-Deoxycortisol,  Serum"
+DCP,"Des-Gamma-Carboxy Prothrombin,  Serum"
+DCTR,"Direct Antiglobulin Test (Polyspecific),  Blood"
+DDITT,"D-Dimer,  Plasma"
+DENGC,"Dengue Virus,  Molecular Detection,  PCR,  Spinal Fluid"
+DENGS,"Dengue Virus,  Molecular Detection,  PCR,  Serum"
+DESG3,"Desmoglein 3 (DSG3) Immunostain,  Technical Component Only"
+DESMN,"Desmin Immunostain,  Technical Component Only"
+DESPR,"Desipramine,  Serum"
+DEXT,"DermPath Consultation,  Wet Tissue"
+DF,"House Dust Mites/Dermatophagoides farinae,  IgE,  Serum"
+DFIR,"Douglas Fir,  IgE,  Serum"
+DGGL,"Gliadin (Deamidated) Antibody,  IgG,  Serum"
+DHEA_,"Dehydroepiandrosterone (DHEA),  Serum"
+DHES1,"Dehydroepiandrosterone Sulfate,  Serum"
+DHTS,"Dihydrotestosterone,  Serum"
+DHVD,"1, 25-Dihydroxyvitamin D,  Serum"
+DIA,"Diazepam and Nordiazepam,  Serum"
+DIG,"Digoxin,  Serum"
+DILL,"Dill,  IgE,  Serum"
+DIMER,"D-Dimer,  Plasma"
+DIPGS,"Diphtheria Toxoid IgG Antibody,  Serum"
+DLAC,"D-Lactate,  Plasma"
+DLAU,"D-Lactate,  Urine"
+DMIC,"Dermatophagoides microceras,  IgE,  Serum"
+DNJB9,"DNAJB9 Immunostain,  Technical Component Only"
+DOCK8,"Dedicator of Cytokinesis 8 (DOCK8) Deficiency,  Blood"
+DOCS,"11-Deoxycorticosterone,  Serum"
+DOG1,"DOG-1 Immunostain,  Technical Component Only"
+DOGD,"Dog Dander,  IgE,  Serum"
+DOXA1,"Oxalate Analysis,  Hemodialysate"
+DP,"House Dust Mites/Dermatophagoides pteronyssinus,  IgE,  Serum"
+DRV1,"Dilute Russell Viper Venom Time (DRVVT),  Plasma"
+DRVI1,"Dilute Russell Viper Venom Time (DRVVT),  with Reflex,  Plasma"
+DSGAB,"Desmoglein 1 (DSG1) and Desmoglein 3 (DSG3),  IgG Antibodies,  Serum"
+DSM4X,"Drugs of Abuse Screen 4,  Chain of Custody,  Meconium"
+DSM5X,"Drugs of Abuse Screen 5,  Chain of Custody,  Meconium"
+DSS,"Drug Screen,  Prescription/OTC,  Serum"
+DSSX,"Drug Screen,  Prescription/OTC,  Chain of Custody,  Serum"
+DUCK,"Duck Feathers,  IgE,  Serum"
+DULOX,"Duloxetine,  Serum"
+E1,"Estrone,  Serum"
+E157C,"Escherichia coli O157:H7 Culture,  Feces"
+EAG,"Hepatitis B e-Antigen,  Serum"
+EBNA2,"Epstein Barr Nuclear Antigen 2 (EBNA2) Immunostain,  Technical Component Only"
+EBV,"Epstein-Barr Virus (EBV) In Situ Hybridization,  Technical Component Only"
+EBVE,"Epstein-Barr Virus (EBV),  IgG Antibody to Early Antigen,  Serum"
+EBVQU,"Epstein-Barr Virus DNA Detection and Quantification,  Plasma"
+ECAD,"E-Cadherin Immunostain,  Technical Component Only"
+ECADB,"E-Cadherin Immunostain,  Bone Marrow,  Technical Component Only"
+ECHNO,"Echinococcus Antibody,  IgG,  Serum"
+ECOLI,"Shiga Toxin Escherichia coli Antigen,  Feces"
+ECULI,"Eculizumab,  Serum"
+EDOXA,"Edoxaban,  Anti-Xa,  Plasma"
+EEPC,"Eastern Equine Encephalitis Antibody Panel,  IgG and IgM,  Spinal Fluid"
+EEST,"Estradiol,  Serum"
+EGG,"Egg White,  IgE,  Serum"
+EGGP,"Eggplant,  IgE,  Serum"
+EGPL,"English Plantain,  IgE,  Serum"
+EHOR,"European Hornet,  IgE,  Serum"
+EHRC,"Ehrlichia chaffeensis (HME) Antibody,  IgG,  Serum"
+ELDR,"Elder,  IgE,  Serum"
+ELM,"Elm,  IgE,  Serum"
+ELYME,"Lyme Disease European Antibody Screen,  Serum"
+EM,"Electron Microscopy,  Varies"
+EMA,"Endomysial Antibodies (IgA),  Serum"
+EMAI,"Epithelial Membrane Antigen (EMA) Immunostain,  Technical Component Only"
+EMAT,"Endomysial (IgA),  Titer,  Serum"
+EMAY,"Euroglyphus maynei,  IgE,  Serum"
+ENTP,"Enterovirus,  Molecular Detection,  PCR,  Plasma"
+EOSU,"Eosinophils,  Random,  Urine"
+EOXD,"Ethylene Oxide,  IgE,  Serum"
+EPIP1,"Epithelia Panel # 1,  Serum"
+EPIP2,"Epithelia Panel # 2,  Serum"
+EPO,"Erythropoietin,  Serum"
+EPOR,"Erythropoietin Receptor (EPOR) Gene,  Exon 8 Sequencing"
+EPUR,"Epicoccum purpurascens,  IgE,  Serum"
+ERBE1,"Estrogen Receptor Beta-1 Immunostain,  Technical Component Only"
+ERG,"ERG Immunostain,  Technical Component Only"
+ESTR,"Estrogen Receptor (ER) Immunostain,  Technical Component Only"
+ESTS,"Estradiol,  Rapid,  Immunoassay,  Serum"
+ESYC,"Eastern Sycamore,  IgE,  Serum"
+ETGC,"Ethyl Glucuronide Confirmation,  Random,  Urine"
+ETGL,"Ethylene Glycol,  Serum"
+ETGS,"Ethyl Glucuronide Screen,  Random,  Urine"
+ETGX,"Ethyl Glucuronide Confirmation,  Chain of Custody,  Random,  Urine"
 ETHO,Ethotoin (Peganone)
-ETX,Ethosuximide ^  Serum
-EUCL,Eucalyptus ^  IgE ^  Serum
-EURO,Phospholipase A2 Receptor ^  Enzyme Linked Immunosorbent Assay ^  Serum
-EVROL,Everolimus ^  Blood
-EZNT8,Zinc Transporter 8 (ZnT8) Antibody ^  Serum
-F_10,Coagulation Factor X Activity Assay ^  Plasma
-F_11,Coagulation Factor XI Activity Assay ^  Plasma
-F_12,Coagulation Factor XII Activity Assay ^  Plasma
-F_2,Coagulation Factor II Activity Assay ^  Plasma
-F_7,Coagulation Factor VII Activity Assay ^  Plasma
-F_9,Coagulation Factor IX Activity Assay ^  Plasma
-F100B,S-100B Protein ^  Serum
+ETX,"Ethosuximide,  Serum"
+EUCL,"Eucalyptus,  IgE,  Serum"
+EURO,"Phospholipase A2 Receptor,  Enzyme Linked Immunosorbent Assay,  Serum"
+EVROL,"Everolimus,  Blood"
+EZNT8,"Zinc Transporter 8 (ZnT8) Antibody,  Serum"
+F_10,"Coagulation Factor X Activity Assay,  Plasma"
+F_11,"Coagulation Factor XI Activity Assay,  Plasma"
+F_12,"Coagulation Factor XII Activity Assay,  Plasma"
+F_2,"Coagulation Factor II Activity Assay,  Plasma"
+F_7,"Coagulation Factor VII Activity Assay,  Plasma"
+F_9,"Coagulation Factor IX Activity Assay,  Plasma"
+F100B,"S-100B Protein,  Serum"
 F143P,14-3-3 eta Protein
-F2ISO,F2-Isoprostanes ^  Random ^  Urine
-F5HAR,5-HIAA (5-Hydroxyindoleacetic Acid) ^  Random Urine
+F2ISO,"F2-Isoprostanes,  Random,  Urine"
+F5HAR,"5-HIAA (5-Hydroxyindoleacetic Acid),  Random Urine"
 F5NUL,5'Nucleotidase
 F68KD,68kD (hsp-70)
-F8A,Coagulation Factor VIII Activity Assay ^  Plasma
+F8A,"Coagulation Factor VIII Activity Assay,  Plasma"
 FA1GP,Alpha-1-Acid Glycoprotein
 FABP,Amyloid Beta-Protein
 FABP2,Allergic Bronchopulmonary Aspergillosis Panel II
-FACEC,Angiotensin Converting Enzyme ^  CSF
-FACES,Acetoacetate ^  Serum
-FACET,Acetaminophen (Tylenol ^  Datril) ^  Urine
-FACR8,Factor 8 Related Antigen (FAC8) Immunostain ^  Technical Component Only
-FACT,F-Actin Ab ^  IgG ^  Serum
-FACTV,Coagulation Factor V Activity Assay ^  Plasma
-FACYS,Acyclovir ^  Plasma
-FADBC,Adenosine Deaminase ^  RBC
-FADDC,Adenosine Deaminase ^  CSF
-FADE,Adenovirus DNA ^  Quantitative Real-Time PCR
+FACEC,"Angiotensin Converting Enzyme,  CSF"
+FACES,"Acetoacetate,  Serum"
+FACET,"Acetaminophen (Tylenol,  Datril),  Urine"
+FACR8,"Factor 8 Related Antigen (FAC8) Immunostain,  Technical Component Only"
+FACT,"F-Actin Ab,  IgG,  Serum"
+FACTV,"Coagulation Factor V Activity Assay,  Plasma"
+FACYS,"Acyclovir,  Plasma"
+FADBC,"Adenosine Deaminase,  RBC"
+FADDC,"Adenosine Deaminase,  CSF"
+FADE,"Adenovirus DNA,  Quantitative Real-Time PCR"
 FADIO,Adiponectin
-FADPL,Adenosine Deaminase ^  Pleural Fluid
+FADPL,"Adenosine Deaminase,  Pleural Fluid"
 FAEAB,Anti-Enterocyte Antibodies
-FALAU,Aminolevulinic Acid (ALA) ^  Urine
+FALAU,"Aminolevulinic Acid (ALA),  Urine"
 FALFG,Almond Food IgG
 FALG,Alpha Lactalbumin IgG
 FALPX,Alprazolam (Xanax)
 FAMAN,Amantadine (Symmetrel)
-FAMP,Amphetamine ^  Serum or Plasma
-FAMYS,Amylase ^  Isoenzymes
-FANG,Angiotensin II ^  Plasma
-FANGI,Angiotensin I ^  Plasma
+FAMP,"Amphetamine,  Serum or Plasma"
+FAMYS,"Amylase,  Isoenzymes"
+FANG,"Angiotensin II,  Plasma"
+FANGI,"Angiotensin I,  Plasma"
 FANGL,Androstanediol Glucuronide
-FANT,Fire Ant ^  IgE ^  Serum
+FANT,"Fire Ant,  IgE,  Serum"
 FANTI,Anti-IgE
-FANTU,Antimony ^  Urine
-FAPIX,Apixaban ^  Plasma
+FANTU,"Antimony,  Urine"
+FAPIX,"Apixaban,  Plasma"
 FAPLG,Apple IgG
 FARI,Aripiprazole (Abilify)
 FARP,Autoimmune Retinopathy Panel by Immunoblot (ARP)
 FART,Artichoke (Cynara scolymus) IgE
-FARWB,Anti-retinal autoantibodies follow up ^  WB
-FASC,Fascin Immunostain ^  Technical Component Only
-FASCC,Amphetamines Analysis ^  Serum
+FARWB,"Anti-retinal autoantibodies follow up,  WB"
+FASC,"Fascin Immunostain,  Technical Component Only"
+FASCC,"Amphetamines Analysis,  Serum"
 FAVCG,Avocado IgG
 FAVI,Hypersensitivity Pneumonitis Avian Panel
 FAZAT,Azathioprine (Imuran) as 6-Mercaptopurine
-FBAC,Bile Acids ^  Urine
-FBACS,Baclofen ^  Serum
+FBAC,"Bile Acids,  Urine"
+FBACS,"Baclofen,  Serum"
 FBANG,Banana IgG
 FBARG,Barley IgG
-FBARS,Barium ^  Serum
+FBARS,"Barium,  Serum"
 FBBLE,Bass Black (Sea Bass) (Centropristis striata) IgE
-FBCEL,FISH ^  B-Cell Chronic Lymphocytic Leukemia Panel
+FBCEL,"FISH,  B-Cell Chronic Lymphocytic Leukemia Panel"
 FBCGG,Bean Coffee Green IgG
 FBEBE,Bean Black (Phaseolus spp) IgE
 FBEFG,Beef IgG
-FBEN,Benzene ^  Occupational Exposure ^  Blood
-FBENZ,Benztropine (Cogentin) ^  Serum
-FBERY,Beryllium ^  Blood
+FBEN,"Benzene,  Occupational Exposure,  Blood"
+FBENZ,"Benztropine (Cogentin),  Serum"
+FBERY,"Beryllium,  Blood"
 FBGSG,Bean Green/String IgG
-FBIOT,Vitamin B7 ^  H (Biotin)
-FBIS,Bismuth ^  Serum
-FBISU,Bismuth ^  Urine
-FBIUR,Bicarbonate ^  Urine
+FBIOT,"Vitamin B7,  H (Biotin)"
+FBIS,"Bismuth,  Serum"
+FBISU,"Bismuth,  Urine"
+FBIUR,"Bicarbonate,  Urine"
 FBKG,Bean Kidney IgG
-FBL,Fungal Culture ^  Blood
+FBL,"Fungal Culture,  Blood"
 FBLGG,Beta Lactoglobulin IgG
 FBLME,Bean Lima (Phaseolus limensis) IgE
 FBLUG,Blueberry IgG
-FBMS,MVista Blastomyces Quantitative Antigen ^  Serum
-FBMU,MVista Blastomyces Quantitative Antigen ^  Urine
+FBMS,"MVista Blastomyces Quantitative Antigen,  Serum"
+FBMU,"MVista Blastomyces Quantitative Antigen,  Urine"
 FBNC1,Brazil Nut Component rBer e 1
 FBNWG,Bean Navy/White IgG
 FBRCG,Broccoli IgG
-FBSH,Firebush (Kochia) ^  IgE ^  Serum
+FBSH,"Firebush (Kochia),  IgE,  Serum"
 FBSLG,Basil IgG
 FBTRG,Beet Root IgG
-FBUMT,Bupropion and Metabolite ^  Serum
+FBUMT,"Bupropion and Metabolite,  Serum"
 FBUS,Buspirone (Buspar)
 FBWME,Bayberry/Wax Myrtle (Myrica spp) IgE
-FC13A,Factor 13a (FAC13A) Immunostain ^  Technical Component Only
-FC1EQ,C1 Esterase Inhibitor ^  Functional Assay ^  Serum
+FC13A,"Factor 13a (FAC13A) Immunostain,  Technical Component Only"
+FC1EQ,"C1 Esterase Inhibitor,  Functional Assay,  Serum"
 FC3AL,C3a Level
 FC4A,C4ades Arg Level
 FCABB,Cabbage IgG
-FCAEC,Cysticercus Antibody (IgG) ^  ELISA ^  CSF
+FCAEC,"Cysticercus Antibody (IgG),  ELISA,  CSF"
 FCAFG,Cauliflower IgG
 FCAIG,Cockroach American (Periplaneta americana) IgE
-FCARO,Carotene ^  Beta
+FCARO,"Carotene,  Beta"
 FCARP,Cancer-Associated Retinopathy Panel (CARP) by Immunoblot and IHC
 FCASG,Casein IgG
 FCASH,Cashew IgG
 FCATE,Catfish (Siluriformes spp) IgE
-FCBDS,Cannabidiol ^  Serum
+FCBDS,"Cannabidiol,  Serum"
 FCCA3,Cashew Component rAna o 3
 FCCEV,NOTCH3 (CADASIL) Sequencing Test
 FCCGG,Cheese Cheddar IgG
@@ -711,7 +711,7 @@ FCELG,Celery IgG
 FCHCG,Chocolate/Cacao IgG
 FCHPZ,Chlorpromazine (Thorazine)
 FCHXG,Chicken IgG
-FCHYS,Chymotrypsin ^  Stool
+FCHYS,"Chymotrypsin,  Stool"
 FCIC,Circulating Immune Complexes (CIC)
 FCING,Cinnamon IgG
 FCLCN,CLCN1 DNA Sequencing Test
@@ -723,10 +723,10 @@ FCNEX,CancerNext
 FCOCN,Coconut IgG
 FCOFE,Coffee (Coffea spp) IgE
 FCOKE,Cocaine Analysis - Whole Blood
-FCOPP,Copper ^  RBCs
+FCOPP,"Copper,  RBCs"
 FCOR4,Corn IgG4
 FCORG,Corn IgG
-FCOV2,2019 Novel Coronavirus (COVID-19) ^  NAA
+FCOV2,"2019 Novel Coronavirus (COVID-19),  NAA"
 FCQBA,C1Q Binding Assay
 FCRAB,Crab IgG
 FCRTG,Carrot IgG
@@ -736,19 +736,19 @@ FCUKG,Cucumber IgG
 FCURV,Curvularia spicifera/Bipolaris IgE
 FCYTG,Cytomegalovirus IgG Avidity
 FD2PG,Prostaglandin D2 (PGD2)
-FDCU,Deoxypyridinoline Crosslinks ^  Urine
-FDERM,Fungal Culture ^  Dermal
+FDCU,"Deoxypyridinoline Crosslinks,  Urine"
+FDERM,"Fungal Culture,  Dermal"
 FDFEN,Dog Fennel (Anthemis cotula) IgE
-FDGTX,Digitoxin ^  Serum
-FDICH,Dichloromethane ^  Serum
-FDILT,Diltiazem (Cardizem ^  Dilacor)
+FDGTX,"Digitoxin,  Serum"
+FDICH,"Dichloromethane,  Serum"
+FDILT,"Diltiazem (Cardizem,  Dilacor)"
 FDISP,Disaccharidase Panel
 FDKYE,Dock Yellow (Rumex crispus) IgE
 FDLS,Donath Landsteiner
-FDM,Dextromethorphan (DM) ^  Serum
+FDM,"Dextromethorphan (DM),  Serum"
 FDM1,DMPK DNA Test (DM1)
 FDMZ,CNBP DNA Test (DM2)
-FDP1,Food Panel #2 ^  Serum
+FDP1,"Food Panel #2,  Serum"
 FDSAC,Disaccharidase Analysis
 FDSOX,11-Desoxycortisol (Specific Compound S)
 FDXAP,Dexedrine (Dextroamphetamine)
@@ -756,44 +756,44 @@ FDXM,Dexamethasone
 FEBGP,Exotic Bird Panel IgG
 FECLT,Euglobulin Clot Lysis Time
 FECP,Eosinophil Cationic Protein (ECP)
-FEEP,Ferret Epithelium ^  IgE ^  Serum
-FEGUC,Ethyl Glucuronide Screen ^  Umbilical Cord Tissue
+FEEP,"Ferret Epithelium,  IgE,  Serum"
+FEGUC,"Ethyl Glucuronide Screen,  Umbilical Cord Tissue"
 FEGWH,Egg White IgG
 FEGYK,Egg Yolk IgG
-FEHAG,Entamoeba histolytica Antigen ^  EIA
-FELAS,Elastase ^  Pancreatic ^  Serum
-FELBA,Felbamate (Felbatol) ^  Serum
-FENC,Encainide (Enkaidr) ^  ODE and MODE
-FENS,Fentanyl Screen ^  Random ^  Urine
-FENTS,Fentanyl ^  Serum
-FEPHD,Ephedrine ^  Serum
-FERR,Ferritin ^  Serum
-FESE,Fennel Seed ^  IgE ^  Serum
-FET,Iron ^  Liver Tissue
+FEHAG,"Entamoeba histolytica Antigen,  EIA"
+FELAS,"Elastase,  Pancreatic,  Serum"
+FELBA,"Felbamate (Felbatol),  Serum"
+FENC,"Encainide (Enkaidr),  ODE and MODE"
+FENS,"Fentanyl Screen,  Random,  Urine"
+FENTS,"Fentanyl,  Serum"
+FEPHD,"Ephedrine,  Serum"
+FERR,"Ferritin,  Serum"
+FESE,"Fennel Seed,  IgE,  Serum"
+FET,"Iron,  Liver Tissue"
 FETCE,Mitochondrial Respiratory Chain Enzyme Analysis (ETC) - Skin Fibroblasts
-FETH2,Feather Panel # 2 ^  Serum
+FETH2,"Feather Panel # 2,  Serum"
 FEWG4,Egg White IgG4
 FEWHG,Egg Whole IgG
-FFAG4,Filaria IgG4 Antibody ^  ELISA
-FFANA,Anti-Nuclear Antibodies ^  Body Fluid
+FFAG4,"Filaria IgG4 Antibody,  ELISA"
+FFANA,"Anti-Nuclear Antibodies,  Body Fluid"
 FFLEX,Cyclobenzaprine (Flexeril)
-FFLRO,Flunitrazepam Confirmation ^  Serum
+FFLRO,"Flunitrazepam Confirmation,  Serum"
 FFLUR,Flurazepam (Dalmane) and Desalkylflurazepam
 FFMI2,Anti-Mi-2 Ab
 FFMTH,Meconium Methadone Screen with Reflex Confirmation
 FFOVE,Fusarium oxysporum/vasinfectum IgE
-FFPET,Phosphatidylethanol (PEth) ^  whole blood
+FFPET,"Phosphatidylethanol (PEth),  whole blood"
 FFPG4,Food Panel IgG4 (532)
 FFRED,Friedreich Ataxia Repeat Expansion Analysis - Unknown Mutation
 FFSPG,Fish and Shellfish Panel IgG
 FFTAT,Thrombin-Antithrombin Complex
-FFTEM,Temazepam (Restoril) ^  Serum
+FFTEM,"Temazepam (Restoril),  Serum"
 FFTHI,Thiothixene (Navane)
-FFTIB,Tin ^  Blood
-FFTIN,Tin ^  Serum
-FFTIO,Thiocyanate ^  Serum
-FFTLB,Toluene ^  Occupational Exposure ^  Blood
-FFTOL,Toluene ^  Occupational Exposure ^  Serum
+FFTIB,"Tin,  Blood"
+FFTIN,"Tin,  Serum"
+FFTIO,"Thiocyanate,  Serum"
+FFTLB,"Toluene,  Occupational Exposure,  Blood"
+FFTOL,"Toluene,  Occupational Exposure,  Serum"
 FFTPO,Thrombopoietin (TPO)
 FFTRO,Trofile DNA Co-Receptor Tropism Assay
 FFTRP,Trofile Co-Receptor Tropism Assay
@@ -803,35 +803,35 @@ FFURO,Furosemide (Lasix)
 FFVLM,Factor V Leiden (F5) R506Q Mutation
 FFVOX,Fluvoxamine (Luvox)
 FFWNC,Walnut Component rJug r 3
-FFX3F,Factor XIII ^  Functional
+FFX3F,"Factor XIII,  Functional"
 FG4FI,IgG4 Food Panel I
 FG4FP,IgG4 Food Panel VIII
-FGA13,Galactose-alpha-1 ^ 3-galactose (Alpha-Gal) IgE
-FGABA,Gabapentin ^  Urine
-FGAGA,Golimumab and Anti-Golimumab Antibody ^  DoseASSURE GOL
-FGANP,Ganciclovir ^  Plasma
+FGA13,"Galactose-alpha-1, 3-galactose (Alpha-Gal) IgE"
+FGABA,"Gabapentin,  Urine"
+FGAGA,"Golimumab and Anti-Golimumab Antibody,  DoseASSURE GOL"
+FGANP,"Ganciclovir,  Plasma"
 FGARG,Garlic IgG
-FGEN,Fungal Culture ^  Routine
+FGEN,"Fungal Culture,  Routine"
 FGENT,Gentamicin in Cerebrospinal Fluid (CSF)
 FGERA,IgE Receptor Antibody
-FGF23,Fibroblast Growth Factor 23 ^  Plasma
-FGFB,Transforming Growth Factor beta ^  Serum
-FGFRC,Fibroblast Growth Factor Receptor 1 (FGFR1) IHC ^  Technical Component Only
-FGGMC,Toxoplasma gondii Antibodies (IgG ^  IgM) ^  ELISA ^  CSF
-FGHSP,Gamma-Hydroxybutyric Acid (GHB) ^  Serum/Plasma
-FGHSU,Gamma-Hydroxybutyric Acid (GHB) ^  Urine
-FGHTL,Ghrelin Total ^  Plasma
+FGF23,"Fibroblast Growth Factor 23,  Plasma"
+FGFB,"Transforming Growth Factor beta,  Serum"
+FGFRC,"Fibroblast Growth Factor Receptor 1 (FGFR1) IHC,  Technical Component Only"
+FGGMC,"Toxoplasma gondii Antibodies (IgG,  IgM),  ELISA,  CSF"
+FGHSP,"Gamma-Hydroxybutyric Acid (GHB),  Serum/Plasma"
+FGHSU,"Gamma-Hydroxybutyric Acid (GHB),  Urine"
+FGHTL,"Ghrelin Total,  Plasma"
 FGLIP,Glipizide (Glucotrol)
 FGLMA,GlycoMark
 FGLUT,Gluten IgG
-FGNRH,Gonadotropin Releasing Hormone (Gn-RH ^  Luteinizing Hormone-Releasing Hormone LH-RH)
+FGNRH,"Gonadotropin Releasing Hormone (Gn-RH,  Luteinizing Hormone-Releasing Hormone LH-RH)"
 FGORG,Turkey IgG
-FGQ1B,Ganglioside GQ1b Antibody (IgG) ^  EIA
+FGQ1B,"Ganglioside GQ1b Antibody (IgG),  EIA"
 FGRPG,Grape IgG
 FGTEA,Tea IgG
-FGTIA,Tiagabine (Gabitril) ^  Serum
-FH7GM,Herpesvirus 7 IgG and IgM Antibody Panel ^  IFA
-FH8RP,Herpesvirus 8 (HHV-8) DNA ^  Quantitative Real-Time PCR
+FGTIA,"Tiagabine (Gabitril),  Serum"
+FH7GM,"Herpesvirus 7 IgG and IgM Antibody Panel,  IFA"
+FH8RP,"Herpesvirus 8 (HHV-8) DNA,  Quantitative Real-Time PCR"
 FHACK,Hackberry (Celtis occidentalis) IgE
 FHADE,Haddock (Melanogrammus aeglefinus) IgE
 FHAL,Triazolam (Halcion)
@@ -839,85 +839,85 @@ FHALG,Halibut IgG
 FHAM,Human Anti-mouse Antibody (HAMA)
 FHASQ,Hepatitis A Qualitative PCR HAV SuperQual
 FHCC1,Hazelnut Component rCor a 1
-FHER,HER-2/neu ^  Quantitative ^  ELISA
+FHER,"HER-2/neu,  Quantitative,  ELISA"
 FHEXA,Hexagonal Phospholipid Neutralization
-FHIAA,5-HIAA (5-Hydroxyindoleacetic acid) ^  Plasma
+FHIAA,"5-HIAA (5-Hydroxyindoleacetic acid),  Plasma"
 FHLAA,HLA A High Resolution
-FHLC,Immunoglobulin M (IgM) Heavy and Light Chain (HLC) Pairs ^  Kappa and Lambda with Ratio
-FHLCG,Immunoglobulin G (IgG) Heavy and Light Chain (HLC) Pairs ^  Kappa and Lambda with Ratio
+FHLC,"Immunoglobulin M (IgM) Heavy and Light Chain (HLC) Pairs,  Kappa and Lambda with Ratio"
+FHLCG,"Immunoglobulin G (IgG) Heavy and Light Chain (HLC) Pairs,  Kappa and Lambda with Ratio"
 FHMTB,Hydrocodone and metabolites
 FHOBG,Venom Honey Bee IgG
-FHPAF,Helicobacter pylori Antigen ^  Fecal by EIA
+FHPAF,"Helicobacter pylori Antigen,  Fecal by EIA"
 FHPCF,Heparin Cofactor II
 FHPL,Human Placental Lactogen (HPL)
 FHSPL,Histamine Plasma
-FHSTW,Histamine ^  Whole Blood
-FHTL,HTLV I/II DNA ^  Qualitative Real-Time PCR
+FHSTW,"Histamine,  Whole Blood"
+FHTL,"HTLV I/II DNA,  Qualitative Real-Time PCR"
 FHV2Q,HIV-2 DNA/RNA Qualitative Real-Time PCR
-FIBAG,Fibrinogen Antigen ^  Plasma
-FIBTP,Fibrinogen ^  Plasma
-FIBUP,Ibuprofen (Motrin ^  Advil ^  Nuprin) ^  serum
+FIBAG,"Fibrinogen Antigen,  Plasma"
+FIBTP,"Fibrinogen,  Plasma"
+FIBUP,"Ibuprofen (Motrin,  Advil,  Nuprin),  serum"
 FIFNY,Interferon-gamma (IFN-y) Serum
 FIGA,Anti-IgA
 FIGBP,IGF Binding Protein-1 (IGFBP-1)
 FIGF2,Insulin-like Growth Factor 2 (IGF-2)
-FIL,Filaria ^  Blood
+FIL,"Filaria,  Blood"
 FIL1S,Interleukin-10 (IL-10) Serum
 FIL2M,Interleukin 2
-FIL2S,Interleukin 2 Receptor ^  Soluble
+FIL2S,"Interleukin 2 Receptor,  Soluble"
 FIL4S,Interleukin-4 (IL-4) Serum
 FIL8S,Interleukin-8 (IL-8) Serum
-FIMM,Immunofixation ^  CSF
-FIMMC,Immunoglobulins ^  CSF Quantitative
+FIMM,"Immunofixation,  CSF"
+FIMMC,"Immunoglobulins,  CSF Quantitative"
 FINA,NAbFeron (IFNB-1) Neutralizing Antibody Test
-FINCH,Finch Feathers ^  IgE ^  Serum
+FINCH,"Finch Feathers,  IgE,  Serum"
 FINTA,Interleukin 1-Alpha
 FINTB,Interleukin 1-Beta
 FIRGH,"Growth Hormone-Releasing Hormone (IR-GH-RH) (Immunoreactive GH-RH)"
-FISLC,Islet Cell Cytoplasmic Ab ^  IgG
+FISLC,"Islet Cell Cytoplasmic Ab,  IgG"
 FISON,Isoniazid (INH)
 FIVCZ,Isavuconazole (CRESEMBA) LC-MS/MS
-FL,Fluoride ^  Plasma
-FLACF,Lactoferrin ^  Fecal by ELISA
+FL,"Fluoride,  Plasma"
+FLACF,"Lactoferrin,  Fecal by ELISA"
 FLBAE,Ladybeetle Multicolored Asian (Harmonia axyridis) IgE
-FLDLD,LDL Cholesterol ^  Direct
-FLEC,Flecainide ^  Serum
+FLDLD,"LDL Cholesterol,  Direct"
+FLEC,"Flecainide,  Serum"
 FLEMG,Lemon IgG
 FLENG,Lentil IgG
 FLEP,Leptin
 FLETG,Lettuce IgG
-FLEVA,Levamisole ^  Urine
-FLI1,FLI-1 Immunostain ^  Technical Component Only
-FLIPR,Lipase ^  Random Urine
+FLEVA,"Levamisole,  Urine"
+FLI1,"FLI-1 Immunostain,  Technical Component Only"
+FLIPR,"Lipase,  Random Urine"
 FLNZ,Olanzapine (Zyprexa)
-FLUC,5-Flucytosine ^  Serum
-FLUOX,Fluoxetine ^  Serum
+FLUC,"5-Flucytosine,  Serum"
+FLUOX,"Fluoxetine,  Serum"
 FLUPV,Lupus Anticoagulant Evaluation with Reflex
 FMACR,Macroamylase
 FMANO,Mannose Binding Lectin
 FMARC,Bupivacaine (Marcaine)
-FMARI,Cannabinoid Analysis ^  Whole Blood
+FMARI,"Cannabinoid Analysis,  Whole Blood"
 FMARP,Melanoma Associated Retinopathy MAR Panel by Immunoblot and IHC
 FMATG,Tomato IgG
 FMBL,Mannan Binding Lectin (MBL)
 FMCG4,Milk Cow IgG4
-FMELA,Melatonin ^  Plasma
+FMELA,"Melatonin,  Plasma"
 FMELG,Melons IgG
-FMEP,Meperidine (Demerol) and Normeperidine ^  serum
-FMERC,Mercaptopurine (6-MP ^  Purinethol)
-FMETH,Methaqualone Confirmation ^  urine
-FMETN,Metformin ^  Plasma
+FMEP,"Meperidine (Demerol) and Normeperidine,  serum"
+FMERC,"Mercaptopurine (6-MP,  Purinethol)"
+FMETH,"Methaqualone Confirmation,  urine"
+FMETN,"Metformin,  Plasma"
 FMETX,Methsuximide (Celontin) as Desmethylmethsuximide
-FMGA,Myelin Assoc. Glycoprotein (MAG) Antibody w/Reflex to MAG-SGPG & MAG ^  EIA
-FMIDZ,Midazolam (Versed) ^  serum
-FMIL,Foxtail Millet ^  IgE ^  Serum
+FMGA,"Myelin Assoc. Glycoprotein (MAG) Antibody w/Reflex to MAG-SGPG & MAG,  EIA"
+FMIDZ,"Midazolam (Versed),  serum"
+FMIL,"Foxtail Millet,  IgE,  Serum"
 FMIRT,Mirtazapine (Remeron)
 FMITO,Mitotane (Lysodren)
-FMMM,Mephedrone ^  MDPV and Methylone ^  Urine
-FMORS,Morphine Confirmation ^  Serum
+FMMM,"Mephedrone,  MDPV and Methylone,  Urine"
+FMORS,"Morphine Confirmation,  Serum"
 FMPRE,Maple Red (Acer rubrum) IgE
 FMT21,MaterniT21 Plus
-FMTAG,Murine Typhus Antibodies ^  IgG
+FMTAG,"Murine Typhus Antibodies,  IgG"
 FMTFG,Mustard Food IgG
 FMUSG,Mushroom IgG
 FMVCO,MVista Coccidioides Antigen EIA
@@ -928,48 +928,48 @@ FNEXT,BreastNext: Analyses of 17 Genes Associated With Hereditary Breast Cancer
 FNFAS,TNF-alpha (TNF-a) Serum
 FNIAC,Vitamin B3 Niacin in Plasma
 FNMEN,Neisseria Meningitidis IgG Vaccine Response
-FNSVG,Vaginitis (VG) ^  NuSwab
+FNSVG,"Vaginitis (VG),  NuSwab"
 FOAKE,Oak Live (Quercus virginiana) IgE
 FOATG,Oat IgG
-FOBT,Fecal Occult Blood ^  Colorectal Cancer Screen ^  Qualitative ^  Immunochemical ^  Feces
-FOL,Folate ^  Serum
+FOBT,"Fecal Occult Blood,  Colorectal Cancer Screen,  Qualitative,  Immunochemical,  Feces"
+FOL,"Folate,  Serum"
 FOLBG,Olive Black IgG
 FONG,Onion IgG
 FONS,Western blot for anti-optic nerve autoantibodies in the serum
-FOOD1,Food-Nut Panel # 2 ^  Serum
-FOOD2,Food-Fruit Panel ^  Serum
-FOOD3,Food-Vegetable Panel ^  Serum
-FOOD4,Food-Grain Panel ^  Serum
-FOOD6,Food Panel ^  Serum
-FOOD7,Food-Seafood Panel ^  Serum
-FOOD8,Food-Nut Panel # 1 ^  Serum
+FOOD1,"Food-Nut Panel # 2,  Serum"
+FOOD2,"Food-Fruit Panel,  Serum"
+FOOD3,"Food-Vegetable Panel,  Serum"
+FOOD4,"Food-Grain Panel,  Serum"
+FOOD6,"Food Panel,  Serum"
+FOOD7,"Food-Seafood Panel,  Serum"
+FOOD8,"Food-Nut Panel # 1,  Serum"
 FOPE,Perch Ocean
-FORAC,Formic Acid ^  Serum
-FORAU,Formic Acid ^  Urine
+FORAC,"Formic Acid,  Serum"
+FORAU,"Formic Acid,  Urine"
 FORGG,Oregano IgG
 FORNG,Orange IgG
-FOVAS,Ovarian Antibody Screen with Reflex to Titer ^  IFA
-FOXAZ,Oxazepam (Serax) ^  Serum
-FOXFU,Oxycodone - Free (Unconjugated) ^  Serum
-FOXP1,FOXP1 Immunostain ^  Technical Component Only
-FOXP3,FOXP3 Immunostain ^  Technical Component Only
+FOVAS,"Ovarian Antibody Screen with Reflex to Titer,  IFA"
+FOXAZ,"Oxazepam (Serax),  Serum"
+FOXFU,"Oxycodone - Free (Unconjugated),  Serum"
+FOXP1,"FOXP1 Immunostain,  Technical Component Only"
+FOXP3,"FOXP3 Immunostain,  Technical Component Only"
 FP5PC,Pyridoxal 5-phosphate (CSF)
 FPAB,Vitamin B5 (Pantothenic Acid) Bioassay
-FPALI,Paliperidone ^  Serum
+FPALI,"Paliperidone,  Serum"
 FPAN1,Pancreatic Elastase-1
 FPARG,Parsley IgG
 FPBLG,Pepper Black IgG
 FPBPG,Pepper Bell/Paprika IgG
 FPCFG,Pecan Food IgG
 FPCHI,Pepper Chili IgG
-FPCNS,Pancreastatin ^  Serum
+FPCNS,"Pancreastatin,  Serum"
 FPCYE,Pepper Cayenne (Capsicum frutescens) IgE
-FPD2U,Prostaglandin D2 (PG D2) ^  Urine
+FPD2U,"Prostaglandin D2 (PG D2),  Urine"
 FPDD,Pigeon/Dove Droppings Gel Diffusion
 FPEAC,Peach IgG
 FPEAR,Pear IgG
 FPEPS,Pepsinogen I
-FPERP,Perampanel ^  Serum
+FPERP,"Perampanel,  Serum"
 FPFRG,Prothrombin Fragment 1+2
 FPFUZ,Phenosense Entry HIV Drug Resistance Assay
 FPGNG,Pea Green IgG
@@ -977,16 +977,16 @@ FPGT,Phenosense Combination HIV Drug Resistance Assay
 FPHAS,Phadiatop (Allergy Screen)
 FPHEG,Promethazine (Phenergan)
 FPHET,Anti-Phosphatidylethanolamine Panel
-FPHFL,pH ^  Fecal
+FPHFL,"pH,  Fecal"
 FPHIV,Phenosense HIV Drug Resistance Replication Capacity
 FPIAP,Pineapple IgG
 FPIGF,Pigeon Feathers IgG
 FPINP,Pine Ponderosa IgE
 FPLAC,PROMETHEUS LactoTYPE
-FPLAT,Platinum ^  Serum
+FPLAT,"Platinum,  Serum"
 FPNG4,Peanut IgG4
 FPNTG,Peanut IgG
-FPOLO,Poliovirus (Types 1 ^  3) Antibodies ^  Neutralization
+FPOLO,"Poliovirus (Types 1,  3) Antibodies,  Neutralization"
 FPOPW,Poplar White (Populus alba) IgE
 FPORG,Pork IgG
 FPPCA,PCA3 (Prostate Cancer Antigen 3)
@@ -999,29 +999,29 @@ FQUET,Quetiapine (Seroquel)
 FRAJI,Raji Cell Immune Complex Assay
 FRASP,Raspberry IgG
 FRBP,Retinol Binding Protein
-FRDIG,Digoxin ^  Free ^  Serum
+FRDIG,"Digoxin,  Free,  Serum"
 FRFIT,Rabies Antibody Endpoint
 FRFYG,Rye Food IgG
-FRGAM,Rheumatoid Factor (RF); IgG ^  IgA & IgM
+FRGAM,"Rheumatoid Factor (RF); IgG,  IgA & IgM"
 FRICE,Rice IgG
 FRISP,Risperidone (Risperdal) and 9-Hydroxyrisperidone
-FRMH,Formaldehyde ^  IgE ^  Serum
+FRMH,"Formaldehyde,  IgE,  Serum"
 FRMTA,Recombx MaTa Autoantibody Test
-FROS2,Fructose ^  Qualitative ^  Semen
+FROS2,"Fructose,  Qualitative,  Semen"
 FRSE,Red Snapper (Lutjanus spp) IgE
-FRT3,T3 (Triiodothyronine) ^  Free ^  Serum
-FRT4,T4 (Thyroxine) ^  Free ^  Serum
-FRT4D,T4 (Thyroxine) ^  Free ^  Dialysis ^  Serum
-FRUCT,Fructosamine ^  Serum
-FRW,False Ragweed ^  IgE ^  Serum
-FS,Fungal Smear ^  Varies
+FRT3,"T3 (Triiodothyronine),  Free,  Serum"
+FRT4,"T4 (Thyroxine),  Free,  Serum"
+FRT4D,"T4 (Thyroxine),  Free,  Dialysis,  Serum"
+FRUCT,"Fructosamine,  Serum"
+FRW,"False Ragweed,  IgE,  Serum"
+FS,"Fungal Smear,  Varies"
 FSABI,Tysabri (Natalizumab) Immunogenicity
 FSAG,Sage (Artemisia spp.) IgE
 FSALG,Salmon IgG
 FSCA1,SCA1 (ATXN1) Repeat Expansion
 FSCA3,SCA3 (MJC/ATXN3) Repeat Expansion
 FSCA6,SCA 6 (CACNA1A) Repeat Expansion
-FSCC,Squamous Cell Carcinoma Antigen ^  Serum
+FSCC,"Squamous Cell Carcinoma Antigen,  Serum"
 FSCN4,SCN4A (Myotonia) DNA Sequencing Test
 FSCNE,Sugar Cane (Saccharum officinarum) IgE
 FSERT,Sertraline (Zoloft) and Desmethylsertraline
@@ -1029,37 +1029,37 @@ FSESG,Sesame Seed IgG
 FSFLE,Safflower (Carthamus tinctorius) IgE
 FSFM,Soluble Fibrin Monomer
 FSGFE,Sage (Salvia officinalis) IgE
-FSH,Follicle-Stimulating Hormone (FSH) ^  Serum
-FSHB,Follicle Stimulating Hormone ^  Beta Subunit (Beta FSH) Immunostain ^  Technical Component Only
+FSH,"Follicle-Stimulating Hormone (FSH),  Serum"
+FSHB,"Follicle Stimulating Hormone,  Beta Subunit (Beta FSH) Immunostain,  Technical Component Only"
 FSHOX,SHOX-DNA-DxTM
 FSHRG,Shrimp IgG
 FSLAA,Soluble Liver Antigen (SLA) Autoantibody
-FSOMA,Somatostatin (Somatotropin Release-Inhibiting Factor ^  SRIF)
+FSOMA,"Somatostatin (Somatotropin Release-Inhibiting Factor,  SRIF)"
 FSOTA,Sotalol (Betapace)
 FSOYG,Soybean IgG
 FSPNG,Spinach IgG
 FSTAB,Stachybotrys chartarum/atra IgE
 FSTBG,Strawberry IgG
-FSTYR,Styrene ^  Occupational Exposure ^  Blood
+FSTYR,"Styrene,  Occupational Exposure,  Blood"
 FSUAB,Sulfatide Autoantibody Test
-FSUCC,Succinyladenosine ^  CSF
+FSUCC,"Succinyladenosine,  CSF"
 FSUNG,Sunflower Seed IgG
 FSYG4,Soybean IgG4
-FUKAU,Ustekinumab and Anti-Ustekinumab Antibody ^  DoseASSURE UST
-FUNBL,Fungitell ^  BAL
-FUNBW,Fungitell ^  bronch wash
-FUNID,Culture Referred for Identification ^  Fungus
-FUNSF,Fungitell ^  CSF
-FUSI,FUS Immunostain ^  Technical Component Only
-FUSM,Fusarium moniliforme ^  IgE ^  Serum
-FVAG,Fungal Culture ^  Vaginal
+FUKAU,"Ustekinumab and Anti-Ustekinumab Antibody,  DoseASSURE UST"
+FUNBL,"Fungitell,  BAL"
+FUNBW,"Fungitell,  bronch wash"
+FUNID,"Culture Referred for Identification,  Fungus"
+FUNSF,"Fungitell,  CSF"
+FUSI,"FUS Immunostain,  Technical Component Only"
+FUSM,"Fusarium moniliforme,  IgE,  Serum"
+FVAG,"Fungal Culture,  Vaginal"
 FVANG,Vanilla IgG
-FVIST,Hydroxyzine (Vistaril ^  Atarax) ^  Serum
+FVIST,"Hydroxyzine (Vistaril,  Atarax),  Serum"
 FVITB,Vitamin B12 Binding Capacity
-FVZGC,Varicella-Zoster Virus Antibody ^  IgG ^  CSF
+FVZGC,"Varicella-Zoster Virus Antibody,  IgG,  CSF"
 FWALG,Walnut Food (Juglans spp) IgG
 FWALP,Wall Eyed Pike (Sander vitreus)(Stizostedium vitreum) IgE
-FWARP,Warfarin ^  Plasma
+FWARP,"Warfarin,  Plasma"
 FWATG,Watermelon IgG
 FWCR1,Walnut Component rJug r 1
 FWFHG,Venom W-F Hornet IgG
@@ -1067,1075 +1067,1075 @@ FWHFE,Whitefish IgE
 FWHG4,Wheat IgG4
 FWHGY,Whey IgG
 FWHTG,Wheat IgG
-FX13M,Factor XIII ^  Qualitative ^  with Reflex to Factor XIII 1:1 Mix
-FXCH,Coagulation Factor X Chromogenic Activity Assay ^  Plasma
+FX13M,"Factor XIII,  Qualitative,  with Reflex to Factor XIII 1:1 Mix"
+FXCH,"Coagulation Factor X Chromogenic Activity Assay,  Plasma"
 FXTDS,Tissue Drug Screen
 FYABS,Yo Antibody Screen with Reflex to Titer and Western Blot
 FZCCE,Zucchini (Cucurbita spp) IgE
-FZIP,Ziprasidone (Geodone ^  Zeldox)
-FZOLP,Zolpidem (Ambien) ^  serum or plasma
-G6PD,Glucose-6-Phosphate Dehydrogenase (G-6-PD) ^  Quantitative ^  Erythrocytes
-G6SW,N-Acetylgalactosamine-6-Sulfatase ^  Leukocytes
-GAAW,Acid Alpha-Glucosidase ^  Leukocytes
-GAB1,GRB2-Associated Binding Protein 1 (GAB1) Immunostain ^  Technical Component Only
-GABA,Gabapentin ^  Serum
-GAL1P,Galactose-1-Phosphate ^  Erythrocytes
-GAL3,Galectin-3 ^  Serum
-GALCW,Galactocerebrosidase ^  Leukocytes
-GALK,Galactokinase ^  Blood
-GALN3,Galectin-3 (GAL3) Immunostain ^  Technical Component Only
-GALP,Galactose ^  Quantitative ^  Plasma
-GALU,Galactose ^  Quantitative ^  Urine
-GARL,Garlic ^  IgE ^  Serum
-GAST,Gastrin ^  Serum
-GASTN,Gastrin Immunostain ^  Technical Component Only
-GATA3,GATA Binding Protein 3 Immunostain ^  Technical Component Only
-GATAB,GATA-Binding Protein 3 Immunostain ^  Bone Marrow ^  Technical Component Only
-GB2GP,Beta-2 Glycoprotein 1 Antibodies ^  IgG ^  Serum
-GBAW,Beta-Glucosidase ^  Leukocytes
-GBM,Glomerular Basement Membrane Antibodies ^  IgG ^  Serum
-GCBN,Green Coffee Bean ^  IgE ^  Serum
-GCDF,GCDFP-15 Immunostain ^  Technical Component Only
-GCET,Germinal Center B-cell Expressed Transcript 1 (GCET1) Immunostain ^  Technical Component Only
-GCLIP,Phospholipid (Cardiolipin) Antibodies ^  IgG ^  Serum
-GD65C,Glutamic Acid Decarboxylase (GAD65) Antibody Assay ^  Spinal Fluid
-GD65S,Glutamic Acid Decarboxylase (GAD65) Antibody Assay ^  Serum
-GDF15,Growth Differentiation Factor 15 ^  Plasma
-GDOM,Glycyphagus domesticus ^  IgE ^  Serum
-GDS,Gadolinium ^  Serum
-GDT,Gadolinium ^  Dermal ^  Tissue
-GELA,Gelatin ^  IgE ^  Serum
-GEN,Bacterial Culture ^  Aerobic ^  Varies
-GENPA,Gentamicin ^  Peak ^  Serum
-GENRA,Gentamicin ^  Random ^  Serum
-GENS,Bacterial Culture ^  Aerobic with Antimicrobial Susceptibilities ^  Varies
-GENTA,Gentamicin ^  Trough ^  Serum
-GERB,Gerbil Epithelium ^  IgE ^  Serum
-GFAP,Glial Fibrillary Acidic Protein (GFAP) Immunostain ^  Technical Component Only
-GGT,Gamma-Glutamyltransferase (GGT) ^  Serum
-GGUM,Guar Gum ^  IgE ^  Serum
-GIA,Giardia Antigen ^  Feces
-GIAR,Giardia Antigen ^  Feces
-GING,Ginger ^  IgE
-GISTP,Gastrointestinal Stromal Tumor (GIST) Targeted Gene Panel ^  Next-Generation Sequencing ^  Tumor
-GLBF,Glucose ^  Body Fluid
-GLDR,Goldenrod ^  IgE ^  Serum
-GLIC,CD8 T-Cell Immune Competence ^  Global ^  Blood
-GLP,Glucagon ^  Plasma
-GLSF,Glucose ^  Spinal Fluid
-GLT,Gluten ^  IgE ^  Serum
-GLUCG,Glucagon (GLUC) Immunostain ^  Technical Component Only
-GLUR,Glucose ^  24 Hour ^  Urine
-GLURA,Glucose ^  Random ^  Serum
-GLUT,GLUT-1 Immunostain ^  Technical Component Only
-GLUTS,Glutamine Synthetase (GS) Immunostain ^  Technical Component Only
-GLYCF,Glycophorin A (CD235a) Immunostain ^  Technical Component Only
-GLYP3,Glypican-3 Immunostain ^  Technical Component Only
-GMILK,Goat's Milk ^  IgE ^  Serum
-GOAT,Goat Epithelium ^  IgE ^  Serum
-GOOS,Goose Feathers ^  IgE ^  Serum
-GPEA,Green Pea ^  IgE ^  Serum
-GPEP,Green Pepper ^  IgE ^  Serum
-GPI,Glucose Phosphate Isomerase ^  Erythrocytes
-GPSY,Glucopsychosine ^  Blood Spot
-GPSYP,Glucopsychosine ^  Plasma
-GRAM,Gram Stain ^  Varies
-GRANB,Granzyme B (GRAN B) Immunostain ^  Technical Component Only
-GRAP,Grape ^  IgE ^  Serum
-GRAS1,Grass Panel # 1 ^  Serum
-GRAS2,Grass Panel # 2 ^  Serum
-GRAS3,Grass Panel # 3 ^  Serum
-GRFE,Greek Fennel ^  IgE ^  Serum
-GRFR,Grapefruit ^  IgE ^  Serum
-GRH,Growth Hormone (GH) Immunostain ^  Technical Component Only
-GRW,Giant Ragweed ^  IgE ^  Serum
+FZIP,"Ziprasidone (Geodone,  Zeldox)"
+FZOLP,"Zolpidem (Ambien),  serum or plasma"
+G6PD,"Glucose-6-Phosphate Dehydrogenase (G-6-PD),  Quantitative,  Erythrocytes"
+G6SW,"N-Acetylgalactosamine-6-Sulfatase,  Leukocytes"
+GAAW,"Acid Alpha-Glucosidase,  Leukocytes"
+GAB1,"GRB2-Associated Binding Protein 1 (GAB1) Immunostain,  Technical Component Only"
+GABA,"Gabapentin,  Serum"
+GAL1P,"Galactose-1-Phosphate,  Erythrocytes"
+GAL3,"Galectin-3,  Serum"
+GALCW,"Galactocerebrosidase,  Leukocytes"
+GALK,"Galactokinase,  Blood"
+GALN3,"Galectin-3 (GAL3) Immunostain,  Technical Component Only"
+GALP,"Galactose,  Quantitative,  Plasma"
+GALU,"Galactose,  Quantitative,  Urine"
+GARL,"Garlic,  IgE,  Serum"
+GAST,"Gastrin,  Serum"
+GASTN,"Gastrin Immunostain,  Technical Component Only"
+GATA3,"GATA Binding Protein 3 Immunostain,  Technical Component Only"
+GATAB,"GATA-Binding Protein 3 Immunostain,  Bone Marrow,  Technical Component Only"
+GB2GP,"Beta-2 Glycoprotein 1 Antibodies,  IgG,  Serum"
+GBAW,"Beta-Glucosidase,  Leukocytes"
+GBM,"Glomerular Basement Membrane Antibodies,  IgG,  Serum"
+GCBN,"Green Coffee Bean,  IgE,  Serum"
+GCDF,"GCDFP-15 Immunostain,  Technical Component Only"
+GCET,"Germinal Center B-cell Expressed Transcript 1 (GCET1) Immunostain,  Technical Component Only"
+GCLIP,"Phospholipid (Cardiolipin) Antibodies,  IgG,  Serum"
+GD65C,"Glutamic Acid Decarboxylase (GAD65) Antibody Assay,  Spinal Fluid"
+GD65S,"Glutamic Acid Decarboxylase (GAD65) Antibody Assay,  Serum"
+GDF15,"Growth Differentiation Factor 15,  Plasma"
+GDOM,"Glycyphagus domesticus,  IgE,  Serum"
+GDS,"Gadolinium,  Serum"
+GDT,"Gadolinium,  Dermal,  Tissue"
+GELA,"Gelatin,  IgE,  Serum"
+GEN,"Bacterial Culture,  Aerobic,  Varies"
+GENPA,"Gentamicin,  Peak,  Serum"
+GENRA,"Gentamicin,  Random,  Serum"
+GENS,"Bacterial Culture,  Aerobic with Antimicrobial Susceptibilities,  Varies"
+GENTA,"Gentamicin,  Trough,  Serum"
+GERB,"Gerbil Epithelium,  IgE,  Serum"
+GFAP,"Glial Fibrillary Acidic Protein (GFAP) Immunostain,  Technical Component Only"
+GGT,"Gamma-Glutamyltransferase (GGT),  Serum"
+GGUM,"Guar Gum,  IgE,  Serum"
+GIA,"Giardia Antigen,  Feces"
+GIAR,"Giardia Antigen,  Feces"
+GING,"Ginger,  IgE"
+GISTP,"Gastrointestinal Stromal Tumor (GIST) Targeted Gene Panel,  Next-Generation Sequencing,  Tumor"
+GLBF,"Glucose,  Body Fluid"
+GLDR,"Goldenrod,  IgE,  Serum"
+GLIC,"CD8 T-Cell Immune Competence,  Global,  Blood"
+GLP,"Glucagon,  Plasma"
+GLSF,"Glucose,  Spinal Fluid"
+GLT,"Gluten,  IgE,  Serum"
+GLUCG,"Glucagon (GLUC) Immunostain,  Technical Component Only"
+GLUR,"Glucose,  24 Hour,  Urine"
+GLURA,"Glucose,  Random,  Serum"
+GLUT,"GLUT-1 Immunostain,  Technical Component Only"
+GLUTS,"Glutamine Synthetase (GS) Immunostain,  Technical Component Only"
+GLYCF,"Glycophorin A (CD235a) Immunostain,  Technical Component Only"
+GLYP3,"Glypican-3 Immunostain,  Technical Component Only"
+GMILK,"Goat's Milk,  IgE,  Serum"
+GOAT,"Goat Epithelium,  IgE,  Serum"
+GOOS,"Goose Feathers,  IgE,  Serum"
+GPEA,"Green Pea,  IgE,  Serum"
+GPEP,"Green Pepper,  IgE,  Serum"
+GPI,"Glucose Phosphate Isomerase,  Erythrocytes"
+GPSY,"Glucopsychosine,  Blood Spot"
+GPSYP,"Glucopsychosine,  Plasma"
+GRAM,"Gram Stain,  Varies"
+GRANB,"Granzyme B (GRAN B) Immunostain,  Technical Component Only"
+GRAP,"Grape,  IgE,  Serum"
+GRAS1,"Grass Panel # 1,  Serum"
+GRAS2,"Grass Panel # 2,  Serum"
+GRAS3,"Grass Panel # 3,  Serum"
+GRFE,"Greek Fennel,  IgE,  Serum"
+GRFR,"Grapefruit,  IgE,  Serum"
+GRH,"Growth Hormone (GH) Immunostain,  Technical Component Only"
+GRW,"Giant Ragweed,  IgE,  Serum"
 GSBV,Gram Stain for Bacterial Vaginosis
-GSTB,Green String Bean ^  IgE ^  Serum
-GUIN,Guinea Pig Epithelium ^  IgE ^  Serum
-GUM,Gum Arabic ^  IgE ^  Serum
-HAD,Huntington Disease ^  Molecular Analysis ^  Varies
-HAIGG,Hepatitis A IgG Antibody ^  Serum
-HAIGM,Hepatitis A IgM Antibody ^  Serum
-HAKE,Hake ^  Fish ^  IgE ^  Serum
-HALI,Halibut ^  IgE ^  Serum
-HALO,Haloperidol ^  Serum
-HAPT,Haptoglobin ^  Serum
-HAV,Hepatitis A Total Antibodies ^  Serum
+GSTB,"Green String Bean,  IgE,  Serum"
+GUIN,"Guinea Pig Epithelium,  IgE,  Serum"
+GUM,"Gum Arabic,  IgE,  Serum"
+HAD,"Huntington Disease,  Molecular Analysis,  Varies"
+HAIGG,"Hepatitis A IgG Antibody,  Serum"
+HAIGM,"Hepatitis A IgM Antibody,  Serum"
+HAKE,"Hake,  Fish,  IgE,  Serum"
+HALI,"Halibut,  IgE,  Serum"
+HALO,"Haloperidol,  Serum"
+HAPT,"Haptoglobin,  Serum"
+HAV,"Hepatitis A Total Antibodies,  Serum"
 HAVAB,​Hepatitis A IgG and Hep. A Virus Ab
-HAVM,Hepatitis A IgM Antibody ^  Serum
-HAZ,Hazelnut-Tree ^  IgE ^  Serum
-HBA1C,Hemoglobin A1c ^  Blood
-HBAB,Hepatitis B Surface Antibody ^  Qualitative/Quantitative ^  Serum
-HBABT,Hepatitis B Surface Antibody Monitor ^  Post-Transplant ^  Serum
-HBAG,Hepatitis B Surface Antigen ^  Serum
-HBAGP,Hepatitis B Surface Antigen Prenatal ^  Serum
-HBC,Hepatitis B Core Total Antibodies ^  Serum
-HBEA,Hornbeam ^  IgE ^  Serum
-HBGCD,Hepatitis B Surface Antigen for Cadaveric or Hemolyzed Specimens ^  Serum
-HBIM,Hepatitis B Core Antibody ^  IgM ^  Serum
-HBME,Mesothelial Cell (HBME-1) Immunostain ^  Technical Component Only
-HBNTP,Hepatitis B Surface Antigen Confirmation Prenatal ^  Serum
-HBV,Honeybee Venom ^  IgE ^  Serum
-HBVQN,Hepatitis B Virus (HBV) DNA Detection and Quantification by Real-Time PCR ^  Serum
-HCCAD,Hepatitis C Virus Antibody Screen for Cadaveric or Hemolyzed Specimens ^  Serum
-HCCDD,Hepatitis C Virus Antibody in Cadaveric or Hemolyzed Specimens ^  Serum
-HCG,Human Chorionic Gonadotropin (hCG) Immunostain ^  Technical Component Only
-HCO3,Bicarbonate ^  Serum
-HCPCR,Hepatitis C Antibody with Reflex to HCV RNA ^  PCR ^  Serum
-HCQ,Hydroxychloroquine ^  Serum
-HCRC,Hereditary Colon Cancer Multi-Gene Panel ^  Varies
-HCSCR,Hepatitis C Antibody Screen with Reflex to HCV RNA ^  PCR ^  Serum
-HCSRN,Hepatitis C Virus (HCV) Antibody Screen with Reflex to HCV RNA by PCR ^  Serum
-HCVDX,Hepatitis C Virus (HCV) Antibody with Reflex to HCV RNA by PCR ^  Serum
-HCVG,Hepatitis C Virus Genotype ^  Serum
-HCVL,Hepatitis C Virus Antibody Confirmation ^  Serum
-HCVQG,Hepatitis C Virus (HCV) RNA Quantification with Reflex to HCV Genotype ^  Serum
-HCVQN,Hepatitis C Virus (HCV) RNA Detection and Quantification by Real-Time Reverse Transcription-PCR (RT-PCR) ^  Serum
-HCVQU,Hepatitis C Virus (HCV) RNA Detection and Quantification by Real-Time Reverse Transcription-PCR (RT-PCR) ^  Serum
-HCYSP,Homocysteine ^  Total ^  Plasma
-HCYSS,Homocysteine ^  Total ^  Serum
-HD1,House Dust Panel ^  Serum
-HDCH,Cholesterol ^  High-Density Lipoprotein (HDL) ^  Serum
-HDG,House Dust/Greer Lab ^  IgE ^  Serum
-HDHS,House Dust/H-S Lab ^  IgE ^  Serum
-HE4,Human Epididymis Protein 4 ^  Serum
-HEAB,Hepatitis B e-Antibody ^  Serum
-HELIS,Helicobacter pylori Culture with Antimicrobial Susceptibilities ^  Varies
-HELM,Helminthosporium halodes ^  IgE ^  Serum
-HEMB,Hemoglobin (Hb) Immunostain ^  Technical Component Only
-HEPAT,Hepatocyte (HEP) Immunostain ^  Technical Component Only
-HEPBC,Hepatitis B Core (HBc) Immunostain ^  Technical Component Only
-HEPBS,Hepatitis B Surface Antigen (HBs) Immunostain ^  Technical Component Only
-HEPI,Hamster Epithelium ^  IgE ^  Serum
-HEPTP,Heparin Anti-Xa ^  Plasma
-HER2I,HER2 Immunostain ^  Without Interpretation
-HERDN,HER2 ^  Breast ^  DCIS ^  Quantitative Immunohistochemistry ^  Manual No Reflex
-HERPB,Herpes Simplex Virus 1 and 2 ^  Qualitative PCR ^  Blood
-HERPV,Herpes Simplex Virus 1 and 2 ^  Qualitative PCR ^  Varies
-HERR,Herring ^  IgE ^  Serum
-HEVG,Hepatitis E Virus IgG Antibody ^  Serum
-HEVM,Hepatitis E Virus IgM Antibody Screen with Reflex to Confirmation ^  Serum
-HEVML,Hepatitis E Virus IgM Antibody Confirmation ^  Serum
-HEXAI,Hexahydrophtalic Anhydride ^  IgE ^  Serum
-HEXP,Iohexol ^  Plasma
-HEXU,Iohexol ^  Timed Collection ^  Urine
-HFSF,Horsefly/Stablefly ^  IgE ^  Serum
-HG,Mercury ^  Blood
-HG34W,Histone 3.3 G34W (H3F3A G34W) Immunostain ^  Tech Only
-HGB,Hemoglobin ^  Blood
-HGH,Growth Hormone ^  Serum
-HGRC,Mercury/Creatinine Ratio ^  Random ^  Urine
-HHV6,Human Herpesvirus-6 ^  Molecular Detection ^  PCR ^  Plasma
-HIBS,Haemophilus influenzae Type B Antibody ^  IgG ^  Serum
-HIF2A,Hypoxia-Inducible Factor Alpha (EPAS1/HIF2A) Gene ^  Exons 9 and 12 Sequencing
-HIQNP,HIV-1 RNA Detection and Quantification ^  Prenatal ^  Plasma
-HISME,Histone H3 Trimethyl K27 (H3 K27me[3]) Immunostain ^  Technical Component Only
-HIV2L,HIV-2 Antibody Confirmation ^  Serum
-HIVDQ,HIV-1 RNA Detection and Quantification ^  Plasma
-HIVDX,HIV-1 and HIV-2 Antigen and Antibody Diagnostic Evaluation ^  Plasma
-HIVP,HIV-1 DNA and RNA Qualitative Detection by PCR ^  Plasma
-HIVQN,HIV-1 RNA Detection and Quantification ^  Plasma
-HIVSP,HIV Antigen and Antibody Prenatal Routine Screen ^  Plasma
-HK27M,Histone H3 K27M Mutant (H3 K27M) Immunostain ^  Technical Component Only
-HK36M,Histone H3 K36M Mutant (H3F3 K36M) Immunostain ^  Technical Component Only
-HL57V,HLA-B*57:01 Genotype ^  Pharmacogenomics ^  Varies
-HMB45,HMB45 Immunostain ^  Technical Component Only
-HMBSZ,HMBS Gene ^  Full Gene Analysis ^  Varies
-HMGA,High Mobility Group A2 (HMGA2) Immunostain ^  Technical Component Only
-HMGCR,3-Hydroxy-3-Methylglutaryl Coenzyme-A (HMG-CoA) Reductase ^  Serum
-HNF1B,Hepatocyte Nuclear Factor 1Beta (HNF-1beta) Immunostain ^  Technical Component Only
-HOP,Hop Fruit ^  IgE ^  Serum
-HORS,Horse Dander ^  IgE ^  Serum
-HPCUT,Hematopathology Consultation ^  Client Embed
-HPL,Human Placental Lactogen (HPL) Immunostain ^  Technical Component Only
-HPP,Pancreatic Polypeptide ^  Plasma
-HPPAN,Hereditary Pancreatitis Panel ^  Varies
-HPSAF,Helicobacter pylori Antigen ^  Feces
-HPVE6,Human Papillomavirus (HPV) High-Risk E6/E7 ^  RNA In Situ Hybridization
-HPYL,Helicobacter pylori (H pylori) Immunostain ^  Technical Component Only
-HQ,HemoQuant ^  Feces
-HRPSV,Herpes Simplex Virus ^  I and II (HSV I and II) Immunostain ^  Technical Component Only
-HRPV8,Human Herpes Virus ^  Type 8 (HHV-8) Immunostain ^  Technical Component Only
-HSCRP,C-Reactive Protein ^  High Sensitivity ^  Serum
-HSVC,Herpes Simplex Virus (HSV) ^  Molecular Detection ^  PCR ^  Spinal Fluid
-HTG2,Thyroglobulin ^  Tumor Marker ^  Serum
-HTGR,Thyroglobulin ^  Tumor Marker Reflex ^  Serum
-HTLLC,Human T-Cell Lymphotropic Virus Types 1 and 2 (HTLV-1/-2) Antibody Confirmation ^  Spinal Fluid
-HTLVC,Human T-Cell Lymphotropic Virus Types 1 and 2 (HTLV-1/-2) Antibody Screen with Confirmation ^  Spinal Fluid
-HTLVI,Human T-Cell Lymphotropic Virus Types I and II Antibody Screen with Confirmation ^  Serum
-HUNY,Honey ^  IgE ^  Serum
-HV1CD,HIV-1 and HIV-2 Antibodies for Cadaveric or Hemolyzed Specimens ^  Serum
-HV1CM,HIV-1 and HIV-2 Antibody Screen for Hemolyzed Specimens ^  Serum
-HVAR,Homovanillic Acid ^  Random ^  Urine
-HVCOP,HIV-1 and HIV-2 Antigen and Antibody Routine Screen ^  Plasma
-HVDIP,HIV-1 and HIV-2 Antibody Confirmation and Differentiation ^  Plasma
-HVDSP,HIV-1 and HIV-2 Antibody Confirmation and Differentiation Prenatal ^  Plasma
-HYD18,Hydroxycorticosterone ^  18
-HYDMU,Hydromorphone Confirmation ^  Random ^  Urine
-IA2,Islet Antigen 2 (IA-2) Antibody ^  Serum
-ICOSI,ICOS (CD278) ^  Immunostain ^  Technical Component Only
-IDENT,Organism Referred for Identification ^  Aerobic Bacteria
-IDH1,IDH1 Mutation (R132H) Immunostain ^  Technical Component Only
-IDUAW,Alpha-L-Iduronidase ^  Leukocytes
-IFBA,Intrinsic Factor Blocking Antibody ^  Serum
-IFG23,Intact Fibroblast Growth Factor 23 ^  Serum
-IGA,Immunoglobulin A (IgA) ^  Serum
-IGAI,IgA Immunostain ^  Technical Component Only
-IGAS,IgA Subclasses ^  Serum
-IGD,Immunoglobulin D (IgD) ^  Serum
-IGDI,IgD Immunostain ^  Technical Component Only
-IGE,Immunoglobulin E (IgE) ^  Serum
-IGFB3,Insulin-Like Growth Factor-Binding Protein 3 (IGFBP-3) ^  Serum
-IGFMS,Insulin-Like Growth Factor-1 ^  LC-MS ^  Serum
-IGG,Immunoglobulin G (IgG) ^  Serum
-IGG4I,IgG4 Immunostain ^  Technical Component Only
-IGGI,IgG Immunostain ^  Technical Component Only
-IGGS,IgG Subclasses ^  Serum
-IGGS4,Immunoglobulin Subclass IgG4 ^  Serum
-IGM,Immunoglobulin M (IgM) ^  Serum
-IGMI,IgM Immunostain ^  Technical Component Only
-IHCFH,Fumarate Hydratase Immunostain ^  Technical Component Only
-IHDI,Isocyanate HDI ^  IgE ^  Serum
-IL28V,Interleukin 28B (IL28B) Variant (rs12979860) ^  Varies
-IL5P,Interleukin 5 ^  Plasma
-IL6,Interleukin 6 ^  Plasma
-IMDI,Isocyanate MDI ^  IgE ^  Serum
-IMFX,Immunofixation ^  Serum
-IMFXO,Immunofixation Only ^  Serum
-IMIPR,Imipramine and Desipramine ^  Serum
-IMMG,Immunoglobulins (IgG ^  IgA ^  and IgM) ^  Serum
-INAB,Insulin Antibodies ^  Serum
-INHA,Inhibin A ^  Tumor Marker ^  Serum
-INHB,Inhibin B ^  Serum
-INHIB,Inhibin Immunostain ^  Technical Component Only
-INHU,Insulin (Human) ^  IgE ^  Serum
-INI1,Integrase Interactor 1 (INI1/BAF47) Immunostain ^  Technical Component Only
-INS,Insulin ^  Serum
-INSM1,Insulinoma-Associated Protein 1 (INSM1) ^  Immunostain ^  Technical Component Only
-INSUL,Insulin Immunostain ^  Technical Component Only
-IOD,Iodine ^  Serum
-ISLET,Islet 1 Immunostain ^  Technical Component Only
-ISPG,Ispaghula ^  IgE ^  Serum
-ITCON,Itraconazole ^  Serum
-ITDT,Isocyanate TDI ^  IgE ^  Serum
-JACK,Jack Fruit ^  IgE ^  Serum
-JAK2B,JAK2 V617F Mutation Detection ^  Blood
-JAK2M,JAK2 V617F Mutation Detection ^  Bone Marrow
-JAK2V,JAK2 V617F Mutation Detection ^  Varies
-JAKXB,JAK2 Exon 12 and Other Non-V617F Mutation Detection ^  Blood
-JAKXM,JAK2 Exon 12 and Other Non-V617F Mutation Detection ^  Bone Marrow
-JCEDR,Japanese Cedar ^  IgE ^  Serum
-JCHAI,J-Chain Immunostain ^  Technical Component Only
+HAVM,"Hepatitis A IgM Antibody,  Serum"
+HAZ,"Hazelnut-Tree,  IgE,  Serum"
+HBA1C,"Hemoglobin A1c,  Blood"
+HBAB,"Hepatitis B Surface Antibody,  Qualitative/Quantitative,  Serum"
+HBABT,"Hepatitis B Surface Antibody Monitor,  Post-Transplant,  Serum"
+HBAG,"Hepatitis B Surface Antigen,  Serum"
+HBAGP,"Hepatitis B Surface Antigen Prenatal,  Serum"
+HBC,"Hepatitis B Core Total Antibodies,  Serum"
+HBEA,"Hornbeam,  IgE,  Serum"
+HBGCD,"Hepatitis B Surface Antigen for Cadaveric or Hemolyzed Specimens,  Serum"
+HBIM,"Hepatitis B Core Antibody,  IgM,  Serum"
+HBME,"Mesothelial Cell (HBME-1) Immunostain,  Technical Component Only"
+HBNTP,"Hepatitis B Surface Antigen Confirmation Prenatal,  Serum"
+HBV,"Honeybee Venom,  IgE,  Serum"
+HBVQN,"Hepatitis B Virus (HBV) DNA Detection and Quantification by Real-Time PCR,  Serum"
+HCCAD,"Hepatitis C Virus Antibody Screen for Cadaveric or Hemolyzed Specimens,  Serum"
+HCCDD,"Hepatitis C Virus Antibody in Cadaveric or Hemolyzed Specimens,  Serum"
+HCG,"Human Chorionic Gonadotropin (hCG) Immunostain,  Technical Component Only"
+HCO3,"Bicarbonate,  Serum"
+HCPCR,"Hepatitis C Antibody with Reflex to HCV RNA,  PCR,  Serum"
+HCQ,"Hydroxychloroquine,  Serum"
+HCRC,"Hereditary Colon Cancer Multi-Gene Panel,  Varies"
+HCSCR,"Hepatitis C Antibody Screen with Reflex to HCV RNA,  PCR,  Serum"
+HCSRN,"Hepatitis C Virus (HCV) Antibody Screen with Reflex to HCV RNA by PCR,  Serum"
+HCVDX,"Hepatitis C Virus (HCV) Antibody with Reflex to HCV RNA by PCR,  Serum"
+HCVG,"Hepatitis C Virus Genotype,  Serum"
+HCVL,"Hepatitis C Virus Antibody Confirmation,  Serum"
+HCVQG,"Hepatitis C Virus (HCV) RNA Quantification with Reflex to HCV Genotype,  Serum"
+HCVQN,"Hepatitis C Virus (HCV) RNA Detection and Quantification by Real-Time Reverse Transcription-PCR (RT-PCR),  Serum"
+HCVQU,"Hepatitis C Virus (HCV) RNA Detection and Quantification by Real-Time Reverse Transcription-PCR (RT-PCR),  Serum"
+HCYSP,"Homocysteine,  Total,  Plasma"
+HCYSS,"Homocysteine,  Total,  Serum"
+HD1,"House Dust Panel,  Serum"
+HDCH,"Cholesterol,  High-Density Lipoprotein (HDL),  Serum"
+HDG,"House Dust/Greer Lab,  IgE,  Serum"
+HDHS,"House Dust/H-S Lab,  IgE,  Serum"
+HE4,"Human Epididymis Protein 4,  Serum"
+HEAB,"Hepatitis B e-Antibody,  Serum"
+HELIS,"Helicobacter pylori Culture with Antimicrobial Susceptibilities,  Varies"
+HELM,"Helminthosporium halodes,  IgE,  Serum"
+HEMB,"Hemoglobin (Hb) Immunostain,  Technical Component Only"
+HEPAT,"Hepatocyte (HEP) Immunostain,  Technical Component Only"
+HEPBC,"Hepatitis B Core (HBc) Immunostain,  Technical Component Only"
+HEPBS,"Hepatitis B Surface Antigen (HBs) Immunostain,  Technical Component Only"
+HEPI,"Hamster Epithelium,  IgE,  Serum"
+HEPTP,"Heparin Anti-Xa,  Plasma"
+HER2I,"HER2 Immunostain,  Without Interpretation"
+HERDN,"HER2,  Breast,  DCIS,  Quantitative Immunohistochemistry,  Manual No Reflex"
+HERPB,"Herpes Simplex Virus 1 and 2,  Qualitative PCR,  Blood"
+HERPV,"Herpes Simplex Virus 1 and 2,  Qualitative PCR,  Varies"
+HERR,"Herring,  IgE,  Serum"
+HEVG,"Hepatitis E Virus IgG Antibody,  Serum"
+HEVM,"Hepatitis E Virus IgM Antibody Screen with Reflex to Confirmation,  Serum"
+HEVML,"Hepatitis E Virus IgM Antibody Confirmation,  Serum"
+HEXAI,"Hexahydrophtalic Anhydride,  IgE,  Serum"
+HEXP,"Iohexol,  Plasma"
+HEXU,"Iohexol,  Timed Collection,  Urine"
+HFSF,"Horsefly/Stablefly,  IgE,  Serum"
+HG,"Mercury,  Blood"
+HG34W,"Histone 3.3 G34W (H3F3A G34W) Immunostain,  Tech Only"
+HGB,"Hemoglobin,  Blood"
+HGH,"Growth Hormone,  Serum"
+HGRC,"Mercury/Creatinine Ratio,  Random,  Urine"
+HHV6,"Human Herpesvirus-6,  Molecular Detection,  PCR,  Plasma"
+HIBS,"Haemophilus influenzae Type B Antibody,  IgG,  Serum"
+HIF2A,"Hypoxia-Inducible Factor Alpha (EPAS1/HIF2A) Gene,  Exons 9 and 12 Sequencing"
+HIQNP,"HIV-1 RNA Detection and Quantification,  Prenatal,  Plasma"
+HISME,"Histone H3 Trimethyl K27 (H3 K27me[3]) Immunostain,  Technical Component Only"
+HIV2L,"HIV-2 Antibody Confirmation,  Serum"
+HIVDQ,"HIV-1 RNA Detection and Quantification,  Plasma"
+HIVDX,"HIV-1 and HIV-2 Antigen and Antibody Diagnostic Evaluation,  Plasma"
+HIVP,"HIV-1 DNA and RNA Qualitative Detection by PCR,  Plasma"
+HIVQN,"HIV-1 RNA Detection and Quantification,  Plasma"
+HIVSP,"HIV Antigen and Antibody Prenatal Routine Screen,  Plasma"
+HK27M,"Histone H3 K27M Mutant (H3 K27M) Immunostain,  Technical Component Only"
+HK36M,"Histone H3 K36M Mutant (H3F3 K36M) Immunostain,  Technical Component Only"
+HL57V,"HLA-B*57:01 Genotype,  Pharmacogenomics,  Varies"
+HMB45,"HMB45 Immunostain,  Technical Component Only"
+HMBSZ,"HMBS Gene,  Full Gene Analysis,  Varies"
+HMGA,"High Mobility Group A2 (HMGA2) Immunostain,  Technical Component Only"
+HMGCR,"3-Hydroxy-3-Methylglutaryl Coenzyme-A (HMG-CoA) Reductase,  Serum"
+HNF1B,"Hepatocyte Nuclear Factor 1Beta (HNF-1beta) Immunostain,  Technical Component Only"
+HOP,"Hop Fruit,  IgE,  Serum"
+HORS,"Horse Dander,  IgE,  Serum"
+HPCUT,"Hematopathology Consultation,  Client Embed"
+HPL,"Human Placental Lactogen (HPL) Immunostain,  Technical Component Only"
+HPP,"Pancreatic Polypeptide,  Plasma"
+HPPAN,"Hereditary Pancreatitis Panel,  Varies"
+HPSAF,"Helicobacter pylori Antigen,  Feces"
+HPVE6,"Human Papillomavirus (HPV) High-Risk E6/E7,  RNA In Situ Hybridization"
+HPYL,"Helicobacter pylori (H pylori) Immunostain,  Technical Component Only"
+HQ,"HemoQuant,  Feces"
+HRPSV,"Herpes Simplex Virus,  I and II (HSV I and II) Immunostain,  Technical Component Only"
+HRPV8,"Human Herpes Virus,  Type 8 (HHV-8) Immunostain,  Technical Component Only"
+HSCRP,"C-Reactive Protein,  High Sensitivity,  Serum"
+HSVC,"Herpes Simplex Virus (HSV),  Molecular Detection,  PCR,  Spinal Fluid"
+HTG2,"Thyroglobulin,  Tumor Marker,  Serum"
+HTGR,"Thyroglobulin,  Tumor Marker Reflex,  Serum"
+HTLLC,"Human T-Cell Lymphotropic Virus Types 1 and 2 (HTLV-1/-2) Antibody Confirmation,  Spinal Fluid"
+HTLVC,"Human T-Cell Lymphotropic Virus Types 1 and 2 (HTLV-1/-2) Antibody Screen with Confirmation,  Spinal Fluid"
+HTLVI,"Human T-Cell Lymphotropic Virus Types I and II Antibody Screen with Confirmation,  Serum"
+HUNY,"Honey,  IgE,  Serum"
+HV1CD,"HIV-1 and HIV-2 Antibodies for Cadaveric or Hemolyzed Specimens,  Serum"
+HV1CM,"HIV-1 and HIV-2 Antibody Screen for Hemolyzed Specimens,  Serum"
+HVAR,"Homovanillic Acid,  Random,  Urine"
+HVCOP,"HIV-1 and HIV-2 Antigen and Antibody Routine Screen,  Plasma"
+HVDIP,"HIV-1 and HIV-2 Antibody Confirmation and Differentiation,  Plasma"
+HVDSP,"HIV-1 and HIV-2 Antibody Confirmation and Differentiation Prenatal,  Plasma"
+HYD18,"Hydroxycorticosterone,  18"
+HYDMU,"Hydromorphone Confirmation,  Random,  Urine"
+IA2,"Islet Antigen 2 (IA-2) Antibody,  Serum"
+ICOSI,"ICOS (CD278),  Immunostain,  Technical Component Only"
+IDENT,"Organism Referred for Identification,  Aerobic Bacteria"
+IDH1,"IDH1 Mutation (R132H) Immunostain,  Technical Component Only"
+IDUAW,"Alpha-L-Iduronidase,  Leukocytes"
+IFBA,"Intrinsic Factor Blocking Antibody,  Serum"
+IFG23,"Intact Fibroblast Growth Factor 23,  Serum"
+IGA,"Immunoglobulin A (IgA),  Serum"
+IGAI,"IgA Immunostain,  Technical Component Only"
+IGAS,"IgA Subclasses,  Serum"
+IGD,"Immunoglobulin D (IgD),  Serum"
+IGDI,"IgD Immunostain,  Technical Component Only"
+IGE,"Immunoglobulin E (IgE),  Serum"
+IGFB3,"Insulin-Like Growth Factor-Binding Protein 3 (IGFBP-3),  Serum"
+IGFMS,"Insulin-Like Growth Factor-1,  LC-MS,  Serum"
+IGG,"Immunoglobulin G (IgG),  Serum"
+IGG4I,"IgG4 Immunostain,  Technical Component Only"
+IGGI,"IgG Immunostain,  Technical Component Only"
+IGGS,"IgG Subclasses,  Serum"
+IGGS4,"Immunoglobulin Subclass IgG4,  Serum"
+IGM,"Immunoglobulin M (IgM),  Serum"
+IGMI,"IgM Immunostain,  Technical Component Only"
+IHCFH,"Fumarate Hydratase Immunostain,  Technical Component Only"
+IHDI,"Isocyanate HDI,  IgE,  Serum"
+IL28V,"Interleukin 28B (IL28B) Variant (rs12979860),  Varies"
+IL5P,"Interleukin 5,  Plasma"
+IL6,"Interleukin 6,  Plasma"
+IMDI,"Isocyanate MDI,  IgE,  Serum"
+IMFX,"Immunofixation,  Serum"
+IMFXO,"Immunofixation Only,  Serum"
+IMIPR,"Imipramine and Desipramine,  Serum"
+IMMG,"Immunoglobulins (IgG,  IgA,  and IgM),  Serum"
+INAB,"Insulin Antibodies,  Serum"
+INHA,"Inhibin A,  Tumor Marker,  Serum"
+INHB,"Inhibin B,  Serum"
+INHIB,"Inhibin Immunostain,  Technical Component Only"
+INHU,"Insulin (Human),  IgE,  Serum"
+INI1,"Integrase Interactor 1 (INI1/BAF47) Immunostain,  Technical Component Only"
+INS,"Insulin,  Serum"
+INSM1,"Insulinoma-Associated Protein 1 (INSM1),  Immunostain,  Technical Component Only"
+INSUL,"Insulin Immunostain,  Technical Component Only"
+IOD,"Iodine,  Serum"
+ISLET,"Islet 1 Immunostain,  Technical Component Only"
+ISPG,"Ispaghula,  IgE,  Serum"
+ITCON,"Itraconazole,  Serum"
+ITDT,"Isocyanate TDI,  IgE,  Serum"
+JACK,"Jack Fruit,  IgE,  Serum"
+JAK2B,"JAK2 V617F Mutation Detection,  Blood"
+JAK2M,"JAK2 V617F Mutation Detection,  Bone Marrow"
+JAK2V,"JAK2 V617F Mutation Detection,  Varies"
+JAKXB,"JAK2 Exon 12 and Other Non-V617F Mutation Detection,  Blood"
+JAKXM,"JAK2 Exon 12 and Other Non-V617F Mutation Detection,  Bone Marrow"
+JCEDR,"Japanese Cedar,  IgE,  Serum"
+JCHAI,"J-Chain Immunostain,  Technical Component Only"
 JCV,JC Virus Detection by In Situ Hybridization
-JMACK,Jack Mackerel ^  IgE ^  Serum
-JMIL,Japanese Millet ^  IgE ^  Serum
-JO1,Jo 1 Antibodies ^  IgG ^  Serum
-JOHN,Johnson Grass ^  IgE ^  Serum
-JUNE,June Grass ^  IgE ^  Serum
-KAIHC,Kappa Light Chain (KappaC) Immunostain ^  Technical Component Only
-KCSF,Immunoglobulin Kappa Free Light Chain ^  Spinal Fluid
-KD2T,Krabbe Disease Second-Tier Newborn Screen ^  Blood Spot
-KETAU,Ketamine and Metabolite Confirmation ^  Random ^  Urine
-KI67,Ki-67 (MIB-1) Immunostain ^  Technical Component Only
-KI67B,Ki-67(MIB-1) ^  Breast ^  Quantitative Immunohistochemistry ^  Automated
+JMACK,"Jack Mackerel,  IgE,  Serum"
+JMIL,"Japanese Millet,  IgE,  Serum"
+JO1,"Jo 1 Antibodies,  IgG,  Serum"
+JOHN,"Johnson Grass,  IgE,  Serum"
+JUNE,"June Grass,  IgE,  Serum"
+KAIHC,"Kappa Light Chain (KappaC) Immunostain,  Technical Component Only"
+KCSF,"Immunoglobulin Kappa Free Light Chain,  Spinal Fluid"
+KD2T,"Krabbe Disease Second-Tier Newborn Screen,  Blood Spot"
+KETAU,"Ketamine and Metabolite Confirmation,  Random,  Urine"
+KI67,"Ki-67 (MIB-1) Immunostain,  Technical Component Only"
+KI67B,"Ki-67(MIB-1),  Breast,  Quantitative Immunohistochemistry,  Automated"
 KIBM,Ki67 Breast IHC Manual
-KIDBN,Kidney Bean (Red) ^  IgE ^  Serum
+KIDBN,"Kidney Bean (Red),  IgE,  Serum"
 KIDST,Kidney Stone Analysis
-KIMEL,Ki67 + Melan A Immunostain ^  Technical Component Only
-KINET,Ki-67(MIB-1) ^  Gastrointestinal/Pancreatic Neuroendocrine Tumors ^  Quantitative Immunohistochemistry ^  Automated
-KINM,Ki-67(MIB-1) ^  Gastrointestinal/Pancreatic Neuroendocrine Tumors ^  Quantitative Immunohistochemistry ^  Manual
-KIT,KIT Immunostain ^  Technical Component Only
-KITAS,KIT Asp816Val Mutation Analysis ^  Qualitative PCR ^  Varies
-KITB,KIT Asp816Val Mutation Analysis ^  Blood
-KITBM,KIT Asp816Val Mutation Analysis ^  Qualitative PCR ^  Bone Marrow
-KIWI,Kiwi Fruit ^  IgE ^  Serum
-KKRP,Kingella kingae ^  Molecular Detection ^  PCR ^  Varies
-KLISH,Kappa and Lambda Light Chain mRNA ^  In Situ Hybridization (ISH) Technical Component Only
-KRT19,Keratin 19 (KRT19) Immunostain ^  Technical Component Only
-KRT20,Keratin 20 (KRT20) Immunostain ^  Technical Component Only
-KRT34,Keratin (34BE12) Immunostain ^  Technical Component Only
-KRT5,Keratin 5 (KRT5) Immunostain ^  Technical Component Only
-KRT7,Keratin 7 (KRT7) Immunostain ^  Technical Component Only
-KRTAE,Keratin (AE1/AE3) Immunostain ^  Technical Component Only
-KRTCA,Keratin (CAM 5.2) Immunostain ^  Technical Component Only
-KRTOS,Keratin (OSCAR) Immunostain ^  Technical Component Only
-KS,Potassium ^  Serum
-KUR,Potassium ^  24 Hour ^  Urine
-KVAR1,Known Variant Analysis-1 Variant ^  Varies
-LACO,Lacosamide ^  Serum
-LACS1,Lactate ^  Plasma
-LACTO,Lactotransferrin IHC ^  Technical Component Only
-LAD1,Leukocyte Adhesion Deficiency Type 1 ^  CD11a/CD18 and CD11b/CD18 Complex Immunophenotyping ^  Blood
-LAGGT,Granulocyte Antibodies ^  Serum
-LAGU,Legionella Antigen ^  Urine
-LAIHC,Lambda Light Chain (Lambda-C) Immunostain ^  Technical Component Only
-LAMB,Lamb ^  IgE ^  Serum
-LAMO,Lamotrigine ^  Serum
-LAMQ,Lamb's Quarter ^  IgE ^  Serum
-LANG,Langust (Lobster) ^  IgE ^  Serum
-LANGR,Langerin Immunostain ^  Technical Component Only
-LASF1,Lactic Acid ^  Spinal Fluid
-LATI,LAT Immunostain ^  Technical Component Only
-LATX,Latex ^  IgE ^  Serum
-LCADP,Adenovirus ^  Molecular Detection ^  PCR ^  Plasma
-LCBK,BK Virus ^  Molecular Detection ^  PCR ^  Random ^  Urine
-LCBKP,BK Virus ^  Molecular Detection ^  PCR ^  Plasma
-LCJC,JC Virus ^  Molecular Detection ^  PCR ^  Spinal Fluid
-LCMAL,Malaria ^  Molecular Detection ^  PCR ^  Varies
-LCMV,Cytomegalovirus (CMV) ^  Molecular Detection ^  PCR ^  Varies
-LD,Lactate Dehydrogenase (LDH) ^  Serum
-LDALD,Lysosomal and Peroxisomal Disorders Newborn Screen ^  Blood Spot
-LDBF,Lactate Dehydrogenase (LDH) ^  Body Fluid
-LDLD,Low-Density Lipoprotein (LDL) Cholesterol (Beta-Quantification) ^  Serum
-LEBV,Epstein-Barr Virus (EBV) ^  Molecular Detection ^  PCR ^  Varies
-LECT2,Leukocyte Cell-Derived Chemotaxin 2 (LECT2) ^  Immunostains Without Interpretation
-LEF1,Lymphoid Enhancer-Binding Factor 1(LEF1) Immunostain ^  Technical Component Only
-LEFLU,Leflunomide Metabolite (Teriflunomide) ^  Serum
-LEGI,Legionella Culture ^  Varies
-LEIS,Leishmaniasis (Visceral) Antibody ^  Serum
-LEM,Lemon ^  IgE ^  Serum
-LEN,Lentil ^  IgE ^  Serum
-LEPD,Lepidoglyphus destructor ^  IgE ^  Serum
-LEPDT,Leptospira ^  IgM ^  Serum
-LETT,Lettuce ^  IgE ^  Serum
-LEU,Fecal Leukocytes ^  Feces
-LEVE,Levetiracetam ^  Serum
-LFABP,Liver Fatty Acid-Binding Protein (L-FABP) Immunostain ^  Technical Component Only
-LH,Luteinizing Hormone (LH) ^  Serum
-LHPED,Luteinizing Hormone (LH) ^  Pediatrics ^  Serum
-LHSVB,Herpes Simplex Virus (HSV) ^  Molecular Detection ^  PCR ^  Blood
-LID,Lidocaine ^  Serum
-LIME,Lime ^  IgE ^  Serum
-LIND,Linden ^  IgE ^  Serum
-LINS,Linseed ^  IgE ^  Serum
-LIPA,Lipoprotein (a) ^  Serum
-LITH,Lithium ^  Serum
-LKM,Liver/Kidney Microsome Type 1 Antibodies ^  Serum
-LLTOF,Leukemia and Lymphoma Phenotyping ^  Technical Only ^  Varies
-LMALP,Malaria PCR with Parasitemia Reflex ^  Varies
-LMO2,LIM Domain Only 2 (LMO2) Immunostain ^  Technical Component Only
-LMP1I,Epstein Barr Virus Latency Membrane Protein 1 (EBV-LMP1) Immunostain ^  Technical Component Only
-LNBAI,Lyme CNS Infection IgG ^  Antibody Index
-LNORO,Norovirus PCR ^  Molecular Detection ^  Feces
-LOB,Lobster ^  IgE ^  Serum
-LORAZ,Lorazepam (Ativan) ^  Serum
+KIMEL,"Ki67 + Melan A Immunostain,  Technical Component Only"
+KINET,"Ki-67(MIB-1),  Gastrointestinal/Pancreatic Neuroendocrine Tumors,  Quantitative Immunohistochemistry,  Automated"
+KINM,"Ki-67(MIB-1),  Gastrointestinal/Pancreatic Neuroendocrine Tumors,  Quantitative Immunohistochemistry,  Manual"
+KIT,"KIT Immunostain,  Technical Component Only"
+KITAS,"KIT Asp816Val Mutation Analysis,  Qualitative PCR,  Varies"
+KITB,"KIT Asp816Val Mutation Analysis,  Blood"
+KITBM,"KIT Asp816Val Mutation Analysis,  Qualitative PCR,  Bone Marrow"
+KIWI,"Kiwi Fruit,  IgE,  Serum"
+KKRP,"Kingella kingae,  Molecular Detection,  PCR,  Varies"
+KLISH,"Kappa and Lambda Light Chain mRNA,  In Situ Hybridization (ISH) Technical Component Only"
+KRT19,"Keratin 19 (KRT19) Immunostain,  Technical Component Only"
+KRT20,"Keratin 20 (KRT20) Immunostain,  Technical Component Only"
+KRT34,"Keratin (34BE12) Immunostain,  Technical Component Only"
+KRT5,"Keratin 5 (KRT5) Immunostain,  Technical Component Only"
+KRT7,"Keratin 7 (KRT7) Immunostain,  Technical Component Only"
+KRTAE,"Keratin (AE1/AE3) Immunostain,  Technical Component Only"
+KRTCA,"Keratin (CAM 5.2) Immunostain,  Technical Component Only"
+KRTOS,"Keratin (OSCAR) Immunostain,  Technical Component Only"
+KS,"Potassium,  Serum"
+KUR,"Potassium,  24 Hour,  Urine"
+KVAR1,"Known Variant Analysis-1 Variant,  Varies"
+LACO,"Lacosamide,  Serum"
+LACS1,"Lactate,  Plasma"
+LACTO,"Lactotransferrin IHC,  Technical Component Only"
+LAD1,"Leukocyte Adhesion Deficiency Type 1,  CD11a/CD18 and CD11b/CD18 Complex Immunophenotyping,  Blood"
+LAGGT,"Granulocyte Antibodies,  Serum"
+LAGU,"Legionella Antigen,  Urine"
+LAIHC,"Lambda Light Chain (Lambda-C) Immunostain,  Technical Component Only"
+LAMB,"Lamb,  IgE,  Serum"
+LAMO,"Lamotrigine,  Serum"
+LAMQ,"Lamb's Quarter,  IgE,  Serum"
+LANG,"Langust (Lobster),  IgE,  Serum"
+LANGR,"Langerin Immunostain,  Technical Component Only"
+LASF1,"Lactic Acid,  Spinal Fluid"
+LATI,"LAT Immunostain,  Technical Component Only"
+LATX,"Latex,  IgE,  Serum"
+LCADP,"Adenovirus,  Molecular Detection,  PCR,  Plasma"
+LCBK,"BK Virus,  Molecular Detection,  PCR,  Random,  Urine"
+LCBKP,"BK Virus,  Molecular Detection,  PCR,  Plasma"
+LCJC,"JC Virus,  Molecular Detection,  PCR,  Spinal Fluid"
+LCMAL,"Malaria,  Molecular Detection,  PCR,  Varies"
+LCMV,"Cytomegalovirus (CMV),  Molecular Detection,  PCR,  Varies"
+LD,"Lactate Dehydrogenase (LDH),  Serum"
+LDALD,"Lysosomal and Peroxisomal Disorders Newborn Screen,  Blood Spot"
+LDBF,"Lactate Dehydrogenase (LDH),  Body Fluid"
+LDLD,"Low-Density Lipoprotein (LDL) Cholesterol (Beta-Quantification),  Serum"
+LEBV,"Epstein-Barr Virus (EBV),  Molecular Detection,  PCR,  Varies"
+LECT2,"Leukocyte Cell-Derived Chemotaxin 2 (LECT2),  Immunostains Without Interpretation"
+LEF1,"Lymphoid Enhancer-Binding Factor 1(LEF1) Immunostain,  Technical Component Only"
+LEFLU,"Leflunomide Metabolite (Teriflunomide),  Serum"
+LEGI,"Legionella Culture,  Varies"
+LEIS,"Leishmaniasis (Visceral) Antibody,  Serum"
+LEM,"Lemon,  IgE,  Serum"
+LEN,"Lentil,  IgE,  Serum"
+LEPD,"Lepidoglyphus destructor,  IgE,  Serum"
+LEPDT,"Leptospira,  IgM,  Serum"
+LETT,"Lettuce,  IgE,  Serum"
+LEU,"Fecal Leukocytes,  Feces"
+LEVE,"Levetiracetam,  Serum"
+LFABP,"Liver Fatty Acid-Binding Protein (L-FABP) Immunostain,  Technical Component Only"
+LH,"Luteinizing Hormone (LH),  Serum"
+LHPED,"Luteinizing Hormone (LH),  Pediatrics,  Serum"
+LHSVB,"Herpes Simplex Virus (HSV),  Molecular Detection,  PCR,  Blood"
+LID,"Lidocaine,  Serum"
+LIME,"Lime,  IgE,  Serum"
+LIND,"Linden,  IgE,  Serum"
+LINS,"Linseed,  IgE,  Serum"
+LIPA,"Lipoprotein (a),  Serum"
+LITH,"Lithium,  Serum"
+LKM,"Liver/Kidney Microsome Type 1 Antibodies,  Serum"
+LLTOF,"Leukemia and Lymphoma Phenotyping,  Technical Only,  Varies"
+LMALP,"Malaria PCR with Parasitemia Reflex,  Varies"
+LMO2,"LIM Domain Only 2 (LMO2) Immunostain,  Technical Component Only"
+LMP1I,"Epstein Barr Virus Latency Membrane Protein 1 (EBV-LMP1) Immunostain,  Technical Component Only"
+LNBAI,"Lyme CNS Infection IgG,  Antibody Index"
+LNORO,"Norovirus PCR,  Molecular Detection,  Feces"
+LOB,"Lobster,  IgE,  Serum"
+LORAZ,"Lorazepam (Ativan),  Serum"
 LOX,Loxapine (Loxitaner) and 8-Hydroxyloxapine
-LPA3P,Lymphocyte Proliferation to Anti-CD3/Anti-CD28 and Anti-CD3/Interleukin-2 (IL-2) by Flow Cytometry ^  Blood
-LPAWS,Lipoprotein (a) Cholesterol ^  Serum
-LPLFX,Lymphoplasmacytic Lymphoma/Waldenstrom Macroglobulinemia (LPL/WM) ^  MYD88 L265P with Reflex to CXCR4 ^  Varies
-LPS,Lipase ^  Serum
-LPSBF,Lipase ^  Body Fluid
-LTE4,Leukotriene E4 ^  Urine
-LUPN,Lupin ^  IgE ^  Serum
-LUTHI,Luteinizing Hormone (LH) Beta Immunostain ^  Technical Component Only
-LY27B,HLA-B27 ^  Blood
-LYME,Lyme Disease Serology ^  Serum
-LYSO,Lysozyme ^  IgE ^  Serum
-LYSOZ,Lysozyme Immunostain ^  Technical Component Only
-MAAN,Maleic Anhydride ^  IgE ^  Serum
-MACE,Mace ^  IgE ^  Serum
-MACK,Mackerel ^  IgE ^  Serum
-MACNT,Macadamia Nut ^  IgE ^  Serum
-MAGNR,Magnesium ^  Random ^  Urine
-MAGR,Magnesium ^  Random ^  Urine
-MAL,Rapid Malaria/Babesia Smear ^  Varies
-MALDO,M-Protein Isotype ^  Matrix-Assisted Laser Desorption-Ionization Time-of-Flight Mass Spectrometry ^  Serum
-MALI,MAL Immunostain ^  Technical Component Only
-MALT,Malt ^  IgE ^  Serum
-MAMMX,6-Monoacetylmorphine (6-MAM) Confirmation ^  Chain of Custody ^  Meconium
-MAND,Mandarin ^  IgE ^  Serum
-MANGO,Mango ^  IgE ^  Serum
-MARE,Mare's Milk ^  IgE ^  Serum
-MARJ,Marjoram ^  IgE ^  Serum
-MARS,Rough Marsh Elder ^  IgE ^  Serum
-MB2GP,Beta-2 Glycoprotein 1 Antibodies ^  IgM ^  Serum
-MCEA,Carcinoembryonic Antigen ^  monoclonal (mCEA) Immunostain ^  Technical Component Only
-MCHZ,Cheese ^  Mold ^  IgE ^  Serum
-MCLIP,Phospholipid (Cardiolipin) Antibodies ^  IgM ^  Serum
-MCRNA,Chlamydia trachomatis ^  Miscellaneous Sites ^  by Nucleic Acid Amplification
-MEAD,Meadow Fescue ^  IgE ^  Serum
-MEGR,Megrim ^  IgE ^  Serum
-MELAI,Melaleuca leucadendron ^  IgE ^  Serum
-MELAN,Melan A (MART-1) Immunostain ^  Technical Component Only
-MELN,Melons ^  IgE ^  Serum
-MERKC,Merkel CC (MCPyV) Immunostain ^  Technical Component Only
+LPA3P,"Lymphocyte Proliferation to Anti-CD3/Anti-CD28 and Anti-CD3/Interleukin-2 (IL-2) by Flow Cytometry,  Blood"
+LPAWS,"Lipoprotein (a) Cholesterol,  Serum"
+LPLFX,"Lymphoplasmacytic Lymphoma/Waldenstrom Macroglobulinemia (LPL/WM),  MYD88 L265P with Reflex to CXCR4,  Varies"
+LPS,"Lipase,  Serum"
+LPSBF,"Lipase,  Body Fluid"
+LTE4,"Leukotriene E4,  Urine"
+LUPN,"Lupin,  IgE,  Serum"
+LUTHI,"Luteinizing Hormone (LH) Beta Immunostain,  Technical Component Only"
+LY27B,"HLA-B27,  Blood"
+LYME,"Lyme Disease Serology,  Serum"
+LYSO,"Lysozyme,  IgE,  Serum"
+LYSOZ,"Lysozyme Immunostain,  Technical Component Only"
+MAAN,"Maleic Anhydride,  IgE,  Serum"
+MACE,"Mace,  IgE,  Serum"
+MACK,"Mackerel,  IgE,  Serum"
+MACNT,"Macadamia Nut,  IgE,  Serum"
+MAGNR,"Magnesium,  Random,  Urine"
+MAGR,"Magnesium,  Random,  Urine"
+MAL,"Rapid Malaria/Babesia Smear,  Varies"
+MALDO,"M-Protein Isotype,  Matrix-Assisted Laser Desorption-Ionization Time-of-Flight Mass Spectrometry,  Serum"
+MALI,"MAL Immunostain,  Technical Component Only"
+MALT,"Malt,  IgE,  Serum"
+MAMMX,"6-Monoacetylmorphine (6-MAM) Confirmation,  Chain of Custody,  Meconium"
+MAND,"Mandarin,  IgE,  Serum"
+MANGO,"Mango,  IgE,  Serum"
+MARE,"Mare's Milk,  IgE,  Serum"
+MARJ,"Marjoram,  IgE,  Serum"
+MARS,"Rough Marsh Elder,  IgE,  Serum"
+MB2GP,"Beta-2 Glycoprotein 1 Antibodies,  IgM,  Serum"
+MCEA,"Carcinoembryonic Antigen,  monoclonal (mCEA) Immunostain,  Technical Component Only"
+MCHZ,"Cheese,  Mold,  IgE,  Serum"
+MCLIP,"Phospholipid (Cardiolipin) Antibodies,  IgM,  Serum"
+MCRNA,"Chlamydia trachomatis,  Miscellaneous Sites,  by Nucleic Acid Amplification"
+MEAD,"Meadow Fescue,  IgE,  Serum"
+MEGR,"Megrim,  IgE,  Serum"
+MELAI,"Melaleuca leucadendron,  IgE,  Serum"
+MELAN,"Melan A (MART-1) Immunostain,  Technical Component Only"
+MELN,"Melons,  IgE,  Serum"
+MERKC,"Merkel CC (MCPyV) Immunostain,  Technical Component Only"
 MESOR,Mesoridazine (Serentil)
-MESQ,Mesquite ^  IgE ^  Serum
-METR,Methemoglobin Reductase ^  Blood
-MEX,Mexiletine ^  Serum
-MFOX,Meadow Foxtail ^  IgE ^  Serum
-MGB,Mammaglobin (MGB) Immunostain ^  Technical Component Only
-MGP,Magnesium ^  Plasma
-MGRNA,Neisseria gonorrhoeae ^  Miscellaneous Sites ^  by Nucleic Acid Amplification
-MGS,Magnesium ^  Serum
-MILK,Milk ^  IgE ^  Serum
-MITF,MiTF Immunostain ^  Technical Component Only
-MLH1,MLH1 Immunostain ^  Technical Component Only
-MMAP,Methylmalonic Acid ^  Quantitative ^  Plasma
-MMAS,Methylmalonic Acid ^  Quantitative ^  Serum
-MMAU,Methylmalonic Acid ^  Quantitative ^  Urine
-MMLNS,Antimicrobial Susceptibility ^  Nocardia species ^  Varies
-MMLRG,Antimicrobial Susceptibility ^  Acid-Fast Bacilli ^  Rapidly Growing ^  Varies
-MMLSA,Antimicrobial Susceptibility ^  Anaerobic Bacteria ^  MIC ^  Varies
-MMLSG,Antimicrobial Susceptibility ^  Acid-Fast Bacilli ^  Slowly Growing ^  Varies
-MMLYP,Antimicrobial Susceptibility Panel ^  Yeast ^  Varies
-MMPM,Mumps Virus Antibody ^  IgM ^  Serum
-MNB,Manganese ^  Blood
-MNS,Manganese ^  Serum
-MOC31,MOC-31 Immunostain ^  Technical Component Only
-MOGFS,Myelin Oligodendrocyte Glycoprotein (MOG-IgG1) Fluorescence-Activated Cell Sorting (FACS) Assay ^  Serum
-MOLD1,Mold Panel ^  Serum
-MOLPS,Molybdenum ^  Serum
-MONOS,Infectious Mononucleosis ^  Rapid Test ^  Serum
-MOSP,Mouse Serum Protein ^  IgE ^  Serum
-MOTH,Moth ^  IgE ^  Serum
-MOUP,Mouse Urine Protein ^  IgE ^  Serum
-MOUS,Mouse Epithelium ^  IgE ^  Serum
-MOWB,Molybdenum ^  Blood
-MP3CZ,Mucopolysaccharidosis IIIC ^  Full Gene Analysis ^  Varies
-MP3DZ,Mucopolysaccharidosis IIID ^  Full Gene Analysis ^  Varies
-MPA,Mycophenolic Acid ^  Serum
-MPLVS,MPL Exon 10 Mutation Detection ^  Varies
-MPNR,Myeloproliferative Neoplasm ^  JAK2 V617F with Reflex to CALR and MPL ^  Varies
-MPO,Myeloperoxidase Antibodies ^  IgG ^  Serum
-MPSF,Micropolyspora faeni ^  IgG Antibodies ^  Serum
-MPSWB,Mucopolysaccharidosis ^  Blood
-MPTS,M-Protein Isotype ^  Matrix-Assisted Laser Desorption/Ionization Time-of-Flight Mass Spectrometry ^  Serum
-MSFGN,Fibrillary Glomerulonephritis Confirmation ^  LC-MS/MS ^  Paraffin Tissue
-MSH2,MSH2 Immunostain ^  Technical Component Only
-MSH6,MSH6 Immunostain ^  Technical Component Only
-MSPP,Mosquito Species ^  IgE ^  Serum
-MSTD,Mustard ^  IgE ^  Serum
-MTAP,Methylthioadenosine Phosphorylase (MTAP) Immunostain ^  Tech Only
-MTBPZ,Mycobacterium tuberculosis Complex ^  Pyrazinamide Resistance by pncA DNA Sequencing ^  Varies
-MTBS,Microsporidia Stain ^  Varies
-MTBT,Mycobacterium tuberculosis Complex ^  Molecular Detection ^  PCR ^  Paraffin ^  Tissue
-MTDNX,Methadone Confirmation ^  Chain of Custody ^  Urine
-MTHAC,5 ^ 10-Methylenetetrahydrofolate Reductase A1298C ^  Mutation ^  Blood
-MTHFR,5 ^ 10-Methylenetetrahydrofolate Reductase C677T ^  Mutation ^  Blood
-MTHX,Methotrexate ^  Serum
-MTXSG,Methotrexate Post Glucarpidase ^  Serum
-MUC,Mucor ^  IgE ^  Serum
-MUCN2,Mucin 2 ^  Immunostain ^  Technical Component Only
-MUCN4,Mucin 4 ^  Immunostain ^  Technical Component Only
-MUCN5,Mucin 5AC ^  Immunostain ^  Technical Component Only
-MUCN6,Mucin 6 ^  Immunostain ^  Technical Component Only
-MUG,Mugwort ^  IgE ^  Serum
-MUGS,Hexosaminidase A ^  Serum
-MULB,Mulberry ^  IgE ^  Serum
-MUM1,MUM-1/IRF4 Immunostain ^  Technical Component Only
-MUM1B,MUM-1/IRF4 Immunostain ^  Bone Marrow ^  Technical Component Only
-MUR,Lysozyme (Muramidase) ^  Plasma
-MUSH,Mushroom ^  IgE ^  Serum
-MUSK,Muscle-Specific Kinase (MuSK) Autoantibody ^  Serum
-MUSS,Blue Mussel ^  IgE ^  Serum
-MYC,MYC Immunostain ^  Technical Component Only
-MYCOG,Mycoplasma pneumoniae Antibodies ^  IgG ^  Serum
-MYCOM,Mycoplasma pneumoniae Antibodies ^  IgM ^  Serum
+MESQ,"Mesquite,  IgE,  Serum"
+METR,"Methemoglobin Reductase,  Blood"
+MEX,"Mexiletine,  Serum"
+MFOX,"Meadow Foxtail,  IgE,  Serum"
+MGB,"Mammaglobin (MGB) Immunostain,  Technical Component Only"
+MGP,"Magnesium,  Plasma"
+MGRNA,"Neisseria gonorrhoeae,  Miscellaneous Sites,  by Nucleic Acid Amplification"
+MGS,"Magnesium,  Serum"
+MILK,"Milk,  IgE,  Serum"
+MITF,"MiTF Immunostain,  Technical Component Only"
+MLH1,"MLH1 Immunostain,  Technical Component Only"
+MMAP,"Methylmalonic Acid,  Quantitative,  Plasma"
+MMAS,"Methylmalonic Acid,  Quantitative,  Serum"
+MMAU,"Methylmalonic Acid,  Quantitative,  Urine"
+MMLNS,"Antimicrobial Susceptibility,  Nocardia species,  Varies"
+MMLRG,"Antimicrobial Susceptibility,  Acid-Fast Bacilli,  Rapidly Growing,  Varies"
+MMLSA,"Antimicrobial Susceptibility,  Anaerobic Bacteria,  MIC,  Varies"
+MMLSG,"Antimicrobial Susceptibility,  Acid-Fast Bacilli,  Slowly Growing,  Varies"
+MMLYP,"Antimicrobial Susceptibility Panel,  Yeast,  Varies"
+MMPM,"Mumps Virus Antibody,  IgM,  Serum"
+MNB,"Manganese,  Blood"
+MNS,"Manganese,  Serum"
+MOC31,"MOC-31 Immunostain,  Technical Component Only"
+MOGFS,"Myelin Oligodendrocyte Glycoprotein (MOG-IgG1) Fluorescence-Activated Cell Sorting (FACS) Assay,  Serum"
+MOLD1,"Mold Panel,  Serum"
+MOLPS,"Molybdenum,  Serum"
+MONOS,"Infectious Mononucleosis,  Rapid Test,  Serum"
+MOSP,"Mouse Serum Protein,  IgE,  Serum"
+MOTH,"Moth,  IgE,  Serum"
+MOUP,"Mouse Urine Protein,  IgE,  Serum"
+MOUS,"Mouse Epithelium,  IgE,  Serum"
+MOWB,"Molybdenum,  Blood"
+MP3CZ,"Mucopolysaccharidosis IIIC,  Full Gene Analysis,  Varies"
+MP3DZ,"Mucopolysaccharidosis IIID,  Full Gene Analysis,  Varies"
+MPA,"Mycophenolic Acid,  Serum"
+MPLVS,"MPL Exon 10 Mutation Detection,  Varies"
+MPNR,"Myeloproliferative Neoplasm,  JAK2 V617F with Reflex to CALR and MPL,  Varies"
+MPO,"Myeloperoxidase Antibodies,  IgG,  Serum"
+MPSF,"Micropolyspora faeni,  IgG Antibodies,  Serum"
+MPSWB,"Mucopolysaccharidosis,  Blood"
+MPTS,"M-Protein Isotype,  Matrix-Assisted Laser Desorption/Ionization Time-of-Flight Mass Spectrometry,  Serum"
+MSFGN,"Fibrillary Glomerulonephritis Confirmation,  LC-MS/MS,  Paraffin Tissue"
+MSH2,"MSH2 Immunostain,  Technical Component Only"
+MSH6,"MSH6 Immunostain,  Technical Component Only"
+MSPP,"Mosquito Species,  IgE,  Serum"
+MSTD,"Mustard,  IgE,  Serum"
+MTAP,"Methylthioadenosine Phosphorylase (MTAP) Immunostain,  Tech Only"
+MTBPZ,"Mycobacterium tuberculosis Complex,  Pyrazinamide Resistance by pncA DNA Sequencing,  Varies"
+MTBS,"Microsporidia Stain,  Varies"
+MTBT,"Mycobacterium tuberculosis Complex,  Molecular Detection,  PCR,  Paraffin,  Tissue"
+MTDNX,"Methadone Confirmation,  Chain of Custody,  Urine"
+MTHAC,"5, 10-Methylenetetrahydrofolate Reductase A1298C,  Mutation,  Blood"
+MTHFR,"5, 10-Methylenetetrahydrofolate Reductase C677T,  Mutation,  Blood"
+MTHX,"Methotrexate,  Serum"
+MTXSG,"Methotrexate Post Glucarpidase,  Serum"
+MUC,"Mucor,  IgE,  Serum"
+MUCN2,"Mucin 2,  Immunostain,  Technical Component Only"
+MUCN4,"Mucin 4,  Immunostain,  Technical Component Only"
+MUCN5,"Mucin 5AC,  Immunostain,  Technical Component Only"
+MUCN6,"Mucin 6,  Immunostain,  Technical Component Only"
+MUG,"Mugwort,  IgE,  Serum"
+MUGS,"Hexosaminidase A,  Serum"
+MULB,"Mulberry,  IgE,  Serum"
+MUM1,"MUM-1/IRF4 Immunostain,  Technical Component Only"
+MUM1B,"MUM-1/IRF4 Immunostain,  Bone Marrow,  Technical Component Only"
+MUR,"Lysozyme (Muramidase),  Plasma"
+MUSH,"Mushroom,  IgE,  Serum"
+MUSK,"Muscle-Specific Kinase (MuSK) Autoantibody,  Serum"
+MUSS,"Blue Mussel,  IgE,  Serum"
+MYC,"MYC Immunostain,  Technical Component Only"
+MYCOG,"Mycoplasma pneumoniae Antibodies,  IgG,  Serum"
+MYCOM,"Mycoplasma pneumoniae Antibodies,  IgM,  Serum"
 MYCON,Mycoplasma pneumoniae Antibody Interpretation
-MYGLS,Myoglobin ^  Serum
-MYGLU,Myoglobin ^  Random ^  Urine
-MYOD1,Myogenic Differentiation Antigen 1 (MYOD1) Immunostain ^  Technical Component Only
-MYOGE,Myogenin Immunostain ^  Technical Component Only
-MYOGL,Myoglobin Immunostain ^  Technical Component Only
-MYPO,Myeloperoxidase (MPO) Immunostain ^  Technical Component Only
-NAGR,Hexosaminidase A and Total ^  Leukocytes/Molecular Reflex ^  Whole Blood
-NAGS,Hexosaminidase A and Total Hexosaminidase ^  Serum
-NAGW,Hexosaminidase A and Total Hexosaminidase ^  Leukocytes
-NAPSN,Napsin A Immunostain ^  Technical Component Only
-NARC,Narcolepsy-Associated Antigen ^  HLA-DQB1 Typing ^  Blood
-NAS,Sodium ^  Serum
-NAU,Sodium ^  24 Hour ^  Urine
-NEFA,Free Fatty Acids ^  Total ^  Serum
-NEGCT,Negative Control ^  Technical Component Only
-NETT,Nettle ^  IgE ^  Serum
-NEUN,Neu-N Immunostain ^  Technical Component Only
-NEZPP,Zinc Protoporphyrin ^  Blood
-NF2F,Neurofilament (2F11)(NF 2F11) Immunostain ^  Technical Component Only
-NFSMI,Neurofilament (SMI31) Immunostain ^  Technical Component Only
-NH3V,Ammonia ^  Plasma
-NICOS,Nicotine and Metabolites ^  Serum
-NICOU,Nicotine and Metabolites ^  Random ^  Urine
-NIS,Nickel ^  Serum
-NKX3,NKX3.1 Immunostain ^  Technical Component Only
-NMEG,Nutmeg ^  IgE ^  Serum
-NMOFC,Neuromyelitis Optica (NMO)/Aquaporin-4-IgG Fluorescence-Activated Cell Sorting (FACS) Assay ^  Spinal Fluid
-NMOFS,Neuromyelitis Optica (NMO)/Aquaporin-4-IgG Fluorescence-Activated Cell Sorting (FACS) Assay ^  Serum
-NMPAN,Neuromuscular Genetic Panels by Next-Generation Sequencing (NGS) ^  Varies
-NMRLP,Nuclear Magnetic Resonance Lipoprotein Profile ^  Serum
-NOTRP,Nortriptyline ^  Serum
-NPM1Q,Nucleophosmin (NPM1) Mutation Analysis ^  Varies
-NPPAN,Peripheral Neuropathy Genetic Panels by Next-Generation Sequencing (NGS) ^  Blood
-NSE,Neuron-Specific Enolase (NSE) ^  Serum
-NSEI,Neuron-Specific Enolase Immunostain ^  Technical Component Only
-NSESF,Neuron-Specific Enolase (NSE) ^  Spinal Fluid
-NUT,NUT Immunostain ^  Technical Component Only
-NUTH,Hazelnut-Food ^  IgE ^  Serum
-OAK,Oak ^  IgE ^  Serum
-OAP,Ova and Parasite ^  Concentrate and Permanent Smear ^  Microscopy ^  Feces
-OAPNS,Ova and Parasite ^  Microscopy ^  Varies
-OATC,Cultivated Oat ^  IgE ^  Serum
-OATS,Oat ^  IgE ^  Serum
-OAU,Organic Acids Screen ^  Urine
-OCC2,Occupational Panel # 2 ^  Serum
-OCTO,Octopus ^  IgE ^  Serum
-OHPG,17-Hydroxyprogesterone ^  Serum
-OLIG2,OLIG2 Immunostain ^  Technical Component Only
-OLIGU,Oligosaccharide Screen ^  Random ^  Urine
-OLIV,Olive Tree ^  IgE ^  Serum
-OLIVF,Olive-Food ^  IgE ^  Serum
-OMHC,Oxcarbazepine Metabolite (MHC) ^  Serum
-ONIN,Onion ^  IgE ^  Serum
-OPATX,Opiates Confirmation ^  Chain of Custody ^  Urine
-OPTMX,Opiate Confirmation ^  Chain of Custody ^  Meconium
-ORCH,Orchard Grass ^  IgE ^  Serum
-OREG,Oregano ^  IgE ^  Serum
-ORNG,Orange ^  IgE ^  Serum
-OROT,Orotic Acid ^  Urine
-ORXNA,Orexin-A/Hypocretin-1 ^  Spinal Fluid
-OSCAL,Osteocalcin ^  Serum
-OVAL,Ovalbumin ^  IgE ^  Serum
-OVMU,Ovomucoid ^  IgE ^  Serum
-OXI,Ox-Eye Daisy ^  IgE ^  Serum
-OXYCU,Oxycodone with Metabolite Confirmation ^  Random ^  Urine
-OXYSU,Oxycodone Screen ^  Random ^  Urine
-OXYSX,Oxycodone Screen ^  Chain of Custody ^  Random ^  Urine
-OYST,Oyster ^  IgE ^  Serum
-P1433,14-3-3 Protein ^  Spinal Fluid
-P16,p16 (INK4a/CDKN2A) Immunostain ^  Technical Component Only
-P40,p40 Immunostain ^  Technical Component Only
-P40NA,p40 + Napsin A Immunostain ^  Technical Component Only
-P53,p53 Immunostain ^  Technical Component Only
-P57I,p57 (KIP2/CDKN1C) Immunostain ^  Technical Component Only
-P5NT,Pyrimidine 5' Nucleotidase ^  Blood
-P62,p62 Immunostain ^  Technical Component Only
-P63,p63 Immunostain ^  Technical Component Only
-PA,Procainamide and N-acetylprocainamide ^  Serum
-PA2RE,Phospholipase A2 Receptor Enzyme-Linked Immunosorbent Assay ^  Serum
-PA2RI,Phospholipase A2 Receptor Indirect Immunofluorescence Assay ^  Serum
-PACP,Prostatic Acid Phosphatase (PAP) ^  Serum
-PACPI,Prostatic Acid Phosphatase (PACP) Immunostain ^  Technical Component Only
-PAHD,Phthalic Anhydride ^  IgE ^  Serum
-PAI1,Plasminogen Activator Inhibitor Antigen ^  Plasma
-PALB,Prealbumin ^  Serum
-PALD,Aldosterone ^  Plasma
-PAMIK,Amikacin ^  Peak ^  Serum
-PAMY,Amylase ^  Pancreatic ^  Serum
-PAPN,Papain ^  IgE ^  Serum
-PAPR,Paprika ^  IgE ^  Serum
-PAPY,Papaya ^  IgE ^  Serum
+MYGLS,"Myoglobin,  Serum"
+MYGLU,"Myoglobin,  Random,  Urine"
+MYOD1,"Myogenic Differentiation Antigen 1 (MYOD1) Immunostain,  Technical Component Only"
+MYOGE,"Myogenin Immunostain,  Technical Component Only"
+MYOGL,"Myoglobin Immunostain,  Technical Component Only"
+MYPO,"Myeloperoxidase (MPO) Immunostain,  Technical Component Only"
+NAGR,"Hexosaminidase A and Total,  Leukocytes/Molecular Reflex,  Whole Blood"
+NAGS,"Hexosaminidase A and Total Hexosaminidase,  Serum"
+NAGW,"Hexosaminidase A and Total Hexosaminidase,  Leukocytes"
+NAPSN,"Napsin A Immunostain,  Technical Component Only"
+NARC,"Narcolepsy-Associated Antigen,  HLA-DQB1 Typing,  Blood"
+NAS,"Sodium,  Serum"
+NAU,"Sodium,  24 Hour,  Urine"
+NEFA,"Free Fatty Acids,  Total,  Serum"
+NEGCT,"Negative Control,  Technical Component Only"
+NETT,"Nettle,  IgE,  Serum"
+NEUN,"Neu-N Immunostain,  Technical Component Only"
+NEZPP,"Zinc Protoporphyrin,  Blood"
+NF2F,"Neurofilament (2F11)(NF 2F11) Immunostain,  Technical Component Only"
+NFSMI,"Neurofilament (SMI31) Immunostain,  Technical Component Only"
+NH3V,"Ammonia,  Plasma"
+NICOS,"Nicotine and Metabolites,  Serum"
+NICOU,"Nicotine and Metabolites,  Random,  Urine"
+NIS,"Nickel,  Serum"
+NKX3,"NKX3.1 Immunostain,  Technical Component Only"
+NMEG,"Nutmeg,  IgE,  Serum"
+NMOFC,"Neuromyelitis Optica (NMO)/Aquaporin-4-IgG Fluorescence-Activated Cell Sorting (FACS) Assay,  Spinal Fluid"
+NMOFS,"Neuromyelitis Optica (NMO)/Aquaporin-4-IgG Fluorescence-Activated Cell Sorting (FACS) Assay,  Serum"
+NMPAN,"Neuromuscular Genetic Panels by Next-Generation Sequencing (NGS),  Varies"
+NMRLP,"Nuclear Magnetic Resonance Lipoprotein Profile,  Serum"
+NOTRP,"Nortriptyline,  Serum"
+NPM1Q,"Nucleophosmin (NPM1) Mutation Analysis,  Varies"
+NPPAN,"Peripheral Neuropathy Genetic Panels by Next-Generation Sequencing (NGS),  Blood"
+NSE,"Neuron-Specific Enolase (NSE),  Serum"
+NSEI,"Neuron-Specific Enolase Immunostain,  Technical Component Only"
+NSESF,"Neuron-Specific Enolase (NSE),  Spinal Fluid"
+NUT,"NUT Immunostain,  Technical Component Only"
+NUTH,"Hazelnut-Food,  IgE,  Serum"
+OAK,"Oak,  IgE,  Serum"
+OAP,"Ova and Parasite,  Concentrate and Permanent Smear,  Microscopy,  Feces"
+OAPNS,"Ova and Parasite,  Microscopy,  Varies"
+OATC,"Cultivated Oat,  IgE,  Serum"
+OATS,"Oat,  IgE,  Serum"
+OAU,"Organic Acids Screen,  Urine"
+OCC2,"Occupational Panel # 2,  Serum"
+OCTO,"Octopus,  IgE,  Serum"
+OHPG,"17-Hydroxyprogesterone,  Serum"
+OLIG2,"OLIG2 Immunostain,  Technical Component Only"
+OLIGU,"Oligosaccharide Screen,  Random,  Urine"
+OLIV,"Olive Tree,  IgE,  Serum"
+OLIVF,"Olive-Food,  IgE,  Serum"
+OMHC,"Oxcarbazepine Metabolite (MHC),  Serum"
+ONIN,"Onion,  IgE,  Serum"
+OPATX,"Opiates Confirmation,  Chain of Custody,  Urine"
+OPTMX,"Opiate Confirmation,  Chain of Custody,  Meconium"
+ORCH,"Orchard Grass,  IgE,  Serum"
+OREG,"Oregano,  IgE,  Serum"
+ORNG,"Orange,  IgE,  Serum"
+OROT,"Orotic Acid,  Urine"
+ORXNA,"Orexin-A/Hypocretin-1,  Spinal Fluid"
+OSCAL,"Osteocalcin,  Serum"
+OVAL,"Ovalbumin,  IgE,  Serum"
+OVMU,"Ovomucoid,  IgE,  Serum"
+OXI,"Ox-Eye Daisy,  IgE,  Serum"
+OXYCU,"Oxycodone with Metabolite Confirmation,  Random,  Urine"
+OXYSU,"Oxycodone Screen,  Random,  Urine"
+OXYSX,"Oxycodone Screen,  Chain of Custody,  Random,  Urine"
+OYST,"Oyster,  IgE,  Serum"
+P1433,"14-3-3 Protein,  Spinal Fluid"
+P16,"p16 (INK4a/CDKN2A) Immunostain,  Technical Component Only"
+P40,"p40 Immunostain,  Technical Component Only"
+P40NA,"p40 + Napsin A Immunostain,  Technical Component Only"
+P53,"p53 Immunostain,  Technical Component Only"
+P57I,"p57 (KIP2/CDKN1C) Immunostain,  Technical Component Only"
+P5NT,"Pyrimidine 5' Nucleotidase,  Blood"
+P62,"p62 Immunostain,  Technical Component Only"
+P63,"p63 Immunostain,  Technical Component Only"
+PA,"Procainamide and N-acetylprocainamide,  Serum"
+PA2RE,"Phospholipase A2 Receptor Enzyme-Linked Immunosorbent Assay,  Serum"
+PA2RI,"Phospholipase A2 Receptor Indirect Immunofluorescence Assay,  Serum"
+PACP,"Prostatic Acid Phosphatase (PAP),  Serum"
+PACPI,"Prostatic Acid Phosphatase (PACP) Immunostain,  Technical Component Only"
+PAHD,"Phthalic Anhydride,  IgE,  Serum"
+PAI1,"Plasminogen Activator Inhibitor Antigen,  Plasma"
+PALB,"Prealbumin,  Serum"
+PALD,"Aldosterone,  Plasma"
+PAMIK,"Amikacin,  Peak,  Serum"
+PAMY,"Amylase,  Pancreatic,  Serum"
+PAPN,"Papain,  IgE,  Serum"
+PAPR,"Paprika,  IgE,  Serum"
+PAPY,"Papaya,  IgE,  Serum"
 PARCT,Malaria Percent Parasitemia
-PARID,Parasite Identification ^  Varies
-PARO,Paroxetine ^  Serum
-PARVG,Parvovirus B19 Antibodies ^  IgG ^  Serum
-PARVI,Parvovirus Immunostain ^  Technical Component Only
-PARVM,Parvovirus B19 Antibody ^  IgM ^  Serum
+PARID,"Parasite Identification,  Varies"
+PARO,"Paroxetine,  Serum"
+PARVG,"Parvovirus B19 Antibodies,  IgG,  Serum"
+PARVI,"Parvovirus Immunostain,  Technical Component Only"
+PARVM,"Parvovirus B19 Antibody,  IgM,  Serum"
 PARVN,Parvovirus B19 Antibody Interpretation
-PARVP,Parvovirus B19 ^  Molecular Detection ^  PCR ^  Plasma
+PARVP,"Parvovirus B19,  Molecular Detection,  PCR,  Plasma"
 PATHC,Pathology Consultation
-PAX2,PAX2 Immunostain ^  Technical Component Only
-PAX5,PAX-5 Immunostain ^  Technical Component Only
-PAX8,PAX8 Immunostain ^  Technical Component Only
-PBNP,NT-Pro B-Type Natriuretic Peptide ^  Serum
-PBPO,Penicillin G ^  IgE ^  Serum
-PBR,Phenobarbital ^  Serum
-PBRC,Lead/Creatinine Ratio ^  Urine
-PCAB,Parietal Cell Antibodies ^  IgG ^  Serum
-PCAG,Protein C Antigen ^  Plasma
-PCANH,Pecan Hickory ^  IgE ^  Serum
-PCEAI,Carcinoembryonic Antigen ^  polyclonal (pCEA) Immunostain ^  Technical Component Only
-PCHE1,Pseudocholinesterase ^  Total ^  Serum
-PCPMX,Phencyclidine (PCP) Confirmation ^  Chain of Custody ^  Meconium
-PCPUG,Phencyclidine (PCP) ^  Confirmation ^  serum
-PCPX,Phencyclidine Confirmation ^  Chain of Custody ^  Random ^  Urine
-PCT,Procalcitonin ^  Serum
-PCTR,Protein Catabolic Rate ^  24 Hour ^  Urine
-PD2T,Pompe Disease Second-Tier Newborn Screening ^  Blood Spot
-PDBS,Pompe Disease ^  Blood Spot
-PDSU,Drug Screen ^  Prescription/OTC ^  Urine
-PDSUX,Drug Screen ^  Prescription/OTC ^  Chain of Custody ^  Urine
-PEAN,Peanut ^  IgE ^  Serum
-PEANT,Peanut ^  IgE with Reflex to Peanut Components ^  IgE ^  Serum
-PEAR,Pear ^  IgE ^  Serum
-PEC,Pecan-Food ^  IgE ^  Serum
-PECH,Peach ^  IgE ^  Serum
-PENIV,Penicillin V ^  IgE ^  Serum
-PENL,Penicillium chrysogenum ^  IgE ^  Serum
-PENTS,Pentobarbital ^  Serum
-PERS,Persimmon ^  IgE ^  Serum
-PFCEA,Carcinoembryonic Antigen (CEA) ^  Pleural Fluid
-PFGE,Bacterial Typing by Pulsed-Field Gel Electrophoresis ^  Varies
-PFIB,Parafibromin ^  Immunostain ^  Technical Component Only
-PFN,Propafenone ^  Serum
-PFRUT,Passion Fruit ^  IgE ^  Serum
-PGM1,CD68 (PG-M1) Immunostain ^  Technical Component Only
-PGN,Pregabalin ^  Serum
-PGSN,Progesterone ^  Serum
+PAX2,"PAX2 Immunostain,  Technical Component Only"
+PAX5,"PAX-5 Immunostain,  Technical Component Only"
+PAX8,"PAX8 Immunostain,  Technical Component Only"
+PBNP,"NT-Pro B-Type Natriuretic Peptide,  Serum"
+PBPO,"Penicillin G,  IgE,  Serum"
+PBR,"Phenobarbital,  Serum"
+PBRC,"Lead/Creatinine Ratio,  Urine"
+PCAB,"Parietal Cell Antibodies,  IgG,  Serum"
+PCAG,"Protein C Antigen,  Plasma"
+PCANH,"Pecan Hickory,  IgE,  Serum"
+PCEAI,"Carcinoembryonic Antigen,  polyclonal (pCEA) Immunostain,  Technical Component Only"
+PCHE1,"Pseudocholinesterase,  Total,  Serum"
+PCPMX,"Phencyclidine (PCP) Confirmation,  Chain of Custody,  Meconium"
+PCPUG,"Phencyclidine (PCP),  Confirmation,  serum"
+PCPX,"Phencyclidine Confirmation,  Chain of Custody,  Random,  Urine"
+PCT,"Procalcitonin,  Serum"
+PCTR,"Protein Catabolic Rate,  24 Hour,  Urine"
+PD2T,"Pompe Disease Second-Tier Newborn Screening,  Blood Spot"
+PDBS,"Pompe Disease,  Blood Spot"
+PDSU,"Drug Screen,  Prescription/OTC,  Urine"
+PDSUX,"Drug Screen,  Prescription/OTC,  Chain of Custody,  Urine"
+PEAN,"Peanut,  IgE,  Serum"
+PEANT,"Peanut,  IgE with Reflex to Peanut Components,  IgE,  Serum"
+PEAR,"Pear,  IgE,  Serum"
+PEC,"Pecan-Food,  IgE,  Serum"
+PECH,"Peach,  IgE,  Serum"
+PENIV,"Penicillin V,  IgE,  Serum"
+PENL,"Penicillium chrysogenum,  IgE,  Serum"
+PENTS,"Pentobarbital,  Serum"
+PERS,"Persimmon,  IgE,  Serum"
+PFCEA,"Carcinoembryonic Antigen (CEA),  Pleural Fluid"
+PFGE,"Bacterial Typing by Pulsed-Field Gel Electrophoresis,  Varies"
+PFIB,"Parafibromin,  Immunostain,  Technical Component Only"
+PFN,"Propafenone,  Serum"
+PFRUT,"Passion Fruit,  IgE,  Serum"
+PGM1,"CD68 (PG-M1) Immunostain,  Technical Component Only"
+PGN,"Pregabalin,  Serum"
+PGSN,"Progesterone,  Serum"
 PHD2,Prolyl Hydroxylase Domain-2 (PHD2/EGLN1) Gene Sequencing
-PHI11,Prostate Health Index (phi) ^  Serum
-PHMA,Phoma betae ^  IgE ^  Serum
-PHOS,Phosphorus (Inorganic) ^  Serum
-PHTDP,Phosphorylated TDP43 Immunostain ^  Technical Component Only
-PHU_,pH ^  Random ^  Urine
-PIGE,Pig Epithelium ^  IgE ^  Serum
-PIGF,Pigeon Feathers ^  IgE ^  Serum
-PIN2,PIN2 (p63/p504S) Immunostain ^  Technical Component Only
-PINE,Pine Nut ^  IgE ^  Serum
-PINP,Procollagen I Intact N-Terminal ^  Serum
-PINS,Proinsulin ^  Plasma
+PHI11,"Prostate Health Index (phi),  Serum"
+PHMA,"Phoma betae,  IgE,  Serum"
+PHOS,"Phosphorus (Inorganic),  Serum"
+PHTDP,"Phosphorylated TDP43 Immunostain,  Technical Component Only"
+PHU_,"pH,  Random,  Urine"
+PIGE,"Pig Epithelium,  IgE,  Serum"
+PIGF,"Pigeon Feathers,  IgE,  Serum"
+PIN2,"PIN2 (p63/p504S) Immunostain,  Technical Component Only"
+PINE,"Pine Nut,  IgE,  Serum"
+PINP,"Procollagen I Intact N-Terminal,  Serum"
+PINS,"Proinsulin,  Plasma"
 PINTP,Peripheral Smear Interpretation
-PINW,Pinworm Exam ^  Perianal
-PIOR,Pityrosporum orbiculare ^  IgE ^  Serum
-PISTA,Pistachio ^  IgE ^  Serum
-PIT1,PIT-1 Immunostain ^  Technical Component Only
-PJUD,Parietaria judaica ^  IgE ^  Serum
-PK,Pyruvate Kinase ^  Erythrocytes
-PKU,Phenylalanine and Tyrosine ^  Plasma
-PLAI,Plaice ^  IgE ^  Serum
-PLAIF,Phospholipase A2 Receptor (PLA2R) ^  Renal Biopsy
-PLAP,Placental Alkaline Phosphatase (PLAP) Immunostain ^  Technical Component Only
-PLAZO,Plazomicin ^  Plasma
-PLFA,Cryptococcus Antigen Screen ^  Lateral Flow Assay ^  Pleural Fluid
-PLFAT,Cryptococcus Antigen Titer ^  Lateral Flow Assay ^  Pleural Fluid
-PLP,Pyridoxal 5-Phosphate (PLP) ^  Plasma
-PLPMA,Prolactin ^  Pituitary Macroadenoma ^  Serum
-PLUM,Plum ^  IgE ^  Serum
-PMET,Metanephrines ^  Fractionated ^  Free ^  Plasma
-PMLK,Milk ^  Processed ^  IgE ^  Serum
-PMS2,PMS2 Immunostain ^  Technical Component Only
-PNAP,Pineapple ^  IgE ^  Serum
-PNEFC,Neuroimmunology Antibody Follow-up ^  Spinal Fluid
-PNEFS,Neuroimmunology Antibody Follow-up ^  Serum
-PNPAB,Paraneoplastic Pemphigus Antibody (IgG) ^  Serum
-PNYA,Phenytoin ^  Total ^  Serum
-PNYF,Phenytoin ^  Free ^  Serum
-PNZN,Perphenazine ^  (Trilafon) ^  Serum
-POFF,Parietaria officinalis ^  IgE ^  Serum
-POPSD,Poppy Seed ^  IgE ^  Serum
-PORK,Pork ^  IgE ^  Serum
-POSA,Posaconazole ^  Serum
-POTA,White Potato ^  IgE ^  Serum
-POXA1,Oxalate ^  Plasma
-PPOXZ,PPOX Gene ^  Full Gene Analysis ^  Varies
-PR3,Proteinase 3 Antibodies ^  IgG ^  Serum
-PRA,Renin Activity ^  Plasma
-PREGN,Pregnenolone ^  Serum
-PRL,Prolactin ^  Serum
-PRLI,Prolactin (PRL) Immunostain ^  Technical Component Only
-PROG,Progesterone Receptor (PR) Immunostain ^  Technical Component Only
-PROLX,Fluphenazine (Prolixin) ^  Serum
+PINW,"Pinworm Exam,  Perianal"
+PIOR,"Pityrosporum orbiculare,  IgE,  Serum"
+PISTA,"Pistachio,  IgE,  Serum"
+PIT1,"PIT-1 Immunostain,  Technical Component Only"
+PJUD,"Parietaria judaica,  IgE,  Serum"
+PK,"Pyruvate Kinase,  Erythrocytes"
+PKU,"Phenylalanine and Tyrosine,  Plasma"
+PLAI,"Plaice,  IgE,  Serum"
+PLAIF,"Phospholipase A2 Receptor (PLA2R),  Renal Biopsy"
+PLAP,"Placental Alkaline Phosphatase (PLAP) Immunostain,  Technical Component Only"
+PLAZO,"Plazomicin,  Plasma"
+PLFA,"Cryptococcus Antigen Screen,  Lateral Flow Assay,  Pleural Fluid"
+PLFAT,"Cryptococcus Antigen Titer,  Lateral Flow Assay,  Pleural Fluid"
+PLP,"Pyridoxal 5-Phosphate (PLP),  Plasma"
+PLPMA,"Prolactin,  Pituitary Macroadenoma,  Serum"
+PLUM,"Plum,  IgE,  Serum"
+PMET,"Metanephrines,  Fractionated,  Free,  Plasma"
+PMLK,"Milk,  Processed,  IgE,  Serum"
+PMS2,"PMS2 Immunostain,  Technical Component Only"
+PNAP,"Pineapple,  IgE,  Serum"
+PNEFC,"Neuroimmunology Antibody Follow-up,  Spinal Fluid"
+PNEFS,"Neuroimmunology Antibody Follow-up,  Serum"
+PNPAB,"Paraneoplastic Pemphigus Antibody (IgG),  Serum"
+PNYA,"Phenytoin,  Total,  Serum"
+PNYF,"Phenytoin,  Free,  Serum"
+PNZN,"Perphenazine,  (Trilafon),  Serum"
+POFF,"Parietaria officinalis,  IgE,  Serum"
+POPSD,"Poppy Seed,  IgE,  Serum"
+PORK,"Pork,  IgE,  Serum"
+POSA,"Posaconazole,  Serum"
+POTA,"White Potato,  IgE,  Serum"
+POXA1,"Oxalate,  Plasma"
+PPOXZ,"PPOX Gene,  Full Gene Analysis,  Varies"
+PR3,"Proteinase 3 Antibodies,  IgG,  Serum"
+PRA,"Renin Activity,  Plasma"
+PREGN,"Pregnenolone,  Serum"
+PRL,"Prolactin,  Serum"
+PRLI,"Prolactin (PRL) Immunostain,  Technical Component Only"
+PROG,"Progesterone Receptor (PR) Immunostain,  Technical Component Only"
+PROLX,"Fluphenazine (Prolixin),  Serum"
 PROTR,Protriptyline (Vivactyl)
-PSA,Prostate-Specific Antigen (PSA) Diagnostic ^  Serum
-PSAFT,Prostate-Specific Antigen (PSA) ^  Total and Free ^  Serum
-PSAIM,Prostate Specific Antigen (PSA) Immunostain ^  Technical Component Only
-PSAU,Prostate-Specific Antigen (PSA) Ultrasensitive ^  Serum
-PSF,Protein S Antigen ^  Free ^  Plasma
-PSGN,Plasminogen Activity ^  Plasma
-PSLY,Parsley ^  IgE ^  Serum
-PSPTG,Phosphatidylserine/Prothrombin Antibody ^  IgG ^  Serum
-PSPTM,Phosphatidylserine/Prothrombin Antibody ^  IgM ^  Serum
-PSY,Psychosine ^  Blood Spot
-PTEM,Platelet Transmission Electron Microscopic Study ^  Whole Blood
-PTFIB,PT-Fibrinogen ^  Plasma
-PTH,Parathyroid Hormone (PTH) Immunostain ^  Technical Component Only
-PTH2,Parathyroid Hormone ^  Serum
-PTHFN,Parathyroid Hormone ^  Fine-Needle Aspiration Biopsy (FNAB)-Needle Wash
-PTHRP,Parathyroid Hormone-Related Peptide ^  Plasma
-PTOX,Toxoplasma gondii ^  Molecular Detection ^  PCR ^  Varies
-PTRE,Privet Tree ^  IgE ^  Serum
-PTTP,Prothrombin Time ^  Plasma
-PU1,PU.1 Immunostain ^  Technical Component Only
-PUSE,Pumpkin Seed ^  IgE ^  Serum
-PWAS,Prader-Willi/Angelman Syndrome ^  Molecular Analysis ^  Varies
-PYR,Pyruvic Acid ^  Blood
-PYRC,Pyruvate ^  Spinal Fluid
-Q10,Coenzyme Q10 ^  Reduced and Total ^  Plasma
-QBK,BK Virus ^  Molecular Detection ^  Quantitative ^  PCR ^  Plasma
-QBKU,BK Virus ^  Molecular Detection ^  Quantitative ^  PCR ^  Urine
-QFT4,QuantiFERON-TB Gold Plus ^  Blood
-QNKS,Natural Killer (NK)/Natural Killer T (NKT) Cell Subsets ^  Quantitative ^  Blood
-QPALM,Queen Palm ^  IgE ^  Serum
-QUIN,Quinidine ^  Serum
-RACTH,Adrenocorticotrophic Hormone ^  ACTH ^  IgE ^  Serum
-RAMB,Rabbit Meat ^  IgE ^  Serum
-RAMBO,Ammonium ^  Random ^  Urine
-RAMCN,Ammonium ^  Random ^  Urine
-RAMIK,Amikacin ^  Random ^  Serum
-RAMSU,Amylase ^  Random ^  Urine
-RASE,Rape Seed ^  IgE ^  Serum
-RASP,Raspberry ^  IgE ^  Serum
-RAT,Rat Epithelium ^  IgE ^  Serum
-RB1,Retinoblastoma Protein (Rb) Immunostain ^  Tech Only
-RBPG,Rubella Antibodies ^  IgG ^  Serum
-RCHLU,Chloride ^  Random ^  Urine
-RCTUR,Creatinine ^  Random ^  Urine
-RECR,Red Currant ^  IgE ^  Serum
-REDT,Red Top ^  IgE ^  Serum
-REED,Common Reed ^  IgE ^  Serum
-REPII,Rabbit Epithelium ^  IgE ^  Serum
-RGLUR,Glucose ^  Random ^  Urine
-RHNI,Rhizopus nigricans ^  IgE ^  Serum
-RHUT,Rheumatoid Factor ^  Serum
-RIB,Ribosome P Antibodies ^  IgG ^  Serum
-RIBAV,Ribavirin ^  Serum
-RICE,Rice ^  IgE ^  Serum
-RIT,Methylphenidate ^  Serum
-RKUR,Potassium ^  Random ^  Urine
-RNAP,RNA Polymerase III Antibodies ^  IgG ^  Serum
-RNAUR,Sodium ^  Random ^  Urine
-RNP,RNP Antibodies ^  IgG ^  Serum
-ROC,Rubeola (Measles) Antibodies ^  IgG and IgM (Separate Determinations) ^  Spinal Fluid
-ROM,Measles (Rubeola) Antibodies ^  IgM ^  Serum
-ROMA1,Risk Score ^  if Premenopausal
-ROMA2,Risk Score ^  if Postmenopausal
-ROPG,Measles (Rubeola) Antibodies ^  IgG ^  Serum
-ROTA,Rotavirus Antigen ^  Feces
-RPCWT,Renal Pathology Consultation ^  Wet Tissue
-RPRRT,Rapid Plasma Reagin Screen Response to Therapy ^  Serum
-RRRP,Rough Pigweed ^  IgE ^  Serum
-RSCOC,Coccidioides Antibody ^  Complement Fixation and Immunodiffusion ^  Serum
-RSER,Rabbit Serum Proteins ^  IgE ^  Serum
-RSVAB,Respiratory Syncytial Virus (RSV) In Situ Hybridization ^  Technical Component Only
-RT3,T3 (Triiodothyronine) ^  Reverse ^  Serum
-RTSC,Reptilase Time ^  Plasma
-RTSP,Rat Serum Protein ^  IgE ^  Serum
-RTUP,Rat Urine Protein ^  IgE ^  Serum
-RUFI,Rufinamide ^  Serum
-RUPR,Rabbit Urine Proteins ^  IgE ^  Serum
-RUSS,Russian Thistle ^  IgE ^  Serum
-RWEED,Rape Weed ^  IgE ^  Serum
-RYE,Rye ^  IgE ^  Serum
-RYEG,Rye Grass ^  IgE ^  Serum
-RZIKS,Zika Virus ^  PCR ^  Molecular Detection ^  Serum
-S_FX,Protein S Activity ^  Plasma
-S100,S-100 Immunostain ^  Technical Component Only
-SAFB,Acid-Fast Smear for Mycobacterium ^  Varies
-SALCA,Salicylate ^  Serum
-SALCT,Cortisol ^  Saliva
-SALL4,SALL4 Immunostain ^  Technical Component Only
-SALM,Salmon ^  IgE ^  Serum
-SALMC,Salmonella Culture ^  Feces
-SAM,Entamoeba histolytica Antibody ^  Serum
-SARD,Sardine (Pilchard) ^  IgE ^  Serum
-SARS2,Severe Acute Respiratory Syndrome Coronavirus 2 (SARS-CoV-2) RNA ^  Varies
-SASP,Aspergillus fumigatus ^  IgG Antibodies ^  Serum
-SATB2,SATB2 Immunostain ^  Technical Component Only
-SBL,Blastomyces Antibody by Immunodiffusion ^  Serum
-SBSE,Sugarbeet Seed ^  IgE ^  Serum
-SBWB,Antimony ^  Blood
-SCALS,Scallop ^  IgE ^  Serum
-SCL70,Scl 70 Antibodies ^  IgG ^  Serum
-SCLAM,Chlamydia Serology ^  Serum
-SCLE,Scale ^  IgE ^  Serum
-SCOPE,Phospholipase A2 Receptor ^  Indirect Immunofluorescence Assay ^  Serum
+PSA,"Prostate-Specific Antigen (PSA) Diagnostic,  Serum"
+PSAFT,"Prostate-Specific Antigen (PSA),  Total and Free,  Serum"
+PSAIM,"Prostate Specific Antigen (PSA) Immunostain,  Technical Component Only"
+PSAU,"Prostate-Specific Antigen (PSA) Ultrasensitive,  Serum"
+PSF,"Protein S Antigen,  Free,  Plasma"
+PSGN,"Plasminogen Activity,  Plasma"
+PSLY,"Parsley,  IgE,  Serum"
+PSPTG,"Phosphatidylserine/Prothrombin Antibody,  IgG,  Serum"
+PSPTM,"Phosphatidylserine/Prothrombin Antibody,  IgM,  Serum"
+PSY,"Psychosine,  Blood Spot"
+PTEM,"Platelet Transmission Electron Microscopic Study,  Whole Blood"
+PTFIB,"PT-Fibrinogen,  Plasma"
+PTH,"Parathyroid Hormone (PTH) Immunostain,  Technical Component Only"
+PTH2,"Parathyroid Hormone,  Serum"
+PTHFN,"Parathyroid Hormone,  Fine-Needle Aspiration Biopsy (FNAB)-Needle Wash"
+PTHRP,"Parathyroid Hormone-Related Peptide,  Plasma"
+PTOX,"Toxoplasma gondii,  Molecular Detection,  PCR,  Varies"
+PTRE,"Privet Tree,  IgE,  Serum"
+PTTP,"Prothrombin Time,  Plasma"
+PU1,"PU.1 Immunostain,  Technical Component Only"
+PUSE,"Pumpkin Seed,  IgE,  Serum"
+PWAS,"Prader-Willi/Angelman Syndrome,  Molecular Analysis,  Varies"
+PYR,"Pyruvic Acid,  Blood"
+PYRC,"Pyruvate,  Spinal Fluid"
+Q10,"Coenzyme Q10,  Reduced and Total,  Plasma"
+QBK,"BK Virus,  Molecular Detection,  Quantitative,  PCR,  Plasma"
+QBKU,"BK Virus,  Molecular Detection,  Quantitative,  PCR,  Urine"
+QFT4,"QuantiFERON-TB Gold Plus,  Blood"
+QNKS,"Natural Killer (NK)/Natural Killer T (NKT) Cell Subsets,  Quantitative,  Blood"
+QPALM,"Queen Palm,  IgE,  Serum"
+QUIN,"Quinidine,  Serum"
+RACTH,"Adrenocorticotrophic Hormone,  ACTH,  IgE,  Serum"
+RAMB,"Rabbit Meat,  IgE,  Serum"
+RAMBO,"Ammonium,  Random,  Urine"
+RAMCN,"Ammonium,  Random,  Urine"
+RAMIK,"Amikacin,  Random,  Serum"
+RAMSU,"Amylase,  Random,  Urine"
+RASE,"Rape Seed,  IgE,  Serum"
+RASP,"Raspberry,  IgE,  Serum"
+RAT,"Rat Epithelium,  IgE,  Serum"
+RB1,"Retinoblastoma Protein (Rb) Immunostain,  Tech Only"
+RBPG,"Rubella Antibodies,  IgG,  Serum"
+RCHLU,"Chloride,  Random,  Urine"
+RCTUR,"Creatinine,  Random,  Urine"
+RECR,"Red Currant,  IgE,  Serum"
+REDT,"Red Top,  IgE,  Serum"
+REED,"Common Reed,  IgE,  Serum"
+REPII,"Rabbit Epithelium,  IgE,  Serum"
+RGLUR,"Glucose,  Random,  Urine"
+RHNI,"Rhizopus nigricans,  IgE,  Serum"
+RHUT,"Rheumatoid Factor,  Serum"
+RIB,"Ribosome P Antibodies,  IgG,  Serum"
+RIBAV,"Ribavirin,  Serum"
+RICE,"Rice,  IgE,  Serum"
+RIT,"Methylphenidate,  Serum"
+RKUR,"Potassium,  Random,  Urine"
+RNAP,"RNA Polymerase III Antibodies,  IgG,  Serum"
+RNAUR,"Sodium,  Random,  Urine"
+RNP,"RNP Antibodies,  IgG,  Serum"
+ROC,"Rubeola (Measles) Antibodies,  IgG and IgM (Separate Determinations),  Spinal Fluid"
+ROM,"Measles (Rubeola) Antibodies,  IgM,  Serum"
+ROMA1,"Risk Score,  if Premenopausal"
+ROMA2,"Risk Score,  if Postmenopausal"
+ROPG,"Measles (Rubeola) Antibodies,  IgG,  Serum"
+ROTA,"Rotavirus Antigen,  Feces"
+RPCWT,"Renal Pathology Consultation,  Wet Tissue"
+RPRRT,"Rapid Plasma Reagin Screen Response to Therapy,  Serum"
+RRRP,"Rough Pigweed,  IgE,  Serum"
+RSCOC,"Coccidioides Antibody,  Complement Fixation and Immunodiffusion,  Serum"
+RSER,"Rabbit Serum Proteins,  IgE,  Serum"
+RSVAB,"Respiratory Syncytial Virus (RSV) In Situ Hybridization,  Technical Component Only"
+RT3,"T3 (Triiodothyronine),  Reverse,  Serum"
+RTSC,"Reptilase Time,  Plasma"
+RTSP,"Rat Serum Protein,  IgE,  Serum"
+RTUP,"Rat Urine Protein,  IgE,  Serum"
+RUFI,"Rufinamide,  Serum"
+RUPR,"Rabbit Urine Proteins,  IgE,  Serum"
+RUSS,"Russian Thistle,  IgE,  Serum"
+RWEED,"Rape Weed,  IgE,  Serum"
+RYE,"Rye,  IgE,  Serum"
+RYEG,"Rye Grass,  IgE,  Serum"
+RZIKS,"Zika Virus,  PCR,  Molecular Detection,  Serum"
+S_FX,"Protein S Activity,  Plasma"
+S100,"S-100 Immunostain,  Technical Component Only"
+SAFB,"Acid-Fast Smear for Mycobacterium,  Varies"
+SALCA,"Salicylate,  Serum"
+SALCT,"Cortisol,  Saliva"
+SALL4,"SALL4 Immunostain,  Technical Component Only"
+SALM,"Salmon,  IgE,  Serum"
+SALMC,"Salmonella Culture,  Feces"
+SAM,"Entamoeba histolytica Antibody,  Serum"
+SARD,"Sardine (Pilchard),  IgE,  Serum"
+SARS2,"Severe Acute Respiratory Syndrome Coronavirus 2 (SARS-CoV-2) RNA,  Varies"
+SASP,"Aspergillus fumigatus,  IgG Antibodies,  Serum"
+SATB2,"SATB2 Immunostain,  Technical Component Only"
+SBL,"Blastomyces Antibody by Immunodiffusion,  Serum"
+SBSE,"Sugarbeet Seed,  IgE,  Serum"
+SBWB,"Antimony,  Blood"
+SCALS,"Scallop,  IgE,  Serum"
+SCL70,"Scl 70 Antibodies,  IgG,  Serum"
+SCLAM,"Chlamydia Serology,  Serum"
+SCLE,"Scale,  IgE,  Serum"
+SCOPE,"Phospholipase A2 Receptor,  Indirect Immunofluorescence Assay,  Serum"
 SCT2,Miscellaneous Biochemical Genetics Testing
-SDEX,Hemoglobin S ^  Screen ^  Blood
-SDHB,SDHB Immunostain ^  Technical Component Only
-SECOS,Secobarbital ^  Serum
-SER,Serotonin ^  Serum
-SERWB,Serotonin ^  Blood
-SES,Selenium ^  Serum
-SESA,Sesame Seed ^  IgE ^  Serum
-SEWB,Selenium ^  Blood
-SF1,SF-1 Immunostain ^  Technical Component Only
-SFGP,Spotted Fever Group Antibody ^  IgG and IgM ^  Serum
-SFLA,Influenza Virus A Antibodies ^  IgG and IgM (Separate Determinations) ^  Serum
-SFLB,Influenza Virus B Antibodies ^  IgG and IgM (Separate Determinations) ^  Serum
-SFZ,Sulfamethoxazole ^  Serum
-SGSS,Synthetic Glucocorticoid Screen ^  Serum
-SGSU,Synthetic Glucocorticoid Screen ^  Urine
-SGU,Specific Gravity ^  Random ^  Urine
-SGUM,Sweet Gum ^  IgE ^  Serum
-SHBG,Sex Hormone-Binding Globulin (SHBG) ^  Serum
-SHIGC,Shigella Culture ^  Feces
-SHRI,Shrimp ^  IgE ^  Serum
-SHSTO,Histoplasma Antibody ^  Serum
-SHUR,Schistosoma Exam ^  Random ^  Urine
-SHWL,Sheep Wool ^  IgE ^  Serum
-SIIRO,Sirolimus ^  Whole Blood
-SILK,Silk ^  IgE ^  Serum
-SLEG,Legionella pneumophila (Legionnaires Disease) ^  Antibody ^  Serum
-SLFA,Cryptococcus Antigen Screen with Titer ^  Serum
-SLFAT,Cryptococcus Antigen Titer ^  LFA ^  Serum
-SLO,Smith-Lemli-Opitz Screen ^  Plasma
-SM,Sm Antibodies ^  IgG ^  Serum
-SMA,Smooth Muscle Antibodies ^  Serum
-SMACN,Actin ^  Smooth Muscle (SMActin) Immunostain ^  Technical Component Only
-SMFL,Seminal Fluid ^  IgE ^  Serum
-SMOTH,Smoothelin Immunostain ^  Technical Component Only
+SDEX,"Hemoglobin S,  Screen,  Blood"
+SDHB,"SDHB Immunostain,  Technical Component Only"
+SECOS,"Secobarbital,  Serum"
+SER,"Serotonin,  Serum"
+SERWB,"Serotonin,  Blood"
+SES,"Selenium,  Serum"
+SESA,"Sesame Seed,  IgE,  Serum"
+SEWB,"Selenium,  Blood"
+SF1,"SF-1 Immunostain,  Technical Component Only"
+SFGP,"Spotted Fever Group Antibody,  IgG and IgM,  Serum"
+SFLA,"Influenza Virus A Antibodies,  IgG and IgM (Separate Determinations),  Serum"
+SFLB,"Influenza Virus B Antibodies,  IgG and IgM (Separate Determinations),  Serum"
+SFZ,"Sulfamethoxazole,  Serum"
+SGSS,"Synthetic Glucocorticoid Screen,  Serum"
+SGSU,"Synthetic Glucocorticoid Screen,  Urine"
+SGU,"Specific Gravity,  Random,  Urine"
+SGUM,"Sweet Gum,  IgE,  Serum"
+SHBG,"Sex Hormone-Binding Globulin (SHBG),  Serum"
+SHIGC,"Shigella Culture,  Feces"
+SHRI,"Shrimp,  IgE,  Serum"
+SHSTO,"Histoplasma Antibody,  Serum"
+SHUR,"Schistosoma Exam,  Random,  Urine"
+SHWL,"Sheep Wool,  IgE,  Serum"
+SIIRO,"Sirolimus,  Whole Blood"
+SILK,"Silk,  IgE,  Serum"
+SLEG,"Legionella pneumophila (Legionnaires Disease),  Antibody,  Serum"
+SLFA,"Cryptococcus Antigen Screen with Titer,  Serum"
+SLFAT,"Cryptococcus Antigen Titer,  LFA,  Serum"
+SLO,"Smith-Lemli-Opitz Screen,  Plasma"
+SM,"Sm Antibodies,  IgG,  Serum"
+SMA,"Smooth Muscle Antibodies,  Serum"
+SMACN,"Actin,  Smooth Muscle (SMActin) Immunostain,  Technical Component Only"
+SMFL,"Seminal Fluid,  IgE,  Serum"
+SMOTH,"Smoothelin Immunostain,  Technical Component Only"
 SMPB,Peripheral Blood Smear Review
-SNAIL,Snail ^  IgE ^  Serum
-SNTX,N-terminal Telopeptide ^  Serum
-SOLEF,Sole ^  IgE ^  Serum
-SOMAT,Somatostatin (SOMATO) Immunostain ^  Technical Component Only
-SORR,Red Sorrel ^  IgE ^  Serum
-SOX10,SOX10 Immunostain ^  Technical Component Only
-SOX11,SOX11 Immunostain ^  Technical Component Only
-SOY,Soybean ^  IgE ^  Serum
-SP263,Programmed Death-Ligand 1 (PD-L1) (SP263) ^  Semi-Quantitative Immunohistochemistry ^  Manual
-SPBX,Epidermal Nerve Fiber Density Consultation ^  Varies
-SPIN,Spinach ^  IgE ^  Serum
-SPN,Pneumocystis Smear ^  Varies
-SPNC,Streptococcus pneumoniae Antigen ^  Spinal Fluid
-SPNEU,Streptococcus pneumoniae Antigen ^  Urine
-SPOT,Sweet Potato ^  IgE ^  Serum
-SPRU,Spruce ^  IgE ^  Serum
-SPSA,Prostate-Specific Antigen (PSA) Screen ^  Serum
-SPUT,Bacterial Culture ^  Aerobic ^  Respiratory
-SPUTS,Bacterial Culture ^  Aerobic ^  Respiratory with Antimicrobial Susceptibilities ^  Varies
-SQUA,Squash ^  IgE ^  Serum
-SQUI,Pacific Squid ^  IgE ^  Serum
-SQUID,Squid ^  IgE ^  Serum
-SRW,Short Ragweed ^  IgE ^  Serum
-SSA,SS-A/Ro Antibodies ^  IgG ^  Serum
-SSB,SS-B/La Antibodies ^  IgG ^  Serum
-SSF1,Nocardia Stain ^  Varies
-SSP,Sporothrix Antibody ^  Serum
-SSPC,Sporothrix Antibody ^  Spinal Fluid
-SSTR2,Somatostatin Receptor 2 (SSTR2) ^  Immunostain ^  Technical Component Only
-ST2S,ST2 ^  Serum
-STAT6,Signal Transducer and Activator of Transcription 6 (STAT6) ^  Technical Component Only
-STBY,Strawberry ^  IgE ^  Serum
-STEM,Stemphyllium ^  IgE ^  Serum
-STFR,Soluble Transferrin Receptor (sTfR) ^  Serum
-STHPV,ThinPrep Screen with Human Papillomavirus (HPV) Reflex ^  Varies
-STKZ,STK11 Gene ^  Full Gene Analysis ^  Varies
-STL,Enteric Pathogens Culture ^  Feces
-STLPC,St. Louis Encephalitis Antibody Panel ^  IgG and IgM ^  Spinal Fluid
-STPCO,ThinPrep with Human Papillomavirus (HPV) Co-Test-Screen ^  Varies
-STR,Striational (Striated Muscle) Antibodies ^  Serum
-STRIC,Trichinella Antibody ^  Serum
-STRNG,Strongyloides Antibody ^  IgG ^  Serum
-STSH,Thyroid-Stimulating Hormone-Sensitive (s-TSH) ^  Serum
+SNAIL,"Snail,  IgE,  Serum"
+SNTX,"N-terminal Telopeptide,  Serum"
+SOLEF,"Sole,  IgE,  Serum"
+SOMAT,"Somatostatin (SOMATO) Immunostain,  Technical Component Only"
+SORR,"Red Sorrel,  IgE,  Serum"
+SOX10,"SOX10 Immunostain,  Technical Component Only"
+SOX11,"SOX11 Immunostain,  Technical Component Only"
+SOY,"Soybean,  IgE,  Serum"
+SP263,"Programmed Death-Ligand 1 (PD-L1) (SP263),  Semi-Quantitative Immunohistochemistry,  Manual"
+SPBX,"Epidermal Nerve Fiber Density Consultation,  Varies"
+SPIN,"Spinach,  IgE,  Serum"
+SPN,"Pneumocystis Smear,  Varies"
+SPNC,"Streptococcus pneumoniae Antigen,  Spinal Fluid"
+SPNEU,"Streptococcus pneumoniae Antigen,  Urine"
+SPOT,"Sweet Potato,  IgE,  Serum"
+SPRU,"Spruce,  IgE,  Serum"
+SPSA,"Prostate-Specific Antigen (PSA) Screen,  Serum"
+SPUT,"Bacterial Culture,  Aerobic,  Respiratory"
+SPUTS,"Bacterial Culture,  Aerobic,  Respiratory with Antimicrobial Susceptibilities,  Varies"
+SQUA,"Squash,  IgE,  Serum"
+SQUI,"Pacific Squid,  IgE,  Serum"
+SQUID,"Squid,  IgE,  Serum"
+SRW,"Short Ragweed,  IgE,  Serum"
+SSA,"SS-A/Ro Antibodies,  IgG,  Serum"
+SSB,"SS-B/La Antibodies,  IgG,  Serum"
+SSF1,"Nocardia Stain,  Varies"
+SSP,"Sporothrix Antibody,  Serum"
+SSPC,"Sporothrix Antibody,  Spinal Fluid"
+SSTR2,"Somatostatin Receptor 2 (SSTR2),  Immunostain,  Technical Component Only"
+ST2S,"ST2,  Serum"
+STAT6,"Signal Transducer and Activator of Transcription 6 (STAT6),  Technical Component Only"
+STBY,"Strawberry,  IgE,  Serum"
+STEM,"Stemphyllium,  IgE,  Serum"
+STFR,"Soluble Transferrin Receptor (sTfR),  Serum"
+STHPV,"ThinPrep Screen with Human Papillomavirus (HPV) Reflex,  Varies"
+STKZ,"STK11 Gene,  Full Gene Analysis,  Varies"
+STL,"Enteric Pathogens Culture,  Feces"
+STLPC,"St. Louis Encephalitis Antibody Panel,  IgG and IgM,  Spinal Fluid"
+STPCO,"ThinPrep with Human Papillomavirus (HPV) Co-Test-Screen,  Varies"
+STR,"Striational (Striated Muscle) Antibodies,  Serum"
+STRIC,"Trichinella Antibody,  Serum"
+STRNG,"Strongyloides Antibody,  IgG,  Serum"
+STSH,"Thyroid-Stimulating Hormone-Sensitive (s-TSH),  Serum"
 SUDC,Sudden Cardiac Death Pathology Consultation
-SULFU,Sulfate ^  24 Hour ^  Urine
-SUNF,Sunflower ^  IgE ^  Serum
-SUNFS,Sunflower Seed ^  IgE ^  Serum
-SWORD,Swordfish ^  IgE ^  Serum
-SYNAP,Synaptophysin (SYNAPTO) Immunostain ^  Technical Component Only
-SYPHN,Syphilis Total Antibody ^  Serum
-SYPHT,Syphilis Total Antibody with Reflex ^  Serum
-SZDIA,Sezary Diagnostic Flow Cytometry ^  Blood
-SZMON,Sezary Monitoring Flow Cytometry ^  Blood
-T3,T3 (Triiodothyronine) ^  Total ^  Serum
-T4,T4 (Thyroxine) ^  Total Only ^  Serum
-TACPK,Tacrolimus ^  Peak ^  Blood
-TAKRO,Tacrolimus ^  Blood
-TAMIK,Amikacin ^  Trough ^  Serum
-TAMV,Thermoactinomyces vulgaris ^  IgG Antibodies ^  Serum
-TAPEN,Tapentadol and Metabolite ^  Random ^  Urine
-TARR,Tarragon ^  IgE ^  Serum
-TAU3,TAU 3 Immunostain ^  Technical Component Only
-TAU4,TAU 4 Immunostain ^  Technical Component Only
-TAUI,TAU Immunostain ^  Technical Component Only
-TB1LN,Antimicrobial Susceptibility ^  Mycobacterium tuberculosis Complex ^  First Line ^  Varies
-TB2LN,Susceptibility ^  Mycobacterium tuberculosis Complex ^  Second Line ^  Varies
-TBET,T-Box Expressed in T Cells (TBET) Immunostain ^  Technical Component Only
-TBGI,Thyroxine-Binding Globulin (TBG) ^  Serum
-TBIDS,Culture Referred for Identification ^  Mycobacterium and Nocardia with Antimicrobial Susceptibility Testing ^  Varies
-TBPZA,Susceptibility ^  Mycobacterium tuberculosis Complex ^  Pyrazinamide ^  Varies
-TBSP,Mycobacterium tuberculosis Complex Species Identification ^  PCR ^  Varies
-TCGBM,T-Cell Receptor Gene Rearrangement ^  PCR ^  Bone Marrow
-TCGR,T-Cell Receptor Gene Rearrangement ^  PCR ^  Blood
-TCGRV,T-Cell Receptor Gene Rearrangement ^  PCR ^  Varies
-TCL1A,T-Cell Leukemia/Lymphoma Protein 1A (TCL1A) Immunostain ^  Technical Component Only
-TCP,T-Cell Subsets ^  Naive ^  Memory and Activated ^  Blood
-TCPT,Trichophyton rubrum ^  IgE ^  Serum
-TCRF1,T-Cell Receptor Beta (TCR Beta F1) Immunostain ^  Technical Component Only
-TCRGD,T-Cell Receptor Delta Immunostain ^  Technical Component Only
-TDP,Thiamine (Vitamin B1) ^  Whole Blood
-TDT,Terminal Deoxynucleotidyl Transferase (TdT) Immunostain ^  Technical Component Only
-TEA,Tea ^  IgE ^  Serum
-TFE3I,Transcription Factor E3 (TFE3) Immunostain ^  Technical Component Only
-TFGFR,FGFR Mutation and Fusion Analysis ^  Tumor
-TGAB,Thyroglobulin Antibody ^  Serum
-TGMS,Thyroglobulin Mass Spectrometry ^  Serum
-THCG,Human Chorionic Gonadotropin (hCG) ^  Quantitative ^  Pregnancy ^  Serum
-THCM,11-nor-Delta-9-Tetrahydrocannabinol-9-Carboxylic Acid (Carboxy-THC) ^  Confirmation ^  Meconium
-THCX,Carboxy-Tetrahydrocannabinol (THC) Confirmation ^  Chain of Custody ^  Urine
-THEO,Theophylline ^  Serum
-THIO,Thiopurine Metabolites ^  Whole Blood
-THSD7,Thrombospondin Type-1 Domain-Containing 7A Antibodies ^  Serum
-THYM,Thyme ^  IgE ^  Serum
-THYR,Thyroglobulin Immunostain ^  Technical Component Only
-THYRO,Thyrotropin Receptor Antibody ^  Serum
-TIA1,T-Cell Intracellular Antigen 1 (TIA-1) Immunostain ^  Technical Component Only
-TIMG,Timothy Grass ^  IgE ^  Serum
-TIS,Titanium ^  Serum
-TLB,Thallium ^  Blood
-TLE1,TLE-1 Immunostain ^  Technical Component Only
-TMA,Trimellitic Anhydride ^  TMA ^  IgE ^  Serum
-TMP,Trimethoprim ^  Serum
-TNFA,Tumor Necrosis Factor (TNF) ^  Plasma
-TOBAC,Tobacco ^  IgE ^  Serum
-TOBPA,Tobramycin ^  Peak ^  Serum
-TOBRA,Tobramycin ^  Random ^  Serum
-TOBTA,Tobramycin ^  Trough ^  Serum
-TOMA,Tomato ^  IgE ^  Serum
-TOPI,Topiramate ^  Serum
-TOXB,Toxoplasma gondii ^  Molecular Detection ^  PCR ^  Blood
-TOXO,Toxoplasma Immunostain ^  Technical Component Only
-TOXOC,Toxocara Antibody ^  IgG ^  Serum
-TP,Protein ^  Total ^  Serum
-TP53Z,TP53 Gene ^  Li Fraumeni Syndrome ^  Full Gene Analysis ^  Varies
-TPDPC,Physician Interpretation ^  Diagnostic
-TPIT,T-PIT Immunostain ^  Technical Component Only
-TPNI,Troponin I ^  Serum
-TPO,Thyroperoxidase Antibodies ^  Serum
-TPPA,Syphilis Antibody by TP-PA ^  Serum
-TPRPD,ThinPrep Diagnostic ^  Varies
-TPSF,Protein ^  Total ^  Spinal Fluid
+SULFU,"Sulfate,  24 Hour,  Urine"
+SUNF,"Sunflower,  IgE,  Serum"
+SUNFS,"Sunflower Seed,  IgE,  Serum"
+SWORD,"Swordfish,  IgE,  Serum"
+SYNAP,"Synaptophysin (SYNAPTO) Immunostain,  Technical Component Only"
+SYPHN,"Syphilis Total Antibody,  Serum"
+SYPHT,"Syphilis Total Antibody with Reflex,  Serum"
+SZDIA,"Sezary Diagnostic Flow Cytometry,  Blood"
+SZMON,"Sezary Monitoring Flow Cytometry,  Blood"
+T3,"T3 (Triiodothyronine),  Total,  Serum"
+T4,"T4 (Thyroxine),  Total Only,  Serum"
+TACPK,"Tacrolimus,  Peak,  Blood"
+TAKRO,"Tacrolimus,  Blood"
+TAMIK,"Amikacin,  Trough,  Serum"
+TAMV,"Thermoactinomyces vulgaris,  IgG Antibodies,  Serum"
+TAPEN,"Tapentadol and Metabolite,  Random,  Urine"
+TARR,"Tarragon,  IgE,  Serum"
+TAU3,"TAU 3 Immunostain,  Technical Component Only"
+TAU4,"TAU 4 Immunostain,  Technical Component Only"
+TAUI,"TAU Immunostain,  Technical Component Only"
+TB1LN,"Antimicrobial Susceptibility,  Mycobacterium tuberculosis Complex,  First Line,  Varies"
+TB2LN,"Susceptibility,  Mycobacterium tuberculosis Complex,  Second Line,  Varies"
+TBET,"T-Box Expressed in T Cells (TBET) Immunostain,  Technical Component Only"
+TBGI,"Thyroxine-Binding Globulin (TBG),  Serum"
+TBIDS,"Culture Referred for Identification,  Mycobacterium and Nocardia with Antimicrobial Susceptibility Testing,  Varies"
+TBPZA,"Susceptibility,  Mycobacterium tuberculosis Complex,  Pyrazinamide,  Varies"
+TBSP,"Mycobacterium tuberculosis Complex Species Identification,  PCR,  Varies"
+TCGBM,"T-Cell Receptor Gene Rearrangement,  PCR,  Bone Marrow"
+TCGR,"T-Cell Receptor Gene Rearrangement,  PCR,  Blood"
+TCGRV,"T-Cell Receptor Gene Rearrangement,  PCR,  Varies"
+TCL1A,"T-Cell Leukemia/Lymphoma Protein 1A (TCL1A) Immunostain,  Technical Component Only"
+TCP,"T-Cell Subsets,  Naive,  Memory and Activated,  Blood"
+TCPT,"Trichophyton rubrum,  IgE,  Serum"
+TCRF1,"T-Cell Receptor Beta (TCR Beta F1) Immunostain,  Technical Component Only"
+TCRGD,"T-Cell Receptor Delta Immunostain,  Technical Component Only"
+TDP,"Thiamine (Vitamin B1),  Whole Blood"
+TDT,"Terminal Deoxynucleotidyl Transferase (TdT) Immunostain,  Technical Component Only"
+TEA,"Tea,  IgE,  Serum"
+TFE3I,"Transcription Factor E3 (TFE3) Immunostain,  Technical Component Only"
+TFGFR,"FGFR Mutation and Fusion Analysis,  Tumor"
+TGAB,"Thyroglobulin Antibody,  Serum"
+TGMS,"Thyroglobulin Mass Spectrometry,  Serum"
+THCG,"Human Chorionic Gonadotropin (hCG),  Quantitative,  Pregnancy,  Serum"
+THCM,"11-nor-Delta-9-Tetrahydrocannabinol-9-Carboxylic Acid (Carboxy-THC),  Confirmation,  Meconium"
+THCX,"Carboxy-Tetrahydrocannabinol (THC) Confirmation,  Chain of Custody,  Urine"
+THEO,"Theophylline,  Serum"
+THIO,"Thiopurine Metabolites,  Whole Blood"
+THSD7,"Thrombospondin Type-1 Domain-Containing 7A Antibodies,  Serum"
+THYM,"Thyme,  IgE,  Serum"
+THYR,"Thyroglobulin Immunostain,  Technical Component Only"
+THYRO,"Thyrotropin Receptor Antibody,  Serum"
+TIA1,"T-Cell Intracellular Antigen 1 (TIA-1) Immunostain,  Technical Component Only"
+TIMG,"Timothy Grass,  IgE,  Serum"
+TIS,"Titanium,  Serum"
+TLB,"Thallium,  Blood"
+TLE1,"TLE-1 Immunostain,  Technical Component Only"
+TMA,"Trimellitic Anhydride,  TMA,  IgE,  Serum"
+TMP,"Trimethoprim,  Serum"
+TNFA,"Tumor Necrosis Factor (TNF),  Plasma"
+TOBAC,"Tobacco,  IgE,  Serum"
+TOBPA,"Tobramycin,  Peak,  Serum"
+TOBRA,"Tobramycin,  Random,  Serum"
+TOBTA,"Tobramycin,  Trough,  Serum"
+TOMA,"Tomato,  IgE,  Serum"
+TOPI,"Topiramate,  Serum"
+TOXB,"Toxoplasma gondii,  Molecular Detection,  PCR,  Blood"
+TOXO,"Toxoplasma Immunostain,  Technical Component Only"
+TOXOC,"Toxocara Antibody,  IgG,  Serum"
+TP,"Protein,  Total,  Serum"
+TP53Z,"TP53 Gene,  Li Fraumeni Syndrome,  Full Gene Analysis,  Varies"
+TPDPC,"Physician Interpretation,  Diagnostic"
+TPIT,"T-PIT Immunostain,  Technical Component Only"
+TPNI,"Troponin I,  Serum"
+TPO,"Thyroperoxidase Antibodies,  Serum"
+TPPA,"Syphilis Antibody by TP-PA,  Serum"
+TPRPD,"ThinPrep Diagnostic,  Varies"
+TPSF,"Protein,  Total,  Spinal Fluid"
 TPSPC,Physician Interp Screen
-TRAG,Tragacanth ^  IgE ^  Serum
-TRAM,Tramadol and Metabolite ^  Random ^  Urine
-TRAP,Tartrate-Resistant Acid Phosphatase (TRAP) Immunostain ^  Technical Component Only
-TREE1,Tree Panel #1 ^  Serum
-TREE2,Tree Panel #2 ^  Serum
-TREE3,Tree Panel #3 ^  Serum
-TREE4,Tree Panel #4 ^  Serum
-TREPE,Treponema pallidum Immunostain ^  Technical Component Only
-TRIG,Triglycerides ^  Serum
-TRIGC,Triglycerides ^  CDC ^  Serum
-TRIGN,Triglycerides ^  Non-Fasting ^  Serum
-TRK,Tropomyosin Receptor Kinase (TRK) Immunostain ^  Technical Component Only
-TRMP,Trimipramine ^  Serum
-TROT,Trout ^  IgE ^  Serum
-TRPS,Troponin T ^  5th Generation ^  Plasma
-TRPTS,Tryptase Immunostain ^  Technical Component Only
-TRPU,Trichosporon pullulans ^  IgE ^  Serum
-TRSF,Transferrin ^  Serum
-TRVI,Trichoderma viride ^  IgE ^  Serum
-TRYPA,Tryptase ^  Autopsy ^  Serum
-TRYPI,Tyrophagus putrescentiae ^  IgE ^  Serum
-TRYPN,Trypsin Immunostain ^  Technical Component Only
-TRYPT,Tryptase ^  Serum
-TSH,Thyroid-Stimulating Hormone (TSH) ^  Beta Immunostain ^  Technical Component Only
-TSI,Thyroid-Stimulating Immunoglobulin ^  Serum
-TTF40,TTF41 (SPT24) + p40 Immunostain ^  Technical Component Only
-TTF8G,Thyroid Transcription Factor (8G7G3/1) Immunostain ^  Technical Component Only
-TTFK5,Thyroid Transcription Factor 1 (TTF1) (SPT24) and Keratin 5 (KRT5) Immunostain ^  Technical Component Only
-TTFSP,Thyroid Transcription Factor (SPT24) Immunostain ^  Technical Component Only
-TTGA,Tissue Transglutaminase Antibody ^  IgA ^  Serum
-TTGG,Tissue Transglutaminase Antibody ^  IgG ^  Serum
-TTOX,Tetanus Toxoid ^  IgE ^  Serum
-TTSC,Thrombin Time (Bovine) ^  Plasma
-TTST,Testosterone ^  Total ^  Mass Spectrometry ^  Serum
-TUNA,Tuna ^  IgE ^  Serum
-TURK,Turkey ^  IgE ^  Serum
-TURKF,Turkey Feathers ^  IgE ^  Serum
-TXM,Toxoplasma gondii Antibody ^  IgM ^  Serum
-TYRBS,Tyrosinemia Follow Up Panel ^  Blood Spot
-TYROS,Tyrosinase (TYROS) Immunostain ^  Technical Component Only
-U1A1V,UDP-Glucuronosyl Transferase 1A1 TA Repeat Genotype ^  UGT1A1 ^  Varies
-UBILU,Bilirubin ^  Random ^  Urine
-UBIQ,Ubiquitin (UBIQ) Immunostain ^  Technical Component Only
+TRAG,"Tragacanth,  IgE,  Serum"
+TRAM,"Tramadol and Metabolite,  Random,  Urine"
+TRAP,"Tartrate-Resistant Acid Phosphatase (TRAP) Immunostain,  Technical Component Only"
+TREE1,"Tree Panel #1,  Serum"
+TREE2,"Tree Panel #2,  Serum"
+TREE3,"Tree Panel #3,  Serum"
+TREE4,"Tree Panel #4,  Serum"
+TREPE,"Treponema pallidum Immunostain,  Technical Component Only"
+TRIG,"Triglycerides,  Serum"
+TRIGC,"Triglycerides,  CDC,  Serum"
+TRIGN,"Triglycerides,  Non-Fasting,  Serum"
+TRK,"Tropomyosin Receptor Kinase (TRK) Immunostain,  Technical Component Only"
+TRMP,"Trimipramine,  Serum"
+TROT,"Trout,  IgE,  Serum"
+TRPS,"Troponin T,  5th Generation,  Plasma"
+TRPTS,"Tryptase Immunostain,  Technical Component Only"
+TRPU,"Trichosporon pullulans,  IgE,  Serum"
+TRSF,"Transferrin,  Serum"
+TRVI,"Trichoderma viride,  IgE,  Serum"
+TRYPA,"Tryptase,  Autopsy,  Serum"
+TRYPI,"Tyrophagus putrescentiae,  IgE,  Serum"
+TRYPN,"Trypsin Immunostain,  Technical Component Only"
+TRYPT,"Tryptase,  Serum"
+TSH,"Thyroid-Stimulating Hormone (TSH),  Beta Immunostain,  Technical Component Only"
+TSI,"Thyroid-Stimulating Immunoglobulin,  Serum"
+TTF40,"TTF41 (SPT24) + p40 Immunostain,  Technical Component Only"
+TTF8G,"Thyroid Transcription Factor (8G7G3/1) Immunostain,  Technical Component Only"
+TTFK5,"Thyroid Transcription Factor 1 (TTF1) (SPT24) and Keratin 5 (KRT5) Immunostain,  Technical Component Only"
+TTFSP,"Thyroid Transcription Factor (SPT24) Immunostain,  Technical Component Only"
+TTGA,"Tissue Transglutaminase Antibody,  IgA,  Serum"
+TTGG,"Tissue Transglutaminase Antibody,  IgG,  Serum"
+TTOX,"Tetanus Toxoid,  IgE,  Serum"
+TTSC,"Thrombin Time (Bovine),  Plasma"
+TTST,"Testosterone,  Total,  Mass Spectrometry,  Serum"
+TUNA,"Tuna,  IgE,  Serum"
+TURK,"Turkey,  IgE,  Serum"
+TURKF,"Turkey Feathers,  IgE,  Serum"
+TXM,"Toxoplasma gondii Antibody,  IgM,  Serum"
+TYRBS,"Tyrosinemia Follow Up Panel,  Blood Spot"
+TYROS,"Tyrosinase (TYROS) Immunostain,  Technical Component Only"
+U1A1V,"UDP-Glucuronosyl Transferase 1A1 TA Repeat Genotype,  UGT1A1,  Varies"
+UBILU,"Bilirubin,  Random,  Urine"
+UBIQ,"Ubiquitin (UBIQ) Immunostain,  Technical Component Only"
 UBT,Helicobacter pylori Breath Test
-UE3,Estriol ^  Unconjugated ^  Serum
-UHIST,Histoplasma Antigen ^  Urine
-UHSD,Hemosiderin ^  Random ^  Urine
-ULCH,Ulocladium chartarum ^  IgE ^  Serum
-ULFA,Cryptococcus Antigen Screen ^  Lateral Flow Assay ^  Urine
-UNHB,Unstable Hemoglobin ^  Blood
-UOSMS,Osmolality ^  Serum
-UOSMU,Osmolality ^  Random ^  Urine
-UPGC,Uroporphyrinogen III Synthase (Co-Synthase) ^  Erythrocytes
-UPH24,pH ^  24 Hour ^  Urine
-UR,Bacterial Culture ^  Aerobic ^  Urine
-URBRP,Ureaplasma species ^  Molecular Detection ^  PCR ^  Blood
-UREDF,Reducing Substance ^  Feces
-URIC,Uric Acid ^  Serum
-URNS,Bacterial Culture ^  Aerobic ^  with Antimicrobial Susceptibilities ^  Urine
-URPRP,Ureaplasma species ^  Molecular Detection ^  PCR ^  Plasma
-USNU,Ustilago nuda ^  Mold Grain Rust ^  IgE ^  Serum
-VALPA,Valproic Acid ^  Total ^  Serum
-VALPF,Valproic Acid ^  Free ^  Serum
-VANIL,Vanilla ^  IgE ^  Serum
-VANPA,Vancomycin ^  Peak ^  Serum
-VANRA,Vancomycin ^  Random ^  Serum
-VANTA,Vancomycin ^  Trough ^  Serum
-VCOV2,Severe Acute Respiratory Syndrome Coronavirus 2 (SARS-CoV-2) IgG Antibody ^  Serum
-VDSF,VDRL ^  Spinal Fluid
-VDSFQ,VDRL Titer ^  Spinal Fluid
-VEDOL,Vedolizumab Quantitation with Reflex to Antibodies ^  Serum
-VEGF,Vascular Endothelial Growth Factor ^  Plasma
-VELV,Velvet Leaf ^  IgE ^  Serum
-VERG,Sweet Vernal Grass ^  IgE ^  Serum
-VH,Vanillylmandelic Acid and Homovanillic Acid ^  Random ^  Urine
-VHSV,Herpes Simplex Virus (HSV) ^  Culture From Neonates ^  Varies
-VIBC,Vibrio Culture ^  Feces
+UE3,"Estriol,  Unconjugated,  Serum"
+UHIST,"Histoplasma Antigen,  Urine"
+UHSD,"Hemosiderin,  Random,  Urine"
+ULCH,"Ulocladium chartarum,  IgE,  Serum"
+ULFA,"Cryptococcus Antigen Screen,  Lateral Flow Assay,  Urine"
+UNHB,"Unstable Hemoglobin,  Blood"
+UOSMS,"Osmolality,  Serum"
+UOSMU,"Osmolality,  Random,  Urine"
+UPGC,"Uroporphyrinogen III Synthase (Co-Synthase),  Erythrocytes"
+UPH24,"pH,  24 Hour,  Urine"
+UR,"Bacterial Culture,  Aerobic,  Urine"
+URBRP,"Ureaplasma species,  Molecular Detection,  PCR,  Blood"
+UREDF,"Reducing Substance,  Feces"
+URIC,"Uric Acid,  Serum"
+URNS,"Bacterial Culture,  Aerobic,  with Antimicrobial Susceptibilities,  Urine"
+URPRP,"Ureaplasma species,  Molecular Detection,  PCR,  Plasma"
+USNU,"Ustilago nuda,  Mold Grain Rust,  IgE,  Serum"
+VALPA,"Valproic Acid,  Total,  Serum"
+VALPF,"Valproic Acid,  Free,  Serum"
+VANIL,"Vanilla,  IgE,  Serum"
+VANPA,"Vancomycin,  Peak,  Serum"
+VANRA,"Vancomycin,  Random,  Serum"
+VANTA,"Vancomycin,  Trough,  Serum"
+VCOV2,"Severe Acute Respiratory Syndrome Coronavirus 2 (SARS-CoV-2) IgG Antibody,  Serum"
+VDSF,"VDRL,  Spinal Fluid"
+VDSFQ,"VDRL Titer,  Spinal Fluid"
+VEDOL,"Vedolizumab Quantitation with Reflex to Antibodies,  Serum"
+VEGF,"Vascular Endothelial Growth Factor,  Plasma"
+VELV,"Velvet Leaf,  IgE,  Serum"
+VERG,"Sweet Vernal Grass,  IgE,  Serum"
+VH,"Vanillylmandelic Acid and Homovanillic Acid,  Random,  Urine"
+VHSV,"Herpes Simplex Virus (HSV),  Culture From Neonates,  Varies"
+VIBC,"Vibrio Culture,  Feces"
 VIGA,Vigabatrin (Sabril)
-VIM,Vimentin (VIM) Immunostain ^  Technical Component Only
-VIP,Vasoactive Intestinal Polypeptide ^  Plasma
-VIPI,Vasoactive Intestine Polypeptide (VIP) ^  Technical Component Only
-VIRNR,Viral Culture ^  Non-Respiratory ^  Varies
-VISCS,Viscosity ^  Serum
-VITA,Vitamin A ^  Serum
-VITAP,Vitamin A ^  Serum
-VITB2,Riboflavin (Vitamin B2) ^  Plasma
-VITC,Ascorbic Acid (Vitamin C) ^  Plasma
-VITE,Vitamin E ^  Serum
-VITK1,Vitamin K1 ^  Serum
-VLTB,Volatile Screen ^  Blood
-VLTBX,Volatile Screen ^  Chain of Custody ^  Blood
-VLTS,Volatile Screen ^  Serum
-VLTU,Volatile Screen ^  Urine
-VLTUX,Volatile Screen ^  Chain of Custody ^  Urine
-VMAR,Vanillylmandelic Acid ^  Random ^  Urine
-VORI,Voriconazole ^  Serum
-VRID2,Culture Referred for Identification ^  Virus
-VWACT,von Willebrand Factor Activity ^  Plasma
-VWAG,von Willebrand Factor Antigen ^  Plasma
-VWD8B,von Willebrand Disease 2N (Subtype Normandy) ^  Plasma
-VWFMS,von Willebrand Factor Multimer Analysis ^  Plasma
-VZM,Varicella-Zoster Virus (VZV) Antibody ^  IgM ^  Serum
-VZV,Varicella Zoster Virus (VZV) Immunostain ^  Technical Component Only
-WALN,Walnut Tree ^  IgE ^  Serum
-WARSV,Warfarin Response Genotype ^  Varies
-WASEQ,Alpha Globin Gene Sequencing ^  Varies
-WASQR,Alpha Globin Gene Sequencing ^  Blood
-WBDD,Beta-Globin Cluster Locus ^  Deletion/Duplication ^  Varies
-WBDDR,Beta-Globin Cluster Locus Deletion/Duplication ^  Blood
-WBSEQ,Beta Globin Gene Sequencing ^  Varies
-WBSQR,Beta-Globin Gene Sequencing ^  Blood
-WEED1,Weed Panel # 1 ^  Serum
-WEED2,Weed Panel # 2 ^  Serum
-WEED3,Weed Panel # 3 ^  Serum
-WEED4,Weed Panel # 4 ^  Serum
-WEEPC,Western Equine Encephalitis Antibody Panel ^  IgG and IgM ^  Spinal Fluid
-WES,Whole Exome Sequencing ^  Varies
-WFHV,White Faced Hornet Venom ^  IgE ^  Serum
-WGSEQ,Gamma Globin Full Gene Sequencing ^  Varies
-WGSQR,Gamma-Globin Full Gene Sequencing ^  Varies
-WHEY,Whey ^  IgE ^  Serum
-WHIC,White Hickory ^  IgE ^  Serum
-WHIPB,Tropheryma whipplei ^  Molecular Detection ^  PCR ^  Blood
-WHT,Wheat ^  IgE ^  Serum
-WHTC,Cultivated Wheat ^  IgE ^  Serum
-WILL,Willow ^  IgE ^  Serum
-WMEL,Watermelon ^  IgE ^  Serum
-WNGC,West Nile Virus Antibody ^  IgG ^  Spinal Fluid
-WNGS,West Nile Virus Antibody ^  IgG ^  Serum
-WNMC,West Nile Virus Antibody ^  IgM ^  Spinal Fluid
-WNMS,West Nile Virus Antibody ^  IgM ^  Serum
+VIM,"Vimentin (VIM) Immunostain,  Technical Component Only"
+VIP,"Vasoactive Intestinal Polypeptide,  Plasma"
+VIPI,"Vasoactive Intestine Polypeptide (VIP),  Technical Component Only"
+VIRNR,"Viral Culture,  Non-Respiratory,  Varies"
+VISCS,"Viscosity,  Serum"
+VITA,"Vitamin A,  Serum"
+VITAP,"Vitamin A,  Serum"
+VITB2,"Riboflavin (Vitamin B2),  Plasma"
+VITC,"Ascorbic Acid (Vitamin C),  Plasma"
+VITE,"Vitamin E,  Serum"
+VITK1,"Vitamin K1,  Serum"
+VLTB,"Volatile Screen,  Blood"
+VLTBX,"Volatile Screen,  Chain of Custody,  Blood"
+VLTS,"Volatile Screen,  Serum"
+VLTU,"Volatile Screen,  Urine"
+VLTUX,"Volatile Screen,  Chain of Custody,  Urine"
+VMAR,"Vanillylmandelic Acid,  Random,  Urine"
+VORI,"Voriconazole,  Serum"
+VRID2,"Culture Referred for Identification,  Virus"
+VWACT,"von Willebrand Factor Activity,  Plasma"
+VWAG,"von Willebrand Factor Antigen,  Plasma"
+VWD8B,"von Willebrand Disease 2N (Subtype Normandy),  Plasma"
+VWFMS,"von Willebrand Factor Multimer Analysis,  Plasma"
+VZM,"Varicella-Zoster Virus (VZV) Antibody,  IgM,  Serum"
+VZV,"Varicella Zoster Virus (VZV) Immunostain,  Technical Component Only"
+WALN,"Walnut Tree,  IgE,  Serum"
+WARSV,"Warfarin Response Genotype,  Varies"
+WASEQ,"Alpha Globin Gene Sequencing,  Varies"
+WASQR,"Alpha Globin Gene Sequencing,  Blood"
+WBDD,"Beta-Globin Cluster Locus,  Deletion/Duplication,  Varies"
+WBDDR,"Beta-Globin Cluster Locus Deletion/Duplication,  Blood"
+WBSEQ,"Beta Globin Gene Sequencing,  Varies"
+WBSQR,"Beta-Globin Gene Sequencing,  Blood"
+WEED1,"Weed Panel # 1,  Serum"
+WEED2,"Weed Panel # 2,  Serum"
+WEED3,"Weed Panel # 3,  Serum"
+WEED4,"Weed Panel # 4,  Serum"
+WEEPC,"Western Equine Encephalitis Antibody Panel,  IgG and IgM,  Spinal Fluid"
+WES,"Whole Exome Sequencing,  Varies"
+WFHV,"White Faced Hornet Venom,  IgE,  Serum"
+WGSEQ,"Gamma Globin Full Gene Sequencing,  Varies"
+WGSQR,"Gamma-Globin Full Gene Sequencing,  Varies"
+WHEY,"Whey,  IgE,  Serum"
+WHIC,"White Hickory,  IgE,  Serum"
+WHIPB,"Tropheryma whipplei,  Molecular Detection,  PCR,  Blood"
+WHT,"Wheat,  IgE,  Serum"
+WHTC,"Cultivated Wheat,  IgE,  Serum"
+WILL,"Willow,  IgE,  Serum"
+WMEL,"Watermelon,  IgE,  Serum"
+WNGC,"West Nile Virus Antibody,  IgG,  Spinal Fluid"
+WNGS,"West Nile Virus Antibody,  IgG,  Serum"
+WNMC,"West Nile Virus Antibody,  IgM,  Spinal Fluid"
+WNMS,"West Nile Virus Antibody,  IgM,  Serum"
 WNVCI,West Nile CSF Interpretation
-WNVP,West Nile Virus (WNV) ^  Molecular Detection ^  PCR ^  Plasma
+WNVP,"West Nile Virus (WNV),  Molecular Detection,  PCR,  Plasma"
 WNVSI,West Nile Serum Interpretation
-WORM,Wormwood ^  IgE ^  Serum
-WPIN,White Pine ^  IgE ^  Serum
-WRGR,Wild Rye Grass ^  IgE ^  Serum
-WRW,Western Ragweed ^  IgE ^  Serum
-WSPV,Wasp Venom ^  IgE ^  Serum
-WT1I,Wilms Tumor (WT-1) Immunostain ^  Technical Component Only
-XHIM,X-Linked Hyper IgM Syndrome ^  Blood
-YAP1,Yes-Associated Protein (YAP) Immunostain ^  Technical Component Only
-YERSC,Yersinia Culture ^  Feces
-YFHV,Yellow Faced Hornet Venom ^  IgE ^  Serum
-YJV,Yellow Jacket Venom ^  IgE ^  Serum
-YOLK,Egg Yolk ^  IgE ^  Serum
-ZMMLS,Antimicrobial Susceptibility ^  Aerobic Bacteria ^  MIC
-ZNS,Zinc ^  Serum
-ZONI,Zonisamide ^  Serum
-ZW10,Miscellaneous Chemistry Testing ^  Varies
+WORM,"Wormwood,  IgE,  Serum"
+WPIN,"White Pine,  IgE,  Serum"
+WRGR,"Wild Rye Grass,  IgE,  Serum"
+WRW,"Western Ragweed,  IgE,  Serum"
+WSPV,"Wasp Venom,  IgE,  Serum"
+WT1I,"Wilms Tumor (WT-1) Immunostain,  Technical Component Only"
+XHIM,"X-Linked Hyper IgM Syndrome,  Blood"
+YAP1,"Yes-Associated Protein (YAP) Immunostain,  Technical Component Only"
+YERSC,"Yersinia Culture,  Feces"
+YFHV,"Yellow Faced Hornet Venom,  IgE,  Serum"
+YJV,"Yellow Jacket Venom,  IgE,  Serum"
+YOLK,"Egg Yolk,  IgE,  Serum"
+ZMMLS,"Antimicrobial Susceptibility,  Aerobic Bacteria,  MIC"
+ZNS,"Zinc,  Serum"
+ZONI,"Zonisamide,  Serum"
+ZW10,"Miscellaneous Chemistry Testing,  Varies"
 ZW124,Miscellaneous Sequenom
 ZW129,Miscellaneous Pacific Rim Pathology Medical Corp
 ZW213,Misc University of Michigan (MLabs)

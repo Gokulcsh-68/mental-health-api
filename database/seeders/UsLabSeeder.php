@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use DB;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Log;
 
 class UsLabSeeder extends Seeder
 {
@@ -24,10 +25,10 @@ class UsLabSeeder extends Seeder
         ];
         
         DB::table('master_types')->insert($master_types);
-
+        
         $this->dataDump();
     }
-
+    
     private function dataDump()
     {
         $us_lab_file_path = __DIR__ . '/source/us_lab.csv';
@@ -41,19 +42,24 @@ class UsLabSeeder extends Seeder
             $us_labs_data = [];
             
             foreach($us_labs as $item) {
-                $data = explode(',', $item);
-                $slug = trim($data[0]);
-                $name = trim($data[1]);
-                $name = str_replace('^', ',', $name);
+                try {
+                    $data = explode(',', $item);
+                    $slug = trim($data[0]);
+                    $name = trim($data[1]);
+                    
+                    $us_labs_data[] = [
+                        'master_type_slug' => 'lab-us', 
+                        'slug' => $slug, 
+                        'name' => $name,
+                        'is_active' => 1,
+                    ];
+                    
+                } catch(\Exception $e) {
+                    Log::error('Lab Import', ['error' => $e->getMessage(), 'row' => $item]);
+                }
                 
-                $us_labs_data[] = [
-                    'master_type_slug' => 'lab-us', 
-                    'slug' => $slug, 
-                    'name' => $name,
-                    'is_active' => 1,
-                ];
             }
-
+            
             DB::table('masters')->insert($us_labs_data);
         }
     }
