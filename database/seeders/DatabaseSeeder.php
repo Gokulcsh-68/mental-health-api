@@ -45,6 +45,8 @@ class DatabaseSeeder extends Seeder
             MeasurementStrengthSeeder::class,
             MedicationBrandSeeder::class,
             MedicationGenericSeeder::class,
+            UsMedicineSeeder::class,
+            UsLabSeeder::class,
             AssementFormADHDSeeder::class,
             AssementFormApgarSeeder::class,
             HealthFormSeeder::class,
