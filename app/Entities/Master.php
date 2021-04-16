@@ -76,9 +76,15 @@ class Master extends BaseModel
         
         if ($request->get('searchkey')) {
 
-            $model->where(function ($subquery) use ($request) {
-                        $subquery->Where('masters.name', 'LIKE',"%".$request->get('searchkey')."%")
-                        ->orWhere('masters.slug', 'LIKE',"%".$request->get('searchkey')."%");
+            $exp_val = explode(" ", $request->get('searchkey'));
+
+            $model->where(function ($subquery) use ($request,$exp_val) {
+                foreach ($exp_val as $key => $value) {
+                    $subquery->Where('masters.name', 'LIKE',"%".$value."%")
+                        ->orWhere('masters.slug', 'LIKE',"%".$value."%");
+                }
+                        // $subquery->Where('masters.name', 'LIKE',"%".$request->get('searchkey')."%")
+                        // ->orWhere('masters.slug', 'LIKE',"%".$request->get('searchkey')."%");
                 });
         }
 
