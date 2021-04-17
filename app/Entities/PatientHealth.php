@@ -151,6 +151,11 @@ class PatientHealth extends BaseModel
     }
 
 
+    public function scopeOpen($query)
+    {
+        return $query->where('freeze', 0);
+    }
+
     public function applyFilters($model, $isPluck){
         $model = parent::applyFilters($model, $isPluck);
         $request = app('request');
@@ -215,13 +220,16 @@ class PatientHealth extends BaseModel
                 }
 
                 $model->Where('values->name', 'LIKE',"%".$request->get('searchkey')."%")
+
                     ->orWhere('values->type', 'LIKE',"%".$request->get('searchkey')."%")
                     ->orWhere('values->is_active', 'LIKE',"%".$status_key."%");
+
             }
         }
 
         return $model;
     }
+
 
     public static function allergy_flag($current_value){
         $input_data['severityFlagColor']        = 'success';
@@ -251,4 +259,5 @@ class PatientHealth extends BaseModel
         
         return $input_data;
     }
+    
 }

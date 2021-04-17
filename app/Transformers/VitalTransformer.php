@@ -21,7 +21,8 @@ class VitalTransformer extends JsonResource
             'consult_id' =>  $this->consult_id,
             'peripheral_id' =>  $this->peripheral_id,
             'slug' =>  $this->slug,
-            'details' =>  $this->details
+            'details' =>  $this->details,
+            'freeze' =>  $this->freeze
         ];
     }
 }

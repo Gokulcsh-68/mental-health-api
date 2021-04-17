@@ -77,6 +77,10 @@ class Vital extends BaseModel
         return $this->hasOne(User::class);
     }
 
+    public function scopeOpen($query)
+    {
+        return $query->where('freeze', 0);
+    }
 
     protected function createModel($request, $data = false)
     {

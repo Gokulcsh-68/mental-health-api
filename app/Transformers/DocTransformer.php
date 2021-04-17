@@ -16,12 +16,13 @@ class DocTransformer extends JsonResource
     public function toArray($request): array
     {
         return [
-            'id' =>  $this->id,
-            'addition_info' =>  $this->addition_info,
-            'consult_id' =>  $this->consult_id,
-            'document_source' =>  $this->document_source,
-            'properties' =>  $this->properties,
-            'user_id' =>  $this->user_id
+            'id'                =>  $this->id,
+            'addition_info'     =>  $this->addition_info,
+            'consult_id'        =>  $this->consult_id,
+            'document_source'   =>  $this->document_source,
+            'properties'        =>  $this->properties,
+            'user_id'           =>  $this->user_id,
+            'freeze'            =>  $this->freeze
         ];
     }
 }

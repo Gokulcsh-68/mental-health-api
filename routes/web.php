@@ -26,7 +26,6 @@ $router->get('/activated', function () use ($router) {
     return view('activated');
 });
 
-
 $router->get('v1/users/activate-accounts-x', 'AuthService@activateAccountsx');
 
 $router->group(['prefix' => 'peripheral/', 'middleware' => 'peripheralAuth'], function ($router) {
@@ -42,7 +41,9 @@ $router->group(['prefix' => 'v1/', 'middleware' => 'clientAuth'], function ($rou
 
 
     $router->get('teleconsult/token-validate', 'AuthService@consultTokenValidate');
-    $router->get('teleconsult/summary', 'AuthService@consultSummary');   
+    $router->get('teleconsult/summary', 'AuthService@consultSummary');
+
+    $router->post('freeze-phr-emr', 'AuthService@freezePhrEmr');
 
     $router->group([], function ($router) {
         $router->group(['prefix' => 'users'], function ($router) {

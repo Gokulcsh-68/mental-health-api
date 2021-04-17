@@ -2,6 +2,7 @@
 
 return [
     "timezone" => env('APP_TIMEZONE', 'UTC'),
+    "health_record_freeze_hours" => env('PATIENT_HEALTH_RECORD_FREEZE_HOURS', '24'),
     "app" => [
         "jwtKey" => env('JWT_SECRET', 'LjnFPiUKwPmvwIl1b4tZ2I48DzPFpTx1'),
         "jwtTtl" => env('JWT_TTL', 864000000),

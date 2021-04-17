@@ -22,6 +22,7 @@ class PatientHealthTransformer extends JsonResource
             // 'slug-display-name' => $this->master->name,
             'values'            => $this->values,
             'user' => (new UserTransformer($this->user)),
+            'freeze' =>  $this->freeze
         ];
 
         if(!empty($this->consult)){

@@ -11,6 +11,7 @@ use App\Entities\PatientHistory;
 use App\Entities\PhysicalExamination;
 use App\Entities\Provider;
 use App\Entities\ReviewOfSystem;
+use App\Entities\ActivityWellness;
 use App\Entities\Role;
 use App\Entities\Staff;
 use App\Entities\Timezone;
@@ -930,4 +931,16 @@ class AuthService extends BaseService
 
     //     return $this->httpResponse->jsonResponse();
     // }
+
+    
+    
+    public function freezePhrEmr(Request $request){
+        $this->validate($request, ['user_id' => 'required|exists:users,id']);
+
+        $user_id = $request->input('user_id');
+        dispatch(new \App\Jobs\FreezePatientHealthRecordJob($user_id));
+
+        $this->httpResponse->setHttpMessage("Record Updated")->setHttpCode(200);
+        return $this->httpResponse->jsonResponse();
+    }
 }

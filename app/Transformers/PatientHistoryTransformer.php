@@ -16,11 +16,12 @@ class PatientHistoryTransformer extends JsonResource
     public function toArray($request): array
     {
         $data = [
-            "id"                => $this->id,
-            'patient_id' =>  $this->patient_id,
-            'consult_id' =>  $this->consult_id,
-            'slug' =>  $this->slug,
-            'values' =>  $this->values
+            "id"            =>  $this->id,
+            'patient_id'    =>  $this->patient_id,
+            'consult_id'    =>  $this->consult_id,
+            'slug'          =>  $this->slug,
+            'values'        =>  $this->values,
+            'freeze'        =>  $this->freeze
         ];
 
         if(!empty($this->consult)){

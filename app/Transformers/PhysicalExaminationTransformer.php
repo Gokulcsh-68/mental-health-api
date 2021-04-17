@@ -23,7 +23,8 @@ class PhysicalExaminationTransformer extends JsonResource
             'slug'          =>  $this->slug,
             'created_at'    =>  $this->created_at,
             'status'        =>  $this->status,
-            'values'        =>  $this->values
+            'values'        =>  $this->values,
+            'freeze'        =>  $this->freeze
         ];
     }
 }

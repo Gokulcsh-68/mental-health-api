@@ -26,7 +26,8 @@ class ActivityWellnessTransformer extends JsonResource
             'act_type' =>  $this->act_type,
             'patient_id' =>  $this->patient_id,
             'status' =>  $this->status,
-            'unit' =>  $this->unit
+            'unit' =>  $this->unit,
+            'freeze' =>  $this->freeze
         ];
     }
 }
