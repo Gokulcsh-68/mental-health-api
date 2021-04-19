@@ -99,17 +99,34 @@ class Master extends BaseModel
         if($type == 'immunisation'){
             $patient_dosages = [];
 
+
+            foreach ($attributes->values as $key => $value) {
+
+
             $patient_dosages = DB::table('immunisations')
                     ->Where('immunisations.patient_id', $request->get('patient_id'))
                     ->Where('immunisations.slug', $slug)
-                    ->value('details');
-            $patient_dosages = json_decode($patient_dosages);
+                    ->whereJsonContains('immunisations.details', $value->periods)
+                    ->select('id','details')
+                    ->first();
+                    if($patient_dosages == null){ 
+                        $dosages_info = [];
+                        $dosages_freeze = 0;
+                        $dosages_id = null;
+                    }
+                    else{
+                        $dosages_info = json_decode($patient_dosages->details);
+                        // $dosages_freeze = $patient_dosages->freeze;
+                        $dosages_freeze = 0;
+                        $dosages_id = $patient_dosages->id;
+                    }
 
-            if($patient_dosages == null){ $patient_dosages = []; }
-
-            foreach ($attributes->values as $key => $value) {
+                    
                 $newValue           = $value;
-                $newValue->status   = in_array($value->periods, $patient_dosages);
+                $newValue->status   = in_array($value->periods, $dosages_info);
+              
+                $newValue->freeze   = $dosages_freeze;
+                $newValue->imm_id   = $dosages_id;
             }
         }else if($type == 'family_history_diseases'){
             $patient_family_history = [];

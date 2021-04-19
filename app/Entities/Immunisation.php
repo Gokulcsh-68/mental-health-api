@@ -76,30 +76,11 @@ class Immunisation extends BaseModel
         DB::beginTransaction();
         try {
 
-            $getData = $this->Where('slug',$data['slug'])
-                            ->Where('patient_id',$data['patient_id'])
-                            ->value('details');
-
-            if($getData == null){ $getData = []; }
-
-
-            if($data['status'] == true){
-
-                if (($key = array_search($data['details'], $getData)) !== false) {
-                   
-                    unset($getData[$key]);
-                }
-            }
-
-            if($data['status'] == false){
-                $getData[] = $data['details'];
-            }
+            $getData[] = $data['details'];
 
             $data['details'] = $getData;
 
-            $matchThese = ['slug'=>$data['slug'],'patient_id'=>$data['patient_id']];
-
-            $model = $this->updateOrCreate($matchThese,$data);
+            $model = $this->Create($data);
 
 
             DB::commit();
