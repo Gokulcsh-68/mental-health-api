@@ -74,7 +74,6 @@ class ImmunisationSeeder extends Seeder
                 'attributes' =>json_encode([
                     "values" => [
                         ['treatment' => 'dose', 'periods' => '6w' ],
-                        ['treatment' => 'dose', 'periods' => '6w'],
                         ['treatment' => 'dose', 'periods' => '10w'],
                         ['treatment' => 'dose', 'periods' => '16m-18m'],
                         ['treatment' => 'dose', 'periods' => '4y-6y']
