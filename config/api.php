@@ -24,6 +24,11 @@ return [
     ],
     's3_images' => [
         'public_url' => env('S3_PUBLIC_BASE_PATH', 'https://a2ztelehealth.s3.amazonaws.com/')
+    ],
+    'teleconsult' => [
+        'default_service_provider' => env('DEFAULT_SERVICE_PROVIDER', 'tokbox'),
+        'api_return_url' => env('TELECONSULT_API_RETURN_URL'),
+        'api_return_url_version' => env('TELECONSULT_API_RETURN_URL_VERSION', 'v1'),
     ]
 
 ];

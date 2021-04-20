@@ -144,11 +144,13 @@ class Consult extends BaseModel
             $patient = User::find($data['patient_id']);
             $provider = User::find($data['provider_id']);
 
+            $teleconsult_config = config('api.teleconsult');
+
             $payload = [
                 'consult_date_time' => $data['consult_date_time'],
                 'consult_type' => 'virtual',
                 'consult_reason' => $data['reason_for_consult'],
-                'service_provider' => 'jitsi',
+                'service_provider' => $teleconsult_config['default_service_provider'],
 
                 'provider' => [
                     'id' => $provider->id,
@@ -159,8 +161,8 @@ class Consult extends BaseModel
                     'profile_pic' => $provider->profile_image,
                     'additional_info' => [
                         'consult_speciality' => $data['speciality'],
-                        'api_end_point' => 'https://school-api.a2zhealth.in', //***without slash at last
-                        'api_end_version' => 'v1',
+                        'api_end_point' => $teleconsult_config['api_return_url'],
+                        'api_end_version' => $teleconsult_config['api_return_url_version'],
                     ],
                 ],
 
