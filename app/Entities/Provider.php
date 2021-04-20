@@ -77,7 +77,7 @@ class Provider extends BaseModel
 
     public function customAvailabilityDetail()
     {
-        return $this->hasMany(CustomAvailabilityDetail::class);
+        return $this->hasMany(CustomAvailabilityDetail::class,'provider_id','user_id');
     }
 
 

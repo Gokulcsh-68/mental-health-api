@@ -21,7 +21,7 @@ class CreateCustomAvailabilityDetailsTable extends Migration
             $table->json('timing')->nullable();
             $table->timestamps();
 
-            $table->foreign('provider_id')->references('id')->on('providers')->onDelete('restrict')->onUpdate('cascade');
+            $table->foreign('provider_id')->references('user_id')->on('providers')->onDelete('restrict')->onUpdate('cascade');
         });
     }
 

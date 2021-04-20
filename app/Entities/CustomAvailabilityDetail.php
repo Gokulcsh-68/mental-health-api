@@ -75,6 +75,42 @@ class CustomAvailabilityDetail extends BaseModel
 
 
 
+    protected function createModel($request)
+    {
+        $data = $this->getModelAttributes($request);
+
+        DB::beginTransaction();
+        try {
+
+
+        if($request->get('user_id')){
+            $data['provider_id'] = $request->get('user_id');
+        }
+        else if($request->get('provider_id'))
+        {
+           $data['provider_id'] = $request->get('provider_id');
+        }
+        else{
+           $data['provider_id'] = $request->user()->id;
+        }
+        
+            
+            $data['created_by'] = $request->user()->id;
+            $model = $this->create($data);
+
+
+            DB::commit();
+
+            return $model;
+        } catch (Exception $e) {
+            exceptionLogger("Provider Custom Availability Create Rollback", $e);
+            DB::rollback();
+        }
+
+        return null;
+    }
+
+
     public function applyFilters($model, $isPluck)
     {
         $model = parent::applyFilters($model, $isPluck);

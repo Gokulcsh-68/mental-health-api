@@ -65,7 +65,7 @@ class Master extends BaseModel
                 $form_slug = '';
 
                  // ['apgar', 'adhd', 'healthy-heart', 'psychiatric-exam', 'stroke-scale'];
-                $form_slug = ['healthy-heart', 'psychiatric-exam', 'stroke-scale'];
+                $form_slug = ['covid','healthy-heart', 'psychiatric-exam', 'stroke-scale'];
 
                 if(!empty($form_slug)){
                     $model->whereIn('masters.slug', $form_slug);
