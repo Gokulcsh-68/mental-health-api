@@ -79,14 +79,14 @@ class Form extends BaseModel
 
         $status_key = $request->get('searchkey');
 
-        if($request->user()->role_id){
+        // if($request->user()->role_id){
             
-            $logged_in_role_code = Role::where('id', $request->user()->role_id)->value('code');
+        //     $logged_in_role_code = Role::where('id', $request->user()->role_id)->value('code');
 
 
-           $model->whereJsonContains('role_code', $logged_in_role_code);
+        //    $model->whereJsonContains('role_code', $logged_in_role_code);
             
-        }
+        // }
 
 
 
