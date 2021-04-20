@@ -93,7 +93,6 @@ class DynamicFormsTableSeeder extends Seeder
             ['slug' => "throat" , 'attributes' => json_encode(['type'=>'checkbox', 'name'=>'pain', 'label'=>' pain' , 'data'=>'throat_pain_notes'])],
             ['slug' => "throat" , 'attributes' => json_encode(['type'=>'checkbox', 'name'=>'soreness', 'label'=>' Soreness' , 'data'=>'throat_soreness_notes'])],
             ['slug' => "throat" , 'attributes' => json_encode(['type'=>'checkbox', 'name'=>'dryness', 'label'=>' dryness' , 'data'=>'throat_dryness_notes'])],
-            ['slug' => "throat" , 'attributes' => json_encode(['type'=>'checkbox', 'name'=>'pain', 'label'=>' pain' , 'data'=>'throat_pain_notes'])],
             ['slug' => "throat" , 'attributes' => json_encode(['type'=>'textarea', 'name'=>'notes', 'label'=>' Notes' , 'data'=>'throat_notes_notes'])],
             ['slug' => "respiratory"    , 'attributes' => json_encode(['type'=>'checkbox', 'name'=>'respiratory_infections', 'label'=>' Respiratory infections' , 'data'=>'respiratory_respiratory_infections_notes'])],
             ['slug' => "respiratory"    , 'attributes' => json_encode(['type'=>'checkbox', 'name'=>'frequent_nasal_allergies', 'label'=>' Frequent Nasal Allergies' , 'data'=>'respiratory_frequent_nasal_allergies_notes'])],
