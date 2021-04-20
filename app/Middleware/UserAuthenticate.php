@@ -44,7 +44,7 @@ class UserAuthenticate
             throw new AuthorizationException("Unauthorized");
         }
 
-        $response = $next($request)->getOriginalContent();
+        $response = $next($request);
 
         // Check for token to refresh or not
         $authorization = $request->bearerToken();
@@ -54,7 +54,10 @@ class UserAuthenticate
         $diffrence = Carbon::now()->diffInMinutes($expiration_time);
         // $response['diff'] = $diffrence;
         if($diffrence < 5) {
-            $response['refresh_token'] = $this->refreshToken($request, $decodedToken);
+            $response_content = $response->getOriginalContent();
+            $response_content['refresh_token'] = $this->refreshToken($request, $decodedToken);;
+            $response->setContent(json_encode($response_content));
+
         }
 
         return $response;
