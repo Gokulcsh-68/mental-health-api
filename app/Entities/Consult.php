@@ -174,8 +174,8 @@ class Consult extends BaseModel
                     'gender' => $patient->gender,
                     'profile_pic' => $patient->profile_image,
                     'additional_info' => [
-                        'api_end_point' => 'https://school-api.a2zhealth.in', //***without slash at last
-                        'api_end_version' => 'v1',
+                        'api_end_point' => $teleconsult_config['api_return_url'],
+                        'api_end_version' => $teleconsult_config['api_return_url_version'],
                     ],
                 ],
             ];
