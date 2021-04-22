@@ -2,14 +2,15 @@
 
 namespace App\Services;
 
+use App\Entities\Doc;
 use App\Entities\User;
 use App\Entities\Vital;
-use App\Entities\Doc;
+use App\Services\UtilService;
+use App\Utils\AuthHelper;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use SimpleXMLElement;
-use App\Utils\AuthHelper;
-use Carbon\Carbon;
 
 class Hms6500 extends BaseService
 {
@@ -95,13 +96,18 @@ class Hms6500 extends BaseService
                 $insert_data['addition_info']['title']          = 'ECG';
                 $insert_data['addition_info']['notes']          = 'ECG';
                 
-                $imageName  = $patient_details['id'].'_'. \Carbon\Carbon::now()->timestamp .'.png';
-            
-                $destinationPath = storage_path('/app/uploadDocs');
-                $request->file('filename')->move($destinationPath, $imageName);
+                $imageName = 'Document'.rand(9999,9999999).rand(100,1999).time().'.'.$request->file('file')->getClientOriginalExtension();
 
-                $insert_data['properties']['file_path'] = $imageName;
-                $insert_data['properties']['file_name'] = $imageName;
+                $request['type']        = 'provider';
+                $request['filetype']    = 'ECG';
+                $request['file_name']   = $imageName;
+
+                $status = (new UtilService())->postSignedUrl($request);
+
+                $insert_data['properties']['file_path'] = $status['file_tmp'];
+                $insert_data['properties']['file_name'] = $status['file_name'];
+                $insert_data['properties']['s3_signed_url'] = $status['file_path'];
+                $insert_data['properties']['s3_upload'] = 1;
 
                 Doc::create($insert_data);
             }
