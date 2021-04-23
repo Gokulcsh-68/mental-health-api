@@ -589,8 +589,8 @@ class Vital extends BaseModel
                     break;
                 case '++':
                     $input_data['leukocytes_message']            = 'Moderate';
-                    $input_data['leukocytes_flag']       = 'success';
-                    $input_data['leukocytes_range_code'] = '#008000';
+                    $input_data['leukocytes_flag']       = 'warning';
+                    $input_data['leukocytes_range_code'] = '#ffc107';
                     break;
                 case '+++':
                     $input_data['leukocytes_message']            = 'Large';
@@ -610,8 +610,8 @@ class Vital extends BaseModel
                     break;
                 case '++':
                     $input_data['protein_message']            = 'Moderate';
-                    $input_data['protein_flag']       = 'success';
-                    $input_data['protein_range_code'] = '#008000';
+                    $input_data['protein_flag']       = 'warning';
+                    $input_data['protein_range_code'] = '#ffc107';
                     break;
                 case '+++':
                     $input_data['protein_message']            = 'Large';
@@ -631,8 +631,8 @@ class Vital extends BaseModel
                     break;
                 case '++':
                     $input_data['rbc_message']            = 'Moderate';
-                    $input_data['rbc_flag']       = 'success';
-                    $input_data['rbc_range_code'] = '#008000';
+                    $input_data['rbc_flag']       = 'warning';
+                    $input_data['rbc_range_code'] = '#ffc107';
                     break;
                 case '+++':
                     $input_data['rbc_message']            = 'Large';
@@ -643,12 +643,74 @@ class Vital extends BaseModel
         }
 
         if (!empty($input_data['sugar_unit'])) {
+
+
+            $input_data['sugar_message']    = 'Low';
+            $input_data['sugar_flag']       = 'danger';
+            $input_data['sugar_range_code'] = '#ff0000';
         
             if ($input_data['sugar_unit'] == 'mg/dL') {
+
+                if ($input_data['sugar'] >= 100 && $input_data['sugar'] <= 249) {
+
+                        $input_data['sugar_message']    = 'Normal';
+                        $input_data['sugar_flag']       = 'success';
+                        $input_data['sugar_range_code'] = '#008000';
+                }
+
+                if ($input_data['sugar'] >= 250 && $input_data['sugar'] <= 499) {
+
+                        $input_data['sugar_message']    = 'Small';
+                        $input_data['sugar_flag']       = 'warning';
+                        $input_data['sugar_range_code'] = '#ffc107';
+                }
+
+                if ($input_data['sugar'] >= 500 && $input_data['sugar'] <= 999) {
+
+                        $input_data['sugar_message']    = 'High';
+                        $input_data['sugar_flag']       = 'danger';
+                        $input_data['sugar_range_code'] = '#ff0000';
+                }
+
+                if ($input_data['sugar'] >= 1000) {
+
+                        $input_data['sugar_message']    = 'Very High';
+                        $input_data['sugar_flag']       = 'danger';
+                        $input_data['sugar_range_code'] = '#ff0000';
+                }
 
             }
 
             if ($input_data['sugar_unit'] == 'mmol/L') {
+
+                if ($input_data['sugar'] >= 5.55 && $input_data['sugar'] <= 11.0) {
+
+                        $input_data['sugar_message']    = 'Normal';
+                        $input_data['sugar_flag']       = 'success';
+                        $input_data['sugar_range_code'] = '#008000';
+                }
+
+                if ($input_data['sugar'] >= 11.1 && $input_data['sugar'] <= 27.74) {
+
+                        $input_data['sugar_message']    = 'Small';
+                        $input_data['sugar_flag']       = 'warning';
+                        $input_data['sugar_range_code'] = '#ffc107';
+                }
+
+                if ($input_data['sugar'] >= 27.5 && $input_data['sugar'] <= 55.4) {
+
+                        $input_data['sugar_message']    = 'High';
+                        $input_data['sugar_flag']       = 'danger';
+                        $input_data['sugar_range_code'] = '#ff0000';
+                }
+
+                if ($input_data['sugar'] >= 55.5) {
+
+                        $input_data['sugar_message']    = 'Very High';
+                        $input_data['sugar_flag']       = 'danger';
+                        $input_data['sugar_range_code'] = '#ff0000';
+                }
+
 
             }
 
