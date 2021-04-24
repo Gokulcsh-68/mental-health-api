@@ -13,6 +13,7 @@ return [
         'hospital' => env('S3_BASE_PATH') . 'a2z-telegaruda-v2/%s/',
         'provider' => env('S3_BASE_PATH') . 'a2z-telegaruda-v2/%s/',
         'folio' => env('S3_BASE_PATH') . 'a2z-telegaruda-v2/%s/',
+        'peripheral' => env('S3_BASE_PATH') . 'a2z-telegaruda-v2/peripheral/',
     ],
     'communication_sms_template' => [
         'forgotPassword' => 'Your ' . config('app.name') . ' forget OTP is {{otp}}',

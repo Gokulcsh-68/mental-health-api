@@ -6,6 +6,7 @@ use App\Entities\Doc;
 use App\Entities\User;
 use App\Entities\Vital;
 use App\Services\UtilService;
+use App\Traits\S3;
 use App\Utils\AuthHelper;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -14,7 +15,7 @@ use SimpleXMLElement;
 
 class Hms6500 extends BaseService
 {
-    use AuthHelper;
+    use AuthHelper,S3;
 
     /***
         HMS LOGIN
@@ -69,51 +70,47 @@ class Hms6500 extends BaseService
      ***/
      public function physicalReport(Request $request){
         try{
+            $file       = $request->file('filename');
             $input      = $request->all();
             $details    = json_encode($input);
 
-            $sessionId  = $request["PHPSESSID"];
-            $fileName   = substr($sessionId,0,10);
-
             $peripheral_secret  = $request["PHPSESSID"];
-            $patient_details    = User::where('peripheral_secret', $peripheral_secret)->first()->toArray();            
-
-            $file = $request->file('filename');
-            // Log::info($input);
+            $patient_details    = User::where('peripheral_secret', $peripheral_secret)->first();
 
             if(!empty($input['content'])){
                 $xml            = simplexml_load_string($input['content'], "SimpleXMLElement", LIBXML_NOCDATA);
                 $patient_vitals = (array) $xml;
             }
 
-            if (!empty($file)){
+            if (!empty($file) && $patient_details){
 
                 $insert_data = array();
-                $insert_data['created_by']      = $patient_details['id'];
-                $insert_data['user_id']         = $patient_details['id'];
+                $insert_data['created_by']      = $patient_details->id;
+                $insert_data['user_id']         = $patient_details->id;
                 $insert_data['document_source'] = 'imaging';
 
-                $insert_data['addition_info']['title']          = 'ECG';
-                $insert_data['addition_info']['notes']          = 'ECG';
-                
-                $imageName = 'Document'.rand(9999,9999999).rand(100,1999).time().'.'.$request->file('file')->getClientOriginalExtension();
+                $insert_data['addition_info']['title'] = 'ECG';
+                $insert_data['addition_info']['notes'] = 'ECG';
 
-                $request['type']        = 'provider';
-                $request['filetype']    = 'ECG';
-                $request['file_name']   = $imageName;
+                $file   = $request->file('filename');
+                $prefix = 'HMS6500_' . $insert_data['addition_info']['title'];
+                $path = config('api.fileSystem.peripheral') . $request->get('file_name');
 
-                $status = (new UtilService())->postSignedUrl($request);
+                $response = $this->diskStorage($file, $path, $prefix, 'private', 'ecg');
 
-                $insert_data['properties']['file_path'] = $status['file_tmp'];
-                $insert_data['properties']['file_name'] = $status['file_name'];
-                $insert_data['properties']['s3_signed_url'] = $status['file_path'];
-                $insert_data['properties']['s3_upload'] = 1;
+                if($response['success']) {
+                    $insert_data['properties']['file_path'] = $response['fullPath'];
+                    $insert_data['properties']['file_name'] = $response['filename'];
+                    $insert_data['properties']['s3_signed_url'] = $response['fullPath'];
+                    $insert_data['properties']['s3_upload'] = 1;
+                    // Log::info('HMS', ['da' => $request->all(), 'file' => $response]);
 
-                Doc::create($insert_data);
+                    Doc::create($insert_data);
+                    return "HTTP_SUCCESS:";
+                }   
             }
 
-            return "HTTP_SUCCESS:";
-
+            return false;
         }catch(Exception $e){
             // Exception
         }

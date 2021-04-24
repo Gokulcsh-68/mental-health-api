@@ -24,25 +24,30 @@ trait S3
   		return false;
 	}
 
-	public function diskStorage($file, $path, $filenamePrefix = "")
-	{
+	public function diskStorage($file, $path, $filenamePrefix = "", $visibility = 'public', $source = 'normal')
+    {
         $ext = $file->getClientOriginalExtension();
-    	$s3 = app('filesystem')->disk('s3');
-		$filename = sprintf('%s%s.%s', $filenamePrefix, md5(time().uniqid(rand(), true)), $file->getClientOriginalExtension());
-  		$filePath = sprintf('%s%s', $path, $filename);
+        $s3 = app('filesystem')->disk('s3');
+        if($source == 'normal'){
+            $filename = sprintf('%s%s.%s', $filenamePrefix, md5(time().uniqid(rand(), true)), $file->getClientOriginalExtension());
+        }else{
+            $filename = sprintf('%s%s.%s', $filenamePrefix, md5(time().uniqid(rand(), true)), '.png');
+        }
+        
+        $filePath = sprintf('%s%s', $path, $filename);
 
-  		try{
-	  		if ($s3->put($filePath, file_get_contents($file->getRealPath()), 'public')) {
+        try{
+            if ($s3->put($filePath, file_get_contents($file->getRealPath()), $visibility)) {
 
-	  			return ["success" => true, "filename" => $filename, "fullPath" => $filePath];
-	  		}
-	  	}
-	  	catch(\Exeception $e) {
-	  		return ["success" => false, "error" => $e->getMessage()];	  		
-	  	}
+                return ["success" => true, "filename" => $filename, "fullPath" => $filePath];
+            }
+        }
+        catch(\Exeception $e) {
+            return ["success" => false, "error" => $e->getMessage()];           
+        }
 
-  		return ["success" => false, "error" => "Error storing file"];
-	}
+        return ["success" => false, "error" => "Error storing file"];
+    }
 
 	public function diskStorageFromExternal($remotePath, $path, $filenamePrefix, $ext)
 	{
