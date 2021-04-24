@@ -193,7 +193,7 @@ class Hms6500 extends BaseService
                         if(!empty($patient_vitals['heartrate'])){
                             $data['details']['heart']    = $patient_vitals['heartrate'];
                             $data['details']['unit']     = 'Bpm';
-                            $data['slug']       = 'heartrate';
+                            $data['slug']       = 'heart-rate';
                             Vital::createModel($request, $data);
                         }
 
