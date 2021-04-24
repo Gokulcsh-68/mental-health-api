@@ -53,8 +53,8 @@ class TeleConsultApiService extends BaseService {
 			
 			'patient.id' => 'required',
 			'patient.name' => 'required',
-			'patient.email' => 'required',
-			'patient.phone' => 'required',
+			'patient.email' => 'required_if:patient.phone,',
+			'patient.phone' => 'required_if:patient.email,',
 			'patient.gender' => 'nullable',
 			'patient.profile_pic' => 'nullable',
         ]);
@@ -138,6 +138,14 @@ class TeleConsultApiService extends BaseService {
     	} 
     	catch(\Exception $e) {
 			Log::error('Cureselect Teleconsult API ERROR ------- ', ['errorDetails' => $e->getMessage()]);
+
+			$api_response = $this->toGuzzleArray();
+
+			if($api_response) {
+				if($api_response['code'] == 422) {
+					throw ValidationException::withMessages($api_response['data']);
+				}
+			}
 
 			throw new BadRequestHttpException($e->getMessage(), $e);
 			$response = [ $e->getMessage() ];
