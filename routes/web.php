@@ -65,6 +65,24 @@ $router->group(['prefix' => 'v1/', 'middleware' => 'clientAuth'], function ($rou
         
     });
 
+    $router->group(['middleware' => 'ApiServiceAuth'], function ($router) {
+
+        $router->group(['prefix' => 'xapi'], function ($router) {
+
+            $router->group(['middleware' => ['resource']], function ($router) {
+                $router->get('{resource}/List', ['uses' => 'ResourceService@list']);
+                $router->get('{resource}/Fetch/{id:[0-9]+}', ['uses' => 'ResourceService@fetch']);
+                $router->put('{resource}/Update/{id:[0-9]+}', ['uses' => 'ResourceService@update']);
+                $router->patch('{resource}/PartialUpdate/{id:[0-9]+}', ['uses' => 'ResourceService@fetch']);
+                $router->post('{resource}/Create', ['uses' => 'ResourceService@create']);
+                $router->get('{resource}/getAll', ['uses' => 'ResourceService@getAll']);
+
+            });
+
+        });
+
+    });
+
 
     $router->group(['middleware' => 'userAuth'], function ($router) {
 

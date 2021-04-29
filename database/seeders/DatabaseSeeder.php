@@ -54,6 +54,7 @@ class DatabaseSeeder extends Seeder
             SigSeeder::class,
             UpdateImmunisationSeeder::class,
             AssessmentCovidSeeder::class,
+            UpdateApiServiceSeeder::class
         ]);
     }
 }

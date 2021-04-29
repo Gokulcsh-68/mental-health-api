@@ -103,6 +103,7 @@ $app->routeMiddleware([
     'clientAuth' => App\Middleware\ClientAuthenticate::class,
     'peripheralAuth' => App\Middleware\PeripheralAuthenticate::class,
     'acl' => App\Middleware\ACLMiddleware::class,
+    'ApiServiceAuth' => App\Middleware\ApiServiceAuthenticate::class,
 ]);
 
 /*

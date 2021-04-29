@@ -171,9 +171,10 @@ class Hospital extends BaseModel
 
         }
 
-
-        if($request->user()->role->code == 'hospitalgroup'){
-            $model->Where('hospitals.group_id', $request->user()->staff->group_id);
+        if($request->user()){
+            if($request->user()->role->code == 'hospitalgroup'){
+                $model->Where('hospitals.group_id', $request->user()->staff->group_id);
+            }            
         }
 
         if ($request->get('searchkey')) {

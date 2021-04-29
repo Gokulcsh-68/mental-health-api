@@ -37,13 +37,17 @@ class UserTransformer extends JsonResource
             'is_active' =>  $this->is_active,
             'communication_channel' =>  $this->communication_channel];
 
-        if($request->user()->role->code == 'hospitalgroup'){
-            $return_val['hospital_group_name'] = $request->get('staff')->hospitalgroup->name;
-        }
+        if($request->user()){
 
 
-        if($request->user()->role->code == 'hospital'){
-            $return_val['hospital_name'] = $request->get('staff')->hospital->name;
+            if($request->user()->role->code == 'hospitalgroup'){
+                $return_val['hospital_group_name'] = $request->get('staff')->hospitalgroup->name;
+            }
+
+
+            if($request->user()->role->code == 'hospital'){
+                $return_val['hospital_name'] = $request->get('staff')->hospital->name;
+            }
         }
 
         return $return_val;
