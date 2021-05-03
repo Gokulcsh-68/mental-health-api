@@ -120,6 +120,10 @@ class Vital extends BaseModel
             $data['details'] += self::urine_flag($data['details']);
         }
 
+        if($data['slug'] == 'respiration'){
+            $data['details'] += self::respiration_flag($data['details']);
+        }
+
         if($data['slug'] == 'heart-rate'){
             $dateOfBirth = User::Where('id', $data['user_id'])->value('dob');
 
@@ -209,6 +213,14 @@ class Vital extends BaseModel
                 $data['details']['range_code']);
 
             $data['details'] += self::spo2_flag($data['details']);
+        }
+
+        if($data['slug'] == 'respiration'){
+            unset($data['details']['respirationFlag'],
+                $data['details']['respirationFlagColor'],
+                $data['details']['range_code']);
+
+            $data['details'] += self::respiration_flag($data['details']);
         }
 
         if($data['slug'] == 'urine'){
@@ -555,6 +567,35 @@ class Vital extends BaseModel
         return $input_data;
     }
     
+    public static function respiration_flag($input_data)
+    {
+        $input_data['respirationFlag']      = '';
+        $input_data['respirationFlagColor'] = '';
+        $input_data['range_code']    = '';
+        if (!empty($input_data['respiration'])) {
+            
+            if ($input_data['respiration'] < 12) {
+                $input_data['respirationFlag']      = 'Low';
+                $input_data['respirationFlagColor'] = 'warning';
+                $input_data['range_code']    = '#ffc107';
+            }
+            
+            if (($input_data['respiration'] >= 12) && ($input_data['respiration'] <= 18)) {
+                $input_data['respirationFlag']      = 'Normal';
+                $input_data['respirationFlagColor'] = 'success';
+                $input_data['range_code']    = '#008000';
+            }
+            
+            if ($input_data['respiration'] > 18) {
+                $input_data['respirationFlag']      = 'High';
+                $input_data['respirationFlagColor'] = 'danger';
+                $input_data['range_code']    = '#ff0000';
+            }
+        }
+
+        return $input_data;
+    }
+    
    
     
     public static function urine_flag($input_data)
@@ -759,9 +800,9 @@ class Vital extends BaseModel
     
     public static function blood_pressure_flag($input_data)
     {
-        $input_data['bpFlag']      = '';
-        $input_data['bpFlagColor'] = '';
-        $input_data['range_code'] = '';
+       $input_data['bpFlag']      = 'LOW BLOOD PRESSURE';
+        $input_data['bpFlagColor'] = 'danger';
+        $input_data['range_code']  = '#ff0000';
         if (!empty($input_data['systolic']) && !empty($input_data['diastolic'])) {
             if (($input_data['systolic'] < 120) && ($input_data['diastolic'] < 80)) {
                 $input_data['bpFlag']      = 'NORMAL';
@@ -769,13 +810,13 @@ class Vital extends BaseModel
                 $input_data['range_code']  = '#008000';
             }
             
-            if ((($input_data['systolic'] > 120) && ($input_data['systolic'] <= 129)) && ($input_data['diastolic'] <= 80)) {
+            if ((($input_data['systolic'] >= 120) && ($input_data['systolic'] <= 129)) && ($input_data['diastolic'] < 80)) {
                 $input_data['bpFlag']      = 'Elevated';
                 $input_data['bpFlagColor'] = 'success';
                 $input_data['range_code']  = '#008000';
             }
             
-            if ((($input_data['systolic'] >= 130) && ($input_data['systolic'] <= 139)) || (($input_data['diastolic'] > 80) && ($input_data['diastolic'] <= 89))) {
+            if ((($input_data['systolic'] >= 130) && ($input_data['systolic'] <= 139)) || (($input_data['diastolic'] >= 80) && ($input_data['diastolic'] <= 89))) {
                 $input_data['bpFlag']      = 'HIGH BLOOD PRESSURE(HYPERTENSION) STAGE 1';
                 $input_data['bpFlagColor'] = 'danger';
                 $input_data['range_code']  = '#ff0000';
@@ -787,18 +828,13 @@ class Vital extends BaseModel
                 $input_data['range_code']  = '#ff0000';
             }
             
-            if (($input_data['systolic'] > 180) || ($input_data['diastolic'] > 120)) {
+            if (($input_data['systolic'] >= 180) || ($input_data['diastolic'] >= 120)) {
                 $input_data['bpFlag']      = 'HYPERTENSIVE CRISIS(consult your doctor immediately)';
                 $input_data['bpFlagColor'] = 'danger';
                 $input_data['range_code']  = '#ff0000';
             }
 
-            // Abnormal Level
-            if (($input_data['systolic'] < 90) && ($input_data['diastolic'] < 60)) {
-                $input_data['bpFlag']      = 'LOW BLOOD PRESSURE';
-                $input_data['bpFlagColor'] = 'danger';
-                $input_data['range_code']  = '#ff0000';
-            }
+           
         }
         
         return $input_data;
@@ -907,13 +943,19 @@ class Vital extends BaseModel
                         $input_data['range_code']         = '#0000ff';
                     }
                     
-                    if (($input_data['heart'] >= 40) && ($input_data['heart'] <= 60)) {
-                        $input_data['heartRateFlag']      = 'Athlete';
-                        $input_data['heartRateFlagColor'] = 'success';
-                        $input_data['range_code']         = '#008000';
-                    }
+                    // if (($input_data['heart'] >= 40) && ($input_data['heart'] <= 60)) {
+                    //     $input_data['heartRateFlag']      = 'Athlete';
+                    //     $input_data['heartRateFlagColor'] = 'success';
+                    //     $input_data['range_code']         = '#008000';
+                    // }
                     
-                    if (($input_data['heart'] > 60)) {
+                    // if (($input_data['heart'] > 60)) {
+                    //     $input_data['heartRateFlag']      = 'High';
+                    //     $input_data['heartRateFlagColor'] = 'danger';
+                    //     $input_data['range_code']         = '#ff0000';
+                    // }
+                    
+                    if (($input_data['heart'] >= 40)) {
                         $input_data['heartRateFlag']      = 'High';
                         $input_data['heartRateFlagColor'] = 'danger';
                         $input_data['range_code']         = '#ff0000';
