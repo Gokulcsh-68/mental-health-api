@@ -107,18 +107,19 @@ class Master extends BaseModel
                     ->Where('immunisations.patient_id', $request->get('patient_id'))
                     ->Where('immunisations.slug', $slug)
                     ->whereJsonContains('immunisations.details', $value->periods)
-                    ->select('id','details')
+                    ->select('freeze','id','details','taken_at')
                     ->first();
                     if($patient_dosages == null){ 
                         $dosages_info = [];
                         $dosages_freeze = 0;
                         $dosages_id = null;
+                        $dosages_taken_at = null;
                     }
                     else{
                         $dosages_info = json_decode($patient_dosages->details);
-                        // $dosages_freeze = $patient_dosages->freeze;
-                        $dosages_freeze = 0;
+                        $dosages_freeze = $patient_dosages->freeze;
                         $dosages_id = $patient_dosages->id;
+                        $dosages_taken_at = $patient_dosages->taken_at;
                     }
 
                     
@@ -127,6 +128,7 @@ class Master extends BaseModel
               
                 $newValue->freeze   = $dosages_freeze;
                 $newValue->imm_id   = $dosages_id;
+                $newValue->taken_at   = $dosages_taken_at;
             }
         }else if($type == 'family_history_diseases'){
             $patient_family_history = [];

@@ -117,7 +117,7 @@ class PhysicalExamination extends BaseModel
             $from   = date('Y-m-d',strtotime($request->get('from')));
             $to     = date('Y-m-d',strtotime($request->get('to')));
 
-            $model->whereBetween('created_at', [$from,$to]);            
+            $model->whereBetween('updated_at', [$from,$to]);            
         }
 
         return $model;

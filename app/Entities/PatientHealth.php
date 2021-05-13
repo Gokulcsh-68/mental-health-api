@@ -177,10 +177,16 @@ class PatientHealth extends BaseModel
             $model->where('patient_id', $request->get('user_id'));
         }
 
-        if($request->get('from') && $request->get('to')){
+         if($request->get('from') && $request->get('to')){
             $from   = date('Y-m-d',strtotime($request->get('from')));
             $to     = date('Y-m-d',strtotime($request->get('to')));
-            $model->whereBetween('values->date', [$from,$to]);
+
+            if ($request->get('slug') == 'medicine') {
+                $model->whereBetween('values->start_date', [$from,$to]);
+            }
+            else{
+                $model->whereBetween('values->date', [$from,$to]);
+            }
         }
 
 

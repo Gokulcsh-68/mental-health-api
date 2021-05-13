@@ -129,6 +129,8 @@ class PatientHistory extends BaseModel
 
             if($request->get('slug') == 'surgical-history'){
                 $model->whereBetween('values->surgery_date', [$from,$to]);
+            }else if($request->get('slug') == 'medical-history'){
+                $model->whereBetween('values->onset_date', [$from,$to]);
             }else{
                 $model->whereBetween('values->date', [$from,$to]);
             }
