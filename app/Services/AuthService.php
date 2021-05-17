@@ -943,4 +943,60 @@ class AuthService extends BaseService
         $this->httpResponse->setHttpMessage("Record Updated")->setHttpCode(200);
         return $this->httpResponse->jsonResponse();
     }
+
+
+
+
+    public function medicinePDFx(Request $request){
+
+       
+      
+        $resource = 'PatientHealth';
+        $entity = new PatientHealth;
+
+        $getResourceName = snake_case(camel_case(str_plural($resource)));
+
+        $medicine_info = [];
+
+        $x_consult_id = callUserFuncArray([$entity, 'getModelList'], [])->groupBy('consult_id')->pluck('consult_id');
+
+
+        foreach ($x_consult_id as $key => $value) {
+            
+
+            $filters['consult_id'] = $value;
+            $request->request->add(['consult_id' => $value?$value:'-1']);
+            $collection = callUserFuncArray([$entity, 'getModelList'], [])->get();
+
+            $medicine_records = $collection->isNotEmpty() ? $this->collectionTransform($resource, $collection) : [];
+
+            if($value != null){
+                $this->_teleconsult_service = new TeleConsultApiService;
+                $consult_info  = $this->_teleconsult_service->fetch($filters, 1, 1); 
+                    foreach ($consult_info['data']['consults'] as $k => $v) {
+                        foreach ($v['participants'] as $k1 => $v1) {
+                            if($v1['role'] == "publisher"){
+                                unset($v1['participant_info']['additional_info']);
+                               
+                                $medicine_info[$key]['providers'] = $v1['participant_info'];
+                                $medicine_info[$key]['lists'] = $medicine_records;
+                            }
+                        }
+                    }
+            }
+            else{
+
+                $collection = callUserFuncArray([$entity, 'getModelList'], [])->get();
+
+                $medicine_records = $collection->isNotEmpty() ? $this->collectionTransform($resource, $collection) : [];
+
+                $medicine_info[$key]['providers'] = null;
+                $medicine_info[$key]['lists'] = $medicine_records;
+            }
+        
+        }
+        return $medicine_info;
+    }
+
+
 }

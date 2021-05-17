@@ -164,8 +164,8 @@ class PatientHealth extends BaseModel
             $model->where('patient_health.slug', $request->get('slug'));
         }
 
-        if ($request->get('consult_id')) {
-            $model->where('patient_health.consult_id', $request->get('consult_id'));
+        if ($request->get('consult_id') || $request->get('consult_id') == '-1') {
+            $model->where('patient_health.consult_id', $request->get('consult_id') == '-1'? null: $request->get('consult_id'));
         }
 
         if ($request->get('slug')) {
