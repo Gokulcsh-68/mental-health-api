@@ -5,6 +5,7 @@ namespace App\Entities;
 use App\Services\MasterService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Carbon\Carbon;
 
 class Master extends BaseModel
 {
@@ -94,41 +95,101 @@ class Master extends BaseModel
 
     public function getResult($slug, $type, $attributes)
     {      
-        $request = app('request');
+        $request    = app('request');
+
+        $user_dob   = auth()->user()->dob;
         
         if($type == 'immunisation'){
             $patient_dosages = [];
 
+            $covid_taken = array('covid-rna-pfizer', 'covid-rna-moderna', 'covid-viral-vector-johnson', 
+                    'covid-protein-based-novavax', 'covid-viral-vector-oxfordaz', 
+                    'covid-viral-vector-sputnikv', 'covid-inactivated-virus-covaxin',
+                    'covid-inactivated-virus-coronovac', 'covid-inactivated-virus-sinopharm');
+
+
+            $all_time_dose_taken = (in_array($slug, $covid_taken) ? 'anytime' : 'periodic');
 
             foreach ($attributes->values as $key => $value) {
 
-
-            $patient_dosages = DB::table('immunisations')
+                $patient_dosages = DB::table('immunisations')
                     ->Where('immunisations.patient_id', $request->get('patient_id'))
                     ->Where('immunisations.slug', $slug)
                     ->whereJsonContains('immunisations.details', $value->periods)
                     ->select('freeze','id','details','taken_at')
                     ->first();
-                    if($patient_dosages == null){ 
-                        $dosages_info = [];
-                        $dosages_freeze = 0;
-                        $dosages_id = null;
-                        $dosages_taken_at = null;
-                    }
-                    else{
-                        $dosages_info = json_decode($patient_dosages->details);
-                        $dosages_freeze = $patient_dosages->freeze;
-                        $dosages_id = $patient_dosages->id;
-                        $dosages_taken_at = $patient_dosages->taken_at;
-                    }
 
+                if($all_time_dose_taken == 'periodic'){
+                    $period = $value->periods;
+                   
+                    if($value->periods == 'Birth'){
+                        $dosage_date = $user_dob;
+                    }else if($period[strlen($period)-1] == 'w'){
+                        $time_period_weeks  = explode('-', $value->periods);
+                        if(is_array($time_period_weeks)){
+                            $find_week = (int) str_replace("w","", $time_period_weeks[0]);
+                        }else{
+                            $find_week = (int) str_replace("w","",$value->periods);
+                        }
+                        $dosage_date = Carbon::parse($user_dob)->addWeeks($find_week);
+                    }else if($period[strlen($period)-1] == 'm'){
+                        $time_period_months  = explode('-', $value->periods);
+
+                        if(is_array($time_period_months)){
+                            $find_months = (int) str_replace("m","", $time_period_months[0]);
+                        }else{
+                            $find_months = (int) str_replace("m","",$value->periods);
+                        }
+                        $dosage_date = Carbon::parse($user_dob)->addMonths($find_months);
+                    }else if($period[strlen($period)-1] == 'y'){
+                        $time_period_years  = explode('-', $value->periods);
+
+                        if(is_array($time_period_years)){
+                            $find_years = (int) str_replace("m","", $time_period_years[0]);
+                        }else{
+                            $find_years = (int) str_replace("m","",$value->periods);
+                        }
+
+                        $dosage_date = Carbon::parse($user_dob)->addYears($find_years);
+                    }
+                }else{
+                    $all_time_dosages[$slug][$value->periods] = (!empty($patient_dosages->taken_at) ? $patient_dosages->taken_at : null);
+
+                    if($value->periods == 'Any Age (dose 2)'){
+                        $dosage_one_date = $all_time_dosages[$slug]["Any Age (dose 1)"];
+
+                        if(!empty($dosage_one_date)){
+                            // $dosage_date = (!empty($patient_dosages->taken_at) ? $patient_dosages->taken_at : Carbon::parse($dosage_one_date)->addDays(45));
+
+                            $dosage_date = Carbon::parse($dosage_one_date)->addDays(45);
+                        }else{
+                            $dosage_date = null;
+                        }
+                    }else{
+                        $dosage_date = (!empty($patient_dosages->taken_at) ? $patient_dosages->taken_at : null);
+                        $all_time_dosages[$slug][$value->periods] = $dosage_date;
+                    }
+                }
+
+                if($patient_dosages == null){ 
+                    $dosages_info       = [];
+                    $dosages_freeze     = 0;
+                    $dosages_id         = null;
+                    $dosages_taken_at   = null;
+                }else{
+                    $dosages_info       = json_decode($patient_dosages->details);
+                    $dosages_freeze     = $patient_dosages->freeze;
+                    $dosages_id         = $patient_dosages->id;
+                    $dosages_taken_at   = $patient_dosages->taken_at;
+                }
                     
                 $newValue           = $value;
                 $newValue->status   = in_array($value->periods, $dosages_info);
               
-                $newValue->freeze   = $dosages_freeze;
-                $newValue->imm_id   = $dosages_id;
-                $newValue->taken_at   = $dosages_taken_at;
+                $newValue->freeze       = $dosages_freeze;
+                $newValue->imm_id       = $dosages_id;
+                $newValue->taken_at     = $dosages_taken_at;
+                $newValue->dosage_date  = $dosage_date;
             }
         }else if($type == 'family_history_diseases'){
             $patient_family_history = [];
