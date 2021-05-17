@@ -54,6 +54,11 @@ class DatabaseSeeder extends Seeder
             SigSeeder::class,
             UpdateImmunisationSeeder::class,
             AssessmentCovidSeeder::class,
+            AssessmentCovidSeederUpdate::class,
+            AssessmentCovidSeederUpdateSecond::class,
+            AssessmentCovidTriageSeeder::class,
+            AssessmentCovidInvestigationSeeder::class,
+            AssessmentCovidCtScoringSeeder::class,
             UpdateApiServiceSeeder::class,
             UpdateVitalsSeeder::class
         ]);
