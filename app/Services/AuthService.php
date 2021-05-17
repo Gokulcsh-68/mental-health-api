@@ -976,8 +976,16 @@ class AuthService extends BaseService
                     foreach ($consult_info['data']['consults'] as $k => $v) {
                         foreach ($v['participants'] as $k1 => $v1) {
                             if($v1['role'] == "publisher"){
+                            
+                                $v1['participant_info']['consult_speciality'] = $v1['participant_info']['additional_info']['consult_speciality'];
+
                                 unset($v1['participant_info']['additional_info']);
-                               
+
+                                $providers = Provider::Where('user_id',5)->first(["additional_info","license_no"]);
+
+                               $v1['participant_info']['license_no'] = $providers?$providers['license_no']:'';
+                               $v1['participant_info']['qualification'] = $providers?$providers['additional_info']->qualification:'';
+
                                 $medicine_info[$key]['providers'] = $v1['participant_info'];
                                 $medicine_info[$key]['lists'] = $medicine_records;
                             }
@@ -995,8 +1003,9 @@ class AuthService extends BaseService
             }
         
         }
-        return $medicine_info;
-    }
 
+        $patient_details = $request->get('user_id')? User::where('id',$request->get('user_id'))->get(): [];
+        return ["medicine_info"=>$medicine_info,"patient_details"=>$patient_details];
+    }
 
 }
