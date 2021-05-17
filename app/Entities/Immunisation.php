@@ -19,7 +19,7 @@ class Immunisation extends BaseModel
      * @var array
      */
     protected $fillable = [
-        "details", "patient_id", "slug"
+        "details", "patient_id", "slug", "taken_at"
     ];
 
     /**
