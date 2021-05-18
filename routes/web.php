@@ -86,7 +86,8 @@ $router->group(['prefix' => 'v1/', 'middleware' => 'clientAuth'], function ($rou
 
     $router->group(['middleware' => 'userAuth'], function ($router) {
 
-        $router->get('medicinePDF', 'AuthService@medicinePDFx');
+        $router->get('healthPDF', 'AuthService@healthPDFx');
+        $router->get('vitalsPDF', 'AuthService@vitalsPDFx');
         
         $router->group(['prefix' => 'users'], function ($router) {
             $router->patch('set-password', 'AuthService@setPassword');

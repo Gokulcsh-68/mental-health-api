@@ -91,7 +91,7 @@ class AssessmentCovidTriageSeeder extends Seeder
             ['parent_id' => $current_question_id, 'name' => 
                         'Test +ve(positive)','type'=> $radio_type,'is_active' => 1],
             ['parent_id' => $current_question_id, 'name' => 
-                        'No Symptoms that are consistant with Covid19','type'=> $radio_type,'is_active' => 1],
+                        'Symptoms that are consistant with Covid19','type'=> $radio_type,'is_active' => 1],
         ];
 
         DB::table('questions')->insert($new_sub_questions);
@@ -103,15 +103,15 @@ class AssessmentCovidTriageSeeder extends Seeder
             ['parent_id' => $current_question_id, 'name' => 
                         'Symptoms of Fever, Cough, Soar Throat, Fatigue, Head ache, Body ache, loss of smell & or Taste etc','type'=> $radio_type,'is_active' => 1],
             ['parent_id' => $current_question_id, 'name' => 
-                        'No shortness of breath','type'=> $radio_type,'is_active' => 1],
+                        'Shortness of breath','type'=> $radio_type,'is_active' => 1],
             ['parent_id' => $current_question_id, 'name' => 
-                        'No difficulty in breathing','type'=> $radio_type,'is_active' => 1],
+                        'Difficulty in breathing','type'=> $radio_type,'is_active' => 1],
             ['parent_id' => $current_question_id, 'name' => 
-                        'No abnormal chest imaging','type'=> $radio_type,'is_active' => 1],
+                        'Abnormal chest imaging','type'=> $radio_type,'is_active' => 1],
             ['parent_id' => $current_question_id, 'name' => 
-                        'No Current Mental Conditions','type'=> $radio_type,'is_active' => 1],
+                        'Current Mental Conditions','type'=> $radio_type,'is_active' => 1],
             ['parent_id' => $current_question_id, 'name' => 
-                        'Correlate with No co-morbidity if any','type'=> $radio_type,'is_active' => 1],
+                        'Co-morbidity like diabetes, hypertension, cardiac, hepatic, renal, etc conditions','type'=> $radio_type,'is_active' => 1],
 
         ];
 
@@ -126,7 +126,7 @@ class AssessmentCovidTriageSeeder extends Seeder
             ['parent_id' => $current_question_id, 'name' => 
                         'Positive Chest Imaging','type'=> $radio_type,'is_active' => 1],
             ['parent_id' => $current_question_id, 'name' => 
-                        'On Clinical Evaluation or Symptomatic Assessment','type'=> $radio_type,'is_active' => 1],
+                        'Positive clinical signs on evaluation / symptomatic assessment','type'=> $radio_type,'is_active' => 1],
             ['parent_id' => $current_question_id, 'name' => 
                         'SpO2 at <=94%','type'=> $radio_type,'is_active' => 1],
             ['parent_id' => $current_question_id, 'name' => 

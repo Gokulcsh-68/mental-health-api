@@ -945,11 +945,7 @@ class AuthService extends BaseService
     }
 
 
-
-
-    public function medicinePDFx(Request $request){
-
-       
+    public function healthPDFx(Request $request){
       
         $resource = 'PatientHealth';
         $entity = new PatientHealth;
@@ -1006,6 +1002,66 @@ class AuthService extends BaseService
 
         $patient_details = $request->get('user_id')? User::where('id',$request->get('user_id'))->get(): [];
         return ["medicine_info"=>$medicine_info,"patient_details"=>$patient_details];
+    }
+
+
+    public function vitalsPDFx(Request $request){
+      
+        $resource = 'Vital';
+        $entity = new Vital;
+
+        $getResourceName = snake_case(camel_case(str_plural($resource)));
+
+        $vitals_info = [];
+
+        $x_consult_id = callUserFuncArray([$entity, 'getModelList'], [])->groupBy('consult_id')->pluck('consult_id');
+
+
+        foreach ($x_consult_id as $key => $value) {
+            
+
+            $filters['consult_id'] = $value;
+            $request->request->add(['consult_id' => $value?$value:'-1']);
+            $collection = callUserFuncArray([$entity, 'getModelList'], [])->get();
+
+            $medicine_records = $collection->isNotEmpty() ? $this->collectionTransform($resource, $collection) : [];
+
+            if($value != null){
+                $this->_teleconsult_service = new TeleConsultApiService;
+                $consult_info  = $this->_teleconsult_service->fetch($filters, 1, 1); 
+                    foreach ($consult_info['data']['consults'] as $k => $v) {
+                        foreach ($v['participants'] as $k1 => $v1) {
+                            if($v1['role'] == "publisher"){
+                            
+                                $v1['participant_info']['consult_speciality'] = $v1['participant_info']['additional_info']['consult_speciality'];
+
+                                unset($v1['participant_info']['additional_info']);
+
+                                $providers = Provider::Where('user_id',5)->first(["additional_info","license_no"]);
+
+                               $v1['participant_info']['license_no'] = $providers?$providers['license_no']:'';
+                               $v1['participant_info']['qualification'] = $providers?$providers['additional_info']->qualification:'';
+
+                                $vitals_info[$key]['providers'] = $v1['participant_info'];
+                                $vitals_info[$key]['lists'] = $medicine_records;
+                            }
+                        }
+                    }
+            }
+            else{
+
+                $collection = callUserFuncArray([$entity, 'getModelList'], [])->get();
+
+                $medicine_records = $collection->isNotEmpty() ? $this->collectionTransform($resource, $collection) : [];
+
+                $vitals_info[$key]['providers'] = null;
+                $vitals_info[$key]['lists'] = $medicine_records;
+            }
+        
+        }
+
+        $patient_details = $request->get('user_id')? User::where('id',$request->get('user_id'))->get(): [];
+        return ["vitals_info"=>$vitals_info,"patient_details"=>$patient_details];
     }
 
 }
