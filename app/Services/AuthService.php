@@ -1121,7 +1121,22 @@ class AuthService extends BaseService
         return $patient_details;
     }
 
+    public function activityWellnessPDFx(Request $request){
+      
+        $resource   = 'ActivityWellness';
+        $entity     = new ActivityWellness;
 
+        $getResourceName = snake_case(camel_case(str_plural($resource)));
+
+        $data_info    = [];
+        $collection   = callUserFuncArray([$entity, 'getModelList'], [])->get();
+
+        $records = $collection->isNotEmpty() ? $this->collectionTransform($resource, $collection) : [];
+        $data_info['lists']     = $records;
+
+        $patient_details = $request->get('user_id')? User::where('id',$request->get('user_id'))->get(): [];
+        return ["data_info" => $data_info, "patient_details"=>$patient_details];
+    }
 
 
 }
