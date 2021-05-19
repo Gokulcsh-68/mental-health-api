@@ -88,6 +88,7 @@ $router->group(['prefix' => 'v1/', 'middleware' => 'clientAuth'], function ($rou
 
         $router->get('healthPDF', 'AuthService@healthPDFx');
         $router->get('vitalsPDF', 'AuthService@vitalsPDFx');
+        $router->get('docsPDF', 'AuthService@docsPDFx');
         
         $router->group(['prefix' => 'users'], function ($router) {
             $router->patch('set-password', 'AuthService@setPassword');
@@ -96,6 +97,7 @@ $router->group(['prefix' => 'v1/', 'middleware' => 'clientAuth'], function ($rou
             $router->patch('communication', 'AuthService@communication');
             $router->get('info', 'AuthService@info');
             $router->get('providerinfo', 'AuthService@providerinfo');
+            $router->get('userDetails', 'AuthService@userDetails');
             $router->post('uploadDocs', 'AuthService@uploadDocs');
             $router->post('uploadAvatar', 'AuthService@uploadAvatar');
             // $router->post('verify-otp', 'AuthService@verifyOtp');

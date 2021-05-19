@@ -113,8 +113,9 @@ class Doc extends BaseModel
             }
         }
 
-        if ($request->get('consult_id')) {
-            $model->where('docs.consult_id', $request->get('consult_id'));
+        
+        if ($request->get('consult_id') || $request->get('consult_id') == '-1') {
+            $model->where('docs.consult_id', $request->get('consult_id') == '-1'? null: $request->get('consult_id'));
         }
 
 

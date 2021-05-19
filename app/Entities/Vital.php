@@ -272,6 +272,10 @@ class Vital extends BaseModel
             $model->where('vitals.slug', $request->get('slug'));
         }
 
+        if ($request->get('consult_id') || $request->get('consult_id') == '-1') {
+            $model->where('vitals.consult_id', $request->get('consult_id') == '-1'? null: $request->get('consult_id'));
+        }
+
         if($request->get('from') && $request->get('to')){
 
             $from = date('Y-m-d',strtotime($request->get('from')));
