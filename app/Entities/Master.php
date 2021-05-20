@@ -97,10 +97,11 @@ class Master extends BaseModel
     {      
         $request    = app('request');
 
-        $user_dob   = auth()->user()->dob;
         
         if($type == 'immunisation'){
-            $patient_dosages = [];
+            $user_dob   = auth()->user()->dob;
+            $patient_dosages    = [];
+            $all_time_dosages   = [];
 
             $covid_taken = array('covid-rna-pfizer', 'covid-rna-moderna', 'covid-viral-vector-johnson', 
                     'covid-protein-based-novavax', 'covid-viral-vector-oxfordaz', 
