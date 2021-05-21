@@ -110,8 +110,8 @@ class PatientHistory extends BaseModel
             $model->where('patient_histories.slug', $request->get('slug'));
         }
 
-        if ($request->get('consult_id')) {
-            $model->where('patient_histories.consult_id', $request->get('consult_id'));
+         if ($request->get('consult_id') || $request->get('consult_id') == '-1') {
+            $model->where('patient_histories.consult_id', $request->get('consult_id') == '-1'? null: $request->get('consult_id'));
         }
 
         

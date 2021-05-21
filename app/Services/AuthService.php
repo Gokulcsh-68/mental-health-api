@@ -948,6 +948,65 @@ class AuthService extends BaseService
     
     
     
+    
+
+    public function historyPDFx(Request $request){
+      
+        $resource = 'PatientHistory';
+        $entity = new PatientHistory;
+
+        $getResourceName = snake_case(camel_case(str_plural($resource)));
+
+        $history_info = [];
+
+        $x_consult_id = callUserFuncArray([$entity, 'getModelList'], [])->groupBy('consult_id')->pluck('consult_id');
+
+
+        foreach ($x_consult_id as $key => $value) {
+            
+
+            $filters['consult_id'] = $value;
+            $request->request->add(['consult_id' => $value?$value:'-1']);
+            $collection = callUserFuncArray([$entity, 'getModelList'], [])->get();
+
+            $medicine_records = $collection->isNotEmpty() ? $this->collectionTransform($resource, $collection) : [];
+
+            if($value != null){
+                $this->_teleconsult_service = new TeleConsultApiService;
+                $consult_info  = $this->_teleconsult_service->fetch($filters, 1, 1); 
+                    foreach ($consult_info['data']['consults'] as $k => $v) {
+                        foreach ($v['participants'] as $k1 => $v1) {
+                            if($v1['role'] == "publisher"){
+                            
+                                $v1['participant_info']['consult_speciality'] = $v1['participant_info']['additional_info']['consult_speciality'];
+
+                                unset($v1['participant_info']['additional_info']);
+
+                                $providers = Provider::Where('user_id',$v1['ref_number'])->first(["additional_info","license_no"]);
+
+                               $v1['participant_info']['license_no'] = $providers?$providers['license_no']:'';
+                               $v1['participant_info']['qualification'] = $providers?$providers['additional_info']->qualification:'';
+
+                                $history_info[$key]['providers'] = $v1['participant_info'];
+                                $history_info[$key]['lists'] = $medicine_records;
+                            }
+                        }
+                    }
+            }
+            else{
+
+                $history_info[$key]['providers'] = null;
+                $history_info[$key]['lists'] = $medicine_records;
+            }
+        
+        }
+
+        $patient_details = $request->get('user_id')? User::where('id',$request->get('user_id'))->get(): [];
+        return ["history_info"=>$history_info,"patient_details"=>$patient_details];
+    }
+
+
+    
     public function healthPDFx(Request $request){
       
         $resource = 'PatientHealth';
@@ -980,7 +1039,7 @@ class AuthService extends BaseService
 
                                 unset($v1['participant_info']['additional_info']);
 
-                                $providers = Provider::Where('user_id',5)->first(["additional_info","license_no"]);
+                                $providers = Provider::Where('user_id',$v1['ref_number'])->first(["additional_info","license_no"]);
 
                                $v1['participant_info']['license_no'] = $providers?$providers['license_no']:'';
                                $v1['participant_info']['qualification'] = $providers?$providers['additional_info']->qualification:'';
@@ -1036,7 +1095,7 @@ class AuthService extends BaseService
 
                                 unset($v1['participant_info']['additional_info']);
 
-                                $providers = Provider::Where('user_id',5)->first(["additional_info","license_no"]);
+                                $providers = Provider::Where('user_id',$v1['ref_number'])->first(["additional_info","license_no"]);
 
                                $v1['participant_info']['license_no'] = $providers?$providers['license_no']:'';
                                $v1['participant_info']['qualification'] = $providers?$providers['additional_info']->qualification:'';
@@ -1057,6 +1116,24 @@ class AuthService extends BaseService
 
         $patient_details = $request->get('user_id')? User::where('id',$request->get('user_id'))->get(): [];
         return ["vitals_info"=>$vitals_info,"patient_details"=>$patient_details];
+    }
+
+
+    public function activityWellnessPDFx(Request $request){
+      
+        $resource   = 'ActivityWellness';
+        $entity     = new ActivityWellness;
+
+        $getResourceName = snake_case(camel_case(str_plural($resource)));
+
+        $data_info    = [];
+        $collection   = callUserFuncArray([$entity, 'getModelList'], [])->get();
+
+        $records = $collection->isNotEmpty() ? $this->collectionTransform($resource, $collection) : [];
+        $data_info['lists']     = $records;
+
+        $patient_details = $request->get('user_id')? User::where('id',$request->get('user_id'))->get(): [];
+        return ["data_info" => $data_info, "patient_details"=>$patient_details];
     }
 
 
@@ -1091,7 +1168,7 @@ class AuthService extends BaseService
 
                                 unset($v1['participant_info']['additional_info']);
 
-                                $providers = Provider::Where('user_id',5)->first(["additional_info","license_no"]);
+                                $providers = Provider::Where('user_id',$v1['ref_number'])->first(["additional_info","license_no"]);
 
                                $v1['participant_info']['license_no'] = $providers?$providers['license_no']:'';
                                $v1['participant_info']['qualification'] = $providers?$providers['additional_info']->qualification:'';
@@ -1115,28 +1192,12 @@ class AuthService extends BaseService
     }
 
 
+
     public function userDetails(Request $request){
              
         $patient_details = $request->get('user_id')? User::where('id',$request->get('user_id'))->get(): [];
         return $patient_details;
     }
 
-    public function activityWellnessPDFx(Request $request){
-      
-        $resource   = 'ActivityWellness';
-        $entity     = new ActivityWellness;
-
-        $getResourceName = snake_case(camel_case(str_plural($resource)));
-
-        $data_info    = [];
-        $collection   = callUserFuncArray([$entity, 'getModelList'], [])->get();
-
-        $records = $collection->isNotEmpty() ? $this->collectionTransform($resource, $collection) : [];
-        $data_info['lists']     = $records;
-
-        $patient_details = $request->get('user_id')? User::where('id',$request->get('user_id'))->get(): [];
-        return ["data_info" => $data_info, "patient_details"=>$patient_details];
-    }
-
-
+    
 }
