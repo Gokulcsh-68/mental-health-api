@@ -162,7 +162,14 @@ class Master extends BaseModel
                         if(!empty($dosage_one_date)){
                             // $dosage_date = (!empty($patient_dosages->taken_at) ? $patient_dosages->taken_at : Carbon::parse($dosage_one_date)->addDays(45));
 
-                            $dosage_date = Carbon::parse($dosage_one_date)->addDays(45);
+                            if($slug == 'covid-inactivated-virus-covaxin'){
+
+                                $dosage_date = Carbon::parse($dosage_one_date)->addDays(45);
+
+                            }else{
+
+                                $dosage_date = Carbon::parse($dosage_one_date)->addDays(21);
+                            }
                         }else{
                             $dosage_date = null;
                         }
