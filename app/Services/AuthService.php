@@ -228,6 +228,10 @@ class AuthService extends BaseService
                             ->Where('slug','!=','stroke-scale')
                             ->orderBy('slug','asc')->get();
 
+
+        $summary['doc_slug'] = Doc::Where('consult_id',$consult_id)
+                            ->orderBy('document_source','asc')->groupBy('document_source')->pluck('document_source');
+                            
         return $this->httpResponse->setHttpData($summary)
                     ->jsonResponse();
     }
