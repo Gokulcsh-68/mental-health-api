@@ -169,6 +169,7 @@ class AuthService extends BaseService
         return $this->httpResponse->setHttpMessage($message)->setHttpCode(401)->jsonResponse();
     }
 
+
     public function getConsultInfo(Request $request){
         $this->_teleconsult_service = new TeleConsultApiService;
 
@@ -176,7 +177,7 @@ class AuthService extends BaseService
 
          $consult_id = '-1';
          $patient_id = '-1';
-        
+        $provider_details = $consultInfo?$consultInfo['data']['info']:[];
 
         if(!empty($consultInfo)){
             if(isset($consultInfo['data']['consult'])){
@@ -194,7 +195,7 @@ class AuthService extends BaseService
             }
         }
 
-        return ["patient_id"=>$patient_id, "consult_id"=> $consult_id];
+        return ["patient_id"=>$patient_id, "consult_id"=> $consult_id, "provider_info" => $provider_details ];
     }
 
     public function consultSummary(Request $request): JsonResponse
@@ -228,10 +229,16 @@ class AuthService extends BaseService
                             ->Where('slug','!=','stroke-scale')
                             ->orderBy('slug','asc')->get();
 
-
         $summary['doc_slug'] = Doc::Where('consult_id',$consult_id)
                             ->orderBy('document_source','asc')->groupBy('document_source')->pluck('document_source');
-                            
+
+
+        $providers = Provider::Where('user_id',$getpatient_id['provider_info']['ref_number'])->first(["additional_info","license_no"]);
+
+         $getpatient_id['provider_info']['license_no'] = $providers?$providers['license_no']:'';
+         $getpatient_id['provider_info']['qualification'] = $providers?$providers['additional_info']->qualification:'';
+        $summary['provider_details'] = $getpatient_id['provider_info'];
+
         return $this->httpResponse->setHttpData($summary)
                     ->jsonResponse();
     }
