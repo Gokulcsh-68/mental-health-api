@@ -236,7 +236,7 @@ class AuthService extends BaseService
         $providers = Provider::Where('user_id',$getpatient_id['provider_info']['ref_number'])->first(["additional_info","license_no"]);
 
          $getpatient_id['provider_info']['license_no'] = $providers?$providers['license_no']:'';
-         $getpatient_id['provider_info']['qualification'] = $providers?$providers['additional_info']->qualification:'';
+         $getpatient_id['provider_info']['qualification'] = $providers?$providers['additional_info']?$providers['additional_info']->qualification:'':'';
         $summary['provider_details'] = $getpatient_id['provider_info'];
 
         return $this->httpResponse->setHttpData($summary)
@@ -996,7 +996,7 @@ class AuthService extends BaseService
                                 $providers = Provider::Where('user_id',$v1['ref_number'])->first(["additional_info","license_no"]);
 
                                $v1['participant_info']['license_no'] = $providers?$providers['license_no']:'';
-                               $v1['participant_info']['qualification'] = $providers?$providers['additional_info']->qualification:'';
+                               $v1['participant_info']['qualification'] = $providers?$providers['additional_info']?$providers['additional_info']->qualification:'':'';
 
                                 $history_info[$key]['providers'] = $v1['participant_info'];
                                 $history_info[$key]['lists'] = $medicine_records;
@@ -1053,7 +1053,7 @@ class AuthService extends BaseService
                                 $providers = Provider::Where('user_id',$v1['ref_number'])->first(["additional_info","license_no"]);
 
                                $v1['participant_info']['license_no'] = $providers?$providers['license_no']:'';
-                               $v1['participant_info']['qualification'] = $providers?$providers['additional_info']->qualification:'';
+                               $v1['participant_info']['qualification'] = $providers?$providers['additional_info']?$providers['additional_info']->qualification:'':'';
 
                                 $medicine_info[$key]['providers'] = $v1['participant_info'];
                                 $medicine_info[$key]['lists'] = $medicine_records;
@@ -1109,7 +1109,7 @@ class AuthService extends BaseService
                                 $providers = Provider::Where('user_id',$v1['ref_number'])->first(["additional_info","license_no"]);
 
                                $v1['participant_info']['license_no'] = $providers?$providers['license_no']:'';
-                               $v1['participant_info']['qualification'] = $providers?$providers['additional_info']->qualification:'';
+                               $v1['participant_info']['qualification'] = $providers?$providers['additional_info']?$providers['additional_info']->qualification:'':'';
 
                                 $vitals_info[$key]['providers'] = $v1['participant_info'];
                                 $vitals_info[$key]['lists'] = $medicine_records;
@@ -1182,7 +1182,7 @@ class AuthService extends BaseService
                                 $providers = Provider::Where('user_id',$v1['ref_number'])->first(["additional_info","license_no"]);
 
                                $v1['participant_info']['license_no'] = $providers?$providers['license_no']:'';
-                               $v1['participant_info']['qualification'] = $providers?$providers['additional_info']->qualification:'';
+                               $v1['participant_info']['qualification'] = $providers?$providers['additional_info']?$providers['additional_info']->qualification:'':'';
 
                                 $docs_info[$key]['providers'] = $v1['participant_info'];
                                 $docs_info[$key]['lists'] = $medicine_records;
