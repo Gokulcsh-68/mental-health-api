@@ -168,7 +168,7 @@ class UpdateImmunisationSeeder extends Seeder
             [
                 'master_type_slug' => 'immunisation',
                 'slug' =>  'covid-viral-vector-oxfordaz',
-                'name' => 'Covid Viral Vector Oxford-AstraZeneca',
+                'name' => 'Covid Viral Vector Oxford-AstraZeneca (Covisheild)',
                 'attributes' =>json_encode([
                     "values" => [
                         ['treatment' => 'dose', 'periods' => 'Any Age (dose 1)' ],

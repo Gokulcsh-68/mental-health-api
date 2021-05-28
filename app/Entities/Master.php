@@ -164,7 +164,7 @@ class Master extends BaseModel
 
                             if($slug == 'covid-inactivated-virus-covaxin' || $slug == 'covid-viral-vector-oxfordaz'){
 
-                                $dosage_date = Carbon::parse($dosage_one_date)->addDays(45);
+                                $dosage_date = Carbon::parse($dosage_one_date)->addDays(56);
 
                             }else{
 

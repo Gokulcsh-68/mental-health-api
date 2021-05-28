@@ -99,7 +99,7 @@ class Doc extends BaseModel
         $model = parent::applyFilters($model, $isPluck);
         $request = app('request');
 
-        $forms_expect = ['imaging','lab','notes','icd','chief-complaints'];
+        $forms_expect = ['imaging','lab','notes','icd','chief-complaints','health-insurance'];
 
 
         if($request->get('user_id')){
@@ -108,7 +108,11 @@ class Doc extends BaseModel
 
         if ($request->get('slug')) {
 
-            if(in_array($request->get('slug'), $forms_expect)) {
+            // if(in_array($request->get('slug'), $forms_expect)) {
+            //     $model->where('docs.document_source', $request->get('slug'));
+            // }
+
+            if($request->get('slug') != 'documents') {
                 $model->where('docs.document_source', $request->get('slug'));
             }
         }
@@ -134,10 +138,14 @@ class Doc extends BaseModel
                 }
 
 
-                if (in_array($request->get('slug'), $forms_expect)) {
+                // if (in_array($request->get('slug'), $forms_expect)) {
+                if ($request->get('slug') != 'documents') {
                     $model->where(function ($query) use ($request) {
                             $query->Where('addition_info->notes', 'LIKE',"%".$request->get('searchkey')."%")
-                            ->orWhere('addition_info->title', 'LIKE',"%".$request->get('searchkey')."%");
+                            ->orWhere('addition_info->title', 'LIKE',"%".$request->get('searchkey')."%")
+                            ->orWhere('addition_info->insurance_company', 'LIKE',"%".$request->get('searchkey')."%")
+                            ->orWhere('addition_info->policy_number', 'LIKE',"%".$request->get('searchkey')."%")
+                            ->orWhere('addition_info->insured_amount', 'LIKE',"%".$request->get('searchkey')."%");
                         });
                 }
             }

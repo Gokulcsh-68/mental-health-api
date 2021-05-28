@@ -60,7 +60,9 @@ class DatabaseSeeder extends Seeder
             AssessmentCovidInvestigationSeeder::class,
             AssessmentCovidCtScoringSeeder::class,
             UpdateApiServiceSeeder::class,
-            UpdateVitalsSeeder::class
+            UpdateVitalsSeeder::class,
+            SymptomSeeder::class,
+            AddHealthFormSeeder::class
         ]);
     }
 }
