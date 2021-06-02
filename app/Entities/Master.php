@@ -99,7 +99,11 @@ class Master extends BaseModel
 
         
         if($type == 'immunisation'){
-            $user_dob   = auth()->user()->dob;
+            if($request->get('patient_id')){
+                $user_dob = User::Where('id',$request->get('patient_id'))->value('dob');
+            }else{
+                $user_dob = auth()->user()->dob;
+            }
             $patient_dosages    = [];
             $all_time_dosages   = [];
 
