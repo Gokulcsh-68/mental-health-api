@@ -1,0 +1,1 @@
+<h2>{{str_replace('-',' ',str_replace('_',' ',$title))}}</h2>

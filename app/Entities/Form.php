@@ -103,6 +103,10 @@ class Form extends BaseModel
             $model->where('forms.assessment_group',$request->get('slug'));
         }
 
+        if ($request->get('form_slug')) {
+            $model->where('forms.slug',$request->get('form_slug'));
+        }
+
         return $model;
     }
 }

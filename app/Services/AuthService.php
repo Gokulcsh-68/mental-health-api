@@ -2,7 +2,9 @@
 
 namespace App\Services;
 
+use App\Entities\ActivityWellness;
 use App\Entities\Doc;
+use App\Entities\Form;
 use App\Entities\Hospital;
 use App\Entities\Master;
 use App\Entities\Patient;
@@ -11,7 +13,6 @@ use App\Entities\PatientHistory;
 use App\Entities\PhysicalExamination;
 use App\Entities\Provider;
 use App\Entities\ReviewOfSystem;
-use App\Entities\ActivityWellness;
 use App\Entities\Role;
 use App\Entities\Staff;
 use App\Entities\Timezone;
@@ -49,6 +50,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Mpdf\Mpdf;
+
 
 class AuthService extends BaseService
 {
@@ -958,8 +961,6 @@ class AuthService extends BaseService
 
     
     
-    
-    
 
     public function historyPDFx(Request $request){
       
@@ -1053,7 +1054,8 @@ class AuthService extends BaseService
                                 $providers = Provider::Where('user_id',$v1['ref_number'])->first(["additional_info","license_no"]);
 
                                $v1['participant_info']['license_no'] = $providers?$providers['license_no']:'';
-                               $v1['participant_info']['qualification'] = $providers?$providers['additional_info']?$providers['additional_info']->qualification:'':'';
+                               
+            $v1['participant_info']['qualification'] = $providers?$providers['additional_info']?$providers['additional_info']->qualification:'':'';
 
                                 $medicine_info[$key]['providers'] = $v1['participant_info'];
                                 $medicine_info[$key]['lists'] = $medicine_records;
@@ -1109,7 +1111,8 @@ class AuthService extends BaseService
                                 $providers = Provider::Where('user_id',$v1['ref_number'])->first(["additional_info","license_no"]);
 
                                $v1['participant_info']['license_no'] = $providers?$providers['license_no']:'';
-                               $v1['participant_info']['qualification'] = $providers?$providers['additional_info']?$providers['additional_info']->qualification:'':'';
+                               
+            $v1['participant_info']['qualification'] = $providers?$providers['additional_info']?$providers['additional_info']->qualification:'':'';
 
                                 $vitals_info[$key]['providers'] = $v1['participant_info'];
                                 $vitals_info[$key]['lists'] = $medicine_records;
@@ -1147,6 +1150,43 @@ class AuthService extends BaseService
         return ["data_info" => $data_info, "patient_details"=>$patient_details];
     }
 
+    public function masterPDFx(Request $request){
+      
+        $resource   = 'Master';
+        $entity     = new Master;
+
+        $getResourceName = snake_case(camel_case(str_plural($resource)));
+
+        $data_info    = [];
+        $collection   = callUserFuncArray([$entity, 'getModelList'], [])->get();
+
+        $records = $collection->isNotEmpty() ? $this->collectionTransform($resource, $collection) : [];
+
+        $data_info['lists']     = $records;
+
+        $patient_details = $request->get('patient_id')? User::where('id',$request->get('patient_id'))->get(): [];
+
+        $return = ["data_info" => $data_info, "patient_details"=>$patient_details];
+        return $this->httpResponse->setHttpData($return)->jsonResponse();
+    }
+
+    public function immunisationPDF_globalx(Request $request){
+        
+        $pdf_content = self::masterPDFx($request);
+        
+        $template = view('pdf_m.immunisation_reports', ['content' => $pdf_content->getData()->data, 'request' => $request]);
+       
+        return self::pdf_m($request, $template);
+    }
+
+    public function familyHistoryPDF_globalx(Request $request){
+        
+        $pdf_content = self::masterPDFx($request);
+        
+        $template = view('pdf_m.family_history_reports', ['content' => $pdf_content->getData()->data, 'request' => $request]);
+       
+        return self::pdf_m($request, $template);
+    }
 
     public function docsPDFx(Request $request){
       
@@ -1202,7 +1242,54 @@ class AuthService extends BaseService
         return ["docs_info"=>$docs_info,"patient_details"=>$patient_details];
     }
 
+    public function ReviewOfSystemPDFx(Request $request){
+      
+        $resource = 'ReviewOfSystems';
+        $entity = new ReviewOfSystem;
 
+        $getResourceName = snake_case(camel_case(str_plural($resource)));
+        
+        $collection   = callUserFuncArray([$entity, 'getModelList'], [])->get();
+
+        $records = $collection->isNotEmpty() ? $this->collectionTransform($resource, $collection) : [];
+
+        $patient_details = $request->get('user_id')? User::where('id',$request->get('user_id'))->get(): [];
+
+        return ["ros_info"=>$records,"patient_details"=>$patient_details];
+    }
+
+    public function PhysicalExaminationPDFx(Request $request){
+      
+        $resource = 'physicalExaminations';
+        $entity = new PhysicalExamination;
+
+        $getResourceName = snake_case(camel_case(str_plural($resource)));
+        
+        $collection   = callUserFuncArray([$entity, 'getModelList'], [])->get();
+
+        $records = $collection->isNotEmpty() ? $this->collectionTransform($resource, $collection) : [];
+
+        $patient_details = $request->get('user_id')? User::where('id',$request->get('user_id'))->get(): [];
+        
+        return ["pe_info"=>$records,"patient_details"=>$patient_details];
+    }
+
+    public function formPDFx(Request $request){
+      
+        $resource = 'Form';
+        $entity = new Form;
+
+        $getResourceName = snake_case(camel_case(str_plural($resource)));
+        
+        $collection   = callUserFuncArray([$entity, 'getModelList'], [])->get();
+
+        $records = $collection->isNotEmpty() ? $this->collectionTransform($resource, $collection) : [];
+
+        $patient_details = $request->get('user_id')? User::where('id',$request->get('user_id'))->get(): [];
+        
+        $return = ["form_info" => $records, "patient_details"=>$patient_details];
+        return $this->httpResponse->setHttpData($return)->jsonResponse();
+    }
 
     public function userDetails(Request $request){
              
@@ -1210,5 +1297,110 @@ class AuthService extends BaseService
         return $patient_details;
     }
 
-    
+    public function vitalsPDF_globalx(Request $request){
+        
+        $pdf_content = self::vitalsPDFx($request);
+        
+        $template = view('pdf_m.vitals_reports', ['content' => $pdf_content, 'request' => $request]);
+        
+        return self::pdf_m($request, $template);
+    }
+
+    public function healthPDF_globalx(Request $request){
+        
+        $pdf_content = self::healthPDFx($request);
+
+        $template = view('pdf_m.health_reports', ['content' => $pdf_content, 'request' => $request]);
+        
+        return self::pdf_m($request, $template);
+    }
+
+    public function historyPDF_globalx(Request $request){
+        
+        $pdf_content = self::historyPDFx($request);
+        // dd($pdf_content);
+        $template = view('pdf_m.history_reports', ['content' => $pdf_content, 'request' => $request]);
+        
+        return self::pdf_m($request, $template);
+    }
+
+    public function docsPDF_globalx(Request $request){
+        
+        $pdf_content = self::docsPDFx($request);
+
+        $template = view('pdf_m.docs_reports', ['content' => $pdf_content, 'request' => $request]);
+        
+        return self::pdf_m($request, $template);
+    }
+
+    public function ReviewOfSystem_globalx(Request $request){
+        
+        $pdf_content = self::ReviewOfSystemPDFx($request);
+
+        $template = view('pdf_m.ros_reports', ['content' => $pdf_content, 'request' => $request]);
+        
+        return self::pdf_m($request, $template);
+    }
+
+    public function physicalExamination_globalx(Request $request){
+        
+        $pdf_content = self::PhysicalExaminationPDFx($request);
+
+        $template = view('pdf_m.pe_reports', ['content' => $pdf_content, 'request' => $request]);
+        
+        return self::pdf_m($request, $template);
+    }
+
+    public function activityWellnessPDF_globalx(Request $request){
+        
+        $pdf_content = self::activityWellnessPDFx($request);
+        // dd($pdf_content);
+        $template = view('pdf_m.activity_wellness_reports', ['content' => $pdf_content, 'request' => $request]);
+        
+        return self::pdf_m($request, $template);
+    }
+
+    public function assessmentPDF_globalx(Request $request){
+        
+        $pdf_content = self::formPDFx($request);
+        
+        $template = view('pdf_m.assessment_reports', ['content' => $pdf_content->getData()->data, 'request' => $request]);
+        
+        return self::pdf_m($request, $template);
+    }
+
+    public function pdf_m(Request $request, $template) {    
+
+        $mpdf = new Mpdf(['tempDir' => storage_path('app/pdf')]);
+
+        $title = $request->get('slug');
+
+        if($title == null){
+            if($request->get('act_catagory')){
+                 $title = $request->get('act_catagory');
+             }   
+            if($request->get('title')){
+                 $title = $request->get('title');
+             }           
+        }
+
+        $mpdf->WriteHTML($template);
+
+        $mpdf->SetTitle(strtoupper($title));
+
+        $a = $mpdf->Output('', 'S');
+
+        $fileName = 'A2Z_'.strtoupper($title).'_REPORTS.pdf';
+
+        $this->httpResponse
+            ->setHttpData($a)
+            ->setHttpHeader([
+                'Content-Type' => 'application/pdf',
+                'Content-disposition' => 'inline; filename=' .$fileName
+            ]);
+        
+        return $this->httpResponse->streamResponse();
+
+    }
+
 }

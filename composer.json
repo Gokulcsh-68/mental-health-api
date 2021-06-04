@@ -22,6 +22,7 @@
         "laravelista/lumen-vendor-publish": "^8.0",
         "league/flysystem-aws-s3-v3": "~1.0",
         "lfkeitel/phptotp": "^1.0",
+        "mpdf/mpdf": "^8.0",
         "pearl/lumen-request-validate": "^1.6",
         "predis/predis": "^1.1"
     },

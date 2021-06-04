@@ -15,6 +15,18 @@ use Illuminate\Http\Request;
 |
  */
 
+// $router->get('vitalsPDF_globalx', 'AuthService@vitalsPDF_globalx');
+//         $router->get('healthPDF_globalx', 'AuthService@healthPDF_globalx');
+//         $router->get('docsPDF_globalx', 'AuthService@docsPDF_globalx');
+//         $router->get('activityWellnessPDF_globalx', 'AuthService@activityWellnessPDF_globalx');
+//         $router->get('immunisationPDF_globalx', 'AuthService@immunisationPDF_globalx');
+//         $router->get('historyPDF_globalx', 'AuthService@historyPDF_globalx');
+//         $router->get('familyHistoryPDF_globalx', 'AuthService@familyHistoryPDF_globalx');
+//         $router->get('ReviewOfSystem_globalx', 'AuthService@ReviewOfSystem_globalx');
+//         $router->get('physicalExamination_globalx', 'AuthService@physicalExamination_globalx');
+//         $router->get('assessmentPDF_globalx', 'AuthService@assessmentPDF_globalx');
+
+
 $router->get('/key', function() {
     return \Illuminate\Support\Str::random(32);
 });
@@ -91,6 +103,18 @@ $router->group(['prefix' => 'v1/', 'middleware' => 'clientAuth'], function ($rou
         $router->get('activityWellnessPDF', 'AuthService@activityWellnessPDFx');
         $router->get('docsPDF', 'AuthService@docsPDFx');
         $router->get('historyPDF', 'AuthService@historyPDFx');
+        $router->get('masterPDFx', 'AuthService@masterPDFx');
+
+         $router->get('vitalsPDF_globalx', 'AuthService@vitalsPDF_globalx');
+        $router->get('healthPDF_globalx', 'AuthService@healthPDF_globalx');
+        $router->get('docsPDF_globalx', 'AuthService@docsPDF_globalx');
+        $router->get('activityWellnessPDF_globalx', 'AuthService@activityWellnessPDF_globalx');
+        $router->get('immunisationPDF_globalx', 'AuthService@immunisationPDF_globalx');
+        $router->get('historyPDF_globalx', 'AuthService@historyPDF_globalx');
+        $router->get('familyHistoryPDF_globalx', 'AuthService@familyHistoryPDF_globalx');
+        $router->get('ReviewOfSystem_globalx', 'AuthService@ReviewOfSystem_globalx');
+        $router->get('physicalExamination_globalx', 'AuthService@physicalExamination_globalx');
+         $router->get('assessmentPDF_globalx', 'AuthService@assessmentPDF_globalx');
         
         $router->group(['prefix' => 'users'], function ($router) {
             $router->patch('set-password', 'AuthService@setPassword');
