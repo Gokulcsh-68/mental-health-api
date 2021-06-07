@@ -4,20 +4,38 @@
 
 
 $msg = 'Please Take Assessment';
+
 if(!empty($lists->latest_form_submisson->message)){
 
 	$msg = str_replace(['!success!','!primary!','!secondary!','!warning!','!danger!'],':',$lists->latest_form_submisson->message);
 
-	$msg = str_replace(['@span','@f','@c','!','@br'],'',$msg);
+	$msg = str_replace(['@span','@f','@c','@br'],'',$msg);
+  $msg = str_replace(['!'],',',$msg);
 	$msg = str_replace(['@teleconsult'],'please take a teleconsult',$msg);
 
+  $msg = explode(',',$msg);
 }
 
  ?>
 
 
- <h4><span class="color_primary">Results:</span> {{$msg}} </h4>
-   		
+ <h4><span class="color_primary">Results:</span> 
+</h4>
+
+@if(gettype($msg) == 'array')
+  
+  @foreach($msg as $lkm => $lvm)
+    <h5>{{$lvm}}</h5>
+  @endforeach
+
+@else
+
+ {{$msg}} 
+@endif
+
+   
+ <h4><span class="color_primary">Questions:</span> 
+</h4>		
 
 	@foreach($lists->questions as $lk => $lv)
 	

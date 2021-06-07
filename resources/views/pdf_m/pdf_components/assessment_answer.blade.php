@@ -36,20 +36,22 @@
       </span>
       @endif
 
+
        @if($submittedAnswer != null &&
           $answerType == 'input' &&
           $render_answers->answer != null)
-      <span>
-        @if($render_answers->answer->id == $submittedAnswer->answers->$questionId)
-        <span class="color_primary">
-        {{$answerType}} {{ $submittedAnswer->answers->$questionId }}
+      
+        <span>
+          @if($render_answers->answer->id == (!empty($submittedAnswer->answers->$questionId)))
+          <span class="color_primary">
+          {{ $submittedAnswer->answers->$questionId }}
+          </span>
+          @else
+            <span class="">
+          @if(!empty($submittedAnswer->answers->$questionId)) {{ $submittedAnswer->answers->$questionId }} @endif
+          </span>
+          @endif
         </span>
-        @else
-          <span class="">
-         {{ $submittedAnswer->answers->$questionId }}
-        </span>
-        @endif
-      </span>
       @endif  
      
     </p>
