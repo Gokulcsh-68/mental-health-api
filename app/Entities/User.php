@@ -2,7 +2,7 @@
 
 namespace App\Entities;
 use \Illuminate\Notifications\Notifiable;
-
+use App\Entities\User;
 use DB;
 
 class User extends BaseModel

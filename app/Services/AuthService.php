@@ -113,6 +113,7 @@ class AuthService extends BaseService
     
             $userInfo = User::where('id', $patient_id)
                 ->first();
+                
             $requestedData['username'] = $userInfo->username;
             $requestedData['id'] = $userInfo->id;
             $requestedData['role'] = Role::Where('id',$userInfo->role_id)->value('code');

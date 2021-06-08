@@ -62,7 +62,14 @@ class DatabaseSeeder extends Seeder
             UpdateApiServiceSeeder::class,
             UpdateVitalsSeeder::class,
             SymptomSeeder::class,
-            AddHealthFormSeeder::class
+            AddHealthFormSeeder::class,
+            AssessmentPsychiatricExamAutismSpectrumDisorder::class,
+            AssessmentPsychiatricExamSocialCommunicationDisorder::class,
+            AssessmentPsychiatricExamPsychosisSymptomSeverity::class,
+            AssessmentPsychiatricExamConductDisorder::class,
+            AssessmentPsychiatricExamNonsuicidalSelfInjury::class,
+            AssessmentPsychiatricExamOppositionalDefiantDisorder::class,
+            AssessmentPsychiatricExamSomaticSymptomDisorder::class,
         ]);
     }
 }

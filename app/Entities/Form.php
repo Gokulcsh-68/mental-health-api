@@ -79,14 +79,20 @@ class Form extends BaseModel
 
         $status_key = $request->get('searchkey');
 
-        // if($request->user()->role_id){
-            
-        //     $logged_in_role_code = Role::where('id', $request->user()->role_id)->value('code');
+        if(!empty($request->get('provider_id'))){
+            $form_user_id   = User::where('id', $request->get('provider_id'))->value('role_id');
+            $form_role_code = Role::where('id', $form_user_id)->value('code');
 
+            $model->whereJsonContains('role_code', $form_role_code);
+        }else if($request->user()->role_id){
+            $logged_in_role_code = Role::where('id', $request->user()->role_id)->value('code');
 
-        //    $model->whereJsonContains('role_code', $logged_in_role_code);
-            
-        // }
+            if(in_array($logged_in_role_code , ['folio']) ){
+                $model->whereJsonContains('role_code', 'student');
+            }else{
+                $model->whereJsonContains('role_code', $logged_in_role_code);
+            }
+        }
 
 
 
