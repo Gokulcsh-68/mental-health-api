@@ -54,8 +54,41 @@ class Master extends BaseModel
         }
 
         if ($request->get('slug')) {
-            $model->where('masters.master_type_slug', $request->get('slug'));
 
+            if($request->get('slug') == 'allergy'){
+                if($request->get('country') == 'IN'){
+                    $model->whereIn('masters.master_type_slug', ['Generic',$request->get('slug')]);
+                }
+                else if($request->get('country') == 'US'){
+                    $model->whereIn('masters.master_type_slug', ['medicine-us',$request->get('slug')]);
+                }
+                else{
+
+                    $model->where('masters.master_type_slug', $request->get('slug'));
+                }
+            }else if($request->get('slug') == 'speciality'){
+
+                if($request->get('speciality_type') == 'all'){
+                    $model->where('masters.master_type_slug', $request->get('slug'));
+                }else{
+                    if($request->user()){
+                        if($request->user()->role->code == 'provider'){
+                            $speciality = $request->user()->provider->providerSpeciality->pluck('speciality');
+                            $model->whereIn('masters.slug', $speciality);
+                        }else{
+                             $model->where('masters.master_type_slug', $request->get('slug'));
+                        }
+
+                    }
+                    else{
+                         $model->where('masters.master_type_slug', $request->get('slug'));
+                    }
+                }
+            }else{
+                $model->where('masters.master_type_slug', $request->get('slug'));
+            }
+
+            
             // Forms Access
             if($request->get('slug') == 'assessment-group'){
                 $logged_in_role_code = Role::where('id', $request->user()->role_id)->value('code');
@@ -74,6 +107,7 @@ class Master extends BaseModel
 
             }
         }
+
         
         if ($request->get('searchkey')) {
 

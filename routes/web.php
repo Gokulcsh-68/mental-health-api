@@ -74,6 +74,7 @@ $router->group(['prefix' => 'v1/', 'middleware' => 'clientAuth'], function ($rou
         });
 
         $router->get('resource/masters/list', 'MasterService@masterList');
+        $router->get('resource/custom/masters/list', 'MasterService@customMasterList');
         
     });
 
