@@ -182,23 +182,33 @@ class Staff extends BaseModel
             $model->where('staffs.id', '!=',$request->get('staff')->id);
         }
 
-        $status_key = $request->get('searchkey');
-        if(strtolower($request->get('searchkey')) == "inactive" || strtolower($request->get('searchkey')) == "active"){
-            $status_key = (strtolower($request->get('searchkey')) == "inactive")?"0":"1";
+        $status_key = 1;
+        if (!empty($request->get('activeUsers'))) {
+            $status_key = (strtolower($request->get('activeUsers')) == "inactive")?"0":"1";
+        }else{
+            $status_key = $request->get('searchkey');
+            if(strtolower($request->get('searchkey')) == "inactive" || strtolower($request->get('searchkey')) == "active"){
+                $status_key = (strtolower($request->get('searchkey')) == "inactive")?"0":"1";
+            }else{
+                $status_key = 1;
+            }
         }
 
 
 
         if ($request->get('searchkey')) {
-            $model->whereHas('user', function ($subquery) use ($request,$status_key) {
+            $model->whereHas('user', function ($subquery) use ($request) {
                     $subquery->Where('users.email', 'LIKE',"%".$request->get('searchkey')."%")
                     ->orWhere('users.mobile', 'LIKE',"%".$request->get('searchkey')."%")
                     ->orWhere(DB::raw("CONCAT(`first_name`, ' ', `last_name`)"), 'LIKE',"%".$request->get('searchkey')."%")
                     // ->orWhere('users.first_name', 'LIKE',"%".$request->get('searchkey')."%")
                     // ->orWhere('users.last_name', 'LIKE',"%".$request->get('searchkey')."%")
                     ->orWhere('users.address', 'LIKE',"%".$request->get('searchkey')."%")
-                    ->orWhere('users.gender', 'LIKE',"%".$request->get('searchkey')."%")
-                    ->orWhere('users.is_active', 'LIKE',"%".$status_key."%");
+                    ->orWhere('users.gender', 'LIKE',"%".$request->get('searchkey')."%");
+            });
+
+            $model->whereHas('user', function ($subquery) use ($request, $status_key) {
+                $subquery->Where('users.is_active',$status_key);
             });
         }
 

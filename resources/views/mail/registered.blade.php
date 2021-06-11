@@ -3,6 +3,6 @@
 
 Dear User,
 
-Your account is under verification, We will activate your account's within 24 hours.
+Your account is under verification. We will activate your account within 24 hours.
 
 @endcomponent

@@ -787,6 +787,8 @@ class AuthService extends BaseService
         $otp = $this->generateOtp($data['secret']);
         $uid = base64_encode($user->id);
 
+        // Log::info($otp);
+
         $subject_prefix = 'A2Z Health';
 
         switch ($data['otp_type']) {
@@ -840,17 +842,19 @@ class AuthService extends BaseService
                 ->replaceLast("{{otp}}", $otp)->replaceLast("{{uid}}", $uid);
         }
 
+        $base_url = config('app.app_urls.' . $user->role->code);
         if($data['otp_type'] == 'activation'){
-                $mail_template = (new MailMessage)->markdown('mail.activation', ['heading' => $heading, 'uid' => $uid])->render();
+                $url = $base_url . '/auth/activate/' . $uid;
+                $mail_template = (new MailMessage)->markdown('mail.activation', ['heading' => $heading, 'url' => $url])->render();
 
             }else if($data['otp_type'] == 'provider_activated'){
-                $mail_template = (new MailMessage)->markdown('mail.provider_activated', ['heading' => $heading, 'uid' => $uid])->render();
+                $mail_template = (new MailMessage)->markdown('mail.provider_activated', ['heading' => $heading, 'url' => $base_url])->render();
 
             }else if($data['otp_type'] == 'registered'){
                 $mail_template = (new MailMessage)->markdown('mail.registered', ['heading' => $heading])->render();
 
             }else{
-                $mail_template = (new MailMessage)->markdown('mail.otp', ['heading' => $heading, 'otp' => $otp])->render();             
+                $mail_template = (new MailMessage)->markdown('mail.otp', ['heading' => $heading, 'otp' => $otp])->render();
             }
 
 

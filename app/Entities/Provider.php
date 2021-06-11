@@ -2,6 +2,8 @@
 
 namespace App\Entities;
 
+use App\Entities\User;
+use App\Services\AuthService;
 use DB;
 
 class Provider extends BaseModel
@@ -178,6 +180,9 @@ class Provider extends BaseModel
         DB::beginTransaction();
         try {
 
+            $user = User::where('id', $request->get('user_id'))
+            ->first();
+            
             $model = parent::updateModel($id, $request, $only);
 
             if($request->method() == "PUT"){
@@ -202,6 +207,19 @@ class Provider extends BaseModel
             }
 
             DB::commit();
+
+            
+            if (!empty($user)) {
+                if($user['is_active'] != 1){
+                    if($data['user']['is_active'] == 1){
+                        $data['otp_type'] = "provider_activated";
+
+                        $this->_communication_service = new AuthService;
+                        $this->_communication_service->otpNotification($data, $user);
+
+                    }
+                }
+            }
 
             return $model;
         } catch (Exception $e) {

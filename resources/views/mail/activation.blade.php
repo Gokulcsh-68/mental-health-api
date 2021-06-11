@@ -4,7 +4,7 @@
 Dear User,
 
 Your Account Activation link is 
-<a href="{{ config('app.web_url') }/auth/activate/{{$uid}}">
+<a href="{{ $url }}">
 	Click to Activate Your Account
 </a>
 

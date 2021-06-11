@@ -15,17 +15,6 @@ use Illuminate\Http\Request;
 |
  */
 
-// $router->get('vitalsPDF_globalx', 'AuthService@vitalsPDF_globalx');
-//         $router->get('healthPDF_globalx', 'AuthService@healthPDF_globalx');
-//         $router->get('docsPDF_globalx', 'AuthService@docsPDF_globalx');
-//         $router->get('activityWellnessPDF_globalx', 'AuthService@activityWellnessPDF_globalx');
-//         $router->get('immunisationPDF_globalx', 'AuthService@immunisationPDF_globalx');
-//         $router->get('historyPDF_globalx', 'AuthService@historyPDF_globalx');
-//         $router->get('familyHistoryPDF_globalx', 'AuthService@familyHistoryPDF_globalx');
-//         $router->get('ReviewOfSystem_globalx', 'AuthService@ReviewOfSystem_globalx');
-//         $router->get('physicalExamination_globalx', 'AuthService@physicalExamination_globalx');
-//         $router->get('assessmentPDF_globalx', 'AuthService@assessmentPDF_globalx');
-
 
 $router->get('/key', function() {
     return \Illuminate\Support\Str::random(32);

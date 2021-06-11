@@ -118,5 +118,9 @@ return [
         'url' => env('LOG_SLACK_WEBHOOK_URL', ''),
         'channel' => env('SLACK_CHANNEL', ''),
     ],
+    'app_urls' => [
+        'folio' => env('APP_FOLIO_URL', ''),
+        'provider' => env('APP_PROVIDER_URL', ''),
+    ]
 
 ];

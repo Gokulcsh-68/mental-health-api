@@ -2,6 +2,8 @@
 
 namespace App\Entities;
 
+use App\Entities\User;
+use App\Services\AuthService;
 use Illuminate\Support\Facades\DB;
 
 class HospitalGroup extends BaseModel
@@ -120,6 +122,9 @@ class HospitalGroup extends BaseModel
         DB::beginTransaction();
         try {
             // Update in hospital
+            $user = User::where('id', $data['user']['id'])
+            ->first();
+            
             $model = parent::updateModel($id, $request, $only);
             // Update in users
             $staff = $this->getModel($id);
@@ -127,6 +132,19 @@ class HospitalGroup extends BaseModel
             unset($data['user']['role_id']);
             $staff->primaryStaff->user->fill($data['user'])->save();
             DB::commit();
+
+
+            if (!empty($user)) {
+                if($user['is_active'] != 1){
+                    if($data['user']['is_active'] == 1){
+                        $data['otp_type'] = "provider_activated";
+
+                        $this->_communication_service = new AuthService;
+                        $this->_communication_service->otpNotification($data, $user);
+
+                    }
+                }
+            }
 
             return $model;
         } catch (Exception $e) {
