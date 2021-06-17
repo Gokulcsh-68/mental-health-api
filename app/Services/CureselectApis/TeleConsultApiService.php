@@ -222,6 +222,53 @@ class TeleConsultApiService extends BaseService {
 
 
 
+    
+	public function fetchById($params = [], $consult_id)
+	{
+		$params = array_only($params, ['participant_ref_number', 'consult_status_id', 'consult_type', 'consult_status', 'scheduled_from_date', 'scheduled_to_date', 'consult_id']);
+
+		$validation = Validator::make($params, [
+    		'scheduled_from_date' => 'nullable|date_format:"Y-m-d H:i:s"',
+    		'scheduled_to_date' => 'required_unless:scheduled_from_date,|date_format:"Y-m-d H:i:s"',
+			'consult_type' => [
+				'nullable',
+				Rule::in(['virtual', 'home', 'clinic'])
+			],
+			'consult_status' => 'nullable',
+        ]);
+
+        if($validation->fails()) {
+        	throw ValidationException::withMessages($validation->errors()->all());
+        }
+
+		
+		$headers = [
+			'Authorization' => 'Bearer ' . $this->getToken(),        
+		];
+
+		$options = [
+			'headers' => $headers,
+			'query' => $params
+		];
+	
+
+		try {
+			$url = $this->endpoint_url.'/'.$consult_id;
+			$this->apiCall($url, $options, $method = "GET");
+			$response = $this->toGuzzleArray();
+		}
+		catch(\Exception $e) {
+			Log::error('Cureselect Teleconsult API ERROR ------- ', ['errorDetails' => $e->getMessage()]);
+
+			throw new BadRequestHttpException($e->getMessage(), $e);
+			$response = [ $e->getMessage() ];
+		}
+
+		return $response;
+	}
+
+
+
 	public function patch($request)
     {
 

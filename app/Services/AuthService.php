@@ -174,7 +174,7 @@ class AuthService extends BaseService
     }
 
 
-    public function getConsultInfo(Request $request){
+     public function getConsultInfo(Request $request){
         $this->_teleconsult_service = new TeleConsultApiService;
 
         $consultInfo = $this->_teleconsult_service->consultDetails($request);
@@ -182,10 +182,20 @@ class AuthService extends BaseService
          $consult_id = '-1';
          $patient_id = '-1';
         $provider_details = $consultInfo?$consultInfo['data']['info']:[];
+        $consult_details = [];
 
         if(!empty($consultInfo)){
             if(isset($consultInfo['data']['consult'])){
+
                 $consult_id = $consultInfo['data']['consult']['id'];
+                $filters['consult_id'] = $consult_id;
+                $consults = $this->_teleconsult_service->fetchById($filters,$consult_id);
+
+                if(!empty($consults)){
+                    if(isset($consults['data']['consults'])){
+                        $consult_details = $consults['data']['consults'];
+                    }
+                }
             }
 
             if(isset($consultInfo['data']['participants'])){
@@ -199,7 +209,7 @@ class AuthService extends BaseService
             }
         }
 
-        return ["patient_id"=>$patient_id, "consult_id"=> $consult_id, "provider_info" => $provider_details ];
+        return ["patient_id"=>$patient_id, "consult_id"=> $consult_id, "provider_info" => $provider_details, "consultInfo" => $consult_details ];
     }
 
     public function consultSummary(Request $request): JsonResponse
@@ -242,6 +252,7 @@ class AuthService extends BaseService
          $getpatient_id['provider_info']['license_no'] = $providers?$providers['license_no']:'';
          $getpatient_id['provider_info']['qualification'] = $providers?$providers['additional_info']?$providers['additional_info']->qualification:'':'';
         $summary['provider_details'] = $getpatient_id['provider_info'];
+        $summary['0_consult_details'] = $getpatient_id['consultInfo'];
 
         return $this->httpResponse->setHttpData($summary)
                     ->jsonResponse();
