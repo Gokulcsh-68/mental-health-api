@@ -163,6 +163,7 @@ class Consult extends BaseModel
                         'consult_speciality' => $data['speciality'],
                         'api_end_point' => $teleconsult_config['api_return_url'],
                         'api_end_version' => $teleconsult_config['api_return_url_version'],
+                        'x_name' => 'garuda',
                     ],
                 ],
 
@@ -176,6 +177,7 @@ class Consult extends BaseModel
                     'additional_info' => [
                         'api_end_point' => $teleconsult_config['api_return_url'],
                         'api_end_version' => $teleconsult_config['api_return_url_version'],
+                        'x_name' => 'garuda',
                     ],
                 ],
             ];
