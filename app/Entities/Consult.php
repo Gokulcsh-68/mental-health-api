@@ -119,9 +119,14 @@ class Consult extends BaseModel
             $filters['participant_ref_number'] = [$request->user()->id];
         }
 
+        if ($request->filled('from_date')) {
+            $filters['scheduled_from_date'] = date('Y-m-d',strtotime($request->get("from_date")));
+            $filters['scheduled_from_date'] = $filters['scheduled_from_date'].' 00:00:00';
+        }
 
-        if ($request->query('from_date')) {
-            $filters['scheduled_from_date'] = $request->get("from_date");
+        if ($request->filled('to_date')) {
+            $filters['scheduled_to_date'] = date('Y-m-d',strtotime($request->get("to_date")));
+            $filters['scheduled_to_date'] = $filters['scheduled_to_date'].' 23:59:59';
         }
 
         // $filters['participant_ref_number'] = [64];
