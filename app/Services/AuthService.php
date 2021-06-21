@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Entities\ActivityWellness;
 use App\Entities\Doc;
+use App\Entities\FamilyHistory;
 use App\Entities\Form;
 use App\Entities\Hospital;
 use App\Entities\Master;
@@ -34,6 +35,8 @@ use App\Requests\ResendOtpRequest;
 use App\Requests\TwofaRequest;
 use App\Requests\VerifyOtpRequest;
 use App\Services\CureselectApis\TeleConsultApiService;
+use App\Services\EntityService;
+use App\Services\ImmunisationService;
 use App\Services\UtilService;
 use App\Traits\DicomUploadTrait;
 use App\Transformers\MasterTransformer;
@@ -78,16 +81,16 @@ class AuthService extends BaseService
             $requestedData['username'] = $userInfo->username;
             $requestedData['id'] = $userInfo->id;
             $requestedData['role'] = Role::Where('id',$userInfo->role_id)->value('code');
-            
+
             $user = $user->guestLoginAttempt($requestedData);
-                
+
             if ($user) {
                 $result['info'] = $user->getBasicInfo();
                 $data['userId'] = $user->id;
                 $Authorization  = $result['token'] =  $this->getAuthorization($data);
-                
+
                 $token_details = $this->decodeJwt($Authorization);
-                
+
                 if($token_details->exp)
                     $result['token_expiration_time'] = $token_details->exp;
 
@@ -95,7 +98,7 @@ class AuthService extends BaseService
                         ->setHttpHeader(['Authorization' => $Authorization])
                         ->jsonResponse();
             }
-        
+
 
         return $this->httpResponse->setHttpCode(401)->jsonResponse();
     }
@@ -108,18 +111,18 @@ class AuthService extends BaseService
 
         $patient_id = $getpatient_id['patient_id'];
         $consult_id = $getpatient_id['consult_id'];
-        
+
         if($patient_id > 0){
-    
+
             $userInfo = User::where('id', $patient_id)
                 ->first();
-                
+
             $requestedData['username'] = $userInfo->username;
             $requestedData['id'] = $userInfo->id;
             $requestedData['role'] = Role::Where('id',$userInfo->role_id)->value('code');
-            
+
             $user = $user->consultLoginAttempt($requestedData);
-                
+
             if ($user) {
                 $result['userInfo'] = $user->getBasicInfo();
                 $data['userId'] = $user->id;
@@ -139,7 +142,7 @@ class AuthService extends BaseService
         $message = trans('auth.failed');
         $requestedData = $request->json()->all();
         $user = $user->generalLoginAttempt($requestedData);
-        
+
         if ($user) {
             if (!empty($user->is_2fa)) {
                 $data['otp_type'] = "2faAuthentication";
@@ -200,7 +203,7 @@ class AuthService extends BaseService
 
             if(isset($consultInfo['data']['participants'])){
                 $consultPatient = $consultInfo['data']['participants'];
-                
+
                 foreach ($consultPatient as $key => $value) {
                     if(!$value['is_guest'] && !str_contains($value['ref_number'], 'guest')){
                         $patient_id = $value['ref_number'];
@@ -321,9 +324,9 @@ class AuthService extends BaseService
         $resource = 'Master';
         $entity = new Master();
         $collection = callUserFuncArray([$entity, 'getModelList'], [])->get();
-  
+
         $res_name = snake_case(camel_case(str_plural($resource)));
- 
+
         $result[$res_name] = $collection->isNotEmpty() ? $this->collectionTransform($resource, $collection) : [];
 
         return $this->httpResponse->setHttpData($result)->jsonResponse();
@@ -337,9 +340,9 @@ class AuthService extends BaseService
         $resource = 'Timezone';
         $entity = new Timezone();
         $collection = callUserFuncArray([$entity, 'getModelList'], [])->get();
-  
+
         $res_name = snake_case(camel_case(str_plural($resource)));
- 
+
         $result[$res_name] = $collection->isNotEmpty() ? $this->collectionTransform($resource, $collection) : [];
 
         return $this->httpResponse->setHttpData($result)->jsonResponse();
@@ -358,7 +361,7 @@ class AuthService extends BaseService
 
         $hospital = Hospital::createModel($hospital_request)->toArray();
         $user_id = Staff::where('user_id',$hospital['id'])->value('user_id');
-    
+
         $user = User::where('id', $user_id)
             ->first();
         if (!empty($user)) {
@@ -383,7 +386,7 @@ class AuthService extends BaseService
         $patient_request->merge(['register' => true]);
 
         $patient = Patient::createModel($patient_request)->toArray();
-    
+
         $user = User::where('id', $patient['user_id'])
             ->first();
         if (!empty($user)) {
@@ -410,7 +413,7 @@ class AuthService extends BaseService
 
 
         $provider = Provider::createModel($provider_request)->toArray();
- 
+
         $user = User::where('id', $provider['user_id'])
             ->first();
         if (!empty($user)) {
@@ -428,7 +431,7 @@ class AuthService extends BaseService
     public function activateAccountsx(Request $request)
     {
 
-       
+
         if($request->get('token')){
         $token = base64_decode($request->get('token'));
             User::Where('id',$token)->update(['is_active'=>1]);
@@ -475,7 +478,7 @@ class AuthService extends BaseService
             $status = (new UtilService())->diskStorage($request->file('file'), $path, 'profile_');
             */
 
-            
+
             $status = (new UtilService())->postSignedUrl($request);
             $res['file_path'] = $status['file_path'];
             $res['file_name'] = $status['file_name'];
@@ -485,7 +488,7 @@ class AuthService extends BaseService
             $user->save();
 
 
-            /* 
+            /*
             $response = ['status' => false];
             if ($status['success']) {
                 $user->profile_image = $status['filename'];
@@ -517,15 +520,15 @@ class AuthService extends BaseService
          $res['file_name'] = "";
 
         $ext = strtolower($request->file('file')->getClientOriginalExtension());
-        
+
 
         $user = (new UserTransformer($request->user()));
         $request['id'] =  $user->id;
         $request['filetype'] =  'item_image';
         if($ext == 'dcm'){
-            
+
                 $dicom_response = $this->initiateDicomUpload($request->file('file'), $ext, $request['id']);
-              
+
                 $res['file_path'] = $dicom_response['file_path'];
                 $res['file_name'] = $dicom_response['file_name'];
         }
@@ -533,7 +536,7 @@ class AuthService extends BaseService
 
             $imageName = 'Document'.rand(9999,9999999).rand(100,1999).time().'.'.$request->file('file')->getClientOriginalExtension();
 
-            $image = $request->get('file'); 
+            $image = $request->get('file');
 
             $request['type'] = $request->user()->role->code;
             $request['file_name'] = $imageName;
@@ -555,10 +558,10 @@ class AuthService extends BaseService
 
 
             //  $res['file_path'] = $status['file_path'];
-            //  $res['file_name'] = $status['file_name'];  
-            //  $res['file_tmp'] = $status['file_tmp'];  
-        
-            
+            //  $res['file_name'] = $status['file_name'];
+            //  $res['file_tmp'] = $status['file_tmp'];
+
+
             /* $destinationPath = storage_path('/app/uploadDocs');
             $request->file('file')->move($destinationPath, $imageName);
             $res['file_path'] = $imageName;
@@ -650,7 +653,7 @@ class AuthService extends BaseService
      * @return json
      */
 
-   
+
     public function verifyOtp(VerifyOtpRequest $request, User $user): JsonResponse
     {
         $message = trans('auth.failed');
@@ -846,7 +849,7 @@ class AuthService extends BaseService
                 $sms_template = view('sms.registered', [ 'uid' => $uid])->render();
 
             }else{
-                $sms_template = view('sms.default_otp', ['otp' => $otp, 'type' => $data['otp_type']])->render();                
+                $sms_template = view('sms.default_otp', ['otp' => $otp, 'type' => $data['otp_type']])->render();
             }
         } else {
             $sms_template = (string) Str::of($sms_template)
@@ -962,8 +965,8 @@ class AuthService extends BaseService
     //     return $this->httpResponse->jsonResponse();
     // }
 
-    
-    
+
+
     public function freezePhrEmr(Request $request){
         $this->validate($request, ['user_id' => 'required|exists:users,id']);
 
@@ -975,11 +978,11 @@ class AuthService extends BaseService
     }
 
 
-    
-    
+
+
 
     public function historyPDFx(Request $request){
-      
+
         $resource = 'PatientHistory';
         $entity = new PatientHistory;
 
@@ -991,7 +994,7 @@ class AuthService extends BaseService
 
 
         foreach ($x_consult_id as $key => $value) {
-            
+
 
             $filters['consult_id'] = $value;
             $request->request->add(['consult_id' => $value?$value:'-1']);
@@ -1001,11 +1004,11 @@ class AuthService extends BaseService
 
             if($value != null){
                 $this->_teleconsult_service = new TeleConsultApiService;
-                $consult_info  = $this->_teleconsult_service->fetch($filters, 1, 1); 
+                $consult_info  = $this->_teleconsult_service->fetch($filters, 1, 1);
                     foreach ($consult_info['data']['consults'] as $k => $v) {
                         foreach ($v['participants'] as $k1 => $v1) {
                             if($v1['role'] == "publisher"){
-                            
+
                                 $v1['participant_info']['consult_speciality'] = $v1['participant_info']['additional_info']['consult_speciality'];
 
                                 unset($v1['participant_info']['additional_info']);
@@ -1026,7 +1029,7 @@ class AuthService extends BaseService
                 $history_info[$key]['providers'] = null;
                 $history_info[$key]['lists'] = $medicine_records;
             }
-        
+
         }
 
         $patient_details = $request->get('user_id')? User::where('id',$request->get('user_id'))->get(): [];
@@ -1034,9 +1037,9 @@ class AuthService extends BaseService
     }
 
 
-    
+
     public function healthPDFx(Request $request){
-      
+
         $resource = 'PatientHealth';
         $entity = new PatientHealth;
 
@@ -1048,7 +1051,7 @@ class AuthService extends BaseService
 
 
         foreach ($x_consult_id as $key => $value) {
-            
+
 
             $filters['consult_id'] = $value;
             $request->request->add(['consult_id' => $value?$value:'-1']);
@@ -1058,11 +1061,11 @@ class AuthService extends BaseService
 
             if($value != null){
                 $this->_teleconsult_service = new TeleConsultApiService;
-                $consult_info  = $this->_teleconsult_service->fetch($filters, 1, 1); 
+                $consult_info  = $this->_teleconsult_service->fetch($filters, 1, 1);
                     foreach ($consult_info['data']['consults'] as $k => $v) {
                         foreach ($v['participants'] as $k1 => $v1) {
                             if($v1['role'] == "publisher"){
-                            
+
                                 $v1['participant_info']['consult_speciality'] = $v1['participant_info']['additional_info']['consult_speciality'];
 
                                 unset($v1['participant_info']['additional_info']);
@@ -1070,7 +1073,7 @@ class AuthService extends BaseService
                                 $providers = Provider::Where('user_id',$v1['ref_number'])->first(["additional_info","license_no"]);
 
                                $v1['participant_info']['license_no'] = $providers?$providers['license_no']:'';
-                               
+
             $v1['participant_info']['qualification'] = $providers?$providers['additional_info']?$providers['additional_info']->qualification:'':'';
 
                                 $medicine_info[$key]['providers'] = $v1['participant_info'];
@@ -1084,7 +1087,7 @@ class AuthService extends BaseService
                 $medicine_info[$key]['providers'] = null;
                 $medicine_info[$key]['lists'] = $medicine_records;
             }
-        
+
         }
 
         $patient_details = $request->get('user_id')? User::where('id',$request->get('user_id'))->get(): [];
@@ -1093,7 +1096,7 @@ class AuthService extends BaseService
 
 
     public function vitalsPDFx(Request $request){
-      
+
         $resource = 'Vital';
         $entity = new Vital;
 
@@ -1105,7 +1108,7 @@ class AuthService extends BaseService
 
 
         foreach ($x_consult_id as $key => $value) {
-            
+
 
             $filters['consult_id'] = $value;
             $request->request->add(['consult_id' => $value?$value:'-1']);
@@ -1115,11 +1118,11 @@ class AuthService extends BaseService
 
             if($value != null){
                 $this->_teleconsult_service = new TeleConsultApiService;
-                $consult_info  = $this->_teleconsult_service->fetch($filters, 1, 1); 
+                $consult_info  = $this->_teleconsult_service->fetch($filters, 1, 1);
                     foreach ($consult_info['data']['consults'] as $k => $v) {
                         foreach ($v['participants'] as $k1 => $v1) {
                             if($v1['role'] == "publisher"){
-                            
+
                                 $v1['participant_info']['consult_speciality'] = $v1['participant_info']['additional_info']['consult_speciality'];
 
                                 unset($v1['participant_info']['additional_info']);
@@ -1127,7 +1130,7 @@ class AuthService extends BaseService
                                 $providers = Provider::Where('user_id',$v1['ref_number'])->first(["additional_info","license_no"]);
 
                                $v1['participant_info']['license_no'] = $providers?$providers['license_no']:'';
-                               
+
             $v1['participant_info']['qualification'] = $providers?$providers['additional_info']?$providers['additional_info']->qualification:'':'';
 
                                 $vitals_info[$key]['providers'] = $v1['participant_info'];
@@ -1141,7 +1144,7 @@ class AuthService extends BaseService
                 $vitals_info[$key]['providers'] = null;
                 $vitals_info[$key]['lists'] = $medicine_records;
             }
-        
+
         }
 
         $patient_details = $request->get('user_id')? User::where('id',$request->get('user_id'))->get(): [];
@@ -1150,7 +1153,7 @@ class AuthService extends BaseService
 
 
     public function activityWellnessPDFx(Request $request){
-      
+
         $resource   = 'ActivityWellness';
         $entity     = new ActivityWellness;
 
@@ -1167,7 +1170,7 @@ class AuthService extends BaseService
     }
 
     public function masterPDFx(Request $request){
-      
+
         $resource   = 'Master';
         $entity     = new Master;
 
@@ -1187,25 +1190,25 @@ class AuthService extends BaseService
     }
 
     public function immunisationPDF_globalx(Request $request){
-        
+
         $pdf_content = self::masterPDFx($request);
-        
+
         $template = view('pdf_m.immunisation_reports', ['content' => $pdf_content->getData()->data, 'request' => $request]);
-       
+
         return self::pdf_m($request, $template);
     }
 
     public function familyHistoryPDF_globalx(Request $request){
-        
+
         $pdf_content = self::masterPDFx($request);
-        
+
         $template = view('pdf_m.family_history_reports', ['content' => $pdf_content->getData()->data, 'request' => $request]);
-       
+
         return self::pdf_m($request, $template);
     }
 
     public function docsPDFx(Request $request){
-      
+
         $resource = 'Doc';
         $entity = new Doc;
 
@@ -1216,7 +1219,7 @@ class AuthService extends BaseService
         $x_consult_id = callUserFuncArray([$entity, 'getModelList'], [])->groupBy('consult_id')->pluck('consult_id');
 
         foreach ($x_consult_id as $key => $value) {
-            
+
 
             $filters['consult_id'] = $value;
             $request->request->add(['consult_id' => $value?$value:'-1']);
@@ -1226,11 +1229,11 @@ class AuthService extends BaseService
 
             if($value != null){
                 $this->_teleconsult_service = new TeleConsultApiService;
-                $consult_info  = $this->_teleconsult_service->fetch($filters, 1, 1); 
+                $consult_info  = $this->_teleconsult_service->fetch($filters, 1, 1);
                     foreach ($consult_info['data']['consults'] as $k => $v) {
                         foreach ($v['participants'] as $k1 => $v1) {
                             if($v1['role'] == "publisher"){
-                            
+
                                 $v1['participant_info']['consult_speciality'] = $v1['participant_info']['additional_info']['consult_speciality'];
 
                                 unset($v1['participant_info']['additional_info']);
@@ -1251,7 +1254,7 @@ class AuthService extends BaseService
                 $docs_info[$key]['providers'] = null;
                 $docs_info[$key]['lists'] = $medicine_records;
             }
-        
+
         }
 
         $patient_details = $request->get('user_id')? User::where('id',$request->get('user_id'))->get(): [];
@@ -1259,12 +1262,12 @@ class AuthService extends BaseService
     }
 
     public function ReviewOfSystemPDFx(Request $request){
-      
+
         $resource = 'ReviewOfSystems';
         $entity = new ReviewOfSystem;
 
         $getResourceName = snake_case(camel_case(str_plural($resource)));
-        
+
         $collection   = callUserFuncArray([$entity, 'getModelList'], [])->get();
 
         $records = $collection->isNotEmpty() ? $this->collectionTransform($resource, $collection) : [];
@@ -1275,117 +1278,117 @@ class AuthService extends BaseService
     }
 
     public function PhysicalExaminationPDFx(Request $request){
-      
+
         $resource = 'physicalExaminations';
         $entity = new PhysicalExamination;
 
         $getResourceName = snake_case(camel_case(str_plural($resource)));
-        
+
         $collection   = callUserFuncArray([$entity, 'getModelList'], [])->get();
 
         $records = $collection->isNotEmpty() ? $this->collectionTransform($resource, $collection) : [];
 
         $patient_details = $request->get('user_id')? User::where('id',$request->get('user_id'))->get(): [];
-        
+
         return ["pe_info"=>$records,"patient_details"=>$patient_details];
     }
 
     public function formPDFx(Request $request){
-      
+
         $resource = 'Form';
         $entity = new Form;
 
         $getResourceName = snake_case(camel_case(str_plural($resource)));
-        
+
         $collection   = callUserFuncArray([$entity, 'getModelList'], [])->get();
 
         $records = $collection->isNotEmpty() ? $this->collectionTransform($resource, $collection) : [];
 
         $patient_details = $request->get('user_id')? User::where('id',$request->get('user_id'))->get(): [];
-        
+
         $return = ["form_info" => $records, "patient_details"=>$patient_details];
         return $this->httpResponse->setHttpData($return)->jsonResponse();
     }
 
     public function userDetails(Request $request){
-             
+
         $patient_details = $request->get('user_id')? User::where('id',$request->get('user_id'))->get(): [];
         return $patient_details;
     }
 
     public function vitalsPDF_globalx(Request $request){
-        
+
         $pdf_content = self::vitalsPDFx($request);
-        
+
         $template = view('pdf_m.vitals_reports', ['content' => $pdf_content, 'request' => $request]);
-        
+
         return self::pdf_m($request, $template);
     }
 
     public function healthPDF_globalx(Request $request){
-        
+
         $pdf_content = self::healthPDFx($request);
 
         $template = view('pdf_m.health_reports', ['content' => $pdf_content, 'request' => $request]);
-        
+
         return self::pdf_m($request, $template);
     }
 
     public function historyPDF_globalx(Request $request){
-        
+
         $pdf_content = self::historyPDFx($request);
         // dd($pdf_content);
         $template = view('pdf_m.history_reports', ['content' => $pdf_content, 'request' => $request]);
-        
+
         return self::pdf_m($request, $template);
     }
 
     public function docsPDF_globalx(Request $request){
-        
+
         $pdf_content = self::docsPDFx($request);
 
         $template = view('pdf_m.docs_reports', ['content' => $pdf_content, 'request' => $request]);
-        
+
         return self::pdf_m($request, $template);
     }
 
     public function ReviewOfSystem_globalx(Request $request){
-        
+
         $pdf_content = self::ReviewOfSystemPDFx($request);
 
         $template = view('pdf_m.ros_reports', ['content' => $pdf_content, 'request' => $request]);
-        
+
         return self::pdf_m($request, $template);
     }
 
     public function physicalExamination_globalx(Request $request){
-        
+
         $pdf_content = self::PhysicalExaminationPDFx($request);
 
         $template = view('pdf_m.pe_reports', ['content' => $pdf_content, 'request' => $request]);
-        
+
         return self::pdf_m($request, $template);
     }
 
     public function activityWellnessPDF_globalx(Request $request){
-        
+
         $pdf_content = self::activityWellnessPDFx($request);
         // dd($pdf_content);
         $template = view('pdf_m.activity_wellness_reports', ['content' => $pdf_content, 'request' => $request]);
-        
+
         return self::pdf_m($request, $template);
     }
 
     public function assessmentPDF_globalx(Request $request){
-        
+
         $pdf_content = self::formPDFx($request);
-        
+
         $template = view('pdf_m.assessment_reports', ['content' => $pdf_content->getData()->data, 'request' => $request]);
-        
+
         return self::pdf_m($request, $template);
     }
 
-    public function pdf_m(Request $request, $template) {    
+    public function pdf_m(Request $request, $template) {
 
         $mpdf = new Mpdf(['tempDir' => storage_path('app/pdf')]);
 
@@ -1394,10 +1397,10 @@ class AuthService extends BaseService
         if($title == null){
             if($request->get('act_catagory')){
                  $title = $request->get('act_catagory');
-             }   
+             }
             if($request->get('title')){
                  $title = $request->get('title');
-             }           
+             }
         }
 
         $mpdf->WriteHTML($template);
@@ -1414,9 +1417,107 @@ class AuthService extends BaseService
                 'Content-Type' => 'application/pdf',
                 'Content-disposition' => 'inline; filename=' .$fileName
             ]);
-        
+
         return $this->httpResponse->streamResponse();
 
+    }
+
+
+
+    public function patientSummary(Request $request): JsonResponse
+    {
+        $getpatient_id = self::getConsultInfo($request);
+        $entityService = new EntityService;
+
+        $patient_id = $getpatient_id['patient_id'];
+        $consult_id = $getpatient_id['consult_id'];
+        $request['patient_id']= $patient_id;
+        $request['user_id'] = $patient_id;
+        $request['limit'] = 3;
+
+        // $summary['1_profile'] = $request->user()->Where('id',$patient_id)->first(['first_name','last_name','dob','gender','blood_group']);
+
+        // HEALTH
+
+        unset($request['slug'],$request['resource'],$request['entity']);
+
+        $request['resource']= 'PatientHealth';
+        $request['entity']= new PatientHealth;
+
+        $request['slug']= 'allergy';
+        $allergy = $entityService->getLimitEntity($request);
+        $health['1_allergy'] = $allergy->getData()->data;
+
+        $request['slug']= 'medicine';
+        $medicine = $entityService->getLimitEntity($request);
+        $health['2_medicine'] = $medicine->getData()->data;
+
+        $request['slug']= 'diet';
+        $diet = $entityService->getLimitEntity($request);
+        $health['3_diet'] = $diet->getData()->data;
+
+        $request['slug']= 'hpi';
+        $hpi = $entityService->getLimitEntity($request);
+        $health['4_hpi'] = $hpi->getData()->data;
+
+        $request['slug']= 'procedure';
+        $procedure = $entityService->getLimitEntity($request);
+        $health['5_procedure'] = $procedure->getData()->data;
+
+
+        // HISTORIES
+
+        $history['1_medical_history'] = PatientHistory::Where('patient_id',$patient_id)
+                            ->Where('slug','medical-history')->orderBy('id', 'desc')
+                            ->limit(5)->get();
+
+        $history['2_social_history'] = PatientHistory::Where('patient_id',$patient_id)
+                            ->Where('slug','social-history')
+                            ->orderBy('id', 'desc')
+                            ->limit(5)->get();
+
+        $history['3_surgical_history'] = PatientHistory::Where('patient_id',$patient_id)
+                            ->Where('slug','surgical-history')
+                            ->orderBy('id', 'desc')
+                            ->limit(5)->get();
+
+        $history['4_ros'] = ReviewOfSystem::Where('patient_id',$patient_id)
+                            ->get();
+
+        $history['5_pe'] = PhysicalExamination::Where('patient_id',$patient_id)
+                            ->get();
+
+        $history['6_stroke_scale'] = PatientHistory::Where('patient_id',$patient_id)
+                            ->Where('slug','stroke-scale')
+                            ->get();
+
+
+        unset($request['slug'],$request['resource'],$request['entity']);
+        $request['slug']= 'family_history_diseases';
+        $request['resource']= 'Master';
+        $request['entity']= new Master;
+        $family_history = $entityService->getEntity($request);
+        $history['7_family_history'] = $family_history->getData()->data;
+
+        // $summary['8_doc'] = Doc::orderBy('document_source','asc')->orderBy('id', 'desc')
+        //                     ->limit(5)->get();
+
+        // $summary['2_vital'] = Vital::Where('user_id',$patient_id)->orderBy('slug','asc')
+        //                     ->orderBy('id', 'desc')->limit(5)->get();
+
+        // $summary['7_history'] = PatientHistory::Where('slug','!=','stroke-scale')
+        //                     ->orderBy('slug','asc')->orderBy('id', 'desc')
+        //                     ->limit(5)->get();
+
+        $summary['doc_slug'] = Doc::orderBy('document_source','asc')->groupBy('document_source')->pluck('document_source');
+
+
+        return $this->httpResponse->setHttpData([
+            'profile'=>$summary,
+            'history'=>$history,
+            'health'=>$health
+        ])
+                    ->jsonResponse();
     }
 
 }

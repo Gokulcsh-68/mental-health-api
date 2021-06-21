@@ -43,6 +43,7 @@ $router->group(['prefix' => 'v1/', 'middleware' => 'clientAuth'], function ($rou
 
     $router->get('teleconsult/token-validate', 'AuthService@consultTokenValidate');
     $router->get('teleconsult/summary', 'AuthService@consultSummary');
+    $router->get('patient/summary', 'AuthService@patientSummary');
 
     $router->post('freeze-phr-emr', 'AuthService@freezePhrEmr');
 
