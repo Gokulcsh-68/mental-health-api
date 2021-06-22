@@ -27,7 +27,6 @@ use App\Requests\ResendOtpRequest;
 use App\Requests\TwofaRequest;
 use App\Requests\VerifyOtpRequest;
 use App\Services\CureselectApis\TeleConsultApiService;
-use App\Services\ImmunisationService;
 use App\Services\UtilService;
 use App\Traits\DicomUploadTrait;
 use App\Transformers\UserTransformer;
