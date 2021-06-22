@@ -36,7 +36,6 @@ use App\Requests\TwofaRequest;
 use App\Requests\VerifyOtpRequest;
 use App\Services\CureselectApis\TeleConsultApiService;
 use App\Services\EntityService;
-use App\Services\ImmunisationService;
 use App\Services\UtilService;
 use App\Traits\DicomUploadTrait;
 use App\Transformers\MasterTransformer;
