@@ -1435,7 +1435,7 @@ class AuthService extends BaseService
         $request['user_id'] = $patient_id;
         $request['limit'] = 3;
 
-        // $summary['1_profile'] = $request->user()->Where('id',$patient_id)->first(['first_name','last_name','dob','gender','blood_group']);
+        $summary['1_profile'] = $request->user()->Where('id',$patient_id)->first(['first_name','last_name','dob','gender','blood_group']);
 
         // HEALTH
 
@@ -1467,57 +1467,142 @@ class AuthService extends BaseService
 
         // HISTORIES
 
-        $history['1_medical_history'] = PatientHistory::Where('patient_id',$patient_id)
-                            ->Where('slug','medical-history')->orderBy('id', 'desc')
-                            ->limit(5)->get();
+        unset($request['slug'],$request['resource'],$request['entity']);
 
-        $history['2_social_history'] = PatientHistory::Where('patient_id',$patient_id)
-                            ->Where('slug','social-history')
-                            ->orderBy('id', 'desc')
-                            ->limit(5)->get();
+        $request['resource']= 'PatientHistory';
+        $request['entity']= new PatientHistory;
 
-        $history['3_surgical_history'] = PatientHistory::Where('patient_id',$patient_id)
-                            ->Where('slug','surgical-history')
-                            ->orderBy('id', 'desc')
-                            ->limit(5)->get();
+        $request['slug']= 'medical-history';
+        $medical_history = $entityService->getLimitEntity($request);
+        $history['1_medical_history'] = $medical_history->getData()->data;
 
-        $history['4_ros'] = ReviewOfSystem::Where('patient_id',$patient_id)
+        $request['slug']= 'social-history';
+        $social_history = $entityService->getLimitEntity($request);
+        $history['3_social_history'] = $social_history->getData()->data;
+
+        $request['slug']= 'surgical-history';
+        $surgical_history = $entityService->getLimitEntity($request);
+        $history['2_surgical_history'] = $surgical_history->getData()->data;
+
+
+        $history['5_ros'] = ReviewOfSystem::Where('patient_id',$patient_id)
                             ->get();
 
-        $history['5_pe'] = PhysicalExamination::Where('patient_id',$patient_id)
+        $history['6_pe'] = PhysicalExamination::Where('patient_id',$patient_id)
                             ->get();
 
-        $history['6_stroke_scale'] = PatientHistory::Where('patient_id',$patient_id)
-                            ->Where('slug','stroke-scale')
-                            ->get();
+        $request['slug']= 'stroke-scale';
+        $stroke_scale = $entityService->getLimitEntity($request);
+        $history['7_stroke_scale'] = $stroke_scale->getData()->data;
 
 
         unset($request['slug'],$request['resource'],$request['entity']);
-        $request['slug']= 'family_history_diseases';
+        
         $request['resource']= 'Master';
         $request['entity']= new Master;
+
+        $request['slug']= 'family_history_diseases';
         $family_history = $entityService->getEntity($request);
-        $history['7_family_history'] = $family_history->getData()->data;
+        $history['4_family_history'] = $family_history->getData()->data;
 
-        // $summary['8_doc'] = Doc::orderBy('document_source','asc')->orderBy('id', 'desc')
-        //                     ->limit(5)->get();
+        // DOCUMENTS
 
-        // $summary['2_vital'] = Vital::Where('user_id',$patient_id)->orderBy('slug','asc')
-        //                     ->orderBy('id', 'desc')->limit(5)->get();
 
-        // $summary['7_history'] = PatientHistory::Where('slug','!=','stroke-scale')
-        //                     ->orderBy('slug','asc')->orderBy('id', 'desc')
-        //                     ->limit(5)->get();
+        unset($request['slug'],$request['resource'],$request['entity']);
 
-        $summary['doc_slug'] = Doc::orderBy('document_source','asc')->groupBy('document_source')->pluck('document_source');
+        $request['resource']= 'Doc';
+        $request['entity']= new Doc;
+
+
+        $request['slug']= 'lab';
+        $lab = $entityService->getLimitEntity($request);
+        $docs['1_lab'] = $lab->getData()->data;
+
+        $request['slug']= 'imaging';
+        $imaging = $entityService->getLimitEntity($request);
+        $docs['2_imaging'] = $imaging->getData()->data;
+
+        $request['slug']= 'icd';
+        $icd = $entityService->getLimitEntity($request);
+        $docs['3_icd'] = $icd->getData()->data;
+
+        $request['slug']= 'chief-complaints';
+        $chief_complaints = $entityService->getLimitEntity($request);
+        $docs['4_chief_complaints'] = $chief_complaints->getData()->data;
+
+
+        unset($request['slug'],$request['resource'],$request['entity']);
+        
+        $request['resource']= 'Master';
+        $request['entity']= new Master;
+
+        $request['slug']= 'immunisation';
+        $immunisation = $entityService->getEntity($request);
+        $vaccine['1_immunisation'] = $immunisation->getData()->data;
+
+       
+        // VITALS
+
+        unset($request['slug'],$request['resource'],$request['entity']);
+
+        $request['resource']= 'Vital';
+        $request['entity']= new Vital;
+
+        $request['slug']= 'bmi';
+        $bmi = $entityService->getLimitEntity($request);
+        $vitals['1_bmi'] = $bmi->getData()->data;
+
+
+        $request['slug']= 'temperature';
+        $temperature = $entityService->getLimitEntity($request);
+        $vitals['2_temperature'] = $temperature->getData()->data;
+
+
+        $request['slug']= 'blood-sugar';
+        $bs = $entityService->getLimitEntity($request);
+        $vitals['3_bs'] = $bs->getData()->data;
+
+
+        $request['slug']= 'spO2';
+        $spo2 = $entityService->getLimitEntity($request);
+        $vitals['4_spo2'] = $spo2->getData()->data;
+
+
+        $request['slug']= 'urine';
+        $urine = $entityService->getLimitEntity($request);
+        $vitals['5_urine'] = $urine->getData()->data;
+
+
+        $request['slug']= 'blood-pressure';
+        $bp = $entityService->getLimitEntity($request);
+        $vitals['6_bp'] = $bp->getData()->data;
+
+
+        $request['slug']= 'heart-rate';
+        $heart = $entityService->getLimitEntity($request);
+        $vitals['7_heart'] = $heart->getData()->data;
+
+
+        $request['slug']= 'lipid-profile';
+        $lipid = $entityService->getLimitEntity($request);
+        $vitals['8_lipid'] = $lipid->getData()->data;
+
+
+        $request['slug']= 'respiration';
+        $respiration = $entityService->getLimitEntity($request);
+        $vitals['9_respiration'] = $respiration->getData()->data;
+
+       
 
 
         return $this->httpResponse->setHttpData([
             'profile'=>$summary,
+            'vitals'=>$vitals,
             'history'=>$history,
-            'health'=>$health
-        ])
-                    ->jsonResponse();
+            'health'=>$health,
+            'immunisation'=>$vaccine,
+            'docs'=>$docs
+        ])->jsonResponse();
     }
 
 }
