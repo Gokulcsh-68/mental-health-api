@@ -230,10 +230,10 @@ class AuthService extends BaseService
                             ->Where('slug','stroke-scale')
                             ->orderBy('slug','asc')->get();
 
-        $summary['4_ros'] = ReviewOfSystem::Where('consult_id',$consult_id)
+        $summary['4_ros'] = ReviewOfSystem::Where('patient_id',$patient_id)
                             ->orderBy('slug','asc')->get();
 
-        $summary['5_pe'] = PhysicalExamination::Where('consult_id',$consult_id)
+        $summary['5_pe'] = PhysicalExamination::Where('patient_id',$patient_id)
                             ->orderBy('slug','asc')->get();
 
         $summary['8_doc'] = Doc::Where('consult_id',$consult_id)
@@ -1397,10 +1397,12 @@ class AuthService extends BaseService
             if($request->get('act_catagory')){
                  $title = $request->get('act_catagory');
              }
-            if($request->get('title')){
-                 $title = $request->get('title');
-             }
         }
+
+
+        if($request->get('title')){
+             $title = $request->get('title');
+         }
 
         $mpdf->WriteHTML($template);
 
@@ -1434,7 +1436,27 @@ class AuthService extends BaseService
         $request['user_id'] = $patient_id;
         $request['limit'] = 3;
 
-        $summary['1_profile'] = $request->user()->Where('id',$patient_id)->first(['first_name','last_name','dob','gender','blood_group']);
+        if($request->get('pdf_for') == 'consult_report'){
+            $request['consult_id']= $consult_id;
+        }
+
+        // $summary['1_profile'] = $request->user()->Where('id',$patient_id)->first(['first_name','last_name','dob','gender','blood_group']);
+
+        $summary['a_profile'] = User::Where('id',$patient_id)->first();
+
+
+        if($request->get('pdf_for') == 'consult_report'){
+             $providers = Provider::Where('user_id',$getpatient_id['provider_info']['ref_number'])->first(["additional_info","license_no"]);
+
+             $getpatient_id['provider_info']['license_no'] = $providers?$providers['license_no']:'';
+             $getpatient_id['provider_info']['qualification'] = $providers?$providers['additional_info']?$providers['additional_info']->qualification:'':'';
+
+              $getpatient_id['provider_info']['consult_speciality'] = $getpatient_id['provider_info']['additional_info']['consult_speciality'];
+
+
+            $summary['c_provider_details'] = $getpatient_id['provider_info'];
+            $summary['b_consult_details'] = $getpatient_id['consultInfo'];
+        }
 
         // HEALTH
 
@@ -1445,23 +1467,23 @@ class AuthService extends BaseService
 
         $request['slug']= 'allergy';
         $allergy = $entityService->getLimitEntity($request);
-        $health['1_allergy'] = $allergy->getData()->data;
+        $health['a_allergy'] = $allergy->getData()->data;
 
         $request['slug']= 'medicine';
         $medicine = $entityService->getLimitEntity($request);
-        $health['2_medicine'] = $medicine->getData()->data;
+        $health['b_medicine'] = $medicine->getData()->data;
 
         $request['slug']= 'diet';
         $diet = $entityService->getLimitEntity($request);
-        $health['3_diet'] = $diet->getData()->data;
+        $health['c_diet'] = $diet->getData()->data;
 
         $request['slug']= 'hpi';
         $hpi = $entityService->getLimitEntity($request);
-        $health['4_hpi'] = $hpi->getData()->data;
+        $health['d_hpi'] = $hpi->getData()->data;
 
         $request['slug']= 'procedure';
         $procedure = $entityService->getLimitEntity($request);
-        $health['5_procedure'] = $procedure->getData()->data;
+        $health['e_procedure'] = $procedure->getData()->data;
 
 
         // HISTORIES
@@ -1473,36 +1495,36 @@ class AuthService extends BaseService
 
         $request['slug']= 'medical-history';
         $medical_history = $entityService->getLimitEntity($request);
-        $history['1_medical_history'] = $medical_history->getData()->data;
+        $history['a_medical_history'] = $medical_history->getData()->data;
 
         $request['slug']= 'social-history';
         $social_history = $entityService->getLimitEntity($request);
-        $history['3_social_history'] = $social_history->getData()->data;
+        $history['c_social_history'] = $social_history->getData()->data;
 
         $request['slug']= 'surgical-history';
         $surgical_history = $entityService->getLimitEntity($request);
-        $history['2_surgical_history'] = $surgical_history->getData()->data;
+        $history['b_surgical_history'] = $surgical_history->getData()->data;
 
 
-        $history['5_ros'] = ReviewOfSystem::Where('patient_id',$patient_id)
+        $history['e_ros'] = ReviewOfSystem::Where('patient_id',$patient_id)
                             ->get();
 
-        $history['6_pe'] = PhysicalExamination::Where('patient_id',$patient_id)
+        $history['f_pe'] = PhysicalExamination::Where('patient_id',$patient_id)
                             ->get();
 
         $request['slug']= 'stroke-scale';
         $stroke_scale = $entityService->getLimitEntity($request);
-        $history['7_stroke_scale'] = $stroke_scale->getData()->data;
+        $history['g_stroke_scale'] = $stroke_scale->getData()->data;
 
 
         unset($request['slug'],$request['resource'],$request['entity']);
-        
+
         $request['resource']= 'Master';
         $request['entity']= new Master;
 
         $request['slug']= 'family_history_diseases';
         $family_history = $entityService->getEntity($request);
-        $history['4_family_history'] = $family_history->getData()->data;
+        $history['d_family_history'] = $family_history->getData()->data;
 
         // DOCUMENTS
 
@@ -1515,31 +1537,35 @@ class AuthService extends BaseService
 
         $request['slug']= 'lab';
         $lab = $entityService->getLimitEntity($request);
-        $docs['1_lab'] = $lab->getData()->data;
+        $docs['a_lab'] = $lab->getData()->data;
 
         $request['slug']= 'imaging';
         $imaging = $entityService->getLimitEntity($request);
-        $docs['2_imaging'] = $imaging->getData()->data;
+        $docs['b_imaging'] = $imaging->getData()->data;
 
         $request['slug']= 'icd';
         $icd = $entityService->getLimitEntity($request);
-        $docs['3_icd'] = $icd->getData()->data;
+        $docs['c_icd'] = $icd->getData()->data;
 
         $request['slug']= 'chief-complaints';
         $chief_complaints = $entityService->getLimitEntity($request);
-        $docs['4_chief_complaints'] = $chief_complaints->getData()->data;
+        $docs['d_chief_complaints'] = $chief_complaints->getData()->data;
+
+        // $request['slug']= 'health-insurance';
+        // $health_insurance = $entityService->getLimitEntity($request);
+        // $docs['e_health_insurance'] = $health_insurance->getData()->data;
 
 
         unset($request['slug'],$request['resource'],$request['entity']);
-        
+
         $request['resource']= 'Master';
         $request['entity']= new Master;
 
         $request['slug']= 'immunisation';
         $immunisation = $entityService->getEntity($request);
-        $vaccine['1_immunisation'] = $immunisation->getData()->data;
+        $vaccine['a_immunisation'] = $immunisation->getData()->data;
 
-       
+
         // VITALS
 
         unset($request['slug'],$request['resource'],$request['entity']);
@@ -1549,49 +1575,49 @@ class AuthService extends BaseService
 
         $request['slug']= 'bmi';
         $bmi = $entityService->getLimitEntity($request);
-        $vitals['1_bmi'] = $bmi->getData()->data;
+        $vitals['a_bmi'] = $bmi->getData()->data;
 
 
         $request['slug']= 'temperature';
         $temperature = $entityService->getLimitEntity($request);
-        $vitals['2_temperature'] = $temperature->getData()->data;
+        $vitals['b_temperature'] = $temperature->getData()->data;
 
 
         $request['slug']= 'blood-sugar';
         $bs = $entityService->getLimitEntity($request);
-        $vitals['3_bs'] = $bs->getData()->data;
+        $vitals['c_bs'] = $bs->getData()->data;
 
 
         $request['slug']= 'spO2';
         $spo2 = $entityService->getLimitEntity($request);
-        $vitals['4_spo2'] = $spo2->getData()->data;
+        $vitals['d_spo2'] = $spo2->getData()->data;
 
 
         $request['slug']= 'urine';
         $urine = $entityService->getLimitEntity($request);
-        $vitals['5_urine'] = $urine->getData()->data;
+        $vitals['e_urine'] = $urine->getData()->data;
 
 
         $request['slug']= 'blood-pressure';
         $bp = $entityService->getLimitEntity($request);
-        $vitals['6_bp'] = $bp->getData()->data;
+        $vitals['f_bp'] = $bp->getData()->data;
 
 
         $request['slug']= 'heart-rate';
         $heart = $entityService->getLimitEntity($request);
-        $vitals['7_heart'] = $heart->getData()->data;
+        $vitals['g_heart'] = $heart->getData()->data;
 
 
         $request['slug']= 'lipid-profile';
         $lipid = $entityService->getLimitEntity($request);
-        $vitals['8_lipid'] = $lipid->getData()->data;
+        $vitals['h_lipid'] = $lipid->getData()->data;
 
 
         $request['slug']= 'respiration';
         $respiration = $entityService->getLimitEntity($request);
-        $vitals['9_respiration'] = $respiration->getData()->data;
+        $vitals['i_respiration'] = $respiration->getData()->data;
 
-       
+
 
 
         return $this->httpResponse->setHttpData([
@@ -1602,6 +1628,35 @@ class AuthService extends BaseService
             'immunisation'=>$vaccine,
             'docs'=>$docs
         ])->jsonResponse();
+    }
+
+
+
+    public function patientSummaryPdf(Request $request){
+
+        $pdf_content = self::patientSummary($request);
+
+        // dd($pdf_content->getData()->data);
+
+        $request->request->add(['title' => 'Patient summary report']);
+        $template = view('pdf_m.patient_summary', ['content' => $pdf_content->getData()->data, 'request' => $request]);
+
+        return self::pdf_m($request, $template);
+    }
+
+    public function consultSummaryPdf(Request $request){
+
+
+        $request->request->add(['pdf_for' => 'consult_report']);
+
+        $pdf_content = self::patientSummary($request);
+
+        // dd($pdf_content->getData()->data);
+
+        $request->request->add(['title' => 'Consult summary report']);
+        $template = view('pdf_m.patient_summary', ['content' => $pdf_content->getData()->data, 'request' => $request]);
+
+        return self::pdf_m($request, $template);
     }
 
 }

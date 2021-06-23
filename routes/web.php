@@ -27,6 +27,8 @@ $router->get('/activated', function () use ($router) {
     return view('activated');
 });
 
+
+
 $router->get('v1/users/activate-accounts-x', 'AuthService@activateAccountsx');
 
 $router->group(['prefix' => 'peripheral/', 'middleware' => 'peripheralAuth'], function ($router) {
@@ -43,7 +45,9 @@ $router->group(['prefix' => 'v1/', 'middleware' => 'clientAuth'], function ($rou
 
     $router->get('teleconsult/token-validate', 'AuthService@consultTokenValidate');
     $router->get('teleconsult/summary', 'AuthService@consultSummary');
+    $router->get('teleconsult/summaryPdf', 'AuthService@consultSummaryPdf');
     $router->get('patient/summary', 'AuthService@patientSummary');
+    $router->get('patient/summaryPdf', 'AuthService@patientSummaryPdf');
 
     $router->post('freeze-phr-emr', 'AuthService@freezePhrEmr');
 
@@ -65,7 +69,7 @@ $router->group(['prefix' => 'v1/', 'middleware' => 'clientAuth'], function ($rou
 
         $router->get('resource/masters/list', 'MasterService@masterList');
         $router->get('resource/custom/masters/list', 'MasterService@customMasterList');
-        
+
     });
 
     $router->group(['middleware' => 'ApiServiceAuth'], function ($router) {
@@ -106,7 +110,7 @@ $router->group(['prefix' => 'v1/', 'middleware' => 'clientAuth'], function ($rou
         $router->get('ReviewOfSystem_globalx', 'AuthService@ReviewOfSystem_globalx');
         $router->get('physicalExamination_globalx', 'AuthService@physicalExamination_globalx');
          $router->get('assessmentPDF_globalx', 'AuthService@assessmentPDF_globalx');
-        
+
         $router->group(['prefix' => 'users'], function ($router) {
             $router->patch('set-password', 'AuthService@setPassword');
             $router->patch('change-password', 'AuthService@changePassword');
