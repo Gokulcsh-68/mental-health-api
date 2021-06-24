@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 |
  */
 
+    $router->get('patient/summary', 'AuthService@patientSummary');
 
 $router->get('/key', function() {
     return \Illuminate\Support\Str::random(32);

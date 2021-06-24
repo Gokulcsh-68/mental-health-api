@@ -12,7 +12,7 @@
 	 		<td>{{date('d-M-y h:i:s',strtotime($v['ended_at']))}}</td>
 
 	 		<th>Additional Notes </th>
-	 		<td>{{$v['additional_info']->consult_notes}}</td>
+	 		<td>@if(!empty($v['additional_info']->consult_notes)){{$v['additional_info']->consult_notes}}@endif</td>
 	 	</tr>	 	
 	 </table>
 
