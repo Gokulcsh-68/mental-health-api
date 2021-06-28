@@ -75,6 +75,9 @@ class Master extends BaseModel
                         if($request->user()->role->code == 'provider'){
                             $speciality = $request->user()->provider->providerSpeciality->pluck('speciality');
                             $model->whereIn('masters.slug', $speciality);
+                        }else if($request->user()->role->code == 'hospital'){
+                            $speciality = $request->user()->staff->hospital->hospitalSpeciality->pluck('speciality');
+                            $model->whereIn('masters.slug', $speciality);
                         }else{
                              $model->where('masters.master_type_slug', $request->get('slug'));
                         }
