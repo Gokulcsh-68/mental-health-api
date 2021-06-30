@@ -42,7 +42,7 @@ class DatabaseSeeder extends Seeder
             ImagingSeeder::class,
             LabSeeder::class,
             MeasurementStrengthSeeder::class,
-            // MedicationBrandSeeder::class,
+            MedicationBrandSeeder::class,
             MedicationGenericSeeder::class,
             UsMedicineSeeder::class,
             UsLabSeeder::class,
