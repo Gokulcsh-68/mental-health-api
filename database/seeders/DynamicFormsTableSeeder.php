@@ -279,7 +279,6 @@ class DynamicFormsTableSeeder extends Seeder
             ['slug' => "neurological"   , 'attributes' => json_encode(['type'=>'checkbox', 'name'=>'problems_with_walking_or_balance', 'label'=>' problems with walking or balance' , 'data'=>'neurological_problems_with_walking_or_balance_notes'])],
             ['slug' => "neurological"   , 'attributes' => json_encode(['type'=>'checkbox', 'name'=>'uncontrolled_motions', 'label'=>' uncontrolled motions' , 'data'=>'neurological_uncontrolled_motions_notes'])],
             ['slug' => "neurological"   , 'attributes' => json_encode(['type'=>'checkbox', 'name'=>'episodes_of_visual_loss', 'label'=>' episodes of visual loss' , 'data'=>'neurological_episodes_of_visual_loss_notes'])],
-            ['slug' => "neurological"   , 'attributes' => json_encode(['type'=>'textarea', 'name'=>'notes', 'label'=>' Notes' , 'data'=>'neurological_notes_notes'])],
             ['slug' => "skin"   , 'attributes' => json_encode(['type'=>'checkbox', 'name'=>'persistent_rash', 'label'=>' Persistent rash' , 'data'=>'skin_persistent_rash_notes'])],
             ['slug' => "skin"   , 'attributes' => json_encode(['type'=>'checkbox', 'name'=>'itching', 'label'=>' itching' , 'data'=>'skin_itching_notes'])],
             ['slug' => "skin"   , 'attributes' => json_encode(['type'=>'checkbox', 'name'=>'new_skin_lesion', 'label'=>' new skin lesion' , 'data'=>'skin_new_skin_lesion_notes'])],

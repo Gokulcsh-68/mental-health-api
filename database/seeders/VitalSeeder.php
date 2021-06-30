@@ -43,7 +43,6 @@ class VitalSeeder extends Seeder
                     'Spo2' => [
                         ["name"=> "%", "code"=> "%"]
                     ],
-
                     'Leukocytes' => [
                         ["name"=> "-", "code"=> "Minus"],
                         ["name"=> "+", "code"=> "Plus"],

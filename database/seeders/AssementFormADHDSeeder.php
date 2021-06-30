@@ -47,7 +47,7 @@ class AssementFormADHDSeeder extends Seeder
                 'type' => 'score',
                 'slug' => str_slug('Assessment Scale - Teacher Informant'),
                 'is_active' => 1,
-                'role_code' => json_encode(array("school", "staff"))
+                'role_code' => json_encode(array("school", "staffStudentAssement"))
             ],
             [
                 'name' => 'Assessment Follow-up - Parent Informant', 
@@ -65,7 +65,7 @@ class AssementFormADHDSeeder extends Seeder
                 'type' => 'score',
                 'slug' => str_slug('Assessment Follow-up - Teacher Informant'),
                 'is_active' => 1,
-                'role_code' => json_encode(array("school", "staff"))
+                'role_code' => json_encode(array("school", "staffStudentAssement"))
             ]
     	];
 
