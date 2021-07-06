@@ -81,6 +81,10 @@ class Hospital extends BaseModel
         return $this->hasOne(Staff::class)->admin();
     }
 
+    public function hospitalSpeciality()
+    {
+        return $this->hasMany(HospitalSpeciality::class);
+    }
 
     public function user()
     {
@@ -96,9 +100,11 @@ class Hospital extends BaseModel
             $data['group_id'] = null;
 
             if(!$request->filled('register')) {
-               
-                if($request->user()->role->code == 'hospitalgroup'){
-                $data['group_id'] = $request->user()->staff->group_id;
+                
+                if(!empty($request->user())){
+                    if($request->user()->role->code == 'hospitalgroup'){
+                    $data['group_id'] = $request->user()->staff->group_id;
+                    }
                 }
             }
 
@@ -110,9 +116,19 @@ class Hospital extends BaseModel
 
             $hospital = $this->create($data);
 
+            $hospital_speciality = [];
+            foreach ($data['hospital_speciality'] as $key => $value) {
+               $hospital_speciality[$key] = ['speciality'=>$value];
+            }
+
+            $hospital->hospitalSpeciality()->createMany($hospital_speciality);
+            
+
             $data['user']['role_id'] = Role::where("code",  $data['user']['role'])->pluck('id')->first();
 
             $user = User::create($data['user']);
+
+            
 
             $staff = [
                 'hospital_id' => $hospital->id,
@@ -149,6 +165,23 @@ class Hospital extends BaseModel
             // Enforce user role not be update
             unset($data['user']['role_id']);
             $staff->primaryStaff->user->fill($data['user'])->save();
+
+
+            if (!empty($data['hospital_speciality'])) {
+                    //hospital specialities delete and add
+                  
+                    $model->hospitalSpeciality()->delete();
+                    $hospital_speciality = [];
+                    foreach ($data['hospital_speciality'] as $key => $value) {
+                       $hospital_speciality[$key] = ['speciality'=>$value];
+                    }
+                    
+                    if(!empty($hospital_speciality)){
+                    $model->hospitalSpeciality()->createMany($hospital_speciality);
+
+                    }
+                }
+
             DB::commit();
 
 

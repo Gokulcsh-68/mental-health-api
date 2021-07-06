@@ -19,19 +19,15 @@
 
 	          <tr>
 	          	<td>{{$lv->name}}</td> 
-	            @foreach($familyRelationships as $fk => $fv) 
 
 		          	@foreach($lv->attributes->values as $vk =>$vv)
 
-		          		@if($fv == $vv->relationship)
 
 		            		<td>@if($vv->status) Yes @endif</td> 
 
-		            	@endif
 
 		            @endforeach
 
-	            @endforeach
 
 	          </tr>
 

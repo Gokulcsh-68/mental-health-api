@@ -2,6 +2,7 @@
 
 namespace App\Entities;
 use DB;
+use Illuminate\Support\Facades\Log;
 
 class FormSubmittedAnswer extends BaseModel
 {
@@ -145,6 +146,71 @@ class FormSubmittedAnswer extends BaseModel
     return $data_fields;
   }
 
+
+  public static function Psychosis_Symptom_Severity_score_fields()
+  {
+
+   $data_fields = array(0 => 'none', 1 => 'equivocal', 2 => 'present, but mild',
+                      3 => 'present and moderate', 4 => 'present and severe');
+    return $data_fields;
+  }
+
+  public static function conduct_disorder_one_score_fields()
+  {
+
+   $data_fields = array(0 => 'None', 1 => 'Mild', 2 => 'Moderate',3 => 'Severe');
+    return $data_fields;
+  }
+
+  public static function conduct_disorder_two_score_fields()
+  {
+
+   $data_fields = array(0 => 'Level 0', 1 => 'Level 1', 2 => 'Level 2',3 => 'Level 3');
+    return $data_fields;
+  }
+
+  public static function nonsuicidal_self_injury_one_score_fields()
+  {
+
+   $data_fields = array(0 => 'None', 1 => 'Subthreshold', 2 => 'Mild',3 => 'Moderate',4 => 'Severe');
+    return $data_fields;
+  }
+
+  public static function nonsuicidal_self_injury_two_score_fields()
+  {
+
+   $data_fields = array(0 => 'Level 0', 1 => 'Level 1', 2 => 'Level 2',3 => 'Level 3', 4 => 'Level 4');
+    return $data_fields;
+  }
+
+  public static function oppositional_defiant_disorder_one_score_fields()
+  {
+
+   $data_fields = array(0 => 'None', 1 => 'Mild', 2 => 'Moderate',3 => 'Severe');
+    return $data_fields;
+  }
+
+  public static function oppositional_defiant_disorder_two_score_fields()
+  {
+
+   $data_fields = array(0 => 'Level 0', 1 => 'Level 1', 2 => 'Level 2',3 => 'Level 3');
+    return $data_fields;
+  }
+
+  public static function autism_social_disorder_one_score_fields()
+  {
+
+   $data_fields = array(0 => 'None', 1 => 'Mild/Requiring support',
+    2 => 'Moderate/Requiring SUBSTANTIAL support',3 => 'Severe/Requiring VERY SUBSTANTIAL support');
+    return $data_fields;
+  }
+
+  public static function autism_social_disorder_two_score_fields()
+  {
+
+   $data_fields = array(0 => 'Level 0', 1 => 'Level 1', 2 => 'Level 2',3 => 'Level 3');
+    return $data_fields;
+  }
 
   public static function Anxiety_score_fields()
   {
@@ -352,6 +418,34 @@ class FormSubmittedAnswer extends BaseModel
             $prorated_score = number_format($prorated_score,2);
 
             $score_message = "@span Raw Score is $score, Total Answered Questions is $total_answered_questions, Pro Rated is !secondary! $prorated_score @br score ! @c ";
+          }
+
+          return $score_message;
+        break;
+
+        case 'Phobia':
+          $score = (int)$data['score'];
+
+          $score_message = '';
+
+          if(!empty($data['answers'])){
+            $written_answers = ($data['answers']);
+            unset($written_answers->feedback);
+            $total_answered_questions = count((array)$written_answers);
+
+            if($total_answered_questions <= 7){
+              return "@span Please Retake the Assement @c";
+            }else if($total_answered_questions <= 9){
+              $prorated_score = ($score * 10)/$total_answered_questions;
+              $prorated_score = number_format($prorated_score,2);
+
+              $score_message = "@span Raw Score is $score, Total Answered Questions is $total_answered_questions, Pro Rated is !secondary! $prorated_score @br score ! @c ";
+
+            }else{
+              $score_message = "@span Raw Score is $score, Total Answered Questions is $total_answered_questions @c ";
+            }
+
+            
           }
 
           return $score_message;
@@ -594,6 +688,8 @@ class FormSubmittedAnswer extends BaseModel
           $score_message  = "@span Apgar Score of @c";
           $txt_score      = '@f'.$score.'@c are';
 
+
+
           if($score == 0 || $score <= 3){
             $score_message = $score_message.'  !danger!'.$txt_score.'  @br @f Critical Low @c !';
           } else if($score == 4 || $score <= 6){
@@ -603,6 +699,646 @@ class FormSubmittedAnswer extends BaseModel
           }
 
           return $score_message;
+        break;
+
+        case 'Covid self assessment':
+
+          // @span @c  !danger! @f'.$score.'@c are' @br @f Critical Low @c !
+
+          $score_message  = "@span ";
+
+          $covid_questions = Question::where('name' , 'What is your present Temperature value in fahrenheit?')
+                                ->orWhere('name', 'What is your present SpO2 value?')
+                                ->orWhere('name', 'What is your Respiration Rate?')->get();
+          // log::info($covid_questions);
+
+          if(!empty($covid_questions)){
+            foreach ($covid_questions as $covid_question) {
+             // log::info($covid_question['id']);
+             $find_questions =  (array) $data['answers'];
+
+             if(array_key_exists($covid_question['id'], $find_questions)){
+                if($find_questions[$covid_question['id']]){
+
+                  switch ($covid_question['name']) {
+                    case 'What is your present Temperature value in fahrenheit?':
+                      # Temperature 98.6 < please take a teleconsult 100 > please visit near by clinic
+                      $score_message = $score_message.' Temperature @c'.($find_questions[$covid_question['id']] >= 100 || $find_questions[$covid_question['id']] < 95 ? ' !danger! '.$find_questions[$covid_question['id']].' @f is danger @c @br please visit near by clinic @c !' : ($find_questions[$covid_question['id']] > 98.6 ? ' !warning! '.$find_questions[$covid_question['id']].' @f is warning @c @br @teleconsult @c !' : ' !primary! '.$find_questions[$covid_question['id']].' @f @c @br Normal !'));
+                    break;
+
+                    case 'What is your present SpO2 value?':
+                      # Spo2 < 95 please take a teleconsult < 90 please visit near by clinic
+                      $score_message = $score_message.'@br @span Spo2 @c'.($find_questions[$covid_question['id']] <= 90 ? ' !danger! '.$find_questions[$covid_question['id']].' @f is danger @c @br @teleconsult @c !' : ($find_questions[$covid_question['id']] < 95 ? ' !warning! '.$find_questions[$covid_question['id']].' @f is warning @c @br please visit near by clinic @c !' : ' !primary! '.$find_questions[$covid_question['id']].' @f @c @br Normal !'));
+                    break;
+
+                    case 'What is your Respiration Rate?':
+                      # Spo2 < 95 please take a teleconsult < 90 please visit near by clinic
+                      $score_message = $score_message.'@br @span Respiration Rate @c'.($find_questions[$covid_question['id']] > 18 ? ' !danger! '.$find_questions[$covid_question['id']].' @f is High @c @br @teleconsult @c !' : ($find_questions[$covid_question['id']] < 12 ? ' !warning! '.$find_questions[$covid_question['id']].' @f is Low @c @br please visit near by clinic @c !' : ' !primary! '.$find_questions[$covid_question['id']].' @f @c @br Normal !'));
+                    break;
+                    
+                    default:
+                      # code...
+                    break;
+                  }
+                }
+             }
+             
+            }
+          }
+
+          return $score_message;
+        break;
+
+        case 'Dimensions of Psychosis Symptom Severity':
+
+          $score_message  = "@span ";
+
+          $all_questions = Question::whereIn('name' , ['Hallucinations','Delusions', 'Disorganized speech',
+            'Abnormal psychomotor behavior', 'Negative symptoms (restricted emotional expression or avolition)',
+            'Impaired cognition', 'Depression','Mania'])->get();
+
+          $pre_defined_scores  = self::Psychosis_Symptom_Severity_score_fields();
+
+          if(!empty($all_questions)){
+            foreach ($all_questions as $all_question) {
+             // log::info($all_question['id']);
+             $find_questions =  (array) $data['answers'];
+
+             if(array_key_exists($all_question['id'], $find_questions)){
+                if($find_questions[$all_question['id']]){
+
+                  $answeredscore = (int) (!empty($find_questions[$all_question['id']]->score) ? $find_questions[$all_question['id']]->score : 0);
+
+                  $score_explanation = (!empty($pre_defined_scores[$answeredscore]) ? $pre_defined_scores[$answeredscore] : 'Nothing');
+
+                    switch ($answeredscore) {
+                      case 0:
+                        $answer_color = '!success!';
+                      break;
+
+                      case 1:
+                        $answer_color = '!primary!';
+                      break;
+
+                      case 2:
+                        $answer_color = '!secondary!';
+                      break;
+
+                      case 3:
+                        $answer_color = '!warning!';
+                      break;
+
+                      case 4:
+                        $answer_color = '!danger!';
+                      break;
+                      
+                      default:
+                        $answer_color = '!danger!';
+                      break;
+                    }
+                    $score_message = $score_message.'@br @span '.$all_question['name'].' @c  '.$answer_color.' @f is '.$score_explanation.' @c @br @c ! @f Score is '.$answeredscore.' @c';
+
+                }
+              }
+             
+            }
+          }
+
+          return $score_message;
+        break;
+
+        case 'Triage (SOP) in Covid 19':
+          $score_message  = "@span ";
+
+          $pre_asymptomatic = Question::whereIn('name' , ['Test +ve(positive)', 'No Symptoms that are consistant with Covid19'])->get();
+
+          $mild_illness = Question::whereIn('name' , ['Symptoms of Fever, Cough, Soar Throat, Fatigue, Head ache, Body ache, loss of smell & or Taste etc', 'No shortness of breath', 'No difficulty in breathing', 
+            'No abnormal chest imaging', 'No Current Mental Conditions', 'Correlate with No co-morbidity if any'])->get();
+
+          $moderate_illness = Question::whereIn('name' , ['Evidence of lower respiratory infections',
+           'Positive Chest Imaging', 'On Clinical Evaluation or Symptomatic Assessment',
+           'SpO2 at <=94%', 'Cough with Expectoration', 'Sputum (may be colored or blood stained)',
+           'Increased in respiration rate > 20 BPM', 'Shortness or Difficulty in Breathing',
+           'Pain or burning in the Chest'])->get();
+
+          $severe_illness = Question::whereIn('name' , ['SpO2 < 94%','Respiratory Rate > 30 BPM',
+            'Imaging Lung infilltrates > 50%','Po2 / F1o2 (Less than 300mm Hg)'])->get();
+
+          $critical_illness = Question::whereIn('name' , ['Respiratory Failure','Septic shock',
+            'Multiple Organ Dysfunction'])->get();
+
+          $critical_illness_error = $severe_illness_error = $moderate_illness_error = $mild_illness_error = $pre_asymptomatic_error = false;
+
+          if(!empty($critical_illness)){
+            foreach ($critical_illness as $covid_question) {
+             $find_questions =  (array) $data['answers'];
+
+             if(array_key_exists($covid_question['id'], $find_questions)){
+                if($find_questions[$covid_question['id']]){
+                  if($find_questions[$covid_question['id']]->name == 'Yes'){
+                    $critical_illness_error = true;
+                  }
+                }
+              }
+           }
+         }
+
+         if(!empty($severe_illness)){
+            // log::info($severe_illness);
+            foreach ($severe_illness as $covid_question) {
+             $find_questions =  (array) $data['answers'];
+
+             if(array_key_exists($covid_question['id'], $find_questions)){
+                if($find_questions[$covid_question['id']]){
+                  if($find_questions[$covid_question['id']]->name == 'Yes'){
+                    $severe_illness_error = true;
+                  }
+                }
+              }
+           }
+         }
+
+         if(!empty($moderate_illness)){
+            foreach ($moderate_illness as $covid_question) {
+             $find_questions =  (array) $data['answers'];
+
+             if(array_key_exists($covid_question['id'], $find_questions)){
+                if($find_questions[$covid_question['id']]){
+                  if($find_questions[$covid_question['id']]->name == 'Yes'){
+                    $moderate_illness_error = true;
+                  }
+                }
+              }
+           }
+         }
+
+         if(!empty($mild_illness)){
+            foreach ($mild_illness as $covid_question) {
+             $find_questions =  (array) $data['answers'];
+
+             if(array_key_exists($covid_question['id'], $find_questions)){
+                if($find_questions[$covid_question['id']]){
+                  if($find_questions[$covid_question['id']]->name == 'Yes'){
+                    $mild_illness_error = true;
+                  }
+                }
+              }
+           }
+         }
+
+         if(!empty($pre_asymptomatic)){
+            foreach ($pre_asymptomatic as $covid_question) {
+             $find_questions =  (array) $data['answers'];
+
+             if(array_key_exists($covid_question['id'], $find_questions)){
+                if($find_questions[$covid_question['id']]){
+                  if($find_questions[$covid_question['id']]->name == 'Yes'){
+                    $pre_asymptomatic_error = true;
+                  }
+                }
+              }
+           }
+         }
+
+
+         if(!empty($critical_illness_error)){
+          $score_message = $score_message.'@br @span CRITICAL ILLNESS @c !danger! Active Assisted ICU support @f @c @br @c!';
+         }else if(!empty($severe_illness_error)){
+          $score_message = $score_message.'@br @span SEVERE ILLNESS @c !warning! Immediate Hospitalization @f @c @br @c!';
+         }else if(!empty($moderate_illness_error)){
+          $score_message = $score_message.'@br @span MODERATE ILLNESS @c !secondary! Immediate face to face consultation with Doctor @f @c @br @c!';
+         }else if(!empty($mild_illness_error)){
+          $score_message = $score_message.'@br @span MILD ILLNESS @c !primary! Home Quarantine, Self Isolation, Masking, Good Hyderation, Paracetamol SOS Fever, Monitor Vital Signs and enter in the App @f @c @c @br !success! RED FLAG SIGNS DURING HOME MONITORING @c @br 1. Fever (High Grade) rising even ater 7th day  @br 2.Biphasic Fever - Second face may signal the start of Cytokines storm @br 3. Normal Activity provoked (6 Minutes walking) - increase in respiratory rate / unmasking breathlessness / Decreasing in SpO2 by 3% from baseline @br 4. Severe vomitting & diarrhea
+          @br !success! RETURN FROM QUARANTINE @c @br 1. Negative RTPCR test result @br 2. CT value >34 @br 3. 3 days of syptom free period with more than 10 days since onset of symptoms 
+          @br !success! PEDIATRIC SPECIFIC Red Flag @c @br 1. Fall in Urinary output @br 2. Skin Rash - Mosaic @br 3. Breast Feeding children - Stop Feeding !';
+         }else if(!empty($pre_asymptomatic_error)){
+          $score_message = $score_message.'@br @span PRE / ASYMPTOMATIC @c !success! Home Quarantine, Self Isolation, Masking, Good Hyderation, Paracetamol SOS Fever, Monitor Vital Signs and enter in the App @f @c @c @br !success! RED FLAG SIGNS DURING HOME MONITORING @c @br 1. Fever (High Grade) rising even ater 7th day  @br 2.Biphasic Fever - Second face may signal the start of Cytokines storm @br 3. Normal Activity provoked (6 Minutes walking) - increase in respiratory rate / unmasking breathlessness / Decreasing in SpO2 by 3% from baseline @br 4. Severe vomitting & diarrhea
+          @br !success! RETURN FROM QUARANTINE @c @br 1. Negative RTPCR test result @br 2. CT value >34 @br 3. 3 days of syptom free period with more than 10 days since onset of symptoms 
+          @br !success! PEDIATRIC SPECIFIC Red Flag @c @br 1. Fall in Urinary output @br 2. Skin Rash - Mosaic @br 3. Breast Feeding children - Stop Feeding !';
+         }else{
+          $score_message = "";
+         }
+
+         // dd($score_message);
+
+         return $score_message;
+        break;
+
+        case 'CT Imaging for COVID19':
+
+          $score_message  = "@span ";
+
+          $covid_questions = Question::whereIn('name' , ['CT Scoring', 'CO-RADS - Level of Suspension COVID19 infection'])->get();
+
+          if(!empty($covid_questions)){
+            foreach ($covid_questions as $covid_question) {
+             $find_questions =  (array) $data['answers'];
+
+             if(array_key_exists($covid_question['id'], $find_questions)){
+                if($find_questions[$covid_question['id']]){
+
+                  switch ($covid_question['name']) {
+                    case 'CT Scoring':
+                      switch($find_questions[$covid_question['id']]->name){
+                        case '0':
+                          $score_message = $score_message.'@br CT Scoring @span @c !success! Normal / Negative @f @c @br @c!';
+                        break;
+
+                        case '1 to 14':
+                          $score_message = $score_message.'@br CT Scoring @span @c !primary! Mild Variety @f @c @br @c!';
+                        break;
+
+                        case '15 to 25':
+                          $score_message = $score_message.'@br CT Scoring @span @c !warning! Moderate Variant @f @c @br @c!';
+                        break;
+
+                        case '26 to 40':
+                          $score_message = $score_message.'@br CT Scoring @span @c !danger! Severe Variant @f @c @br @c!';
+                        break;
+
+                        default:
+                          # code...
+                        break;
+                      }
+                   
+                    break;
+
+                    case 'CO-RADS - Level of Suspension COVID19 infection':
+                      switch($find_questions[$covid_question['id']]->name){
+                        case 'Not Interpretable':
+                          $score_message = $score_message.'@br CO-RADS - Level of Suspension COVID19 infection @span @c !success! Scan Technically insufficient for assigning a score @f @c @br @c!';
+                        break;
+
+                        case 'Very Low':
+                          $score_message = $score_message.'@br CO-RADS - Level of Suspension COVID19 infection @span @c !success! Normal or Noninfectious @f @c @br @c!';
+                        break;
+
+                        case 'Low':
+                          $score_message = $score_message.'@br CO-RADS - Level of Suspension COVID19 infection @span @c !warning! Typical for other infection but not COVID19 @f @c @br @c!';
+                        break;
+
+                        case 'Equivocal / Unsure':
+                          $score_message = $score_message.'@br CO-RADS - Level of Suspension COVID19 infection @span @c !warning! Features compatible with COVID19 but also other diseases @f @c @br @c!';
+                        break;
+
+                        case 'High':
+                          $score_message = $score_message.'@br CO-RADS - Level of Suspension COVID19 infection @span @c !warning! Suspicious of COVID19 @f @c @br @c!';
+                        break;
+
+                        case 'Very High':
+                          $score_message = $score_message.'@br CO-RADS - Level of Suspension COVID19 infection @span @c !warning! Typical for COVID19 @f @c @br @c!';
+                        break;
+
+                        case 'Proven':
+                          $score_message = $score_message.'@br CO-RADS - Level of Suspension COVID19 infection @span @c !danger! RT-PCR Positive for SARS - CoV-2 @f @c @br @c!';
+                        break;
+
+                        default:
+                          # code...
+                        break;
+                      }
+                    break;
+                    
+                    default:
+                      # code...
+                    break;
+                  }
+                }
+             }
+             
+            }
+          }
+
+          return $score_message;
+        break;
+
+        case 'Investigation for Biochemical Monitoring of Covid 19 Patients':
+
+          $score_message  = "@span ";
+
+          $covid_questions = Question::whereIn('name' , ['WBC (Complete Blood Count)','Neutrophil (Complete Blood Count)',
+            'Lympocyte (Complete Blood Count)', 'Platlet Count (Complete Blood Count)',
+            'Blood Gases', 'Albumin', 'Lactate dehydrogenase (LDH)?', 'ALT (S.G.P.T)', 
+            'AST (S.G.O.T)', 'Total Bilirubin', 'Creatinine', 'Urea', 'Cardiac Troponin',
+            'D-Dimer', 'Prothrombin Time', 'Procalcitonin', 'C-reactive Protein',
+            'Ferritin', 'Cytokines'])->get();
+
+          # log::info($covid_questions);
+
+          if(!empty($covid_questions)){
+            foreach ($covid_questions as $covid_question) {
+             // log::info($covid_question['id']);
+             $find_questions =  (array) $data['answers'];
+
+             if(array_key_exists($covid_question['id'], $find_questions)){
+                if($find_questions[$covid_question['id']]){
+
+                  switch ($covid_question['name']) {
+                    case 'WBC (Complete Blood Count)':
+                      $score_message = $score_message.'@br @span WBC @c'.($find_questions[$covid_question['id']] >= 4000 && $find_questions[$covid_question['id']] <= 11000 ? ' !primary! '.$find_questions[$covid_question['id']].' @f is Normal @c @br @c !' : ($find_questions[$covid_question['id']] > 11000 ? ' !danger! '.$find_questions[$covid_question['id']].' @f is Abnormal @c @br Bacterial (Super) Infection @c !' : ' !warning! '.$find_questions[$covid_question['id']].' @f @c @br Low !'));
+                    break;
+
+                    case 'Neutrophil (Complete Blood Count)':
+                      $score_message = $score_message.'@br @span Neutrophil @c'.($find_questions[$covid_question['id']] >= 40 && $find_questions[$covid_question['id']] <= 75 ? ' !primary! '.$find_questions[$covid_question['id']].' @f is Normal @c @br @c !' : ($find_questions[$covid_question['id']] > 75 ? ' !danger! '.$find_questions[$covid_question['id']].' @f is Abnormal @c @br Bacterial (Super) Infection @c !' : ' !warning! '.$find_questions[$covid_question['id']].' @f @c @br Low !'));
+                    break;
+
+                    case 'Lympocyte (Complete Blood Count)':
+                      $score_message = $score_message.'@br @span Lympocyte @c'.($find_questions[$covid_question['id']] >= 20 && $find_questions[$covid_question['id']] <= 45 ? ' !primary! '.$find_questions[$covid_question['id']].' @f is Normal @c @br @c !' : ($find_questions[$covid_question['id']] < 20 ? ' !danger! '.$find_questions[$covid_question['id']].' @f is Abnormal @c @br Decreased Immunological Response to Virus @c !' : ' !warning! '.$find_questions[$covid_question['id']].' @f @c @br High !'));
+                    break;
+
+                    case 'Platlet Count (Complete Blood Count)':
+                      $score_message = $score_message.'@br @span Platlet Count @c'.($find_questions[$covid_question['id']] >= 1.5 && $find_questions[$covid_question['id']] <= 4.1 ? ' !primary! '.$find_questions[$covid_question['id']].' @f is Normal @c @br @c !' : ($find_questions[$covid_question['id']] < 1.5 ? ' !danger! '.$find_questions[$covid_question['id']].' @f is Abnormal @c @br Consumption Coagulopathy (DIC) @c !' : ' !warning! '.$find_questions[$covid_question['id']].' @f @c @br High !'));
+                    break;
+
+                    case 'Blood Gases':
+                     $score_message = $score_message.'@br @span Blood Gases @c'.($find_questions[$covid_question['id']] >= 94 && $find_questions[$covid_question['id']] <= 100 ? ' !primary! '.$find_questions[$covid_question['id']].' @f is Normal @c @br @c !' : ($find_questions[$covid_question['id']] < 94 ? ' !danger! '.$find_questions[$covid_question['id']].' @f is Abnormal @c @br Requires Hopitalization and Critical Care Management @c !' : ' !warning! '.$find_questions[$covid_question['id']].' @f @c @br High !'));
+                    break;
+
+                    case 'Albumin':
+                      $score_message = $score_message.'@br @span Albumin @c'.($find_questions[$covid_question['id']] >= 3.5 && $find_questions[$covid_question['id']] <= 5.2 ? ' !primary! '.$find_questions[$covid_question['id']].' @f is Normal @c @br @c !' : ($find_questions[$covid_question['id']] < 3.5 ? ' !danger! '.$find_questions[$covid_question['id']].' @f is Abnormal @c @br Impaired Liver Function @c !' : ' !warning! '.$find_questions[$covid_question['id']].' @f @c @br High !'));
+                    break;
+
+                    case 'Lactate dehydrogenase (LDH)?':
+                      $score_message = $score_message.'@br @span Lactate dehydrogenase @c'.($find_questions[$covid_question['id']] >= 140 && $find_questions[$covid_question['id']] <= 280 ? ' !primary! '.$find_questions[$covid_question['id']].' @f is Normal @c @br @c !' : ($find_questions[$covid_question['id']] > 280 ? ' !danger! '.$find_questions[$covid_question['id']].' @f is Abnormal @c @br Pulmonary Injury and / or widespread organ damage @c !' : ' !warning! '.$find_questions[$covid_question['id']].' @f @c @br Low !'));
+                    break;
+
+                    case 'ALT (S.G.P.T)':
+                      $score_message = $score_message.'@br @span ALT (S.G.P.T) @c'.($find_questions[$covid_question['id']] <= 41 ? ' !primary! '.$find_questions[$covid_question['id']].' @f is Normal @c @br @c !' : ($find_questions[$covid_question['id']] > 41 ? ' !danger! '.$find_questions[$covid_question['id']].' @f is Abnormal @c @br Liver Injury or organ damage @c !' : ' !warning! '.$find_questions[$covid_question['id']].' @f @c @br Other !'));
+                    break;
+
+                    case 'AST (S.G.O.T)':
+                      $score_message = $score_message.'@br @span AST (S.G.O.T) @c'.($find_questions[$covid_question['id']] <= 40 ? ' !primary! '.$find_questions[$covid_question['id']].' @f is Normal @c @br @teleconsult @c !' : ($find_questions[$covid_question['id']] > 40 ? ' !danger! '.$find_questions[$covid_question['id']].' @f is Abnormal @c @br Liver Injury or organ damage @c !' : ' !warning! '.$find_questions[$covid_question['id']].' @f @c @br Other !'));
+                    break;
+
+                    case 'Total Bilirubin':
+                      $score_message = $score_message.'@br @span Total Bilirubin @c'.($find_questions[$covid_question['id']] >= 0.3 && $find_questions[$covid_question['id']] <= 1.2 ? ' !primary! '.$find_questions[$covid_question['id']].' @f is Normal @c @br @teleconsult @c !' : ($find_questions[$covid_question['id']] > 1.2 ? ' !danger! '.$find_questions[$covid_question['id']].' @f is Abnormal @c @br Liver Injury @c !' : ' !warning! '.$find_questions[$covid_question['id']].' @f @c @br Low !'));
+                    
+                    break;
+
+                    case 'Creatinine':
+                      $score_message = $score_message.'@br @span Creatinine @c'.($find_questions[$covid_question['id']] >= 0.7 && $find_questions[$covid_question['id']] <= 1.2 ? ' !primary! '.$find_questions[$covid_question['id']].' @f is Normal @c @br @teleconsult @c !' : ($find_questions[$covid_question['id']] > 1.2 ? ' !danger! '.$find_questions[$covid_question['id']].' @f is Abnormal @c @br Kidney Injury @c !' : ' !warning! '.$find_questions[$covid_question['id']].' @f @c @br Low !'));
+                    break;
+
+                    case 'Urea':
+                      $score_message = $score_message.'@br @span Urea @c'.($find_questions[$covid_question['id']] >= 13 && $find_questions[$covid_question['id']] <= 49 ? ' !primary! '.$find_questions[$covid_question['id']].' @f is Normal @c @br @teleconsult @c !' : ($find_questions[$covid_question['id']] > 49 ? ' !danger! '.$find_questions[$covid_question['id']].' @f is Abnormal @c @br Kidney Injury @c !' : ' !warning! '.$find_questions[$covid_question['id']].' @f @c @br Low !'));
+                    break;
+
+                    case 'Cardiac Troponin':
+                      $score_message = $score_message.'@br @span Cardiac Troponin @c'.($find_questions[$covid_question['id']] <= 0.4 ? ' !primary! '.$find_questions[$covid_question['id']].' @f is Normal @c @br @teleconsult @c !' : ($find_questions[$covid_question['id']] > 0.4 ? ' !danger! '.$find_questions[$covid_question['id']].' @f is Abnormal @c @br Cardiac Injury / Myocarditis @c !' : ' !warning! '.$find_questions[$covid_question['id']].' @f @c @br Low !'));
+                    break;
+
+                    case 'D-Dimer':
+                      $score_message = $score_message.'@br @span D-Dimer @c'.($find_questions[$covid_question['id']] <= 0.5 ? ' !primary! '.$find_questions[$covid_question['id']].' @f is Normal @c @br @teleconsult @c !' : ($find_questions[$covid_question['id']] > 0.5 ? ' !danger! '.$find_questions[$covid_question['id']].' @f is Abnormal @c @br Activation of Blood Coagulation (DIC) @c !' : ' !warning! '.$find_questions[$covid_question['id']].' @f @c @br Low !'));
+                    break;
+
+                    case 'Prothrombin Time':
+                      $score_message = $score_message.'@br @span Prothrombin Time @c'.($find_questions[$covid_question['id']] >= 11 && $find_questions[$covid_question['id']] <= 13.5 ? ' !primary! '.$find_questions[$covid_question['id']].' @f is Normal @c @br @c !' : ($find_questions[$covid_question['id']] > 13.5 ? ' !danger! '.$find_questions[$covid_question['id']].' @f is Abnormal @c @br Activation of Blood Coagulation (DIC) @c !' : ' !warning! '.$find_questions[$covid_question['id']].' @f @c @br Low !'));
+                    break;
+
+                    case 'Procalcitonin':
+                      $score_message = $score_message.'@br @span Procalcitonin @c'.($find_questions[$covid_question['id']] <= 0.15 ? ' !primary! '.$find_questions[$covid_question['id']].' @f is Normal @c @br @c !' : ($find_questions[$covid_question['id']] > 0.15 ? ' !danger! '.$find_questions[$covid_question['id']].' @f is Abnormal @c @br Bacterial (Super) Infection (DIC) @c !' : ' !warning! '.$find_questions[$covid_question['id']].' @f @c @br Low !'));
+                    break;
+
+                    case 'C-reactive Protein':
+                      $score_message = $score_message.'@br @span C-reactive Protein @c'.($find_questions[$covid_question['id']] <= 3 ? ' !primary! '.$find_questions[$covid_question['id']].' @f is Normal @c @br @c !' : ($find_questions[$covid_question['id']] > 3 ? ' !danger! '.$find_questions[$covid_question['id']].' @f is Abnormal @c @br Severe Viral Infection / Viremia / Viral Sepsis / Cardiac Causes @c !' : ' !warning! '.$find_questions[$covid_question['id']].' @f @c @br Low !'));
+                    break;
+
+                    case 'Ferritin':
+                      $score_message = $score_message.'@br @span Ferritin @c'.($find_questions[$covid_question['id']] <= 300 ? ' !primary! '.$find_questions[$covid_question['id']].' @f is Normal @c @br @c !' : ($find_questions[$covid_question['id']] > 300 ? ' !danger! '.$find_questions[$covid_question['id']].' @f is Abnormal @c @br Severe Inflammation @c !' : ' !warning! '.$find_questions[$covid_question['id']].' @f @c @br Low !'));
+                    break;
+
+                    case 'Cytokines':
+                      $score_message = $score_message.'@br @span Cytokines @c'.($find_questions[$covid_question['id']] >= 0.16 && $find_questions[$covid_question['id']] <= 37.7 ? ' !primary! '.$find_questions[$covid_question['id']].' @f is Normal @c @br @c !' : ($find_questions[$covid_question['id']] > 37.7 ? ' !danger! '.$find_questions[$covid_question['id']].' @f is Abnormal @c @br Citokines Storm Syndrome @c !' : ' !warning! '.$find_questions[$covid_question['id']].' @f @c @br High !'));
+                    break;
+                    
+                    default:
+                      # code...
+                    break;
+                  }
+                }
+             }
+             
+            }
+          }
+
+          return $score_message;
+        break;
+
+        case 'CONDUCT DISORDER':
+          $score_message  = "@span ";
+          $score      = (int)$data['score'];
+          $score      = (int) (!empty($score) ? $score : 0);
+
+          $pre_score    = self::conduct_disorder_one_score_fields();
+          $post_score   = self::conduct_disorder_two_score_fields();
+
+          $score_explanation_one = (!empty($pre_score[$score]) ? $pre_score[$score] : 'Nothing');
+          $score_explanation_two = (!empty($post_score[$score]) ? $post_score[$score] : 'Nothing');
+
+          switch ($score) {
+            case 0:
+              $answer_explaination = '!success!';
+            break;
+
+            case 1:
+              $answer_explaination = '!primary!';
+            break;
+
+            case 2:
+              $answer_explaination = '!warning!';
+            break;
+
+            case 3:
+              $answer_explaination = '!danger!';
+            break;
+                      
+            default:
+              $answer_explaination = '!danger!';
+            break;
+          }
+          $score_message = $score_message.'@br @span Raw Score is '.$score.' @c  '.$answer_explaination.' @f '.$score_explanation_two.' = '.$score_explanation_one.' @c';
+
+          return $score_message;
+          
+        break;
+
+        case 'NONSUICIDAL SELF-INJURY':
+          $score_message  = "@span ";
+          $score      = (int)$data['score'];
+          $score      = (int) (!empty($score) ? $score : 0);
+
+          $pre_score    = self::nonsuicidal_self_injury_one_score_fields();
+          $post_score   = self::nonsuicidal_self_injury_two_score_fields();
+
+          $score_explanation_one = (!empty($pre_score[$score]) ? $pre_score[$score] : 'Nothing');
+          $score_explanation_two = (!empty($post_score[$score]) ? $post_score[$score] : 'Nothing');
+
+          switch ($score) {
+            case 0:
+              $answer_explaination = '!success!';
+            break;
+
+            case 1:
+              $answer_explaination = '!primary!';
+            break;
+
+            case 2:
+              $answer_explaination = '!secondary!';
+            break;
+
+            case 3:
+              $answer_explaination = '!warning!';
+            break;
+
+            case 4:
+              $answer_explaination = '!danger!';
+            break;
+                      
+            default:
+              $answer_explaination = '!danger!';
+            break;
+          }
+          $score_message = $score_message.'@br @span Raw Score is '.$score.' @c  '.$answer_explaination.' @f '.$score_explanation_two.' = '.$score_explanation_one.' @c';
+
+          return $score_message;
+          
+        break;
+
+        case 'OPPOSITIONAL DEFIANT DISORDER':
+          $score_message  = "@span ";
+          $score      = (int)$data['score'];
+          $score      = (int) (!empty($score) ? $score : 0);
+
+          $pre_score    = self::oppositional_defiant_disorder_one_score_fields();
+          $post_score   = self::oppositional_defiant_disorder_two_score_fields();
+
+          $score_explanation_one = (!empty($pre_score[$score]) ? $pre_score[$score] : 'Nothing');
+          $score_explanation_two = (!empty($post_score[$score]) ? $post_score[$score] : 'Nothing');
+
+          switch ($score) {
+            case 0:
+              $answer_explaination = '!success!';
+            break;
+
+            case 1:
+              $answer_explaination = '!primary!';
+            break;
+
+            case 2:
+              $answer_explaination = '!warning!';
+            break;
+
+            case 3:
+              $answer_explaination = '!danger!';
+            break;
+                      
+            default:
+              $answer_explaination = '!danger!';
+            break;
+          }
+          $score_message = $score_message.'@br @span Raw Score is '.$score.' @c  '.$answer_explaination.' @f '.$score_explanation_two.' = '.$score_explanation_one.' @c';
+
+          return $score_message;
+          
+        break;
+
+        case 'SOMATIC SYMPTOM DISORDER':
+
+          $score_message  = "@span ";
+          if(!empty($data['answers'])){
+              $index = 1;
+              $total_symptoms_score = $performance_score = $average_performance_score = 0;
+
+              $msg_occured = false;
+              $inattention = $hyperactivity_impulsivity = false;
+
+              foreach ($data['answers'] as $key => $value) {
+                $total_symptoms_score = $total_symptoms_score+(!empty($value->score) ? $value->score : 0);
+
+                $index++;
+              }
+
+              $score_message = 'Total Raw Score :'.$total_symptoms_score;
+              $score_message = $score_message.', Average Score : '.round($total_symptoms_score/3,2);
+          }
+
+          return $score_message;
+        break;
+
+        case 'Autism Spectrum Disorder':
+          $score_message  = "@span ";
+          $score      = (int)$data['score'];
+          $score      = (int) (!empty($score) ? $score : 0);
+
+          $pre_score    = self::autism_social_disorder_one_score_fields();
+          $post_score   = self::autism_social_disorder_two_score_fields();
+
+          $score_explanation_one = (!empty($pre_score[$score]) ? $pre_score[$score] : 'Nothing');
+          $score_explanation_two = (!empty($post_score[$score]) ? $post_score[$score] : 'Nothing');
+
+          switch ($score) {
+            case 0:
+              $answer_explaination = '!success!';
+            break;
+
+            case 1:
+              $answer_explaination = '!primary!';
+            break;
+
+            case 2:
+              $answer_explaination = '!warning!';
+            break;
+
+            case 3:
+              $answer_explaination = '!danger!';
+            break;
+                      
+            default:
+              $answer_explaination = '!danger!';
+            break;
+          }
+          $score_message = $score_message.'@br @span Raw Score is '.$score.' @c  '.$answer_explaination.' @f '.$score_explanation_two.' = '.$score_explanation_one.' @c';
+
+          return $score_message;
+          
+        break;
+
+        case 'Social Communication Disorder':
+          $score_message  = "@span ";
+          $score      = (int)$data['score'];
+          $score      = (int) (!empty($score) ? $score : 0);
+
+          $pre_score    = self::autism_social_disorder_one_score_fields();
+          $post_score   = self::autism_social_disorder_two_score_fields();
+
+          $score_explanation_one = (!empty($pre_score[$score]) ? $pre_score[$score] : 'Nothing');
+          $score_explanation_two = (!empty($post_score[$score]) ? $post_score[$score] : 'Nothing');
+
+          switch ($score) {
+            case 0:
+              $answer_explaination = '!success!';
+            break;
+
+            case 1:
+              $answer_explaination = '!primary!';
+            break;
+
+            case 2:
+              $answer_explaination = '!warning!';
+            break;
+
+            case 3:
+              $answer_explaination = '!danger!';
+            break;
+                      
+            default:
+              $answer_explaination = '!danger!';
+            break;
+          }
+          $score_message = $score_message.'@br @span Raw Score is '.$score.' @c  '.$answer_explaination.' @f '.$score_explanation_two.' = '.$score_explanation_one.' @c';
+
+          return $score_message;
+          
         break;
         
         default:

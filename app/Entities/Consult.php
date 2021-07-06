@@ -119,13 +119,17 @@ class Consult extends BaseModel
             $filters['participant_ref_number'] = [$request->user()->id];
         }
 
-
         if ($request->query('from_date')) {
-            $filters['scheduled_from_date'] = $request->get("from_date");
+            $filters['scheduled_from_date'] = date('Y-m-d',strtotime($request->get("from_date")));
+            $filters['scheduled_from_date'] = $filters['scheduled_from_date'].' 00:00:00';
         }
 
-        // $filters['participant_ref_number'] = [64];
-       // dd($filters);
+        if ($request->query('to_date')) {
+            $filters['scheduled_to_date'] = date('Y-m-d',strtotime($request->get("to_date")));
+            $filters['scheduled_to_date'] = $filters['scheduled_to_date'].' 23:59:59';
+        }
+
+        
         $limit = $this->getResourceDataFetchLimit();
         $page = app('request')->get('page') ? app('request')->get('page') : 1;
 

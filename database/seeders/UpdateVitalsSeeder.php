@@ -16,9 +16,9 @@ class UpdateVitalsSeeder extends Seeder
     {  
         $master_types = [
             [ 'master_type_slug' => 'vitals',
-                'name' => 'Respiration Rate', 'slug' => 'respiration'],
+        		'name' => 'Respiration Rate', 'slug' => 'respiration'],
             [ 'master_type_slug' => 'speciality',
-                'name' => 'Internist / Infection Disease Specialist (COVID19) ', 'slug' => 'infection_disease_specialist'],
+        		'name' => 'Internist / Infection Disease Specialist (COVID19) ', 'slug' => 'infection_disease_specialist'],
         ];
         
         DB::table('masters')->insert($master_types);

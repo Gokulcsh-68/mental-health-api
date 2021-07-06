@@ -123,7 +123,11 @@
 
 	 	<tr>
 	 		<th>Occupation</th>
-	 		<td>@if(!empty($lv->values->occupation_details->occupation_name)) {{$lv->values->occupation_details->occupation_name}}  @endif</td> 	
+	 		<td>
+	 			@if(!empty($lv->values->occupation_details->occupation_name->name)) {{$lv->values->occupation_details->occupation_name->name}} 
+
+	 			@else (!empty($lv->values->occupation_details->occupation_name)) {{$lv->values->occupation_details->occupation_name}}  @endif	 			
+	 		</td> 	
 	 	</tr> 
 	 	<tr>
 	 		<th>Occupation Notes</th>

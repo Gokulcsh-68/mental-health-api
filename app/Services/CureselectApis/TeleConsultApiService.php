@@ -4,6 +4,7 @@ namespace App\Services\CureselectApis;
 
 use App\Services\CureselectApis\BaseService;
 use App\Utils\Api;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Log;
@@ -64,6 +65,26 @@ class TeleConsultApiService extends BaseService {
         }
 	}
 
+	private function processUserData($data, $role) {
+		$user = [
+			'role' => $role,
+            'ref_number' => (string) $data['id'],
+            'participant_info' => [
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'phone' => $data['phone'],
+                'gender' => $data['gender'],
+                'profile_pic' => $data['profile_pic']
+            ]
+		];
+
+		if(isset($data['additional_info'])) {
+			$user['participant_info']['additional_info'] = $data['additional_info'];
+		}
+
+		return $user;
+	}
+
 	public function create($payload)
     {
     	$this->consultCreateValidate($payload);
@@ -74,50 +95,27 @@ class TeleConsultApiService extends BaseService {
 	    $consult_reason = $payload['consult_reason'];
 	    $consult_date_time = $payload['consult_date_time'];
 	    $service_provider = $payload['service_provider'] ?? self::$default_virtual_service_provider;
+	    $consult_additional_info = $payload['additional_info'] ?? null;
 
     	try {
 
     		$url = $this->endpoint_url;
-
-    		$provider = [
-    			'role' => 'publisher',
-	            'ref_number' => (string) $provider_data['id'],
-	            'participant_info' => [
-	                'name' => $provider_data['name'],
-	                'email' => $provider_data['email'],
-	                'phone' => $provider_data['phone'],
-	                'gender' => $provider_data['gender'],
-	                'profile_pic' => $provider_data['profile_pic']
-	            ]
-    		];
-
-			if(isset($provider_data['additional_info'])) {
-				$provider['participant_info']['additional_info'] = $provider_data['additional_info'];
-			}
-
-    		$patient = [
-    			'role' => 'subscriber',
-	            'ref_number' => (string) $patient_data['id'],
-	            'participant_info' => [
-	                'name' => $patient_data['name'],
-	                'email' => $patient_data['email'],
-	                'phone' => $patient_data['phone'],
-	                'gender' => $patient_data['gender'],
-	                'profile_pic' => $patient_data['profile_pic']
-	            ]
-    		];
-
-			if(isset($patient_data['additional_info'])) {
-				$patient['participant_info']['additional_info'] = $provider_data['additional_info'];
-			}
 
     		$form_data = [
     			'scheduled_at' => date('Y-m-d H:i:s', strtotime($consult_date_time)),
     			"consult_type" => $consult_type,
 			    'reason' => $consult_reason,
 			    'virtual_service_provider' => $service_provider,
-			    'participants' => [$provider, $patient],
+			    'participants' => [
+			    	$this->processUserData($provider_data, 'publisher'), 
+			    	$this->processUserData($patient_data, 'subscriber'),
+			    ],
+			    'additional_info' => $consult_additional_info,
     		];
+
+    		if(isset($payload['consult_status'])) {
+    			$form_data['consult_status'] = $payload['consult_status'];
+    		}
 
     		$headers = [
 			    'Authorization' => 'Bearer ' . $this->getToken(),        
@@ -160,8 +158,8 @@ class TeleConsultApiService extends BaseService {
 		$params = array_only($params, ['participant_ref_number', 'consult_status_id', 'consult_type', 'consult_status', 'scheduled_from_date', 'scheduled_to_date', 'consult_id']);
 
 		$validation = Validator::make($params, [
-    		'scheduled_from_date' => 'nullable|date_format:"Y-m-d"',
-    		'scheduled_to_date' => 'required_unless:scheduled_from_date,|date_format:"Y-m-d"',
+    		'scheduled_from_date' => 'nullable|date_format:"Y-m-d H:i:s"',
+    		'scheduled_to_date' => 'required_unless:scheduled_from_date,|date_format:"Y-m-d H:i:s"',
 			'consult_type' => [
 				'nullable',
 				Rule::in(['virtual', 'home', 'clinic'])
@@ -182,7 +180,6 @@ class TeleConsultApiService extends BaseService {
 		$options = [
 			'headers' => $headers,
 			'query' => $params
-			// 'body' => json_encode($form_data),
 		];
 
 		
@@ -200,29 +197,9 @@ class TeleConsultApiService extends BaseService {
 		}
 
 		return $response;
-
-		// return Cache::rememberForever('philip', function() use ($options) {
-		// 	try {
-		// 		$url = $this->endpoint_url;
-		// 		$this->apiCall($url, $options, $method = "GET");
-		// 		$response = $this->toGuzzleArray();
-		// 	}
-		// 	catch(\Exception $e) {
-		// 		Log::error('Cureselect Teleconsult API ERROR ------- ', ['errorDetails' => $e->getMessage()]);
-	
-		// 		throw new BadRequestHttpException($e->getMessage(), $e);
-		// 		$response = [ $e->getMessage() ];
-		// 	}
-
-		// 	return $response;
-		// });
-
-		// return $response;
 	}
 
 
-
-    
 	public function fetchById($params = [], $consult_id)
 	{
 		$params = array_only($params, ['participant_ref_number', 'consult_status_id', 'consult_type', 'consult_status', 'scheduled_from_date', 'scheduled_to_date', 'consult_id']);
@@ -267,9 +244,7 @@ class TeleConsultApiService extends BaseService {
 		return $response;
 	}
 
-
-
-	public function patch($request)
+	public function patch(Request $request)
     {
 
 
@@ -280,6 +255,7 @@ class TeleConsultApiService extends BaseService {
 
     		$form_data = [
     			"consult_status" => $request->get('status'),
+    			"additional_info" => $request->get('additional_info') ?? null,
     		];
 
     		$headers = [
