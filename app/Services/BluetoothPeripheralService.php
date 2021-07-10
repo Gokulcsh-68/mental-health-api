@@ -23,7 +23,7 @@ class BluetoothPeripheralService extends BaseService {
             $result = [];
             $result['info'] =  array_only($model->getBasicInfo(), ['id', 'name', 'gender']);
 
-            $Authorization  = $result['token'] =  $this->getAuthorization(['user_id' => $model->id]);
+            $Authorization  = $result['token'] =  $this->getAuthorization(['userId' => $model->id]);
 
             $token_details = $this->decodeJwt($Authorization);
 

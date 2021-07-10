@@ -54,7 +54,7 @@ $router->group(['prefix' => 'v1/', 'middleware' => 'clientAuth'], function ($rou
 
     $router->group(['prefix' => 'peripheral-ev/'], function($router){
         $router->post('login', 'BluetoothPeripheralService@login');
-        $router->post('capture', ['middleware' => 'userAuth'], 'BluetoothPeripheralService@capture');
+        $router->post('capture', ['middleware' => 'userAuth', 'uses' => 'BluetoothPeripheralService@capture']);
     });
 
     $router->group([], function ($router) {
