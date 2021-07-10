@@ -32,7 +32,9 @@ class Master extends BaseModel
 
     public $timestamps = false;
 
-    protected $appends = ['details'];
+    // Commented below line because of the detail function is not found in the master entity.
+    // And its showing error when pull the patient basic info function
+    // protected $appends = ['details'];
 
     public function immunisation()
     {

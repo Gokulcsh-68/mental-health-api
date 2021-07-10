@@ -52,6 +52,11 @@ $router->group(['prefix' => 'v1/', 'middleware' => 'clientAuth'], function ($rou
 
     $router->post('freeze-phr-emr', 'AuthService@freezePhrEmr');
 
+    $router->group(['prefix' => 'peripheral-ev/'], function($router){
+        $router->post('login', 'BluetoothPeripheralService@login');
+        $router->post('capture', ['middleware' => 'userAuth'], 'BluetoothPeripheralService@capture');
+    });
+
     $router->group([], function ($router) {
         $router->group(['prefix' => 'users'], function ($router) {
             $router->post('authenticate', 'AuthService@generalLogin');

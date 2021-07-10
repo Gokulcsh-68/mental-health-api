@@ -149,6 +149,11 @@ class User extends BaseModel
         return app('hash')->check($attributes['password'], $this->password);
     }
 
+    public function isValidPeripheralPassword($attributes) : bool
+    {
+        return $attributes['password'] == $this->address->peripheral_password;
+    }
+
     public function isValidUser($attributes): bool
     {
         return $this->is_active == self::ACTIVE && $this->isValidPassword($attributes);
