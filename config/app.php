@@ -121,6 +121,8 @@ return [
     'app_urls' => [
         'folio' => env('APP_FOLIO_URL', ''),
         'provider' => env('APP_PROVIDER_URL', ''),
+        'hospital' => env('APP_HOSPITAL_URL', ''),
+        'hospitalgroup' => env('APP_HOSPITAL_GROUP_URL', ''),
     ]
 
 ];
