@@ -32,7 +32,7 @@ class CameraMasterSeeder extends Seeder
     		[
                 'master_type_slug' => 'camera', 
                 'slug' => 'minrray', 
-                'name' => 'Minrray',
+                'name' => 'M',
                 'attributes' => json_encode([]),
                 'is_active' => 1,
             ]
