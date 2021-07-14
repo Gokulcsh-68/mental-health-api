@@ -1,9 +1,17 @@
 <?php
 
 namespace App\Entities;
+use DB;
 
 class Camera extends BaseModel
 {
+    const VIEW = true;
+
+    const CREATE = true;
+
+    const UPDATE = true;
+
+    const ACTION = true;
     /**
      * The attributes that are mass assignable.
      *
@@ -57,4 +65,30 @@ class Camera extends BaseModel
     protected $dispatchesEvents = [
         
     ];
+
+
+    protected function createModel($request)
+    {
+        $data = $this->getModelAttributes($request);
+
+        DB::beginTransaction();
+        try {
+
+        if($request->user()->role->code == 'hospital'){
+            $data['hospital_id'] = $request->user()->id;
+        }
+
+            $model = $this->Create($data);
+
+
+            DB::commit();
+
+            return $model;
+        } catch (Exception $e) {
+            exceptionLogger("Immunisation Create Rollback", $e);
+            DB::rollback();
+        }
+
+        return null;
+    }
 }

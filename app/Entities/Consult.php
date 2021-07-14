@@ -150,6 +150,18 @@ class Consult extends BaseModel
 
             $teleconsult_config = config('api.teleconsult');
 
+               
+            $addition_value = [
+                        'consult_speciality' => $data['speciality'],
+                        'api_end_point' => $teleconsult_config['api_return_url'],
+                        'api_end_version' => $teleconsult_config['api_return_url_version'],
+                        'x_name' => 'garuda'
+                    ];
+
+
+
+           
+
             $payload = [
                 'consult_date_time' => $data['consult_date_time'],
                 'consult_type' => 'virtual',
@@ -163,12 +175,7 @@ class Consult extends BaseModel
                     'phone' => $provider->mobile_number,
                     'gender' => $provider->gender,
                     'profile_pic' => $provider->profile_image,
-                    'additional_info' => [
-                        'consult_speciality' => $data['speciality'],
-                        'api_end_point' => $teleconsult_config['api_return_url'],
-                        'api_end_version' => $teleconsult_config['api_return_url_version'],
-                        'x_name' => 'garuda',
-                    ],
+                    'additional_info' => $addition_value,
                 ],
 
                 'patient' => [
@@ -178,13 +185,15 @@ class Consult extends BaseModel
                     'phone' => $patient->mobile_number,
                     'gender' => $patient->gender,
                     'profile_pic' => $patient->profile_image,
-                    'additional_info' => [
-                        'api_end_point' => $teleconsult_config['api_return_url'],
-                        'api_end_version' => $teleconsult_config['api_return_url_version'],
-                        'x_name' => 'garuda',
-                    ],
+                    'additional_info' => $addition_value
                 ],
             ];
+
+
+            if(!empty($data['cart_camera']))
+            {
+                $payload['additional_info'] = ['camera'=>$data['cart_camera']];
+            }
 
             $teleconsult_response = $this->_teleconsult_service->create($payload);
             // dd($teleconsult_response);
