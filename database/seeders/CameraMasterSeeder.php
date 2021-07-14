@@ -35,13 +35,6 @@ class CameraMasterSeeder extends Seeder
                 'name' => 'Minrray',
                 'attributes' => json_encode([]),
                 'is_active' => 1,
-            ],
-    		[
-                'master_type_slug' => 'camera', 
-                'slug' => 'vhd', 
-                'name' => 'VHD',
-                'attributes' => json_encode([]),
-                'is_active' => 1,
             ]
     	];
 
