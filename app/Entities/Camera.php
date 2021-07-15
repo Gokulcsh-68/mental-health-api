@@ -91,4 +91,20 @@ class Camera extends BaseModel
 
         return null;
     }
+
+
+    public function applyFilters($model, $isPluck)
+    {
+        $model = parent::applyFilters($model, $isPluck);
+        $request = app('request');
+    
+
+        if($request->user()->role->code == 'hospital'){
+
+            $model->where('hospital_id', $request->get('hospital_id'));
+        }
+
+        return $model;
+    }
+
 }
