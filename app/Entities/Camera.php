@@ -75,7 +75,7 @@ class Camera extends BaseModel
         try {
 
         if($request->user()->role->code == 'hospital'){
-            $data['hospital_id'] = $request->user()->id;
+            $data['hospital_id'] = $request->user()->staff->hospital_id;
         }
 
             $model = $this->Create($data);
@@ -101,7 +101,7 @@ class Camera extends BaseModel
 
         if($request->user()->role->code == 'hospital'){
 
-            $model->where('hospital_id', $request->user()->id);
+            $model->where('hospital_id', $request->user()->staff->hospital_id);
         }
 
         return $model;
