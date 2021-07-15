@@ -101,7 +101,7 @@ class Camera extends BaseModel
 
         if($request->user()->role->code == 'hospital'){
 
-            $model->where('hospital_id', $request->get('hospital_id'));
+            $model->where('hospital_id', $request->user()->id);
         }
 
         return $model;
