@@ -32,7 +32,7 @@ class UserRequest extends RequestAbstract
         $rules = [
             'role' => 'required',
             'first_name' => 'required',
-            'last_name' => 'required',
+            'last_name' => 'nullable',
             'email' => 'required',
             'isd_code' => 'nullable',
             'mobile' => 'nullable',

@@ -73,6 +73,10 @@ class Doc extends BaseModel
         return $query->where('freeze', 0);
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     protected function createModel($request)
     {
@@ -80,6 +84,12 @@ class Doc extends BaseModel
 
         DB::beginTransaction();
         try {
+
+            if(isset($data['addition_info']['scan_centre_id'])) {
+                $addition_info = $data['addition_info'];
+                $addition_info['scan_status'] = 'Not Uploaded';
+                $data['addition_info'] = $addition_info;
+            }
 
             $model = $this->create($data);
 
@@ -106,6 +116,17 @@ class Doc extends BaseModel
             $model->where('user_id', $request->get('user_id'));
         }
 
+        if($request->user()){
+            if($request->user()->role->code == 'scancentre'){
+                   
+
+                $model->whereIn('docs.document_source', ['imaging','lab']);
+                $model->whereJsonContains('docs.addition_info', ['scan_centre_id'=>$request->user()->id]);
+                    
+
+            }
+        }
+
         if ($request->get('slug')) {
 
             // if(in_array($request->get('slug'), $forms_expect)) {
@@ -130,6 +151,10 @@ class Doc extends BaseModel
         }
 
 
+        if($request->get('scanOrdersOnly') == 'true') {
+            $model->whereNotNull('docs.addition_info->scan_centre_id');
+        }
+
         if ($request->get('searchkey')) {
             
             if ($request->get('slug')) {
@@ -149,8 +174,38 @@ class Doc extends BaseModel
                         });
                 }
             }
+
+            if($request->user()){
+                if($request->user()->role->code == 'scancentre'){
+
+                $model->where(function($query) use ($request) {
+
+
+                    $query->where(function ($squery) use ($request) {
+                            $squery->Where('addition_info->notes', 'LIKE',"%".$request->get('searchkey')."%")
+                            ->orWhere('addition_info->title', 'LIKE',"%".$request->get('searchkey')."%");
+                    });
+
+                    $query->orwhereHas('user', function ($subquery) use ($request) {
+                        $subquery->Where('users.email', 'LIKE',"%".$request->get('searchkey')."%")
+                        ->orWhere('users.mobile', 'LIKE',"%".$request->get('searchkey')."%")
+                        ->orWhere(DB::raw("CONCAT(`first_name`, ' ', `last_name`)"), 'LIKE',"%".$request->get('searchkey')."%")
+                        ->orWhere('users.address', 'LIKE',"%".$request->get('searchkey')."%")
+                        ->orWhere('users.gender', 'LIKE',"%".$request->get('searchkey')."%");
+                    });
+
+                });
+                }
+            }
         }
 
+
+        if ($request->get('scanstatus')) {
+
+            if ($request->get('scanstatus') != 'All') {
+                $model->Where('addition_info->scan_status', $request->get('scanstatus'));
+            }
+        }
         return $model;
     }
 }
