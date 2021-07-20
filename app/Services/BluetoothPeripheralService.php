@@ -1,14 +1,24 @@
 <?php
 namespace App\Services;
 
-use Illuminate\Http\Request;
-use App\Entities\User;
-use App\Utils\AuthHelper;
 use Log;
+use App\Entities\User;
+use App\Entities\Vital;
+use App\Utils\AuthHelper;
+use Illuminate\Http\Request;
 
 class BluetoothPeripheralService extends BaseService {
 
     use AuthHelper;
+
+    private $_model;
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->_model = new Vital;
+
+    }
 
     public function login(Request $request)
     {
@@ -46,5 +56,18 @@ class BluetoothPeripheralService extends BaseService {
     public function capture(Request $request)
     {
         Log::debug('EVITALZ', ['data' => $request->all()]);
+        return $this->httpResponse->setHttpMessage('Data Captured Successfully')->jsonResponse();
+    }
+
+    private function savePulseOximeter($request, $data)
+    {
+        $vitalData = [
+            'details' => [
+                'date' => $data,
+                'spo2' => $data
+            ],
+        ];
+
+        $this->_model->createModel($request, $vitalData);
     }
 }
