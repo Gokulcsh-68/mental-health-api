@@ -19,6 +19,7 @@ class HospitalGroupTransformer extends JsonResource
             'id' => $this->id,
             'name' =>  $this->name,
             'reg_no' =>  $this->reg_no,
+            'logo' =>  $this->logo,
             'additional_info' =>  $this->additional_info,
             'user' => (new UserTransformer($this->primaryStaff->user)),
         ];
