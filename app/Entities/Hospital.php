@@ -31,7 +31,8 @@ class Hospital extends BaseModel
      * @var array
      */
     protected $casts = [
-        'additional_info' => 'object'
+        'additional_info' => 'object',
+        'logo' => 'object'
         
     ];
 
