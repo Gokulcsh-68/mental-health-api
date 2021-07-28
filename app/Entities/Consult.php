@@ -159,7 +159,12 @@ class Consult extends BaseModel
                     ];
 
 
-
+            $consult_additional_info = null;
+            $hospital_id = '';
+            if($request->user()->role->code == 'hospital'){
+                $hospital_id = $request->user()->staff->hospital_id;
+                $consult_additional_info['organization_id'] = $request->user()->staff->hospital_id;
+            }
            
 
             $payload = [
@@ -167,6 +172,7 @@ class Consult extends BaseModel
                 'consult_type' => 'virtual',
                 'consult_reason' => $data['reason_for_consult'],
                 'service_provider' => $teleconsult_config['default_service_provider'],
+                'additional_info' => $consult_additional_info,
 
                 'provider' => [
                     'id' => $provider->id,
@@ -192,7 +198,7 @@ class Consult extends BaseModel
 
             if(!empty($data['cart_camera']))
             {
-                $payload['additional_info'] = ['camera'=>$data['cart_camera']];
+                $payload['additional_info'] += ['camera'=>$data['cart_camera']];
             }
 
             $teleconsult_response = $this->_teleconsult_service->create($payload);

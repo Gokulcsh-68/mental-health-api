@@ -85,7 +85,7 @@ class Camera extends BaseModel
 
             return $model;
         } catch (Exception $e) {
-            exceptionLogger("Immunisation Create Rollback", $e);
+            exceptionLogger("Camera Create Rollback", $e);
             DB::rollback();
         }
 

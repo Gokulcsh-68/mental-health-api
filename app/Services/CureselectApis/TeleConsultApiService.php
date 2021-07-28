@@ -255,7 +255,7 @@ class TeleConsultApiService extends BaseService {
 
     		$form_data = [
     			"consult_status" => $request->get('status'),
-    			"additional_info" => $request->get('additional_info') ?? null,
+    			"additional_info" => $request->get('additional_info') ?? [],
     		];
 
     		$headers = [
