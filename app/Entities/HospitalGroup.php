@@ -22,7 +22,7 @@ class HospitalGroup extends BaseModel
      * @var array
      */
     protected $fillable = [
-        "name", "reg_no", "additional_info"
+        "name", "reg_no", "additional_info", "logo"
     ];
 
     /**
@@ -31,7 +31,8 @@ class HospitalGroup extends BaseModel
      * @var array
      */
     protected $casts = [
-        'additional_info' => 'object'
+        'additional_info' => 'object',
+        'logo' => 'object'
         
     ];
 

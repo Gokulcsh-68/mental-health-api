@@ -14,7 +14,7 @@ class CameraRequest extends RequestAbstract
     public function rules(): array
     {
         return [
-            'hospital_id' => 'required',
+            'hospital_id' => 'nullable',
             'camera_name' => 'required',
             'camera_ip' => 'required',
             'camera_type' => 'required'

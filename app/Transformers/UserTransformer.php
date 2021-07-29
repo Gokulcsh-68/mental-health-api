@@ -42,11 +42,13 @@ class UserTransformer extends JsonResource
 
             if($request->user()->role->code == 'hospitalgroup'){
                 $return_val['hospital_group_name'] = $request->get('staff')->hospitalgroup->name;
+                $return_val['hospital_group_address'] = $request->get('staff')->hospitalgroup;
             }
 
 
             if($request->user()->role->code == 'hospital'){
                 $return_val['hospital_name'] = $request->get('staff')->hospital->name;
+                $return_val['hospital_address'] = $request->get('staff')->hospital;
             }
         }
 

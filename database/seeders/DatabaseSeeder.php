@@ -71,7 +71,8 @@ class DatabaseSeeder extends Seeder
             AssessmentPsychiatricExamNonsuicidalSelfInjury::class,
             AssessmentPsychiatricExamOppositionalDefiantDisorder::class,
             AssessmentPsychiatricExamSomaticSymptomDisorder::class,
-            SymptomUpdateNewSeeder::class
+            SymptomUpdateNewSeeder::class,
+            UpdateRolesSeeder::class
         ]);
     }
 }

@@ -150,11 +150,29 @@ class Consult extends BaseModel
 
             $teleconsult_config = config('api.teleconsult');
 
+               
+            $addition_value = [
+                        'consult_speciality' => $data['speciality'],
+                        'api_end_point' => $teleconsult_config['api_return_url'],
+                        'api_end_version' => $teleconsult_config['api_return_url_version'],
+                        'x_name' => 'garuda'
+                    ];
+
+
+            $consult_additional_info = null;
+            $hospital_id = '';
+            if($request->user()->role->code == 'hospital'){
+                $hospital_id = $request->user()->staff->hospital_id;
+                $consult_additional_info['organization_id'] = $request->user()->staff->hospital_id;
+            }
+           
+
             $payload = [
                 'consult_date_time' => $data['consult_date_time'],
                 'consult_type' => 'virtual',
                 'consult_reason' => $data['reason_for_consult'],
                 'service_provider' => $teleconsult_config['default_service_provider'],
+                'additional_info' => $consult_additional_info,
 
                 'provider' => [
                     'id' => $provider->id,
@@ -163,12 +181,7 @@ class Consult extends BaseModel
                     'phone' => $provider->mobile_number,
                     'gender' => $provider->gender,
                     'profile_pic' => $provider->profile_image,
-                    'additional_info' => [
-                        'consult_speciality' => $data['speciality'],
-                        'api_end_point' => $teleconsult_config['api_return_url'],
-                        'api_end_version' => $teleconsult_config['api_return_url_version'],
-                        'x_name' => 'garuda',
-                    ],
+                    'additional_info' => $addition_value,
                 ],
 
                 'patient' => [
@@ -178,13 +191,15 @@ class Consult extends BaseModel
                     'phone' => $patient->mobile_number,
                     'gender' => $patient->gender,
                     'profile_pic' => $patient->profile_image,
-                    'additional_info' => [
-                        'api_end_point' => $teleconsult_config['api_return_url'],
-                        'api_end_version' => $teleconsult_config['api_return_url_version'],
-                        'x_name' => 'garuda',
-                    ],
+                    'additional_info' => $addition_value
                 ],
             ];
+
+
+            if(!empty($data['cart_camera']))
+            {
+                $payload['additional_info'] += ['camera'=>$data['cart_camera']];
+            }
 
             $teleconsult_response = $this->_teleconsult_service->create($payload);
             // dd($teleconsult_response);

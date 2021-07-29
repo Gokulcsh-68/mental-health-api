@@ -31,7 +31,8 @@ class Hospital extends BaseModel
      * @var array
      */
     protected $casts = [
-        'additional_info' => 'object'
+        'additional_info' => 'object',
+        'logo' => 'object'
         
     ];
 
@@ -116,14 +117,16 @@ class Hospital extends BaseModel
 
             $hospital = $this->create($data);
 
-            $hospital_speciality = [];
-            foreach ($data['hospital_speciality'] as $key => $value) {
-               $hospital_speciality[$key] = ['speciality'=>$value];
+            if (!empty($data['hospital_speciality'])) {
+                $hospital_speciality = [];
+                foreach ($data['hospital_speciality'] as $key => $value) {
+                   $hospital_speciality[$key] = ['speciality'=>$value];
+                }
+
+                $hospital->hospitalSpeciality()->createMany($hospital_speciality);
+                
             }
-
-            $hospital->hospitalSpeciality()->createMany($hospital_speciality);
             
-
             $data['user']['role_id'] = Role::where("code",  $data['user']['role'])->pluck('id')->first();
 
             $user = User::create($data['user']);
