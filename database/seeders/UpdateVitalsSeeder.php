@@ -19,9 +19,13 @@ class UpdateVitalsSeeder extends Seeder
         		'name' => 'Respiration Rate', 'slug' => 'respiration'],
             [ 'master_type_slug' => 'speciality',
         		'name' => 'Internist / Infection Disease Specialist (COVID19) ', 'slug' => 'infection_disease_specialist'],
+            [ 'master_type_slug' => 'vitals','name' => 'HCT', 'slug' => 'hct'],
+            [ 'master_type_slug' => 'vitals', 'name' => 'Hemoglobin', 'slug' => 'hemoglobin'],
+            [ 'master_type_slug' => 'vitals', 'name' => 'Keytone', 'slug' => 'keytone'],
+            [ 'master_type_slug' => 'vitals', 'name' => 'Uric Acid', 'slug' => 'uric_acid'],
         ];
         
-        DB::table('masters')->insert($master_types);
+        DB::table('masters')->insertOrIgnore($master_types);
     }
 
 } 
