@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use DB;
 use Illuminate\Database\Seeder;
 
-class CardiacPulmonarySeeder extends Seeder
+class OphthalmologySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,20 +15,20 @@ class CardiacPulmonarySeeder extends Seeder
     public function run()
     {
 
-        $vdx_cardiac_pulmonary = [];
-        $vdx_cardiac_pulmonary_file_path = __DIR__ . '/source/vdx_cardiac_pulmonary.csv';
+        $vdx_ophthalmology = [];
+        $vdx_ophthalmology_file_path = __DIR__ . '/source/vdx_ophthalmology.csv';
        
-        $vdx_cardiac_pulmonary_file = file($vdx_cardiac_pulmonary_file_path);
+        $vdx_ophthalmology_file = file($vdx_ophthalmology_file_path);
 
-        $vdx_cardiac_pulmonary_data_collection = array_slice($vdx_cardiac_pulmonary_file, 1);
+        $vdx_ophthalmology_data_collection = array_slice($vdx_ophthalmology_file, 1);
          
-        $vdx_cardiac_pulmonary_chunched = (array_chunk($vdx_cardiac_pulmonary_data_collection, 1000));
+        $vdx_ophthalmology_chunched = (array_chunk($vdx_ophthalmology_data_collection, 1000));
         $i = 1;
 
         $rand_key = \Illuminate\Support\Str::random(6);
 
-        foreach($vdx_cardiac_pulmonary_chunched as $vdxs) {
-            $vdx_cardiac_pulmonary_data = [];
+        foreach($vdx_ophthalmology_chunched as $vdxs) {
+            $vdx_ophthalmology_data = [];
             
             foreach($vdxs as $item) {
                 $data = explode(',', $item);
@@ -37,16 +37,16 @@ class CardiacPulmonarySeeder extends Seeder
 
                 if(!empty($data[1])){
                     $name = trim($data[1]);
-                    $slug_string = str_replace(' ', '_', $name); 
+                    $slug_string = str_replace(' ', '_', $name);                
                     $rmv_slug_string = preg_replace('/[^A-Za-z0-9\-]/', '', $slug_string);            
                     $slug = strtolower($rand_key.'1'.$rmv_slug_string);
 
-                    $main_name = trim(substr($rmv_slug_string, 0,3)).trim(substr($rmv_slug_string, -5));    
-                    
-                    $slug = substr($slug,0,44);
+                    $main_name = trim(substr($rmv_slug_string, 0,3)).trim(substr($rmv_slug_string, -5));
 
+                    $slug = substr($slug,0,44); 
+                    
                     if(!empty($name)){
-                        $vdx_cardiac_pulmonary_data[] = [
+                        $vdx_ophthalmology_data[] = [
                             'attributes' => json_encode([
                                 'reference_slug' => $master_type_slug
                             ]), 
@@ -62,11 +62,10 @@ class CardiacPulmonarySeeder extends Seeder
                         $slug_string2 = str_replace(' ', '_', $name2);                
                         $slug2 = strtolower($rand_key.'2'.$main_name.preg_replace('/[^A-Za-z0-9\-]/', '', $slug_string2));
 
-
-                        $slug2 = substr($slug2,0,44);
+                    $slug2 = substr($slug2,0,44);
 
                     if(!empty($name2)){
-                        $vdx_cardiac_pulmonary_data[] = [
+                        $vdx_ophthalmology_data[] = [
                             'attributes' => json_encode([
                                 'reference_slug' => $slug
                             ]), 
@@ -74,8 +73,8 @@ class CardiacPulmonarySeeder extends Seeder
                             'slug' => $slug2, 
                             'name' => $name2,
                             'is_active' => 1,
-                        ];    
-                    }            
+                        ]; 
+                        }               
 
 
 
@@ -84,10 +83,10 @@ class CardiacPulmonarySeeder extends Seeder
                             $slug_string3 = str_replace(' ', '_', $name3);                
                             $slug3 = strtolower($rand_key.'3'.$main_name.preg_replace('/[^A-Za-z0-9\-]/', '', $slug_string3));
 
-                            $slug3 = substr($slug3,0,44);
+                    $slug3 = substr($slug3,0,44);
 
-                        if(!empty($name3)){
-                            $vdx_cardiac_pulmonary_data[] = [
+                    if(!empty($name3)){
+                            $vdx_ophthalmology_data[] = [
                                 'attributes' => json_encode([
                                     'reference_slug' => $slug2
                                 ]),  
@@ -96,7 +95,7 @@ class CardiacPulmonarySeeder extends Seeder
                                 'name' => $name3,
                                 'is_active' => 1,
                             ];
-                        }
+                            }
 
 
                             if(!empty($data[4])){
@@ -104,19 +103,19 @@ class CardiacPulmonarySeeder extends Seeder
                                 $slug_string4 = str_replace(' ', '_', $name4);                
                                 $slug4 = strtolower($rand_key.'4'.$main_name.preg_replace('/[^A-Za-z0-9\-]/', '', $slug_string4));
 
-                                $slug4 = substr($slug4,0,44);
+                    $slug4 = substr($slug4,0,44);
 
-                                if(!empty($name4)){
-                                    $vdx_cardiac_pulmonary_data[] = [
-                                        'attributes' => json_encode([
-                                            'reference_slug' => $slug3
-                                        ]), 
-                                        'master_type_slug' => 'vdx_sub_types',
-                                        'slug' => $slug4, 
-                                        'name' => $name4,
-                                        'is_active' => 1,
-                                    ];
-                                }
+                    if(!empty($name4)){
+                                $vdx_ophthalmology_data[] = [
+                                    'attributes' => json_encode([
+                                        'reference_slug' => $slug3
+                                    ]), 
+                                    'master_type_slug' => 'vdx_sub_types',
+                                    'slug' => $slug4, 
+                                    'name' => $name4,
+                                    'is_active' => 1,
+                                ];
+                            }
                             }
                         }
 
@@ -126,7 +125,7 @@ class CardiacPulmonarySeeder extends Seeder
 
             }
 
-            DB::table('masters')->insertOrIgnore($vdx_cardiac_pulmonary_data);
+            DB::table('masters')->insertOrIgnore($vdx_ophthalmology_data);
         }
         
     }

@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use DB;
 use Illuminate\Database\Seeder;
 
-class CardiacPulmonarySeeder extends Seeder
+class SkinLesionsSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,20 +15,20 @@ class CardiacPulmonarySeeder extends Seeder
     public function run()
     {
 
-        $vdx_cardiac_pulmonary = [];
-        $vdx_cardiac_pulmonary_file_path = __DIR__ . '/source/vdx_cardiac_pulmonary.csv';
+        $vdx_skin_lesion = [];
+        $vdx_skin_lesion_file_path = __DIR__ . '/source/vdx_skin_lesion.csv';
        
-        $vdx_cardiac_pulmonary_file = file($vdx_cardiac_pulmonary_file_path);
+        $vdx_skin_lesion_file = file($vdx_skin_lesion_file_path);
 
-        $vdx_cardiac_pulmonary_data_collection = array_slice($vdx_cardiac_pulmonary_file, 1);
+        $vdx_skin_lesion_data_collection = array_slice($vdx_skin_lesion_file, 1);
          
-        $vdx_cardiac_pulmonary_chunched = (array_chunk($vdx_cardiac_pulmonary_data_collection, 1000));
+        $vdx_skin_lesion_chunched = (array_chunk($vdx_skin_lesion_data_collection, 1000));
         $i = 1;
 
         $rand_key = \Illuminate\Support\Str::random(6);
 
-        foreach($vdx_cardiac_pulmonary_chunched as $vdxs) {
-            $vdx_cardiac_pulmonary_data = [];
+        foreach($vdx_skin_lesion_chunched as $vdxs) {
+            $vdx_skin_lesion_data = [];
             
             foreach($vdxs as $item) {
                 $data = explode(',', $item);
@@ -41,12 +41,12 @@ class CardiacPulmonarySeeder extends Seeder
                     $rmv_slug_string = preg_replace('/[^A-Za-z0-9\-]/', '', $slug_string);            
                     $slug = strtolower($rand_key.'1'.$rmv_slug_string);
 
-                    $main_name = trim(substr($rmv_slug_string, 0,3)).trim(substr($rmv_slug_string, -5));    
+                    $main_name = trim(substr($rmv_slug_string, 0,3)).trim(substr($rmv_slug_string, -5));   
                     
                     $slug = substr($slug,0,44);
 
                     if(!empty($name)){
-                        $vdx_cardiac_pulmonary_data[] = [
+                        $vdx_skin_lesion_data[] = [
                             'attributes' => json_encode([
                                 'reference_slug' => $master_type_slug
                             ]), 
@@ -66,7 +66,7 @@ class CardiacPulmonarySeeder extends Seeder
                         $slug2 = substr($slug2,0,44);
 
                     if(!empty($name2)){
-                        $vdx_cardiac_pulmonary_data[] = [
+                        $vdx_skin_lesion_data[] = [
                             'attributes' => json_encode([
                                 'reference_slug' => $slug
                             ]), 
@@ -87,7 +87,7 @@ class CardiacPulmonarySeeder extends Seeder
                             $slug3 = substr($slug3,0,44);
 
                         if(!empty($name3)){
-                            $vdx_cardiac_pulmonary_data[] = [
+                            $vdx_skin_lesion_data[] = [
                                 'attributes' => json_encode([
                                     'reference_slug' => $slug2
                                 ]),  
@@ -107,7 +107,7 @@ class CardiacPulmonarySeeder extends Seeder
                                 $slug4 = substr($slug4,0,44);
 
                                 if(!empty($name4)){
-                                    $vdx_cardiac_pulmonary_data[] = [
+                                    $vdx_skin_lesion_data[] = [
                                         'attributes' => json_encode([
                                             'reference_slug' => $slug3
                                         ]), 
@@ -126,7 +126,7 @@ class CardiacPulmonarySeeder extends Seeder
 
             }
 
-            DB::table('masters')->insertOrIgnore($vdx_cardiac_pulmonary_data);
+            DB::table('masters')->insertOrIgnore($vdx_skin_lesion_data);
         }
         
     }

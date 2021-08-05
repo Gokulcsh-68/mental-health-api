@@ -1,0 +1,455 @@
+col_zero,col_one,col_two,col_three,col_four
+vdx_gastrointestinal,Abdominal pain,Abdominal pain subtypes,Abdominal pain,
+vdx_gastrointestinal,Abdominal pain,Abdominal pain subtypes,Epigastric pain,
+vdx_gastrointestinal,Abdominal pain,Abdominal pain subtypes,Right upper quadrant pain,
+vdx_gastrointestinal,Abdominal pain,Abdominal pain subtypes,Right lower quadrant pain,
+vdx_gastrointestinal,Abdominal pain,Abdominal pain subtypes,Left upper quadrant pain,
+vdx_gastrointestinal,Abdominal pain,Abdominal pain subtypes,Left lower quadrant pain,
+vdx_gastrointestinal,Abdominal pain,Abdominal pain subtypes,Periumbilical pain,
+vdx_gastrointestinal,Abdominal pain,GI Symptoms,Nausea,
+vdx_gastrointestinal,Abdominal pain,GI Symptoms,Vomiting,
+vdx_gastrointestinal,Abdominal pain,GI Symptoms,Diarrhea,
+vdx_gastrointestinal,Abdominal pain,GI Symptoms,Abdominal distension,
+vdx_gastrointestinal,Abdominal pain,GI Symptoms,Constipation,
+vdx_gastrointestinal,Abdominal pain,GI Symptoms,Melena,
+vdx_gastrointestinal,Abdominal pain,GI Symptoms,Hematochezia,
+vdx_gastrointestinal,Abdominal pain,GI Symptoms,Pale feces,
+vdx_gastrointestinal,Abdominal pain,Physical GI Signs,Abdominal mass,
+vdx_gastrointestinal,Abdominal pain,Physical GI Signs,Hypoactive bowel sounds,
+vdx_gastrointestinal,Abdominal pain,Physical GI Signs,Hyperactive bowel sounds,
+vdx_gastrointestinal,Abdominal pain,Physical GI Signs,Hepatomegaly,
+vdx_gastrointestinal,Abdominal pain,Physical GI Signs,Splenomegaly,
+vdx_gastrointestinal,Abdominal pain,Physical GI Signs,Ascites,
+vdx_gastrointestinal,Abdominal pain,Physical GI Signs,Rebound tenderness,
+vdx_gastrointestinal,Abdominal pain,Onset Findings,Developed rapidly (minutes to hours),
+vdx_gastrointestinal,Abdominal pain,Onset Findings,Developed acutely (days to weeks),
+vdx_gastrointestinal,Abdominal pain,Onset Findings,Developed chronically (months to years),
+vdx_gastrointestinal,Abdominal pain,Onset Findings,Recurring episodes or relapses,
+vdx_gastrointestinal,Abdominal pain,Onset Findings,Present at birth,
+vdx_gastrointestinal,Abdominal pain,Appearance of the Patient,Patient appears well,
+vdx_gastrointestinal,Abdominal pain,Appearance of the Patient,Patient appears ill,
+vdx_gastrointestinal,Abdominal pain,Appearance of the Patient,Patient appears systemically ill - toxic,
+vdx_gastrointestinal,Abdominal pain,Appearance of the Patient,None,
+vdx_gastrointestinal,Abdominal pain,Other associated symptoms,General,Fever
+vdx_gastrointestinal,Abdominal pain,Other associated symptoms,General,Anorexia
+vdx_gastrointestinal,Abdominal pain,Other associated symptoms,General,Unexplained weight loss
+vdx_gastrointestinal,Abdominal pain,Other associated symptoms,General,Jaundice
+vdx_gastrointestinal,Abdominal pain,Other associated symptoms,General,Anxiety
+vdx_gastrointestinal,Abdominal pain,Other associated symptoms,General,Myalgia
+vdx_gastrointestinal,Abdominal pain,Other associated symptoms,Cardiovascular,Chest pain
+vdx_gastrointestinal,Abdominal pain,Other associated symptoms,Cardiovascular,Hypertension
+vdx_gastrointestinal,Abdominal pain,Other associated symptoms,Cardiovascular,Tachycardia
+vdx_gastrointestinal,Abdominal pain,Other associated symptoms,Cardiovascular,Pericardial friction rub
+vdx_gastrointestinal,Abdominal pain,Other associated symptoms,Genitourinary,Oliguria
+vdx_gastrointestinal,Abdominal pain,Other associated symptoms,Respiratory,Tachypnea
+vdx_gastrointestinal,Abdominal pain,Other associated symptoms,Respiratory,Cough
+vdx_gastrointestinal,Abdominal pain,Other associated symptoms,Respiratory,Rhonchi
+vdx_gastrointestinal,Abdominal pain,Other associated symptoms,Respiratory,Crackles
+vdx_gastrointestinal,Abdominal pain,Investigations,Chemistry,C-reactive protein elevated
+vdx_gastrointestinal,Abdominal pain,Investigations,Chemistry,ESR elevated
+vdx_gastrointestinal,Abdominal pain,Investigations,Chemistry,Transaminases elevated
+vdx_gastrointestinal,Abdominal pain,Investigations,Chemistry,Hyponatremia
+vdx_gastrointestinal,Abdominal pain,Investigations,Chemistry,Hypernatremia
+vdx_gastrointestinal,Abdominal pain,Investigations,Chemistry,Hyperbilirubinemia
+vdx_gastrointestinal,Abdominal pain,Investigations,Chemistry,LDH elevated
+vdx_gastrointestinal,Abdominal pain,Investigations,Chemistry,Procalcitonin increased
+vdx_gastrointestinal,Abdominal pain,Investigations,Chemistry,Acid base disturbance
+vdx_gastrointestinal,Abdominal pain,Investigations,Chemistry,Blood urea nitrogen elevated
+vdx_gastrointestinal,Abdominal pain,Investigations,Chemistry,Hypoxemia
+vdx_gastrointestinal,Abdominal pain,Investigations,Chemistry,Hypercalcemia
+vdx_gastrointestinal,Abdominal pain,Investigations,Hematology,Leukocytosis
+vdx_gastrointestinal,Abdominal pain,Investigations,Hematology,Leukopenia
+vdx_gastrointestinal,Abdominal pain,Investigations,Hematology,Thrombocytosis
+vdx_gastrointestinal,Abdominal pain,Investigations,Hematology,Thrombocytopenia
+vdx_gastrointestinal,Abdominal pain,Investigations,Hematology,Anemia
+vdx_gastrointestinal,Abdominal pain,Investigations,Hematology,Eosinophilia
+vdx_gastrointestinal,Abdominal pain,Investigations,Urinalysis,Proteinuria
+vdx_gastrointestinal,Abdominal pain,Investigations,Urinalysis,Urine nitrite positive
+vdx_gastrointestinal,Abdominal pain,Investigations,Urinalysis,Leukocyte esterase positive
+vdx_gastrointestinal,Abdominal pain,Investigations,Urinalysis,Urine pH decreased
+vdx_gastrointestinal,Abdominal pain,Investigations,Urinalysis,Urine pH increased
+vdx_gastrointestinal,Abdominal pain,Investigations,Urinalysis,Urobilinogen positive
+vdx_gastrointestinal,Abdominal pain,Investigations,Urinalysis,Glycosuria
+vdx_gastrointestinal,Abdominal pain,Investigations,Urinalysis,Bacteriuria
+vdx_gastrointestinal,Abdominal pain,Investigations,Urinalysis,Hyaline casts
+vdx_gastrointestinal,Abdominal pain,Investigations,Urinalysis,WBC casts
+vdx_gastrointestinal,Abdominal pain,Investigations,Urinalysis,Hematuria
+vdx_gastrointestinal,Abdominal pain,Medical History,History of Immunosuppression/immunocompromised,
+vdx_gastrointestinal,Abdominal pain,Medical History,History of Diabetes mellitus,
+vdx_gastrointestinal,Abdominal pain,Medical History,History of Pregnancy (currently pregnant),
+vdx_gastrointestinal,Abdominal pain,Social History,Substance abuse,
+vdx_gastrointestinal,Abdominal pain,Social History,Sexually active,
+vdx_gastrointestinal,Abdominal pain,Social History,Hygiene,
+vdx_gastrointestinal,Abdominal pain,Travel History,Endemic Zones,
+vdx_gastrointestinal,Abdominal pain,Abuse History,Tobacco use,
+vdx_gastrointestinal,Abdominal pain,Abuse History,Alcohol use,
+vdx_gastrointestinal,Abdominal pain,Abuse History,Drugs use,
+vdx_gastrointestinal,Abdominal pain,Sexual History,Inactive,
+vdx_gastrointestinal,Abdominal pain,Sexual History,Active,
+vdx_gastrointestinal,Abdominal pain,Sexual History,Multiple Partners,
+vdx_gastrointestinal,Abdominal pain,Sexual History,Recent new sexual partner,
+vdx_gastrointestinal,Abdominal pain,Sexual History,LGBT,
+vdx_gastrointestinal,Abdominal pain,Sexual History,Condom use,
+vdx_gastrointestinal,Abdominal pain,Exposure,Animal,
+vdx_gastrointestinal,Abdominal pain,Exposure,Reptile,
+vdx_gastrointestinal,Abdominal pain,Exposure,Chemical,
+vdx_gastrointestinal,Abdominal pain,Exposure,Birds,
+vdx_gastrointestinal,Abdominal pain,Exposure,Aquatic Animals,
+vdx_gastrointestinal,Abdominal pain,Nagetive Findings,No skin findings,
+vdx_gastrointestinal,Abdominal pain,Nagetive Findings,No cardiovascular findings,
+vdx_gastrointestinal,Abdominal pain,Nagetive Findings,No dysmorphologic/malformation features,
+vdx_gastrointestinal,Abdominal pain,Nagetive Findings,No gastrointestinal findings,
+vdx_gastrointestinal,Abdominal pain,Nagetive Findings,No HEENT findings,
+vdx_gastrointestinal,Abdominal pain,Nagetive Findings,No musculoskeletal findings,
+vdx_gastrointestinal,Abdominal pain,Nagetive Findings,No neurologic findings,
+vdx_gastrointestinal,Abdominal pain,Nagetive Findings,No medication use (prescription or OTC),
+vdx_gastrointestinal,Abdominal pain,Nagetive Findings,No respiratory findings,
+vdx_gastrointestinal,Diarrhea,Onset Findings,Developed rapidly (minutes to hours),
+vdx_gastrointestinal,Diarrhea,Onset Findings,Developed acutely (days to weeks),
+vdx_gastrointestinal,Diarrhea,Onset Findings,Developed chronically (months to years),
+vdx_gastrointestinal,Diarrhea,Onset Findings,Recurring episodes or relapses,
+vdx_gastrointestinal,Diarrhea,Onset Findings,Present at birth,
+vdx_gastrointestinal,Diarrhea,Appearance of the Patient,Patient appears well,
+vdx_gastrointestinal,Diarrhea,Appearance of the Patient,Patient appears ill,
+vdx_gastrointestinal,Diarrhea,Appearance of the Patient,Patient appears systemically ill - toxic,
+vdx_gastrointestinal,Diarrhea,Appearance of the Patient,None,
+vdx_gastrointestinal,Diarrhea,Exposure,Animal,
+vdx_gastrointestinal,Diarrhea,Exposure,Reptile,
+vdx_gastrointestinal,Diarrhea,Exposure,Chemical,
+vdx_gastrointestinal,Diarrhea,Exposure,Birds,
+vdx_gastrointestinal,Diarrhea,Exposure,Aquatic Animals,
+vdx_gastrointestinal,Diarrhea,Occupation,Military,
+vdx_gastrointestinal,Diarrhea,Occupation,Veterinarian,
+vdx_gastrointestinal,Diarrhea,Occupation,Farmer,
+vdx_gastrointestinal,Diarrhea,Occupation,Healthcare worker,
+vdx_gastrointestinal,Diarrhea,Occupation,Butcher,
+vdx_gastrointestinal,Diarrhea,Occupation,Laboratory worker or researcher,
+vdx_gastrointestinal,Diarrhea,Social History,Substance abuse,
+vdx_gastrointestinal,Diarrhea,Social History,Sexually active,
+vdx_gastrointestinal,Diarrhea,Social History,Hygiene,
+vdx_gastrointestinal,Diarrhea,Travel History,Endemic Zones,
+vdx_gastrointestinal,Diarrhea,Associated findings,Vomiting,
+vdx_gastrointestinal,Diarrhea,Associated findings,Abdominal pain,Epigastric pain
+vdx_gastrointestinal,Diarrhea,Associated findings,Abdominal pain,Right upper quadrant pain
+vdx_gastrointestinal,Diarrhea,Associated findings,Abdominal pain,Right lower quadrant pain
+vdx_gastrointestinal,Diarrhea,Associated findings,Abdominal pain,Left upper quadrant pain
+vdx_gastrointestinal,Diarrhea,Associated findings,Abdominal pain,Left lower quadrant pain
+vdx_gastrointestinal,Diarrhea,Associated findings,Abdominal pain,Periumbilical pain
+vdx_gastrointestinal,Diarrhea,Associated findings,Fever,
+vdx_gastrointestinal,Diarrhea,Associated findings,Steatorrhea,
+vdx_gastrointestinal,Diarrhea,Associated findings,Melena,
+vdx_gastrointestinal,Diarrhea,Associated findings,Hematochezia,
+vdx_gastrointestinal,Diarrhea,Associated findings,Liquid stool,
+vdx_gastrointestinal,Diarrhea,Associated findings,Foul smelling stool,
+vdx_gastrointestinal,Diarrhea,Associated findings,Pallor,
+vdx_gastrointestinal,Diarrhea,Associated findings,Unexplained weight loss,
+vdx_gastrointestinal,Diarrhea,Associated findings,Anxiety,
+vdx_gastrointestinal,Diarrhea,Associated findings,Abdominal distension,
+vdx_gastrointestinal,Diarrhea,Associated findings,Flatulence,
+vdx_gastrointestinal,Diarrhea,Nagetive Findings,No skin findings,
+vdx_gastrointestinal,Diarrhea,Nagetive Findings,No cardiovascular findings,
+vdx_gastrointestinal,Diarrhea,Nagetive Findings,No dysmorphologic/malformation features,
+vdx_gastrointestinal,Diarrhea,Nagetive Findings,No gastrointestinal findings,
+vdx_gastrointestinal,Diarrhea,Nagetive Findings,No HEENT findings,
+vdx_gastrointestinal,Diarrhea,Nagetive Findings,No musculoskeletal findings,
+vdx_gastrointestinal,Diarrhea,Nagetive Findings,No neurologic findings,
+vdx_gastrointestinal,Diarrhea,Nagetive Findings,No medication use (prescription or OTC),
+vdx_gastrointestinal,Diarrhea,Nagetive Findings,No respiratory findings,
+vdx_gastrointestinal,Vomiting,Onset Findings,Developed rapidly (minutes to hours),
+vdx_gastrointestinal,Vomiting,Onset Findings,Developed acutely (days to weeks),
+vdx_gastrointestinal,Vomiting,Onset Findings,Developed chronically (months to years),
+vdx_gastrointestinal,Vomiting,Onset Findings,Recurring episodes or relapses,
+vdx_gastrointestinal,Vomiting,Onset Findings,Present at birth,
+vdx_gastrointestinal,Vomiting,Appearance of the Patient,Patient appears well,
+vdx_gastrointestinal,Vomiting,Appearance of the Patient,Patient appears ill,
+vdx_gastrointestinal,Vomiting,Appearance of the Patient,Patient appears systemically ill - toxic,
+vdx_gastrointestinal,Vomiting,Appearance of the Patient,None,
+vdx_gastrointestinal,Vomiting,Associated Symptoms,Fever,
+vdx_gastrointestinal,Vomiting,Associated Symptoms,Headache,
+vdx_gastrointestinal,Vomiting,Associated Symptoms,Vertigo,
+vdx_gastrointestinal,Vomiting,Associated Symptoms,Diarrhea,
+vdx_gastrointestinal,Vomiting,Associated Symptoms,Abdominal pain,Epigastric pain
+vdx_gastrointestinal,Vomiting,Associated Symptoms,Abdominal pain,Right upper quadrant pain
+vdx_gastrointestinal,Vomiting,Associated Symptoms,Abdominal pain,Right lower quadrant pain
+vdx_gastrointestinal,Vomiting,Associated Symptoms,Abdominal pain,Left upper quadrant pain
+vdx_gastrointestinal,Vomiting,Associated Symptoms,Abdominal pain,Left lower quadrant pain
+vdx_gastrointestinal,Vomiting,Associated Symptoms,Abdominal pain,Periumbilical pain
+vdx_gastrointestinal,Vomiting,Physical Exam Findings,Abdominal mass,
+vdx_gastrointestinal,Vomiting,Physical Exam Findings,Papilledema,
+vdx_gastrointestinal,Vomiting,Physical Exam Findings,Unexplained weight loss,
+vdx_gastrointestinal,Vomiting,Physical Exam Findings,Hepatomegaly,
+vdx_gastrointestinal,Vomiting,Physical Exam Findings,Ascites,
+vdx_gastrointestinal,Vomiting,Investigations,Blood urea nitrogen elevated,
+vdx_gastrointestinal,Vomiting,Investigations,Transaminases elevated,
+vdx_gastrointestinal,Vomiting,Investigations,Eosinophilia,
+vdx_gastrointestinal,Vomiting,Investigations,Urine creatinine elevated,
+vdx_gastrointestinal,Vomiting,Investigations,Thrombocytopenia,
+vdx_gastrointestinal,Vomiting,Social History,Substance abuse,
+vdx_gastrointestinal,Vomiting,Social History,Sexually active,
+vdx_gastrointestinal,Vomiting,Social History,Hygiene,
+vdx_gastrointestinal,Vomiting,Nagetive Findings,No skin findings,
+vdx_gastrointestinal,Vomiting,Nagetive Findings,No cardiovascular findings,
+vdx_gastrointestinal,Vomiting,Nagetive Findings,No dysmorphologic/malformation features,
+vdx_gastrointestinal,Vomiting,Nagetive Findings,No gastrointestinal findings,
+vdx_gastrointestinal,Vomiting,Nagetive Findings,No HEENT findings,
+vdx_gastrointestinal,Vomiting,Nagetive Findings,No musculoskeletal findings,
+vdx_gastrointestinal,Vomiting,Nagetive Findings,No neurologic findings,
+vdx_gastrointestinal,Vomiting,Nagetive Findings,No medication use (prescription or OTC),
+vdx_gastrointestinal,Vomiting,Nagetive Findings,No respiratory findings,
+vdx_gastrointestinal,Nausea,Onset Findings,Developed rapidly (minutes to hours),
+vdx_gastrointestinal,Nausea,Onset Findings,Developed acutely (days to weeks),
+vdx_gastrointestinal,Nausea,Onset Findings,Developed chronically (months to years),
+vdx_gastrointestinal,Nausea,Onset Findings,Recurring episodes or relapses,
+vdx_gastrointestinal,Nausea,Onset Findings,Present at birth,
+vdx_gastrointestinal,Nausea,Appearance of the Patient,Patient appears well,
+vdx_gastrointestinal,Nausea,Appearance of the Patient,Patient appears ill,
+vdx_gastrointestinal,Nausea,Appearance of the Patient,Patient appears systemically ill - toxic,
+vdx_gastrointestinal,Nausea,Appearance of the Patient,None,
+vdx_gastrointestinal,Nausea,GI Symptoms,Vomiting,
+vdx_gastrointestinal,Nausea,GI Symptoms,Dyspepsia,
+vdx_gastrointestinal,Nausea,GI Symptoms,Regurgitation,
+vdx_gastrointestinal,Nausea,GI Symptoms,Diarrhea,
+vdx_gastrointestinal,Nausea,GI Symptoms,Abdominal distension,
+vdx_gastrointestinal,Nausea,GI Symptoms,Abdominal pain,Epigastric pain
+vdx_gastrointestinal,Nausea,GI Symptoms,Abdominal pain,Right upper quadrant pain
+vdx_gastrointestinal,Nausea,GI Symptoms,Abdominal pain,Right lower quadrant pain
+vdx_gastrointestinal,Nausea,GI Symptoms,Abdominal pain,Left upper quadrant pain
+vdx_gastrointestinal,Nausea,GI Symptoms,Abdominal pain,Left lower quadrant pain
+vdx_gastrointestinal,Nausea,GI Symptoms,Abdominal pain,Periumbilical pain
+vdx_gastrointestinal,Nausea,Other symptoms,Vertigo,
+vdx_gastrointestinal,Nausea,Other symptoms,Nystagmus,
+vdx_gastrointestinal,Nausea,Other symptoms,Headache,
+vdx_gastrointestinal,Nausea,Other symptoms,Mental status alteration,Agitation
+vdx_gastrointestinal,Nausea,Other symptoms,Mental status alteration,Delirium/Confusion
+vdx_gastrointestinal,Nausea,Other symptoms,Mental status alteration,Hallucination
+vdx_gastrointestinal,Nausea,Other symptoms,Mental status alteration,Stupor
+vdx_gastrointestinal,Nausea,Other symptoms,Mental status alteration,Coma
+vdx_gastrointestinal,Nausea,Other symptoms,Mental status alteration,Irritability
+vdx_gastrointestinal,Nausea,Other symptoms,Ataxia,
+vdx_gastrointestinal,Nausea,Other symptoms,Oral erosions,
+vdx_gastrointestinal,Nausea,Other symptoms,Parotid enlargement,
+vdx_gastrointestinal,Nausea,Other symptoms,Paresthesias,
+vdx_gastrointestinal,Nausea,Other symptoms,Hyperpigmented patch,
+vdx_gastrointestinal,Nausea,Other symptoms,Jaundice,
+vdx_gastrointestinal,Nausea,Nagetive Findings,No skin findings,
+vdx_gastrointestinal,Nausea,Nagetive Findings,No cardiovascular findings,
+vdx_gastrointestinal,Nausea,Nagetive Findings,No dysmorphologic/malformation features,
+vdx_gastrointestinal,Nausea,Nagetive Findings,No gastrointestinal findings,
+vdx_gastrointestinal,Nausea,Nagetive Findings,No HEENT findings,
+vdx_gastrointestinal,Nausea,Nagetive Findings,No musculoskeletal findings,
+vdx_gastrointestinal,Nausea,Nagetive Findings,No neurologic findings,
+vdx_gastrointestinal,Nausea,Nagetive Findings,No medication use (prescription or OTC),
+vdx_gastrointestinal,Nausea,Nagetive Findings,No respiratory findings,
+vdx_gastrointestinal,Hepatomegaly,Symptoms,Fever,
+vdx_gastrointestinal,Hepatomegaly,Symptoms,Dyspnea,
+vdx_gastrointestinal,Hepatomegaly,Symptoms,Fatigue,
+vdx_gastrointestinal,Hepatomegaly,Symptoms,Abdominal pain,Epigastric pain
+vdx_gastrointestinal,Hepatomegaly,Symptoms,Abdominal pain,Right upper quadrant pain
+vdx_gastrointestinal,Hepatomegaly,Symptoms,Abdominal pain,Right lower quadrant pain
+vdx_gastrointestinal,Hepatomegaly,Symptoms,Abdominal pain,Left upper quadrant pain
+vdx_gastrointestinal,Hepatomegaly,Symptoms,Abdominal pain,Left lower quadrant pain
+vdx_gastrointestinal,Hepatomegaly,Symptoms,Abdominal pain,Periumbilical pain
+vdx_gastrointestinal,Hepatomegaly,Physical Sign,Ascites,
+vdx_gastrointestinal,Hepatomegaly,Physical Sign,Jaundice,
+vdx_gastrointestinal,Hepatomegaly,Physical Sign,Unexplained weight loss,
+vdx_gastrointestinal,Hepatomegaly,Travel History,Endemic Zones,
+vdx_gastrointestinal,Hepatomegaly,Social History,Substance abuse,
+vdx_gastrointestinal,Hepatomegaly,Social History,Sexually active,
+vdx_gastrointestinal,Hepatomegaly,Social History,Hygiene,
+vdx_gastrointestinal,Hepatomegaly,Investigations,Transaminases elevated,
+vdx_gastrointestinal,Hepatomegaly,Investigations,Serum ammonia increased,
+vdx_gastrointestinal,Hepatomegaly,Investigations,Alkaline phosphatase elevated,
+vdx_gastrointestinal,Hepatomegaly,Investigations,Hyperbilirubinemia,
+vdx_gastrointestinal,Hepatomegaly,Investigations,Thrombocytopenia,
+vdx_gastrointestinal,Hepatomegaly,Investigations,Anemia,
+vdx_gastrointestinal,Hepatomegaly,Investigations,ANA positive,
+vdx_gastrointestinal,Hepatomegaly,Investigations,Hypoglycemia,
+vdx_gastrointestinal,Hepatomegaly,Investigations,Elevated urine hCG level,
+vdx_gastrointestinal,Hepatomegaly,Investigations,Proteinuria,
+vdx_gastrointestinal,Hepatomegaly,Investigations,Protoporphyrins elevate,
+vdx_gastrointestinal,Hepatomegaly,Skin Leison Type,Light Skin,Smooth Papule / Plaque
+vdx_gastrointestinal,Hepatomegaly,Skin Leison Type,Light Skin,Scaly Papule / Plaque
+vdx_gastrointestinal,Hepatomegaly,Skin Leison Type,Light Skin,Eschar
+vdx_gastrointestinal,Hepatomegaly,Skin Leison Type,Light Skin,Erythema / Erythroderma
+vdx_gastrointestinal,Hepatomegaly,Skin Leison Type,Light Skin,Purpura / Petechiae
+vdx_gastrointestinal,Hepatomegaly,Skin Leison Type,Light Skin,Flat / Macular
+vdx_gastrointestinal,Hepatomegaly,Skin Leison Type,Light Skin,Vesicular / Pustular
+vdx_gastrointestinal,Hepatomegaly,Skin Leison Type,Light Skin,Erosion / Ulcer / Atrophy
+vdx_gastrointestinal,Hepatomegaly,Skin Leison Type,Light Skin,Gangrene
+vdx_gastrointestinal,Hepatomegaly,Skin Leison Type,Dark Skin,Smooth Papule / Plaque
+vdx_gastrointestinal,Hepatomegaly,Skin Leison Type,Dark Skin,Scaly Papule / Plaque
+vdx_gastrointestinal,Hepatomegaly,Skin Leison Type,Dark Skin,Eschar
+vdx_gastrointestinal,Hepatomegaly,Skin Leison Type,Dark Skin,Erythema / Erythroderma
+vdx_gastrointestinal,Hepatomegaly,Skin Leison Type,Dark Skin,Purpura / Petechiae
+vdx_gastrointestinal,Hepatomegaly,Skin Leison Type,Dark Skin,Flat / Macular
+vdx_gastrointestinal,Hepatomegaly,Skin Leison Type,Dark Skin,Vesicular / Pustular
+vdx_gastrointestinal,Hepatomegaly,Skin Leison Type,Dark Skin,Erosion / Ulcer / Atrophy
+vdx_gastrointestinal,Hepatomegaly,Skin Leison Type,Dark Skin,Gangrene
+vdx_gastrointestinal,Hepatomegaly,Nagetive Findings,No skin findings,
+vdx_gastrointestinal,Hepatomegaly,Nagetive Findings,No cardiovascular findings,
+vdx_gastrointestinal,Hepatomegaly,Nagetive Findings,No dysmorphologic/malformation features,
+vdx_gastrointestinal,Hepatomegaly,Nagetive Findings,No gastrointestinal findings,
+vdx_gastrointestinal,Hepatomegaly,Nagetive Findings,No HEENT findings,
+vdx_gastrointestinal,Hepatomegaly,Nagetive Findings,No musculoskeletal findings,
+vdx_gastrointestinal,Hepatomegaly,Nagetive Findings,No neurologic findings,
+vdx_gastrointestinal,Hepatomegaly,Nagetive Findings,No medication use (prescription or OTC),
+vdx_gastrointestinal,Hepatomegaly,Nagetive Findings,No respiratory findings,
+vdx_gastrointestinal,Constipation,GI Symptoms,Abdominal pain,Epigastric pain
+vdx_gastrointestinal,Constipation,GI Symptoms,Abdominal pain,Right upper quadrant pain
+vdx_gastrointestinal,Constipation,GI Symptoms,Abdominal pain,Right lower quadrant pain
+vdx_gastrointestinal,Constipation,GI Symptoms,Abdominal pain,Left upper quadrant pain
+vdx_gastrointestinal,Constipation,GI Symptoms,Abdominal pain,Left lower quadrant pain
+vdx_gastrointestinal,Constipation,GI Symptoms,Abdominal pain,Periumbilical pain
+vdx_gastrointestinal,Constipation,GI Symptoms,Abdominal mass,
+vdx_gastrointestinal,Constipation,GI Symptoms,Diarrhea,
+vdx_gastrointestinal,Constipation,GI Symptoms,Hematochezia,
+vdx_gastrointestinal,Constipation,GI Symptoms,Hepatomegaly,
+vdx_gastrointestinal,Constipation,GI Symptoms,NauseaRectal discharge,
+vdx_gastrointestinal,Constipation,GI Symptoms,Rectal pain,
+vdx_gastrointestinal,Constipation,GI Symptoms,Tenesmus,
+vdx_gastrointestinal,Constipation,GI Symptoms,Vomiting,
+vdx_gastrointestinal,Constipation,Other Symptoms,Unexplained weight loss,
+vdx_gastrointestinal,Constipation,Other Symptoms,Fever,
+vdx_gastrointestinal,Constipation,Other Symptoms,Dehydration,
+vdx_gastrointestinal,Constipation,Other Symptoms,Failure to thrive,
+vdx_gastrointestinal,Constipation,Other Symptoms,Low back pain,
+vdx_gastrointestinal,Constipation,Other Symptoms,Anxiety,
+vdx_gastrointestinal,Constipation,Other Symptoms,Headache,
+vdx_gastrointestinal,Constipation,Other Symptoms,Muscle weakness,
+vdx_gastrointestinal,Constipation,Other Symptoms,Mental status alteration,Agitation
+vdx_gastrointestinal,Constipation,Other Symptoms,Mental status alteration,Delirium/Confusion
+vdx_gastrointestinal,Constipation,Other Symptoms,Mental status alteration,Hallucination
+vdx_gastrointestinal,Constipation,Other Symptoms,Mental status alteration,Stupor
+vdx_gastrointestinal,Constipation,Other Symptoms,Mental status alteration,Coma
+vdx_gastrointestinal,Constipation,Other Symptoms,Mental status alteration,Irritability
+vdx_gastrointestinal,Constipation,Other Symptoms,Depressed mood,
+vdx_gastrointestinal,Constipation,Other Symptoms,Dyspnea,
+vdx_gastrointestinal,Constipation,Investigations,Anemia,
+vdx_gastrointestinal,Constipation,Investigations,Hyperbilirubinemia,
+vdx_gastrointestinal,Constipation,Investigations,ESR elevated,
+vdx_gastrointestinal,Constipation,Investigations,Hypercalcemia,
+vdx_gastrointestinal,Constipation,Investigations,Hyperkalemia,
+vdx_gastrointestinal,Constipation,Investigations,Hypokalemia,
+vdx_gastrointestinal,Constipation,Investigations,Hyponatremia,
+vdx_gastrointestinal,Constipation,Investigations,Leukocytosis,
+vdx_gastrointestinal,Constipation,Medical History,History of Small bowel obstruction,
+vdx_gastrointestinal,Constipation,Medical History,History of Anorexia nervosa,
+vdx_gastrointestinal,Dyspepsia,Onset Findings,Developed rapidly (minutes to hours),
+vdx_gastrointestinal,Dyspepsia,Onset Findings,Developed acutely (days to weeks),
+vdx_gastrointestinal,Dyspepsia,Onset Findings,Developed chronically (months to years),
+vdx_gastrointestinal,Dyspepsia,Onset Findings,Recurring episodes or relapses,
+vdx_gastrointestinal,Dyspepsia,Onset Findings,Present at birth,
+vdx_gastrointestinal,Dyspepsia,Social History,Substance abuse,
+vdx_gastrointestinal,Dyspepsia,Social History,Sexually active,
+vdx_gastrointestinal,Dyspepsia,Social History,Hygiene,
+vdx_gastrointestinal,Dyspepsia,GI Symptoms,Abdominal pain,Epigastric pain
+vdx_gastrointestinal,Dyspepsia,GI Symptoms,Abdominal pain,Right upper quadrant pain
+vdx_gastrointestinal,Dyspepsia,GI Symptoms,Abdominal pain,Right lower quadrant pain
+vdx_gastrointestinal,Dyspepsia,GI Symptoms,Abdominal pain,Left upper quadrant pain
+vdx_gastrointestinal,Dyspepsia,GI Symptoms,Abdominal pain,Left lower quadrant pain
+vdx_gastrointestinal,Dyspepsia,GI Symptoms,Abdominal pain,Periumbilical pain
+vdx_gastrointestinal,Dyspepsia,GI Symptoms,Eructation,
+vdx_gastrointestinal,Dyspepsia,GI Symptoms,Nausea,
+vdx_gastrointestinal,Dyspepsia,GI Symptoms,Vomiting,
+vdx_gastrointestinal,Dyspepsia,GI Symptoms,Dysphagia,
+vdx_gastrointestinal,Dyspepsia,GI Symptoms,Regurgitation,
+vdx_gastrointestinal,Dyspepsia,GI Symptoms,Flatulence,
+vdx_gastrointestinal,Dyspepsia,GI Symptoms,Diarrhea,
+vdx_gastrointestinal,Dyspepsia,GI Symptoms,Constipation,
+vdx_gastrointestinal,Dyspepsia,GI Symptoms,Abdominal distension,
+vdx_gastrointestinal,Dyspepsia,Cardiopulmonary symptoms,Cough,
+vdx_gastrointestinal,Dyspepsia,Cardiopulmonary symptoms,Dyspnea,
+vdx_gastrointestinal,Dyspepsia,Cardiopulmonary symptoms,Chest pain,
+vdx_gastrointestinal,Hematochezia,Onset Findings,Developed rapidly (minutes to hours),
+vdx_gastrointestinal,Hematochezia,Onset Findings,Developed acutely (days to weeks),
+vdx_gastrointestinal,Hematochezia,Onset Findings,Developed chronically (months to years),
+vdx_gastrointestinal,Hematochezia,Onset Findings,Recurring episodes or relapses,
+vdx_gastrointestinal,Hematochezia,Onset Findings,Present at birth,
+vdx_gastrointestinal,Hematochezia,Appearance of the Patient,Patient appears well,
+vdx_gastrointestinal,Hematochezia,Appearance of the Patient,Patient appears ill,
+vdx_gastrointestinal,Hematochezia,Appearance of the Patient,Patient appears systemically ill - toxic,
+vdx_gastrointestinal,Hematochezia,Appearance of the Patient,None,
+vdx_gastrointestinal,Hematochezia,GI Symptoms / Signs,Diarrhea,
+vdx_gastrointestinal,Hematochezia,GI Symptoms / Signs,Abdominal pain,
+vdx_gastrointestinal,Hematochezia,GI Symptoms / Signs,Nausea,
+vdx_gastrointestinal,Hematochezia,GI Symptoms / Signs,Anorexia,
+vdx_gastrointestinal,Hematochezia,GI Symptoms / Signs,Vomiting,
+vdx_gastrointestinal,Hematochezia,GI Symptoms / Signs,Melena,
+vdx_gastrointestinal,Hematochezia,GI Symptoms / Signs,Tenesmus,
+vdx_gastrointestinal,Hematochezia,GI Symptoms / Signs,Constipation,
+vdx_gastrointestinal,Hematochezia,GI Symptoms / Signs,Steatorrhea,
+vdx_gastrointestinal,Hematochezia,GI Symptoms / Signs,Hepatomegaly,
+vdx_gastrointestinal,Hematochezia,GI Symptoms / Signs,Splenomegaly,
+vdx_gastrointestinal,Hematochezia,General Symptoms / Signs,Fever,
+vdx_gastrointestinal,Hematochezia,General Symptoms / Signs,Unexplained weight loss,
+vdx_gastrointestinal,Hematochezia,General Symptoms / Signs,Myalgia,
+vdx_gastrointestinal,Hematochezia,General Symptoms / Signs,Ecchymosis,
+vdx_gastrointestinal,Hematochezia,General Symptoms / Signs,Headache,
+vdx_gastrointestinal,Hematochezia,General Symptoms / Signs,Seizures,
+vdx_gastrointestinal,Hematochezia,General Symptoms / Signs,Mental status alteration,
+vdx_gastrointestinal,Hematochezia,General Symptoms / Signs,Epistaxis,
+vdx_gastrointestinal,Hematochezia,General Symptoms / Signs,Hemoptysis,
+vdx_gastrointestinal,Hematochezia,General Symptoms / Signs,Night sweats,
+vdx_gastrointestinal,Hematochezia,General Symptoms / Signs,Hypotension,
+vdx_gastrointestinal,Hematochezia,General Symptoms / Signs,Tachycardia,
+vdx_gastrointestinal,Hematochezia,Medications,Anticoagulant,
+vdx_gastrointestinal,Hematochezia,Medications,NSAID,
+vdx_gastrointestinal,Hematochezia,Medications,Antibiotic,
+vdx_gastrointestinal,Hematochezia,Medications,Corticosteroid,
+vdx_gastrointestinal,Hematochezia,Investigations,Thrombocytopenia,
+vdx_gastrointestinal,Hematochezia,Investigations,Leukocytosis,
+vdx_gastrointestinal,Hematochezia,Investigations,AST elevated,
+vdx_gastrointestinal,Hematochezia,Investigations,ALT elevated,
+vdx_gastrointestinal,Hematochezia,Investigations,Hyperbilirubinemia,
+vdx_gastrointestinal,Hematochezia,Investigations,C-reactive protein elevated,
+vdx_gastrointestinal,Hematochezia,Investigations,ESR elevated,
+vdx_gastrointestinal,Hematochezia,Investigations,Prothrombin time prolonged,
+vdx_gastrointestinal,Hematochezia,Investigations,Partial thromboplastin time prolonged,
+vdx_gastrointestinal,Hematochezia,Exposure,Animal,
+vdx_gastrointestinal,Hematochezia,Exposure,Reptile,
+vdx_gastrointestinal,Hematochezia,Exposure,Chemical,
+vdx_gastrointestinal,Hematochezia,Exposure,Birds,
+vdx_gastrointestinal,Hematochezia,Exposure,Aquatic Animals,
+vdx_gastrointestinal,Hematochezia,Social History,Substance abuse,
+vdx_gastrointestinal,Hematochezia,Social History,Sexually active,
+vdx_gastrointestinal,Hematochezia,Social History,Hygiene,
+vdx_gastrointestinal,Liver failure,Onset Findings,Developed rapidly (minutes to hours),
+vdx_gastrointestinal,Liver failure,Onset Findings,Developed acutely (days to weeks),
+vdx_gastrointestinal,Liver failure,Onset Findings,Developed chronically (months to years),
+vdx_gastrointestinal,Liver failure,Onset Findings,Recurring episodes or relapses,
+vdx_gastrointestinal,Liver failure,Onset Findings,Present at birth,
+vdx_gastrointestinal,Liver failure,Appearance of the Patient,Patient appears well,
+vdx_gastrointestinal,Liver failure,Appearance of the Patient,Patient appears ill,
+vdx_gastrointestinal,Liver failure,Appearance of the Patient,Patient appears systemically ill - toxic,
+vdx_gastrointestinal,Liver failure,Appearance of the Patient,None,
+vdx_gastrointestinal,Liver failure,Symptoms,Abdominal pain,Epigastric pain
+vdx_gastrointestinal,Liver failure,Symptoms,Abdominal pain,Right upper quadrant pain
+vdx_gastrointestinal,Liver failure,Symptoms,Abdominal pain,Right lower quadrant pain
+vdx_gastrointestinal,Liver failure,Symptoms,Abdominal pain,Left upper quadrant pain
+vdx_gastrointestinal,Liver failure,Symptoms,Abdominal pain,Left lower quadrant pain
+vdx_gastrointestinal,Liver failure,Symptoms,Abdominal pain,Periumbilical pain
+vdx_gastrointestinal,Liver failure,Symptoms,Anorexia,
+vdx_gastrointestinal,Liver failure,Symptoms,Vomiting,
+vdx_gastrointestinal,Liver failure,Symptoms,Nausea,
+vdx_gastrointestinal,Liver failure,Symptoms,Fatigue,
+vdx_gastrointestinal,Liver failure,Symptoms,Fever,
+vdx_gastrointestinal,Liver failure,Symptoms,Mental status alteration,Agitation
+vdx_gastrointestinal,Liver failure,Symptoms,Mental status alteration,Delirium/Confusion
+vdx_gastrointestinal,Liver failure,Symptoms,Mental status alteration,Hallucination
+vdx_gastrointestinal,Liver failure,Symptoms,Mental status alteration,Stupor
+vdx_gastrointestinal,Liver failure,Symptoms,Mental status alteration,Coma
+vdx_gastrointestinal,Liver failure,Symptoms,Mental status alteration,Irritability
+vdx_gastrointestinal,Liver failure,Symptoms,Seizures,
+vdx_gastrointestinal,Liver failure,Symptoms,Jaundice,
+vdx_gastrointestinal,Liver failure,Symptoms,Pruritus,
+vdx_gastrointestinal,Liver failure,Investigations,Transaminases elevated,
+vdx_gastrointestinal,Liver failure,Investigations,Serum ammonia increased,
+vdx_gastrointestinal,Liver failure,Investigations,Alkaline phosphatase elevated,
+vdx_gastrointestinal,Liver failure,Investigations,Hyperbilirubinemia,
+vdx_gastrointestinal,Liver failure,Investigations,Thrombocytopenia,
+vdx_gastrointestinal,Liver failure,Investigations,Anemia,
+vdx_gastrointestinal,Liver failure,Investigations,ANA positive,
+vdx_gastrointestinal,Liver failure,Investigations,Hypoglycemia,
+vdx_gastrointestinal,Liver failure,Investigations,Elevated urine hCG level,
+vdx_gastrointestinal,Liver failure,Investigations,Proteinuria,
+vdx_gastrointestinal,Liver failure,Investigations,Protoporphyrins elevated,

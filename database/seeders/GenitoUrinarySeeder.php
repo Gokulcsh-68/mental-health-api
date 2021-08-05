@@ -24,6 +24,9 @@ class GenitoUrinarySeeder extends Seeder
          
         $vdx_genito_urinary_chunched = (array_chunk($vdx_genito_urinary_data_collection, 1000));
         $i = 1;
+
+        $rand_key = \Illuminate\Support\Str::random(6);
+
         foreach($vdx_genito_urinary_chunched as $vdxs) {
             $vdx_genito_urinary_data = [];
             
@@ -36,11 +39,11 @@ class GenitoUrinarySeeder extends Seeder
                     $name = trim($data[1]);
                     $slug_string = str_replace(' ', '_', $name);                
                     $rmv_slug_string = preg_replace('/[^A-Za-z0-9\-]/', '', $slug_string);            
-                    $slug = strtolower('geni1'.$rmv_slug_string);
+                    $slug = strtolower($rand_key.'1'.$rmv_slug_string);
 
-                    $main_name = trim(substr($rmv_slug_string, 0, 5)); 
+                    $main_name = trim(substr($rmv_slug_string, 0,3)).trim(substr($rmv_slug_string, -5)); 
 
-                    $slug = substr($slug,0,40); 
+                    $slug = substr($slug,0,44); 
                     
                     if(!empty($name)){
                         $vdx_genito_urinary_data[] = [
@@ -57,9 +60,9 @@ class GenitoUrinarySeeder extends Seeder
                     if(!empty($data[2])){
                         $name2 = trim($data[2]);
                         $slug_string2 = str_replace(' ', '_', $name2);                
-                        $slug2 = strtolower('geni2'.$main_name.preg_replace('/[^A-Za-z0-9\-]/', '', $slug_string2));
+                        $slug2 = strtolower($rand_key.'2'.$main_name.preg_replace('/[^A-Za-z0-9\-]/', '', $slug_string2));
 
-                    $slug2 = substr($slug2,0,40);
+                    $slug2 = substr($slug2,0,44);
 
                     if(!empty($name2)){
                         $vdx_genito_urinary_data[] = [
@@ -78,9 +81,9 @@ class GenitoUrinarySeeder extends Seeder
                         if(!empty($data[3])){
                             $name3 = trim($data[3]);
                             $slug_string3 = str_replace(' ', '_', $name3);                
-                            $slug3 = strtolower('geni3'.$main_name.preg_replace('/[^A-Za-z0-9\-]/', '', $slug_string3));
+                            $slug3 = strtolower($rand_key.'3'.$main_name.preg_replace('/[^A-Za-z0-9\-]/', '', $slug_string3));
 
-                    $slug3 = substr($slug3,0,40);
+                    $slug3 = substr($slug3,0,44);
 
                     if(!empty($name3)){
                             $vdx_genito_urinary_data[] = [
@@ -98,9 +101,9 @@ class GenitoUrinarySeeder extends Seeder
                             if(!empty($data[4])){
                                 $name4 = trim($data[4]);
                                 $slug_string4 = str_replace(' ', '_', $name4);                
-                                $slug4 = strtolower('geni4'.$main_name.preg_replace('/[^A-Za-z0-9\-]/', '', $slug_string4));
+                                $slug4 = strtolower($rand_key.'4'.$main_name.preg_replace('/[^A-Za-z0-9\-]/', '', $slug_string4));
 
-                    $slug4 = substr($slug4,0,40);
+                    $slug4 = substr($slug4,0,44);
 
                     if(!empty($name4)){
                                 $vdx_genito_urinary_data[] = [

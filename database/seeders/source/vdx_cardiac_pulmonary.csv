@@ -1,0 +1,514 @@
+col_zero,col_one,col_two,col_three,col_four
+vdx_cardiac_pulmonary,Chest Pain,Onset Findings,Developed rapidly (minutes to hours),
+vdx_cardiac_pulmonary,Chest Pain,Onset Findings,Developed acutely (days to weeks),
+vdx_cardiac_pulmonary,Chest Pain,Onset Findings,Developed chronically (months to years),
+vdx_cardiac_pulmonary,Chest Pain,Onset Findings,Recurring episodes or relapses,
+vdx_cardiac_pulmonary,Chest Pain,Onset Findings,Present at birth,
+vdx_cardiac_pulmonary,Chest Pain,Appearance of the Patient,Patient appears well,
+vdx_cardiac_pulmonary,Chest Pain,Appearance of the Patient,Patient appears ill,
+vdx_cardiac_pulmonary,Chest Pain,Appearance of the Patient,Patient appears systemically ill - toxic,
+vdx_cardiac_pulmonary,Chest Pain,Appearance of the Patient,None,
+vdx_cardiac_pulmonary,Chest Pain,Signs & Symptoms,Cardiovascular,Pleuritic chest pain
+vdx_cardiac_pulmonary,Chest Pain,Signs & Symptoms,Cardiovascular,Tachycardia
+vdx_cardiac_pulmonary,Chest Pain,Signs & Symptoms,Cardiovascular,Bradycardia
+vdx_cardiac_pulmonary,Chest Pain,Signs & Symptoms,Cardiovascular,Hypertension
+vdx_cardiac_pulmonary,Chest Pain,Signs & Symptoms,Cardiovascular,Hypotension
+vdx_cardiac_pulmonary,Chest Pain,Signs & Symptoms,Cardiovascular,Heart murmur
+vdx_cardiac_pulmonary,Chest Pain,Signs & Symptoms,Cardiovascular,Heart palpitations
+vdx_cardiac_pulmonary,Chest Pain,Signs & Symptoms,Cardiovascular,Syncope
+vdx_cardiac_pulmonary,Chest Pain,Signs & Symptoms,Respiratory,Dyspnea
+vdx_cardiac_pulmonary,Chest Pain,Signs & Symptoms,Respiratory,Cough
+vdx_cardiac_pulmonary,Chest Pain,Signs & Symptoms,Respiratory,Hypoxia
+vdx_cardiac_pulmonary,Chest Pain,Signs & Symptoms,Respiratory,Hemoptysis
+vdx_cardiac_pulmonary,Chest Pain,Signs & Symptoms,Respiratory,Tachypnea
+vdx_cardiac_pulmonary,Chest Pain,Signs & Symptoms,Respiratory,Wheezing
+vdx_cardiac_pulmonary,Chest Pain,Signs & Symptoms,General,Fever
+vdx_cardiac_pulmonary,Chest Pain,Signs & Symptoms,General,Headache
+vdx_cardiac_pulmonary,Chest Pain,Signs & Symptoms,General,Arm pain
+vdx_cardiac_pulmonary,Chest Pain,Signs & Symptoms,General,Arthralgia
+vdx_cardiac_pulmonary,Chest Pain,Signs & Symptoms,General,Myalgia
+vdx_cardiac_pulmonary,Chest Pain,Signs & Symptoms,General,Diaphoresis
+vdx_cardiac_pulmonary,Chest Pain,Signs & Symptoms,General,Fatigue
+vdx_cardiac_pulmonary,Chest Pain,Signs & Symptoms,General,Unexplained weight loss
+vdx_cardiac_pulmonary,Chest Pain,Signs & Symptoms,General,Dehydration
+vdx_cardiac_pulmonary,Chest Pain,Signs & Symptoms,General,Lymphadenopathy
+vdx_cardiac_pulmonary,Chest Pain,Signs & Symptoms,Digestive/abdominal,Abdominal pain
+vdx_cardiac_pulmonary,Chest Pain,Signs & Symptoms,Digestive/abdominal,Diarrhea
+vdx_cardiac_pulmonary,Chest Pain,Signs & Symptoms,Digestive/abdominal,Nausea
+vdx_cardiac_pulmonary,Chest Pain,Signs & Symptoms,Digestive/abdominal,Vomiting
+vdx_cardiac_pulmonary,Chest Pain,Signs & Symptoms,Digestive/abdominal,Anorexia
+vdx_cardiac_pulmonary,Chest Pain,Signs & Symptoms,Digestive/abdominal,Hepatomegaly
+vdx_cardiac_pulmonary,Chest Pain,Signs & Symptoms,Digestive/abdominal,Splenomegaly
+vdx_cardiac_pulmonary,Chest Pain,Signs & Symptoms,Digestive/abdominal,Hiccups
+vdx_cardiac_pulmonary,Chest Pain,Signs & Symptoms,Digestive/abdominal,Eructation
+vdx_cardiac_pulmonary,Chest Pain,Signs & Symptoms,Digestive/abdominal,Dysphagia
+vdx_cardiac_pulmonary,Chest Pain,Signs & Symptoms,Digestive/abdominal,Dyspepsia
+vdx_cardiac_pulmonary,Chest Pain,Signs & Symptoms,Digestive/abdominal,Ascites
+vdx_cardiac_pulmonary,Chest Pain,Signs & Symptoms,HEENT,Sore throat
+vdx_cardiac_pulmonary,Chest Pain,Signs & Symptoms,HEENT,Epistaxis
+vdx_cardiac_pulmonary,Chest Pain,Signs & Symptoms,HEENT,Neck pain
+vdx_cardiac_pulmonary,Chest Pain,Signs & Symptoms,HEENT,Jaw pain
+vdx_cardiac_pulmonary,Chest Pain,Signs & Symptoms,HEENT,Toothache
+vdx_cardiac_pulmonary,Chest Pain,Signs & Symptoms,HEENT,Ocular pain
+vdx_cardiac_pulmonary,Chest Pain,Signs & Symptoms,HEENT,Hoarseness
+vdx_cardiac_pulmonary,Chest Pain,Signs & Symptoms,HEENT,Visual impairment
+vdx_cardiac_pulmonary,Chest Pain,Signs & Symptoms,HEENT,Rhinorrhea
+vdx_cardiac_pulmonary,Chest Pain,Signs & Symptoms,HEENT,Tinnitus
+vdx_cardiac_pulmonary,Chest Pain,Abuse History,Tobacco use,
+vdx_cardiac_pulmonary,Chest Pain,Abuse History,Alcohol use,
+vdx_cardiac_pulmonary,Chest Pain,Abuse History,Drugs use,
+vdx_cardiac_pulmonary,Chest Pain,Lung Exam Findings,Bronchophony,
+vdx_cardiac_pulmonary,Chest Pain,Lung Exam Findings,Crackles,
+vdx_cardiac_pulmonary,Chest Pain,Lung Exam Findings,Decreased breath sounds,
+vdx_cardiac_pulmonary,Chest Pain,Lung Exam Findings,Dullness to percussion,
+vdx_cardiac_pulmonary,Chest Pain,Lung Exam Findings,Egophony,
+vdx_cardiac_pulmonary,Chest Pain,Lung Exam Findings,Pleural rub,
+vdx_cardiac_pulmonary,Chest Pain,Lung Exam Findings,Rhonchi,
+vdx_cardiac_pulmonary,Chest Pain,Lung Exam Findings,Stridor,
+vdx_cardiac_pulmonary,Chest Pain,Lung Exam Findings,Wheezing,
+vdx_cardiac_pulmonary,Chest Pain,Investigation - Chest Radiology,Interstitial Opacity,
+vdx_cardiac_pulmonary,Chest Pain,Investigation - Chest Radiology,Solitary Pulmonary Nodule / Mass,
+vdx_cardiac_pulmonary,Chest Pain,Investigation - Chest Radiology,Mediastinal Abnormality,
+vdx_cardiac_pulmonary,Chest Pain,Investigation - Chest Radiology,Multiple Pulmonary Nodules / Masses,
+vdx_cardiac_pulmonary,Chest Pain,Investigation - Chest Radiology,Airspace Opacity / Consolidation,
+vdx_cardiac_pulmonary,Chest Pain,Investigation - Chest Radiology,Diaphragm Contour Abnormal,
+vdx_cardiac_pulmonary,Chest Pain,Investigation - Chest Radiology,Hilar Enlargement,
+vdx_cardiac_pulmonary,Chest Pain,Chest Radiology Distribution,Lobar,
+vdx_cardiac_pulmonary,Chest Pain,Chest Radiology Distribution,Segmental,
+vdx_cardiac_pulmonary,Chest Pain,Chest Radiology Distribution,Bilateral Chest,
+vdx_cardiac_pulmonary,Chest Pain,Chest Radiology Distribution,Lower Lobes,
+vdx_cardiac_pulmonary,Chest Pain,Chest Radiology Distribution,Perihilar,
+vdx_cardiac_pulmonary,Chest Pain,Chest Radiology Distribution,Non-Segmental / Sub-Segmental,
+vdx_cardiac_pulmonary,Chest Pain,Chest Radiology Distribution,Unilateral Chest,
+vdx_cardiac_pulmonary,Chest Pain,Nagative Findings,No skin findings,
+vdx_cardiac_pulmonary,Chest Pain,Nagative Findings,No cardiovascular findings,
+vdx_cardiac_pulmonary,Chest Pain,Nagative Findings,No dysmorphologic/malformation features,
+vdx_cardiac_pulmonary,Chest Pain,Nagative Findings,No gastrointestinal findings,
+vdx_cardiac_pulmonary,Chest Pain,Nagative Findings,No HEENT findings,
+vdx_cardiac_pulmonary,Chest Pain,Nagative Findings,No musculoskeletal findings,
+vdx_cardiac_pulmonary,Chest Pain,Nagative Findings,No neurologic findings,
+vdx_cardiac_pulmonary,Chest Pain,Nagative Findings,No medication use (prescription or OTC),
+vdx_cardiac_pulmonary,Chest Pain,Nagative Findings,No respiratory findings,
+vdx_cardiac_pulmonary,Dyspnea,Onset Findings,Developed rapidly (minutes to hours),
+vdx_cardiac_pulmonary,Dyspnea,Onset Findings,Developed acutely (days to weeks),
+vdx_cardiac_pulmonary,Dyspnea,Onset Findings,Developed chronically (months to years),
+vdx_cardiac_pulmonary,Dyspnea,Onset Findings,Recurring episodes or relapses,
+vdx_cardiac_pulmonary,Dyspnea,Onset Findings,Present at birth,
+vdx_cardiac_pulmonary,Dyspnea,Appearance of the Patient,Patient appears well,
+vdx_cardiac_pulmonary,Dyspnea,Appearance of the Patient,Patient appears ill,
+vdx_cardiac_pulmonary,Dyspnea,Appearance of the Patient,Patient appears systemically ill - toxic,
+vdx_cardiac_pulmonary,Dyspnea,Appearance of the Patient,None,
+vdx_cardiac_pulmonary,Dyspnea,Dyspnea Sub Types,Dyspnea,
+vdx_cardiac_pulmonary,Dyspnea,Dyspnea Sub Types,Orthopnea,
+vdx_cardiac_pulmonary,Dyspnea,Dyspnea Sub Types,Exertional dyspnea,
+vdx_cardiac_pulmonary,Dyspnea,Associated Symptoms,General,Fever
+vdx_cardiac_pulmonary,Dyspnea,Associated Symptoms,General,Headache
+vdx_cardiac_pulmonary,Dyspnea,Associated Symptoms,General,Malaise
+vdx_cardiac_pulmonary,Dyspnea,Associated Symptoms,General,Fatigue
+vdx_cardiac_pulmonary,Dyspnea,Associated Symptoms,General,Anorexia
+vdx_cardiac_pulmonary,Dyspnea,Associated Symptoms,General,Chills
+vdx_cardiac_pulmonary,Dyspnea,Associated Symptoms,General,Diaphoresis
+vdx_cardiac_pulmonary,Dyspnea,Associated Symptoms,General,Rigors
+vdx_cardiac_pulmonary,Dyspnea,Associated Symptoms,General,Arthralgia
+vdx_cardiac_pulmonary,Dyspnea,Associated Symptoms,General,Myalgia
+vdx_cardiac_pulmonary,Dyspnea,Associated Symptoms,General,Weight gain
+vdx_cardiac_pulmonary,Dyspnea,Associated Symptoms,General,Unexplained weight loss
+vdx_cardiac_pulmonary,Dyspnea,Associated Symptoms,Respiratory,Cough
+vdx_cardiac_pulmonary,Dyspnea,Associated Symptoms,Respiratory,Chest pain
+vdx_cardiac_pulmonary,Dyspnea,Associated Symptoms,Respiratory,Hypoxia
+vdx_cardiac_pulmonary,Dyspnea,Associated Symptoms,Respiratory,Tachypnea
+vdx_cardiac_pulmonary,Dyspnea,Associated Symptoms,Respiratory,Hemoptysis
+vdx_cardiac_pulmonary,Dyspnea,Associated Symptoms,Cardiovascular,Tachycardia
+vdx_cardiac_pulmonary,Dyspnea,Associated Symptoms,Cardiovascular,Bradycardia
+vdx_cardiac_pulmonary,Dyspnea,Associated Symptoms,Cardiovascular,Hypertension
+vdx_cardiac_pulmonary,Dyspnea,Associated Symptoms,Cardiovascular,Hypotension
+vdx_cardiac_pulmonary,Dyspnea,Associated Symptoms,Cardiovascular,Heart palpitations
+vdx_cardiac_pulmonary,Dyspnea,Associated Symptoms,Cardiovascular,Heart murmur
+vdx_cardiac_pulmonary,Dyspnea,Associated Symptoms,Cardiovascular,Syncope
+vdx_cardiac_pulmonary,Dyspnea,Associated Symptoms,HEENT,Neck pain
+vdx_cardiac_pulmonary,Dyspnea,Associated Symptoms,HEENT,Hoarseness
+vdx_cardiac_pulmonary,Dyspnea,Associated Symptoms,HEENT,Epistaxis
+vdx_cardiac_pulmonary,Dyspnea,Associated Symptoms,HEENT,Sore throat
+vdx_cardiac_pulmonary,Dyspnea,Associated Symptoms,HEENT,Ocular pain
+vdx_cardiac_pulmonary,Dyspnea,Associated Symptoms,HEENT,Hearing loss
+vdx_cardiac_pulmonary,Dyspnea,Associated Symptoms,HEENT,Visual impairment
+vdx_cardiac_pulmonary,Dyspnea,Associated Symptoms,HEENT,Drooling
+vdx_cardiac_pulmonary,Dyspnea,Associated Symptoms,Digestive/abdominal,Dysphagia
+vdx_cardiac_pulmonary,Dyspnea,Associated Symptoms,Digestive/abdominal,Abdominal pain
+vdx_cardiac_pulmonary,Dyspnea,Associated Symptoms,Digestive/abdominal,Ascites
+vdx_cardiac_pulmonary,Dyspnea,Associated Symptoms,Digestive/abdominal,Vomiting
+vdx_cardiac_pulmonary,Dyspnea,Associated Symptoms,Digestive/abdominal,Diarrhea
+vdx_cardiac_pulmonary,Dyspnea,Associated Symptoms,Digestive/abdominal,Constipation
+vdx_cardiac_pulmonary,Dyspnea,Associated Symptoms,Digestive/abdominal,Hepatomegaly
+vdx_cardiac_pulmonary,Dyspnea,Associated Symptoms,Digestive/abdominal,Splenomegaly
+vdx_cardiac_pulmonary,Dyspnea,Associated Symptoms,Neurologic,Mental status alteration
+vdx_cardiac_pulmonary,Dyspnea,Associated Symptoms,Neurologic,Ataxia
+vdx_cardiac_pulmonary,Dyspnea,Associated Symptoms,Neurologic,Dizziness
+vdx_cardiac_pulmonary,Dyspnea,Lung Exam Findings,Bronchophony,
+vdx_cardiac_pulmonary,Dyspnea,Lung Exam Findings,Crackles,
+vdx_cardiac_pulmonary,Dyspnea,Lung Exam Findings,Decreased breath sounds,
+vdx_cardiac_pulmonary,Dyspnea,Lung Exam Findings,Dullness to percussion,
+vdx_cardiac_pulmonary,Dyspnea,Lung Exam Findings,Egophony,
+vdx_cardiac_pulmonary,Dyspnea,Lung Exam Findings,Pleural rub,
+vdx_cardiac_pulmonary,Dyspnea,Lung Exam Findings,Rhonchi,
+vdx_cardiac_pulmonary,Dyspnea,Lung Exam Findings,Stridor,
+vdx_cardiac_pulmonary,Dyspnea,Lung Exam Findings,Wheezing,
+vdx_cardiac_pulmonary,Dyspnea,Investigation,Anemia,
+vdx_cardiac_pulmonary,Dyspnea,Investigation,Thrombocytopenia,
+vdx_cardiac_pulmonary,Dyspnea,Investigation,Thrombocytosis,
+vdx_cardiac_pulmonary,Dyspnea,Investigation,Leukocytosis,
+vdx_cardiac_pulmonary,Dyspnea,Investigation,Leukopenia,
+vdx_cardiac_pulmonary,Dyspnea,Investigation,Eosinophilia,
+vdx_cardiac_pulmonary,Dyspnea,Investigation,Hyponatremia,
+vdx_cardiac_pulmonary,Dyspnea,Investigation,Acid base disturbance,Metabolic acidosis
+vdx_cardiac_pulmonary,Dyspnea,Investigation,Acid base disturbance,Respiratory acidosis
+vdx_cardiac_pulmonary,Dyspnea,Investigation,Acid base disturbance,Metabolic alkalosis
+vdx_cardiac_pulmonary,Dyspnea,Investigation,Acid base disturbance,Respiratory alkalosis
+vdx_cardiac_pulmonary,Dyspnea,Investigation,Transaminases elevated,
+vdx_cardiac_pulmonary,Dyspnea,Investigation,Investigation - Chest Radiology,Interstitial Opacity
+vdx_cardiac_pulmonary,Dyspnea,Investigation,Investigation - Chest Radiology,Solitary Pulmonary Nodule / Mass
+vdx_cardiac_pulmonary,Dyspnea,Investigation,Investigation - Chest Radiology,Mediastinal Abnormality
+vdx_cardiac_pulmonary,Dyspnea,Investigation,Investigation - Chest Radiology,Multiple Pulmonary Nodules / Masses
+vdx_cardiac_pulmonary,Dyspnea,Investigation,Investigation - Chest Radiology,Airspace Opacity / Consolidation
+vdx_cardiac_pulmonary,Dyspnea,Investigation,Investigation - Chest Radiology,Diaphragm Contour Abnormal
+vdx_cardiac_pulmonary,Dyspnea,Investigation,Investigation - Chest Radiology,Hilar Enlargement
+vdx_cardiac_pulmonary,Dyspnea,Travel History,Endemic Zones,
+vdx_cardiac_pulmonary,Dyspnea,History of Hospitalization,Yes,
+vdx_cardiac_pulmonary,Dyspnea,History of Hospitalization,No,
+vdx_cardiac_pulmonary,Dyspnea,Exposure,Animal,
+vdx_cardiac_pulmonary,Dyspnea,Exposure,Reptile,
+vdx_cardiac_pulmonary,Dyspnea,Exposure,Chemical,
+vdx_cardiac_pulmonary,Dyspnea,Exposure,Birds,
+vdx_cardiac_pulmonary,Dyspnea,Exposure,Aquatic Animals,
+vdx_cardiac_pulmonary,Dyspnea,Abuse History,Tobacco use,
+vdx_cardiac_pulmonary,Dyspnea,Abuse History,Alcohol use,
+vdx_cardiac_pulmonary,Dyspnea,Abuse History,Drugs use,
+vdx_cardiac_pulmonary,Dyspnea,Nagetive Findings,No skin findings,
+vdx_cardiac_pulmonary,Dyspnea,Nagetive Findings,No cardiovascular findings,
+vdx_cardiac_pulmonary,Dyspnea,Nagetive Findings,No dysmorphologic/malformation features,
+vdx_cardiac_pulmonary,Dyspnea,Nagetive Findings,No gastrointestinal findings,
+vdx_cardiac_pulmonary,Dyspnea,Nagetive Findings,No HEENT findings,
+vdx_cardiac_pulmonary,Dyspnea,Nagetive Findings,No musculoskeletal findings,
+vdx_cardiac_pulmonary,Dyspnea,Nagetive Findings,No neurologic findings,
+vdx_cardiac_pulmonary,Dyspnea,Nagetive Findings,No medication use (prescription or OTC),
+vdx_cardiac_pulmonary,Cough,Type of Cough,Cough,
+vdx_cardiac_pulmonary,Cough,Type of Cough,Non-productive cough,
+vdx_cardiac_pulmonary,Cough,Type of Cough,Productive cough,
+vdx_cardiac_pulmonary,Cough,Type of Cough,Hemoptysis,
+vdx_cardiac_pulmonary,Cough,Onset Findings,Developed rapidly (minutes to hours),
+vdx_cardiac_pulmonary,Cough,Onset Findings,Developed acutely (days to weeks),
+vdx_cardiac_pulmonary,Cough,Onset Findings,Developed chronically (months to years),
+vdx_cardiac_pulmonary,Cough,Onset Findings,Recurring episodes or relapses,
+vdx_cardiac_pulmonary,Cough,Onset Findings,Present at birth,
+vdx_cardiac_pulmonary,Cough,Appearance of the Patient,Patient appears well,
+vdx_cardiac_pulmonary,Cough,Appearance of the Patient,Patient appears ill,
+vdx_cardiac_pulmonary,Cough,Appearance of the Patient,Patient appears systemically ill - toxic,
+vdx_cardiac_pulmonary,Cough,Appearance of the Patient,None,
+vdx_cardiac_pulmonary,Cough,Cardiovascular,Chest pain,
+vdx_cardiac_pulmonary,Cough,Cardiovascular,Hypertension,
+vdx_cardiac_pulmonary,Cough,Cardiovascular,Hypotension,
+vdx_cardiac_pulmonary,Cough,Cardiovascular,Heart palpitations,
+vdx_cardiac_pulmonary,Cough,Cardiovascular,Syncope,
+vdx_cardiac_pulmonary,Cough,Cardiovascular,Tachycardia,
+vdx_cardiac_pulmonary,Cough,Cardiovascular,Bradycardia,
+vdx_cardiac_pulmonary,Cough,Digestive/abdominal,Abdominal pain,
+vdx_cardiac_pulmonary,Cough,Digestive/abdominal,Anorexia,
+vdx_cardiac_pulmonary,Cough,Digestive/abdominal,Ascites,
+vdx_cardiac_pulmonary,Cough,Digestive/abdominal,Constipation,
+vdx_cardiac_pulmonary,Cough,Digestive/abdominal,Diarrhea,
+vdx_cardiac_pulmonary,Cough,Digestive/abdominal,Dysphagia,
+vdx_cardiac_pulmonary,Cough,Digestive/abdominal,Hepatomegaly,
+vdx_cardiac_pulmonary,Cough,Digestive/abdominal,Hiccups,
+vdx_cardiac_pulmonary,Cough,Digestive/abdominal,Nausea,
+vdx_cardiac_pulmonary,Cough,Digestive/abdominal,Vomiting,
+vdx_cardiac_pulmonary,Cough,General,Generalized weakness,
+vdx_cardiac_pulmonary,Cough,General,Arthralgia,
+vdx_cardiac_pulmonary,Cough,General,Chills,
+vdx_cardiac_pulmonary,Cough,General,Dehydration,
+vdx_cardiac_pulmonary,Cough,General,Diaphoresis,
+vdx_cardiac_pulmonary,Cough,General,Fatigue,
+vdx_cardiac_pulmonary,Cough,General,Fever,
+vdx_cardiac_pulmonary,Cough,General,Malaise,
+vdx_cardiac_pulmonary,Cough,General,Myalgia,
+vdx_cardiac_pulmonary,Cough,General,Neck mass,
+vdx_cardiac_pulmonary,Cough,General,Lymphadenopathy,
+vdx_cardiac_pulmonary,Cough,General,Edema,
+vdx_cardiac_pulmonary,Cough,HEENT,Coryza,
+vdx_cardiac_pulmonary,Cough,HEENT,Epistaxis,
+vdx_cardiac_pulmonary,Cough,HEENT,Excessive tearing,
+vdx_cardiac_pulmonary,Cough,HEENT,Hearing loss,
+vdx_cardiac_pulmonary,Cough,HEENT,Hoarseness,
+vdx_cardiac_pulmonary,Cough,HEENT,Nasal congestion,
+vdx_cardiac_pulmonary,Cough,HEENT,Ocular pain,
+vdx_cardiac_pulmonary,Cough,HEENT,Otalgia,
+vdx_cardiac_pulmonary,Cough,HEENT,Sore throat,
+vdx_cardiac_pulmonary,Cough,HEENT,No sore throat,
+vdx_cardiac_pulmonary,Cough,HEENT,Rhinorrhea,
+vdx_cardiac_pulmonary,Cough,HEENT,Tinnitus,
+vdx_cardiac_pulmonary,Cough,HEENT,Visual impairment,
+vdx_cardiac_pulmonary,Cough,Neurologic,Mental status alteration,
+vdx_cardiac_pulmonary,Cough,Neurologic,Photophobia,
+vdx_cardiac_pulmonary,Cough,Neurologic,Seizures,
+vdx_cardiac_pulmonary,Cough,Neurologic,Ataxia,
+vdx_cardiac_pulmonary,Cough,Neurologic,Dizziness,
+vdx_cardiac_pulmonary,Cough,Neurologic,Headache,
+vdx_cardiac_pulmonary,Cough,Respiratory,Apnea,
+vdx_cardiac_pulmonary,Cough,Respiratory,Dyspnea,
+vdx_cardiac_pulmonary,Cough,Respiratory,Hypoxia,
+vdx_cardiac_pulmonary,Cough,Respiratory,Bradypnea,
+vdx_cardiac_pulmonary,Cough,Respiratory,Tachypnea,
+vdx_cardiac_pulmonary,Cough,Patient History,Tobacco use,
+vdx_cardiac_pulmonary,Cough,Patient History,History of Obesity,
+vdx_cardiac_pulmonary,Cough,Patient History,History of Immunosuppression/immunocompromised,
+vdx_cardiac_pulmonary,Cough,Patient History,History of Diabetes mellitus,
+vdx_cardiac_pulmonary,Cough,Lung Exam Findings,Bronchophony,
+vdx_cardiac_pulmonary,Cough,Lung Exam Findings,Crackles,
+vdx_cardiac_pulmonary,Cough,Lung Exam Findings,Decreased breath sounds,
+vdx_cardiac_pulmonary,Cough,Lung Exam Findings,Dullness to percussion,
+vdx_cardiac_pulmonary,Cough,Lung Exam Findings,Egophony,
+vdx_cardiac_pulmonary,Cough,Lung Exam Findings,Pleural rub,
+vdx_cardiac_pulmonary,Cough,Lung Exam Findings,Rhonchi,
+vdx_cardiac_pulmonary,Cough,Lung Exam Findings,Stridor,
+vdx_cardiac_pulmonary,Cough,Lung Exam Findings,Wheezing,
+vdx_cardiac_pulmonary,Cough,Investigation - Chest Radiology,Interstitial Opacity,
+vdx_cardiac_pulmonary,Cough,Investigation - Chest Radiology,Solitary Pulmonary Nodule / Mass,
+vdx_cardiac_pulmonary,Cough,Investigation - Chest Radiology,Mediastinal Abnormality,
+vdx_cardiac_pulmonary,Cough,Investigation - Chest Radiology,Multiple Pulmonary Nodules / Masses,
+vdx_cardiac_pulmonary,Cough,Investigation - Chest Radiology,Airspace Opacity / Consolidation,
+vdx_cardiac_pulmonary,Cough,Investigation - Chest Radiology,Diaphragm Contour Abnormal,
+vdx_cardiac_pulmonary,Cough,Investigation - Chest Radiology,Hilar Enlargement,
+vdx_cardiac_pulmonary,Cough,Chest Radiology Distribution,Lobar,
+vdx_cardiac_pulmonary,Cough,Chest Radiology Distribution,Segmental,
+vdx_cardiac_pulmonary,Cough,Chest Radiology Distribution,Bilateral Chest,
+vdx_cardiac_pulmonary,Cough,Chest Radiology Distribution,Lower Lobes,
+vdx_cardiac_pulmonary,Cough,Chest Radiology Distribution,Perihilar,
+vdx_cardiac_pulmonary,Cough,Chest Radiology Distribution,Non-Segmental / Sub-Segmental,
+vdx_cardiac_pulmonary,Cough,Chest Radiology Distribution,Unilateral Chest,
+vdx_cardiac_pulmonary,Cough,Investigation,Hematology,Leukocytosis
+vdx_cardiac_pulmonary,Cough,Investigation,Hematology,Leukopenia
+vdx_cardiac_pulmonary,Cough,Investigation,Hematology,Thrombocytosis
+vdx_cardiac_pulmonary,Cough,Investigation,Hematology,Thrombocytopenia
+vdx_cardiac_pulmonary,Cough,Investigation,Hematology,Anemia
+vdx_cardiac_pulmonary,Cough,Investigation,Hematology,Eosinophilia
+vdx_cardiac_pulmonary,Cough,Investigation,Chemistry,C-reactive protein elevated
+vdx_cardiac_pulmonary,Cough,Investigation,Chemistry,ESR elevated
+vdx_cardiac_pulmonary,Cough,Investigation,Chemistry,Transaminases elevated
+vdx_cardiac_pulmonary,Cough,Investigation,Chemistry,Hyponatremia
+vdx_cardiac_pulmonary,Cough,Investigation,Chemistry,Hypernatremia
+vdx_cardiac_pulmonary,Cough,Investigation,Chemistry,Hyperbilirubinemia
+vdx_cardiac_pulmonary,Cough,Investigation,Chemistry,LDH elevated
+vdx_cardiac_pulmonary,Cough,Investigation,Chemistry,Procalcitonin increased
+vdx_cardiac_pulmonary,Cough,Investigation,Chemistry,Acid base disturbance
+vdx_cardiac_pulmonary,Cough,Investigation,Chemistry,Blood urea nitrogen elevated
+vdx_cardiac_pulmonary,Cough,Investigation,Chemistry,Hypoxemia
+vdx_cardiac_pulmonary,Cough,Investigation,Chemistry,Hypercalcemia
+vdx_cardiac_pulmonary,Cough,Exposure,Animal,
+vdx_cardiac_pulmonary,Cough,Exposure,Reptile,
+vdx_cardiac_pulmonary,Cough,Exposure,Chemical,
+vdx_cardiac_pulmonary,Cough,Exposure,Birds,
+vdx_cardiac_pulmonary,Cough,Exposure,Aquatic Animals,
+vdx_cardiac_pulmonary,Cough,Nagetive Findings,No skin findings,
+vdx_cardiac_pulmonary,Cough,Nagetive Findings,No cardiovascular findings,
+vdx_cardiac_pulmonary,Cough,Nagetive Findings,No dysmorphologic/malformation features,
+vdx_cardiac_pulmonary,Cough,Nagetive Findings,No gastrointestinal findings,
+vdx_cardiac_pulmonary,Cough,Nagetive Findings,No HEENT findings,
+vdx_cardiac_pulmonary,Cough,Nagetive Findings,No musculoskeletal findings,
+vdx_cardiac_pulmonary,Cough,Nagetive Findings,No neurologic findings,
+vdx_cardiac_pulmonary,Cough,Nagetive Findings,No medication use (prescription or OTC),
+vdx_cardiac_pulmonary,Cough,Travel History,Endemic Zones,
+vdx_cardiac_pulmonary,Heart palpitations,Onset Findings,Developed rapidly (minutes to hours),
+vdx_cardiac_pulmonary,Heart palpitations,Onset Findings,Developed acutely (days to weeks),
+vdx_cardiac_pulmonary,Heart palpitations,Onset Findings,Developed chronically (months to years),
+vdx_cardiac_pulmonary,Heart palpitations,Onset Findings,Recurring episodes or relapses,
+vdx_cardiac_pulmonary,Heart palpitations,Onset Findings,Present at birth,
+vdx_cardiac_pulmonary,Heart palpitations,Signs / Symptoms,Syncope,
+vdx_cardiac_pulmonary,Heart palpitations,Signs / Symptoms,Presyncope,
+vdx_cardiac_pulmonary,Heart palpitations,Signs / Symptoms,Heart murmur,
+vdx_cardiac_pulmonary,Heart palpitations,Signs / Symptoms,Chest pain,
+vdx_cardiac_pulmonary,Heart palpitations,Signs / Symptoms,Tachycardia,
+vdx_cardiac_pulmonary,Heart palpitations,Signs / Symptoms,General,Fever
+vdx_cardiac_pulmonary,Heart palpitations,Signs / Symptoms,General,Fatigue
+vdx_cardiac_pulmonary,Heart palpitations,Signs / Symptoms,General,Unexplained weight loss
+vdx_cardiac_pulmonary,Heart palpitations,Signs / Symptoms,General,Diaphoresis
+vdx_cardiac_pulmonary,Heart palpitations,Signs / Symptoms,General,Generalized weakness
+vdx_cardiac_pulmonary,Heart palpitations,Signs / Symptoms,General,Headache
+vdx_cardiac_pulmonary,Heart palpitations,Signs / Symptoms,Mental status alteration,Mental status alteration
+vdx_cardiac_pulmonary,Heart palpitations,Signs / Symptoms,Mental status alteration,Agitation
+vdx_cardiac_pulmonary,Heart palpitations,Signs / Symptoms,Mental status alteration,Delirium/Confusion
+vdx_cardiac_pulmonary,Heart palpitations,Signs / Symptoms,Mental status alteration,Hallucination
+vdx_cardiac_pulmonary,Heart palpitations,Signs / Symptoms,Mental status alteration,Stupor
+vdx_cardiac_pulmonary,Heart palpitations,Signs / Symptoms,Mental status alteration,Coma
+vdx_cardiac_pulmonary,Heart palpitations,Signs / Symptoms,Mental status alteration,Irritability
+vdx_cardiac_pulmonary,Heart palpitations,Signs / Symptoms,Hypotension,
+vdx_cardiac_pulmonary,Heart palpitations,Signs / Symptoms,Hypertension,
+vdx_cardiac_pulmonary,Heart palpitations,ECG Findings,Long QT interval,
+vdx_cardiac_pulmonary,Heart palpitations,ECG Findings,Pathologic Q waves,
+vdx_cardiac_pulmonary,Heart palpitations,ECG Findings,Short PR interval,
+vdx_cardiac_pulmonary,Heart palpitations,Nagetive Findings,No skin findings,
+vdx_cardiac_pulmonary,Heart palpitations,Nagetive Findings,No cardiovascular findings,
+vdx_cardiac_pulmonary,Heart palpitations,Nagetive Findings,No dysmorphologic/malformation features,
+vdx_cardiac_pulmonary,Heart palpitations,Nagetive Findings,No gastrointestinal findings,
+vdx_cardiac_pulmonary,Heart palpitations,Nagetive Findings,No HEENT findings,
+vdx_cardiac_pulmonary,Heart palpitations,Nagetive Findings,No musculoskeletal findings,
+vdx_cardiac_pulmonary,Heart palpitations,Nagetive Findings,No neurologic findings,
+vdx_cardiac_pulmonary,Heart palpitations,Nagetive Findings,No medication use (prescription or OTC),
+vdx_cardiac_pulmonary,Heart palpitations,Nagetive Findings,No respiratory findings,
+vdx_cardiac_pulmonary,Wheezing,Onset Findings,Developed rapidly (minutes to hours),
+vdx_cardiac_pulmonary,Wheezing,Onset Findings,Developed acutely (days to weeks),
+vdx_cardiac_pulmonary,Wheezing,Onset Findings,Developed chronically (months to years),
+vdx_cardiac_pulmonary,Wheezing,Onset Findings,Recurring episodes or relapses,
+vdx_cardiac_pulmonary,Wheezing,Onset Findings,Present at birth,
+vdx_cardiac_pulmonary,Wheezing,Appearance of the Patient,Patient appears well,
+vdx_cardiac_pulmonary,Wheezing,Appearance of the Patient,Patient appears ill,
+vdx_cardiac_pulmonary,Wheezing,Appearance of the Patient,Patient appears systemically ill - toxic,
+vdx_cardiac_pulmonary,Wheezing,Appearance of the Patient,None,
+vdx_cardiac_pulmonary,Wheezing,Symptoms,General,Fever
+vdx_cardiac_pulmonary,Wheezing,Symptoms,General,Fatigue
+vdx_cardiac_pulmonary,Wheezing,Symptoms,General,Anorexia
+vdx_cardiac_pulmonary,Wheezing,Symptoms,General,Unexplained weight loss
+vdx_cardiac_pulmonary,Wheezing,Symptoms,General,Headache
+vdx_cardiac_pulmonary,Wheezing,Symptoms,General,Failure to thrive
+vdx_cardiac_pulmonary,Wheezing,Symptoms,General,Diaphoresis
+vdx_cardiac_pulmonary,Wheezing,Symptoms,General,Irritability
+vdx_cardiac_pulmonary,Wheezing,Symptoms,Respiratory,Dyspnea
+vdx_cardiac_pulmonary,Wheezing,Symptoms,Respiratory,Cough
+vdx_cardiac_pulmonary,Wheezing,Symptoms,Respiratory,Chest pain
+vdx_cardiac_pulmonary,Wheezing,Symptoms,Respiratory,Hemoptysis
+vdx_cardiac_pulmonary,Wheezing,Symptoms,Respiratory,Tachypnea
+vdx_cardiac_pulmonary,Wheezing,Symptoms,HEENT,Rhinorrhea
+vdx_cardiac_pulmonary,Wheezing,Symptoms,HEENT,Hoarseness
+vdx_cardiac_pulmonary,Wheezing,Symptoms,HEENT,Nasal congestion
+vdx_cardiac_pulmonary,Wheezing,Symptoms,HEENT,Sore throat
+vdx_cardiac_pulmonary,Wheezing,Symptoms,HEENT,Conjunctival injection
+vdx_cardiac_pulmonary,Wheezing,Symptoms,HEENT,Ocular pain
+vdx_cardiac_pulmonary,Wheezing,Symptoms,Digestive/abdominal,Nausea
+vdx_cardiac_pulmonary,Wheezing,Symptoms,Digestive/abdominal,Vomiting
+vdx_cardiac_pulmonary,Wheezing,Symptoms,Digestive/abdominal,Diarrhea
+vdx_cardiac_pulmonary,Wheezing,Symptoms,Digestive/abdominal,Dysphagia
+vdx_cardiac_pulmonary,Wheezing,Symptoms,Digestive/abdominal,Abdominal pain
+vdx_cardiac_pulmonary,Wheezing,Symptoms,Musculoskeletal,Arthralgia
+vdx_cardiac_pulmonary,Wheezing,Symptoms,Musculoskeletal,Myalgia
+vdx_cardiac_pulmonary,Wheezing,Physical Examination,Respiratory,Bronchophony
+vdx_cardiac_pulmonary,Wheezing,Physical Examination,Respiratory,Crackles
+vdx_cardiac_pulmonary,Wheezing,Physical Examination,Respiratory,Decreased breath sounds
+vdx_cardiac_pulmonary,Wheezing,Physical Examination,Respiratory,Dullness to percussion
+vdx_cardiac_pulmonary,Wheezing,Physical Examination,Respiratory,Egophony
+vdx_cardiac_pulmonary,Wheezing,Physical Examination,Respiratory,Pleural rub
+vdx_cardiac_pulmonary,Wheezing,Physical Examination,Respiratory,Rhonchi
+vdx_cardiac_pulmonary,Wheezing,Physical Examination,Respiratory,Stridor
+vdx_cardiac_pulmonary,Wheezing,Physical Examination,Respiratory,Wheezing
+vdx_cardiac_pulmonary,Wheezing,Physical Examination,Cyanosis,
+vdx_cardiac_pulmonary,Wheezing,Physical Examination,Jaundice,
+vdx_cardiac_pulmonary,Wheezing,Physical Examination,Hypertension,
+vdx_cardiac_pulmonary,Wheezing,Physical Examination,Hypotension,
+vdx_cardiac_pulmonary,Wheezing,Physical Examination,Tachycardia,
+vdx_cardiac_pulmonary,Wheezing,Physical Examination,Bradycardia,
+vdx_cardiac_pulmonary,Wheezing,Physical Examination,Hepatomegaly,
+vdx_cardiac_pulmonary,Wheezing,Physical Examination,Splenomegaly,
+vdx_cardiac_pulmonary,Wheezing,Physical Examination,Ascites,
+vdx_cardiac_pulmonary,Wheezing,Investigation,Eosinophilia,
+vdx_cardiac_pulmonary,Wheezing,Investigation,Leukocytosis,
+vdx_cardiac_pulmonary,Wheezing,Investigation,Respiratory alkalosis,
+vdx_cardiac_pulmonary,Wheezing,Investigation,Hypoxemia,
+vdx_cardiac_pulmonary,Wheezing,Investigation,Hyperbilirubinemia,
+vdx_cardiac_pulmonary,Wheezing,Investigation,ESR elevated,
+vdx_cardiac_pulmonary,Wheezing,Investigation,IgE elevated,
+vdx_cardiac_pulmonary,Wheezing,Investigation,Anemia,
+vdx_cardiac_pulmonary,Wheezing,Investigation,Hyponatremia,
+vdx_cardiac_pulmonary,Wheezing,Investigation,Respiratory acidosis,
+vdx_cardiac_pulmonary,Wheezing,Investigation,Lymphocytosis,
+vdx_cardiac_pulmonary,Wheezing,Abuse History,Tobacco use,
+vdx_cardiac_pulmonary,Wheezing,Abuse History,Alcohol use,
+vdx_cardiac_pulmonary,Wheezing,Abuse History,Drugs use,
+vdx_cardiac_pulmonary,Wheezing,Nagetive Findings,No skin findings,
+vdx_cardiac_pulmonary,Wheezing,Nagetive Findings,No cardiovascular findings,
+vdx_cardiac_pulmonary,Wheezing,Nagetive Findings,No dysmorphologic/malformation features,
+vdx_cardiac_pulmonary,Wheezing,Nagetive Findings,No gastrointestinal findings,
+vdx_cardiac_pulmonary,Wheezing,Nagetive Findings,No HEENT findings,
+vdx_cardiac_pulmonary,Wheezing,Nagetive Findings,No musculoskeletal findings,
+vdx_cardiac_pulmonary,Wheezing,Nagetive Findings,No neurologic findings,
+vdx_cardiac_pulmonary,Wheezing,Nagetive Findings,No medication use (prescription or OTC),
+vdx_cardiac_pulmonary,Tachycardia,Onset Findings,Developed rapidly (minutes to hours),
+vdx_cardiac_pulmonary,Tachycardia,Onset Findings,Developed acutely (days to weeks),
+vdx_cardiac_pulmonary,Tachycardia,Onset Findings,Developed chronically (months to years),
+vdx_cardiac_pulmonary,Tachycardia,Onset Findings,Recurring episodes or relapses,
+vdx_cardiac_pulmonary,Tachycardia,Onset Findings,Present at birth,
+vdx_cardiac_pulmonary,Tachycardia,Associated Symptoms,Heart palpitations,
+vdx_cardiac_pulmonary,Tachycardia,Associated Symptoms,Chest pain,
+vdx_cardiac_pulmonary,Tachycardia,Associated Symptoms,Dyspnea,
+vdx_cardiac_pulmonary,Tachycardia,Associated Symptoms,Syncope,
+vdx_cardiac_pulmonary,Tachycardia,Associated Symptoms,Presyncope,
+vdx_cardiac_pulmonary,Tachycardia,Associated Symptoms,Headache,
+vdx_cardiac_pulmonary,Tachycardia,Associated Symptoms,Fever,
+vdx_cardiac_pulmonary,Tachycardia,Associated Symptoms,Arthralgia,
+vdx_cardiac_pulmonary,Tachycardia,ECG Findings,Atrial fibrillation,
+vdx_cardiac_pulmonary,Tachycardia,ECG Findings,Electrical alternans,
+vdx_cardiac_pulmonary,Tachycardia,ECG Findings,Right bundle branch block,
+vdx_cardiac_pulmonary,Tachycardia,ECG Findings,Sinus tachycardia,
+vdx_cardiac_pulmonary,Tachycardia,ECG Findings,ST elevation,
+vdx_cardiac_pulmonary,Tachycardia,ECG Findings,Wide QRS complex,
+vdx_cardiac_pulmonary,Tachycardia,ECG Findings,T wave inversion,
+vdx_cardiac_pulmonary,Tachycardia,Investigation,Acid base disturbance,Metabolic acidosis
+vdx_cardiac_pulmonary,Tachycardia,Investigation,Acid base disturbance,Respiratory acidosis
+vdx_cardiac_pulmonary,Tachycardia,Investigation,Acid base disturbance,Metabolic alkalosis
+vdx_cardiac_pulmonary,Tachycardia,Investigation,Acid base disturbance,Respiratory alkalosis
+vdx_cardiac_pulmonary,Tachycardia,Investigation,Anemia,
+vdx_cardiac_pulmonary,Tachycardia,Investigation,C-reactive protein elevated,
+vdx_cardiac_pulmonary,Tachycardia,Investigation,Hyponatremia,
+vdx_cardiac_pulmonary,Tachycardia,Investigation,Leukocytosis,
+vdx_cardiac_pulmonary,Tachycardia,Investigation,Thrombocytopenia,
+vdx_cardiac_pulmonary,Tachycardia,Investigation,Transaminases elevated,
+vdx_cardiac_pulmonary,Hemoptysis,Onset Findings,Developed rapidly (minutes to hours),
+vdx_cardiac_pulmonary,Hemoptysis,Onset Findings,Developed acutely (days to weeks),
+vdx_cardiac_pulmonary,Hemoptysis,Onset Findings,Developed chronically (months to years),
+vdx_cardiac_pulmonary,Hemoptysis,Onset Findings,Recurring episodes or relapses,
+vdx_cardiac_pulmonary,Hemoptysis,Onset Findings,Present at birth,
+vdx_cardiac_pulmonary,Hemoptysis,Appearance of the Patient,Patient appears well,
+vdx_cardiac_pulmonary,Hemoptysis,Appearance of the Patient,Patient appears ill,
+vdx_cardiac_pulmonary,Hemoptysis,Appearance of the Patient,Patient appears systemically ill - toxic,
+vdx_cardiac_pulmonary,Hemoptysis,Appearance of the Patient,None,
+vdx_cardiac_pulmonary,Hemoptysis,Symptoms,Dyspnea,
+vdx_cardiac_pulmonary,Hemoptysis,Symptoms,Cough,
+vdx_cardiac_pulmonary,Hemoptysis,Symptoms,Chest pain,
+vdx_cardiac_pulmonary,Hemoptysis,Symptoms,Abdominal pain,
+vdx_cardiac_pulmonary,Hemoptysis,Symptoms,Fatigue,
+vdx_cardiac_pulmonary,Hemoptysis,Symptoms,Vomiting,
+vdx_cardiac_pulmonary,Hemoptysis,Symptoms,Hematemesis,
+vdx_cardiac_pulmonary,Hemoptysis,Symptoms,Diaphoresis,
+vdx_cardiac_pulmonary,Hemoptysis,Symptoms,Sore throat,
+vdx_cardiac_pulmonary,Hemoptysis,Symptoms,Arthralgia,
+vdx_cardiac_pulmonary,Hemoptysis,Symptoms,Epistaxis,
+vdx_cardiac_pulmonary,Hemoptysis,Symptoms,Seizures,
+vdx_cardiac_pulmonary,Hemoptysis,Signs,Fever,
+vdx_cardiac_pulmonary,Hemoptysis,Signs,Unexplained weight loss,
+vdx_cardiac_pulmonary,Hemoptysis,Signs,Tachycardia,
+vdx_cardiac_pulmonary,Hemoptysis,Signs,HypoxiaUnilateral leg edema,
+vdx_cardiac_pulmonary,Hemoptysis,Signs,CyanosisWheezing,
+vdx_cardiac_pulmonary,Hemoptysis,Signs,Crackles,
+vdx_cardiac_pulmonary,Hemoptysis,Signs,Hepatomegaly,
+vdx_cardiac_pulmonary,Hemoptysis,Signs,Splenomegaly,
+vdx_cardiac_pulmonary,Hemoptysis,Signs,Hilar lymphadenopathy,
+vdx_cardiac_pulmonary,Hemoptysis,Signs,Supraclavicular lymphadenopathy,
+vdx_cardiac_pulmonary,Hemoptysis,Signs,Pleural effusion,
+vdx_cardiac_pulmonary,Hemoptysis,Signs,Heart murmur,
+vdx_cardiac_pulmonary,Hemoptysis,Investigation,Leukocytosis,
+vdx_cardiac_pulmonary,Hemoptysis,Investigation,Eosinophilia,
+vdx_cardiac_pulmonary,Hemoptysis,Investigation,Anemia,
+vdx_cardiac_pulmonary,Hemoptysis,Investigation,AST elevated,
+vdx_cardiac_pulmonary,Hemoptysis,Investigation,ALT elevated,
+vdx_cardiac_pulmonary,Hemoptysis,Investigation,Hyperbilirubinemia,
+vdx_cardiac_pulmonary,Hemoptysis,Investigation,Thrombocytosis,
+vdx_cardiac_pulmonary,Hemoptysis,Investigation,Thrombocytopenia,
+vdx_cardiac_pulmonary,Hemoptysis,Investigation,Proteinuria,
+vdx_cardiac_pulmonary,Hemoptysis,Investigation - Chest Radiology,Interstitial Opacity,
+vdx_cardiac_pulmonary,Hemoptysis,Investigation - Chest Radiology,Solitary Pulmonary Nodule / Mass,
+vdx_cardiac_pulmonary,Hemoptysis,Investigation - Chest Radiology,Mediastinal Abnormality,
+vdx_cardiac_pulmonary,Hemoptysis,Investigation - Chest Radiology,Multiple Pulmonary Nodules / Masses,
+vdx_cardiac_pulmonary,Hemoptysis,Investigation - Chest Radiology,Airspace Opacity / Consolidation,
+vdx_cardiac_pulmonary,Hemoptysis,Investigation - Chest Radiology,Diaphragm Contour Abnormal,
+vdx_cardiac_pulmonary,Hemoptysis,Investigation - Chest Radiology,Hilar Enlargement,
+vdx_cardiac_pulmonary,Hemoptysis,History / Risk Factor,History of Asthma,
+vdx_cardiac_pulmonary,Hemoptysis,History / Risk Factor,History of S-P lung transplant,
+vdx_cardiac_pulmonary,Hemoptysis,History / Risk Factor,Tobacco use,
+vdx_cardiac_pulmonary,Hemoptysis,History / Risk Factor,Construction worker,
+vdx_cardiac_pulmonary,Hemoptysis,History / Risk Factor,Mining,

@@ -1,0 +1,507 @@
+col_zero,col_one,col_two,col_three,col_four
+vdx_genito_urinary,Urinary frequency,Onset Findings,Developed rapidly (minutes to hours),
+vdx_genito_urinary,Urinary frequency,Onset Findings,Developed acutely (days to weeks),
+vdx_genito_urinary,Urinary frequency,Onset Findings,Developed chronically (months to years),
+vdx_genito_urinary,Urinary frequency,Onset Findings,Recurring episodes or relapses,
+vdx_genito_urinary,Urinary frequency,Onset Findings,Present at birth,
+vdx_genito_urinary,Urinary frequency,Appearance of the Patient,Patient appears well,
+vdx_genito_urinary,Urinary frequency,Appearance of the Patient,Patient appears ill,
+vdx_genito_urinary,Urinary frequency,Appearance of the Patient,Patient appears systemically ill - toxic,
+vdx_genito_urinary,Urinary frequency,Appearance of the Patient,None,
+vdx_genito_urinary,Urinary frequency,Symptoms & Signs,Genitourinary,Polyuria
+vdx_genito_urinary,Urinary frequency,Symptoms & Signs,Genitourinary,Dysuria
+vdx_genito_urinary,Urinary frequency,Symptoms & Signs,Genitourinary,Nocturia
+vdx_genito_urinary,Urinary frequency,Symptoms & Signs,Genitourinary,Frank hematuria
+vdx_genito_urinary,Urinary frequency,Symptoms & Signs,Genitourinary,Vaginal-labial itching
+vdx_genito_urinary,Urinary frequency,Symptoms & Signs,Genitourinary,Dyspareunia
+vdx_genito_urinary,Urinary frequency,Symptoms & Signs,Genitourinary,Flank pain
+vdx_genito_urinary,Urinary frequency,Symptoms & Signs,Genitourinary,Urinary urgency
+vdx_genito_urinary,Urinary frequency,Symptoms & Signs,General,Fever
+vdx_genito_urinary,Urinary frequency,Symptoms & Signs,General,Chills
+vdx_genito_urinary,Urinary frequency,Symptoms & Signs,General,Unexplained weight loss
+vdx_genito_urinary,Urinary frequency,Symptoms & Signs,General,Fatigue
+vdx_genito_urinary,Urinary frequency,Symptoms & Signs,General,Low back pain
+vdx_genito_urinary,Urinary frequency,Symptoms & Signs,General,Anxiety
+vdx_genito_urinary,Urinary frequency,Symptoms & Signs,General,Arthralgia
+vdx_genito_urinary,Urinary frequency,Symptoms & Signs,General,Night sweats
+vdx_genito_urinary,Urinary frequency,Symptoms & Signs,Digestive/abdominal,Diarrhea
+vdx_genito_urinary,Urinary frequency,Symptoms & Signs,Digestive/abdominal,Constipation
+vdx_genito_urinary,Urinary frequency,Symptoms & Signs,Digestive/abdominal,Vomiting
+vdx_genito_urinary,Urinary frequency,Symptoms & Signs,Digestive/abdominal,Nausea
+vdx_genito_urinary,Urinary frequency,Symptoms & Signs,Digestive/abdominal,Polydipsia
+vdx_genito_urinary,Urinary frequency,Symptoms & Signs,Digestive/abdominal,Xerostomia
+vdx_genito_urinary,Urinary frequency,Symptoms & Signs,Digestive/abdominal,Abdominal mass
+vdx_genito_urinary,Urinary frequency,Symptoms & Signs,Neurologic,Headache
+vdx_genito_urinary,Urinary frequency,Symptoms & Signs,Neurologic,Generalized weakness
+vdx_genito_urinary,Urinary frequency,Symptoms & Signs,Neurologic,Tremor
+vdx_genito_urinary,Urinary frequency,Symptoms & Signs,Neurologic,Areflexia
+vdx_genito_urinary,Urinary frequency,Symptoms & Signs,Neurologic,Visual impairment
+vdx_genito_urinary,Urinary frequency,Urinanalysis,Proteinuria,
+vdx_genito_urinary,Urinary frequency,Urinanalysis,Abnormal urinary sediment,Hyaline casts
+vdx_genito_urinary,Urinary frequency,Urinanalysis,Abnormal urinary sediment,RBC casts
+vdx_genito_urinary,Urinary frequency,Urinanalysis,Abnormal urinary sediment,WBC casts
+vdx_genito_urinary,Urinary frequency,Urinanalysis,Abnormal urinary sediment,Urine Maltese cross appearance
+vdx_genito_urinary,Urinary frequency,Urinanalysis,Urine nitrite positive,
+vdx_genito_urinary,Urinary frequency,Urinanalysis,Pyuria,
+vdx_genito_urinary,Urinary frequency,Urinanalysis,Sterile pyuria,
+vdx_genito_urinary,Urinary frequency,Urinanalysis,Hypercalciuria,
+vdx_genito_urinary,Urinary frequency,Urinanalysis,Hypocalciuria,
+vdx_genito_urinary,Urinary frequency,Urinanalysis,Urine creatinine elevated,
+vdx_genito_urinary,Urinary frequency,Social History,Substance abuse,
+vdx_genito_urinary,Urinary frequency,Social History,Sexually active,
+vdx_genito_urinary,Urinary frequency,Negative Findings,No skin findings,
+vdx_genito_urinary,Urinary frequency,Negative Findings,No cardiovascular findings,
+vdx_genito_urinary,Urinary frequency,Negative Findings,No dysmorphologic/malformation features,
+vdx_genito_urinary,Urinary frequency,Negative Findings,No gastrointestinal findings,
+vdx_genito_urinary,Urinary frequency,Negative Findings,No HEENT findings,
+vdx_genito_urinary,Urinary frequency,Negative Findings,No musculoskeletal findings,
+vdx_genito_urinary,Urinary frequency,Negative Findings,No neurologic findings,
+vdx_genito_urinary,Urinary frequency,Negative Findings,No medication use (prescription or OTC),
+vdx_genito_urinary,Urinary frequency,Negative Findings,No respiratory findings,
+vdx_genito_urinary,Urinary incontinence,Onset Findings,Developed rapidly (minutes to hours),
+vdx_genito_urinary,Urinary incontinence,Onset Findings,Developed acutely (days to weeks),
+vdx_genito_urinary,Urinary incontinence,Onset Findings,Developed chronically (months to years),
+vdx_genito_urinary,Urinary incontinence,Onset Findings,Recurring episodes or relapses,
+vdx_genito_urinary,Urinary incontinence,Onset Findings,Present at birth,
+vdx_genito_urinary,Urinary incontinence,Appearance of the Patient,Patient appears well,
+vdx_genito_urinary,Urinary incontinence,Appearance of the Patient,Patient appears ill,
+vdx_genito_urinary,Urinary incontinence,Appearance of the Patient,Patient appears systemically ill - toxic,
+vdx_genito_urinary,Urinary incontinence,Appearance of the Patient,None,
+vdx_genito_urinary,Urinary incontinence,Symptoms,Genitourinary,Urinary retention
+vdx_genito_urinary,Urinary incontinence,Symptoms,Genitourinary,Urinary frequency
+vdx_genito_urinary,Urinary incontinence,Symptoms,Genitourinary,Dysuria
+vdx_genito_urinary,Urinary incontinence,Symptoms,Genitourinary,Urinary urgency
+vdx_genito_urinary,Urinary incontinence,Symptoms,Genitourinary,Dyspareunia
+vdx_genito_urinary,Urinary incontinence,Symptoms,Genitourinary,Frank hematuria
+vdx_genito_urinary,Urinary incontinence,Symptoms,General,Fever
+vdx_genito_urinary,Urinary incontinence,Symptoms,General,Fatigue
+vdx_genito_urinary,Urinary incontinence,Symptoms,General,Low back pain
+vdx_genito_urinary,Urinary incontinence,Symptoms,General,Unexplained weight loss
+vdx_genito_urinary,Urinary incontinence,Symptoms,General,Neck pain
+vdx_genito_urinary,Urinary incontinence,Symptoms,General,Hypertension
+vdx_genito_urinary,Urinary incontinence,Symptoms,General,Anorexia
+vdx_genito_urinary,Urinary incontinence,Symptoms,General,Tachycardia
+vdx_genito_urinary,Urinary incontinence,Symptoms,General,Bradycardia
+vdx_genito_urinary,Urinary incontinence,Symptoms,Neurologic,Ataxia
+vdx_genito_urinary,Urinary incontinence,Symptoms,Neurologic,Paresthesias
+vdx_genito_urinary,Urinary incontinence,Symptoms,Neurologic,Mental status alteration
+vdx_genito_urinary,Urinary incontinence,Symptoms,Neurologic,Spasticity
+vdx_genito_urinary,Urinary incontinence,Symptoms,Neurologic,Impaired cognition
+vdx_genito_urinary,Urinary incontinence,Symptoms,Neurologic,Dysarthria
+vdx_genito_urinary,Urinary incontinence,Symptoms,Neurologic,Paralysis
+vdx_genito_urinary,Urinary incontinence,Symptoms,Neurologic,Seizures
+vdx_genito_urinary,Urinary incontinence,Symptoms,Neurologic,Tremor
+vdx_genito_urinary,Urinary incontinence,Symptoms,Digestive/abdominal,Constipation
+vdx_genito_urinary,Urinary incontinence,Symptoms,Digestive/abdominal,Nausea
+vdx_genito_urinary,Urinary incontinence,Symptoms,Digestive/abdominal,Vomiting
+vdx_genito_urinary,Urinary incontinence,Symptoms,Digestive/abdominal,Diarrhea
+vdx_genito_urinary,Urinary incontinence,Symptoms,Digestive/abdominal,Abdominal pain
+vdx_genito_urinary,Urinary incontinence,Investigations,CSF lymphocytosis,
+vdx_genito_urinary,Urinary incontinence,Investigations,CSF protein elevated,
+vdx_genito_urinary,Urinary incontinence,Investigations,Hyperbilirubinemia,
+vdx_genito_urinary,Urinary incontinence,Investigations,Anemia,
+vdx_genito_urinary,Urinary incontinence,Investigations,Alkaline phosphatase elevated,
+vdx_genito_urinary,Urinary incontinence,Investigations,Leukocytosis,
+vdx_genito_urinary,Urinary incontinence,Investigations,Hyponatremia,
+vdx_genito_urinary,Urinary incontinence,Negative Findings,No skin findings,
+vdx_genito_urinary,Urinary incontinence,Negative Findings,No cardiovascular findings,
+vdx_genito_urinary,Urinary incontinence,Negative Findings,No dysmorphologic/malformation features,
+vdx_genito_urinary,Urinary incontinence,Negative Findings,No gastrointestinal findings,
+vdx_genito_urinary,Urinary incontinence,Negative Findings,No HEENT findings,
+vdx_genito_urinary,Urinary incontinence,Negative Findings,No musculoskeletal findings,
+vdx_genito_urinary,Urinary incontinence,Negative Findings,No neurologic findings,
+vdx_genito_urinary,Urinary incontinence,Negative Findings,No medication use (prescription or OTC),
+vdx_genito_urinary,Urinary incontinence,Negative Findings,No respiratory findings,
+vdx_genito_urinary,Dysuria,Urinary Symptoms,Urinary incontinence,
+vdx_genito_urinary,Dysuria,Urinary Symptoms,Urinary retention,
+vdx_genito_urinary,Dysuria,Urinary Symptoms,Urinary urgency,
+vdx_genito_urinary,Dysuria,Urinary Symptoms,Foul smelling urine,
+vdx_genito_urinary,Dysuria,Urinary Symptoms,Dark urine,
+vdx_genito_urinary,Dysuria,Urinary Symptoms,Milky urine,
+vdx_genito_urinary,Dysuria,Urinary Symptoms,Oliguria,
+vdx_genito_urinary,Dysuria,Urinary Symptoms,Polyuria,
+vdx_genito_urinary,Dysuria,Urinary Symptoms,Weak urine flow,
+vdx_genito_urinary,Dysuria,Urinary Symptoms,Anuria,
+vdx_genito_urinary,Dysuria,Other Symptoms,Fever,
+vdx_genito_urinary,Dysuria,Other Symptoms,Abdominal pain,
+vdx_genito_urinary,Dysuria,Other Symptoms,Low back pain,
+vdx_genito_urinary,Dysuria,Other Symptoms,Dyspareunia,
+vdx_genito_urinary,Dysuria,Other Symptoms,Headache,
+vdx_genito_urinary,Dysuria,Other Symptoms,Anorexia,
+vdx_genito_urinary,Dysuria,Other Symptoms,Pelvic pain,
+vdx_genito_urinary,Dysuria,Appearance of the Patient,Patient appears well,
+vdx_genito_urinary,Dysuria,Appearance of the Patient,Patient appears ill,
+vdx_genito_urinary,Dysuria,Appearance of the Patient,Patient appears systemically ill - toxic,
+vdx_genito_urinary,Dysuria,Appearance of the Patient,None,
+vdx_genito_urinary,Dysuria,Onset Findings,Developed rapidly (minutes to hours),
+vdx_genito_urinary,Dysuria,Onset Findings,Developed acutely (days to weeks),
+vdx_genito_urinary,Dysuria,Onset Findings,Developed chronically (months to years),
+vdx_genito_urinary,Dysuria,Onset Findings,Recurring episodes or relapses,
+vdx_genito_urinary,Dysuria,Onset Findings,Present at birth,
+vdx_genito_urinary,Dysuria,Urinanalysis,Proteinuria,
+vdx_genito_urinary,Dysuria,Urinanalysis,Abnormal urinary sediment,Hyaline casts
+vdx_genito_urinary,Dysuria,Urinanalysis,Abnormal urinary sediment,RBC casts
+vdx_genito_urinary,Dysuria,Urinanalysis,Abnormal urinary sediment,WBC casts
+vdx_genito_urinary,Dysuria,Urinanalysis,Abnormal urinary sediment,Urine Maltese cross appearance
+vdx_genito_urinary,Dysuria,Urinanalysis,Urine nitrite positive,
+vdx_genito_urinary,Dysuria,Urinanalysis,Pyuria,
+vdx_genito_urinary,Dysuria,Urinanalysis,Sterile pyuria,
+vdx_genito_urinary,Dysuria,Urinanalysis,Hypercalciuria,
+vdx_genito_urinary,Dysuria,Urinanalysis,Hypocalciuria,
+vdx_genito_urinary,Dysuria,Urinanalysis,Urine creatinine elevated,
+vdx_genito_urinary,Dysuria,Sexual History,Inactive,
+vdx_genito_urinary,Dysuria,Sexual History,Active,
+vdx_genito_urinary,Dysuria,Sexual History,Multiple Partners,
+vdx_genito_urinary,Dysuria,Sexual History,Recent new sexual partner,
+vdx_genito_urinary,Dysuria,Sexual History,LGBT,
+vdx_genito_urinary,Dysuria,Sexual History,Condom use,
+vdx_genito_urinary,Dysuria,Abuse History,Tobacco use,
+vdx_genito_urinary,Dysuria,Abuse History,Alcohol use,
+vdx_genito_urinary,Dysuria,Abuse History,Drugs use,
+vdx_genito_urinary,Dysuria,Negative Findings,No skin findings,
+vdx_genito_urinary,Dysuria,Negative Findings,No cardiovascular findings,
+vdx_genito_urinary,Dysuria,Negative Findings,No dysmorphologic/malformation features,
+vdx_genito_urinary,Dysuria,Negative Findings,No gastrointestinal findings,
+vdx_genito_urinary,Dysuria,Negative Findings,No HEENT findings,
+vdx_genito_urinary,Dysuria,Negative Findings,No musculoskeletal findings,
+vdx_genito_urinary,Dysuria,Negative Findings,No neurologic findings,
+vdx_genito_urinary,Dysuria,Negative Findings,No medication use (prescription or OTC),
+vdx_genito_urinary,Dysuria,Negative Findings,No respiratory findings,
+vdx_genito_urinary,Hematuria,Subtye,Frank hematuria,
+vdx_genito_urinary,Hematuria,Subtye,Microscopic hematuria,
+vdx_genito_urinary,Hematuria,Symptoms,Dysuria,
+vdx_genito_urinary,Hematuria,Symptoms,Diarrhea,
+vdx_genito_urinary,Hematuria,Symptoms,Vomiting,
+vdx_genito_urinary,Hematuria,Symptoms,Abdominal pain,
+vdx_genito_urinary,Hematuria,Symptoms,Cough,
+vdx_genito_urinary,Hematuria,Symptoms,Vaginal bleeding,
+vdx_genito_urinary,Hematuria,Symptoms,Night sweats,
+vdx_genito_urinary,Hematuria,Symptoms,Sore throat,
+vdx_genito_urinary,Hematuria,Symptoms,Musculoskeletal,Low back pain
+vdx_genito_urinary,Hematuria,Symptoms,Musculoskeletal,Flank pain
+vdx_genito_urinary,Hematuria,Symptoms,Musculoskeletal,Bone pain
+vdx_genito_urinary,Hematuria,Symptoms,Musculoskeletal,Arthralgia
+vdx_genito_urinary,Hematuria,Symptoms,Musculoskeletal,Myalgia
+vdx_genito_urinary,Hematuria,Signs,Fever,
+vdx_genito_urinary,Hematuria,Signs,Hypertension,
+vdx_genito_urinary,Hematuria,Signs,Abdominal mass,
+vdx_genito_urinary,Hematuria,Signs,Hepatomegaly,
+vdx_genito_urinary,Hematuria,Signs,Splenomegaly,
+vdx_genito_urinary,Hematuria,Signs,Easy bruising,
+vdx_genito_urinary,Hematuria,Signs,Edema,
+vdx_genito_urinary,Hematuria,Signs,Hearing loss,
+vdx_genito_urinary,Hematuria,Signs,Skin lesion,Single skin lesion
+vdx_genito_urinary,Hematuria,Signs,Skin lesion,Rash or multiple lesions
+vdx_genito_urinary,Hematuria,Signs,Skin lesion,None
+vdx_genito_urinary,Hematuria,Onset Findings,Developed rapidly (minutes to hours),
+vdx_genito_urinary,Hematuria,Onset Findings,Developed acutely (days to weeks),
+vdx_genito_urinary,Hematuria,Onset Findings,Developed chronically (months to years),
+vdx_genito_urinary,Hematuria,Onset Findings,Recurring episodes or relapses,
+vdx_genito_urinary,Hematuria,Onset Findings,Present at birth,
+vdx_genito_urinary,Hematuria,Appearance of the Patient,Patient appears well,
+vdx_genito_urinary,Hematuria,Appearance of the Patient,Patient appears ill,
+vdx_genito_urinary,Hematuria,Appearance of the Patient,Patient appears systemically ill - toxic,
+vdx_genito_urinary,Hematuria,Appearance of the Patient,None,
+vdx_genito_urinary,Hematuria,Investigations,Creatinine elevated,
+vdx_genito_urinary,Hematuria,Investigations,Pyuria,
+vdx_genito_urinary,Hematuria,Investigations,Blood urea nitrogen elevated,
+vdx_genito_urinary,Hematuria,Investigations,Leukocytosis,
+vdx_genito_urinary,Hematuria,Investigations,Hypercalciuria,
+vdx_genito_urinary,Hematuria,Investigations,Hemolytic anemia,
+vdx_genito_urinary,Hematuria,Investigations,Hyponatremia,
+vdx_genito_urinary,Hematuria,Investigations,Urine nitrite positive,
+vdx_genito_urinary,Hematuria,Skin Lesion Type,Light Skin,Smooth Papule / Plaque
+vdx_genito_urinary,Hematuria,Skin Lesion Type,Light Skin,Scaly Papule / Plaque
+vdx_genito_urinary,Hematuria,Skin Lesion Type,Light Skin,Eschar
+vdx_genito_urinary,Hematuria,Skin Lesion Type,Light Skin,Erythema / Erythroderma
+vdx_genito_urinary,Hematuria,Skin Lesion Type,Light Skin,Purpura / Petechiae
+vdx_genito_urinary,Hematuria,Skin Lesion Type,Light Skin,Flat / Macular
+vdx_genito_urinary,Hematuria,Skin Lesion Type,Light Skin,Vesicular / Pustular
+vdx_genito_urinary,Hematuria,Skin Lesion Type,Light Skin,Erosion / Ulcer / Atrophy
+vdx_genito_urinary,Hematuria,Skin Lesion Type,Light Skin,Gangrene
+vdx_genito_urinary,Hematuria,Skin Lesion Type,Dark Skin,Smooth Papule / Plaque
+vdx_genito_urinary,Hematuria,Skin Lesion Type,Dark Skin,Scaly Papule / Plaque
+vdx_genito_urinary,Hematuria,Skin Lesion Type,Dark Skin,Eschar
+vdx_genito_urinary,Hematuria,Skin Lesion Type,Dark Skin,Erythema / Erythroderma
+vdx_genito_urinary,Hematuria,Skin Lesion Type,Dark Skin,Purpura / Petechiae
+vdx_genito_urinary,Hematuria,Skin Lesion Type,Dark Skin,Flat / Macular
+vdx_genito_urinary,Hematuria,Skin Lesion Type,Dark Skin,Vesicular / Pustular
+vdx_genito_urinary,Hematuria,Skin Lesion Type,Dark Skin,Erosion / Ulcer / Atrophy
+vdx_genito_urinary,Hematuria,Skin Lesion Type,Dark Skin,Gangrene
+vdx_genito_urinary,Hematuria,Negative Findings,No skin findings,
+vdx_genito_urinary,Hematuria,Negative Findings,No cardiovascular findings,
+vdx_genito_urinary,Hematuria,Negative Findings,No dysmorphologic/malformation features,
+vdx_genito_urinary,Hematuria,Negative Findings,No gastrointestinal findings,
+vdx_genito_urinary,Hematuria,Negative Findings,No HEENT findings,
+vdx_genito_urinary,Hematuria,Negative Findings,No musculoskeletal findings,
+vdx_genito_urinary,Hematuria,Negative Findings,No neurologic findings,
+vdx_genito_urinary,Hematuria,Negative Findings,No medication use (prescription or OTC),
+vdx_genito_urinary,Hematuria,Negative Findings,No respiratory findings,
+vdx_genito_urinary,Pelvic pain,Onset Findings,Developed rapidly (minutes to hours),
+vdx_genito_urinary,Pelvic pain,Onset Findings,Developed acutely (days to weeks),
+vdx_genito_urinary,Pelvic pain,Onset Findings,Developed chronically (months to years),
+vdx_genito_urinary,Pelvic pain,Onset Findings,Recurring episodes or relapses,
+vdx_genito_urinary,Pelvic pain,Onset Findings,Present at birth,
+vdx_genito_urinary,Pelvic pain,Appearance of the Patient,Patient appears well,
+vdx_genito_urinary,Pelvic pain,Appearance of the Patient,Patient appears ill,
+vdx_genito_urinary,Pelvic pain,Appearance of the Patient,Patient appears systemically ill - toxic,
+vdx_genito_urinary,Pelvic pain,Appearance of the Patient,None,
+vdx_genito_urinary,Pelvic pain,Symptoms,General,Fever
+vdx_genito_urinary,Pelvic pain,Symptoms,General,Fatigue
+vdx_genito_urinary,Pelvic pain,Symptoms,General,Unexplained weight loss
+vdx_genito_urinary,Pelvic pain,Symptoms,General,Anorexia
+vdx_genito_urinary,Pelvic pain,Symptoms,General,Chills
+vdx_genito_urinary,Pelvic pain,Symptoms,General,Dyspnea
+vdx_genito_urinary,Pelvic pain,Symptoms,General,Chest pain
+vdx_genito_urinary,Pelvic pain,Symptoms,Genitourinary,Urinary frequency
+vdx_genito_urinary,Pelvic pain,Symptoms,Genitourinary,Dysuria
+vdx_genito_urinary,Pelvic pain,Symptoms,Genitourinary,Urinary retention
+vdx_genito_urinary,Pelvic pain,Symptoms,Genitourinary,Urinary incontinence
+vdx_genito_urinary,Pelvic pain,Symptoms,Reproductive,Dyspareunia
+vdx_genito_urinary,Pelvic pain,Symptoms,Reproductive,Orchidalgia
+vdx_genito_urinary,Pelvic pain,Symptoms,Digestive/abdominal,Abdominal pain
+vdx_genito_urinary,Pelvic pain,Symptoms,Digestive/abdominal,Nausea
+vdx_genito_urinary,Pelvic pain,Symptoms,Digestive/abdominal,Vomiting
+vdx_genito_urinary,Pelvic pain,Symptoms,Digestive/abdominal,Constipation
+vdx_genito_urinary,Pelvic pain,Symptoms,Digestive/abdominal,Diarrhea
+vdx_genito_urinary,Pelvic pain,Symptoms,Digestive/abdominal,Rectal pain
+vdx_genito_urinary,Pelvic pain,Symptoms,Digestive/abdominal,Tenesmus
+vdx_genito_urinary,Pelvic pain,Symptoms,Musculoskeletal,Low back pain
+vdx_genito_urinary,Pelvic pain,Symptoms,Musculoskeletal,Bone pain
+vdx_genito_urinary,Pelvic pain,Symptoms,Musculoskeletal,Hip pain
+vdx_genito_urinary,Pelvic pain,Symptoms,Musculoskeletal,Neck pain
+vdx_genito_urinary,Pelvic pain,Symptoms,Musculoskeletal,Groin pain
+vdx_genito_urinary,Pelvic pain,Physical Examination,Pelvic mass,
+vdx_genito_urinary,Pelvic pain,Physical Examination,Abdominal distension,
+vdx_genito_urinary,Pelvic pain,Physical Examination,Abdominal mass,
+vdx_genito_urinary,Pelvic pain,Physical Examination,Ascites,
+vdx_genito_urinary,Pelvic pain,Physical Examination,Hypoactive bowel sounds,
+vdx_genito_urinary,Pelvic pain,Physical Examination,Adnexal mass on pelvic exam,
+vdx_genito_urinary,Pelvic pain,Physical Examination,Testicular mass,
+vdx_genito_urinary,Pelvic pain,Investigations,Urinalysis,Hematuria
+vdx_genito_urinary,Pelvic pain,Investigations,Urinalysis,Pyuria
+vdx_genito_urinary,Pelvic pain,Investigations,Urinalysis,Abnormal urinary sediment
+vdx_genito_urinary,Pelvic pain,Investigations,Urinalysis,Leukocyte esterase positive
+vdx_genito_urinary,Pelvic pain,Investigations,Urinalysis,Elevated urine hCG level
+vdx_genito_urinary,Pelvic pain,Investigations,Leukocytosis,
+vdx_genito_urinary,Pelvic pain,Investigations,ESR elevated,
+vdx_genito_urinary,Pelvic pain,Investigations,C-reactive protein elevated,
+vdx_genito_urinary,Pelvic pain,Investigations,Alkaline phosphatase elevated,
+vdx_genito_urinary,Pelvic pain,Investigations,Thrombocytosis,
+vdx_genito_urinary,Pelvic pain,Investigations,Hemoccult positive stool,
+vdx_genito_urinary,Pelvic pain,Sexual History,Inactive,
+vdx_genito_urinary,Pelvic pain,Sexual History,Active,
+vdx_genito_urinary,Pelvic pain,Sexual History,Multiple Partners,
+vdx_genito_urinary,Pelvic pain,Sexual History,Recent new sexual partner,
+vdx_genito_urinary,Pelvic pain,Sexual History,LGBT,
+vdx_genito_urinary,Pelvic pain,Sexual History,Condom use,
+vdx_genito_urinary,Pelvic pain,Negative Findings,No skin findings,
+vdx_genito_urinary,Pelvic pain,Negative Findings,No cardiovascular findings,
+vdx_genito_urinary,Pelvic pain,Negative Findings,No dysmorphologic/malformation features,
+vdx_genito_urinary,Pelvic pain,Negative Findings,No gastrointestinal findings,
+vdx_genito_urinary,Pelvic pain,Negative Findings,No HEENT findings,
+vdx_genito_urinary,Pelvic pain,Negative Findings,No musculoskeletal findings,
+vdx_genito_urinary,Pelvic pain,Negative Findings,No neurologic findings,
+vdx_genito_urinary,Pelvic pain,Negative Findings,No medication use (prescription or OTC),
+vdx_genito_urinary,Pelvic pain,Negative Findings,No respiratory findings,
+vdx_genito_urinary,Female genital,Onset Findings,Developed rapidly (minutes to hours),
+vdx_genito_urinary,Female genital,Onset Findings,Developed acutely (days to weeks),
+vdx_genito_urinary,Female genital,Onset Findings,Developed chronically (months to years),
+vdx_genito_urinary,Female genital,Onset Findings,Recurring episodes or relapses,
+vdx_genito_urinary,Female genital,Onset Findings,Present at birth,
+vdx_genito_urinary,Female genital,Appearance of the Patient,Patient appears well,
+vdx_genito_urinary,Female genital,Appearance of the Patient,Patient appears ill,
+vdx_genito_urinary,Female genital,Appearance of the Patient,Patient appears systemically ill - toxic,
+vdx_genito_urinary,Female genital,Appearance of the Patient,None,
+vdx_genito_urinary,Female genital,Skin Lesion Type,Light Skin,Smooth Papule / Plaque
+vdx_genito_urinary,Female genital,Skin Lesion Type,Light Skin,Scaly Papule / Plaque
+vdx_genito_urinary,Female genital,Skin Lesion Type,Light Skin,Eschar
+vdx_genito_urinary,Female genital,Skin Lesion Type,Light Skin,Erythema / Erythroderma
+vdx_genito_urinary,Female genital,Skin Lesion Type,Light Skin,Purpura / Petechiae
+vdx_genito_urinary,Female genital,Skin Lesion Type,Light Skin,Flat / Macular
+vdx_genito_urinary,Female genital,Skin Lesion Type,Light Skin,Vesicular / Pustular
+vdx_genito_urinary,Female genital,Skin Lesion Type,Light Skin,Erosion / Ulcer / Atrophy
+vdx_genito_urinary,Female genital,Skin Lesion Type,Light Skin,Gangrene
+vdx_genito_urinary,Female genital,Skin Lesion Type,Dark Skin,Smooth Papule / Plaque
+vdx_genito_urinary,Female genital,Skin Lesion Type,Dark Skin,Scaly Papule / Plaque
+vdx_genito_urinary,Female genital,Skin Lesion Type,Dark Skin,Eschar
+vdx_genito_urinary,Female genital,Skin Lesion Type,Dark Skin,Erythema / Erythroderma
+vdx_genito_urinary,Female genital,Skin Lesion Type,Dark Skin,Purpura / Petechiae
+vdx_genito_urinary,Female genital,Skin Lesion Type,Dark Skin,Flat / Macular
+vdx_genito_urinary,Female genital,Skin Lesion Type,Dark Skin,Vesicular / Pustular
+vdx_genito_urinary,Female genital,Skin Lesion Type,Dark Skin,Erosion / Ulcer / Atrophy
+vdx_genito_urinary,Female genital,Skin Lesion Type,Dark Skin,Gangrene
+vdx_genito_urinary,Female genital,Anogenital Location,Suprapubic/mons pubis,
+vdx_genito_urinary,Female genital,Anogenital Location,Labia majora,
+vdx_genito_urinary,Female genital,Anogenital Location,Labia minora/vestibule,
+vdx_genito_urinary,Female genital,Anogenital Location,Vaginal opening,
+vdx_genito_urinary,Female genital,Anogenital Location,Perineum,
+vdx_genito_urinary,Female genital,Anogenital Location,Perianal-anus,
+vdx_genito_urinary,Female genital,Anogenital Location,Inguinal region,
+vdx_genito_urinary,Female genital,Symptoms & Signs,Genitourinary,Dysuria
+vdx_genito_urinary,Female genital,Symptoms & Signs,Genitourinary,Urinary incontinence
+vdx_genito_urinary,Female genital,Symptoms & Signs,Genitourinary,Urinary frequency
+vdx_genito_urinary,Female genital,Symptoms & Signs,Genitourinary,Urinary retention
+vdx_genito_urinary,Female genital,Symptoms & Signs,Genitourinary,Dark urine
+vdx_genito_urinary,Female genital,Symptoms & Signs,Genitourinary,Flank pain
+vdx_genito_urinary,Female genital,Symptoms & Signs,Genitourinary,Anuria
+vdx_genito_urinary,Female genital,Symptoms & Signs,Genitourinary,Vaginal bleeding
+vdx_genito_urinary,Female genital,Symptoms & Signs,Genitourinary,Vaginal discharge
+vdx_genito_urinary,Female genital,Symptoms & Signs,Genitourinary,Vaginal-labial itching
+vdx_genito_urinary,Female genital,Symptoms & Signs,Genitourinary,Vulvar pain
+vdx_genito_urinary,Female genital,Symptoms & Signs,Genitourinary,Amenorrhea
+vdx_genito_urinary,Female genital,Symptoms & Signs,Painful skin lesions,
+vdx_genito_urinary,Female genital,Symptoms & Signs,Fever,
+vdx_genito_urinary,Female genital,Symptoms & Signs,Pruritus,
+vdx_genito_urinary,Female genital,Symptoms & Signs,Pelvic pain,
+vdx_genito_urinary,Female genital,Symptoms & Signs,Rectal pain,
+vdx_genito_urinary,Female genital,Symptoms & Signs,Inguinal lymphadenopathy,
+vdx_genito_urinary,Female genital,Symptoms & Signs,Arthralgia,
+vdx_genito_urinary,Female genital,Sexual History,Inactive,
+vdx_genito_urinary,Female genital,Sexual History,Active,
+vdx_genito_urinary,Female genital,Sexual History,Multiple Partners,
+vdx_genito_urinary,Female genital,Sexual History,Recent new sexual partner,
+vdx_genito_urinary,Female genital,Sexual History,LGBT,
+vdx_genito_urinary,Female genital,Sexual History,Condom use,
+vdx_genito_urinary,Male genital,Onset Findings,Developed rapidly (minutes to hours),
+vdx_genito_urinary,Male genital,Onset Findings,Developed acutely (days to weeks),
+vdx_genito_urinary,Male genital,Onset Findings,Developed chronically (months to years),
+vdx_genito_urinary,Male genital,Onset Findings,Recurring episodes or relapses,
+vdx_genito_urinary,Male genital,Onset Findings,Present at birth,
+vdx_genito_urinary,Male genital,Appearance of the Patient,Patient appears well,
+vdx_genito_urinary,Male genital,Appearance of the Patient,Patient appears ill,
+vdx_genito_urinary,Male genital,Appearance of the Patient,Patient appears systemically ill - toxic,
+vdx_genito_urinary,Male genital,Appearance of the Patient,None,
+vdx_genito_urinary,Male genital,Skin Lesion Type,Light Skin,Smooth Papule / Plaque
+vdx_genito_urinary,Male genital,Skin Lesion Type,Light Skin,Scaly Papule / Plaque
+vdx_genito_urinary,Male genital,Skin Lesion Type,Light Skin,Eschar
+vdx_genito_urinary,Male genital,Skin Lesion Type,Light Skin,Erythema / Erythroderma
+vdx_genito_urinary,Male genital,Skin Lesion Type,Light Skin,Purpura / Petechiae
+vdx_genito_urinary,Male genital,Skin Lesion Type,Light Skin,Flat / Macular
+vdx_genito_urinary,Male genital,Skin Lesion Type,Light Skin,Vesicular / Pustular
+vdx_genito_urinary,Male genital,Skin Lesion Type,Light Skin,Erosion / Ulcer / Atrophy
+vdx_genito_urinary,Male genital,Skin Lesion Type,Light Skin,Gangrene
+vdx_genito_urinary,Male genital,Skin Lesion Type,Dark Skin,Smooth Papule / Plaque
+vdx_genito_urinary,Male genital,Skin Lesion Type,Dark Skin,Scaly Papule / Plaque
+vdx_genito_urinary,Male genital,Skin Lesion Type,Dark Skin,Eschar
+vdx_genito_urinary,Male genital,Skin Lesion Type,Dark Skin,Erythema / Erythroderma
+vdx_genito_urinary,Male genital,Skin Lesion Type,Dark Skin,Purpura / Petechiae
+vdx_genito_urinary,Male genital,Skin Lesion Type,Dark Skin,Flat / Macular
+vdx_genito_urinary,Male genital,Skin Lesion Type,Dark Skin,Vesicular / Pustular
+vdx_genito_urinary,Male genital,Skin Lesion Type,Dark Skin,Erosion / Ulcer / Atrophy
+vdx_genito_urinary,Male genital,Skin Lesion Type,Dark Skin,Gangrene
+vdx_genito_urinary,Male genital,Anogenital Location,Suprapubic/mons pubis,
+vdx_genito_urinary,Male genital,Anogenital Location,Glans of penis,
+vdx_genito_urinary,Male genital,Anogenital Location,Urethral meatus,
+vdx_genito_urinary,Male genital,Anogenital Location,Corona,
+vdx_genito_urinary,Male genital,Anogenital Location,Foreskin,
+vdx_genito_urinary,Male genital,Anogenital Location,Shaft of penis,
+vdx_genito_urinary,Male genital,Anogenital Location,Scrotum,
+vdx_genito_urinary,Male genital,Anogenital Location,Perineum,
+vdx_genito_urinary,Male genital,Anogenital Location,Perianal-anus,
+vdx_genito_urinary,Male genital,Anogenital Location,Inguinal region,
+vdx_genito_urinary,Male genital,Symptoms & Signs,Genitourinary,Dysuria
+vdx_genito_urinary,Male genital,Symptoms & Signs,Genitourinary,Urinary incontinence
+vdx_genito_urinary,Male genital,Symptoms & Signs,Genitourinary,Urinary frequency
+vdx_genito_urinary,Male genital,Symptoms & Signs,Genitourinary,Urinary retention
+vdx_genito_urinary,Male genital,Symptoms & Signs,Genitourinary,Dark urine
+vdx_genito_urinary,Male genital,Symptoms & Signs,Genitourinary,Flank pain
+vdx_genito_urinary,Male genital,Symptoms & Signs,Genitourinary,Anuria
+vdx_genito_urinary,Male genital,Symptoms & Signs,Genitourinary,Erectile dysfunction
+vdx_genito_urinary,Male genital,Symptoms & Signs,Genitourinary,Orchidalgia
+vdx_genito_urinary,Male genital,Symptoms & Signs,Genitourinary,Priapism
+vdx_genito_urinary,Male genital,Symptoms & Signs,Painful skin lesions,
+vdx_genito_urinary,Male genital,Symptoms & Signs,Fever,
+vdx_genito_urinary,Male genital,Symptoms & Signs,Pruritus,
+vdx_genito_urinary,Male genital,Symptoms & Signs,Pelvic pain,
+vdx_genito_urinary,Male genital,Symptoms & Signs,Rectal pain,
+vdx_genito_urinary,Male genital,Symptoms & Signs,Inguinal lymphadenopathy,
+vdx_genito_urinary,Male genital,Symptoms & Signs,Arthralgia,
+vdx_genito_urinary,Male genital,Sexual History,Inactive,
+vdx_genito_urinary,Male genital,Sexual History,Active,
+vdx_genito_urinary,Male genital,Sexual History,Multiple Partners,
+vdx_genito_urinary,Male genital,Sexual History,Recent new sexual partner,
+vdx_genito_urinary,Male genital,Sexual History,LGBT,
+vdx_genito_urinary,Male genital,Sexual History,Condom use,
+vdx_genito_urinary,Erectile dysfunction,Symptoms & Signs,Femoral bruit,
+vdx_genito_urinary,Erectile dysfunction,Symptoms & Signs,Gynecomastia,
+vdx_genito_urinary,Erectile dysfunction,Symptoms & Signs,Visual field defect,
+vdx_genito_urinary,Erectile dysfunction,Symptoms & Signs,Fatigue,
+vdx_genito_urinary,Erectile dysfunction,Symptoms & Signs,Depressed mood,
+vdx_genito_urinary,Erectile dysfunction,Symptoms & Signs,Anxiety,
+vdx_genito_urinary,Erectile dysfunction,Symptoms & Signs,Hypertension,
+vdx_genito_urinary,Erectile dysfunction,Onset Syptoms,Developed acutely (days to weeks),
+vdx_genito_urinary,Erectile dysfunction,Onset Syptoms,Developed steadily (weeks to months),
+vdx_genito_urinary,Erectile dysfunction,Onset Syptoms,Chronic duration lasting years,
+vdx_genito_urinary,Erectile dysfunction,Onset Syptoms,None,
+vdx_genito_urinary,Erectile dysfunction,Skin Lesion Type,Light Skin,Smooth Papule / Plaque
+vdx_genito_urinary,Erectile dysfunction,Skin Lesion Type,Light Skin,Scaly Papule / Plaque
+vdx_genito_urinary,Erectile dysfunction,Skin Lesion Type,Light Skin,Eschar
+vdx_genito_urinary,Erectile dysfunction,Skin Lesion Type,Light Skin,Erythema / Erythroderma
+vdx_genito_urinary,Erectile dysfunction,Skin Lesion Type,Light Skin,Purpura / Petechiae
+vdx_genito_urinary,Erectile dysfunction,Skin Lesion Type,Light Skin,Flat / Macular
+vdx_genito_urinary,Erectile dysfunction,Skin Lesion Type,Light Skin,Vesicular / Pustular
+vdx_genito_urinary,Erectile dysfunction,Skin Lesion Type,Light Skin,Erosion / Ulcer / Atrophy
+vdx_genito_urinary,Erectile dysfunction,Skin Lesion Type,Light Skin,Gangrene
+vdx_genito_urinary,Erectile dysfunction,Skin Lesion Type,Dark Skin,Smooth Papule / Plaque
+vdx_genito_urinary,Erectile dysfunction,Skin Lesion Type,Dark Skin,Scaly Papule / Plaque
+vdx_genito_urinary,Erectile dysfunction,Skin Lesion Type,Dark Skin,Eschar
+vdx_genito_urinary,Erectile dysfunction,Skin Lesion Type,Dark Skin,Erythema / Erythroderma
+vdx_genito_urinary,Erectile dysfunction,Skin Lesion Type,Dark Skin,Purpura / Petechiae
+vdx_genito_urinary,Erectile dysfunction,Skin Lesion Type,Dark Skin,Flat / Macular
+vdx_genito_urinary,Erectile dysfunction,Skin Lesion Type,Dark Skin,Vesicular / Pustular
+vdx_genito_urinary,Erectile dysfunction,Skin Lesion Type,Dark Skin,Erosion / Ulcer / Atrophy
+vdx_genito_urinary,Erectile dysfunction,Skin Lesion Type,Dark Skin,Gangrene
+vdx_genito_urinary,Erectile dysfunction,Appearance of the Patient,Patient appears well,
+vdx_genito_urinary,Erectile dysfunction,Appearance of the Patient,Patient appears ill,
+vdx_genito_urinary,Erectile dysfunction,Appearance of the Patient,Patient appears systemically ill - toxic,
+vdx_genito_urinary,Erectile dysfunction,Appearance of the Patient,None,
+vdx_genito_urinary,Erectile dysfunction,Anogenital Location,Suprapubic/mons pubis,
+vdx_genito_urinary,Erectile dysfunction,Anogenital Location,Glans of penis,
+vdx_genito_urinary,Erectile dysfunction,Anogenital Location,Urethral meatus,
+vdx_genito_urinary,Erectile dysfunction,Anogenital Location,Corona,
+vdx_genito_urinary,Erectile dysfunction,Anogenital Location,Foreskin,
+vdx_genito_urinary,Erectile dysfunction,Anogenital Location,Shaft of penis,
+vdx_genito_urinary,Erectile dysfunction,Anogenital Location,Scrotum,
+vdx_genito_urinary,Erectile dysfunction,Anogenital Location,Perineum,
+vdx_genito_urinary,Erectile dysfunction,Anogenital Location,Perianal-anus,
+vdx_genito_urinary,Erectile dysfunction,Anogenital Location,Inguinal region,
+vdx_genito_urinary,Amenorrhea,Appearance of the Patient,Patient appears well,
+vdx_genito_urinary,Amenorrhea,Appearance of the Patient,Patient appears ill,
+vdx_genito_urinary,Amenorrhea,Appearance of the Patient,Patient appears systemically ill - toxic,
+vdx_genito_urinary,Amenorrhea,Appearance of the Patient,None,
+vdx_genito_urinary,Amenorrhea,Symptoms & Signs,General,Fatigue
+vdx_genito_urinary,Amenorrhea,Symptoms & Signs,General,Unexplained weight loss
+vdx_genito_urinary,Amenorrhea,Symptoms & Signs,General,Weight gain
+vdx_genito_urinary,Amenorrhea,Symptoms & Signs,General,Hirsute
+vdx_genito_urinary,Amenorrhea,Symptoms & Signs,General,Dehydration
+vdx_genito_urinary,Amenorrhea,Symptoms & Signs,General,Anorexia
+vdx_genito_urinary,Amenorrhea,Symptoms & Signs,General,Diaphoresis
+vdx_genito_urinary,Amenorrhea,Symptoms & Signs,Genitourinary,Infertility
+vdx_genito_urinary,Amenorrhea,Symptoms & Signs,Genitourinary,Pelvic pain
+vdx_genito_urinary,Amenorrhea,Symptoms & Signs,Genitourinary,Urinary frequency
+vdx_genito_urinary,Amenorrhea,Symptoms & Signs,Genitourinary,Dyspareunia
+vdx_genito_urinary,Amenorrhea,Symptoms & Signs,Genitourinary,Urinary urgency
+vdx_genito_urinary,Amenorrhea,Symptoms & Signs,Genitourinary,Virilization
+vdx_genito_urinary,Amenorrhea,Symptoms & Signs,Genitourinary,Clitoromegaly
+vdx_genito_urinary,Amenorrhea,Symptoms & Signs,HEENT,Voice change
+vdx_genito_urinary,Amenorrhea,Symptoms & Signs,HEENT,Hyposmia
+vdx_genito_urinary,Amenorrhea,Symptoms & Signs,HEENT,Visual impairment
+vdx_genito_urinary,Amenorrhea,Symptoms & Signs,Digestive/abdominal,Abdominal pain
+vdx_genito_urinary,Amenorrhea,Symptoms & Signs,Digestive/abdominal,Vomiting
+vdx_genito_urinary,Amenorrhea,Symptoms & Signs,Digestive/abdominal,Nausea
+vdx_genito_urinary,Amenorrhea,Symptoms & Signs,Digestive/abdominal,Constipation
+vdx_genito_urinary,Amenorrhea,Symptoms & Signs,Digestive/abdominal,Diarrhea
+vdx_genito_urinary,Amenorrhea,Symptoms & Signs,Digestive/abdominal,Ascites
+vdx_genito_urinary,Amenorrhea,Investigations,Prolactin level increased,
+vdx_genito_urinary,Amenorrhea,Investigations,Elevated urine hCG level,
+vdx_genito_urinary,Amenorrhea,Investigations,Thyroid-stimulating hormone decreased,
+vdx_genito_urinary,Amenorrhea,Investigations,Thyroid-stimulating hormone elevated,
+vdx_genito_urinary,Amenorrhea,Negative Findings,No skin findings,
+vdx_genito_urinary,Amenorrhea,Negative Findings,No cardiovascular findings,
+vdx_genito_urinary,Amenorrhea,Negative Findings,No dysmorphologic/malformation features,
+vdx_genito_urinary,Amenorrhea,Negative Findings,No gastrointestinal findings,
+vdx_genito_urinary,Amenorrhea,Negative Findings,No HEENT findings,
+vdx_genito_urinary,Amenorrhea,Negative Findings,No musculoskeletal findings,
+vdx_genito_urinary,Amenorrhea,Negative Findings,No neurologic findings,
+vdx_genito_urinary,Amenorrhea,Negative Findings,No medication use (prescription or OTC),
