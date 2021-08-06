@@ -55,6 +55,11 @@ class Master extends BaseModel
             $model->where('masters.master_type_slug', $request->get('master_type'));
         }
 
+        
+        if ($request->get('attr_slug')) {
+            $model->where('masters.attributes->reference_slug', $request->get('attr_slug'));
+        }
+
         if ($request->get('slug')) {
 
             if($request->get('slug') == 'allergy'){
