@@ -3,6 +3,7 @@
 namespace App\Entities;
 
 use App\Entities\Hospital;
+use App\Services\CureselectApis\PeripheralApiService;
 use DB;
 
 class Patient extends BaseModel
@@ -99,13 +100,27 @@ class Patient extends BaseModel
 
             $data['user_id']    = $user->id;
 
+            // Peripheral User Creation
+            if(isset($data['peripheral_credentials']) && 
+                !empty($data['peripheral_credentials']['username']) && 
+                !empty($data['peripheral_credentials']['password'])
+            ) {
+                $peripheral_username = $data['peripheral_credentials']['username'];
+                $peripheral_password = $data['peripheral_credentials']['password'];
+                $peripheral_user_data = [
+                    "username" => $peripheral_username,
+                    "password" => $peripheral_password,
+                    "ref_number" => $user->id,
+                ];
+                (new PeripheralApiService)->create($peripheral_user_data);
+            }
+
             if($request->user()->role->code == 'hospitalgroup'){
                 $data['group_id'] = $request->user()->staff->group_id;
             }
             else{
                 $data['group_id'] = Hospital::Where('id',$request->user()->staff->hospital_id)->value('group_id');
             }
-
             $model = $this->create($data);
             DB::commit();
             return $model;
@@ -133,6 +148,28 @@ class Patient extends BaseModel
                 $data['user']['role_id'] = Role::where("code", $data['user']['role'])->pluck('id')->first();
             }else{
                 unset($data['user']['role_id']);
+            }
+
+            // Peripheral User Creation / Updating
+            if(isset($data['peripheral_credentials']) && 
+                !empty($data['peripheral_credentials']['username']) && 
+                !empty($data['peripheral_credentials']['password'])
+            ) {
+                $peripheralApiService = new PeripheralApiService();
+                $peripheral_username = $data['peripheral_credentials']['username'];
+                $peripheral_password = $data['peripheral_credentials']['password'];
+                $peripheral_user_data = [
+                    "username" => $peripheral_username,
+                    "password" => $peripheral_password,
+                    "ref_number" => $patient->user->id,
+                ];
+
+                $peripheral_credentials = $peripheralApiService->get($patient->user_id);
+                if(isset($peripheral_credentials['id'])) {                    
+                    $peripheralApiService->patch($peripheral_credentials['id'], $peripheral_user_data);
+                } else {
+                    $peripheralApiService->create($peripheral_user_data);
+                }
             }
             
             
