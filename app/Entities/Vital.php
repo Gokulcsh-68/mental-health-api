@@ -134,6 +134,11 @@ class Vital extends BaseModel
            $data['details'] += self::heart_rate_flag($data['details'], $years, $months, $days);
         }
 
+
+        if($data['slug'] == 'keytone'){
+            $data['details'] += self::keytone_flag($data['details']);
+        }
+
         return $this->create($data);
     }
 
@@ -250,6 +255,10 @@ class Vital extends BaseModel
         }
 
         
+        if($data['slug'] == 'keytone'){
+            unset($data['details']['keytoneFlag'], $data['details']['keytoneFlagColor'], $data['details']['range_code']);
+            $data['details'] += self::keytone_flag($data['details']);
+        }
 
         $instance = $this->getModel($id);
         $instance->fill($data);
@@ -1345,4 +1354,34 @@ class Vital extends BaseModel
         return $input_data;
     }
     
+
+
+    public static function keytone_flag($input_data)
+    {
+        $input_data['keytoneFlag']      = '';
+        $input_data['keytoneFlagColor'] = '';
+        $input_data['range_code']    = '';
+        if (!empty($input_data['keytone'])) {
+            
+            if ($input_data['keytone'] < 0.6) {
+                $input_data['keytoneFlag']      = 'Normal';
+                $input_data['keytoneFlagColor'] = 'success';
+                $input_data['range_code']    = '#008000';
+            }
+            
+            if (($input_data['keytone'] >= 0.6) && ($input_data['keytone'] <= 1.5)) {
+                $input_data['keytoneFlag']      = 'Warning';
+                $input_data['keytoneFlagColor'] = 'warning';
+                $input_data['range_code']    = '#ffc107';
+            }
+            
+             if (($input_data['keytone'] >= 1.6) && ($input_data['keytone'] <= 2.9)) {
+                $input_data['keytoneFlag']      = 'High';
+                $input_data['keytoneFlagColor'] = 'danger';
+                $input_data['range_code']    = '#ff0000';
+            }
+        }
+
+        return $input_data;
+    }
 }

@@ -8,7 +8,15 @@
     @component('pdf_m.pdf_components.patient_details',['patient_details'=> $content['patient_details']])
     @endcomponent
 
+    <?php
 
+    	$gender = '';
+
+    	foreach ($content['patient_details'] as $key => $value) {
+    		$gender = $value->gender;
+    	}
+
+    ?>
 	<h3 class="color_primary">Results:</h3>
 
     @foreach($content['vitals_info'] as $k => $v)
@@ -64,6 +72,26 @@
 
 		    @case('respiration')
 		        @component('pdf_m.pdf_components.respiration',['lists'=> $v['lists']])
+	    		 @endcomponent
+		        @break
+
+		    @case('hct')
+		        @component('pdf_m.pdf_components.hct',['lists'=> $v['lists'],'gender'=>$gender])
+	    		 @endcomponent
+		        @break
+
+		    @case('hemoglobin')
+		        @component('pdf_m.pdf_components.hemoglobin',['lists'=> $v['lists'],'gender'=>$gender])
+	    		 @endcomponent
+		        @break
+
+		    @case('keytone')
+		        @component('pdf_m.pdf_components.keytone',['lists'=> $v['lists']])
+	    		 @endcomponent
+		        @break
+
+		    @case('uric_acid')
+		        @component('pdf_m.pdf_components.uric_aid',['lists'=> $v['lists'],'gender'=>$gender])
 	    		 @endcomponent
 		        @break
 

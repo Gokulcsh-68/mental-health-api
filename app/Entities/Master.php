@@ -27,7 +27,7 @@ class Master extends BaseModel
      */
     protected $casts = [
         'attributes' => 'object'
-        
+
     ];
 
     public $timestamps = false;
@@ -53,6 +53,11 @@ class Master extends BaseModel
 
         if ($request->get('master_type')) {
             $model->where('masters.master_type_slug', $request->get('master_type'));
+        }
+
+        
+        if ($request->get('attr_slug')) {
+            $model->where('masters.attributes->reference_slug', $request->get('attr_slug'));
         }
 
         if ($request->get('slug')) {
@@ -93,7 +98,7 @@ class Master extends BaseModel
                 $model->where('masters.master_type_slug', $request->get('slug'));
             }
 
-            
+
             // Forms Access
             if($request->get('slug') == 'assessment-group'){
                 $logged_in_role_code = Role::where('id', $request->user()->role_id)->value('code');
@@ -113,7 +118,7 @@ class Master extends BaseModel
             }
         }
 
-        
+
         if ($request->get('searchkey')) {
 
             $exp_val = explode(" ", $request->get('searchkey'));
@@ -133,10 +138,10 @@ class Master extends BaseModel
     }
 
     public function getResult($slug, $type, $attributes)
-    {      
+    {
         $request    = app('request');
 
-        
+
         if($type == 'immunisation'){
             if($request->get('patient_id')){
                 $user_dob = User::Where('id',$request->get('patient_id'))->value('dob');
@@ -146,8 +151,8 @@ class Master extends BaseModel
             $patient_dosages    = [];
             $all_time_dosages   = [];
 
-            $covid_taken = array('covid-rna-pfizer', 'covid-rna-moderna', 'covid-viral-vector-johnson', 
-                    'covid-protein-based-novavax', 'covid-viral-vector-oxfordaz', 
+            $covid_taken = array('covid-rna-pfizer', 'covid-rna-moderna', 'covid-viral-vector-johnson',
+                    'covid-protein-based-novavax', 'covid-viral-vector-oxfordaz',
                     'covid-viral-vector-sputnikv', 'covid-inactivated-virus-covaxin',
                     'covid-inactivated-virus-coronovac', 'covid-inactivated-virus-sinopharm');
 
@@ -165,7 +170,7 @@ class Master extends BaseModel
 
                 if($all_time_dose_taken == 'periodic'){
                     $period = $value->periods;
-                   
+
                     if($value->periods == 'Birth'){
                         $dosage_date = $user_dob;
                     }else if($period[strlen($period)-1] == 'w'){
@@ -222,7 +227,7 @@ class Master extends BaseModel
                     }
                 }
 
-                if($patient_dosages == null){ 
+                if($patient_dosages == null){
                     $dosages_info       = [];
                     $dosages_freeze     = 0;
                     $dosages_id         = null;
@@ -233,10 +238,10 @@ class Master extends BaseModel
                     $dosages_id         = $patient_dosages->id;
                     $dosages_taken_at   = $patient_dosages->taken_at;
                 }
-                    
+
                 $newValue           = $value;
                 $newValue->status   = in_array($value->periods, $dosages_info);
-              
+
                 $newValue->freeze       = $dosages_freeze;
                 $newValue->imm_id       = $dosages_id;
                 $newValue->taken_at     = $dosages_taken_at;
@@ -284,9 +289,32 @@ class Master extends BaseModel
                 $attributes = new \stdClass();
                 $attributes->pe_available = (!empty($slug_data) ? false : true);
             }
+        }else if($type == 'vdx_sub_types'){
+
+            if(!empty($request->get('with_values'))) {
+
+                $attributes->value_lists = $this->where('attributes->reference_slug',$slug)->get();
+
+            }
+
+            if(!empty($request->get('patient_id'))) {
+
+                 $user_values = PatientHealth::where('patient_id',$request->get('patient_id'))->where('slug',$slug)->value('values');
+
+                 $user_values = (array) $user_values;
+
+                 $attributes->folio_values = [];
+                foreach ($user_values as $key => $value) {
+                    if($value == true){
+                        $attributes->folio_values[] = $this->where('slug',$key)->value('name');
+                    }
+
+                }
+
+            }
         }
 
-        return $attributes;        
+        return $attributes;
     }
 
 }

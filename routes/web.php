@@ -1,7 +1,5 @@
 <?php
 
-use App\Services\CureselectApis\TeleConsultApiService;
-use Illuminate\Http\Request;
 /** @var \Laravel\Lumen\Routing\Router $router */
 
 /*
@@ -15,9 +13,9 @@ use Illuminate\Http\Request;
 |
  */
 
-    $router->get('patient/summary', 'AuthService@patientSummary');
+$router->get('patient/summary', 'AuthService@patientSummary');
 
-$router->get('/key', function() {
+$router->get('/key', function () {
     return \Illuminate\Support\Str::random(32);
 });
 
@@ -27,8 +25,6 @@ $router->get('/', function () use ($router) {
 $router->get('/activated', function () use ($router) {
     return view('activated');
 });
-
-
 
 $router->get('v1/users/activate-accounts-x', 'AuthService@activateAccountsx');
 
@@ -43,7 +39,6 @@ $router->group(['prefix' => 'peripheral/', 'middleware' => 'peripheralAuth'], fu
 
 $router->group(['prefix' => 'v1/', 'middleware' => 'clientAuth'], function ($router) {
 
-
     $router->get('teleconsult/token-validate', 'AuthService@consultTokenValidate');
     $router->get('teleconsult/summary', 'AuthService@consultSummary');
     $router->get('teleconsult/summaryPdf', 'AuthService@consultSummaryPdf');
@@ -52,7 +47,7 @@ $router->group(['prefix' => 'v1/', 'middleware' => 'clientAuth'], function ($rou
 
     $router->post('freeze-phr-emr', 'AuthService@freezePhrEmr');
 
-    $router->group(['prefix' => 'peripheral-ev/'], function($router){
+    $router->group(['prefix' => 'peripheral-ev/'], function ($router) {
         $router->post('login', 'BluetoothPeripheralService@login');
         $router->post('capture', ['middleware' => 'userAuth', 'uses' => 'BluetoothPeripheralService@capture']);
     });
@@ -80,6 +75,9 @@ $router->group(['prefix' => 'v1/', 'middleware' => 'clientAuth'], function ($rou
 
     $router->group(['middleware' => 'ApiServiceAuth'], function ($router) {
 
+        // AutoLogin User
+        $router->post('auto-login', 'BluetoothPeripheralService@autoLogin');
+
         $router->group(['prefix' => 'xapi'], function ($router) {
 
             $router->group(['middleware' => ['resource']], function ($router) {
@@ -96,7 +94,6 @@ $router->group(['prefix' => 'v1/', 'middleware' => 'clientAuth'], function ($rou
 
     });
 
-
     $router->group(['middleware' => 'userAuth'], function ($router) {
 
         $router->get('healthPDF', 'AuthService@healthPDFx');
@@ -106,7 +103,7 @@ $router->group(['prefix' => 'v1/', 'middleware' => 'clientAuth'], function ($rou
         $router->get('historyPDF', 'AuthService@historyPDFx');
         $router->get('masterPDFx', 'AuthService@masterPDFx');
 
-         $router->get('vitalsPDF_globalx', 'AuthService@vitalsPDF_globalx');
+        $router->get('vitalsPDF_globalx', 'AuthService@vitalsPDF_globalx');
         $router->get('healthPDF_globalx', 'AuthService@healthPDF_globalx');
         $router->get('docsPDF_globalx', 'AuthService@docsPDF_globalx');
         $router->get('activityWellnessPDF_globalx', 'AuthService@activityWellnessPDF_globalx');
@@ -115,7 +112,7 @@ $router->group(['prefix' => 'v1/', 'middleware' => 'clientAuth'], function ($rou
         $router->get('familyHistoryPDF_globalx', 'AuthService@familyHistoryPDF_globalx');
         $router->get('ReviewOfSystem_globalx', 'AuthService@ReviewOfSystem_globalx');
         $router->get('physicalExamination_globalx', 'AuthService@physicalExamination_globalx');
-         $router->get('assessmentPDF_globalx', 'AuthService@assessmentPDF_globalx');
+        $router->get('assessmentPDF_globalx', 'AuthService@assessmentPDF_globalx');
 
         $router->group(['prefix' => 'users'], function ($router) {
             $router->patch('set-password', 'AuthService@setPassword');

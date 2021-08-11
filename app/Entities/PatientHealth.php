@@ -112,7 +112,18 @@ class PatientHealth extends BaseModel
             
         }
         
-        return $this->create($data);
+        if(!empty($data['up_create'])){
+
+
+            $matchThese = ['slug'=>$data['slug'],'patient_id'=>$data['patient_id']];
+
+            return $this->updateOrCreate($matchThese,$data);
+
+        }else{
+
+            return $this->create($data);
+
+        }
     }
 
     protected function updateModel($id, $request, $only = []){
