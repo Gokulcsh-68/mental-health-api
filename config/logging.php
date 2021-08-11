@@ -53,6 +53,12 @@ return [
             'days' => 14,
         ],
 
+        'evaitals' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/evaitals.log'),
+            'level' => 'info',
+        ],
+
         'slack' => [
             'driver' => 'slack',
             'url' => env('LOG_SLACK_WEBHOOK_URL'),
