@@ -1375,7 +1375,7 @@ class Vital extends BaseModel
                 $input_data['range_code']    = '#ffc107';
             }
             
-             if (($input_data['keytone'] >= 1.6) && ($input_data['keytone'] <= 2.9)) {
+             if (($input_data['keytone'] >= 1.6)) {
                 $input_data['keytoneFlag']      = 'High';
                 $input_data['keytoneFlagColor'] = 'danger';
                 $input_data['range_code']    = '#ff0000';
