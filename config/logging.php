@@ -55,8 +55,9 @@ return [
 
         'evaitals' => [
             'driver' => 'daily',
-            'path' => storage_path('logs/evaitals.log'),
+            'path' => storage_path('logs/evaitals/evaitals.log'),
             'level' => 'info',
+            'days' => 30,
         ],
 
         'slack' => [

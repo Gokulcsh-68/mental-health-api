@@ -120,6 +120,22 @@ class BluetoothPeripheralService extends BaseService
                     case 'ECG':
                         $this->saveECG($vital_data);
                         break;
+
+                    case 'HCT':
+                        $this->saveHCT($vital_data);
+                        break;
+
+                    case 'Hemoglobin':
+                        $this->saveHemoglobin($vital_data);
+                        break;
+
+                    case 'Ketone':
+                        $this->saveKeytone($vital_data);
+                        break;
+
+                    case 'Uric Acid':
+                        $this->saveUricAcid($vital_data);
+                        break;
                 }
             }
 
@@ -127,9 +143,68 @@ class BluetoothPeripheralService extends BaseService
         }
     }
 
+    private function saveUricAcid($data)
+    {
+        $vitalData = [
+            'user_id' => $this->_user_id,
+            'slug' => 'uric_acid',
+            'details' => [
+                'date' => $data['date_time'],
+                'time' => date('H:i', strtotime($data['date_time'])),
+                'uric_acid' => $data['uric_acid'],
+            ],
+        ];
+
+        $this->saveVitalData($vitalData);
+    }
+
+    private function saveKeytone($data)
+    {
+        $vitalData = [
+            'user_id' => $this->_user_id,
+            'slug' => 'keytone',
+            'details' => [
+                'date' => $data['date_time'],
+                'time' => date('H:i', strtotime($data['date_time'])),
+                'keytone' => $data['ketone'],
+            ],
+        ];
+
+        $this->saveVitalData($vitalData);
+    }
+
+    private function saveHemoglobin($data)
+    {
+        $vitalData = [
+            'user_id' => $this->_user_id,
+            'slug' => 'hemoglobin',
+            'details' => [
+                'date' => $data['date_time'],
+                'time' => date('H:i', strtotime($data['date_time'])),
+                'hemoglobin' => $data['HB'],
+            ],
+        ];
+
+        $this->saveVitalData($vitalData);
+    }
+
+    private function saveHCT($data)
+    {
+        $vitalData = [
+            'user_id' => $this->_user_id,
+            'slug' => 'hct',
+            'details' => [
+                'date' => $data['date_time'],
+                'time' => date('H:i', strtotime($data['date_time'])),
+                'hct' => $data['HCT'],
+            ],
+        ];
+
+        $this->saveVitalData($vitalData);
+    }
+
     private function saveECG($data)
     {
-        // dd($data);
         $image = $data['image'];
         $temp_file_name = time() . '.png';
         \Storage::disk('public')->put($temp_file_name, base64_decode($image)); 
@@ -173,6 +248,19 @@ class BluetoothPeripheralService extends BaseService
 
             \Storage::disk('public')->delete($temp_file_name);
         }
+
+        $vitalData = [
+            'user_id' => $this->_user_id,
+            'slug' => 'heart-rate',
+            'details' => [
+                'date' => $data['date_time'],
+                'time' => date('H:i', strtotime($data['date_time'])),
+                'heart' => $data['PR'],
+                'unit' => 'Bpm',
+            ],
+        ];
+
+        $this->saveVitalData($vitalData);
     }
 
     private function savePulseOximeter($data)
@@ -182,8 +270,10 @@ class BluetoothPeripheralService extends BaseService
             'slug' => 'spO2',
             'details' => [
                 'date' => $data['date_time'],
+                'time' => date('H:i', strtotime($data['date_time'])),
                 'spo2' => $data['SpO2'],
                 'pulse_rate' => $data['PR'],
+                'unit' => '%',
             ],
         ];
 
@@ -197,9 +287,10 @@ class BluetoothPeripheralService extends BaseService
             'slug' => 'blood-pressure',
             'details' => [
                 'date' => $data['date_time'],
+                'time' => date('H:i', strtotime($data['date_time'])),
                 'systolic' => $data['SYS'],
                 'diastolic' => $data['DIA'],
-                'pulse_rate' => $data['PR'],
+                'pulse' => $data['PR'],
             ],
         ];
 
@@ -213,6 +304,7 @@ class BluetoothPeripheralService extends BaseService
             'slug' => 'temperature',
             'details' => [
                 'date' => $data['date_time'],
+                'time' => date('H:i', strtotime($data['date_time'])),
                 'temperature' => $data['Tempf'],
                 'unit' => 'Fahrenheit',
             ],
@@ -228,6 +320,7 @@ class BluetoothPeripheralService extends BaseService
             'slug' => 'blood-sugar',
             'details' => [
                 'date' => $data['date_time'],
+                'time' => date('H:i', strtotime($data['date_time'])),
                 'blood_sugar' => $data['mmol'],
                 'unit' => 'mmol/L',
             ],
@@ -243,6 +336,7 @@ class BluetoothPeripheralService extends BaseService
             'slug' => 'lipid-profile',
             'details' => [
                 'date' => $data['date_time'],
+                'time' => date('H:i', strtotime($data['date_time'])),
                 'total' => $data['cholesterol'],
                 'total_unit' => 'mg/d',
             ],
