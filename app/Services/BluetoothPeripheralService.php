@@ -338,7 +338,7 @@ class BluetoothPeripheralService extends BaseService
                 'date' => $data['date_time'],
                 'time' => date('H:i', strtotime($data['date_time'])),
                 'total' => $data['cholesterol'],
-                'total_unit' => 'mg/d',
+                'total_unit' => 'mg/dL',
             ],
         ];
 
