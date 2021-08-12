@@ -1307,33 +1307,33 @@ class Vital extends BaseModel
         
         if (!empty($input_data['hdl_ldl'])) {
             
-            if ($input_data['hdl_ldl_unit'] == 'mg/dL') {
-                if ($input_data['hdl_ldl'] <= 3) {
-                    $input_data['hdl_ldl_message'] = 'Optimal';
-                }
-
-                if (($input_data['hdl_ldl'] >= 3.1) && ($input_data['hdl_ldl'] <= 3.8)) {
-                    $input_data['hdl_ldl_message'] = 'Intermediate';
-                }
-
-                if ($input_data['hdl_ldl'] > 3.8) {
-                    $input_data['hdl_ldl_message'] = 'High';
-                }
+        if ($input_data['hdl_ldl_unit'] == 'mg/dL') {
+            if ($input_data['hdl_ldl'] <= 3) {
+                $input_data['hdl_ldl_message'] = 'Optimal';
             }
 
-            if ($input_data['hdl_ldl_unit'] == 'mmol/L') {
-                if ($input_data['hdl_ldl'] <= 1.33) {
-                    $input_data['hdl_ldl_message'] = 'Optimal';
-                }
-
-                if (($input_data['hdl_ldl'] >= 1.34) && ($input_data['hdl_ldl'] <= 1.68)) {
-                    $input_data['hdl_ldl_message'] = 'Intermediate';
-                }
-
-                if ($input_data['hdl_ldl'] > 1.68) {
-                    $input_data['hdl_ldl_message'] = 'High';
-                }
+            if (($input_data['hdl_ldl'] >= 3.1) && ($input_data['hdl_ldl'] <= 3.8)) {
+                $input_data['hdl_ldl_message'] = 'Intermediate';
             }
+
+            if ($input_data['hdl_ldl'] > 3.8) {
+                $input_data['hdl_ldl_message'] = 'High';
+            }
+        }
+
+        if ($input_data['hdl_ldl_unit'] == 'mmol/L') {
+            if ($input_data['hdl_ldl'] <= 1.33) {
+                $input_data['hdl_ldl_message'] = 'Optimal';
+            }
+
+            if (($input_data['hdl_ldl'] >= 1.34) && ($input_data['hdl_ldl'] <= 1.68)) {
+                $input_data['hdl_ldl_message'] = 'Intermediate';
+            }
+
+            if ($input_data['hdl_ldl'] > 1.68) {
+                $input_data['hdl_ldl_message'] = 'High';
+            }
+        }
             
             switch ($input_data['hdl_ldl_message']) {
                 case 'Optimal':
@@ -1358,9 +1358,9 @@ class Vital extends BaseModel
 
     public static function keytone_flag($input_data)
     {
-        $input_data['keytoneFlag']      = '';
-        $input_data['keytoneFlagColor'] = '';
-        $input_data['range_code']    = '';
+        $input_data['keytoneFlag']      = 'Warning';
+        $input_data['keytoneFlagColor'] = 'warning';
+        $input_data['range_code']    = '#ffc107';
         if (!empty($input_data['keytone'])) {
             
             if ($input_data['keytone'] < 0.6) {
@@ -1375,7 +1375,7 @@ class Vital extends BaseModel
                 $input_data['range_code']    = '#ffc107';
             }
             
-             if (($input_data['keytone'] >= 1.6) && ($input_data['keytone'] <= 2.9)) {
+             if (($input_data['keytone'] >= 1.6)) {
                 $input_data['keytoneFlag']      = 'High';
                 $input_data['keytoneFlagColor'] = 'danger';
                 $input_data['range_code']    = '#ff0000';
