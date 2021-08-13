@@ -105,10 +105,10 @@ class User extends BaseModel
         return $this->belongsTo(Master::class, 'gender', 'slug')->where('master_type_slug', 'gender');
     }
 
-    /*public function provider()
+    public function provider()
     {
-        return $this->hasOne(Provider::class);
-    }*/
+        return $this->hasOne(Provider::class, 'user_id');
+    }
 
 
     public function guestLoginAttempt($attributes, $field = "username"):  ? User

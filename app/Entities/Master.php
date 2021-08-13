@@ -2,10 +2,12 @@
 
 namespace App\Entities;
 
+use App\Entities\Provider;
+use App\Entities\ProviderSpeciality;
 use App\Services\MasterService;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Carbon\Carbon;
 
 class Master extends BaseModel
 {
@@ -116,6 +118,29 @@ class Master extends BaseModel
                 }
 
             }
+
+
+            if($request->get('slug') == 'vdx'){
+                if($request->user()->role->code == 'provider' || $request->get('provider_id')){
+
+                    if($request->get('provider_id')){
+                        $providerId = Provider::where('user_id',$request->get('provider_id'))->value('id');
+                    }else{
+                        $providerId = $request->user()->provider->id;
+
+                    }
+
+                    $providerSpeciality = ProviderSpeciality::where('provider_id',$providerId)->pluck('speciality');
+
+                    $model->where(function ($subquery) use ($request,$providerSpeciality) {
+                        foreach ($providerSpeciality as $key => $value) {
+                            $subquery->orwhereJsonContains('attributes->speciality',$value);
+                        }
+                    });
+
+                }               
+            }
+            
         }
 
 
