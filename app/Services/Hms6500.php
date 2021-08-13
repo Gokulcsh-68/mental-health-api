@@ -37,7 +37,7 @@ class Hms6500 extends BaseService
 
                 if (isset($response['peripheral_users_id'])) {
 
-                    $patient_login = User::find($response['peripheral_users_id'])->first();
+                    $patient_login = User::find($response['peripheral_users_id']);
 
                     if (!empty($patient_login)) {
                         $peripheral_secret = md5(uniqid(rand(), true));
