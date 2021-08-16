@@ -1617,7 +1617,23 @@ class AuthService extends BaseService
         $respiration = $entityService->getLimitEntity($request);
         $vitals['i_respiration'] = $respiration->getData()->data;
 
+        
+       
+        $request['slug']= 'hct';
+        $respiration = $entityService->getLimitEntity($request);
+        $vitals['j_hct'] = $respiration->getData()->data;
 
+        $request['slug']= 'hemoglobin';
+        $respiration = $entityService->getLimitEntity($request);
+        $vitals['k_hemoglobin'] = $respiration->getData()->data;
+
+        $request['slug']= 'keytone';
+        $respiration = $entityService->getLimitEntity($request);
+        $vitals['l_keytone'] = $respiration->getData()->data;
+        
+        $request['slug']= 'uric_acid';
+        $respiration = $entityService->getLimitEntity($request);
+        $vitals['m_uric_acid'] = $respiration->getData()->data;
 
 
         return $this->httpResponse->setHttpData([

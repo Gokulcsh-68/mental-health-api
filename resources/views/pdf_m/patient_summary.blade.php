@@ -1,6 +1,7 @@
 @extends('pdf_m.layouts.pdf_layouts')
 @section('content')
 	
+ <?php $gender = ''; ?>
  
 	@component('pdf_m.pdf_components.title',['title'=> 'Patient Summary Reports'])
     @endcomponent
@@ -12,6 +13,9 @@
 					<?php
 						$patient_details = (array) [$v];
 						
+				    	foreach ($patient_details as $key => $value) {
+				    		$gender = $value->gender;
+				    	}
 					?>
 				   
 					    @component('pdf_m.pdf_components.patient_details',['patient_details'=> $patient_details])
@@ -113,6 +117,38 @@
 				    @if(count((array)$v) > 0)
 			    	<h4 class="color_secondary">Respiration</h4>
 			        @component('pdf_m.pdf_components.respiration',['lists'=> $v])
+		    		 @endcomponent
+		    		 @endif
+			        @break
+
+			    @case('j_hct')
+				    @if(count((array)$v) > 0)
+			    	<h4 class="color_secondary">HCT</h4>
+			        @component('pdf_m.pdf_components.hct',['lists'=> $v,'gender'=>$gender])
+		    		 @endcomponent
+		    		 @endif
+			        @break
+
+			    @case('k_hemoglobin')
+				    @if(count((array)$v) > 0)
+			    	<h4 class="color_secondary">Hemoglobin</h4>
+			        @component('pdf_m.pdf_components.hemoglobin',['lists'=> $v,'gender'=>$gender])
+		    		 @endcomponent
+		    		 @endif
+			        @break
+
+			    @case('l_keytone')
+				    @if(count((array)$v) > 0)
+			    	<h4 class="color_secondary">Keytone</h4>
+			        @component('pdf_m.pdf_components.keytone',['lists'=> $v])
+		    		 @endcomponent
+		    		 @endif
+			        @break
+
+			    @case('m_uric_acid')
+				    @if(count((array)$v) > 0)
+			    	<h4 class="color_secondary">Uric Acid</h4>
+			        @component('pdf_m.pdf_components.uric_aid',['lists'=> $v,'gender'=>$gender])
 		    		 @endcomponent
 		    		 @endif
 			        @break
