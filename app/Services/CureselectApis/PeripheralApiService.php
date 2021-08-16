@@ -22,6 +22,7 @@ class PeripheralApiService extends BaseService {
 	{
 		parent::__construct();
 		$this->endpoint_url = $this->_base_url . 'v1/resource/peripheral-users';
+		$this->authentication_url = $this->_base_url . 'v1/peripheral/login-check';
 	}
 
 	protected function peripheralUserCreateValidate($payload) {
@@ -142,4 +143,57 @@ class PeripheralApiService extends BaseService {
 
         return $response;
     }
+
+	public function loginVaidate($payload)
+	{
+		$validation = Validator::make($payload, [
+			'username' => 'required|string',
+			'password' => 'required',
+		]);
+
+		if ($validation->fails()) {
+			throw ValidationException::withMessages($validation->errors()->all());
+		}
+
+		try {
+
+			$url = $this->authentication_url;
+
+			$form_data = [
+				'username' => $payload['username'],
+				'password' => $payload['password'],
+			];
+
+			$headers = [
+				'Authorization' => 'Bearer ' . $this->getToken(),
+				'Accept'        => 'application/json',
+				'Content-Type' => 'application/json',
+			];
+
+			$options = [
+				'headers' => $headers,
+				'body' => json_encode($form_data),
+			];
+
+			$this->apiCall($url, $options, $method = "POST");
+			$api_response = $this->toGuzzleArray();
+
+			$response = ['peripheral_users_id' => $api_response['data']['user_id']];
+		} catch (\Exception $e) {
+			Log::error('Peripheral User Auth API ERROR ------- ', ['errorDetails' => $e->getMessage()]);
+
+			$api_response = $this->toGuzzleArray();
+
+			if ($api_response) {
+				if ($api_response['code'] == 422) {
+					throw ValidationException::withMessages($api_response['data']);
+				}
+			}
+
+			throw new BadRequestHttpException($e->getMessage(), $e);
+			$response = [$e->getMessage()];
+		}
+
+		return $response;
+	}
 }

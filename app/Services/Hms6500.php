@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Entities\Doc;
 use App\Entities\User;
 use App\Entities\Vital;
+use App\Services\CureselectApis\PeripheralApiService;
 use App\Services\UtilService;
 use App\Traits\S3;
 use App\Utils\AuthHelper;
@@ -25,39 +26,49 @@ class Hms6500 extends BaseService
             $input = $request->all();
 
             $input['password']  = preg_replace("/[\n\r]/","",$input['password']);
-            // $details            = json_encode($input);
 
-            $patient_login = User::where('id', $input['username'])
-                                 ->whereJsonContains('address->peripheral_password', $input['password'])
-                                 ->first();
+            $payload = [
+                'username' => $input['username'],
+                'password' => $input['password'],
+            ];
+            
+            try {
+                $response = (new PeripheralApiService)->loginVaidate($payload);
 
-            if(!empty($patient_login)){
-                $peripheral_secret = md5($patient_login['id']);
-                $patient_login->peripheral_secret = $peripheral_secret;
-                $patient_login->save();
+                if (isset($response['peripheral_users_id'])) {
 
-                $patient_login_info = 'HTTP_SUCCESS:PHPSESSID='.$peripheral_secret;
-                $patient_login_info .= '<?xml version=\"1.0\" encoding=\"GBK\"?>';
-                $patient_login_info .= ' \n ';
-                $patient_login_info .= "<downinfo>";
-                $patient_login_info .= ' \n ';
-                $patient_login_info .= "<used>2</used> \n";
-                $patient_login_info .= "<total>1000</total> \n";
-                $patient_login_info .= "<username>".$patient_login->getFullName()."</username> \n";
-                $patient_login_info .= "<age>".Carbon::parse($patient_login['dob'])->age."</age> \n";
-                $patient_login_info .= "<sex>".($patient_login['gender'] == 'Female' ? 1 : 0 )."</sex> \n"; // 0-If Male 1-If Female
-                $patient_login_info .= "<birthday>".$patient_login['dob']."</birthday> \n";
-                $patient_login_info .= "<phone>".$patient_login['mobile']."</phone> \n";
-                $patient_login_info .= "<height>1600</height> \n";
-                $patient_login_info .= "<weight>600</weight> \n";
-                $patient_login_info .= "</downinfo>";
-                $patient_login_info .= ' \n ';
+                    $patient_login = User::find($response['peripheral_users_id']);
 
-                return $patient_login_info;
+                    if (!empty($patient_login)) {
+                        $peripheral_secret = md5(uniqid(rand(), true));
+                        $patient_login->peripheral_secret = $peripheral_secret;
+                        $patient_login->save();
 
-            } else {
-                return "ERR_INVALID_LOGIN_ID:Invalid account details.";
+                        $patient_login_info = 'HTTP_SUCCESS:PHPSESSID=' . $peripheral_secret;
+                        $patient_login_info .= '<?xml version=\"1.0\" encoding=\"GBK\"?>';
+                        $patient_login_info .= ' \n ';
+                        $patient_login_info .= "<downinfo>";
+                        $patient_login_info .= ' \n ';
+                        $patient_login_info .= "<used>2</used> \n";
+                        $patient_login_info .= "<total>1000</total> \n";
+                        $patient_login_info .= "<username>" . $patient_login->getFullName() . "</username> \n";
+                        $patient_login_info .= "<age>" . Carbon::parse($patient_login['dob'])->age . "</age> \n";
+                        $patient_login_info .= "<sex>" . ($patient_login['gender'] == 'Female' ? 1 : 0) . "</sex> \n"; // 0-If Male 1-If Female
+                        $patient_login_info .= "<birthday>" . $patient_login['dob'] . "</birthday> \n";
+                        $patient_login_info .= "<phone>" . $patient_login['mobile'] . "</phone> \n";
+                        $patient_login_info .= "<height>1600</height> \n";
+                        $patient_login_info .= "<weight>600</weight> \n";
+                        $patient_login_info .= "</downinfo>";
+                        $patient_login_info .= ' \n ';
+
+                        return $patient_login_info;
+                    }
+                }
+            } catch(\Exception $e) {
+                //
             }
+
+            return "ERR_INVALID_LOGIN_ID:Invalid account details.";
 
         }catch(Exception $e){
             // Exception
