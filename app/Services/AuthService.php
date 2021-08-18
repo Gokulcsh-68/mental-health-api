@@ -1485,6 +1485,29 @@ class AuthService extends BaseService
         $procedure = $entityService->getLimitEntity($request);
         $health['e_procedure'] = $procedure->getData()->data;
 
+        unset($request['slug'],$request['resource'],$request['entity']);
+        
+        $request['resource']= 'Master';
+        $request['entity']= new Master;
+        $request['slug']= 'vdx';
+        $vdx = $entityService->getLimitEntity($request);
+        $health['f_vdx'] = $vdx->getData()->data;
+
+        foreach ($health['f_vdx'] as $key => $value) {
+            unset($request['slug']);
+            $request['attr_slug']= $value->slug;
+            $vdxType = $entityService->getEntity($request);
+            $value->type = $vdxType->getData()->data;
+
+            foreach ($value->type as $k => $v) {
+                
+                unset($request['slug']);
+                $request['attr_slug']= $v->slug;
+                $vdxsubType = $entityService->getEntity($request);
+                $v->sub_type = $vdxsubType->getData()->data;
+            }
+
+        }
 
         // HISTORIES
 

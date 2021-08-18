@@ -273,6 +273,14 @@
 		    		 @endif
 			        @break
 
+			    @case('f_vdx')
+				    @if(count((array)$v) > 0)
+			    	<h4 class="color_secondary">Diagnosis</h4>
+			        @component('pdf_m.pdf_components.vdx',['lists'=> $v])
+		    		@endcomponent
+		    		 @endif
+			        @break
+
 			    @default
 			        <span>`{{ucfirst($k)}}` is not found!</span>
 			@endswitch
