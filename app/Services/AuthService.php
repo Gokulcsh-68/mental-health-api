@@ -1698,4 +1698,41 @@ class AuthService extends BaseService
         return self::pdf_m($request, $template);
     }
 
+    public function analytics(Request $request): JsonResponse{
+
+        try{
+            $hospital_id = 1;
+            $getPatientUserId = Patient::Where('hospital_id',$hospital_id)->pluck('user_id');
+
+            $getVitals = Vital::whereIn('user_id',$getPatientUserId)->orderBy('id','desc')
+                                ->get()
+                                ->groupBy('slug');
+            // dd($getVitals);
+
+            foreach ($getVitals as $key => $value) {
+                
+                // dd($key);
+                    switch ($key) {
+                        case 'urine':
+
+                            foreach ($value as $k => $v) {
+                                dd($v->details);
+                            }
+
+                            break;
+                        
+                        default:
+                            // dd('Not Found');
+                            break;
+                    }
+            }
+
+            return $this->httpResponse->setHttpData($getVitals)->jsonResponse();
+
+        } catch (Exception $e) {
+            exceptionLogger("Failed ", $e);
+            return false;
+        }
+    }
+
 }

@@ -13,7 +13,7 @@
 |
  */
 
-$router->get('patient/summary', 'AuthService@patientSummary');
+$router->get('analytics', 'AuthService@analytics');
 
 $router->get('/key', function () {
     return \Illuminate\Support\Str::random(32);
