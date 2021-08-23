@@ -43,7 +43,7 @@ class VDXSeeder extends Seeder
             DB::table('masters')->where('id',$chk)->update($value);
 
             }else{
-            DB::table('masters')->Create($value);
+            DB::table('masters')->insert($value);
 
             }
         }
