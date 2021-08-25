@@ -1004,9 +1004,9 @@ class Vital extends BaseModel
                     }
                     
                     if (($input_data['heart'] >= 100) && ($input_data['heart'] <= 190)) {
-                        $input_data['heartRateFlag']      = 'Low';
-                        $input_data['heartRateFlagColor'] = 'primary';
-                        $input_data['range_code']         = '#0000ff';
+                        $input_data['heartRateFlag']      = 'Normal';
+                        $input_data['heartRateFlagColor'] = 'success';
+                        $input_data['range_code']         = '#008000';
                     }
                     
                     if (($input_data['heart'] > 190)) {
