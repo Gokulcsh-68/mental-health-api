@@ -1358,9 +1358,9 @@ class Vital extends BaseModel
 
     public static function keytone_flag($input_data)
     {
-        $input_data['keytoneFlag']      = 'Warning';
-        $input_data['keytoneFlagColor'] = 'warning';
-        $input_data['range_code']    = '#ffc107';
+        $input_data['keytoneFlag']      = 'Low';
+        $input_data['keytoneFlagColor'] = 'primary';
+        $input_data['range_code']    = '#0000ff';
         if (!empty($input_data['keytone'])) {
             
             if ($input_data['keytone'] < 0.6) {
