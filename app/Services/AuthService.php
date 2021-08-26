@@ -1704,30 +1704,80 @@ class AuthService extends BaseService
             $hospital_id = 1;
             $getPatientUserId = Patient::Where('hospital_id',$hospital_id)->pluck('user_id');
 
-            $getVitals = Vital::whereIn('user_id',$getPatientUserId)->orderBy('id','desc')
-                                ->get()
-                                ->groupBy('slug');
-            // dd($getVitals);
+            $getVitals = Vital::whereIn('user_id',$getPatientUserId)->orderBy('id','desc');
 
+            if($request->get('from') && $request->get('to')){
+
+                $from = date('Y-m-d',strtotime($request->get('from')));
+                $to = date('Y-m-d',strtotime($request->get('to')));
+                $getVitals = $getVitals->whereBetween('details->date', [$from,$to]);
+            }
+                $getVitals = $getVitals->get()->groupBy('slug');
+                
+                $result = [];
             foreach ($getVitals as $key => $value) {
                 
-                // dd($key);
-                    switch ($key) {
-                        case 'urine':
+                switch ($key) {
+                    case 'bmi':
+                        $bmi_result = [];
+                        foreach ($value as $k => $v) {
 
-                            foreach ($value as $k => $v) {
-                                dd($v->details);
+                            $flag = $v->details->bmiFlag;
+
+                            switch ($flag) {
+                                case 'Below normal weight':
+
+                                $bmi_result['below_weight'] = !empty($bmi_result['below_weight'])?$bmi_result['below_weight']+1:1;
+
+                                    break;
+
+                                case 'Normal weight':
+
+                                $bmi_result['normal_weight'] = !empty($bmi_result['normal_weight'])?$bmi_result['normal_weight']+1:1;
+
+                                    break;
+
+                                case 'Overweight':
+
+                                $bmi_result['over_weight'] = !empty($bmi_result['over_weight'])?$bmi_result['over_weight']+1:1;
+
+                                    break;
+
+                                case 'Class I Obesity':
+
+                                $bmi_result['class_one'] = !empty($bmi_result['class_one'])?$bmi_result['class_one']+1:1;
+                                    $bmi_result['class_one'] = 1;
+                                    break;
+
+                                case 'Class II Obesity':
+
+                                $bmi_result['class_two'] = !empty($bmi_result['class_two'])?$bmi_result['class_two']+1:1;
+
+                                    break;
+
+                                case 'Class III Obesity':
+
+                                $bmi_result['class_three'] = !empty($bmi_result['class_three'])?$bmi_result['class_three']+1:1;
+                                
+                                    break;
+                                
+                                default:
+                                    // code...
+                                    break;
                             }
-
-                            break;
-                        
-                        default:
-                            // dd('Not Found');
-                            break;
-                    }
+                        }
+                        $result['bmi'] = $bmi_result;
+                        break;
+                    
+                    default:
+                        // code...
+                        break;
+                }
             }
+           
+           // dd($result);
 
-            return $this->httpResponse->setHttpData($getVitals)->jsonResponse();
+            return $this->httpResponse->setHttpData($result)->jsonResponse();
 
         } catch (Exception $e) {
             exceptionLogger("Failed ", $e);
