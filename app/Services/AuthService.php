@@ -20,6 +20,7 @@ use App\Entities\Timezone;
 use App\Entities\User;
 use App\Entities\Vital;
 use App\Enums\EmailTemplateEnum;
+use App\Enums\EnumAnalyticsChart;
 use App\Enums\InternalCodeEnum;
 use App\Enums\UserTypeEnum;
 use App\Jobs\CommunicationJob;
@@ -1704,7 +1705,8 @@ class AuthService extends BaseService
             $hospital_id = 1;
             $getPatientUserId = Patient::Where('hospital_id',$hospital_id)->pluck('user_id');
 
-            $getVitals = Vital::whereIn('user_id',$getPatientUserId)->orderBy('id','desc');
+            // select('id','user_id','consult_id','peripheral_id','slug', DB::raw('group_concat(details) as detail'), 'freeze', 'created_at', 'updated_at')
+            $getVitals = Vital::whereIn('user_id',$getPatientUserId)->orderBy('details->date','desc');
 
             if($request->get('from') && $request->get('to')){
 
@@ -1715,58 +1717,70 @@ class AuthService extends BaseService
                 $getVitals = $getVitals->get()->groupBy('slug');
                 
                 $result = [];
+
             foreach ($getVitals as $key => $value) {
                 
                 switch ($key) {
                     case 'bmi':
-                        $bmi_result = [];
-                        foreach ($value as $k => $v) {
+                        $result['bmi'] =  EnumAnalyticsChart::ChartCounts($value,$key);
+                        break;
 
-                            $flag = $v->details->bmiFlag;
+                    case 'temperature':
+                        $result['temperature'] =  EnumAnalyticsChart::ChartCounts($value,$key);
+                        break;
 
-                            switch ($flag) {
-                                case 'Below normal weight':
+                    case 'spO2':
+                        $result['spo'] =  EnumAnalyticsChart::ChartCounts($value,$key);
+                        break;
 
-                                $bmi_result['below_weight'] = !empty($bmi_result['below_weight'])?$bmi_result['below_weight']+1:1;
+                    case 'blood-pressure':
+                        $result['bp'] =  EnumAnalyticsChart::ChartCounts($value,$key);
+                        break;
 
-                                    break;
+                    case 'blood-sugar':
+                        $result['bs'] =  EnumAnalyticsChart::ChartCounts($value,$key);
+                        break;
 
-                                case 'Normal weight':
+                    case 'heart-rate':
+                        $result['heart'] =  EnumAnalyticsChart::ChartCounts($value,$key);
+                        break;
 
-                                $bmi_result['normal_weight'] = !empty($bmi_result['normal_weight'])?$bmi_result['normal_weight']+1:1;
+                    case 'urine':
 
-                                    break;
+                        $urine['urine_leukocytes'] =  EnumAnalyticsChart::ChartCounts($value,'urine_leukocytes');
 
-                                case 'Overweight':
+                        $urine['urine_protein'] =  EnumAnalyticsChart::ChartCounts($value,'urine_protein');
 
-                                $bmi_result['over_weight'] = !empty($bmi_result['over_weight'])?$bmi_result['over_weight']+1:1;
+                        $urine['urine_rbc'] =  EnumAnalyticsChart::ChartCounts($value,'urine_rbc');
 
-                                    break;
+                        $result['urine_lpr'] = array_merge(['leukocytes'=>$urine['urine_leukocytes']],['protein'=>$urine['urine_protein']],['rbc'=>$urine['urine_rbc']]);
 
-                                case 'Class I Obesity':
+                        $result['urine_sugar'] =  EnumAnalyticsChart::ChartCounts($value,'urine_sugar');
 
-                                $bmi_result['class_one'] = !empty($bmi_result['class_one'])?$bmi_result['class_one']+1:1;
-                                    $bmi_result['class_one'] = 1;
-                                    break;
+                        $result['urine'] =  EnumAnalyticsChart::ChartCounts($value,$key);
+                        break;
 
-                                case 'Class II Obesity':
+                    case 'lipid-profile':
+                        $lipid['lipid_ldl'] =  EnumAnalyticsChart::ChartCounts($value,'lipid_ldl');
 
-                                $bmi_result['class_two'] = !empty($bmi_result['class_two'])?$bmi_result['class_two']+1:1;
+                        $lipid['lipid_hdl'] =  EnumAnalyticsChart::ChartCounts($value,'lipid_hdl');
 
-                                    break;
+                        $lipid['lipid_vldl'] =  EnumAnalyticsChart::ChartCounts($value,'lipid_vldl');
 
-                                case 'Class III Obesity':
+                        $lipid['lipid_ldl'] =  EnumAnalyticsChart::ChartCounts($value,'lipid_ldl');
 
-                                $bmi_result['class_three'] = !empty($bmi_result['class_three'])?$bmi_result['class_three']+1:1;
-                                
-                                    break;
-                                
-                                default:
-                                    // code...
-                                    break;
-                            }
-                        }
-                        $result['bmi'] = $bmi_result;
+                        $lipid['lipid_hdl_ldl'] =  EnumAnalyticsChart::ChartCounts($value,'lipid_hdl_ldl');
+
+                        $lipid['lipid_tri'] =  EnumAnalyticsChart::ChartCounts($value,'lipid_tri');
+
+                        $lipid['lipid_total'] =  EnumAnalyticsChart::ChartCounts($value,'lipid_total');
+
+                        $result['lipid'] = array_merge(['ldl'=>$lipid['lipid_ldl']],['hdl'=>$lipid['lipid_hdl']],['vldl'=>$lipid['lipid_vldl']],['hdl_ldl'=>$lipid['lipid_hdl_ldl']],['tri'=>$lipid['lipid_tri']],['total'=>$lipid['lipid_total']]);
+
+                        break;
+
+                    case 'respiration':
+                        $result['respiration'] =  EnumAnalyticsChart::ChartCounts($value,$key);
                         break;
                     
                     default:

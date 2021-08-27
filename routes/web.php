@@ -39,6 +39,7 @@ $router->group(['prefix' => 'peripheral/', 'middleware' => 'peripheralAuth'], fu
 
 $router->group(['prefix' => 'v1/', 'middleware' => 'clientAuth'], function ($router) {
 
+    $router->get('analytics', 'AuthService@analytics');
     $router->get('teleconsult/token-validate', 'AuthService@consultTokenValidate');
     $router->get('teleconsult/summary', 'AuthService@consultSummary');
     $router->get('teleconsult/summaryPdf', 'AuthService@consultSummaryPdf');
