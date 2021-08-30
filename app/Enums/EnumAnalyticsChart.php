@@ -2,6 +2,8 @@
 
 namespace App\Enums;
 
+use App\Entities\User;
+
 abstract class EnumAnalyticsChart {
 
     
@@ -84,7 +86,111 @@ abstract class EnumAnalyticsChart {
                 $flag = $v->details->respirationFlag;
             }
 
+            if($key == 'keytone'){
+                $flag = $v->details->keytoneFlag;
+            }
+
+            if($key == 'hct' || $key == 'hemoglobin' || $key == 'uric_acid'){
+                $flag = $key;
+            }
+
             switch ($flag) {
+
+                case 'hct':
+                    $chart_result['male']['normal'] = !empty($chart_result['male']['normal'])?$chart_result['male']['normal']:0;
+                   
+
+                    $chart_result['male']['danger'] = !empty($chart_result['male']['danger'])?$chart_result['male']['danger']:0;
+
+                    $chart_result['female']['normal'] = !empty($chart_result['male']['normal'])?$chart_result['male']['normal']:0;
+                    $chart_result['female']['danger'] = !empty($chart_result['female']['danger'])?$chart_result['female']['danger']:0;
+
+                    $getGender = User::Where('id',$v->user_id)->value('gender');
+
+                    if($getGender == 'Male'){
+
+                        if($v->details->hct >= '41' && $v->details->hct <= '50'){
+                            $chart_result['male']['normal'] = !empty($chart_result['male']['normal'])?$chart_result['male']['normal']+1:1;
+                        }else{
+                            $chart_result['male']['danger'] = !empty($chart_result['male']['danger'])?$chart_result['male']['danger']+1:1;
+                        }
+                    }
+
+                    if($getGender == 'Female'){
+
+                        if($v->details->hct >= '36' && $v->details->hct <= '48'){
+                            $chart_result['female']['normal'] = !empty($chart_result['female']['normal'])?$chart_result['female']['normal']+1:1;
+                        }else{
+                            $chart_result['female']['danger'] = !empty($chart_result['female']['danger'])?$chart_result['female']['danger']+1:1;
+                        }                    
+                    }
+
+                    break;
+
+                case 'hemoglobin':
+                    $chart_result['male']['normal'] = !empty($chart_result['male']['normal'])?$chart_result['male']['normal']:0;
+                   
+
+                    $chart_result['male']['danger'] = !empty($chart_result['male']['danger'])?$chart_result['male']['danger']:0;
+
+                    $chart_result['female']['normal'] = !empty($chart_result['male']['normal'])?$chart_result['male']['normal']:0;
+                    $chart_result['female']['danger'] = !empty($chart_result['female']['danger'])?$chart_result['female']['danger']:0;
+
+                    $getGender = User::Where('id',$v->user_id)->value('gender');
+
+                    if($getGender == 'Male'){
+
+                        if($v->details->hemoglobin >= '13.8' && $v->details->hemoglobin <= '17.2'){
+                            $chart_result['male']['normal'] = !empty($chart_result['male']['normal'])?$chart_result['male']['normal']+1:1;
+                        }else{
+                            $chart_result['male']['danger'] = !empty($chart_result['male']['danger'])?$chart_result['male']['danger']+1:1;
+                        }
+                    }
+
+                    if($getGender == 'Female'){
+
+                        if($v->details->hemoglobin >= '12.1' && $v->details->hemoglobin <= '15.1'){
+                            $chart_result['female']['normal'] = !empty($chart_result['female']['normal'])?$chart_result['female']['normal']+1:1;
+                        }else{
+                            $chart_result['female']['danger'] = !empty($chart_result['female']['danger'])?$chart_result['female']['danger']+1:1;
+                        }                    
+                    }
+
+                    break;
+
+                
+                case 'uric_acid':
+                    $chart_result['male']['normal'] = !empty($chart_result['male']['normal'])?$chart_result['male']['normal']:0;
+                   
+
+                    $chart_result['male']['danger'] = !empty($chart_result['male']['danger'])?$chart_result['male']['danger']:0;
+
+                    $chart_result['female']['normal'] = !empty($chart_result['male']['normal'])?$chart_result['male']['normal']:0;
+                    $chart_result['female']['danger'] = !empty($chart_result['female']['danger'])?$chart_result['female']['danger']:0;
+
+                    $getGender = User::Where('id',$v->user_id)->value('gender');
+
+                    if($getGender == 'Male'){
+
+                        if($v->details->uric_acid >= '4.0' && $v->details->uric_acid <= '8.5'){
+                            $chart_result['male']['normal'] = !empty($chart_result['male']['normal'])?$chart_result['male']['normal']+1:1;
+                        }else{
+                            $chart_result['male']['danger'] = !empty($chart_result['male']['danger'])?$chart_result['male']['danger']+1:1;
+                        }
+                    }
+
+                    if($getGender == 'Female'){
+
+                        if($v->details->uric_acid >= '2.7' && $v->details->uric_acid <= '7.3'){
+                            $chart_result['female']['normal'] = !empty($chart_result['female']['normal'])?$chart_result['female']['normal']+1:1;
+                        }else{
+                            $chart_result['female']['danger'] = !empty($chart_result['female']['danger'])?$chart_result['female']['danger']+1:1;
+                        }                    
+                    }
+
+                    break;
+
+                
                 case 'Below normal weight':
 
                 $chart_result['below_weight'][$v->details->date] = !empty($chart_result['below_weight'][$v->details->date])?$chart_result['below_weight'][$v->details->date]+1:1;
@@ -166,6 +272,7 @@ abstract class EnumAnalyticsChart {
 
                 case 'Moderate Hypoxemia':
                 case 'Moderate':
+                case 'Warning':
                 case 'Intermediate':
 
                 $chart_result['moderate'][$v->details->date] = !empty($chart_result['moderate'][$v->details->date])?$chart_result['moderate'][$v->details->date]+1:1;

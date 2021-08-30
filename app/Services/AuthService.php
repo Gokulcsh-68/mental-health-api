@@ -1703,9 +1703,9 @@ class AuthService extends BaseService
 
         try{
             $hospital_id = 1;
+
             $getPatientUserId = Patient::Where('hospital_id',$hospital_id)->pluck('user_id');
 
-            // select('id','user_id','consult_id','peripheral_id','slug', DB::raw('group_concat(details) as detail'), 'freeze', 'created_at', 'updated_at')
             $getVitals = Vital::whereIn('user_id',$getPatientUserId)->orderBy('details->date','desc');
 
             if($request->get('from') && $request->get('to')){
@@ -1713,13 +1713,14 @@ class AuthService extends BaseService
                 $from = date('Y-m-d',strtotime($request->get('from')));
                 $to = date('Y-m-d',strtotime($request->get('to')));
                 $getVitals = $getVitals->whereBetween('details->date', [$from,$to]);
+
             }
+
                 $getVitals = $getVitals->get()->groupBy('slug');
-                
+           
                 $result = [];
 
             foreach ($getVitals as $key => $value) {
-                
                 switch ($key) {
                     case 'bmi':
                         $result['bmi'] =  EnumAnalyticsChart::ChartCounts($value,$key);
@@ -1781,6 +1782,22 @@ class AuthService extends BaseService
 
                     case 'respiration':
                         $result['respiration'] =  EnumAnalyticsChart::ChartCounts($value,$key);
+                        break;
+
+                    case 'keytone':
+                        $result['keytone'] =  EnumAnalyticsChart::ChartCounts($value,$key);
+                        break;
+
+                    case 'hct':
+                        $result['hct'] =  EnumAnalyticsChart::ChartCounts($value,$key);
+                        break;
+
+                    case 'hemoglobin':
+                        $result['hemoglobin'] =  EnumAnalyticsChart::ChartCounts($value,$key);
+                        break;
+
+                    case 'uric_acid':
+                        $result['uric_acid'] =  EnumAnalyticsChart::ChartCounts($value,$key);
                         break;
                     
                     default:
