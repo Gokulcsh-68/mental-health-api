@@ -1702,7 +1702,7 @@ class AuthService extends BaseService
     public function analytics(Request $request): JsonResponse{
 
         try{
-            $hospital_id = 1;
+            $hospital_id = $request->user()->staff->hospital_id;
 
             $getPatientUserId = Patient::Where('hospital_id',$hospital_id)->pluck('user_id');
 
