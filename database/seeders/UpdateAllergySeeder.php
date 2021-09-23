@@ -22,7 +22,11 @@ class UpdateAllergySeeder extends Seeder
             ['master_type_slug' => 'allergy',
             'name' => "Shrimp",
             'slug' => "shrimp",
-            'attributes' => json_encode([ 'allergy_type' => "Sea Food", 'allergy_category' => "Food"]),'is_active' => 1]      
+            'attributes' => json_encode([ 'allergy_type' => "Sea Food", 'allergy_category' => "Food"]),'is_active' => 1],
+            ['master_type_slug' => 'allergy',
+            'name' => "Fish",
+            'slug' => "fish",
+            'attributes' => json_encode([ 'allergy_type' => "Sea Food", 'allergy_category' => "Food"]),'is_active' => 1]     
     	];
 
 
