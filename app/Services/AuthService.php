@@ -1702,9 +1702,13 @@ class AuthService extends BaseService
     public function analytics(Request $request): JsonResponse{
 
         try{
+            // $hospital_id = 1;
             $hospital_id = $request->user()->staff->hospital_id;
 
             $getPatientUserId = Patient::Where('hospital_id',$hospital_id)->pluck('user_id');
+
+            $getProviderUserId = Provider::Where('hospital_id',$hospital_id)->pluck('id');
+
 
             $getVitals = Vital::whereIn('user_id',$getPatientUserId)->orderBy('details->date','desc');
 
@@ -1716,9 +1720,12 @@ class AuthService extends BaseService
 
             }
 
-                $getVitals = $getVitals->get()->groupBy('slug');
-           
-                $result = [];
+            $getVitals = $getVitals->get()->groupBy('slug');
+       
+            $result = [];
+
+            $result['age_counts'] =  EnumAnalyticsChart::AgeCounts($getPatientUserId);
+            $result['provider_counts'] =  EnumAnalyticsChart::SpecialityCounts($getProviderUserId);
 
             foreach ($getVitals as $key => $value) {
                 switch ($key) {

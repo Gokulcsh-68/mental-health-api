@@ -2,10 +2,68 @@
 
 namespace App\Enums;
 
+use App\Entities\Master;
+use App\Entities\ProviderSpeciality;
 use App\Entities\User;
 
 abstract class EnumAnalyticsChart {
 
+
+    public static function SpecialityCounts($value) 
+    {
+
+        $chart_result = [];
+
+
+            $getSpeciality = ProviderSpeciality::WhereIn('provider_id',$value)
+                ->get()->groupBy('speciality')->toArray(); 
+
+
+            $MasterSpeciality = Master::WhereIn('slug',array_keys($getSpeciality))
+                ->pluck('name','slug'); 
+
+            foreach ($getSpeciality as $key => $value) {
+                $chart_result[$MasterSpeciality[$key]]=count($value);
+            }
+            
+            return $chart_result;
+
+    }
+
+    public static function AgeCounts($value) 
+    {
+
+        $chart_result = [];
+        foreach ($value as $k => $v) {
+            $chart_result['child'] = !empty($chart_result['child'])?$chart_result['child']:0;
+            $chart_result['adolescence'] = !empty($chart_result['adolescence'])?$chart_result['adolescence']:0;
+            $chart_result['adult'] = !empty($chart_result['adult'])?$chart_result['adult']:0;
+            $chart_result['senior'] = !empty($chart_result['senior'])?$chart_result['senior']:0;
+
+            $getAge = User::Where('id',$v)->selectRaw("TIMESTAMPDIFF(YEAR, DATE(dob), current_date) AS age")
+                ->value('age');
+
+                if($getAge >= '0' && $getAge <= '12'){
+                    $chart_result['child'] = !empty($chart_result['child'])?$chart_result['child']+1:1;
+                }
+
+                if($getAge >= '13' && $getAge <= '18'){
+                    $chart_result['adolescence'] = !empty($chart_result['adolescence'])?$chart_result['adolescence']+1:1;
+                }
+
+                if($getAge >= '19' && $getAge <= '59'){
+                    $chart_result['adult'] = !empty($chart_result['adult'])?$chart_result['adult']+1:1;
+                }
+
+                if($getAge >= '60'){
+                    $chart_result['senior'] = !empty($chart_result['senior'])?$chart_result['senior']+1:1;
+                }
+
+        }
+
+            return $chart_result;
+
+    }
     
     public static function ChartCounts($value,$key) 
     {
