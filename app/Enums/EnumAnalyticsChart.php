@@ -160,7 +160,7 @@ abstract class EnumAnalyticsChart {
 
                     $chart_result['male']['danger'] = !empty($chart_result['male']['danger'])?$chart_result['male']['danger']:0;
 
-                    $chart_result['female']['normal'] = !empty($chart_result['male']['normal'])?$chart_result['male']['normal']:0;
+                    $chart_result['female']['normal'] = !empty($chart_result['female']['normal'])?$chart_result['female']['normal']:0;
                     $chart_result['female']['danger'] = !empty($chart_result['female']['danger'])?$chart_result['female']['danger']:0;
 
                     $getGender = User::Where('id',$v->user_id)->value('gender');
@@ -191,7 +191,7 @@ abstract class EnumAnalyticsChart {
 
                     $chart_result['male']['danger'] = !empty($chart_result['male']['danger'])?$chart_result['male']['danger']:0;
 
-                    $chart_result['female']['normal'] = !empty($chart_result['male']['normal'])?$chart_result['male']['normal']:0;
+                    $chart_result['female']['normal'] = !empty($chart_result['female']['normal'])?$chart_result['female']['normal']:0;
                     $chart_result['female']['danger'] = !empty($chart_result['female']['danger'])?$chart_result['female']['danger']:0;
 
                     $getGender = User::Where('id',$v->user_id)->value('gender');
@@ -223,7 +223,7 @@ abstract class EnumAnalyticsChart {
 
                     $chart_result['male']['danger'] = !empty($chart_result['male']['danger'])?$chart_result['male']['danger']:0;
 
-                    $chart_result['female']['normal'] = !empty($chart_result['male']['normal'])?$chart_result['male']['normal']:0;
+                    $chart_result['female']['normal'] = !empty($chart_result['female']['normal'])?$chart_result['female']['normal']:0;
                     $chart_result['female']['danger'] = !empty($chart_result['female']['danger'])?$chart_result['female']['danger']:0;
 
                     $getGender = User::Where('id',$v->user_id)->value('gender');
