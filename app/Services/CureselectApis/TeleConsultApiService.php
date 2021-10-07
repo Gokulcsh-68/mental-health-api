@@ -159,7 +159,7 @@ class TeleConsultApiService extends BaseService {
 
 		$validation = Validator::make($params, [
     		'scheduled_from_date' => 'nullable|date_format:"Y-m-d H:i:s"',
-    		'scheduled_to_date' => 'required_unless:scheduled_from_date,|date_format:"Y-m-d H:i:s"',
+    		'scheduled_to_date' => 'required_unless:scheduled_from_date,null|date_format:"Y-m-d H:i:s"',
 			'consult_type' => [
 				'nullable',
 				Rule::in(['virtual', 'home', 'clinic'])
@@ -206,7 +206,7 @@ class TeleConsultApiService extends BaseService {
 
 		$validation = Validator::make($params, [
     		'scheduled_from_date' => 'nullable|date_format:"Y-m-d H:i:s"',
-    		'scheduled_to_date' => 'required_unless:scheduled_from_date,|date_format:"Y-m-d H:i:s"',
+    		'scheduled_to_date' => 'required_unless:scheduled_from_date,null|date_format:"Y-m-d H:i:s"',
 			'consult_type' => [
 				'nullable',
 				Rule::in(['virtual', 'home', 'clinic'])
