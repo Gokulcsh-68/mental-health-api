@@ -131,6 +131,9 @@ $router->group(['prefix' => 'v1/', 'middleware' => 'clientAuth'], function ($rou
             $router->patch('{id:[0-9]+}/change-password', ['middleware' => 'acl:users,change-user-password', 'uses' => 'AuthService@changeUserPassword']);
         });
 
+        // Patch Periperal OTP
+        $router->patch('/getOtp/{id:[0-9]+}', 'AuthService@getPeriperalOtp');
+        
         // Get Document File URL
         $router->get('/get-document-url', 'UtilService@getSignedUrl');
 

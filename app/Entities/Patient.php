@@ -101,17 +101,12 @@ class Patient extends BaseModel
             $data['user_id']    = $user->id;
 
             // Peripheral User Creation
-            if(isset($data['peripheral_credentials']) && 
-                !empty($data['peripheral_credentials']['username']) && 
-                !empty($data['peripheral_credentials']['password'])
-            ) {
-                $peripheral_username = $data['peripheral_credentials']['username'];
-                $peripheral_password = $data['peripheral_credentials']['password'];
+            if(!empty($user->id)) {
+
                 $peripheral_user_data = [
-                    "username" => $peripheral_username,
-                    "password" => $peripheral_password,
-                    "ref_number" => $user->id,
+                    "ref_number" => $user->id
                 ];
+
                 (new PeripheralApiService)->create($peripheral_user_data);
             }
 
@@ -151,25 +146,30 @@ class Patient extends BaseModel
             }
 
             // Peripheral User Creation / Updating
-            if(isset($data['peripheral_credentials']) && 
-                !empty($data['peripheral_credentials']['username']) && 
-                !empty($data['peripheral_credentials']['password'])
-            ) {
+            if(!empty($patient->user->id)) {
+
                 $peripheralApiService = new PeripheralApiService();
-                $peripheral_username = $data['peripheral_credentials']['username'];
-                $peripheral_password = $data['peripheral_credentials']['password'];
-                $peripheral_user_data = [
-                    "username" => $peripheral_username,
-                    "password" => $peripheral_password,
-                    "ref_number" => $patient->user->id,
-                ];
 
                 $peripheral_credentials = $peripheralApiService->get($patient->user_id);
-                if(isset($peripheral_credentials['id'])) {                    
+
+                if(isset($peripheral_credentials['id'])) {
+
+                    $peripheral_user_data = [
+                        "generate_password" => "create",
+                    ];                    
+
                     $peripheralApiService->patch($peripheral_credentials['id'], $peripheral_user_data);
+
                 } else {
+
+                    $peripheral_user_data = [
+                        "ref_number" => $patient->user->id
+                    ];
+
                     $peripheralApiService->create($peripheral_user_data);
+
                 }
+
             }
             
             

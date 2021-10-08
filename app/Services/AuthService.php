@@ -35,6 +35,7 @@ use App\Requests\GeneralLoginRequest;
 use App\Requests\ResendOtpRequest;
 use App\Requests\TwofaRequest;
 use App\Requests\VerifyOtpRequest;
+use App\Services\CureselectApis\PeripheralApiService;
 use App\Services\CureselectApis\TeleConsultApiService;
 use App\Services\EntityService;
 use App\Services\UtilService;
@@ -1821,6 +1822,33 @@ class AuthService extends BaseService
             exceptionLogger("Failed ", $e);
             return false;
         }
+    }
+
+    public function getPeriperalOtp(Request $request,$id){
+
+        $peripheralApiService = new PeripheralApiService();
+
+        $peripheral_credentials = $peripheralApiService->get($id);
+
+        if(isset($peripheral_credentials['id'])) {
+
+            $peripheral_user_data = [
+                "generate_password" => "create",
+            ];                    
+
+            $peripheralApiService->patch($peripheral_credentials['id'], $peripheral_user_data);
+
+        } else {
+
+            $peripheral_user_data = [
+                "ref_number" => $id
+            ];
+
+            $peripheralApiService->create($peripheral_user_data);
+
+        }
+
+        return ['result'=>json_decode($peripheralApiService->apiResponse)];
     }
 
 }

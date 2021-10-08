@@ -27,8 +27,8 @@ class PeripheralApiService extends BaseService {
 
 	protected function peripheralUserCreateValidate($payload) {
 		$validation = Validator::make($payload, [
-    		'username' => 'required|string',
-    		'password' => 'required',
+    		'username' => 'nullable|string',
+    		'password' => 'nullable',
             'ref_number' => 'required|integer',
         ]);
 
