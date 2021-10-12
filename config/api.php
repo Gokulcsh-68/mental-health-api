@@ -8,12 +8,12 @@ return [
         "jwtTtl" => env('JWT_TTL', 864000000),
     ],
     'fileSystem' => [
-        'admin' => env('S3_BASE_PATH') . 'a2z-telegaruda-v2/%s/',
-        'hospitalgroup' => env('S3_BASE_PATH') . 'a2z-telegaruda-v2/%s/',
-        'hospital' => env('S3_BASE_PATH') . 'a2z-telegaruda-v2/%s/',
-        'provider' => env('S3_BASE_PATH') . 'a2z-telegaruda-v2/%s/',
-        'folio' => env('S3_BASE_PATH') . 'a2z-telegaruda-v2/%s/',
-        'peripheral' => env('S3_BASE_PATH') . 'a2z-telegaruda-v2/peripheral/',
+        'admin' => env('S3_BASE_PATH') . '%s/',
+        'hospitalgroup' => env('S3_BASE_PATH') . '%s/',
+        'hospital' => env('S3_BASE_PATH') . '%s/',
+        'provider' => env('S3_BASE_PATH') . '%s/',
+        'folio' => env('S3_BASE_PATH') . '%s/',
+        'peripheral' => env('S3_BASE_PATH') . 'peripheral/',
     ],
     'communication_sms_template' => [
         'forgotPassword' => 'Your ' . config('app.name') . ' forget OTP is {{otp}}',
