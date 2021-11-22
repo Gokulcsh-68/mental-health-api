@@ -314,6 +314,11 @@ class Vital extends BaseModel
         }
 
 
+
+        if ($request->get("order_by") == 'details->date') {
+            $model = $model->orderBy($this->getTable() . "." . $request->get("order_by"), $this->getOrderByDir());
+            $model = $model->orderBy($this->getTable() . ".details->time", $this->getOrderByDir());
+        }
         // $model->where('ids','s');
         return $model;
     }
