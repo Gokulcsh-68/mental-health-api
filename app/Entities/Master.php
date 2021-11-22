@@ -57,7 +57,7 @@ class Master extends BaseModel
             $model->where('masters.master_type_slug', $request->get('master_type'));
         }
 
-        
+
         if ($request->get('attr_slug')) {
             $model->where('masters.attributes->reference_slug', $request->get('attr_slug'));
         }
@@ -111,7 +111,13 @@ class Master extends BaseModel
                 $form_slug = '';
 
                  // ['apgar', 'adhd', 'healthy-heart', 'psychiatric-exam', 'stroke-scale'];
-                $form_slug = ['covid','healthy-heart', 'psychiatric-exam', 'stroke-scale'];
+                if($logged_in_role_code == 'folio'){
+                $form_slug = ['healthy-heart', 'psychiatric-exam', 'covid'];
+
+                }else{
+                $form_slug = ['healthy-heart', 'psychiatric-exam', 'stroke-scale', 'covid'];
+
+                }
 
                 if(!empty($form_slug)){
                     $model->whereIn('masters.slug', $form_slug);
@@ -138,9 +144,9 @@ class Master extends BaseModel
                         }
                     });
 
-                }               
+                }
             }
-            
+
         }
 
 
@@ -314,7 +320,7 @@ class Master extends BaseModel
                 $attributes = new \stdClass();
                 $attributes->pe_available = (!empty($slug_data) ? false : true);
             }
-        }else if($type == 'vdx_sub_types'){
+        }else if($type == 'vdx_sub_types' || $type == 'symptoms_reason_sub_types'){
 
             if(!empty($request->get('with_values'))) {
 
