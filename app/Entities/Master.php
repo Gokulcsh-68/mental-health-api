@@ -127,7 +127,8 @@ class Master extends BaseModel
 
 
             if($request->get('slug') == 'vdx'){
-                if($request->user()->role->code == 'provider' || $request->get('provider_id')){
+                // if($request->user()->role->code == 'provider' || $request->get('provider_id')){
+                if($request->get('provider_id')){
 
                     if($request->get('provider_id')){
                         $providerId = Provider::where('user_id',$request->get('provider_id'))->value('id');
@@ -342,6 +343,23 @@ class Master extends BaseModel
 
                 }
 
+            }
+        }else if($type == 'symptoms_reason'){
+
+            if(!empty($request->get('patient_id'))) { 
+
+                 $user_values = PatientHealth::where('patient_id',$request->get('patient_id'))->where('slug',$slug)->value('values');
+
+                 $user_values = (array) $user_values;
+
+                 $attributes->folio_values = [];
+                foreach ($user_values as $key => $value) {
+                    if($value == true){
+                        $attributes->folio_values[] = $this->where('slug',$key)->value('name');
+                    }
+                   
+                }
+                
             }
         }
 
