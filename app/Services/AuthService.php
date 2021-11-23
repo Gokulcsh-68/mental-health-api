@@ -1487,29 +1487,39 @@ class AuthService extends BaseService
         $procedure = $entityService->getLimitEntity($request);
         $health['e_procedure'] = $procedure->getData()->data;
 
+
+
+        // unset($request['slug'],$request['resource'],$request['entity']);
+        
+        // $request['resource']= 'Master';
+        // $request['entity']= new Master;
+        // $request['slug']= 'vdx';
+        // $vdx = $entityService->getLimitEntity($request);
+        // $health['f_vdx'] = $vdx->getData()->data;
+
+        // foreach ($health['f_vdx'] as $key => $value) {
+        //     unset($request['slug']);
+        //     $request['attr_slug']= $value->slug;
+        //     $vdxType = $entityService->getEntity($request);
+        //     $value->type = $vdxType->getData()->data;
+
+        //     foreach ($value->type as $k => $v) {
+                
+        //         unset($request['slug']);
+        //         $request['attr_slug']= $v->slug;
+        //         $vdxsubType = $entityService->getEntity($request);
+        //         $v->sub_type = $vdxsubType->getData()->data;
+        //     }
+
+        // }
+
         unset($request['slug'],$request['resource'],$request['entity']);
         
         $request['resource']= 'Master';
         $request['entity']= new Master;
-        $request['slug']= 'vdx';
-        $vdx = $entityService->getLimitEntity($request);
-        $health['f_vdx'] = $vdx->getData()->data;
-
-        foreach ($health['f_vdx'] as $key => $value) {
-            unset($request['slug']);
-            $request['attr_slug']= $value->slug;
-            $vdxType = $entityService->getEntity($request);
-            $value->type = $vdxType->getData()->data;
-
-            foreach ($value->type as $k => $v) {
-                
-                unset($request['slug']);
-                $request['attr_slug']= $v->slug;
-                $vdxsubType = $entityService->getEntity($request);
-                $v->sub_type = $vdxsubType->getData()->data;
-            }
-
-        }
+        $request['slug']= 'symptoms_reason';
+        $vdx = $entityService->getEntity($request);
+        $health['f_symptoms_reason'] = $vdx->getData()->data;
 
         // HISTORIES
 
@@ -1532,9 +1542,11 @@ class AuthService extends BaseService
 
 
         $history['e_ros'] = ReviewOfSystem::Where('patient_id',$patient_id)
+                            ->Where('consult_id',$consult_id)
                             ->get();
 
         $history['f_pe'] = PhysicalExamination::Where('patient_id',$patient_id)
+                            ->Where('consult_id',$consult_id)
                             ->get();
 
         $request['slug']= 'stroke-scale';

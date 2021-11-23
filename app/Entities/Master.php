@@ -127,8 +127,7 @@ class Master extends BaseModel
 
 
             if($request->get('slug') == 'vdx'){
-                // if($request->user()->role->code == 'provider' || $request->get('provider_id')){
-                if($request->get('provider_id')){
+                if($request->user()->role->code == 'provider' || $request->get('provider_id')){
 
                     if($request->get('provider_id')){
                         $providerId = Provider::where('user_id',$request->get('provider_id'))->value('id');

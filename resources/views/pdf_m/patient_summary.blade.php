@@ -281,6 +281,14 @@
 		    		 @endif
 			        @break
 
+			    @case('f_symptoms_reason')
+				    @if(count((array)$v) > 0)
+			    	<h4 class="color_secondary">Assessment & Evaluation</h4>
+			        @component('pdf_m.pdf_components.symptoms_reason',['lists'=> $v,'gender'=>$gender])
+		    		@endcomponent
+		    		 @endif
+			        @break
+
 			    @default
 			        <span>`{{ucfirst($k)}}` is not found!</span>
 			@endswitch
