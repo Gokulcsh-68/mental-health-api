@@ -68,7 +68,14 @@ class EntityService extends BaseService
 
         $getResourceName = snake_case(camel_case(str_plural($resource)));
 
-        $collection = callUserFuncArray([$entity, 'getModelList'], [])->paginate($entity->getResourceDataFetchLimit());
+        $collection = callUserFuncArray([$entity, 'getModelList'], []);
+
+        if(!empty($request['limit'])){
+            $collection   = $collection->paginate($entity->getResourceDataFetchLimit());
+
+        }else{
+            $collection   = $collection->get();
+        }
 
         $records = $collection->isNotEmpty() ? $this->collectionTransform($resource, $collection) : [];
 

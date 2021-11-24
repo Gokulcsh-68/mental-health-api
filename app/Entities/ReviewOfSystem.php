@@ -110,13 +110,17 @@ class ReviewOfSystem extends BaseModel
             $model->where('patient_id', $request->get('user_id'));
         }
 
+        if ($request->get('consult_id') || $request->get('consult_id') == '-1') {
+            $model->where('patient_histories.consult_id', $request->get('consult_id') == '-1'? null: $request->get('consult_id'));
+        }
+
         if($request->get('filter_slug')){
             $model->where('slug', $request->get('filter_slug'));
         }
 
         if($request->get('from') && $request->get('to')){
-            $from   = date('Y-m-d',strtotime($request->get('from')));
-            $to     = date('Y-m-d',strtotime($request->get('to')));
+            $from   = date('Y-m-d 00:00:00',strtotime($request->get('from')));
+            $to     = date('Y-m-d 23:59:00',strtotime($request->get('to')));
 
             $model->whereBetween('updated_at', [$from,$to]);            
         }

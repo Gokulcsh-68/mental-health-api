@@ -1428,15 +1428,30 @@ class AuthService extends BaseService
 
 
     public function patientSummary(Request $request): JsonResponse
-    {
-        $getpatient_id = self::getConsultInfo($request);
+    {   
+
+        if($request->get('patient_id')){
+            $patient_id = $request->get('patient_id');
+            $consult_id = null;
+            $request['patient_id']= $request->get('patient_id');
+            $request['user_id'] = $request->get('patient_id');
+        }else{
+
+            $getpatient_id = self::getConsultInfo($request);
+            $patient_id = $getpatient_id['patient_id'];
+            $consult_id = $getpatient_id['consult_id'];
+            $request['patient_id']= $patient_id;
+            $request['user_id'] = $patient_id;
+
+        }
+        
         $entityService = new EntityService;
 
-        $patient_id = $getpatient_id['patient_id'];
-        $consult_id = $getpatient_id['consult_id'];
-        $request['patient_id']= $patient_id;
-        $request['user_id'] = $patient_id;
         $request['limit'] = 3;
+
+        if($request->get('from') && $request->get('to')){
+            $request['limit'] = null;
+        }
 
         if($request->get('pdf_for') == 'consult_report'){
             $request['consult_id']= $consult_id;
@@ -1540,15 +1555,27 @@ class AuthService extends BaseService
         $surgical_history = $entityService->getLimitEntity($request);
         $history['b_surgical_history'] = $surgical_history->getData()->data;
 
+        unset($request['slug'],$request['resource'],$request['entity']);
 
-        $history['e_ros'] = ReviewOfSystem::Where('patient_id',$patient_id)
-                            ->Where('consult_id',$consult_id)
-                            ->get();
+        $request['resource']= 'ReviewOfSystem';
+        $request['entity']= new ReviewOfSystem;
 
-        $history['f_pe'] = PhysicalExamination::Where('patient_id',$patient_id)
-                            ->Where('consult_id',$consult_id)
-                            ->get();
+        $ros_history = $entityService->getLimitEntity($request);
+        $history['e_ros'] = $ros_history->getData()->data;
 
+        unset($request['slug'],$request['resource'],$request['entity']);
+
+        $request['resource']= 'PhysicalExamination';
+        $request['entity']= new PhysicalExamination;
+
+        $pe_history = $entityService->getLimitEntity($request);
+        $history['f_pe'] = $pe_history->getData()->data;
+
+        unset($request['slug'],$request['resource'],$request['entity']);
+
+        $request['resource']= 'PatientHistory';
+        $request['entity']= new PatientHistory;
+        
         $request['slug']= 'stroke-scale';
         $stroke_scale = $entityService->getLimitEntity($request);
         $history['g_stroke_scale'] = $stroke_scale->getData()->data;
