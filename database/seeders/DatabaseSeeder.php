@@ -77,7 +77,8 @@ class DatabaseSeeder extends Seeder
             GenitoUrinarySeeder::class,
             CardiacPulmonarySeeder::class,
             SymptomsReasonSeeder::class,
-            SymptomsValueReasonSeeder::class
+            SymptomsValueReasonSeeder::class,
+            ROSTableSeeder::class
         ]);
     }
 }
