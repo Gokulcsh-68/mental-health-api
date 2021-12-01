@@ -78,7 +78,8 @@ class DatabaseSeeder extends Seeder
             CardiacPulmonarySeeder::class,
             SymptomsReasonSeeder::class,
             SymptomsValueReasonSeeder::class,
-            ROSTableSeeder::class
+            ROSTableSeeder::class,
+            UpdateROSSeeder::class
         ]);
     }
 }
