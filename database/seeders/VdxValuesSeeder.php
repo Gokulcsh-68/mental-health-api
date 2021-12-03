@@ -15,6 +15,7 @@ class VdxValuesSeeder extends Seeder
     {
         $this->call([
             
+            VDXSeeder::class,
             UpdateVitalsSeeder::class,
             CardiacPulmonarySeeder::class,
             EntOralMedicineSeeder::class,
@@ -22,7 +23,11 @@ class VdxValuesSeeder extends Seeder
             GenitoUrinarySeeder::class,
             NeurologyPsychiatricSeeder::class,
             OphthalmologySeeder::class,
-            SkinLesionsSeeder::class
+            SkinLesionsSeeder::class,
+            SymptomsReasonSeeder::class,
+            SymptomsValueReasonSeeder::class,
+            ROSTableSeeder::class,
+            UpdateROSSeeder::class
 
         ]);
     }

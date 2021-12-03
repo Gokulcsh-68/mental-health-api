@@ -72,14 +72,8 @@ class DatabaseSeeder extends Seeder
             AssessmentPsychiatricExamOppositionalDefiantDisorder::class,
             AssessmentPsychiatricExamSomaticSymptomDisorder::class,
             SymptomUpdateNewSeeder::class,
-            UpdateRolesSeeder::class
-            VDXSeeder::class,
-            GenitoUrinarySeeder::class,
-            CardiacPulmonarySeeder::class,
-            SymptomsReasonSeeder::class,
-            SymptomsValueReasonSeeder::class,
-            ROSTableSeeder::class,
-            UpdateROSSeeder::class
+            UpdateRolesSeeder::class,
+            VdxValuesSeeder::class
         ]);
     }
 }
