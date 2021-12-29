@@ -109,6 +109,10 @@ class PhysicalExamination extends BaseModel
             $model->where('patient_id', $request->get('user_id'));
         }
 
+        if ($request->get('consult_id') || $request->get('consult_id') == '-1') {
+            $model->where('consult_id', $request->get('consult_id') == '-1'? null: $request->get('consult_id'));
+        }
+
         if($request->get('filter_slug')){
             $model->where('slug', $request->get('filter_slug'));
         }

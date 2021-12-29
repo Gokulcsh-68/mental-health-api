@@ -111,7 +111,7 @@ class ReviewOfSystem extends BaseModel
         }
 
         if ($request->get('consult_id') || $request->get('consult_id') == '-1') {
-            $model->where('patient_histories.consult_id', $request->get('consult_id') == '-1'? null: $request->get('consult_id'));
+            $model->where('consult_id', $request->get('consult_id') == '-1'? null: $request->get('consult_id'));
         }
 
         if($request->get('filter_slug')){

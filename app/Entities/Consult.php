@@ -129,6 +129,10 @@ class Consult extends BaseModel
             $filters['scheduled_to_date'] = $filters['scheduled_to_date'].' 23:59:59';
         }
 
+
+        if ($request->query('consult_status')) {
+            $filters['consult_status'] = $request->query('consult_status');
+        }
         
         $limit = $this->getResourceDataFetchLimit();
         $page = app('request')->get('page') ? app('request')->get('page') : 1;

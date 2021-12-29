@@ -233,9 +233,11 @@ class AuthService extends BaseService
                             ->orderBy('slug','asc')->get();
 
         $summary['4_ros'] = ReviewOfSystem::Where('patient_id',$patient_id)
+                            ->Where('consult_id',$consult_id)
                             ->orderBy('slug','asc')->get();
 
         $summary['5_pe'] = PhysicalExamination::Where('patient_id',$patient_id)
+                            ->Where('consult_id',$consult_id)
                             ->orderBy('slug','asc')->get();
 
         $summary['8_doc'] = Doc::Where('consult_id',$consult_id)
