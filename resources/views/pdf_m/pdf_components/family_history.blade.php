@@ -16,21 +16,19 @@
         </thead>
         @foreach($lists as $lk => $lv) 
 	        <tbody>
-
+            @if(in_array(true, array_column($lv->attributes->values, 'status')))
 	          <tr>
 	          	<td>{{$lv->name}}</td> 
-
+	            
 		          	@foreach($lv->attributes->values as $vk =>$vv)
 
-
-		            		<td>@if($vv->status) Yes @endif</td> 
-
+		          		<td>@if($vv->status) Yes @endif</td> 
 
 		            @endforeach
 
 
 	          </tr>
-
+            @endif
 	        </tbody>
         @endforeach
     
