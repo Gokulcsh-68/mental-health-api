@@ -1,7 +1,7 @@
 <table id="table" style="margin-top: 15px;">
     <thead>
       <tr>
-        <th>S.No</th>
+        <!-- <th>S.No</th> -->
         <th>Vaccine</th>
         <th>Period</th>
         <th>Type</th>
@@ -15,13 +15,13 @@
 		    	@if(in_array(true, array_column($lv->attributes->values, 'status')))
     			<tr>
     				@if(count($lv->attributes->values) > 1)
-		    					<th class="bg" rowspan="{{count($lv->attributes->values)+1}}">{{$lk+1}}</th>
+		    					<!-- <th class="bg" rowspan="{{count($lv->attributes->values)+1}}">{{$lk+1}}</th> -->
 		    					<th class="bg" rowspan="{{count($lv->attributes->values)+1}}">{{$lv->name}}</th>
     				@else
     					@foreach($lv->attributes->values as $lkk => $lvv)	
 	    					@if($lvv->status == true)
 		    					@if($lkk == 0)	
-		    					<th class="bg">{{$lk+1}}</th>
+		    					<!-- <th class="bg">{{$lk+1}}</th> -->
 		    					<th class="bg">{{$lv->name}}</th>
 		    					@endif
 			    			
