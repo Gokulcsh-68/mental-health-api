@@ -29,7 +29,8 @@ class SymptomsReasonSeeder extends Seeder
             ['master_type_slug' => 'symptoms_reason', 'name' => 'Female genital', 'slug' => str_slug("Female genital"),'is_active' => 1,'attributes' => json_encode(['gender'=>'female'])],
             ['master_type_slug' => 'symptoms_reason', 'name' => 'Nerves and Mental health', 'slug' => str_slug("Nerves and Mental health"),'is_active' => 1,'attributes' => json_encode(['gender'=>''])],
             ['master_type_slug' => 'symptoms_reason', 'name' => 'Eyes', 'slug' => str_slug("Eyes"),'is_active' => 1,'attributes' => json_encode(['gender'=>''])],
-            ['master_type_slug' => 'symptoms_reason', 'name' => 'Skin', 'slug' => str_slug("Skin"),'is_active' => 1,'attributes' => json_encode(['gender'=>''])]
+            ['master_type_slug' => 'symptoms_reason', 'name' => 'Skin', 'slug' => str_slug("Skin"),'is_active' => 1,'attributes' => json_encode(['gender'=>''])],
+            ['master_type_slug' => 'symptoms_reason', 'name' => 'Constitutional', 'slug' => str_slug("Constitutional"),'is_active' => 1,'attributes' => json_encode(['gender'=>''])]
         ];
 
         // DB::table('masters')->insert($symptoms_reason);

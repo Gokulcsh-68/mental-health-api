@@ -91,7 +91,21 @@ class SymptomsValueReasonSeeder extends Seeder
             ['attributes' => json_encode(['reference_slug' => 'skin']),'master_type_slug' => 'symptoms_reason_sub_types', 'name' => 'Boils, burns or swellings', 'slug' => str_slug("Boils, burns or swellings"),'is_active' => 1],
             ['attributes' => json_encode(['reference_slug' => 'skin']),'master_type_slug' => 'symptoms_reason_sub_types', 'name' => 'itching', 'slug' => str_slug("itching"),'is_active' => 1],
             ['attributes' => json_encode(['reference_slug' => 'skin']),'master_type_slug' => 'symptoms_reason_sub_types', 'name' => 'Pus or other discharge', 'slug' => str_slug("Pus or other discharge"),'is_active' => 1],
-            ['attributes' => json_encode(['reference_slug' => 'skin']),'master_type_slug' => 'symptoms_reason_sub_types', 'name' => 'Moles, Dark or light patches', 'slug' => str_slug("Moles, Dark or light patches"),'is_active' => 1]
+            ['attributes' => json_encode(['reference_slug' => 'skin']),'master_type_slug' => 'symptoms_reason_sub_types', 'name' => 'Moles, Dark or light patches', 'slug' => str_slug("Moles, Dark or light patches"),'is_active' => 1],
+
+            ['attributes' => json_encode(['reference_slug' => 'constitutional']),'master_type_slug' => 'symptoms_reason_sub_types', 'name' => 'Lethargy', 'slug' => str_slug("Lethargy"),'is_active' => 1],
+            ['attributes' => json_encode(['reference_slug' => 'constitutional']),'master_type_slug' => 'symptoms_reason_sub_types', 'name' => 'Unexplained weight gain or weight loss', 'slug' => str_slug("unexplained weight gain or weight loss"),'is_active' => 1],
+            ['attributes' => json_encode(['reference_slug' => 'constitutional']),'master_type_slug' => 'symptoms_reason_sub_types', 'name' => 'Loss of appetite', 'slug' => str_slug("loss of appetite"),'is_active' => 1],
+            ['attributes' => json_encode(['reference_slug' => 'constitutional']),'master_type_slug' => 'symptoms_reason_sub_types', 'name' => 'Fever', 'slug' => str_slug("fever"),'is_active' => 1],
+            ['attributes' => json_encode(['reference_slug' => 'constitutional']),'master_type_slug' => 'symptoms_reason_sub_types', 'name' => 'Fatigue', 'slug' => str_slug("fatigue"),'is_active' => 1],
+            ['attributes' => json_encode(['reference_slug' => 'constitutional']),'master_type_slug' => 'symptoms_reason_sub_types', 'name' => 'Anorexia', 'slug' => str_slug("anorexia"),'is_active' => 1],
+            ['attributes' => json_encode(['reference_slug' => 'constitutional']),'master_type_slug' => 'symptoms_reason_sub_types', 'name' => 'Night Sweats', 'slug' => str_slug("night sweats"),'is_active' => 1],
+            ['attributes' => json_encode(['reference_slug' => 'constitutional']),'master_type_slug' => 'symptoms_reason_sub_types', 'name' => 'Scalp Tenderness', 'slug' => str_slug("scalp tenderness"),'is_active' => 1],
+            ['attributes' => json_encode(['reference_slug' => 'constitutional']),'master_type_slug' => 'symptoms_reason_sub_types', 'name' => 'Prior diagnosis of cancer', 'slug' => str_slug("prior diagnosis of cancer"),'is_active' => 1],
+            ['attributes' => json_encode(['reference_slug' => 'constitutional']),'master_type_slug' => 'symptoms_reason_sub_types', 'name' => 'Malaise', 'slug' => str_slug("malaise"),'is_active' => 1],
+            ['attributes' => json_encode(['reference_slug' => 'constitutional']),'master_type_slug' => 'symptoms_reason_sub_types', 'name' => 'Ability to conduct usual activities', 'slug' => str_slug("Ability to conduct usual activities"),'is_active' => 1],
+            ['attributes' => json_encode(['reference_slug' => 'constitutional']),'master_type_slug' => 'symptoms_reason_sub_types', 'name' => 'Exercise tolerance', 'slug' => str_slug("Exercise tolerance"),'is_active' => 1],
+            ['attributes' => json_encode(['reference_slug' => 'constitutional']),'master_type_slug' => 'symptoms_reason_sub_types', 'name' => 'Sense of well-being', 'slug' => str_slug("Sense of well-being"),'is_active' => 1]
         ];
 
         // DB::table('masters')->insert($symptoms_reason);

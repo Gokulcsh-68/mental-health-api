@@ -28,7 +28,7 @@ class ROSTableSeeder extends Seeder
             ['slug' => "constitutional" , 'attributes' => json_encode(['type'=>'checkbox', 'name'=>'ability_to_conduct_usual_activiteis', 'label'=>' Ability to conduct usual activities' , 'data'=>'constitutional_ability_to_conduct_usual_activiteis_notes'])],
            
             ['slug' => "constitutional" , 'attributes' => json_encode(['type'=>'checkbox', 'name'=>'exercise_tolerance', 'label'=>' Exercise tolerance' , 'data'=>'constitutional_exercise_tolerance_notes'])],
-            ['slug' => "constitutional" , 'attributes' => json_encode(['type'=>'checkbox', 'name'=>'strength', 'label'=>' Strength' , 'data'=>'constitutional_strength_notes'])],
+            
             ['slug' => "constitutional" , 'attributes' => json_encode(['type'=>'checkbox', 'name'=>'sense_of_well-being', 'label'=>' Sense of well-being' , 'data'=>'constitutional_sense_of_well-being_notes'])],
             ['slug' => "constitutional" , 'attributes' => json_encode(['type'=>'textarea', 'name'=>'notes', 'label'=>' Notes' , 'data'=>'constitutional_notes_notes'])],
 
@@ -432,5 +432,8 @@ class ROSTableSeeder extends Seeder
         DB::table('dynamic_forms')->WhereIN('slug', $slug)->delete();
         DB::table('dynamic_forms')->insert($ros);
 
+        $this->call([
+            UpdateROSSeeder::class
+        ]);
     }
 }
