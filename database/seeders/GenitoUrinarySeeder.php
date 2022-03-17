@@ -25,7 +25,8 @@ class GenitoUrinarySeeder extends Seeder
         $vdx_genito_urinary_chunched = (array_chunk($vdx_genito_urinary_data_collection, 1000));
         $i = 1;
 
-        $rand_key = \Illuminate\Support\Str::random(6);
+        $rand_key = 'genito';
+        // $rand_key = \Illuminate\Support\Str::random(6);
 
         foreach($vdx_genito_urinary_chunched as $vdxs) {
             $vdx_genito_urinary_data = [];

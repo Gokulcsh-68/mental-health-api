@@ -25,7 +25,8 @@ class NeurologyPsychiatricSeeder extends Seeder
         $vdx_neurology_psychiatric_chunched = (array_chunk($vdx_neurology_psychiatric_data_collection, 1000));
         $i = 1;
 
-        $rand_key = \Illuminate\Support\Str::random(6);
+        $rand_key = 'neurol';
+        // $rand_key = \Illuminate\Support\Str::random(6);
 
         foreach($vdx_neurology_psychiatric_chunched as $vdxs) {
             $vdx_neurology_psychiatric_data = [];

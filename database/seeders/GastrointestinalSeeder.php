@@ -25,7 +25,8 @@ class GastrointestinalSeeder extends Seeder
         $vdx_gastrointestinal_chunched = (array_chunk($vdx_gastrointestinal_data_collection, 1000));
         $i = 1;
 
-        $rand_key = \Illuminate\Support\Str::random(6);
+        $rand_key = 'gastro';
+        // $rand_key = \Illuminate\Support\Str::random(6);
 
         foreach($vdx_gastrointestinal_chunched as $vdxs) {
             $vdx_gastrointestinal_data = [];

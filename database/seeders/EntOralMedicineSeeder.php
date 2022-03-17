@@ -25,7 +25,8 @@ class EntOralMedicineSeeder extends Seeder
         $vdx_ent_oral_medicine_chunched = (array_chunk($vdx_ent_oral_medicine_data_collection, 1000));
         $i = 1;
 
-        $rand_key = \Illuminate\Support\Str::random(6);
+        $rand_key = 'entoral';
+        // $rand_key = \Illuminate\Support\Str::random(6);
 
         foreach($vdx_ent_oral_medicine_chunched as $vdxs) {
             $vdx_ent_oral_medicine_data = [];

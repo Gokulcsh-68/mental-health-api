@@ -25,7 +25,8 @@ class SkinLesionsSeeder extends Seeder
         $vdx_skin_lesion_chunched = (array_chunk($vdx_skin_lesion_data_collection, 1000));
         $i = 1;
 
-        $rand_key = \Illuminate\Support\Str::random(6);
+        $rand_key = 'skinle';
+        // $rand_key = \Illuminate\Support\Str::random(6);
 
         foreach($vdx_skin_lesion_chunched as $vdxs) {
             $vdx_skin_lesion_data = [];

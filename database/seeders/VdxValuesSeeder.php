@@ -14,7 +14,7 @@ class VdxValuesSeeder extends Seeder
     public function run()
     {
         $this->call([
-            
+            VdxDeleteOldSeeder::class,
             VDXSeeder::class,
             UpdateVitalsSeeder::class,
             CardiacPulmonarySeeder::class,

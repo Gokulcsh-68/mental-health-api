@@ -25,7 +25,8 @@ class CardiacPulmonarySeeder extends Seeder
         $vdx_cardiac_pulmonary_chunched = (array_chunk($vdx_cardiac_pulmonary_data_collection, 1000));
         $i = 1;
 
-        $rand_key = \Illuminate\Support\Str::random(6);
+        $rand_key = 'cardpul';
+        // $rand_key = \Illuminate\Support\Str::random(6);
 
         foreach($vdx_cardiac_pulmonary_chunched as $vdxs) {
             $vdx_cardiac_pulmonary_data = [];

@@ -25,7 +25,8 @@ class OphthalmologySeeder extends Seeder
         $vdx_ophthalmology_chunched = (array_chunk($vdx_ophthalmology_data_collection, 1000));
         $i = 1;
 
-        $rand_key = \Illuminate\Support\Str::random(6);
+        $rand_key = 'ophtha';
+        // $rand_key = \Illuminate\Support\Str::random(6);
 
         foreach($vdx_ophthalmology_chunched as $vdxs) {
             $vdx_ophthalmology_data = [];
