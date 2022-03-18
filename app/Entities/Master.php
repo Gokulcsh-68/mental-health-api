@@ -125,6 +125,10 @@ class Master extends BaseModel
 
             }
 
+            if($request->get('slug') == 'vdx'){
+                $model->where('masters.slug', '!=','vdx_duplicate_status');
+            }
+
 
             // if($request->get('slug') == 'vdx'){
             //     if($request->user()->role->code == 'provider' || $request->get('provider_id')){
