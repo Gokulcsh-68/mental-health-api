@@ -634,9 +634,18 @@ class AuthService extends BaseService
     public function forgotPasswordEmail(ForgotPasswordEmailRequest $request, User $user): JsonResponse
     {
         $roleId = Role::where("code", $request->get('role'))->pluck('id')->first();
-        $user = $user->where('email', $request->get('email'))
-            ->where('role_id', $roleId)
-            ->first();
+    
+        $user = User::query();
+        $user->where('email', $request->get('email'));
+        $user->where('role_id', $roleId);
+    
+
+        if($request->get('username')){
+            $user->where('username', $request->get('username'));
+        }
+
+        $user = $user->first();
+        
         if (!empty($user)) {
             $data['otp_type'] = "forgotPassword";
             $this->otpNotification($data, $user);
@@ -665,9 +674,18 @@ class AuthService extends BaseService
 
         // Forgot Password Change
         if ($request->get('action') == 'forgotPassword') {
-            $user = User::where('email', $request->get('email'))
-                ->where('role_id', $roleId)
-                ->first();
+        
+            $user = User::query();
+            $user->where('email', $request->get('email'));
+            $user->where('role_id', $roleId);
+        
+
+            if($request->get('username')){
+                $user->where('username', $request->get('username'));
+            }
+
+            $user = $user->first();
+            
             if (!empty($user)) {
                 $check_otp_token = $this->validateOtp($user->secret, $request->get('otp'));
 
@@ -691,8 +709,18 @@ class AuthService extends BaseService
         }
 
         if ($request->get('action') == 'resetPassword') {
-            $user = User::where('email', $request->get('email'))
-                        ->where('role_id', $roleId)->first();
+            
+            $user = User::query();
+            $user->where('email', $request->get('email'));
+            $user->where('role_id', $roleId);
+        
+
+            if($request->get('username')){
+                $user->where('username', $request->get('username'));
+            }
+
+            $user = $user->first();
+            
             if (!empty($user)) {
                 $check_otp_token = $this->validateOtp($user->secret, $request->get('otp'));
 
