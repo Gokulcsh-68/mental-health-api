@@ -1920,4 +1920,28 @@ class AuthService extends BaseService
         return ['result'=>json_decode($peripheralApiService->apiResponse)];
     }
 
+    
+
+    public function vitalDashboards(Request $request): JsonResponse{
+
+        $getVitalslug = Master::Where('master_type_slug','vitals')->pluck('slug')->toArray();
+
+        $vital = Vital::query();
+        $vital->where('user_id',$request->get('user_id'));
+        $vital->whereIn('vitals.slug', $getVitalslug);
+        
+
+        if($request->get('from') && $request->get('to')){
+            $from = date('Y-m-d',strtotime($request->get('from')));
+            $to = date('Y-m-d',strtotime($request->get('to')));
+            $vital->whereBetween('details->date', [$from,$to]);
+        }
+
+        $vital = $vital->orderBy('id','DESC')
+                        ->get()->unique('slug')->flatten();
+                        
+        return $this->httpResponse->setHttpData($vital)  
+                ->jsonResponse();
+    }
+
 }
