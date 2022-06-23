@@ -339,7 +339,7 @@ class Vital extends BaseModel
             $model->whereBetween('details->date', [$from,$to]);
         }
 
-        if ($request->get('searchkey')) {
+        if ($request->get('searchkey') && $request->get('searchkey') != 'undefined') {
             
             $model->Where('details->created_app', 'LIKE',"%".$request->get('searchkey')."%");
         }

@@ -1937,6 +1937,10 @@ class AuthService extends BaseService
             $vital->whereBetween('details->date', [$from,$to]);
         }
 
+        if ($request->get('searchkey') && $request->get('searchkey') != 'undefined') {
+            $vital->Where('details->created_app', 'LIKE',"%".$request->get('searchkey')."%");
+        }  
+
         $vital = $vital->orderBy('id','DESC')
                         ->get()->unique('slug')->flatten();
                         
