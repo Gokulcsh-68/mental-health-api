@@ -86,7 +86,7 @@ $router->group(['prefix' => 'v1/', 'middleware' => 'clientAuth'], function ($rou
                 $router->get('{resource}/List', ['uses' => 'ResourceService@list']);
                 $router->get('{resource}/Fetch/{id:[0-9]+}', ['uses' => 'ResourceService@fetch']);
                 $router->put('{resource}/Update/{id:[0-9]+}', ['uses' => 'ResourceService@update']);
-                $router->patch('{resource}/PartialUpdate/{id:[0-9]+}', ['uses' => 'ResourceService@fetch']);
+                $router->patch('{resource}/PartialUpdate/{id:[0-9]+}', ['uses' => 'ResourceService@partialUpdate']);
                 $router->post('{resource}/Create', ['uses' => 'ResourceService@create']);
                 $router->get('{resource}/getAll', ['uses' => 'ResourceService@getAll']);
 
