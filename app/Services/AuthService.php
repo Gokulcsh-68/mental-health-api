@@ -634,9 +634,18 @@ class AuthService extends BaseService
     public function forgotPasswordEmail(ForgotPasswordEmailRequest $request, User $user): JsonResponse
     {
         $roleId = Role::where("code", $request->get('role'))->pluck('id')->first();
-        $user = $user->where('email', $request->get('email'))
-            ->where('role_id', $roleId)
-            ->first();
+    
+        $user = User::query();
+        $user->where('email', $request->get('email'));
+        $user->where('role_id', $roleId);
+    
+
+        if($request->get('username')){
+            $user->where('username', $request->get('username'));
+        }
+
+        $user = $user->first();
+        
         if (!empty($user)) {
             $data['otp_type'] = "forgotPassword";
             $this->otpNotification($data, $user);
@@ -665,9 +674,18 @@ class AuthService extends BaseService
 
         // Forgot Password Change
         if ($request->get('action') == 'forgotPassword') {
-            $user = User::where('email', $request->get('email'))
-                ->where('role_id', $roleId)
-                ->first();
+        
+            $user = User::query();
+            $user->where('email', $request->get('email'));
+            $user->where('role_id', $roleId);
+        
+
+            if($request->get('username')){
+                $user->where('username', $request->get('username'));
+            }
+
+            $user = $user->first();
+            
             if (!empty($user)) {
                 $check_otp_token = $this->validateOtp($user->secret, $request->get('otp'));
 
@@ -691,8 +709,18 @@ class AuthService extends BaseService
         }
 
         if ($request->get('action') == 'resetPassword') {
-            $user = User::where('email', $request->get('email'))
-                        ->where('role_id', $roleId)->first();
+            
+            $user = User::query();
+            $user->where('email', $request->get('email'));
+            $user->where('role_id', $roleId);
+        
+
+            if($request->get('username')){
+                $user->where('username', $request->get('username'));
+            }
+
+            $user = $user->first();
+            
             if (!empty($user)) {
                 $check_otp_token = $this->validateOtp($user->secret, $request->get('otp'));
 
@@ -1890,6 +1918,34 @@ class AuthService extends BaseService
         }
 
         return ['result'=>json_decode($peripheralApiService->apiResponse)];
+    }
+
+    
+
+    public function vitalDashboards(Request $request): JsonResponse{
+
+        $getVitalslug = Master::Where('master_type_slug','vitals')->pluck('slug')->toArray();
+
+        $vital = Vital::query();
+        $vital->where('user_id',$request->get('user_id'));
+        $vital->whereIn('vitals.slug', $getVitalslug);
+        
+
+        if($request->get('from') && $request->get('to')){
+            $from = date('Y-m-d',strtotime($request->get('from')));
+            $to = date('Y-m-d',strtotime($request->get('to')));
+            $vital->whereBetween('details->date', [$from,$to]);
+        }
+
+        if ($request->get('searchkey') && $request->get('searchkey') != 'undefined') {
+            $vital->Where('details->created_app', 'LIKE',"%".$request->get('searchkey')."%");
+        }  
+
+        $vital = $vital->orderBy('id','DESC')
+                        ->get()->unique('slug')->flatten();
+                        
+        return $this->httpResponse->setHttpData($vital)  
+                ->jsonResponse();
     }
 
 }

@@ -60,19 +60,17 @@ class PeripheralApiService extends BaseService {
     		$this->apiCall($url, $options, $method = "POST");
     		$api_response = $this->toGuzzleArray();
 
-    		$response = ['peripheral_users_id' => $api_response['data']['peripheral_users']['id']];
-
-    	} 
-    	catch(\Exception $e) {
-			Log::error('Peripheral User API ERROR ------- ', ['errorDetails' => $e->getMessage()]);
-
-			$api_response = $this->toGuzzleArray();
-
 			if($api_response) {
 				if($api_response['code'] == 422) {
 					throw ValidationException::withMessages($api_response['data']);
 				}
 			}
+
+    		$response = ['peripheral_users_id' => $api_response['data']['peripheral_users']['id']];
+
+    	} 
+    	catch(\Exception $e) {
+			Log::error('Peripheral User API ERROR ------- ', ['errorDetails' => $e->getMessage()]);
 
 			throw new BadRequestHttpException($e->getMessage(), $e);
 			$response = [ $e->getMessage() ];
@@ -177,18 +175,17 @@ class PeripheralApiService extends BaseService {
 
 			$this->apiCall($url, $options, $method = "POST");
 			$api_response = $this->toGuzzleArray();
-
-			$response = ['peripheral_users_id' => $api_response['data']['user_id']];
-		} catch (\Exception $e) {
-			Log::error('Peripheral User Auth API ERROR ------- ', ['errorDetails' => $e->getMessage()]);
-
-			$api_response = $this->toGuzzleArray();
-
+			
 			if ($api_response) {
 				if ($api_response['code'] == 422) {
 					throw ValidationException::withMessages($api_response['data']);
 				}
 			}
+
+			$response = ['peripheral_users_id' => $api_response['data']['user_id']];
+		} catch (\Exception $e) {
+			Log::error('Peripheral User Auth API ERROR ------- ', ['errorDetails' => $e->getMessage()]);
+
 
 			throw new BadRequestHttpException($e->getMessage(), $e);
 			$response = [$e->getMessage()];

@@ -86,11 +86,12 @@ $router->group(['prefix' => 'v1/', 'middleware' => 'clientAuth'], function ($rou
                 $router->get('{resource}/List', ['uses' => 'ResourceService@list']);
                 $router->get('{resource}/Fetch/{id:[0-9]+}', ['uses' => 'ResourceService@fetch']);
                 $router->put('{resource}/Update/{id:[0-9]+}', ['uses' => 'ResourceService@update']);
-                $router->patch('{resource}/PartialUpdate/{id:[0-9]+}', ['uses' => 'ResourceService@fetch']);
+                $router->patch('{resource}/PartialUpdate/{id:[0-9]+}', ['uses' => 'ResourceService@partialUpdate']);
                 $router->post('{resource}/Create', ['uses' => 'ResourceService@create']);
                 $router->get('{resource}/getAll', ['uses' => 'ResourceService@getAll']);
 
             });
+            $router->get('vitalDashboards', 'AuthService@vitalDashboards');
 
         });
 
@@ -115,6 +116,7 @@ $router->group(['prefix' => 'v1/', 'middleware' => 'clientAuth'], function ($rou
         $router->get('ReviewOfSystem_globalx', 'AuthService@ReviewOfSystem_globalx');
         $router->get('physicalExamination_globalx', 'AuthService@physicalExamination_globalx');
         $router->get('assessmentPDF_globalx', 'AuthService@assessmentPDF_globalx');
+            $router->get('vitalDashboards', 'AuthService@vitalDashboards');
 
         $router->group(['prefix' => 'users'], function ($router) {
             $router->patch('set-password', 'AuthService@setPassword');

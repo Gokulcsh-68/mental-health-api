@@ -203,9 +203,13 @@ class BluetoothPeripheralService extends BaseService
         $this->saveVitalData($vitalData);
     }
 
-    private function saveECG($data)
+    /*
+    upload ECG file to AWS Server
+    */
+    public function uploadECGFile($data)
     {
         $image = $data['image'];
+        
         $temp_file_name = time() . '.png';
         \Storage::disk('public')->put($temp_file_name, base64_decode($image)); 
         $file_location = \Storage::disk('public')->path($temp_file_name);
@@ -228,9 +232,11 @@ class BluetoothPeripheralService extends BaseService
 
         if($response['success']) {
 
+            $uid = !empty($data['user_id']) ? $data['user_id']:$this->_user_id;
+
             $insert_data = [
-                'user_id' => $this->_user_id,
-                'created_by' => $this->_user_id,
+                'user_id' => $uid,
+                'created_by' => $uid,
                 'document_source' => 'imaging',
                 'addition_info' => [
                     'date' => $data['date_time'],
@@ -244,10 +250,17 @@ class BluetoothPeripheralService extends BaseService
                 ],
             ];
 
-            Doc::create($insert_data);
+           $resDoc = Doc::create($insert_data);
 
             \Storage::disk('public')->delete($temp_file_name);
+
+            return $resDoc->id;
         }
+    }
+
+    private function saveECG($data)
+    {
+       $doc_id = $this->uploadECGFile($data);
 
         $vitalData = [
             'user_id' => $this->_user_id,
@@ -257,6 +270,7 @@ class BluetoothPeripheralService extends BaseService
                 'time' => date('H:i', strtotime($data['date_time'])),
                 'heart' => $data['PR'],
                 'unit' => 'Bpm',
+                'doc_id' => $doc_id
             ],
         ];
 
