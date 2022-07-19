@@ -104,7 +104,17 @@ class Patient extends BaseModel
             if(!empty($user->id)) {
 
                 $peripheral_user_data = [
-                    "ref_number" => $user->id
+                    "ref_number" => $user->id,
+
+                    /**
+                     * NOTE: Below parameters is added to support MedLib App transactions
+                     * As of now, this code is only for creating patient
+                     */
+                    "first_name" => $user->first_name,
+                    "last_name" => $user->last_name,
+                    "mobile" => $user->mobile,
+                    "gender" => $user->gender,
+                    "age" => $data['additional_info']['age'],
                 ];
 
                 (new PeripheralApiService)->create($peripheral_user_data);
