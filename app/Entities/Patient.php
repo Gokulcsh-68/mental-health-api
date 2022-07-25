@@ -235,6 +235,10 @@ class Patient extends BaseModel
                     ->orWhere('users.gender', 'LIKE',"%".$request->get('searchkey')."%")
                     ->orWhere('users.is_active', 'LIKE',"%".$status_key."%");
             });
+
+             $model->orwhere( function ($subquery) use ($request) {
+                    $subquery->where('patients.additional_info->mrn_number', 'LIKE',"%".$request->get('searchkey')."%");
+            });
         }
 
         return $model;
