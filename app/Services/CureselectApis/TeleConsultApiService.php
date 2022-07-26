@@ -47,8 +47,8 @@ class TeleConsultApiService extends BaseService {
 			
 			'provider.id' => 'required',
 			'provider.name' => 'required',
-			'provider.email' => 'required',
-			'provider.phone' => 'required',
+			'provider.email' => 'nullable',
+			'provider.phone' => 'nullable',
 			'provider.gender' => 'nullable',
 			'provider.profile_pic' => 'nullable',
 			

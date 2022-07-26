@@ -134,6 +134,10 @@ class Consult extends BaseModel
             $filters['consult_status'] = $request->query('consult_status');
         }
         
+        if ($request->query('consult_id')) {
+            $filters['consult_id'] = $request->query('consult_id');
+        }
+        
         $limit = $this->getResourceDataFetchLimit();
         $page = app('request')->get('page') ? app('request')->get('page') : 1;
 
@@ -178,16 +182,7 @@ class Consult extends BaseModel
                 'service_provider' => $teleconsult_config['default_service_provider'],
                 'additional_info' => $consult_additional_info,
 
-                'provider' => [
-                    'id' => $provider->id,
-                    'name' => $provider->getFullName(),
-                    'email' => $provider->email,
-                    'phone' => $provider->mobile_number,
-                    'gender' => $provider->gender,
-                    'profile_pic' => $provider->profile_image,
-                    'additional_info' => $addition_value,
-                ],
-
+                
                 'patient' => [
                     'id' => $patient->id,
                     'name' => $patient->getFullName(),
@@ -198,6 +193,46 @@ class Consult extends BaseModel
                     'additional_info' => $addition_value
                 ],
             ];
+
+           
+            if($request->get('teleType') == '1'){
+
+
+               $payload['provider'] =  [
+                        'id' => $request->get('provider_id'),
+                        'name' =>$request->get('consult_doctor'),
+                        'email' => null,
+                        'phone' => $request->get('doctor_mobile'),
+                        'gender' => null,
+                        'profile_pic' => null,
+                        'additional_info' => $addition_value,
+                    ];
+
+                }else if($request->get('teleType') == '3'){
+
+
+               $payload['provider'] =  [
+                        'id' => $request->get('provider_id'),
+                        'name' =>$request->get('consult_doctor'),
+                        'email' => $request->get('doctor_email'),
+                        'phone' => null,
+                        'gender' => null,
+                        'profile_pic' => null,
+                        'additional_info' => $addition_value,
+                    ];
+
+                }else{
+
+                  $payload['provider'] = [
+                        'id' => $provider->id,
+                        'name' =>$provider->getFullName(),
+                        'email' => $provider->email,
+                        'phone' => $provider->mobile_number,
+                        'gender' => $provider->gender,
+                        'profile_pic' => $provider->profile_image,
+                        'additional_info' => $addition_value,
+                    ];
+                }
 
 
             if(!empty($data['cart_camera']))

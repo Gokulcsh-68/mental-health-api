@@ -22,6 +22,7 @@ class BaseService {
 
 	public function getToken()
 	{
+		Cache::forget('CURESELECT_API_TOKEN');
 		return Cache::remember('CURESELECT_API_TOKEN', $minutes = 1380, function() {
 			$this->authenticate();
 			return $this->_token;
