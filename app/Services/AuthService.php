@@ -463,9 +463,15 @@ class AuthService extends BaseService
             $imageFile = $request->all();
             // return $this->httpResponse->setHttpData(['adsf' => $imageFile, 'a' => $request->file('file')])->jsonResponse();
 
-            $imageName = 'profile_' . rand(9999,9999999).rand(100,1999).time().'.png';
+            $imageName = 'profile_'.rand(9999,9999999).rand(100,1999).time().'.png';            
 
-            $user =  $request->user();
+            if($request->get('patient_id')){
+                $patient_uid = Patient::where('id',$request->get('patient_id'))->value('user_id');
+                $user = new User();
+                $user = $user->where('id',$patient_uid)->first();
+            }else{
+                $user = $request->user();
+            }
 
             $request['type'] = $user->role->code;
             $request['filetype'] = 'profile_image';
