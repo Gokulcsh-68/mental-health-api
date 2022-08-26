@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Entities;
+use DB;
 
 class Medicine extends BaseModel
 {
@@ -74,33 +75,17 @@ class Medicine extends BaseModel
     public function applyFilters($model, $isPluck)
     {
         $model = parent::applyFilters($model, $isPluck);
-        $request = app('request');
+        $request = app('request');        
 
-        if($request->get('staff')){
-
-            if ($request->get('staff')->hospital_id) { 
-                $model->where('providers.hospital_id', $request->get('staff')->hospital_id);
-            }       
-            if ($request->get('staff')->group_id) { 
-                $model->where('providers.group_id', $request->get('staff')->group_id);
-            }   
-
-
-            if ($request->get('user_id')) { 
-                $model->where('providers.user_id', $request->get('user_id'));
-            }         
+        if($request->get('type')){
+            $model->where('type', $request->get('type'));
         }
-        else{ 
-            $model->where('providers.user_id', $request->user()->id);
-        }
-
-
 
         if ($request->get('searchkey')) {
 
             $model->where(function($query) use ($request) {
-                $query->Where('name', 'LIKE',"%".$request->get('searchkey')."%")
-                        ->orWhere('generic_name', 'LIKE',"%".$request->get('searchkey')."%");                
+                $query->Where(DB::raw("CONCAT(`name`, ' ', `dosage`)"), 'LIKE', $request->get('searchkey')."%")
+                        ->orWhere('generic_name', 'LIKE', $request->get('searchkey')."%");                
             });
 
         }

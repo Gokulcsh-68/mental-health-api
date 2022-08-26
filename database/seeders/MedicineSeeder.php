@@ -18,17 +18,17 @@ class MedicineSeeder extends Seeder
         $medicines = [
     		[
 	    		'name' => 'Dolo',
-	            'type' => "Tablet",
+	            'type' => "Tablets",
 	            'dosage' => "650 mg",
 	            'generic_name' => 'Acetaminophen or Paracetamol'
         	],[
 	    		'name' => 'Paracetamol',
-	            'type' => "Tablet",
+	            'type' => "Tablets",
 	            'dosage' => "200 mg",
 	            'generic_name' => 'Acetaminophen or Paracetamol'
         	],[
 	    		'name' => 'Dolo',
-	            'type' => "Tablet",
+	            'type' => "Tablets",
 	            'dosage' => "250 mg",
 	            'generic_name' => 'Acetaminophen or Paracetamol'
         	],[
@@ -38,12 +38,12 @@ class MedicineSeeder extends Seeder
 	            'generic_name' => 'Acetaminophen or Paracetamol'
         	],[
 	    		'name' => 'Crocin',
-	            'type' => "Tablet",
+	            'type' => "Tablets",
 	            'dosage' => "500 mg",
 	            'generic_name' => 'Paracetamol and Caffeine Tablets I.P.'
         	],[
 	    		'name' => 'Crocin',
-	            'type' => "Tablet",
+	            'type' => "Tablets",
 	            'dosage' => "100 mg",
 	            'generic_name' => 'Paracetamol and Caffeine Tablets I.P.'
         	],[
