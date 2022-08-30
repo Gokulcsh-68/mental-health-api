@@ -21,7 +21,7 @@ class PatientHealth extends BaseModel
      * @var array
      */
     protected $fillable = [
-        "patient_id", "consult_id", "slug", "values"
+        "id", "patient_id", "consult_id", "slug", "values"
     ];
 
     /**
@@ -171,6 +171,10 @@ class PatientHealth extends BaseModel
         $model = parent::applyFilters($model, $isPluck);
         $request = app('request');
 
+        if ($request->get('id')) {
+            $model->where('patient_health.id', $request->get('id'));
+        }
+
         if ($request->get('slug')) {
             $model->where('patient_health.slug', $request->get('slug'));
         }
@@ -178,11 +182,6 @@ class PatientHealth extends BaseModel
         if ($request->get('consult_id') || $request->get('consult_id') == '-1') {
             $model->where('patient_health.consult_id', $request->get('consult_id') == '-1'? null: $request->get('consult_id'));
         }
-
-        if ($request->get('slug')) {
-            $model->where('patient_health.slug', $request->get('slug'));
-        }
-
         
         if($request->get('user_id')){
             $model->where('patient_id', $request->get('user_id'));
@@ -193,10 +192,13 @@ class PatientHealth extends BaseModel
             $to     = date('Y-m-d',strtotime($request->get('to')));
 
             if ($request->get('slug') == 'medicine') {
-                $model->whereBetween('values->start_date', [$from,$to]);
+                $model->whereBetween('values->start_date', [$from, $to]);
+            }
+            else if($request->get('slug') == 'prescription') {
+                $model->whereBetween('created_at', [$from." 00:00:00", $to." 23:59:59"]);
             }
             else{
-                $model->whereBetween('values->date', [$from,$to]);
+                $model->whereBetween('values->date', [$from, $to]);
             }
         }
 

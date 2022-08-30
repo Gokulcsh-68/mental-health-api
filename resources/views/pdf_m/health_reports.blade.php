@@ -8,8 +8,13 @@
     @component('pdf_m.pdf_components.patient_details',['patient_details'=> $content['patient_details']])
     @endcomponent
 
+    @if($request->get('slug') != 'prescription')
+		<h3 class="color_primary">Results:</h3>
+	@endif
 
-	<h3 class="color_primary">Results:</h3>
+    @if($request->get('slug') == 'prescription')
+		<h3 class="color_primary">Medicine Details:</h3>
+    @endif
 
     @foreach($content['medicine_info'] as $k => $v)
 
@@ -18,7 +23,9 @@
 	    @component('pdf_m.pdf_components.provider_details',['provider_details'=> [$v['providers']]])
 	    @endcomponent
 	    @else
-			<h4 class="color_secondary">Self Added:</h4>
+    		@if($request->get('slug') != 'prescription')
+				<h4 class="color_secondary">Self Added:</h4>
+			@endif
 	    @endif
 
 	    @switch($request->get('slug'))
@@ -44,6 +51,11 @@
 
 		    @case('procedure')
 		        @component('pdf_m.pdf_components.procedure',['lists'=> $v['lists']])
+	    		@endcomponent
+		        @break
+
+		    @case('prescription')
+		        @component('pdf_m.pdf_components.prescription',['lists'=> $v['lists']])
 	    		@endcomponent
 		        @break
 

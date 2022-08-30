@@ -14,15 +14,15 @@ class UpdateMedicineTypeSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('masters')->Where('master_type_slug','medicineType')->delete();
+        // DB::table('masters')->Where('master_type_slug','medicineType')->delete();
 
-        DB::table('master_types')->Where('slug','medicineType')->delete();
+        // DB::table('master_types')->Where('slug','medicineType')->delete();
 
     	$master_types = [
     		['slug' => 'medicineType'],
     	];
         
-        DB::table('master_types')->insert($master_types);
+        DB::table('master_types')->insertOrIgnore($master_types);
 
 
 
@@ -37,9 +37,14 @@ class UpdateMedicineTypeSeeder extends Seeder
                 'slug' => 'medtype_syrup', 
                 'name' => 'Syrup',
                 'is_active' => 1,
+            ],[
+                'master_type_slug' => 'health', 
+                'slug' => 'prescription', 
+                'name' => 'Prescription',
+                'is_active' => 1,
             ]
         ];
 
-        DB::table('masters')->insert($medicine_types);
+        DB::table('masters')->insertOrIgnore($medicine_types);
     }
 }
