@@ -19,7 +19,7 @@
 			<thead>
 		 	<tr>
 		 		<th rowspan="2" colspan="2">Rx</th>
-		 		<th style="width: 150px">Frequency</th>
+		 		<th style="width: 75px">Frequency</th>
 		 		<th rowspan="2">Duration</th>
 		 		<th rowspan="2">Qty / Taken</th>
 		 	</tr>
@@ -32,9 +32,11 @@
 
 		@foreach($val->values as $lk => $lv)	
 		 	<tr>
-		 		<td style="width:50px">{{$lk+1}}</td>
+		 		<td style="width:25px">{{$lk+1}}</td>
 		 		<td> 
 		 			@if(!empty($lv->medicine_name)) {{$lv->medicine_name}} @endif
+		 			<br>
+		 			@if(!empty($lv->medicine_instruction)) ({{$lv->medicine_instruction}}) @endif
 		 		</td>
 		 		<td> 
 		 			@if(!empty($lv->medicine_taken->m)) {{$lv->medicine_taken->m}}  @else 0 @endif - 
@@ -64,7 +66,6 @@
 		 		</td>
 		 		<td>
 		 			@if(!empty($lv->total_qty)) {{$lv->total_qty}} @endif
-		 			@if(!empty($lv->medicine_type)) {{$lv->medicine_type}} @endif
 		 		</td>
 		 	</tr>	
     	@endforeach
