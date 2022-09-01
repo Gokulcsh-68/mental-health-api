@@ -197,6 +197,9 @@ class PatientHealth extends BaseModel
             else if($request->get('slug') == 'prescription') {
                 $model->whereBetween('created_at', [$from." 00:00:00", $to." 23:59:59"]);
             }
+            else if($request->get('slug') == 'prescription_glasses') {
+                $model->whereBetween('created_at', [$from." 00:00:00", $to." 23:59:59"]);
+            }
             else{
                 $model->whereBetween('values->date', [$from, $to]);
             }
