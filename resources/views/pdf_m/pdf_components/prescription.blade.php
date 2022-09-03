@@ -5,7 +5,7 @@
 	}
 </style>
 
-	@foreach($lists as $lk => $val)	
+	@foreach($lists as $key => $val)	
 		<table style="margin-top: 15px;">
 			<thead>
 		 	<tr>

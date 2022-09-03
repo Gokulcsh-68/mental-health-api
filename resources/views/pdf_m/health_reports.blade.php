@@ -2,7 +2,7 @@
 @section('content')
 	
 	
-	@component('pdf_m.pdf_components.title',['title'=> ucfirst($request->get('slug')).' Reports'])
+	@component('pdf_m.pdf_components.title',['title'=> strtoupper($request->get('slug')).' REPORTS'])
     @endcomponent
 
     @component('pdf_m.pdf_components.patient_details',['patient_details'=> $content['patient_details']])
@@ -23,7 +23,7 @@
 	    @component('pdf_m.pdf_components.provider_details',['provider_details'=> [$v['providers']]])
 	    @endcomponent
 	    @else
-    		@if($request->get('slug') != 'prescription')
+    		@if($request->get('slug') != 'prescription' && $request->get('slug') != 'prescription_glasses')
 				<h4 class="color_secondary">Self Added:</h4>
 			@endif
 	    @endif
@@ -56,6 +56,11 @@
 
 		    @case('prescription')
 		        @component('pdf_m.pdf_components.prescription',['lists'=> $v['lists']])
+	    		@endcomponent
+		        @break
+
+		    @case('prescription_glasses')
+		        @component('pdf_m.pdf_components.prescription_glasses',['lists'=> $v['lists']])
 	    		@endcomponent
 		        @break
 
