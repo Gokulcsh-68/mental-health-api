@@ -15,55 +15,32 @@ class MedicineSeeder extends Seeder
     public function run()
     {
 
-        $medicines = [
-    		[
-	    		'name' => 'Dolo',
-	            'type' => "Tablets",
-	            'dosage' => "650 mg",
-	            'generic_name' => 'Acetaminophen or Paracetamol'
-        	],[
-	    		'name' => 'Paracetamol',
-	            'type' => "Tablets",
-	            'dosage' => "200 mg",
-	            'generic_name' => 'Acetaminophen or Paracetamol'
-        	],[
-	    		'name' => 'Dolo',
-	            'type' => "Tablets",
-	            'dosage' => "250 mg",
-	            'generic_name' => 'Acetaminophen or Paracetamol'
-        	],[
-	    		'name' => 'Dolo',
-	            'type' => "Syrup",
-	            'dosage' => "60 ml",
-	            'generic_name' => 'Acetaminophen or Paracetamol'
-        	],[
-	    		'name' => 'Crocin',
-	            'type' => "Tablets",
-	            'dosage' => "500 mg",
-	            'generic_name' => 'Paracetamol and Caffeine Tablets I.P.'
-        	],[
-	    		'name' => 'Crocin',
-	            'type' => "Tablets",
-	            'dosage' => "100 mg",
-	            'generic_name' => 'Paracetamol and Caffeine Tablets I.P.'
-        	],[
-	    		'name' => 'Crocin',
-	            'type' => "Syrup",
-	            'dosage' => "15 ml",
-	            'generic_name' => 'Paracetamol and Caffeine Tablets I.P.'
-        	],[
-	    		'name' => 'Crocin',
-	            'type' => "Syrup",
-	            'dosage' => "100 ml",
-	            'generic_name' => 'Paracetamol and Caffeine Tablets I.P.'
-        	],[
-	    		'name' => 'Benadryl',
-	            'type' => "Syrup",
-	            'dosage' => "500 ml",
-	            'generic_name' => 'Diphenhydramine'
-        	],
-    	];
 
-        DB::table('medicines')->insert($medicines);
+        $medicine_file_path = __DIR__ . '/source/medicines.csv';
+        $medicine_file = file($medicine_file_path);
+        $medicine_data_collection = array_slice($medicine_file, 1);
+        
+        $medicine_chunched = (array_chunk($medicine_data_collection, 1000));
+        
+        $i = 1;
+        foreach($medicine_chunched as $meds) {
+            $meds_data = [];
+            
+            foreach($meds as $item) {
+                $data = explode('**', $item);
+                $name = trim(ucfirst($data[0]));
+                $type = trim(ucfirst($data[1]));
+                $dosage = trim(ucfirst($data[2]));
+                
+                $meds_data[] = [
+		    		'name' => $name,
+		            'type' => $type,
+		            'dosage' => $dosage,
+                ];
+            }
+
+            DB::table('medicines')->insertOrIgnore($meds_data);
+        }
+
     }
 }
