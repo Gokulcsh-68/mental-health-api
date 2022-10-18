@@ -228,7 +228,7 @@ class Patient extends BaseModel
 
         if ($request->get('searchkey')) {
             
-            $model->where(function($query) use ($request) {
+            $model->where(function($query) use ($request, $status_key) {
                 $query->whereHas('user', function ($subquery) use ($request, $status_key) {
                         $subquery->Where('users.email', 'LIKE',"%".$request->get('searchkey')."%")
                         ->orWhere('users.mobile', 'LIKE',"%".$request->get('searchkey')."%")
