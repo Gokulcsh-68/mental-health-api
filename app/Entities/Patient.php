@@ -227,17 +227,20 @@ class Patient extends BaseModel
 
 
         if ($request->get('searchkey')) {
-            $model->whereHas('user', function ($subquery) use ($request, $status_key) {
-                    $subquery->Where('users.email', 'LIKE',"%".$request->get('searchkey')."%")
-                    ->orWhere('users.mobile', 'LIKE',"%".$request->get('searchkey')."%")
-                    ->orWhere(DB::raw("CONCAT(`first_name`, ' ', `last_name`)"), 'LIKE',"%".$request->get('searchkey')."%")
-                    ->orWhere('users.address', 'LIKE',"%".$request->get('searchkey')."%")
-                    ->orWhere('users.gender', 'LIKE',"%".$request->get('searchkey')."%")
-                    ->orWhere('users.is_active', 'LIKE',"%".$status_key."%");
-            });
+            
+            $model->where(function($query) use ($request) {
+                $query->whereHas('user', function ($subquery) use ($request, $status_key) {
+                        $subquery->Where('users.email', 'LIKE',"%".$request->get('searchkey')."%")
+                        ->orWhere('users.mobile', 'LIKE',"%".$request->get('searchkey')."%")
+                        ->orWhere(DB::raw("CONCAT(`first_name`, ' ', `last_name`)"), 'LIKE',"%".$request->get('searchkey')."%")
+                        ->orWhere('users.address', 'LIKE',"%".$request->get('searchkey')."%")
+                        ->orWhere('users.gender', 'LIKE',"%".$request->get('searchkey')."%")
+                        ->orWhere('users.is_active', 'LIKE',"%".$status_key."%");
+                });
 
-             $model->orwhere( function ($subquery) use ($request) {
-                    $subquery->where('patients.additional_info->mrn_number', 'LIKE',"%".$request->get('searchkey')."%");
+                 $query->orwhere( function ($subquery) use ($request) {
+                        $subquery->where('patients.additional_info->mrn_number', 'LIKE',"%".$request->get('searchkey')."%");
+                });
             });
         }
 
