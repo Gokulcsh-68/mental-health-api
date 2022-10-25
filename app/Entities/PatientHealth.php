@@ -115,7 +115,13 @@ class PatientHealth extends BaseModel
         if(!empty($data['up_create'])){
 
 
-            $matchThese = ['slug'=>$data['slug'],'patient_id'=>$data['patient_id']];
+            if(!empty($data['values']['date'])){
+                $matchThese = ['slug'=>$data['slug'],'patient_id'=>$data['patient_id'],'values->date'=>$data['values']['date']];
+
+            }else{
+
+                $matchThese = ['slug'=>$data['slug'],'patient_id'=>$data['patient_id']];
+            }
 
             return $this->updateOrCreate($matchThese,$data);
 
@@ -177,6 +183,11 @@ class PatientHealth extends BaseModel
 
         if ($request->get('slug')) {
             $model->where('patient_health.slug', $request->get('slug'));
+        }
+
+        if ($request->get('slug_array')) {
+            $model->whereIn('patient_health.slug', explode(',', $request->get('slug_array')));
+            $model->groupBy('values->date');
         }
 
         if ($request->get('consult_id') || $request->get('consult_id') == '-1') {
