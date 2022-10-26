@@ -187,6 +187,7 @@ class PatientHealth extends BaseModel
 
         if ($request->get('slug_array')) {
             $model->whereIn('patient_health.slug', explode(',', $request->get('slug_array')));
+            $model->where('values->date', '!=' ,'');
             $model->groupBy('values->date');
         }
 
