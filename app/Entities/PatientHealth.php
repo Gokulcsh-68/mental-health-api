@@ -115,7 +115,7 @@ class PatientHealth extends BaseModel
         if(!empty($data['up_create'])){
 
 
-            if(!empty($data['values']['date'])){
+            if(isset($data['values']['date'])){
                 $matchThese = ['slug'=>$data['slug'],'patient_id'=>$data['patient_id'],'values->date'=>$data['values']['date']];
 
             }else{
@@ -261,6 +261,22 @@ class PatientHealth extends BaseModel
         }
 
         return $model;
+    }
+
+    protected function deleteModel($id, $request)
+    {
+        $data = $this->getModelAttributes($request);
+        
+        if($request->get('patient_id') && $request->get('del_date')){
+            
+            $del_date = date('Y-m-d',strtotime($request->get('del_date')));
+
+            return $this->Where('values->date',$del_date)->Where('patient_id',$request->get('patient_id'))->delete();
+        }else{
+
+            return $this->getModel($id)->delete();
+        }
+
     }
 
 
