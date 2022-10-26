@@ -73,7 +73,8 @@ class DatabaseSeeder extends Seeder
             AssessmentPsychiatricExamSomaticSymptomDisorder::class,
             SymptomUpdateNewSeeder::class,
             UpdateRolesSeeder::class,
-            VdxValuesSeeder::class
+            VdxValuesSeeder::class,
+            SystemicValueSeeder::class
         ]);
     }
 }
