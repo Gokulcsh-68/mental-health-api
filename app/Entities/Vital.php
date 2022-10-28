@@ -163,6 +163,11 @@ class Vital extends BaseModel
             $data['details'] += self::uric_acid_flag($data['details'],$gender);
         }
 
+        if($data['slug'] == 'spirometer'){
+            $data['details'] += self::spirometer_flag($data['details']);
+        }
+
+
         return $this->create($data);
     }
 
@@ -304,6 +309,11 @@ class Vital extends BaseModel
             unset($data['details']['uricFlag'], $data['details']['uricFlagColor'], $data['details']['range_code']);
             $gender = User::Where('id', $data['user_id'])->value('gender');
             $data['details'] += self::uric_acid_flag($data['details'],$gender);
+        }
+
+        if($data['slug'] == 'spirometer'){
+            unset($data['details']['spirometerFlag'], $data['details']['spirometerFlagColor'], $data['details']['range_code']);
+            $data['details'] += self::spirometer_flag($data['details']);
         }
 
         $instance = $this->getModel($id);
@@ -1604,6 +1614,12 @@ class Vital extends BaseModel
         $input_data['range_code']    = '#ff0000';
         if (!empty($input_data['hct'])) {
 
+            if (($input_data['hct'] >= '41') && ($input_data['hct'] <= '50')) {
+                    $input_data['hctFlag']      = 'Normal';
+                    $input_data['hctFlagColor'] = 'success';
+                    $input_data['range_code']    = '#008000';
+                }
+                
             if($gender == 'Male'){
             
                 if (($input_data['hct'] >= '41') && ($input_data['hct'] <= '50')) {
@@ -1650,6 +1666,16 @@ class Vital extends BaseModel
                 }
             }
         }
+
+        return $input_data;
+    }
+
+    public static function spirometer_flag($input_data)
+    {
+        $input_data['spirometerFlag']      = 'Normal';
+        $input_data['spirometerFlagColor'] = 'primary';
+        $input_data['range_code']    = '#0000ff';
+        
 
         return $input_data;
     }

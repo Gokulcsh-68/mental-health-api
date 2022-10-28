@@ -23,6 +23,7 @@ class UpdateVitalsSeeder extends Seeder
             [ 'master_type_slug' => 'vitals', 'name' => 'Hemoglobin', 'slug' => 'hemoglobin'],
             [ 'master_type_slug' => 'vitals', 'name' => 'Keytone', 'slug' => 'keytone'],
             [ 'master_type_slug' => 'vitals', 'name' => 'Uric Acid', 'slug' => 'uric_acid'],
+            [ 'master_type_slug' => 'vitals', 'name' => 'Spirometer', 'slug' => 'spirometer'],
         ];
         
         DB::table('masters')->insertOrIgnore($master_types);

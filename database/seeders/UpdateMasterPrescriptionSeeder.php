@@ -26,6 +26,11 @@ class UpdateMasterPrescriptionSeeder extends Seeder
                 'slug' => 'prescription_glasses', 
                 'name' => 'Prescription Glasses',
                 'is_active' => 1,
+            ],[
+                'master_type_slug' => 'health', 
+                'slug' => 'surgical-procedure', 
+                'name' => 'Surgical Procedure',
+                'is_active' => 1,
             ]
         ];
 
