@@ -1,0 +1,204 @@
+HEENT,NAD
+HEENT,D.N.S.
+HEENT,Nasal Polyps
+HEENT,Enlarged Tonsils
+HEENT,Congested throat
+HEENT,Tenderness in Frontal Sinus
+HEENT,Tenderness in Maxillary Sinus- Lt
+HEENT,Tenderness in Maxillary Sinus- Rt
+HEENT,Angular stomatitis
+HEENT,Apthous Ulcers'
+HEENT,Carious Teeth
+HEENT,Cataract
+HEENT,Posterior Pharyngeal Injection Or Exudates
+HEENT,Halitosis
+HEENT,Nasal Septum And Whether Turbinates Are Enlarged Or Reddened
+HEENT,Loss of hearing
+HEENT,Visual Acuity reduced
+HEENT,Cornea (Opacified)
+HEENT,Conjunctivae (Pale Injected Or Red)
+HEENT,Sclerae (Any Icterus Muddy Appearance)
+HEENT,Ptosis
+HEENT,Abnormal Oral Mucosa
+HEENT,Gingival Inflammation
+HEENT,Cyanosis
+HEENT,Palpable nodes/nodules
+HEENT,Jugular Venous distension
+CVS,NAD
+CVS,Murmur
+CVS,Added Sounds
+CVS,Missed beats
+CVS,Reduced heart sounds
+CVS,Clicks
+CVS,Rubs
+CVS,Gallops
+CVS,Murmurs
+CVS,Heart Sounds (S1 S2 S3 S4)
+CVS,Rhythm (Regular Or Irregular)
+CVS,Auscultation
+CVS,Whether Or Not Abnormally Sustained
+CVS,P M I ( Point Of Maximal Impulse)
+CVS,Thrills (Palpable Murmurs)
+CVS,Shocks (Palpable Heart Sounds)
+CVS,Heaves
+CVS,Palpation
+CVS,Visible P M I
+CVS,Abnormal Outward Pulsations
+CVS,Arrhythmias
+Breasts,NAD
+Breasts,Discharge
+Breasts,Masses
+Breasts,Lumps
+Breasts,Pain
+Breasts,Cracked Nipples
+Breasts,Everted Nipples
+Breasts,Tenderness
+RS,NAD
+RS,Wheeze- Bilateral
+RS,Wheeze- Left side
+RS,Wheeze- Right side
+RS,Crackles- Bilateral
+RS,Crackles-Left side
+RS,Crackles-Right side
+RS,Stridor+
+RS,Tachypnea at rest
+RS,Dyspnea at rest
+RS,Noisy breathing
+RS,Reduced Bilateral airflow
+RS,Reduced Unilateral airflow
+CNS,NAD
+CNS,Conscious
+CNS,Semi conscious
+CNS,Unconscious
+CNS,Disoriented
+CNS,Neck rigidity
+CNS,Meningeal signs
+CNS,Focal Neurological Deficit
+CNS,Flapping Tremor
+CNS,Alzheimer's disease
+CNS,Parkisnon's
+Gasterointestinal System,NAD
+Gasterointestinal System,Hepatomegaly
+Gasterointestinal System,Splenomegaly
+Gasterointestinal System,Abdominal distension
+Gasterointestinal System,Tenderness- Left loin
+Gasterointestinal System,Tenderness- Right loin
+Gasterointestinal System,Tenderness- epigastric
+Gasterointestinal System,Tenderness- Suprapubic
+Gasterointestinal System,Hernia
+Gasterointestinal System,Hydrocele
+Gasterointestinal System,Phimosis
+Gasterointestinal System,Balanitis
+Gasterointestinal System,Tenderness- Left Hypochondreal
+Gasterointestinal System,Tenderness- Right Hypochondreal
+Gasterointestinal System,Shifting Dullness
+Gasterointestinal System,Rebound tenderness
+Gasterointestinal System,Ascites
+Gasterointestinal System,Dysentery
+Gasterointestinal System,Constipation
+Gasterointestinal System,Increased Flatulence
+Gasterointestinal System,GERD
+Gasterointestinal System,Reflux disorders
+Gasterointestinal System,Ulcers
+Endocrine System,NAD
+Endocrine System,Hypothyroidism
+Endocrine System,Hperthyroidism
+Endocrine System,Diabetes Mellitus
+Endocrine System,Diabetes Insipidus
+Endocrine System,Hypoparathyroidism
+Endocrine System,Hyperparathyroidism
+Endocrine System,Cretinism
+Endocrine System,Gigantism
+Endocrine System,Addisons disease
+Endocrine System,Cushings disease
+Endocrine System,Pituatary insufficiency
+Endocrine System,Hirsutism
+CNS,NAD
+CNS,Snout Reflex
+CNS,Grasp Reflex
+CNS,Digital Reflexes (Wartenberg - Hoffman)
+CNS,Babinski reflex
+CNS,Pathologic Reflexes
+CNS,Abnormal Deep Tendon Reflexes
+CNS,Positive Romberg Sign
+CNS,Loss of Position Sense
+CNS,Ataxia
+CNS,Alexia
+CNS,Agraphia
+CNS,Sterognosis
+CNS,Graphesthesia
+CNS,Muscle Tenderness
+CNS,Atrophy - Hypertrophy
+CNS,Abnormal Limb Tone (Spasticity - Rigidity - Cogwheeling - Flaccidity)
+CNS,Involuntary Movements (Fasciculations - Tremor - Chorea - Posturing)
+CNS,Loss of Abstract Reasoning
+CNS,Aphonia
+CNS,Chorea
+CNS,Problems With Walking Or Balance
+CNS,Change In Sensation
+CNS,Headaches
+CNS,Memory Changes
+CNS,Tremors
+CNS,Tingling
+CNS,Numbness
+CNS,Local Weakness
+CNS,Paralysis
+CNS,Seizures
+CNS,Fainting
+CNS,Back Pain
+CNS,Joint Deformities
+CNS,Swelling Of Joints
+CNS,Shoulder Pain
+CNS,Aching Muscles
+CNS,Cortical Functions
+CNS,Sensory
+CNS,Diplopia
+CNS,Thrombus/ Embolus
+CNS,Syncope
+CNS,Hemophilias, Bleeding Ulcers
+CNS,Visual Field Changes
+Skin,NAD
+Skin,Edema
+Skin,Pallor
+Skin,Icterus
+Skin,Rash
+Skin,Turgor
+Skin,Texture Change
+Skin,Change In Existing Skin Lesion
+Skin,New Skin Lesion
+Skin,Itching
+Skin,Persistent Rash
+Skin,Macule
+Skin,Papule
+Skin,Bullae
+Skin,Dermatitis
+Skin,Pustule
+Skin,Scaly skin
+Skin,Pruritis
+Skin,Burns
+Skin,Moles
+Genito-Urinary System (M),NAD
+Genito-Urinary System (M),Increased urination
+Genito-Urinary System (M),Decreased urination
+Genito-Urinary System (M),Unable to hold urine
+Genito-Urinary System (M),Blood in urine
+Genito-Urinary System (M),CKD
+Genito-Urinary System (M),Erectile dysfunction
+Genito-Urinary System (M),Penile discharge
+Genito-Urinary System (M),Pain on micturition
+Genito-Urinary System (M),Burning on micturition
+Genito-Urinary System (M),Infertility
+Genito-Urinary System (M),Genital Lesions
+Genito-Urinary System (F),NAD
+Genito-Urinary System (F),Pelvic pain
+Genito-Urinary System (F),Amenorrhea
+Genito-Urinary System (F),Pain on micturition
+Genito-Urinary System (F),Burning on micturition
+Genito-Urinary System (F),Vaginal discharge
+Genito-Urinary System (F),Inflammation
+Genito-Urinary System (F),Pain/swelling
+Genito-Urinary System (F),Excessive menstrual bleeding
+Genito-Urinary System (F),Irregular menses
+Genito-Urinary System (F),Prolonged menses
+Genito-Urinary System (F),Infertility
+Genito-Urinary System (F),Genital Lesions

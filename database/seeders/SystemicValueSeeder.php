@@ -22,51 +22,76 @@ class SystemicValueSeeder extends Seeder
         DB::table('master_types')->insertOrIgnore($master_types);
 
 
-        $cloneData = DB::table('masters')->Where('master_type_slug','physical-examination')->get();
-
-        foreach ($cloneData as $key => $value) {
-            
-
-            DB::table('masters')->insertOrIgnore(['master_type_slug' => 'systemic-examination','name' => $value->name, 'slug' => $value->slug, 'is_active' => 1]);
-        }
+       DB::table('masters')->Where('master_type_slug','systemic_sub_types')->delete();
+       DB::table('masters')->Where('master_type_slug','systemic-examination')->delete();
 
 
+        $this->systemHeadDataDump();       
+        $this->systemValueDataDump();      
 
-        $systemic = [];
-
-
-        $master = DB::table('masters')->Where('master_type_slug','systemic-examination')->get();
-
-        foreach ($master as $key => $value) {
-       
-        	$datas = DB::table('dynamic_forms')->Where('slug',$value->slug)->get();
-
-        	foreach ($datas as $k => $v) {        		
-        		$v->attributes = json_decode($v->attributes);
-        	
-        		if($v->attributes->name != 'notes'){
-		         $systemic[] = ['attributes' => json_encode(['reference_slug' => $v->slug]),'master_type_slug' => 'systemic_sub_types', 'name' => $v->attributes->label, 'slug' => str_slug($v->slug.$v->attributes->label),'is_active' => 1];
-	        	}
-        	}
-	    }
-
-        foreach ($systemic as $key => $value) {
-        	
-
-            DB::table('masters')->insertOrIgnore($value);
-
-            // $matchThese = ['slug'=>$value['slug'],'master_type_slug'=>$value['master_type_slug']];
-
-            // $chk = DB::table('masters')->where('slug',$value['slug'])->where('master_type_slug',$value['master_type_slug'])->value('id');
-
-            // if(!empty($chk)){
-            // DB::table('masters')->where('id',$chk)->update($value);
-
-            // }else{
-            // DB::table('masters')->insert($value);
-
-            // }
-        }
 
 	}
+
+
+
+    private function systemHeadDataDump()
+    {
+        $sys_file_path = __DIR__ . '/source/systemicHead.csv';
+        $sys_file = file($sys_file_path);
+        $sys_data_collection = array_slice($sys_file, 0);
+        
+        $sys_chunched = (array_chunk($sys_data_collection, 1000));
+        
+        $i = 1;
+        foreach($sys_chunched as $syss) {
+            $sys_data = [];
+            
+            foreach($syss as $item) {
+                $data = explode(',', $item);
+                $slug = str_slug(trim($data[0]));
+                $name = trim($data[0]);
+                
+                $sys_data[] = [
+                    'master_type_slug' => 'systemic-examination', 
+                    'slug' => $slug, 
+                    'name' => $name,
+                    'is_active' => 1,
+                ];
+            }
+
+            DB::table('masters')->insertOrIgnore($sys_data);
+        }
+    }
+
+
+    private function systemValueDataDump()
+    {
+        $sys_file_path = __DIR__ . '/source/systemicValue.csv';
+        $sys_file = file($sys_file_path);
+        $sys_data_collection = array_slice($sys_file, 0);
+        
+        $sys_chunched = (array_chunk($sys_data_collection, 1000));
+        
+        $i = 1;
+        foreach($sys_chunched as $syss) {
+            $sys_data = [];
+            
+            foreach($syss as $item) {
+                $data = explode(',', $item);
+                $masterslug = str_slug(trim($data[0]));
+                $slug = str_slug(trim($data[0]).$data[1]);
+                $name = trim($data[1]);
+                
+                $sys_data[] = [
+                    'master_type_slug' => 'systemic_sub_types', 
+                    'slug' => $slug, 
+                    'name' => $name,
+                    'attributes' => json_encode(['reference_slug' => $masterslug]),
+                    'is_active' => 1,
+                ];
+            }
+
+            DB::table('masters')->insertOrIgnore($sys_data);
+        }
+    }
 }

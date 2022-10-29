@@ -78,6 +78,16 @@ class PatientHistory extends BaseModel
                 $data['values']['additional'] = $data['additional'];
             }
 
+            
+            if(isset($data['values']['date'])){
+                $data['values']['date'] = date('Y-m-d',strtotime($data['values']['date']));
+                
+            } 
+            if(isset($data['values']['surgery_date'])){
+                $data['values']['surgery_date'] = date('Y-m-d',strtotime($data['values']['surgery_date']));
+                
+            }
+
             if($data['slug'] == 'student-history'){
 
             $matchThese = ['slug'=>$data['slug'],'patient_id'=>$data['patient_id']];
@@ -93,6 +103,15 @@ class PatientHistory extends BaseModel
 
     protected function updateModel($id, $request, $only = []){
         $data = $this->getModelAttributes($request);
+
+        if(isset($data['values']['date'])){
+            $data['values']['date'] = date('Y-m-d',strtotime($data['values']['date']));
+            
+        } 
+        if(isset($data['values']['surgery_date'])){
+            $data['values']['surgery_date'] = date('Y-m-d',strtotime($data['values']['surgery_date']));
+            
+        }
 
         unset($request['patient_id']);
 

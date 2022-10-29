@@ -31,6 +31,11 @@ class UpdateMasterPrescriptionSeeder extends Seeder
                 'slug' => 'surgical-procedure', 
                 'name' => 'Surgical Procedure',
                 'is_active' => 1,
+            ],[
+                'master_type_slug' => 'history', 
+                'slug' => 'diagnosis', 
+                'name' => 'Diagnosis',
+                'is_active' => 1,
             ]
         ];
 
