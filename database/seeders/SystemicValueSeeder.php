@@ -50,11 +50,13 @@ class SystemicValueSeeder extends Seeder
                 $data = explode(',', $item);
                 $slug = str_slug(trim($data[0]));
                 $name = trim($data[0]);
+                $gender = count($data) > 1 ?trim($data[1]):null;
                 
                 $sys_data[] = [
                     'master_type_slug' => 'systemic-examination', 
                     'slug' => $slug, 
                     'name' => $name,
+                    'attributes' => $gender?json_encode(['gender' => $gender]):null,
                     'is_active' => 1,
                 ];
             }
