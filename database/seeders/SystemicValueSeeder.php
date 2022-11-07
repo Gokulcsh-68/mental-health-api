@@ -87,12 +87,12 @@ class SystemicValueSeeder extends Seeder
                 $multiple = 'yes';
                 $icon = 'no';
                 if(isset($data[2])){
-                    if($data[2] == 'nomultiple'){
+                    if(trim($data[2]) == 'nomultiple'){
                         $multiple = 'no';
                     }
                 }
                 if(isset($data[3])){
-                    if($data[3] == 'icon'){
+                    if(trim($data[3]) == 'icon'){
                         $icon = 'yes';
                     }
                 }
