@@ -83,12 +83,25 @@ class SystemicValueSeeder extends Seeder
                 $masterslug = str_slug(trim($data[0]));
                 $slug = str_slug(trim($data[0]).$data[1]);
                 $name = trim($data[1]);
+
+                $multiple = 'yes';
+                $icon = 'no';
+                if(isset($data[2])){
+                    if($data[2] == 'nomultiple'){
+                        $multiple = 'no';
+                    }
+                }
+                if(isset($data[3])){
+                    if($data[3] == 'icon'){
+                        $icon = 'yes';
+                    }
+                }
                 
                 $sys_data[] = [
                     'master_type_slug' => 'systemic_sub_types', 
                     'slug' => $slug, 
                     'name' => $name,
-                    'attributes' => json_encode(['reference_slug' => $masterslug]),
+                    'attributes' => json_encode(['reference_slug' => $masterslug, 'multiple'=>$multiple, 'icon'=>$icon]),
                     'is_active' => 1,
                 ];
             }

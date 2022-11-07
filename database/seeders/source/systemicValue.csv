@@ -1,3 +1,28 @@
+Nutritional,Emaciated,nomultiple
+Nutritional,Undernourished,nomultiple
+Nutritional,Adequately nourished,nomultiple
+Nutritional,Overweight,nomultiple
+Nutritional,Obese,nomultiple
+Nutritional,Morbidly obese,nomultiple
+Constitutional,Loss of appetite
+Constitutional,Lethargy
+Constitutional,Unexplained weight gain or weight loss
+Constitutional,Fever
+Constitutional,Fatigue
+Constitutional,Anorexia
+Constitutional,Night Sweats
+Constitutional,Scalp Tenderness
+Constitutional,Prior diagnosis of cancer
+Constitutional,Malaise
+Constitutional,Ability to conduct usual activities
+Constitutional,Exercise tolerance
+Constitutional,Sense of well-being
+General,Anemia
+General,Icterus
+General,Clubbing
+General,Lymphadenopathy
+General,Cyanosis
+General,oedema
 HEENT,NAD
 HEENT,D.N.S.
 HEENT,Nasal Polyps
@@ -45,14 +70,19 @@ CVS,Palpation
 CVS,Visible P M I
 CVS,Abnormal Outward Pulsations
 CVS,Arrhythmias
+CVS,Cardiac Wheeze
 Breasts,NAD
-Breasts,Discharge
+Breasts,Spontaneoous discharge
 Breasts,Masses
 Breasts,Lumps
 Breasts,Pain
 Breasts,Cracked Nipples
 Breasts,Everted Nipples
 Breasts,Tenderness
+Breasts,Asymmtery
+Breasts,Peau d’orange appearance
+Breasts,Skin dimpling
+Breasts,Swollen Lymph Nodes
 RS,NAD
 RS,Wheeze- Bilateral
 RS,Wheeze- Left side
@@ -66,7 +96,58 @@ RS,Dyspnea at rest
 RS,Noisy breathing
 RS,Reduced Bilateral airflow
 RS,Reduced Unilateral airflow
+RS,Hemoptysis
 CNS,NAD
+CNS,Change in behavior
+CNS,Headache
+CNS,Snout Reflex
+CNS,Grasp Reflex
+CNS,Digital Reflexes (Wartenberg - Hoffman)
+CNS,Babinski reflex
+CNS,Pathologic Reflexes
+CNS,Abnormal Deep Tendon Reflexes
+CNS,Positive Romberg Sign
+CNS,Loss of Position Sense
+CNS,Ataxia
+CNS,Alexia
+CNS,Agraphia
+CNS,Sterognosis
+CNS,Graphesthesia
+CNS,Muscle Tenderness
+CNS,Atrophy - Hypertrophy
+CNS,Abnormal Limb Tone (Spasticity - Rigidity - Cogwheeling - Flaccidity)
+CNS,Involuntary Movements (Fasciculations - Tremor - Chorea - Posturing)
+CNS,Loss of Abstract Reasoning
+CNS,Aphonia
+CNS,Athetosis
+CNS,Chorea
+CNS,Problems With Walking Or Balance
+CNS,Change In Sensation
+CNS,Headaches
+CNS,Memory Changes
+CNS,Tremors
+CNS,Tingling
+CNS,Numbness
+CNS,Local Weakness
+CNS,Paralysis
+CNS,Seizures
+CNS,Fainting
+CNS,Back Pain
+CNS,Joint Deformities
+CNS,Swelling Of Joints
+CNS,Shoulder Pain
+CNS,Aching Muscles
+CNS,Cortical Functions
+CNS,Sensory loss
+CNS,Diplopia
+CNS,Thrombus/ Embolus
+CNS,Syncope
+CNS,Visual Field Changes
+CNS,Muscle Weakness-Upper Limb (R)
+CNS,Muscle Weakness-Upper Limb (L)
+CNS,Muscle Weakness-Lower Limb (R)
+CNS,Muscle Weakness-Lower Limb (L)
+CNS,Speech disability
 CNS,Conscious
 CNS,Semi conscious
 CNS,Unconscious
@@ -75,8 +156,14 @@ CNS,Neck rigidity
 CNS,Meningeal signs
 CNS,Focal Neurological Deficit
 CNS,Flapping Tremor
-CNS,Alzheimer's disease
-CNS,Parkisnon's
+CNS,Delirium/Confusion
+CNS,Hallucination
+CNS,Stupor
+CNS,Reflex abnormality
+CNS,Myoclonus
+CNS,Nystagmus
+CNS,Rigidity
+CNS,Bradykinesia
 Gasterointestinal System,NAD
 Gasterointestinal System,Hepatomegaly
 Gasterointestinal System,Splenomegaly
@@ -100,63 +187,51 @@ Gasterointestinal System,Increased Flatulence
 Gasterointestinal System,GERD
 Gasterointestinal System,Reflux disorders
 Gasterointestinal System,Ulcers
+Gasterointestinal System,Hematemesis
+Gasterointestinal System,Vomiting
+Gasterointestinal System,Dyspepsia
+Gasterointestinal System,Melena
+Gasterointestinal System,Steatorrhea
+Gasterointestinal System,Caput Medusae
+Gasterointestinal System,Change in bowel history
+Gasterointestinal System,Abnormal Pulsations/Movememnts
+Gasterointestinal System,Absent bowel sounds
+Gasterointestinal System,Abdominal rigidity
 Endocrine System,NAD
-Endocrine System,Hypothyroidism
-Endocrine System,Hperthyroidism
-Endocrine System,Diabetes Mellitus
-Endocrine System,Diabetes Insipidus
-Endocrine System,Hypoparathyroidism
-Endocrine System,Hyperparathyroidism
 Endocrine System,Cretinism
 Endocrine System,Gigantism
 Endocrine System,Addisons disease
 Endocrine System,Cushings disease
 Endocrine System,Pituatary insufficiency
 Endocrine System,Hirsutism
-CNS,NAD
-CNS,Snout Reflex
-CNS,Grasp Reflex
-CNS,Digital Reflexes (Wartenberg - Hoffman)
-CNS,Babinski reflex
-CNS,Pathologic Reflexes
-CNS,Abnormal Deep Tendon Reflexes
-CNS,Positive Romberg Sign
-CNS,Loss of Position Sense
-CNS,Ataxia
-CNS,Alexia
-CNS,Agraphia
-CNS,Sterognosis
-CNS,Graphesthesia
-CNS,Muscle Tenderness
-CNS,Atrophy - Hypertrophy
-CNS,Abnormal Limb Tone (Spasticity - Rigidity - Cogwheeling - Flaccidity)
-CNS,Involuntary Movements (Fasciculations - Tremor - Chorea - Posturing)
-CNS,Loss of Abstract Reasoning
-CNS,Aphonia
-CNS,Chorea
-CNS,Problems With Walking Or Balance
-CNS,Change In Sensation
-CNS,Headaches
-CNS,Memory Changes
-CNS,Tremors
-CNS,Tingling
-CNS,Numbness
-CNS,Local Weakness
-CNS,Paralysis
-CNS,Seizures
-CNS,Fainting
-CNS,Back Pain
-CNS,Joint Deformities
-CNS,Swelling Of Joints
-CNS,Shoulder Pain
-CNS,Aching Muscles
-CNS,Cortical Functions
-CNS,Sensory
-CNS,Diplopia
-CNS,Thrombus/ Embolus
-CNS,Syncope
-CNS,Hemophilias, Bleeding Ulcers
-CNS,Visual Field Changes
+Endocrine System,Abnormal Weight gain
+Endocrine System,Abnormal Weight Loss
+Endocrine System,Changes in mood/memory
+Endocrine System,Tremor
+Endocrine System,Exophthalmos
+Endocrine System,Fat pads on neck and shoulders
+Endocrine System,Hyperpigmentation of skin
+Endocrine System,Intolerance to heat or cold
+Endocrine System,Confusion
+Endocrine System,Blurred vision
+Endocrine System,Paresthesias
+Endocrine System,Seizures
+Endocrine System,Coma
+Endocrine System,Decreased blood glucose level
+Endocrine System,Pallor
+Endocrine System,Cool, clammy skin
+Endocrine System,Diaphoretic
+Endocrine System,Polyurea
+Endocrine System,Polydipsia
+Endocrine System,Polyphagia
+Endocrine System,Tachycardia
+Endocrine System,Palpitations
+Endocrine System,Hypothyroidism
+Endocrine System,Hperthyroidism
+Endocrine System,Diabetes Mellitus
+Endocrine System,Diabetes Insipidus
+Endocrine System,Hypoparathyroidism
+Endocrine System,Hyperparathyroidism
 Skin,NAD
 Skin,Edema
 Skin,Pallor
@@ -177,11 +252,13 @@ Skin,Scaly skin
 Skin,Pruritis
 Skin,Burns
 Skin,Moles
+Skin,Flushing
+Skin,Hyperpigmentation
+Skin,Hypopigmentation
 Genito-Urinary System (M),NAD
 Genito-Urinary System (M),Increased urination
 Genito-Urinary System (M),Decreased urination
-Genito-Urinary System (M),Unable to hold urine
-Genito-Urinary System (M),Blood in urine
+Genito-Urinary System (M),Loss of bladder control
 Genito-Urinary System (M),CKD
 Genito-Urinary System (M),Erectile dysfunction
 Genito-Urinary System (M),Penile discharge
@@ -189,16 +266,41 @@ Genito-Urinary System (M),Pain on micturition
 Genito-Urinary System (M),Burning on micturition
 Genito-Urinary System (M),Infertility
 Genito-Urinary System (M),Genital Lesions
+Genito-Urinary System (M),Blood in urine
+Genito-Urinary System (M),Incomplete voiding
+Genito-Urinary System (M),Phimosis
+Genito-Urinary System (M),Kyluria
 Genito-Urinary System (F),NAD
 Genito-Urinary System (F),Pelvic pain
-Genito-Urinary System (F),Amenorrhea
 Genito-Urinary System (F),Pain on micturition
 Genito-Urinary System (F),Burning on micturition
 Genito-Urinary System (F),Vaginal discharge
+Genito-Urinary System (F),Loss of bladder control
 Genito-Urinary System (F),Inflammation
 Genito-Urinary System (F),Pain/swelling
 Genito-Urinary System (F),Excessive menstrual bleeding
-Genito-Urinary System (F),Irregular menses
 Genito-Urinary System (F),Prolonged menses
+Genito-Urinary System (F),Inter mentsrual bleeding
+Genito-Urinary System (F),Painful Menstruation
+Genito-Urinary System (F),Irregular menses
+Genito-Urinary System (F),Amenorrhea
 Genito-Urinary System (F),Infertility
 Genito-Urinary System (F),Genital Lesions
+Psychiatric Evaluation,NAD
+Psychiatric Evaluation,Anxiety
+Psychiatric Evaluation,Delirium/Confusion
+Psychiatric Evaluation,Agitation
+Psychiatric Evaluation,Irritability
+Psychiatric Evaluation,Personality changes
+Psychiatric Evaluation,Anhedonia
+Psychiatric Evaluation,Suicidal ideation
+Psychiatric Evaluation,Headache
+Psychiatric Evaluation,Memory impairment
+Psychiatric Evaluation,Seizures
+Psychiatric Evaluation,Insomnia
+Psychiatric Evaluation,Tremor
+Psychiatric Evaluation,Paresthesias
+Psychiatric Evaluation,Altered Mental Sensorium
+Psychiatric Evaluation,Mood changes
+Psychiatric Evaluation,Depression
+Psychiatric Evaluation,Mania
