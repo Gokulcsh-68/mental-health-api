@@ -270,7 +270,6 @@ abstract class EnumAnalyticsChart {
                 case 'Class I Obesity':
 
                 $chart_result['class_one'][$v->details->date] = !empty($chart_result['class_one'][$v->details->date])?$chart_result['class_one'][$v->details->date]+1:1;
-                    $chart_result['class_one'] = 1;
                     break;
 
                 case 'Class II Obesity':
