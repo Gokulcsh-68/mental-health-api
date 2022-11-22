@@ -1538,6 +1538,10 @@ class AuthService extends BaseService
         $procedure = $entityService->getLimitEntity($request);
         $health['e_procedure'] = $procedure->getData()->data;
 
+        $request['slug']= 'surgical-procedure';
+        $surgicalprocedure = $entityService->getLimitEntity($request);
+        $health['g_surgical_procedure'] = $surgicalprocedure->getData()->data;
+
 
 
         // unset($request['slug'],$request['resource'],$request['entity']);
@@ -1572,6 +1576,17 @@ class AuthService extends BaseService
         $vdx = $entityService->getEntity($request);
         $health['f_symptoms_reason'] = $vdx->getData()->data;
 
+        unset($request['slug'],$request['resource'],$request['entity']);
+        
+        $request['resource']= 'Master';
+        $request['entity']= new Master;
+        $request['slug']= 'systemic-examination';
+        $request['getValues']= 'yes';
+        $request['order_by']= 'id';
+        $request['dir']= 'asc';
+        $exam = $entityService->getEntity($request);
+        $health['h_examination'] = $exam->getData()->data;
+
         // HISTORIES
 
         unset($request['slug'],$request['resource'],$request['entity']);
@@ -1590,6 +1605,10 @@ class AuthService extends BaseService
         $request['slug']= 'surgical-history';
         $surgical_history = $entityService->getLimitEntity($request);
         $history['b_surgical_history'] = $surgical_history->getData()->data;
+
+        $request['slug']= 'diagnosis';
+        $diagnosis = $entityService->getLimitEntity($request);
+        $history['h_diagnosis'] = $diagnosis->getData()->data;
 
         unset($request['slug'],$request['resource'],$request['entity']);
 
@@ -1650,6 +1669,10 @@ class AuthService extends BaseService
         $request['slug']= 'chief-complaints';
         $chief_complaints = $entityService->getLimitEntity($request);
         $docs['d_chief_complaints'] = $chief_complaints->getData()->data;
+
+        $request['slug']= 'notes';
+        $notes = $entityService->getLimitEntity($request);
+        $docs['e_notes'] = $notes->getData()->data;
 
         // $request['slug']= 'health-insurance';
         // $health_insurance = $entityService->getLimitEntity($request);

@@ -12,7 +12,6 @@ trait GetEntity
     public function getModelList()
     {
         $model = $this;
-
         return $this->applyFilters($model, app('request')->get('pluck') ? true : false);
     }
 
@@ -34,7 +33,7 @@ trait GetEntity
         }
 
         if ($request->get("order_by")) {
-            $model = $model->orderBy($this->getTable() . "." . $request->get("order_by"), $this->getOrderByDir());
+            $model = $model->orderBy($this->getTable() . "." . $request->get("order_by"), $request->get("dir")?$request->get("dir"): $this->getOrderByDir());
         } else {
             $model = $model->orderBy($this->getTable() . "." . $this->getKeyName(), "desc" );
         }

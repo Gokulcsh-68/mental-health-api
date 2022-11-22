@@ -365,6 +365,33 @@ class Master extends BaseModel
                 
             }
         }
+        else if($type == 'systemic-examination'){
+
+            if(!empty($request->get('patient_id')) && $request->get('getValues') == 'yes') { 
+
+                 $user_values = PatientHealth::where('patient_id',$request->get('patient_id'))->where('slug',$slug)->value('values');
+
+                 $user_values = (array) $user_values;
+
+                if($attributes == ''){
+                    $attributes= (object) $attributes;
+                }
+
+                 $attributes->folio_values = [];
+                foreach ($user_values as $key => $value) {
+                    if($value === true){
+                        $attributes->folio_values[] = $this->where('slug',$key)->value('name');
+                    }
+                    if($key == 'others'){
+                        foreach ($value as $ko => $vo) {
+                            $attributes->folio_values[] = $vo;
+                        }
+                   }
+                }
+
+                
+            }
+        }
 
         return $attributes;
     }
