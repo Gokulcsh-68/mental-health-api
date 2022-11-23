@@ -33,7 +33,19 @@ trait GetEntity
         }
 
         if ($request->get("order_by")) {
-            $model = $model->orderBy($this->getTable() . "." . $request->get("order_by"), $request->get("dir")?$request->get("dir"): $this->getOrderByDir());
+            if(!empty($request->get("dir"))){
+                if($request->get("dir") == '1'){
+                    $dir = 'asc';
+                }else if($request->get("dir") == 'asc' || $request->get("dir") == 'desc'){
+                    $dir = $request->get("dir");
+                }else{
+                    $dir = 'desc';
+                }
+            }else{
+                $dir = $this->getOrderByDir();
+            }
+
+            $model = $model->orderBy($this->getTable() . "." . $request->get("order_by"), $dir);
         } else {
             $model = $model->orderBy($this->getTable() . "." . $this->getKeyName(), "desc" );
         }

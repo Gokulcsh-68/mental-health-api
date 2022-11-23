@@ -369,7 +369,11 @@ class Master extends BaseModel
 
             if(!empty($request->get('patient_id')) && $request->get('getValues') == 'yes') { 
 
-                 $user_values = PatientHealth::where('patient_id',$request->get('patient_id'))->where('slug',$slug)->value('values');
+            $from  = $request->get('from')? date('Y-m-d',strtotime($request->get('from'))): date('Y-m-d');
+            $to    = $request->get('to')? date('Y-m-d',strtotime($request->get('to'))): date('Y-m-d');
+
+                 $user_values = PatientHealth::where('patient_id',$request->get('patient_id'))
+                 ->whereBetween('values->date', [$from, $to])->where('slug',$slug)->value('values');
 
                  $user_values = (array) $user_values;
 
