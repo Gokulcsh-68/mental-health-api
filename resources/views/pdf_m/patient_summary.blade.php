@@ -174,6 +174,14 @@
 		    		 @endif
 		        @break
 
+		    @case('h_diagnosis')
+				    @if(count((array)$v) > 0)
+			    	<h4 class="color_secondary">Diagnosis</h4>
+		         @component('pdf_m.pdf_components.diagnosis',['lists'=> $v])
+	    		 @endcomponent
+		    		 @endif
+		        @break
+
 		    @case('b_surgical_history')
 				    @if(count((array)$v) > 0)
 			    	<h4 class="color_secondary">Surgical History</h4>
@@ -185,18 +193,18 @@
 		    @case('c_social_history')
 				    @if(count((array)$v) > 0)
 			    	<h4 class="color_secondary">Social History</h4>
-		        @component('pdf_m.pdf_components.social_history',['lists'=> $v])
+		        @component('pdf_m.pdf_components.habit_history',['lists'=> $v])
 	    		@endcomponent
 		    		 @endif
 		        @break
 
-		    @case('d_family_history')
+		  <?php /*  @case('d_family_history')
 
 			    	<h4 class="color_secondary">Family History</h4>
 		        @component('pdf_m.pdf_components.family_history',['lists'=> $v])
 	    		@endcomponent
 
-		        @break
+		        @break */ ?> 
 
 		    @case('e_ros')
 				    @if(count((array)$v) > 0)
@@ -289,13 +297,29 @@
 		    		 @endif
 			        @break
 
+			    @case('g_surgical_procedure')
+				    @if(count((array)$v) > 0)
+			    	<h4 class="color_secondary">Surgical Procedure</h4>
+			        @component('pdf_m.pdf_components.surgical_procedure',['lists'=> $v])
+		    		@endcomponent
+		    		 @endif
+			        @break
+			        
+			    @case('h_examination')
+				    @if(count((array)$v) > 0)
+			    	<h4 class="color_secondary">Examination</h4>
+			        @component('pdf_m.pdf_components.examination',['lists'=> $v,'gender'=>$gender])
+		    		@endcomponent
+		    		 @endif
+			        @break
+
 			    @default
 			        <span>`{{ucfirst($k)}}` is not found!</span>
 			@endswitch
    	@endforeach
 
 
-	<h3 class="color_primary">Vaccination:</h3>
+<?php /*   	<h3 class="color_primary">Vaccination:</h3>
 
     @foreach($content->immunisation as $k => $v)
    	
@@ -303,7 +327,7 @@
 	   @endcomponent
 
      		
-    @endforeach
+    @endforeach */ ?> 
 
 
 	<h3 class="color_primary">Documents:</h3>
