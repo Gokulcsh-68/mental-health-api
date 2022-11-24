@@ -358,7 +358,7 @@
 		    		 @endif
 		        @break
 
-		    @case('notes')
+		    @case('e_notes')
 				    @if(count((array)$v) > 0)
 			    	<h4 class="color_secondary">Notes</h4>
 		        @component('pdf_m.pdf_components.notes',['lists'=> $v])
