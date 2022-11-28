@@ -1542,6 +1542,10 @@ class AuthService extends BaseService
         $surgicalprocedure = $entityService->getLimitEntity($request);
         $health['g_surgical_procedure'] = $surgicalprocedure->getData()->data;
 
+        $request['slug']= 'prescription';
+        $prescription = $entityService->getLimitEntity($request);
+        $health['h_prescription'] = $prescription->getData()->data;
+
 
 
         // unset($request['slug'],$request['resource'],$request['entity']);
@@ -1586,6 +1590,7 @@ class AuthService extends BaseService
         $request['dir']= 'asc';
         $exam = $entityService->getEntity($request);
         $health['h_examination'] = $exam->getData()->data;
+        $request['dir']= 'desc';
 
         // HISTORIES
 
