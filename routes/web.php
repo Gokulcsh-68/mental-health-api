@@ -46,6 +46,7 @@ $router->group(['prefix' => 'v1/', 'middleware' => 'clientAuth'], function ($rou
     $router->get('teleconsult/summaryPdf', 'AuthService@consultSummaryPdf');
     $router->get('patient/summary', 'AuthService@patientSummary');
     $router->get('patient/summaryPdf', 'AuthService@patientSummaryPdf');
+    $router->post('patient/ConsultCache', 'AuthService@ConsultCache');
 
     $router->post('freeze-phr-emr', 'AuthService@freezePhrEmr');
 

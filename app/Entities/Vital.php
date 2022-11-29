@@ -2,9 +2,12 @@
 
 namespace App\Entities;
 use App\Entities\User;
+use App\Services\AuthService;
 use App\Services\BluetoothPeripheralService;
+use App\Services\CureselectApis\TeleConsultApiService;
 use Carbon\Carbon;
 use DB;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 
 class Vital extends BaseModel
@@ -87,6 +90,16 @@ class Vital extends BaseModel
     {
         if(empty($data)){
             $data = $this->getModelAttributes($request);
+        }            
+
+
+        if(!$request->get('consult_id')){
+            $Cachevalue = Cache::get($data['user_id']);
+
+            if(!empty($Cachevalue)){
+                $data['consult_id'] = $Cachevalue['consult_id'];
+                $data['details']['updated_by'] = "user";
+            }            
         }
 
         if(isset($data['details']['date'])){

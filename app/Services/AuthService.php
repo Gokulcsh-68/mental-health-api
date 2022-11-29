@@ -55,6 +55,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Mpdf\Mpdf;
+use Illuminate\Support\Facades\Cache;
 
 
 class AuthService extends BaseService
@@ -1979,6 +1980,35 @@ class AuthService extends BaseService
                         ->get()->unique('slug')->flatten();
                         
         return $this->httpResponse->setHttpData($vital)  
+                ->jsonResponse();
+    }
+
+
+    public function ConsultCache(Request $request): JsonResponse{
+        
+
+        if($request->get('cache_type') == "create"){
+            $consult_status = '';
+            $consult_id = '';
+
+            if(!empty($request->get('consult_id'))){
+                $consult_id = $request->get('consult_id');
+            }
+
+            if(!empty($request->get('consult_status'))){
+                $consult_status = $request->get('consult_status');
+            }
+
+            $cacheVal = array('consult_id' => $consult_id, 'consult_status' => $consult_status);
+
+            Cache::put($request->get('user_id'), $cacheVal);
+        }
+
+        if($request->get('cache_type') == "delete"){
+            Cache::forget($request->get('user_id'));
+        }
+                        
+        return $this->httpResponse->setHttpMessage('Updated')  
                 ->jsonResponse();
     }
 
