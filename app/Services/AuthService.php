@@ -1514,6 +1514,17 @@ class AuthService extends BaseService
 
         // HEALTH
 
+
+
+        unset($request['slug'],$request['resource'],$request['entity']);
+
+        $request['resource']= 'Doc';
+        $request['entity']= new Doc;
+
+        $request['slug']= 'chief-complaints';
+        $chief_complaints = $entityService->getLimitEntity($request);
+        $health['a_chief_complaints'] = $chief_complaints->getData()->data;
+
         unset($request['slug'],$request['resource'],$request['entity']);
 
         $request['resource']= 'PatientHealth';
@@ -1671,10 +1682,6 @@ class AuthService extends BaseService
         $request['slug']= 'icd';
         $icd = $entityService->getLimitEntity($request);
         $docs['c_icd'] = $icd->getData()->data;
-
-        $request['slug']= 'chief-complaints';
-        $chief_complaints = $entityService->getLimitEntity($request);
-        $docs['d_chief_complaints'] = $chief_complaints->getData()->data;
 
         $request['slug']= 'notes';
         $notes = $entityService->getLimitEntity($request);
