@@ -30,7 +30,7 @@
 
 			if(!empty($lv->le)){
 				$reading = $lv->le;
-				$title = "Left Eye (R.E.)";
+				$title = "Left Eye (L.E.)";
 			}
 		?>
 		

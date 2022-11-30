@@ -1558,6 +1558,10 @@ class AuthService extends BaseService
         $prescription = $entityService->getLimitEntity($request);
         $health['h_prescription'] = $prescription->getData()->data;
 
+        $request['slug']= 'prescription_glasses';
+        $prescription_glasses = $entityService->getLimitEntity($request);
+        $health['i_prescription_glasses'] = $prescription_glasses->getData()->data;
+
 
 
         // unset($request['slug'],$request['resource'],$request['entity']);
