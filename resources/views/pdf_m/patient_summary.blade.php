@@ -39,7 +39,7 @@
 					    @endcomponent
 			    	@break
 			    @default
-			        <span>`{{ucfirst($k)}}` is not found!</span>
+		        @break
 			@endswitch
 	 @endforeach
 
@@ -154,7 +154,7 @@
 			        @break
 
 			    @default
-			        <span>`{{ucfirst($k)}}` is not found!</span>
+		        @break
 			@endswitch
    @endforeach
 	 
@@ -231,7 +231,8 @@
 		        @break
 
 		    @default
-		        <span>`{{ucfirst($k)}}` is not found!</span>
+		        @break
+		        <!-- <span>`{{ucfirst($k)}}` is not found!</span> -->
 		@endswitch
 
    @endforeach
@@ -241,6 +242,17 @@
 
 	@foreach($content->health as $k => $v)
 		@switch($k)
+
+
+		    	@case('a_chief_complaints')
+				    @if(count((array)$v) > 0)
+			    	<h4 class="color_secondary">Chief Complaints</h4>
+		        @component('pdf_m.pdf_components.chief_complaints',['lists'=> $v])
+	    		@endcomponent
+		    		 @endif
+		        @break
+
+
 			    @case('b_medicine')
 				    @if(count((array)$v) > 0)
 			    	<h4 class="color_secondary">Medicine</h4>
@@ -312,9 +324,25 @@
 		    		@endcomponent
 		    		 @endif
 			        @break
+			        
+			    @case('h_prescription')
+				    @if(count((array)$v) > 0)
+			    	<h4 class="color_secondary">Prescription</h4>
+			        @component('pdf_m.pdf_components.prescription',['lists'=> $v])
+		    		@endcomponent
+		    		 @endif
+			        @break
+			        
+			    @case('i_prescription_glasses')
+				    @if(count((array)$v) > 0)
+			    	<h4 class="color_secondary">Glasses</h4>
+			        @component('pdf_m.pdf_components.prescription_glasses',['lists'=> $v])
+		    		@endcomponent
+		    		 @endif
+			        @break
 
 			    @default
-			        <span>`{{ucfirst($k)}}` is not found!</span>
+		        @break
 			@endswitch
    	@endforeach
 
@@ -391,7 +419,7 @@
 		        @break
 
 		    @default
-		        <span>`{{ucfirst($k)}}` is not found!</span>
+		        @break
 		@endswitch
 	@endforeach
 
