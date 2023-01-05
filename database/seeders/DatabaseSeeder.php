@@ -74,7 +74,8 @@ class DatabaseSeeder extends Seeder
             SymptomUpdateNewSeeder::class,
             UpdateRolesSeeder::class,
             VdxValuesSeeder::class,
-            SystemicValueSeeder::class
+            SystemicValueSeeder::class,
+            UpdateAssessmentStrokeScale::class
         ]);
     }
 }
