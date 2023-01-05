@@ -10,7 +10,7 @@ class Question extends BaseModel
      * @var array
      */
     protected $fillable = [
-        "parent_id", "name", "type", "is_active"
+        "parent_id", "name", "type", "is_active", "additional_info"
     ];
 
     /**
@@ -19,6 +19,7 @@ class Question extends BaseModel
      * @var array
      */
     protected $casts = [
+        "additional_info" => "object",
         
     ];
 

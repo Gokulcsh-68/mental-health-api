@@ -23,7 +23,8 @@ class QuestionTransformer extends JsonResource
                 'name'          => $this->name,
                 'type'          => $this->type,
                 'is_active'     => $this->is_active,
-                'sub_questions' => $this->subQuestions
+                'sub_questions' => $this->subQuestions,
+                'additional_info'       => $this->additional_info                
             ];
 
         }else{
@@ -32,7 +33,8 @@ class QuestionTransformer extends JsonResource
                 // 'parent_id' =>  $this->parent_id,
                 'name'      =>  $this->name,
                 'type'      =>  $this->type,
-                'is_active' =>  $this->is_active
+                'is_active' =>  $this->is_active,
+                'additional_info'       => $this->additional_info
             ];
         }
         
