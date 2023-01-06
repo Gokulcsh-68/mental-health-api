@@ -15,7 +15,7 @@ class Form extends BaseModel
      * @var array
      */
     protected $fillable = [
-        "parent_id", "slug", "name", "desc", "assessment_group", "type", "images", "is_active", "created_by", "role_code"
+        "parent_id", "slug", "name", "desc", "assessment_group", "type", "images", "is_active", "created_by", "role_code","order"
     ];
 
     /**
