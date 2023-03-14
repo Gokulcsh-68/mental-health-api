@@ -1776,6 +1776,11 @@ class AuthService extends BaseService
         $vitals['m_uric_acid'] = $respiration->getData()->data;
 
 
+        $request['slug']= 'spirometer';
+        $respiration = $entityService->getLimitEntity($request);
+        $vitals['n_spirometer'] = $respiration->getData()->data;
+
+
         return $this->httpResponse->setHttpData([
             'profile'=>$summary,
             'vitals'=>$vitals,
