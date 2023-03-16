@@ -322,6 +322,19 @@ class AuthService extends BaseService
         return $this->httpResponse->setHttpData($providerinfo)->jsonResponse();
     }
 
+    public function patientinfo(Request $request): JsonResponse
+    {
+       $uid = $request->user()->id;
+        if($request->get('user_id')){
+            if($request->get('user_id') > 0){
+                $uid = $request->get('user_id');
+            }
+        }
+        $patientinfo = app(Patient::class)->where('user_id',$uid)->first()->toArray();
+
+        return $this->httpResponse->setHttpData($patientinfo)->jsonResponse();
+    }
+
     public function getMasterx(Request $request): JsonResponse
     {
 

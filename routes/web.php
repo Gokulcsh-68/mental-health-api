@@ -126,6 +126,7 @@ $router->group(['prefix' => 'v1/', 'middleware' => 'clientAuth'], function ($rou
             $router->patch('communication', 'AuthService@communication');
             $router->get('info', 'AuthService@info');
             $router->get('providerinfo', 'AuthService@providerinfo');
+            $router->get('patientinfo', 'AuthService@patientinfo');
             $router->get('userDetails', 'AuthService@userDetails');
             $router->post('uploadDocs', 'AuthService@uploadDocs');
             $router->post('uploadAvatar', 'AuthService@uploadAvatar');
