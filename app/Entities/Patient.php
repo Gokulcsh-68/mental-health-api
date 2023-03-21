@@ -5,6 +5,7 @@ namespace App\Entities;
 use App\Entities\Hospital;
 use App\Services\CureselectApis\PeripheralApiService;
 use DB;
+use Illuminate\Support\Facades\Log;
 
 class Patient extends BaseModel
 {
@@ -93,7 +94,14 @@ class Patient extends BaseModel
             $user = User::create($data['user']);
 
             if(!$request->get('hospital_id')){
-                $data['hospital_id']  = $request->user()->staff->hospital_id;
+
+                if ($request->user()->role->code == 'provider') {            
+                     $data['hospital_id'] = $request->user()->provider->hospital_id;
+                 }else{
+                    $data['hospital_id']  = $request->user()->staff->hospital_id;
+
+                 }
+                
             }
 
            
@@ -124,7 +132,11 @@ class Patient extends BaseModel
                 $data['group_id'] = $request->user()->staff->group_id;
             }
             else{
-                $data['group_id'] = Hospital::Where('id',$request->user()->staff->hospital_id)->value('group_id');
+                if ($request->user()->role->code == 'provider') {            
+                     $data['group_id'] = $request->user()->provider->group_id;
+                 }else{
+                    $data['group_id'] = Hospital::Where('id',$request->user()->staff->hospital_id)->value('group_id');
+                }
             }
             $model = $this->create($data);
             DB::commit();
@@ -201,11 +213,16 @@ class Patient extends BaseModel
         $model = parent::applyFilters($model, $isPluck);
         $request = app('request');
 
-        if ($request->get('staff')->hospital_id) {
+        if (!empty($request->get('staff')->hospital_id)) {
             $model->where('patients.hospital_id', $request->get('staff')->hospital_id);
         }
+
+        if ($request->user()->role->code == 'provider') {
+
+            $model->where('patients.hospital_id', $request->user()->provider->hospital_id);
+        }
      
-        if ($request->get('staff')->group_id) { 
+        if (!empty($request->get('staff')->group_id)) { 
             $model->where('patients.group_id', $request->get('staff')->group_id);
         } 
 
