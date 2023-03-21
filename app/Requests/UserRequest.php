@@ -33,7 +33,7 @@ class UserRequest extends RequestAbstract
             'role' => 'required',
             'first_name' => 'required',
             'last_name' => 'nullable',
-            'email' => 'required',
+            'email' => 'nullable',
             'isd_code' => 'nullable',
             'mobile' => 'nullable',
             'username' => 'required|unique:users,username,null,id,role_id,' . $role_id,
