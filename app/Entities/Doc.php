@@ -127,6 +127,10 @@ class Doc extends BaseModel
             }
         }
 
+        if ($request->get('slug') != 'chief-complaints') {
+            $model->whereNotIn('docs.document_source', ['chief-complaints']);
+        }
+
         if ($request->get('slug')) {
 
             // if(in_array($request->get('slug'), $forms_expect)) {
