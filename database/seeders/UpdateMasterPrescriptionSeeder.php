@@ -36,6 +36,11 @@ class UpdateMasterPrescriptionSeeder extends Seeder
                 'slug' => 'diagnosis', 
                 'name' => 'Diagnosis',
                 'is_active' => 1,
+            ],[
+                'master_type_slug' => 'health_form', 
+                'slug' => 'continuous_report', 
+                'name' => 'Continuous Care Report',
+                'is_active' => 1,
             ]
         ];
 
