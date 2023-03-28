@@ -365,7 +365,7 @@ class Master extends BaseModel
                 
             }
         }
-        else if($type == 'systemic-examination'){
+        else if($type == 'systemic-examination' || $type == 'jayam-systemic-examination'){
 
             if(!empty($request->get('patient_id')) && $request->get('getValues') == 'yes') { 
 
