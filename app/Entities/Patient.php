@@ -217,17 +217,23 @@ class Patient extends BaseModel
             $model->where('patients.hospital_id', $request->get('staff')->hospital_id);
         }
 
-        if ($request->user()->role->code == 'provider') {
+        if ($request->get('user_id')) {
 
-            $model->where('patients.hospital_id', $request->user()->provider->hospital_id);
+                $model->where('patients.user_id', $request->get('user_id'));
+            }
+
+        if(!empty($request->user()))
+        {
+            if ($request->user()->role->code == 'provider') {
+
+                $model->where('patients.hospital_id', $request->user()->provider->hospital_id);
+            }
+            
         }
      
         if (!empty($request->get('staff')->group_id)) { 
             $model->where('patients.group_id', $request->get('staff')->group_id);
         } 
-
-        $role_code = Role::where('id', $request->user()->role_id)->value('code');
-
         
 
         $status_key = $request->get('searchkey');

@@ -1,63 +1,63 @@
-Status of starting,Walking,nomultiple
-Status of starting,Wheeler Chair,nomultiple
-Status of starting,Bed ridden,nomultiple
-Status of starting,Clinical Diagnosis,nomultiple
+Status of starting,Walking
+Status of starting,Wheeler Chair
+Status of starting,Bed ridden
+Status of starting,Clinical Diagnosis
 Pedal Odema,Yes,nomultiple
 Pedal Odema,No,nomultiple
 Bed sore,Yes,nomultiple
 Bed sore,No,nomultiple
-Injection,IM,nomultiple
-Injection,IV,nomultiple
-Injection,SC,nomultiple
-Blood Sugar Check (hrs),Q2,nomultiple
-Blood Sugar Check (hrs),Q4,nomultiple
-Blood Sugar Check (hrs),Q6,nomultiple
-Blood Sugar Check (hrs),Q8,nomultiple
-Nebulisation (hrs),Q2,nomultiple
-Nebulisation (hrs),Q4,nomultiple
-Nebulisation (hrs),Q6,nomultiple
-Nebulisation (hrs),Q8,nomultiple
-Mode of Oxygen,Cylinder,nomultiple
-Mode of Oxygen,Concentrator,nomultiple
-Mode of Oxygen,BIPAP,nomultiple
-Mode of Oxygen,Ventilator,nomultiple
-Mode of Oxygen,Ambu Bag,nomultiple
-Ambulation,Walking with aid,nomultiple
-Ambulation,Walking without aid,nomultiple
-Ambulation,Bedridden,nomultiple
-Ambulation,Using Wheel Chair,nomultiple
-Ambulation,Using Walker,nomultiple
-Mood,Cheerful,nomultiple
-Mood,Irritated,nomultiple
-Mood,Agitated,nomultiple
-Mood,Morose,nomultiple
-Mood,Disturbed,nomultiple
-Mood,Feeding,Self,nomultiple
-Mood,Ryles Tube,nomultiple
-Mood,Assisted by person,nomultiple
-Mood,PEG,nomultiple
-Elimination Bladder,Self,nomultiple
-Elimination Bladder,Urinal,nomultiple
-Elimination Bladder,SPC,nomultiple
-Elimination Bladder,Diaper,nomultiple
-Elimination Bladder,Catheter,nomultiple
-Elimination Bladder,Condom,nomultiple
-Elimination Bowel,Self,nomultiple
-Elimination Bowel,Bedpan,nomultiple
-Elimination Bowel,Diaper,nomultiple
-Elimination Bowel,Colostomy,nomultiple
-Mode of Suction,Oral,nomultiple
-Mode of Suction,Tracheal,nomultiple
-Mode of Suction,Endo Tracheal,nomultiple
-Mode of Suction,Nasal,nomultiple
-Mode of Suction,Naso Tracheal,nomultiple
-Fall Risk Assessment,Age above 60,nomultiple
-Fall Risk Assessment,Impaired Judgement,nomultiple
-Fall Risk Assessment,Muscular Weakness,nomultiple
-Fall Risk Assessment,Other,nomultiple
-Fall Risk Assessment,Previous Fall,nomultiple
-Fall Risk Assessment,Post operative,nomultiple
-Fall Risk Assessment,Sensory Deflicit,nomultiple
+Injection,IM
+Injection,IV
+Injection,SC
+Blood Sugar Check (hrs),Q2
+Blood Sugar Check (hrs),Q4
+Blood Sugar Check (hrs),Q6
+Blood Sugar Check (hrs),Q8
+Nebulisation (hrs),Q2
+Nebulisation (hrs),Q4
+Nebulisation (hrs),Q6
+Nebulisation (hrs),Q8
+Mode of Oxygen,Cylinder
+Mode of Oxygen,Concentrator
+Mode of Oxygen,BIPAP
+Mode of Oxygen,Ventilator
+Mode of Oxygen,Ambu Bag
+Ambulation,Walking with aid
+Ambulation,Walking without aid
+Ambulation,Bedridden
+Ambulation,Using Wheel Chair
+Ambulation,Using Walker
+Mood,Cheerful
+Mood,Irritated
+Mood,Agitated
+Mood,Morose
+Mood,Disturbed
+Mood,Feeding,Self
+Mood,Ryles Tube
+Mood,Assisted by person
+Mood,PEG
+Elimination Bladder,Self
+Elimination Bladder,Urinal
+Elimination Bladder,SPC
+Elimination Bladder,Diaper
+Elimination Bladder,Catheter
+Elimination Bladder,Condom
+Elimination Bowel,Self
+Elimination Bowel,Bedpan
+Elimination Bowel,Diaper
+Elimination Bowel,Colostomy
+Mode of Suction,Oral
+Mode of Suction,Tracheal
+Mode of Suction,Endo Tracheal
+Mode of Suction,Nasal
+Mode of Suction,Naso Tracheal
+Fall Risk Assessment,Age above 60
+Fall Risk Assessment,Impaired Judgement
+Fall Risk Assessment,Muscular Weakness
+Fall Risk Assessment,Other
+Fall Risk Assessment,Previous Fall
+Fall Risk Assessment,Post operative
+Fall Risk Assessment,Sensory Deflicit
 Pain Score,0,nomultiple
 Pain Score,1,nomultiple
 Pain Score,2,nomultiple
@@ -71,18 +71,18 @@ Pain Score,9,nomultiple
 Pain Score,10,nomultiple
 Knowledge imparted to staff regarding the use of medical equipments,Yes,nomultiple
 Knowledge imparted to staff regarding the use of medical equipments,No,nomultiple
-Disposal available for staff,Handwash,nomultiple
-Disposal available for staff,Cotton,nomultiple
-Disposal available for staff,Catheters,nomultiple
-Disposal available for staff,Face Mask,nomultiple
-Disposal available for staff,Underpads,nomultiple
-Disposal available for staff,Dressing Items,nomultiple
-Disposal available for staff,Diapers,nomultiple
-Disposal available for staff,Suction,nomultiple
-Disposal available for staff,Gloves,nomultiple
-Disposal available for staff,Cap,nomultiple
-Disposal available for staff,Tissues,nomultiple
-Disposal available for staff,Apron,nomultiple
+Disposal available for staff,Handwash
+Disposal available for staff,Cotton
+Disposal available for staff,Catheters
+Disposal available for staff,Face Mask
+Disposal available for staff,Underpads
+Disposal available for staff,Dressing Items
+Disposal available for staff,Diapers
+Disposal available for staff,Suction
+Disposal available for staff,Gloves
+Disposal available for staff,Cap
+Disposal available for staff,Tissues
+Disposal available for staff,Apron
 Any Pets?,Yes,nomultiple
 Any Pets?,No,nomultiple
 Incase of staff injured by pets accident at workplace, will you bear the cost of treatment?,Yes,nomultiple

@@ -27,6 +27,8 @@ $router->get('/activated', function () use ($router) {
     return view('activated');
 });
 
+$router->get('downloadReport/{id}', 'AuthService@downloadReport');
+
 $router->get('v1/users/activate-accounts-x', 'AuthService@activateAccountsx');
 
 $router->group(['prefix' => 'peripheral/', 'middleware' => 'peripheralAuth'], function ($router) {
