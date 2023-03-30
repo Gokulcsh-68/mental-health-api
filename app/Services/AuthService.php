@@ -2041,27 +2041,23 @@ class AuthService extends BaseService
                 ->jsonResponse();
     }
 
-    public function downloadReport($id, Request $request){
-        
+    public function downloadReport($id, Request $request){        
 
         $patientHealth = PatientHealth::find($id);
 
-
         $entityService = new EntityService;
-        $request['resource']= 'Patient';
-        $request['entity']= new Patient;
+        $request['resource'] = 'Patient';
+        $request['entity'] = new Patient;
 
-        $request['user_id']= $patientHealth->patient_id;
+        $request['user_id'] = $patientHealth->patient_id;
         $patient = $entityService->getLimitEntity($request);
         $patientDetails = $patient->getData()->data;
 
-        $request->request->add(['title' => 'Continuous summary report']);
+        $request->request->add(['title' => 'Continuous summary report - '.$patientHealth->values->report_name.'-'.$patientHealth->patient_id]);
 
-        $template = view('pdf_m.continuous_summary', ['patientDetails' => $patientDetails, 'request' => $request]);
+        $template = view('pdf_m.continuous_summary', ['patientHealth'=>$patientHealth, 'patientDetails' => $patientDetails, 'request' => $request]);
 
         return self::pdf_m($request, $template);
-        // return $this->httpResponse->setHttpMessage('Updated')  
-        //         ->jsonResponse();
     }
 
 }

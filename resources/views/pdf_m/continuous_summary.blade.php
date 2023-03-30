@@ -2,22 +2,28 @@
 @section('content')
 
 <style type="text/css">
-	td,th{
+	td,th, body{
 		font-size: 12px;
 	}
 	h2{
 		font-size: 14px;
 	}
 </style>
-	
- <?php $gender = ''; ?>
+
+		<?php 
+			$gender = ''; 
+		?>
+
  
-	@component('pdf_m.pdf_components.title',['title'=> 'Continuous Summary Reports'])
-    @endcomponent
 
     
     @foreach($patientDetails as $k => $v)
 
+
+    <h1 align="center" class="color_secondary">{{$v->hospital_name}}</h1>
+    <h3 align="center" >Continuous Summary Reports</h3>
+
+    <?php $gender = $v->user->gender; ?>
 	 <table>
 	 	<tr>
 	 		<th>Patient Name</th>
@@ -53,6 +59,96 @@
 	 </table>
 
 @endforeach
+
+
+	<h3 class="color_primary">Vitals:</h3>
+
+	<?php
+		$vitals = [];
+		$evaluation = [];
+		$examination = [];
+		$assessment = [];
+
+		$orderVitals = ['temperature','bp','pulse','respiration'];
+
+		foreach ($orderVitals as $key) {
+		    $vitals[$key] = $patientHealth->values->vitals->$key;
+		}
+
+		if(!empty($patientHealth->values->assessment)){
+			$assessment = $patientHealth->values->assessment;
+		}
+
+		if(!empty($patientHealth->values->examination)){
+			$examination = $patientHealth->values->examination;
+		}
+
+		if(!empty($patientHealth->values->evaluation)){
+			$evaluation = $patientHealth->values->evaluation;
+		}
+	?>
+
+   @foreach($vitals as $k => $v)
+   	
+	   	@switch($k)
+
+			    @case('temperature')
+				    @if(count((array)$v) > 0)
+			    	<h4 class="color_secondary">Temperature</h4>
+			        @component('pdf_m.pdf_components.temperature',['lists'=> $v])
+		    		 @endcomponent
+		    		 @endif
+			        @break
+
+			    @case('bp')
+				    @if(count((array)$v) > 0)
+			    	<h4 class="color_secondary">Blood Pressure</h4>
+			        @component('pdf_m.pdf_components.blood_pressure',['lists'=> $v])
+		    		 @endcomponent
+		    		 @endif
+			        @break
+
+			    @case('pulse')
+				    @if(count((array)$v) > 0)
+			    	<h4 class="color_secondary">Heart Rate</h4>
+			        @component('pdf_m.pdf_components.heart_rate',['lists'=> $v])
+		    		 @endcomponent
+		    		 @endif
+			        @break
+
+			    @case('respiration')
+				    @if(count((array)$v) > 0)
+			    	<h4 class="color_secondary">Respiration</h4>
+			        @component('pdf_m.pdf_components.respiration',['lists'=> $v])
+		    		 @endcomponent
+		    		 @endif
+			        @break
+
+			    @default
+		        @break
+			@endswitch
+   @endforeach
+
+   		@if(count((array)$evaluation) > 0)
+    		<h4 class="color_secondary">HPI</h4>
+	        @component('pdf_m.pdf_components.hpi',['lists'=> $evaluation->hpi])
+			@endcomponent
+		 @endif
+
+
+	    @if(count((array)$examination) > 0)
+	    	<h4 class="color_secondary">Examination</h4>
+	        @component('pdf_m.pdf_components.examination',['lists'=> $examination,'gender'=>$gender])
+			@endcomponent
+		@endif
+
+
+	    @if(count((array)$assessment) > 0)
+	    	<h4 class="color_secondary">Assessment</h4>
+	        @component('pdf_m.pdf_components.examination',['lists'=> $assessment,'gender'=>$gender])
+			@endcomponent
+		@endif
+
 
 
 

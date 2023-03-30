@@ -23,6 +23,7 @@ class PatientTransformer extends JsonResource
             'hospital_id' =>  $this->hospital_id,
             'additional_info' =>  $this->additional_info,
             'user' => (new UserTransformer($this->user)),
+            'hospital_name' => $this->hospital->name,
             'peripheral_credentials' => [
                 'username' => $peripheral_credentials['username'] ?? '',
                 'otp' => $peripheral_credentials['otp'] ?? '',

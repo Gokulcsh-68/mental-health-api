@@ -27,7 +27,6 @@ $router->get('/activated', function () use ($router) {
     return view('activated');
 });
 
-$router->get('downloadReport/{id}', 'AuthService@downloadReport');
 
 $router->get('v1/users/activate-accounts-x', 'AuthService@activateAccountsx');
 
@@ -48,6 +47,7 @@ $router->group(['prefix' => 'v1/', 'middleware' => 'clientAuth'], function ($rou
     $router->get('teleconsult/summaryPdf', 'AuthService@consultSummaryPdf');
     $router->get('patient/summary', 'AuthService@patientSummary');
     $router->get('patient/summaryPdf', 'AuthService@patientSummaryPdf');
+    $router->get('patient/downloadReport/{id}', 'AuthService@downloadReport');
     $router->post('patient/ConsultCache', 'AuthService@ConsultCache');
 
     $router->post('freeze-phr-emr', 'AuthService@freezePhrEmr');

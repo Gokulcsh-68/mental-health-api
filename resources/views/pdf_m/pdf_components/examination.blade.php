@@ -10,12 +10,13 @@
 
         <div style="border-bottom: 1px solid #ccc; padding: 5px">  
           <h4 class="color_primary">
-            <b>{{ $element->name }}</b>
+            <b>{{ $element->name }}</b> - 
+                     @foreach($element->attributes->folio_values as $vj => $evalue)
+                           <span style="color: #000000">{{ $evalue }}, </span>
+                        @endforeach
           </h4>
 
-         @foreach($element->attributes->folio_values as $vj => $evalue)
-                           <span style="color: #007bff">{{ $evalue }}, </span>
-                        @endforeach
+        
         </div>
         @endif
       @endif
