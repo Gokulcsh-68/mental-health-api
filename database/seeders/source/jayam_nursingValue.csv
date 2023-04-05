@@ -1,0 +1,129 @@
+Prognosis,Poor
+Prognosis,Guarded
+Prognosis,Fair
+Prognosis,Good
+Prognosis,Excellent
+Support System,Live Alone: Yes,nomultiple
+Support System,Live Alone: No,nomultiple
+Caregivers ability to assist patient / able to provide,Personal Care: Yes,nomultiple
+Caregivers ability to assist patient / able to provide,Personal Care: No,nomultiple
+Caregivers ability to assist patient / able to provide,Mobility: Yes,nomultiple
+Caregivers ability to assist patient / able to provide,Mobility: No,nomultiple
+Caregivers ability to assist patient / able to provide,Med Admin: Yes,nomultiple
+Caregivers ability to assist patient / able to provide,Med Admin: No,nomultiple
+Caregivers ability to assist patient / able to provide,Prepare / Serve meals: Yes,nomultiple
+Caregivers ability to assist patient / able to provide,Prepare / Serve meals: No,nomultiple
+Caregivers ability to assist patient / able to provide,Maintain safe / clean environment: Yes,nomultiple
+Caregivers ability to assist patient / able to provide,Maintain safe / clean environment: No,nomultiple
+Caregivers ability to assist patient / able to provide,No Perform / assist with procedures: Yes,nomultiple
+Caregivers ability to assist patient / able to provide,No Perform / assist with procedures: No,nomultiple
+Advanced Directives,Patient has a living will: Yes,nomultiple
+Advanced Directives,Patient has a living will: No,nomultiple
+Advanced Directives,Special Provisions included: No Resuscitation
+Advanced Directives,Special Provisions included: No Mech.Vent
+Advanced Directives,Special Provisions included: Medicine support only
+Advanced Directives,Special Provisions included: No Feeding tubes
+Advanced Directives,Special Provisions included: Other
+ADL,Bathing / Showering
+ADL,Toileting
+ADL,Ambulation
+ADL,Dressing
+ADL,Transfers
+ADL,Eating / Meal preparation
+ADL,Medication reminders
+ADL,Shopping
+ADL,House Keeping
+ADL,Laundry
+ADL,Other
+Safety Hazards in the home,Sound structure
+Safety Hazards in the home,Safe placement of Cords Rugs and Furniture
+Safety Hazards in the home,Adequate heating and ventilation
+Safety Hazards in the home,Adequate cooking facility
+Safety Hazards in the home,Adequate plumbing / sanitation / running water
+Safety Hazards in the home,Adequate sleeping arrangements
+Safety Hazards in the home,Safe gas / electric appliances
+Safety Hazards in the home,Ground plug for equipment
+Safety Hazards in the home,Enough electrical outlets for equipment
+Safety Hazards in the home,Working telephone in the home
+Safety Hazards in the home,Safe storage for supplies / equipments / medicines
+Safety Hazards in the home,Exits free of obstruction
+Safety Hazards in the home,Working smoke detectors
+Safety Hazards in the home,Fire extinguister in home
+Safety Hazards in the home,Infestation of pests
+Safety Hazards in the home,Neighborhood safe
+Neurological / Mental Status,Patient denies problems
+Neurological / Mental Status,Alert / Oriented X3
+Neurological / Mental Status,Headache
+Neurological / Mental Status,Fine / Gross hands tremor
+Neurological / Mental Status,PEERLA Left
+Neurological / Mental Status,PEERLA Right
+Neurological / Mental Status,Dominant side Left
+Neurological / Mental Status,Dominant side Right
+Neurological / Mental Status,Aphasia
+Neurological / Mental Status,Hemiplegia
+Neurological / Mental Status,Paraplegia / Quadriplegia
+Neurological / Mental Status,Numbness
+Neurological / Mental Status,Seizures
+Neurological / Mental Status,Unsteady Giant / Ataxia
+Neurological / Mental Status,Syncope
+Neurological / Mental Status,Vertigo
+Neurological / Mental Status,Poor Balance
+Neurological / Mental Status,Dizziness
+Neurological / Mental Status,Weakness
+Neurological / Mental Status,Oriented
+Neurological / Mental Status,Disoriented
+Neurological / Mental Status,Comatose
+Neurological / Mental Status,Forgetful
+Neurological / Mental Status,Agitated
+Neurological / Mental Status,Confused
+Neurological / Mental Status,Anxious
+Neurological / Mental Status,Depressed
+Risk Factors,Smoking
+Risk Factors,Obesity
+Risk Factors,Alcohol dependency
+Risk Factors,Drug Abuse
+Risk Factors,None of the above
+Risk Factors,Other
+Functional Limitations,Amputation
+Functional Limitations,Bowel / Bladder Incontinence
+Functional Limitations,Contracture
+Functional Limitations,Hearing
+Functional Limitations,Paralysis
+Functional Limitations,Endurance
+Functional Limitations,Ambulation
+Functional Limitations,Speech
+Functional Limitations,Vision
+Functional Limitations,Poor Manual dexteritz
+Functional Limitations,Legal Blind
+Functional Limitations,Dyspnea
+Functional Limitations,Poor hand-eye coordination
+Functional Limitations,Unsteady Giant
+Functional Limitations,Poor Balance
+Functional Limitations,Other
+Activities Permitted,Complete Bedrest
+Activities Permitted,Bedrest / BRP
+Activities Permitted,Up as tolerated
+Activities Permitted,Transfer bed to chair
+Activities Permitted,Independent in home
+Activities Permitted,Other
+Fall Precaution,Patient has risk of fall: Yes,nomultiple
+Fall Precaution,Patient has risk of fall: No,nomultiple
+Fall Precaution,Fall Precaution Education Provided: Yes,nomultiple
+Fall Precaution,Fall Precaution Education Provided: No,nomultiple
+Assistive Device,Cane
+Assistive Device,Quad cane
+Assistive Device,Walker
+Assistive Device,Rolling Walker
+Assistive Device,Crutches
+Assistive Device,Reg. Wheelchair
+Assistive Device,Electric Wheelchair
+Assistive Device,Other
+Equipment,Hospital Bed
+Equipment,Commode
+Equipment,Hoyer Life
+Equipment,Nebulizer
+Equipment,Bath Chair
+Equipment,Apnea Machine
+Equipment,Oxygen concentrator
+Equipment,Other
+Equipment,Device / Equipment needed at home
