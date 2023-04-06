@@ -97,6 +97,7 @@ $router->group(['prefix' => 'v1/', 'middleware' => 'clientAuth'], function ($rou
             });
             $router->get('vitalDashboards', 'AuthService@vitalDashboards');
             $router->get('get-document-url', 'UtilService@getSignedUrl');
+            $router->post('uploadDocs', 'AuthService@uploadDocs');
 
         });
 
