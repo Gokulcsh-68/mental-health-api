@@ -92,9 +92,11 @@ $router->group(['prefix' => 'v1/', 'middleware' => 'clientAuth'], function ($rou
                 $router->patch('{resource}/PartialUpdate/{id:[0-9]+}', ['uses' => 'ResourceService@partialUpdate']);
                 $router->post('{resource}/Create', ['uses' => 'ResourceService@create']);
                 $router->get('{resource}/getAll', ['uses' => 'ResourceService@getAll']);
+                $router->delete('{resource}/Delete/{id:[0-9]+}', ['uses' => 'ResourceService@delete']);
 
             });
             $router->get('vitalDashboards', 'AuthService@vitalDashboards');
+            $router->get('get-document-url', 'UtilService@getSignedUrl');
 
         });
 
