@@ -127,3 +127,180 @@ Equipment,Apnea Machine
 Equipment,Oxygen concentrator
 Equipment,Other
 Equipment,Device / Equipment needed at home
+Skin,Client denies problems
+Color,Normal
+Color,Pink
+Color,Pale
+Color,Cyanotic
+Color,Jaundiced
+Turgor,Poor
+Turgor,Fair
+Turgor,Good
+Temperature,Hot
+Temperature,Warm
+Temperature,Cool
+Condition,Dry
+Condition,Moist
+Condition,Ecchymosis
+Condition,Rash
+Condition,Petechie
+Condition,Litch
+Condition,Redness
+Condition,Bruises
+Condition,Scaling
+Skin Problems,Lesion
+Skin Problems,Scaling
+Skin Problems,Lesion
+Skin Problems,Wound
+Skin Problems,Ulcer
+Skin Problems,Rasch
+Skin Problems,Ostomy
+Skin Problems,Cyst
+Skin Problems,Messes
+Skin Problems,Itch
+Skin Problems,Other
+GU / GYN,Pt.denies problems
+GU / GYN,Frequency
+GU / GYN,Urgency
+GU / GYN,Incontinence
+GU / GYN,Nocturia
+GU / GYN,Polyuria
+GU / GYN,Dysuria
+GU / GYN,Oliguria
+GU / GYN,Pan
+GU / GYN,Burning
+GU / GYN,Odor
+GU / GYN,Lithiasis
+GU / GYN,Hematuria
+GU / GYN,Infections Ostomy
+GU / GYN,Catheter: Condon Cath
+GU / GYN,Catheter: Foley Cath
+GU / GYN,Catheter: Suprapublic Cath
+GU / GYN,Madtectomy R/L
+GU / GYN,Madtectomy Right
+GU / GYN,Madtectomy Left
+GU / GYN,Hysterectomy
+GU / GYN,Vaginal Bleeding
+GU / GYN,Discharge
+GU / GYN,BPH/TURP
+GU / GYN,Other
+Musculoskeletal,Pt.denies problem
+Musculoskeletal,Fracture
+Musculoskeletal,Contracture Joints
+Musculoskeletal,Atrophy
+Musculoskeletal,Decreased
+Musculoskeletal,ROM
+Musculoskeletal,Pain Intensity: 1
+Musculoskeletal,Pain Intensity: 2
+Musculoskeletal,Pain Intensity: 3
+Musculoskeletal,Pain Intensity: 4
+Musculoskeletal,Pain Intensity: 5
+Musculoskeletal,Pain Intensity: 6
+Musculoskeletal,Pain Intensity: 7
+Musculoskeletal,Pain Intensity: 8
+Musculoskeletal,Pain Intensity: 9
+Musculoskeletal,Pain Intensity: 10
+Musculoskeletal,Duration: Less often than daily
+Musculoskeletal,Duration: Daily, but not constantly
+Musculoskeletal,Duration: All of the time
+EYE,Pt.denies problems
+EYE,Impaired Vision
+EYE,Cataracts
+EYE,Right Cataracts
+EYE,Left Cataracts
+EYE,Retinopathy
+EYE,Blind
+EYE,Blind Right
+EYE,Blind Left
+EYE,Blurred Vision
+EYE,Glaucoma
+EYE,Glasses
+EYE,Contracts
+EYE,Contracts Right
+EYE,Contracts Left
+EYE,Prothesis
+EYE,Prothesis Right
+EYE,Prothesis Left
+EYE,Legally Blind
+EYE,Other
+NOSE,Pt.denies problems
+NOSE,Congestion
+NOSE,Epistaxis
+NOSE,Loss of smell
+NOSE,Sinus Problem
+NOSE,Other
+THROAT,Pt.denies problems
+THROAT,Dysphagia
+THROAT,Hoarseness
+THROAT,Lesions
+THROAT,Sore throat
+THROAT,Other
+MOUTH,Patient denies problems
+MOUTH,Dentures
+MOUTH,Dentures Upper
+MOUTH,Dentures Lower
+MOUTH,Dentures Partial
+MOUTH,Dentures Total
+MOUTH,Gingivitis
+MOUTH,Toothache
+MOUTH,Ulcerations
+MOUTH,Other
+COMMUNICATION ASSESSMENT,Primary Language: Speech
+COMMUNICATION ASSESSMENT,Primary Language: Language Barrier
+COMMUNICATION ASSESSMENT,Caregiver
+COMMUNICATION ASSESSMENT,Patient Interpreter needed: Yes,nomultiple
+COMMUNICATION ASSESSMENT,Patient Interpreter needed: No,nomultiple
+COMMUNICATION ASSESSMENT,Hearing Loss: Yes,nomultiple
+COMMUNICATION ASSESSMENT,Hearing Loss: No,nomultiple
+COMMUNICATION ASSESSMENT,Aide used: Yes,nomultiple
+COMMUNICATION ASSESSMENT,Aide used: No,nomultiple
+COMMUNICATION ASSESSMENT,Ear discharge Or Ear Pain: Yes,nomultiple
+COMMUNICATION ASSESSMENT,Ear discharge Or Ear Pain: No,nomultiple
+COMMUNICATION ASSESSMENT,Visual Impairment: Blind
+COMMUNICATION ASSESSMENT,Visual Impairment: Glasses
+COMMUNICATION ASSESSMENT,Visual Impairment: Contacts Rednesss
+COMMUNICATION ASSESSMENT,Visual Impairment: Contacts Itching
+COMMUNICATION ASSESSMENT,Visual Impairment: Contacts Burning Reading
+COMMUNICATION ASSESSMENT,Visual Impairment: Contacts Writing Problem
+COMMUNICATION ASSESSMENT,Caregiver Slow Learner
+Ambulation,Unable to do
+Ambulation,Minimal Assistance
+Ambulation,Moderate Assistance
+Ambulation,Maximal Assistance
+Ambulation,Independent
+Stairs,Unable to do
+Stairs,Minimal Assistance
+Stairs,Moderate Assistance
+Stairs,Maximal Assistance
+Stairs,Independent
+Dressing,Unable to do
+Dressing,Minimal Assistance
+Dressing,Moderate Assistance
+Dressing,Maximal Assistance
+Dressing,Independent
+Feeding,Unable to do
+Feeding,Minimal Assistance
+Feeding,Moderate Assistance
+Feeding,Maximal Assistance
+Feeding,Independent
+Household Tasks,Unable to do
+Household Tasks,Minimal Assistance
+Household Tasks,Moderate Assistance
+Household Tasks,Maximal Assistance
+Household Tasks,Independent
+Transfer,Unable to do
+Transfer,Minimal Assistance
+Transfer,Moderate Assistance
+Transfer,Maximal Assistance
+Transfer,Independent
+Reviewed and Discussed with Patient / Caregiver,Service Provided
+Reviewed and Discussed with Patient / Caregiver,Frequency and Duration of Serivice
+Reviewed and Discussed with Patient / Caregiver,Goals of Service
+Reviewed and Discussed with Patient / Caregiver,Complaint Right and Proced
+Reviewed and Discussed with Patient / Caregiver,Patient Rights/Responsibilities/State Hotline No
+Reviewed and Discussed with Patient / Caregiver,Home Safety/Emergency Info
+Reviewed and Discussed with Patient / Caregiver,Reporting Abuse/Neglect/Exploitation
+Reviewed and Discussed with Patient / Caregiver,Agency Drug Free Work Policy
+Reviewed and Discussed with Patient / Caregiver,Conflidentiality/Release of records Policies
+Reviewed and Discussed with Patient / Caregiver,Patient/Caregiver participated in the development of the care plan
+Reviewed and Discussed with Patient / Caregiver,Other
