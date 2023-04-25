@@ -365,7 +365,12 @@ class Master extends BaseModel
                 
             }
         }
-        else if($type == 'systemic-examination' || $type == 'jayam-systemic-examination'){
+        else if(
+            $type == 'systemic-examination' || 
+            $type == 'jayam-systemic-examination' || 
+            $type == 'jayam-nursing-examination' ||
+            $type == 'jayam-continuous-examination'
+            ) {
 
             if(!empty($request->get('patient_id')) && $request->get('getValues') == 'yes') { 
 
