@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use DB;
 use Illuminate\Database\Seeder;
 
-class JayamExamSystemicValueSeeder extends Seeder
+class JayamContinuousSystemicValueSeeder extends Seeder
 {
     /**
      * Run the database seeds.
