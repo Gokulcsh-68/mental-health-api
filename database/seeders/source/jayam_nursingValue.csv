@@ -127,6 +127,37 @@ Equipment,Apnea Machine
 Equipment,Oxygen concentrator
 Equipment,Other
 Equipment,Device / Equipment needed at home
+Cardiovascular,SOB: At rest,nomultiple
+Cardiovascular,SOB: With exertion,nomultiple
+Cardiovascular,SOB: Chest Pain,nomultiple
+Cardiovascular,Peripheral pulses: Irregular,nomultiple
+Cardiovascular,Peripheral pulses: Absent,nomultiple
+Cardiovascular,Edema: Peripheral,nomultiple
+Cardiovascular,Edema: Abdominal,nomultiple
+Respiratory,SOB
+Respiratory,Congestion
+Respiratory,Oxyigen
+Respiratory,Trach present
+Respiratory,Noisy respirations
+Respiratory,Cough,nomultiple
+Respiratory,Cough: dry,nomultiple
+Gastrointestinal / Abdomen,Constipation
+Gastrointestinal / Abdomen,Diarrhea
+Gastrointestinal / Abdomen,Rectal bleeding
+Gastrointestinal / Abdomen,Abdominal distention
+Gastrointestinal / Abdomen,Incontinence
+Gastrointestinal / Abdomen,Nause
+Gastrointestinal / Abdomen,Vomiting
+Gastrointestinal / Abdomen,Mouth sores
+Gastrointestinal / Abdomen,Feeding tube present
+Gastrointestinal / Abdomen,Lack of appetite
+Gastrointestinal / Abdomen,Diff. Swallowing
+Genitourinary,Painful urination
+Genitourinary,Retention
+Genitourinary,Urinary/vaginal bleeding
+Genitourinary,Incontinence
+Genitourinary,Vaginal Discharge
+Genitourinary,Catheter Present
 Skin,Client denies problems
 Color,Normal
 Color,Pink

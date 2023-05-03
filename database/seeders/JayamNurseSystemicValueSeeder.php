@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use DB;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Schema;
 
 class JayamNurseSystemicValueSeeder extends Seeder
 {
@@ -19,12 +20,11 @@ class JayamNurseSystemicValueSeeder extends Seeder
             [ 'slug' => 'jayam-nursing-examination']
         ];
         
-        DB::table('master_types')->insertOrIgnore($master_types);
-
-
-       DB::table('masters')->Where('master_type_slug','jayam_nursing_sub_types')->delete();
-       DB::table('masters')->Where('master_type_slug','jayam-nursing-examination')->delete();
-
+        // DB::table('master_types')->insertOrIgnore($master_types);
+        Schema::disableForeignKeyConstraints();
+        DB::table('masters')->Where('master_type_slug','jayam_nursing_sub_types')->delete();
+        DB::table('masters')->Where('master_type_slug','jayam-nursing-examination')->delete();
+        Schema::enableForeignKeyConstraints();
 
         $this->systemHeadDataDump();       
         $this->systemValueDataDump();      
