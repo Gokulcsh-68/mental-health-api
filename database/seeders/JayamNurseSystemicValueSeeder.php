@@ -91,7 +91,7 @@ class JayamNurseSystemicValueSeeder extends Seeder
                 if(isset($data[2])){
                     if(trim($data[2]) == 'nomultiple'){
                         $multiple = 'no';
-                        $group = $data[3];
+                        $group = trim($data[3]);
                     }
                 }
                 if(isset($data[3])){
