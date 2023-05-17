@@ -3,22 +3,22 @@ Prognosis,Guarded
 Prognosis,Fair
 Prognosis,Good
 Prognosis,Excellent
-Support System,Live Alone: Yes,nomultiple
-Support System,Live Alone: No,nomultiple
-Caregivers ability to assist patient / able to provide,Personal Care: Yes,nomultiple
-Caregivers ability to assist patient / able to provide,Personal Care: No,nomultiple
-Caregivers ability to assist patient / able to provide,Mobility: Yes,nomultiple
-Caregivers ability to assist patient / able to provide,Mobility: No,nomultiple
-Caregivers ability to assist patient / able to provide,Med Admin: Yes,nomultiple
-Caregivers ability to assist patient / able to provide,Med Admin: No,nomultiple
-Caregivers ability to assist patient / able to provide,Prepare / Serve meals: Yes,nomultiple
-Caregivers ability to assist patient / able to provide,Prepare / Serve meals: No,nomultiple
-Caregivers ability to assist patient / able to provide,Maintain safe / clean environment: Yes,nomultiple
-Caregivers ability to assist patient / able to provide,Maintain safe / clean environment: No,nomultiple
-Caregivers ability to assist patient / able to provide,No Perform / assist with procedures: Yes,nomultiple
-Caregivers ability to assist patient / able to provide,No Perform / assist with procedures: No,nomultiple
-Advanced Directives,Patient has a living will: Yes,nomultiple
-Advanced Directives,Patient has a living will: No,nomultiple
+Support System,Live Alone: Yes,nomultiple,live-alone
+Support System,Live Alone: No,nomultiple,live-alone
+Caregivers ability to assist patient / able to provide,Personal Care: Yes,nomultiple,personal-care
+Caregivers ability to assist patient / able to provide,Personal Care: No,nomultiple,personal-care
+Caregivers ability to assist patient / able to provide,Mobility: Yes,nomultiple,mobility
+Caregivers ability to assist patient / able to provide,Mobility: No,nomultiple,mobility
+Caregivers ability to assist patient / able to provide,Med Admin: Yes,nomultiple,med-admin
+Caregivers ability to assist patient / able to provide,Med Admin: No,nomultiple,med-admin
+Caregivers ability to assist patient / able to provide,Prepare / Serve meals: Yes,nomultiple,prepare-serve-meals
+Caregivers ability to assist patient / able to provide,Prepare / Serve meals: No,nomultiple,prepare-serve-meals
+Caregivers ability to assist patient / able to provide,Maintain safe / clean environment: Yes,nomultiple,clean-environment
+Caregivers ability to assist patient / able to provide,Maintain safe / clean environment: No,nomultiple,clean-environment
+Caregivers ability to assist patient / able to provide,No Perform / assist with procedures: Yes,nomultiple,no-perform
+Caregivers ability to assist patient / able to provide,No Perform / assist with procedures: No,nomultiple,no-perform
+Advanced Directives,Patient has a living will: Yes,nomultiple,patient-has-a-living-will
+Advanced Directives,Patient has a living will: No,nomultiple,patient-has-a-living-will
 Advanced Directives,Special Provisions included: No Resuscitation
 Advanced Directives,Special Provisions included: No Mech.Vent
 Advanced Directives,Special Provisions included: Medicine support only
@@ -106,10 +106,10 @@ Activities Permitted,Up as tolerated
 Activities Permitted,Transfer bed to chair
 Activities Permitted,Independent in home
 Activities Permitted,Other
-Fall Precaution,Patient has risk of fall: Yes,nomultiple
-Fall Precaution,Patient has risk of fall: No,nomultiple
-Fall Precaution,Fall Precaution Education Provided: Yes,nomultiple
-Fall Precaution,Fall Precaution Education Provided: No,nomultiple
+Fall Precaution,Patient has risk of fall: Yes,nomultiple,patient-has-risk-of-fall
+Fall Precaution,Patient has risk of fall: No,nomultiple,patient-has-risk-of-fall
+Fall Precaution,Fall Precaution Education Provided: Yes,nomultiple,fall-precaution-education-provided
+Fall Precaution,Fall Precaution Education Provided: No,nomultiple,fall-precaution-education-provided
 Assistive Device,Cane
 Assistive Device,Quad cane
 Assistive Device,Walker
@@ -127,20 +127,20 @@ Equipment,Apnea Machine
 Equipment,Oxygen concentrator
 Equipment,Other
 Equipment,Device / Equipment needed at home
-Cardiovascular,SOB: At rest,nomultiple
-Cardiovascular,SOB: With exertion,nomultiple
-Cardiovascular,SOB: Chest Pain,nomultiple
-Cardiovascular,Peripheral pulses: Irregular,nomultiple
-Cardiovascular,Peripheral pulses: Absent,nomultiple
-Cardiovascular,Edema: Peripheral,nomultiple
-Cardiovascular,Edema: Abdominal,nomultiple
+Cardiovascular,SOB: At rest,nomultiple,sob
+Cardiovascular,SOB: With exertion,nomultiple,sob
+Cardiovascular,SOB: Chest Pain,nomultiple,sob
+Cardiovascular,Peripheral pulses: Irregular,nomultiple,peripheral-pulses
+Cardiovascular,Peripheral pulses: Absent,nomultiple,peripheral-pulses
+Cardiovascular,Edema: Peripheral,nomultiple,edema
+Cardiovascular,Edema: Abdominal,nomultiple,edema
 Respiratory,SOB
 Respiratory,Congestion
 Respiratory,Oxyigen
 Respiratory,Trach present
 Respiratory,Noisy respirations
-Respiratory,Cough,nomultiple
-Respiratory,Cough: dry,nomultiple
+Respiratory,Cough,nomultiple,cough
+Respiratory,Cough: dry,nomultiple,cough
 Gastrointestinal / Abdomen,Constipation
 Gastrointestinal / Abdomen,Diarrhea
 Gastrointestinal / Abdomen,Rectal bleeding
@@ -279,14 +279,14 @@ MOUTH,Other
 COMMUNICATION ASSESSMENT,Primary Language: Speech
 COMMUNICATION ASSESSMENT,Primary Language: Language Barrier
 COMMUNICATION ASSESSMENT,Caregiver
-COMMUNICATION ASSESSMENT,Patient Interpreter needed: Yes,nomultiple
-COMMUNICATION ASSESSMENT,Patient Interpreter needed: No,nomultiple
-COMMUNICATION ASSESSMENT,Hearing Loss: Yes,nomultiple
-COMMUNICATION ASSESSMENT,Hearing Loss: No,nomultiple
-COMMUNICATION ASSESSMENT,Aide used: Yes,nomultiple
-COMMUNICATION ASSESSMENT,Aide used: No,nomultiple
-COMMUNICATION ASSESSMENT,Ear discharge Or Ear Pain: Yes,nomultiple
-COMMUNICATION ASSESSMENT,Ear discharge Or Ear Pain: No,nomultiple
+COMMUNICATION ASSESSMENT,Patient Interpreter needed: Yes,nomultiple,patient-interpreter-needed
+COMMUNICATION ASSESSMENT,Patient Interpreter needed: No,nomultiple,patient-interpreter-needed
+COMMUNICATION ASSESSMENT,Hearing Loss: Yes,nomultiple,hearing-loss
+COMMUNICATION ASSESSMENT,Hearing Loss: No,nomultiple,hearing-loss
+COMMUNICATION ASSESSMENT,Aide used: Yes,nomultiple,aide-used
+COMMUNICATION ASSESSMENT,Aide used: No,nomultiple,aide-used
+COMMUNICATION ASSESSMENT,Ear discharge Or Ear Pain: Yes,nomultiple,ear-discharge
+COMMUNICATION ASSESSMENT,Ear discharge Or Ear Pain: No,nomultiple,ear-discharge
 COMMUNICATION ASSESSMENT,Visual Impairment: Blind
 COMMUNICATION ASSESSMENT,Visual Impairment: Glasses
 COMMUNICATION ASSESSMENT,Visual Impairment: Contacts Rednesss

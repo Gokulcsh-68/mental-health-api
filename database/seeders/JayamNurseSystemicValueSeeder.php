@@ -86,9 +86,12 @@ class JayamNurseSystemicValueSeeder extends Seeder
 
                 $multiple = 'yes';
                 $icon = 'no';
+                $group = '';
+
                 if(isset($data[2])){
                     if(trim($data[2]) == 'nomultiple'){
                         $multiple = 'no';
+                        $group = $data[3];
                     }
                 }
                 if(isset($data[3])){
@@ -101,7 +104,7 @@ class JayamNurseSystemicValueSeeder extends Seeder
                     'master_type_slug' => 'jayam_nursing_sub_types', 
                     'slug' => $slug, 
                     'name' => $name,
-                    'attributes' => json_encode(['reference_slug' => $masterslug, 'multiple'=>$multiple, 'icon'=>$icon]),
+                    'attributes' => json_encode(['reference_slug' => $masterslug, 'multiple'=>$multiple, 'group' => $group, 'icon'=>$icon]),
                     'is_active' => 1,
                 ];
             }
