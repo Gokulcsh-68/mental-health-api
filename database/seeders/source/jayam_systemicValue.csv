@@ -2,10 +2,10 @@ Status of starting,Walking
 Status of starting,Wheeler Chair
 Status of starting,Bed ridden
 Status of starting,Clinical Diagnosis
-Pedal Odema,Yes,nomultiple
-Pedal Odema,No,nomultiple
-Bed sore,Yes,nomultiple
-Bed sore,No,nomultiple
+Pedal Odema,Yes,nomultiple,pedal-odema
+Pedal Odema,No,nomultiple,pedal-odema
+Bed sore,Yes,nomultiple,bed-sore
+Bed sore,No,nomultiple,bed-sore
 Injection,IM
 Injection,IV
 Injection,SC
@@ -58,19 +58,19 @@ Fall Risk Assessment,Other
 Fall Risk Assessment,Previous Fall
 Fall Risk Assessment,Post operative
 Fall Risk Assessment,Sensory Deflicit
-Pain Score,0,nomultiple
-Pain Score,1,nomultiple
-Pain Score,2,nomultiple
-Pain Score,3,nomultiple
-Pain Score,4,nomultiple
-Pain Score,5,nomultiple
-Pain Score,6,nomultiple
-Pain Score,7,nomultiple
-Pain Score,8,nomultiple
-Pain Score,9,nomultiple
-Pain Score,10,nomultiple
-Knowledge imparted to staff regarding the use of medical equipments,Yes,nomultiple
-Knowledge imparted to staff regarding the use of medical equipments,No,nomultiple
+Pain Score,0,nomultiple,pain-score
+Pain Score,1,nomultiple,pain-score
+Pain Score,2,nomultiple,pain-score
+Pain Score,3,nomultiple,pain-score
+Pain Score,4,nomultiple,pain-score
+Pain Score,5,nomultiple,pain-score
+Pain Score,6,nomultiple,pain-score
+Pain Score,7,nomultiple,pain-score
+Pain Score,8,nomultiple,pain-score
+Pain Score,9,nomultiple,pain-score
+Pain Score,10,nomultiple,pain-score
+Knowledge imparted to staff regarding the use of medical equipments,Yes,nomultiple,staff-knowledge-medical-equipments
+Knowledge imparted to staff regarding the use of medical equipments,No,nomultiple,staff-knowledge-medical-equipments
 Disposal available for staff,Handwash
 Disposal available for staff,Cotton
 Disposal available for staff,Catheters
@@ -83,13 +83,13 @@ Disposal available for staff,Gloves
 Disposal available for staff,Cap
 Disposal available for staff,Tissues
 Disposal available for staff,Apron
-Any Pets?,Yes,nomultiple
-Any Pets?,No,nomultiple
-Incase of staff injured by pets accident at workplace, will you bear the cost of treatment?,Yes,nomultiple
-Incase of staff injured by pets accident at workplace, will you bear the cost of treatment?,No,nomultiple
-Does the patient Smoke / Drink?,Yes,nomultiple
-Does the patient Smoke / Drink?,No,nomultiple
-Does the patient go on regular social visit?,Yes,nomultiple
-Does the patient go on regular social visit?,No,nomultiple
-Any Guard at your home?,Yes,nomultiple
-Any Guard at your home?,No,nomultiple
+Any Pets?,Yes,nomultiple,any-pets
+Any Pets?,No,nomultiple,any-pets
+Incase of staff injured by pets accident at workplace, will you bear the cost of treatment?,Yes,nomultiple,staff-injured-by-pet
+Incase of staff injured by pets accident at workplace, will you bear the cost of treatment?,No,nomultiple,staff-injured-by-pet
+Does the patient Smoke / Drink?,Yes,nomultiple,patient-smoke-drink
+Does the patient Smoke / Drink?,No,nomultiple,patient-smoke-drink
+Does the patient go on regular social visit?,Yes,nomultiple,regular-social-visit
+Does the patient go on regular social visit?,No,nomultiple,regular-social-visit
+Any Guard at your home?,Yes,nomultiple-,guard-at-home
+Any Guard at your home?,No,nomultiple-,guard-at-home
