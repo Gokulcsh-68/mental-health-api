@@ -92,11 +92,11 @@ PERSONAL CARE,PPE Used
 PERSONAL CARE,Others
 NUTRITION / HYDRATION,Tube fed
 NUTRITION / HYDRATION,PO
-NUTRITION / HYDRATION,Type: Liquid
-NUTRITION / HYDRATION,Type: Puree
-NUTRITION / HYDRATION,Type: Chopped
-NUTRITION / HYDRATION,Type: Solid
-NUTRITION / HYDRATION,Type: Soft
+NUTRITION / HYDRATION,Type: Liquid,nomultiple,hydration
+NUTRITION / HYDRATION,Type: Puree,nomultiple,hydration
+NUTRITION / HYDRATION,Type: Chopped,nomultiple,hydration
+NUTRITION / HYDRATION,Type: Solid,nomultiple,hydration
+NUTRITION / HYDRATION,Type: Soft,nomultiple,hydration
 NUTRITION / HYDRATION,Amount: Breakfast %
 NUTRITION / HYDRATION,Amount: Lunch %
 NUTRITION / HYDRATION,Amount: Dinner %
@@ -105,8 +105,8 @@ NUTRITION / HYDRATION,Encourage Fluids
 NUTRITION / HYDRATION,IV
 NUTRITION / HYDRATION,SQ
 NUTRITION / HYDRATION,Site Appearance
-PSYCHOSOCIAL / SPIRITUAL,Family: Present
-PSYCHOSOCIAL / SPIRITUAL,Family: Not Present
+PSYCHOSOCIAL / SPIRITUAL,Family: Present,nomultiple,family
+PSYCHOSOCIAL / SPIRITUAL,Family: Not Present,nomultiple,family
 PSYCHOSOCIAL / SPIRITUAL,Phone contact made
 PSYCHOSOCIAL / SPIRITUAL,Visitors present during shift
 PSYCHOSOCIAL / SPIRITUAL,Anxiety
@@ -135,16 +135,16 @@ Respiratory,Lift
 Respiratory,Right (Wheezes/Rhonchi)
 Respiratory,Right (Crackles/Rales)
 Respiratory,Right (Diminish/Absent)
-Respiratory,Cappilary Refill: Less than 3 seconds
-Respiratory,Cappilary Refill: Greater than 3 seconds
+Respiratory,Cappilary Refill: Less than 3 seconds,nomultiple,cappilary-refill
+Respiratory,Cappilary Refill: Greater than 3 seconds,nomultiple,cappilary-refill
 Respiratory,Orthopnea
 Respiratory,Hemoptysis
-Respiratory,SOB at rest
-Respiratory,SOB at Minimal Exersion
-Respiratory,SOB at Moderate Exertion
-Respiratory,SOB at When walking > 20 feet
-Respiratory,Cough Productive
-Respiratory,Cough Non-Productive
+Respiratory,SOB at rest,nomultiple,sob-respiratory
+Respiratory,SOB at Minimal Exersion,nomultiple,sob-respiratory
+Respiratory,SOB at Moderate Exertion,nomultiple,sob-respiratory
+Respiratory,SOB at When walking > 20 feet,nomultiple,sob-respiratory
+Respiratory,Cough Productive,nomultiple,cough
+Respiratory,Cough Non-Productive,nomultiple,cough
 Gastrointestinal / Abdomen,Patient denies problems
 Gastrointestinal / Abdomen,Heartburn
 Gastrointestinal / Abdomen,Distension

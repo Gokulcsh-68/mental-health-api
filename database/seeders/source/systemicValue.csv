@@ -205,8 +205,8 @@ Endocrine System,Addisons disease
 Endocrine System,Cushings disease
 Endocrine System,Pituatary insufficiency
 Endocrine System,Hirsutism
-Endocrine System,Abnormal Weight gain
-Endocrine System,Abnormal Weight Loss
+Endocrine System,Abnormal Weight gain,nomultiple,abnormal-weight
+Endocrine System,Abnormal Weight Loss,nomultiple,abnormal-weight
 Endocrine System,Changes in mood/memory
 Endocrine System,Tremor
 Endocrine System,Exophthalmos
