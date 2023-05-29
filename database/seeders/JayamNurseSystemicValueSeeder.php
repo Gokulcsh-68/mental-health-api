@@ -20,7 +20,8 @@ class JayamNurseSystemicValueSeeder extends Seeder
             [ 'slug' => 'jayam-nursing-examination']
         ];
         
-        // DB::table('master_types')->insertOrIgnore($master_types);
+        DB::table('master_types')->insertOrIgnore($master_types);
+        
         Schema::disableForeignKeyConstraints();
         DB::table('masters')->Where('master_type_slug','jayam_nursing_sub_types')->delete();
         DB::table('masters')->Where('master_type_slug','jayam-nursing-examination')->delete();

@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use DB;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Schema;
 
 class SystemicValueSeeder extends Seeder
 {
@@ -21,15 +22,13 @@ class SystemicValueSeeder extends Seeder
         
         DB::table('master_types')->insertOrIgnore($master_types);
 
-
-       DB::table('masters')->Where('master_type_slug','systemic_sub_types')->delete();
-       DB::table('masters')->Where('master_type_slug','systemic-examination')->delete();
-
+        Schema::disableForeignKeyConstraints();
+        DB::table('masters')->Where('master_type_slug','systemic_sub_types')->delete();
+        DB::table('masters')->Where('master_type_slug','systemic-examination')->delete();
+        Schema::enableForeignKeyConstraints();
 
         $this->systemHeadDataDump();       
         $this->systemValueDataDump();      
-
-
 	}
 
 
@@ -86,9 +85,11 @@ class SystemicValueSeeder extends Seeder
 
                 $multiple = 'yes';
                 $icon = 'no';
+                $group = '';
                 if(isset($data[2])){
                     if(trim($data[2]) == 'nomultiple'){
                         $multiple = 'no';
+                        $group = trim($data[3]);
                     }
                 }
                 if(isset($data[3])){
@@ -101,7 +102,7 @@ class SystemicValueSeeder extends Seeder
                     'master_type_slug' => 'systemic_sub_types', 
                     'slug' => $slug, 
                     'name' => $name,
-                    'attributes' => json_encode(['reference_slug' => $masterslug, 'multiple'=>$multiple, 'icon'=>$icon]),
+                    'attributes' => json_encode(['reference_slug' => $masterslug, 'multiple'=>$multiple, 'group' => $group, 'icon'=>$icon]),
                     'is_active' => 1,
                 ];
             }

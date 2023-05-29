@@ -1,9 +1,9 @@
-Nutritional,Emaciated,nomultiple
-Nutritional,Undernourished,nomultiple
-Nutritional,Adequately nourished,nomultiple
-Nutritional,Overweight,nomultiple
-Nutritional,Obese,nomultiple
-Nutritional,Morbidly obese,nomultiple
+Nutritional,Emaciated,nomultiple,nutritional
+Nutritional,Undernourished,nomultiple,nutritional
+Nutritional,Adequately nourished,nomultiple,nutritional
+Nutritional,Overweight,nomultiple,nutritional
+Nutritional,Obese,nomultiple,nutritional
+Nutritional,Morbidly obese,nomultiple,nutritional
 Constitutional,NAD
 Constitutional,Loss of appetite
 Constitutional,Lethargy
