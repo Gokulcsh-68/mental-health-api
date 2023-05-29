@@ -1,8 +1,8 @@
-Prognosis,Poor
-Prognosis,Guarded
-Prognosis,Fair
-Prognosis,Good
-Prognosis,Excellent
+Prognosis,Poor,nomultiple,prognosis
+Prognosis,Guarded,nomultiple,prognosis
+Prognosis,Fair,nomultiple,prognosis
+Prognosis,Good,nomultiple,prognosis
+Prognosis,Excellent,nomultiple,prognosis
 Support System,Live Alone: Yes,nomultiple,live-alone
 Support System,Live Alone: No,nomultiple,live-alone
 Caregivers ability to assist patient / able to provide,Personal Care: Yes,nomultiple,personal-care
