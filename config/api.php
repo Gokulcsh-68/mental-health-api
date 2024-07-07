@@ -14,6 +14,7 @@ return [
         'provider' => env('S3_BASE_PATH') . '%s/',
         'folio' => env('S3_BASE_PATH') . '%s/',
         'peripheral' => env('S3_BASE_PATH') . 'peripheral/',
+        'remidio' => env('S3_BASE_PATH') . 'remidio/',
     ],
     'communication_sms_template' => [
         'forgotPassword' => 'Your ' . config('app.name') . ' forget OTP is {{otp}}',
