@@ -6,13 +6,10 @@ use App\Entities\Doc;
 use App\Entities\Patient;
 use App\Services\RemidioApis\BaseService;
 use App\Traits\S3;
-use App\Utils\Api;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class FundusCameraApiService extends BaseService
@@ -51,11 +48,12 @@ class FundusCameraApiService extends BaseService
 			->first();
 
 			if(!$patient_model) {
-				DB::table('remidio_fundus_api_log')->insertGetId([
+				$log_id = DB::table('remidio_fundus_api_log')->insertGetId([
 					'data' => json_encode($api_response),
 					'created_at' => Carbon::now(),
 					'notes' => 'Patient not found',
 				]);
+				Log::info('REMIDIO PATIENT NOT FOUND ------- ' . $log_id, []);
 				$this->elementQueueNext();
 				return;
 			}
@@ -78,6 +76,8 @@ class FundusCameraApiService extends BaseService
 					'status' => 1,
 					'updated_at' => Carbon::now(),
 				]);
+
+			Log::info('REMIDIO QUEUE IMPORTED ------- ' . $log_id, []);
 
 			// complete process
 			$this->elementQueueNext();
@@ -172,7 +172,18 @@ class FundusCameraApiService extends BaseService
 					'gma_result' => $data['aiReportV2']['gmaResult'],
 				];
 				break;
-			
+			case 'DOCTOR_REPORT':
+				$ext = 'pdf';
+				$remotePath = $data['report']['path'];
+				$filenamePrefix = sprintf('Fundus_%s', $data['type']);
+
+				$insert_data['addition_info'] = [
+					'notes' => '',
+					'title' => sprintf('Fundus_%s', $data['type']),
+					'left_eye_diagnosis' => $data['report']['leftEyeDiagnosis'],
+					'right_eye_diagnosis' => $data['report']['rightEyeDiagnosis'],
+				];
+				break;			
 		}
 
 		$filenamePrefix .= md5(time() . uniqid(rand(), true));
