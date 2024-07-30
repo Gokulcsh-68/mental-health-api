@@ -20,6 +20,9 @@ $router->get('/key', function () {
     return \Illuminate\Support\Str::random(32);
 });
 
+$router->post('/rijuven', 'RijuvenApis\WebhookService@handle');
+// $router->post('/rijuven', ['uses' => 'RijuvenApis\WebhookService@handle']);
+
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });

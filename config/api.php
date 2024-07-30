@@ -15,6 +15,7 @@ return [
         'folio' => env('S3_BASE_PATH') . '%s/',
         'peripheral' => env('S3_BASE_PATH') . 'peripheral/',
         'remidio' => env('S3_BASE_PATH') . 'remidio/',
+        'rijuven' => env('S3_BASE_PATH') . 'rijuven/',
     ],
     'communication_sms_template' => [
         'forgotPassword' => 'Your ' . config('app.name') . ' forget OTP is {{otp}}',
