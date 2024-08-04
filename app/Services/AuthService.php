@@ -1959,6 +1959,8 @@ class AuthService extends BaseService
 
     public function getPeriperalOtp(Request $request,$id){
 
+        Cache::forget('PERIPHERAL_CREDENTIALS_USER_' . $id);
+
         $peripheralApiService = new PeripheralApiService();
 
         $peripheral_credentials = $peripheralApiService->get($id);

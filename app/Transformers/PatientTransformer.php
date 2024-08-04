@@ -4,6 +4,7 @@ namespace App\Transformers;
 
 use App\Services\CureselectApis\PeripheralApiService;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Cache;
 
 class PatientTransformer extends JsonResource
 {
@@ -16,7 +17,10 @@ class PatientTransformer extends JsonResource
 
     public function toArray($request): array
     {
-        $peripheral_credentials = (new PeripheralApiService)->get($this->user_id);
+        $peripheral_credentials = Cache::rememberForever('PERIPHERAL_CREDENTIALS_USER_' . $this->user_id, function() {
+			return (new PeripheralApiService)->get($this->user_id);
+    	});
+        // $peripheral_credentials = (new PeripheralApiService)->get($this->user_id);
         return [
             'id' => $this->id,
             'user_id' =>  $this->user_id,

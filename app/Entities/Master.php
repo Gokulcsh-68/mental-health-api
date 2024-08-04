@@ -115,7 +115,7 @@ class Master extends BaseModel
                 $form_slug = ['healthy-heart', 'psychiatric-exam', 'covid'];
 
                 }else{
-                $form_slug = ['healthy-heart', 'psychiatric-exam', 'stroke-scale', 'covid'];
+                $form_slug = ['healthy-heart', 'psychiatric-exam', 'stroke-scale', 'covid', 'vision', 'apgar'];
 
                 }
 
@@ -156,7 +156,9 @@ class Master extends BaseModel
 
         if ($request->get('searchkey')) {
 
-            $exp_val = explode(" ", $request->get('searchkey'));
+            $model->whereRaw("concat(slug, ' ', name) like '%" . $request->get('searchkey') . "%' ");
+
+            /* $exp_val = explode(" ", $request->get('searchkey'));
 
             $model->where(function ($subquery) use ($request,$exp_val) {
                 foreach ($exp_val as $key => $value) {
@@ -165,7 +167,7 @@ class Master extends BaseModel
                 }
                         // $subquery->Where('masters.name', 'LIKE',"%".$request->get('searchkey')."%")
                         // ->orWhere('masters.slug', 'LIKE',"%".$request->get('searchkey')."%");
-                });
+                }); */
         }
 
 
