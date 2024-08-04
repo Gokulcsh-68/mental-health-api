@@ -79,6 +79,7 @@ class AabaApiService extends BaseService
 	public function enrollViaAadhaar(Request $request)
 	{
 		$validation = Validator::make($request->all(), [
+			'patient_id' => 'required|exists:patients,id',
 			'transaction_id' => 'required|string',
 			'transaction_time' => 'required',
 			'mobile' => 'required|digits:10',
@@ -90,6 +91,7 @@ class AabaApiService extends BaseService
 		}
 
 		try {
+			$patient_id = $request->input('patient_id');
 
 			$form_data = [
 				'authData' => [
@@ -118,7 +120,18 @@ class AabaApiService extends BaseService
 			$api_response = $this->toGuzzleArray();
 			$response = $api_response;
 
-			// $response = ['transaction_id' => $api_response['txnId'], 'message' => $api_response['message']];
+			Log::info('ABDM API VERIFY VIA AADHAAR INFO RESPONSE ------- ', $api_response);
+
+			// Save data to patient
+			$patient = Patient::find($patient_id);
+			$additional_info = $patient->additional_info;
+			$additional_info->abha_profile = $api_response->ABHAProfile;
+			$patient->additional_info = $additional_info;
+			$patient->save();
+
+			// (new Patient)->modelUpdateProcess($patient_id, $patient, ['additional_info']);
+
+			$response = ['message' => 'ABHA details saved'];
 		} catch (\Exception $e) {
 			$error = [
 				'code' => $this->error->getCode(),

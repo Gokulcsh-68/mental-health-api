@@ -60,8 +60,30 @@ class HistorySeeder extends Seeder
                 'attributes' => json_encode([]),
                 'is_active' => 1,
             ],
+            [
+                'master_type_slug' => 'history', 
+                'slug' => 'obstetric-history', 
+                'name' => 'Obstetric History',
+                'attributes' => json_encode([]),
+                'is_active' => 1,
+            ],
+            [
+                'master_type_slug' => 'history', 
+                'slug' => 'menstrual-history', 
+                'name' => 'Menstrual History',
+                'attributes' => json_encode([]),
+                'is_active' => 1,
+            ],
+            [
+                'master_type_slug' => 'history', 
+                'slug' => 'screening-diagnostic-history', 
+                'name' => 'Screening & Diagnostic History',
+                'attributes' => json_encode([]),
+                'is_active' => 1,
+            ],
+            
     	];
 
-        DB::table('masters')->insert($histories);
+        DB::table('masters')->insertOrIgnore($histories);
     }
 }

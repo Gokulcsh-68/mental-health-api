@@ -15,7 +15,7 @@ class ActivityWellnessTransformer extends JsonResource
 
     public function toArray($request): array
     {
-        return [
+        $data = [
             'id' =>  $this->id,
             'act_catagory' =>  $this->act_catagory,
             'act_date' =>  $this->act_date,
@@ -24,10 +24,13 @@ class ActivityWellnessTransformer extends JsonResource
             'act_intensity' =>  $this->act_intensity,
             'act_time' =>  $this->act_time,
             'act_type' =>  $this->act_type,
+            'detail' =>  $this->detail,
             'patient_id' =>  $this->patient_id,
             'status' =>  $this->status,
             'unit' =>  $this->unit,
             'freeze' =>  $this->freeze
         ];
+
+        return $data;
     }
 }

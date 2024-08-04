@@ -21,7 +21,7 @@ class ActivityWellness extends BaseModel
      * @var array
      */
     protected $fillable = [
-        "act_catagory", "act_date", "act_duration", "act_intake", "act_intensity", "act_time", "act_type", "patient_id", "status", "unit"
+        "act_catagory", "act_date", "act_duration", "act_intake", "act_intensity", "act_time", "act_type", "patient_id", "status", "unit", "detail",
     ];
 
     /**
@@ -30,7 +30,7 @@ class ActivityWellness extends BaseModel
      * @var array
      */
     protected $casts = [
-        
+        'detail' => 'object'
     ];
 
     /**
