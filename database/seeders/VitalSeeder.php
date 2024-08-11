@@ -148,9 +148,30 @@ class VitalSeeder extends Seeder
                 'name' => 'Lipid Profile',
                 'attributes' => json_encode([]),
                 'is_active' => 1,
+            ],
+            [
+                'master_type_slug' => 'vitals', 
+                'slug' => 'urea', 
+                'name' => 'Urea',
+                'attributes' => json_encode([]),
+                'is_active' => 1,
+            ],
+            [
+                'master_type_slug' => 'vitals', 
+                'slug' => 'creatinine', 
+                'name' => 'Creatinine',
+                'attributes' => json_encode([]),
+                'is_active' => 1,
+            ],
+            [
+                'master_type_slug' => 'vitals', 
+                'slug' => 'gfr', 
+                'name' => 'GFR',
+                'attributes' => json_encode([]),
+                'is_active' => 1,
             ]
     	];
 
-        DB::table('masters')->insert($seeders);
+        DB::table('masters')->insertOrIgnore($seeders);
     }
 }

@@ -21,10 +21,13 @@ class PatientHealthTransformer extends JsonResource
             'consult_id'        =>  $this->consult_id,
             // 'slug-display-name' => $this->master->name,
             'values'            => $this->values,
-            'user' => (new UserTransformer($this->user)),
             'created_at' => $this->created_at,
             'freeze' =>  $this->freeze
         ];
+
+        // if($this->slug == 'condition') { // removed unnessary user data here. If needed then add a if condition and use it
+        //     $data['user'] = new UserTransformer($this->user);
+        // }
 
         if(!empty($this->consult)){
             $data['consult'] = (new ConsultTransformer($this->consult));
