@@ -20,13 +20,16 @@ $router->get('/key', function () {
     return \Illuminate\Support\Str::random(32);
 });
 
+$router->post('/rijuven', 'RijuvenApis\WebhookService@handle');
+// $router->post('/rijuven', ['uses' => 'RijuvenApis\WebhookService@handle']);
+
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
 $router->get('/activated', function () use ($router) {
     return view('activated');
 });
-
 
 $router->get('v1/users/activate-accounts-x', 'AuthService@activateAccountsx');
 
@@ -40,6 +43,13 @@ $router->group(['prefix' => 'peripheral/', 'middleware' => 'peripheralAuth'], fu
 });
 
 $router->group(['prefix' => 'v1/', 'middleware' => 'clientAuth'], function ($router) {
+
+    // ABDM - AABA ROUTES
+    $router->group(['prefix' => 'abdm', 'namespace' => 'ABDMApis'], function ($router) {
+        $router->get('get-public-key', 'BaseService@getPublicKey');
+        $router->post('aaba-request-otp-via-aadhaar', 'AabaApiService@requestOtpForEnrollViaAadhaar');
+        $router->post('aaba-enroll-via-aadhaar', 'AabaApiService@enrollViaAadhaar'); 
+    });
 
     $router->get('analytics', 'AuthService@analytics');
     $router->get('teleconsult/token-validate', 'AuthService@consultTokenValidate');

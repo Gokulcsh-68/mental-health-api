@@ -194,6 +194,18 @@ class Vital extends BaseModel
             $data['details'] += self::spirometer_flag($data['details']);
         }
 
+        if($data['slug'] == 'urea'){
+            $data['details'] += self::urea_flag($data['details']);
+        }
+
+        if($data['slug'] == 'creatinine'){
+            $data['details'] += self::creatinine_flag($data['details']);
+        }
+
+        if($data['slug'] == 'gfr'){
+            $data['details'] += self::gfr_flag($data['details']);
+        }
+
 
         return $this->create($data);
     }
@@ -341,6 +353,21 @@ class Vital extends BaseModel
         if($data['slug'] == 'spirometer'){
             unset($data['details']['spirometerFlag'], $data['details']['spirometerFlagColor'], $data['details']['range_code']);
             $data['details'] += self::spirometer_flag($data['details']);
+        }
+
+        if($data['slug'] == 'urea'){
+            unset($data['details']['ureaFlag'], $data['details']['ureaFlagColor'], $data['details']['range_code']);
+            $data['details'] += self::urea_flag($data['details']);
+        }
+
+        if($data['slug'] == 'creatinine'){
+            unset($data['details']['creatinineFlag'], $data['details']['creatinineFlagColor'], $data['details']['range_code']);
+            $data['details'] += self::creatinine_flag($data['details']);
+        }
+
+        if($data['slug'] == 'gfr'){
+            unset($data['details']['gfrFlag'], $data['details']['gfrFlagColor'], $data['details']['range_code']);
+            $data['details'] += self::gfr_flag($data['details']);
         }
 
         $instance = $this->getModel($id);
@@ -1706,6 +1733,93 @@ class Vital extends BaseModel
         $input_data['spirometerFlagColor'] = 'primary';
         $input_data['range_code']    = '#0000ff';
 
+
+        return $input_data;
+    }
+
+    public static function urea_flag($input_data)
+    {
+        $input_data['ureaFlag']      = '';
+        $input_data['ureaFlagColor'] = '';
+        $input_data['range_code']    = '';
+        if (!empty($input_data['urea'])) {
+
+            if ($input_data['urea'] <= 20) {
+                $input_data['ureaFlag']      = 'Normal';
+                $input_data['ureaFlagColor'] = 'success';
+                $input_data['range_code']    = '#008000';
+            }
+
+            if (($input_data['urea'] > 20) && ($input_data['urea'] <= 30)) {
+                $input_data['ureaFlag']      = 'Moderate';
+                $input_data['ureaFlagColor'] = 'warning';
+                $input_data['range_code']    = '#ffc107';
+            }
+            
+            if ($input_data['urea'] > 30) {
+                $input_data['ureaFlag']      = 'Severe';
+                $input_data['ureaFlagColor'] = 'danger';
+                $input_data['range_code']    = '#ff0000';
+            }
+        }
+
+        return $input_data;
+    }
+
+    public static function creatinine_flag($input_data)
+    {
+        $input_data['creatinineFlag']      = '';
+        $input_data['creatinineFlagColor'] = '';
+        $input_data['range_code']    = '';
+        if (!empty($input_data['creatinine'])) {
+
+            if ($input_data['creatinine'] <= 1.2) {
+                $input_data['creatinineFlag']      = 'Normal';
+                $input_data['creatinineFlagColor'] = 'success';
+                $input_data['range_code']    = '#008000';
+            }
+
+            if (($input_data['creatinine'] > 1.2) && ($input_data['creatinine'] <= 1.5)) {
+                $input_data['creatinineFlag']      = 'Moderate';
+                $input_data['creatinineFlagColor'] = 'warning';
+                $input_data['range_code']    = '#ffc107';
+            }
+            
+            if ($input_data['creatinine'] > 1.5) {
+                $input_data['creatinineFlag']      = 'Severe';
+                $input_data['creatinineFlagColor'] = 'danger';
+                $input_data['range_code']    = '#ff0000';
+            }
+        }
+
+        return $input_data;
+    }
+
+    public static function gfr_flag($input_data)
+    {
+        $input_data['gfrFlag']      = '';
+        $input_data['gfrFlagColor'] = '';
+        $input_data['range_code']    = '';
+        if (!empty($input_data['gfr'])) {
+
+            if ($input_data['gfr'] >= 90) {
+                $input_data['gfrFlag']      = 'Normal';
+                $input_data['gfrFlagColor'] = 'success';
+                $input_data['range_code']    = '#008000';
+            }
+
+            if (($input_data['gfr'] >= 60) && ($input_data['gfr'] < 90)) {
+                $input_data['gfrFlag']      = 'Moderate';
+                $input_data['gfrFlagColor'] = 'warning';
+                $input_data['range_code']    = '#ffc107';
+            }
+            
+            if ($input_data['gfr'] < 60) {
+                $input_data['gfrFlag']      = 'Severe';
+                $input_data['gfrFlagColor'] = 'danger';
+                $input_data['range_code']    = '#ff0000';
+            }
+        }
 
         return $input_data;
     }

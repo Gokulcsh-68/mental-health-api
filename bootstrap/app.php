@@ -77,6 +77,7 @@ $app->configure('app');
 $app->configure('api');
 $app->configure('database');
 $app->configure('cors');
+$app->configure('abdm');
 
 /*
 |--------------------------------------------------------------------------

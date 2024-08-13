@@ -21,7 +21,7 @@ class ActivityWellness extends BaseModel
      * @var array
      */
     protected $fillable = [
-        "act_catagory", "act_date", "act_duration", "act_intake", "act_intensity", "act_time", "act_type", "patient_id", "status", "unit"
+        "act_catagory", "act_date", "act_duration", "act_intake", "act_intensity", "act_time", "act_type", "patient_id", "status", "unit", "detail",
     ];
 
     /**
@@ -30,7 +30,7 @@ class ActivityWellness extends BaseModel
      * @var array
      */
     protected $casts = [
-        
+        'detail' => 'object'
     ];
 
     /**
@@ -92,8 +92,9 @@ class ActivityWellness extends BaseModel
             else if($request->get('act_intake')){
 
                 $act_intake = $request->get('act_intake');
+                $actual_value = $request->get('actual_value') ?? false;
                 foreach ($act_intake as $key => $value) {
-                    $data['act_intake'] = $value * 100;
+                    $data['act_intake'] = $actual_value ? $value : ($value * 100);
                     $data['act_type'] = $key;
                     $model = $this->create($data);
                 }
@@ -126,6 +127,10 @@ class ActivityWellness extends BaseModel
         
         if($request->get('act_catagory')){
             $model->where('activity_wellness.act_catagory', $request->get('act_catagory'));
+        }
+
+        if($request->get('act_type')){
+            $model->where('activity_wellness.act_type', $request->get('act_type'));
         }
 
         if($request->get('from') && $request->get('to')){

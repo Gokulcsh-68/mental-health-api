@@ -56,12 +56,11 @@ trait S3
     		$filenamePrefix = md5(time().uniqid(rand(), true));
     	}
     	$filename = sprintf('%s.%s', $filenamePrefix, $ext);
-  		$filePath = sprintf('%s/%s', $path, $filename);
+  		$filePath = sprintf('%s%s', $path, $filename);
 
   		try{
-	  		if ($s3->put($filePath, file_get_contents($remotePath), "public")) {
-
-	  			return ["filename" => $filename, "fullPath" => $filePath];
+	  		if ($x = $s3->put($filePath, file_get_contents($remotePath), "public")) {
+	  			return ["filename" => $filename, "fullPath" => $filePath, 'url' => $s3->url($filePath)];
 	  		}
 	  	}
 	  	catch(\Exeception $e) {

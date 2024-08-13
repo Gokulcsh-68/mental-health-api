@@ -49,6 +49,13 @@ class HealthFormSeeder extends Seeder
             ],
             [
                 'master_type_slug' => 'health_form', 
+                'slug' => 'patient-education', 
+                'name' => 'Patient Education',
+                'attributes' => json_encode([]),
+                'is_active' => 1,
+            ],
+            [
+                'master_type_slug' => 'health_form', 
                 'slug' => 'hpi', 
                 'name' => 'HPI',
                 'attributes' => json_encode([]),

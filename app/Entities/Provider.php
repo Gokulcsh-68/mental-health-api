@@ -253,7 +253,17 @@ class Provider extends BaseModel
             $model->where('providers.user_id', $request->user()->id);
         }
 
+        if ($request->get('gender')) { 
+            $model->whereHas('user', function ($query) use ($request) {
+                $query->where('users.gender', $request->get('gender'));
+            });
+        }  
 
+        if ($request->get('speciality')) { 
+            $model->whereHas('providerSpeciality', function ($query) use ($request) {
+                $query->Where('provider_specialities.speciality', $request->get('speciality'));
+            });
+        }
 
         if ($request->get('searchkey')) {
             $model->where(function($query) use ($request) {

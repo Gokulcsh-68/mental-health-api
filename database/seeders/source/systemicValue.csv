@@ -1,307 +1,128 @@
-Nutritional,Emaciated,nomultiple,nutritional
-Nutritional,Undernourished,nomultiple,nutritional
-Nutritional,Adequately nourished,nomultiple,nutritional
-Nutritional,Overweight,nomultiple,nutritional
-Nutritional,Obese,nomultiple,nutritional
-Nutritional,Morbidly obese,nomultiple,nutritional
-Constitutional,NAD
-Constitutional,Loss of appetite
-Constitutional,Lethargy
-Constitutional,Unexplained weight gain or weight loss
-Constitutional,Fever
-Constitutional,Fatigue
-Constitutional,Anorexia
-Constitutional,Night Sweats
-Constitutional,Scalp Tenderness
-Constitutional,Prior diagnosis of cancer
-Constitutional,Malaise
-Constitutional,Ability to conduct usual activities
-Constitutional,Exercise tolerance
-Constitutional,Sense of well-being
-General,Anemia
-General,Icterus
-General,Clubbing
-General,Lymphadenopathy
-General,Cyanosis
-General,oedema
-HEENT,NAD
-HEENT,D.N.S.
-HEENT,Nasal Polyps
-HEENT,Enlarged Tonsils
-HEENT,Congested throat
-HEENT,Tenderness in Frontal Sinus
-HEENT,Tenderness in Maxillary Sinus- Lt
-HEENT,Tenderness in Maxillary Sinus- Rt
-HEENT,Angular stomatitis
-HEENT,Apthous Ulcers'
-HEENT,Carious Teeth
-HEENT,Cataract
-HEENT,Posterior Pharyngeal Injection Or Exudates
-HEENT,Halitosis
-HEENT,Nasal Septum And Whether Turbinates Are Enlarged Or Reddened
-HEENT,Loss of hearing
-HEENT,Visual Acuity reduced
-HEENT,Cornea (Opacified)
-HEENT,Conjunctivae (Pale Injected Or Red)
-HEENT,Sclerae (Any Icterus Muddy Appearance)
-HEENT,Ptosis
-HEENT,Abnormal Oral Mucosa
-HEENT,Gingival Inflammation
-HEENT,Cyanosis
-HEENT,Palpable nodes/nodules
-HEENT,Jugular Venous distension
-CVS,NAD
-CVS,Murmur
-CVS,Added Sounds
-CVS,Missed beats
-CVS,Reduced heart sounds
-CVS,Clicks
-CVS,Rubs
-CVS,Gallops
-CVS,Murmurs
-CVS,Heart Sounds (S1 S2 S3 S4)
-CVS,Rhythm (Regular Or Irregular)
-CVS,Auscultation
-CVS,Whether Or Not Abnormally Sustained
-CVS,P M I ( Point Of Maximal Impulse)
-CVS,Thrills (Palpable Murmurs)
-CVS,Shocks (Palpable Heart Sounds)
-CVS,Heaves
-CVS,Palpation
-CVS,Visible P M I
-CVS,Abnormal Outward Pulsations
-CVS,Arrhythmias
-CVS,Cardiac Wheeze
-Breasts,NAD
-Breasts,Spontaneoous discharge
-Breasts,Masses
-Breasts,Lumps
-Breasts,Pain
-Breasts,Cracked Nipples
-Breasts,Everted Nipples
-Breasts,Tenderness
-Breasts,Asymmtery
-Breasts,Peau d’orange appearance
-Breasts,Skin dimpling
-Breasts,Swollen Lymph Nodes
-RS,NAD
-RS,Wheeze- Bilateral
-RS,Wheeze- Left side
-RS,Wheeze- Right side
-RS,Crackles- Bilateral
-RS,Crackles-Left side
-RS,Crackles-Right side
-RS,Stridor+
-RS,Tachypnea at rest
-RS,Dyspnea at rest
-RS,Noisy breathing
-RS,Reduced Bilateral airflow
-RS,Reduced Unilateral airflow
-RS,Hemoptysis
-CNS,NAD
-CNS,Change in behavior
-CNS,Headache
-CNS,Snout Reflex
-CNS,Grasp Reflex
-CNS,Digital Reflexes (Wartenberg - Hoffman)
-CNS,Babinski reflex
-CNS,Pathologic Reflexes
-CNS,Abnormal Deep Tendon Reflexes
-CNS,Positive Romberg Sign
-CNS,Loss of Position Sense
-CNS,Ataxia
-CNS,Alexia
-CNS,Agraphia
-CNS,Sterognosis
-CNS,Graphesthesia
-CNS,Muscle Tenderness
-CNS,Atrophy - Hypertrophy
-CNS,Abnormal Limb Tone (Spasticity - Rigidity - Cogwheeling - Flaccidity)
-CNS,Involuntary Movements (Fasciculations - Tremor - Chorea - Posturing)
-CNS,Loss of Abstract Reasoning
-CNS,Aphonia
-CNS,Athetosis
-CNS,Chorea
-CNS,Problems With Walking Or Balance
-CNS,Change In Sensation
-CNS,Headaches
-CNS,Memory Changes
-CNS,Tremors
-CNS,Tingling
-CNS,Numbness
-CNS,Local Weakness
-CNS,Paralysis
-CNS,Seizures
-CNS,Fainting
-CNS,Back Pain
-CNS,Joint Deformities
-CNS,Swelling Of Joints
-CNS,Shoulder Pain
-CNS,Aching Muscles
-CNS,Cortical Functions
-CNS,Sensory loss
-CNS,Diplopia
-CNS,Thrombus/ Embolus
-CNS,Syncope
-CNS,Visual Field Changes
-CNS,Muscle Weakness-Upper Limb (R)
-CNS,Muscle Weakness-Upper Limb (L)
-CNS,Muscle Weakness-Lower Limb (R)
-CNS,Muscle Weakness-Lower Limb (L)
-CNS,Speech disability
-CNS,Conscious
-CNS,Semi conscious
-CNS,Unconscious
-CNS,Disoriented
-CNS,Neck rigidity
-CNS,Meningeal signs
-CNS,Focal Neurological Deficit
-CNS,Flapping Tremor
-CNS,Delirium/Confusion
-CNS,Hallucination
-CNS,Stupor
-CNS,Reflex abnormality
-CNS,Myoclonus
-CNS,Nystagmus
-CNS,Rigidity
-CNS,Bradykinesia
-Gasterointestinal System,NAD
-Gasterointestinal System,Hepatomegaly
-Gasterointestinal System,Splenomegaly
-Gasterointestinal System,Abdominal distension
-Gasterointestinal System,Tenderness- Left loin
-Gasterointestinal System,Tenderness- Right loin
-Gasterointestinal System,Tenderness- epigastric
-Gasterointestinal System,Tenderness- Suprapubic
-Gasterointestinal System,Hernia
-Gasterointestinal System,Hydrocele
-Gasterointestinal System,Phimosis
-Gasterointestinal System,Balanitis
-Gasterointestinal System,Tenderness- Left Hypochondreal
-Gasterointestinal System,Tenderness- Right Hypochondreal
-Gasterointestinal System,Shifting Dullness
-Gasterointestinal System,Rebound tenderness
-Gasterointestinal System,Ascites
-Gasterointestinal System,Dysentery
-Gasterointestinal System,Constipation
-Gasterointestinal System,Increased Flatulence
-Gasterointestinal System,GERD
-Gasterointestinal System,Reflux disorders
-Gasterointestinal System,Ulcers
-Gasterointestinal System,Hematemesis
-Gasterointestinal System,Vomiting
-Gasterointestinal System,Dyspepsia
-Gasterointestinal System,Melena
-Gasterointestinal System,Steatorrhea
-Gasterointestinal System,Caput Medusae
-Gasterointestinal System,Change in bowel history
-Gasterointestinal System,Abnormal Pulsations/Movememnts
-Gasterointestinal System,Absent bowel sounds
-Gasterointestinal System,Abdominal rigidity
-Endocrine System,NAD
-Endocrine System,Cretinism
-Endocrine System,Gigantism
-Endocrine System,Addisons disease
-Endocrine System,Cushings disease
-Endocrine System,Pituatary insufficiency
-Endocrine System,Hirsutism
-Endocrine System,Abnormal Weight gain,nomultiple,abnormal-weight
-Endocrine System,Abnormal Weight Loss,nomultiple,abnormal-weight
-Endocrine System,Changes in mood/memory
-Endocrine System,Tremor
-Endocrine System,Exophthalmos
-Endocrine System,Fat pads on neck and shoulders
-Endocrine System,Hyperpigmentation of skin
-Endocrine System,Intolerance to heat or cold
-Endocrine System,Confusion
-Endocrine System,Blurred vision
-Endocrine System,Paresthesias
-Endocrine System,Seizures
-Endocrine System,Coma
-Endocrine System,Decreased blood glucose level
-Endocrine System,Pallor
-Endocrine System,Cool, clammy skin
-Endocrine System,Diaphoretic
-Endocrine System,Polyurea
-Endocrine System,Polydipsia
-Endocrine System,Polyphagia
-Endocrine System,Tachycardia
-Endocrine System,Palpitations
-Endocrine System,Hypothyroidism
-Endocrine System,Hperthyroidism
-Endocrine System,Diabetes Mellitus
-Endocrine System,Diabetes Insipidus
-Endocrine System,Hypoparathyroidism
-Endocrine System,Hyperparathyroidism
-Skin,NAD
-Skin,Edema
-Skin,Pallor
-Skin,Icterus
-Skin,Rash
-Skin,Turgor
-Skin,Texture Change
-Skin,Change In Existing Skin Lesion
-Skin,New Skin Lesion
+General,Weight Loss
+General,Fever
+General,Fatigue
+General,Sweating
+General,Appetite Changes
+General,Night Sweats
+General,Weakness
+General,Chills
+Allergy,Hives
+Allergy,Swelling of lips or tongue
+Allergy,Hay fever
+Allergy,Asthma
+Allergy,Eczema/Sensitive
+Allergy,"Sensitivity to drugs, food,"
+Allergy,"pollens, or dander"
+Allergy,AutoImmune Disorder
+Skin,Rashes
 Skin,Itching
-Skin,Persistent Rash
-Skin,Macule
-Skin,Papule
-Skin,Bullae
-Skin,Dermatitis
-Skin,Pustule
-Skin,Scaly skin
-Skin,Pruritis
-Skin,Burns
-Skin,Moles
-Skin,Flushing
-Skin,Hyperpigmentation
-Skin,Hypopigmentation
-Genito-Urinary System (M),NAD
-Genito-Urinary System (M),Increased urination
-Genito-Urinary System (M),Decreased urination
-Genito-Urinary System (M),Loss of bladder control
-Genito-Urinary System (M),CKD
-Genito-Urinary System (M),Erectile dysfunction
-Genito-Urinary System (M),Penile discharge
-Genito-Urinary System (M),Pain on micturition
-Genito-Urinary System (M),Burning on micturition
-Genito-Urinary System (M),Infertility
-Genito-Urinary System (M),Genital Lesions
-Genito-Urinary System (M),Blood in urine
-Genito-Urinary System (M),Incomplete voiding
-Genito-Urinary System (M),Phimosis
-Genito-Urinary System (M),Kyluria
-Genito-Urinary System (F),NAD
-Genito-Urinary System (F),Pelvic pain
-Genito-Urinary System (F),Pain on micturition
-Genito-Urinary System (F),Burning on micturition
-Genito-Urinary System (F),Vaginal discharge
-Genito-Urinary System (F),Loss of bladder control
-Genito-Urinary System (F),Inflammation
-Genito-Urinary System (F),Pain/swelling
-Genito-Urinary System (F),Excessive menstrual bleeding
-Genito-Urinary System (F),Prolonged menses
-Genito-Urinary System (F),Inter mentsrual bleeding
-Genito-Urinary System (F),Painful Menstruation
-Genito-Urinary System (F),Irregular menses
-Genito-Urinary System (F),Amenorrhea
-Genito-Urinary System (F),Infertility
-Genito-Urinary System (F),Genital Lesions
-Psychiatric Evaluation,NAD
-Psychiatric Evaluation,Anxiety
-Psychiatric Evaluation,Delirium/Confusion
-Psychiatric Evaluation,Agitation
-Psychiatric Evaluation,Irritability
-Psychiatric Evaluation,Personality changes
-Psychiatric Evaluation,Anhedonia
-Psychiatric Evaluation,Suicidal ideation
-Psychiatric Evaluation,Headache
-Psychiatric Evaluation,Memory impairment
-Psychiatric Evaluation,Seizures
-Psychiatric Evaluation,Insomnia
-Psychiatric Evaluation,Tremor
-Psychiatric Evaluation,Paresthesias
-Psychiatric Evaluation,Altered Mental Sensorium
-Psychiatric Evaluation,Mood changes
-Psychiatric Evaluation,Depression
-Psychiatric Evaluation,Mania
+Skin,Change in hair or nails
+Skin,Skin Lesions
+Head,Headaches
+Head,Head injury
+Eyes,Glasses or contacts
+Eyes,Change in vision
+Eyes,Eye pain
+Eyes,Double vision
+Eyes,Flashing lights
+Eyes,Glaucoma/Cataracts
+Ears,Change in hearing
+Ears,Ear pain
+Ears,Ear discharge
+Ears,Ringing
+Ears,Dizziness
+Nose,Nose bleeds
+Nose,Nasal stuffiness
+Nose,Frequent colds
+Mouth/Throat,Bleeding gums
+Mouth/Throat,Sore tongue
+Mouth/Throat,Sore throat
+Mouth/Throat,Hoarseness
+Neck,Lumps
+Neck,Swollen glands
+Neck,Goiter
+Neck,Stiffness
+Breast,Lumps
+Breast,Pain
+Breast,Nipple discharge
+Breast,BSE (Breast Self-Examination)
+Respiratory,Shortness of breath
+Respiratory,Cough
+Respiratory,"Production of phlegm, color"
+Respiratory,Wheezing
+Respiratory,Coughing up blood
+Respiratory,Chest pain
+Respiratory,Dyspnea (Difficulty Breathing)
+CVS,Chest Pain
+CVS,Palpitations
+CVS,Swelling in hands/feet
+CVS,Blue fingers/toes
+CVS,High blood pressure
+CVS,Skipping heart beats
+CVS,Heart murmur
+CVS,HX of heart medication
+Gastro,Abdominal Pain
+Gastro,Change of appetite
+Gastro,Weight Loss
+Gastro,Problems swallowing
+Gastro,Nausea
+Gastro,Heartburn
+Gastro,Vomiting
+Gastro,Vomiting blood
+Gastro,Constipation
+Gastro,Diarrhoea
+Gastro,Change in bowel habits
+Gastro,Excessive belching
+Gastro,Excessive flatus
+Gastro,Yellow color of skin
+Gastro,Food intolerance
+Gastro,Rectal bleeding
+Gastro,Hemorrhoids
+Genito Urinary,Difficulty in urination
+Genito Urinary,Pain or burning on urination
+Genito Urinary,Frequent urination at night
+Genito Urinary,Urgent need to urinate
+Genito Urinary,Incontinence of urine
+Genito Urinary,Dribbling
+Genito Urinary,Decreased urine stream
+Genito Urinary,Blood in urine
+Genito Urinary,UTI/stones/prostate
+Genito Urinary,Infection
+Peripheral Vascular Disease,Leg cramps
+Peripheral Vascular Disease,Varicose veins
+Peripheral Vascular Disease,Clots in veins
+Musculoskeletal,Pain
+Musculoskeletal,Swelling
+Musculoskeletal,Stiffness
+Musculoskeletal,Decreased joint motion
+Musculoskeletal,Broken bone
+Musculoskeletal,Serious sprains
+Musculoskeletal,Arthritis
+Musculoskeletal,Gout
+Neurology,Headaches
+Neurology,Seizures
+Neurology,Syncope (Fainting)
+Neurology,Paralysis
+Neurology,Weakness
+Neurology,Loss of muscle size
+Neurology,Muscle spasm
+Neurology,Tremor
+Neurology,Involuntary movement
+Neurology,Incoordination
+Neurology,Numbness
+Neurology,Feeling of pins and needles/tingles
+Hematology,Anemia
+Hematology,Easy bruising/bleeding
+Hematology,Past Transfusions
+Endocrine,Abnormal growth
+Endocrine,Increased appetite
+Endocrine,Increased thirst
+Endocrine,Increased urine production
+Endocrine,Thyroid trouble
+Endocrine,Heat/cold intolerance
+Endocrine,Excessive sweating
+Endocrine,Diabetes
+Psychiatry,Tension/Anxiety
+Psychiatry,Depression/suicide ideation
+Psychiatry,Memory problems
+Psychiatry,Unusual problems
