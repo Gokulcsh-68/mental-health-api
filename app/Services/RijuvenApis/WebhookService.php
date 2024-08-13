@@ -4,6 +4,8 @@ namespace App\Services\RijuvenApis;
 
 use App\Entities\Doc;
 use App\Entities\Patient;
+use App\Entities\User;
+use App\Entities\Vital;
 use App\Traits\S3;
 use Carbon\Carbon;
 use DB;
@@ -50,8 +52,9 @@ class WebhookService
 				foreach ($data['tests'] as $test) {
 					$notes .= sprintf('%s - %s, ', $test['location'], $test['ecg_description_short']);
 				}
+                $uid = Patient::where('id', $rijuven_patient_log->patient_id)->first()->user_id;
 				$processed_data = [
-					'user_id' => Patient::where('id', $rijuven_patient_log->patient_id)->first()->user_id,
+					'user_id' => $uid,
 					'document_source' => 'imaging',
 					'created_by' => 1,
 					'addition_info' => [
@@ -62,7 +65,30 @@ class WebhookService
 					'properties' => $this->uploadToS3($data['report_url'], sprintf('%s-%s',$data['patient_id'],$data['session_id']), $ext = '.pdf'),
 
 				];
-				$this->saveDocData($processed_data);
+
+                $response_doc = $this->saveDocData($processed_data);
+
+                $doc_id = $response_doc['data']['id'];
+
+                $dateOfBirth = User::Where('id', $uid)->value('dob');
+
+                $years  = Carbon::parse($dateOfBirth)->diff(Carbon::now())->format('%y');
+                $months = Carbon::parse($dateOfBirth)->diff(Carbon::now())->format('%m');
+                $days   = Carbon::parse($dateOfBirth)->diff(Carbon::now())->format('%d');
+
+                $vital_data = array();
+                $vital_data['slug'] = 'ecg';
+                $vital_data['user_id'] = $uid;
+                $vital_data['details']['date'] = Carbon::now()->format('Y-m-d');
+                $vital_data['details']['time'] = Carbon::now()->format('H:i:s');
+                $vital_data['details']['unit'] = 'Bpm';
+                $vital_data['details']['heart'] = '0';
+                $vital_data['details'] += Vital::heart_rate_flag($vital_data['details'], $years, $months, $days);
+                $vital_data['details']['doc_id'] = $doc_id;
+                $vital_data['details']['device_type'] = 'ECG - Rijuven';
+
+                Vital::create($vital_data);
+
 			} else if($data['test_type'] == 'auscultation') {
 				$notes = '';
 				foreach ($data['tests'] as $test) {
@@ -104,9 +130,9 @@ class WebhookService
 					'rijuven_patient_id' => $rijuven_patient_log->rijuven_patient_id,
 					'updated_at' => Carbon::now(),
 				]);
-			
+
 		} else if(!empty($data['patient_identifier']) && !empty($data['name_first']) && !empty($data['name_last']) && !empty($data['id'])) {
-			
+
 			//  check rijuven patient id exist in our log
 			if($this->getRijuvenPatientFromDB($data['id'])) {
 				return response()->json($result);
@@ -167,7 +193,8 @@ class WebhookService
 		$new_request->merge($data);
 		$new_request->setJson($new_request);
 
-		(new Doc)->modelCreateProcess($new_request);
+		$doc_id = (new Doc)->modelCreateProcess($new_request);
+        return $doc_id;
 	}
 
 	protected function uploadToS3($remotePath, $filenamePrefix, $ext = '.pdf'): array {
