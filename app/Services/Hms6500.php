@@ -31,7 +31,7 @@ class Hms6500 extends BaseService
                 'username' => $input['username'],
                 'password' => $input['password'],
             ];
-            
+
             try {
                 $response = (new PeripheralApiService)->loginVaidate($payload);
 
@@ -102,6 +102,7 @@ class Hms6500 extends BaseService
 
                 $insert_data['addition_info']['title'] = 'ECG';
                 $insert_data['addition_info']['notes'] = 'ECG';
+                $insert_data['addition_info']['device_type'] = '12 Lead ECG';
 
                 $file   = $request->file('filename');
                 $prefix = 'HMS6500_' . $insert_data['addition_info']['title'];
@@ -116,9 +117,29 @@ class Hms6500 extends BaseService
                     $insert_data['properties']['s3_upload'] = 1;
                     // Log::info('HMS', ['da' => $request->all(), 'file' => $response]);
 
-                    Doc::create($insert_data);
+                    $doc_id = Doc::create($insert_data);
+
+                    $dateOfBirth = User::Where('id', $patient_details->id)->value('dob');
+
+                    $years  = Carbon::parse($dateOfBirth)->diff(Carbon::now())->format('%y');
+                    $months = Carbon::parse($dateOfBirth)->diff(Carbon::now())->format('%m');
+                    $days   = Carbon::parse($dateOfBirth)->diff(Carbon::now())->format('%d');
+
+                     $vital_data = array();
+                     $vital_data['slug'] = 'ecg';
+                     $vital_data['user_id'] = $patient_details->id;
+                     $vital_data['details']['date'] = Carbon::now()->format('Y-m-d');
+                     $vital_data['details']['time'] = Carbon::now()->format('H:i:s');
+                     $vital_data['details']['unit'] = 'Bpm';
+                     $vital_data['details']['heart'] = '0';
+                     $vital_data['details'] += Vital::heart_rate_flag($vital_data['details'], $years, $months, $days);
+                     $vital_data['details']['doc_id'] = $doc_id->id;
+                     $vital_data['details']['device_type'] = '12 Lead ECG';
+
+                     Vital::create($vital_data);
+
                     return "HTTP_SUCCESS:";
-                }   
+                }
             }
 
             return false;
@@ -141,7 +162,7 @@ class Hms6500 extends BaseService
             if(!empty($input['content'])){
                 $xml = simplexml_load_string($input['content'], "SimpleXMLElement", LIBXML_NOCDATA);
 
-                $patient_details = User::where('peripheral_secret', $peripheral_secret)->first()->toArray();    
+                $patient_details = User::where('peripheral_secret', $peripheral_secret)->first()->toArray();
                 $patient_vitals  = (array) $xml;
                 $data            = array();
 
@@ -161,7 +182,7 @@ class Hms6500 extends BaseService
 
                         // BloodPressure
                         if( !empty($patient_vitals['sys']) || !empty($patient_vitals['dia']) ){
-                        
+
                             if(!empty($patient_vitals['sys'])){
                                 $data['details']['systolic'] = $patient_vitals['sys'];
                             }
@@ -233,7 +254,7 @@ class Hms6500 extends BaseService
 
                     } // File Info Ends
 
-                    
+
 
                 } // Vitals and Patient Ends
 

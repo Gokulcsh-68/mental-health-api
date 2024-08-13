@@ -477,7 +477,7 @@ class AuthService extends BaseService
             $imageFile = $request->all();
             // return $this->httpResponse->setHttpData(['adsf' => $imageFile, 'a' => $request->file('file')])->jsonResponse();
 
-            $imageName = 'profile_'.rand(9999,9999999).rand(100,1999).time().'.png';            
+            $imageName = 'profile_'.rand(9999,9999999).rand(100,1999).time().'.png';
 
             if($request->get('patient_id')){
                 $patient_uid = Patient::where('id',$request->get('patient_id'))->value('user_id');
@@ -654,18 +654,18 @@ class AuthService extends BaseService
     public function forgotPasswordEmail(ForgotPasswordEmailRequest $request, User $user): JsonResponse
     {
         $roleId = Role::where("code", $request->get('role'))->pluck('id')->first();
-    
+
         $user = User::query();
         $user->where('email', $request->get('email'));
         $user->where('role_id', $roleId);
-    
+
 
         if($request->get('username')){
             $user->where('username', $request->get('username'));
         }
 
         $user = $user->first();
-        
+
         if (!empty($user)) {
             $data['otp_type'] = "forgotPassword";
             $this->otpNotification($data, $user);
@@ -694,18 +694,18 @@ class AuthService extends BaseService
 
         // Forgot Password Change
         if ($request->get('action') == 'forgotPassword') {
-        
+
             $user = User::query();
             $user->where('email', $request->get('email'));
             $user->where('role_id', $roleId);
-        
+
 
             if($request->get('username')){
                 $user->where('username', $request->get('username'));
             }
 
             $user = $user->first();
-            
+
             if (!empty($user)) {
                 $check_otp_token = $this->validateOtp($user->secret, $request->get('otp'));
 
@@ -729,18 +729,18 @@ class AuthService extends BaseService
         }
 
         if ($request->get('action') == 'resetPassword') {
-            
+
             $user = User::query();
             $user->where('email', $request->get('email'));
             $user->where('role_id', $roleId);
-        
+
 
             if($request->get('username')){
                 $user->where('username', $request->get('username'));
             }
 
             $user = $user->first();
-            
+
             if (!empty($user)) {
                 $check_otp_token = $this->validateOtp($user->secret, $request->get('otp'));
 
@@ -1478,7 +1478,7 @@ class AuthService extends BaseService
 
 
     public function patientSummary(Request $request): JsonResponse
-    {   
+    {
 
         if($request->get('patient_id')){
             $patient_id = $request->get('patient_id');
@@ -1494,7 +1494,7 @@ class AuthService extends BaseService
             $request['user_id'] = $patient_id;
 
         }
-        
+
         $entityService = new EntityService;
 
         $request['limit'] = 3;
@@ -1578,7 +1578,7 @@ class AuthService extends BaseService
 
 
         // unset($request['slug'],$request['resource'],$request['entity']);
-        
+
         // $request['resource']= 'Master';
         // $request['entity']= new Master;
         // $request['slug']= 'vdx';
@@ -1592,7 +1592,7 @@ class AuthService extends BaseService
         //     $value->type = $vdxType->getData()->data;
 
         //     foreach ($value->type as $k => $v) {
-                
+
         //         unset($request['slug']);
         //         $request['attr_slug']= $v->slug;
         //         $vdxsubType = $entityService->getEntity($request);
@@ -1602,7 +1602,7 @@ class AuthService extends BaseService
         // }
 
         unset($request['slug'],$request['resource'],$request['entity']);
-        
+
         $request['resource']= 'Master';
         $request['entity']= new Master;
         $request['slug']= 'symptoms_reason';
@@ -1610,7 +1610,7 @@ class AuthService extends BaseService
         $health['f_symptoms_reason'] = $vdx->getData()->data;
 
         unset($request['slug'],$request['resource'],$request['entity']);
-        
+
         $request['resource']= 'Master';
         $request['entity']= new Master;
         $request['slug']= 'systemic-examination';
@@ -1664,7 +1664,7 @@ class AuthService extends BaseService
 
         $request['resource']= 'PatientHistory';
         $request['entity']= new PatientHistory;
-        
+
         $request['slug']= 'stroke-scale';
         $stroke_scale = $entityService->getLimitEntity($request);
         $history['g_stroke_scale'] = $stroke_scale->getData()->data;
@@ -1770,8 +1770,8 @@ class AuthService extends BaseService
         $respiration = $entityService->getLimitEntity($request);
         $vitals['i_respiration'] = $respiration->getData()->data;
 
-        
-       
+
+
         $request['slug']= 'hct';
         $respiration = $entityService->getLimitEntity($request);
         $vitals['j_hct'] = $respiration->getData()->data;
@@ -1783,7 +1783,7 @@ class AuthService extends BaseService
         $request['slug']= 'keytone';
         $respiration = $entityService->getLimitEntity($request);
         $vitals['l_keytone'] = $respiration->getData()->data;
-        
+
         $request['slug']= 'uric_acid';
         $respiration = $entityService->getLimitEntity($request);
         $vitals['m_uric_acid'] = $respiration->getData()->data;
@@ -1855,7 +1855,7 @@ class AuthService extends BaseService
             }
 
             $getVitals = $getVitals->get()->groupBy('slug');
-       
+
             $result = [];
 
             $result['age_counts'] =  EnumAnalyticsChart::AgeCounts($getPatientUserId);
@@ -1940,13 +1940,13 @@ class AuthService extends BaseService
                     case 'uric_acid':
                         $result['uric_acid'] =  EnumAnalyticsChart::ChartCounts($value,$key);
                         break;
-                    
+
                     default:
                         // code...
                         break;
                 }
             }
-           
+
            // dd($result);
 
             return $this->httpResponse->setHttpData($result)->jsonResponse();
@@ -1967,7 +1967,7 @@ class AuthService extends BaseService
 
             $peripheral_user_data = [
                 "generate_password" => "create",
-            ];                    
+            ];
 
             $peripheralApiService->patch($peripheral_credentials['id'], $peripheral_user_data);
 
@@ -1984,7 +1984,7 @@ class AuthService extends BaseService
         return ['result'=>json_decode($peripheralApiService->apiResponse)];
     }
 
-    
+
 
     public function vitalDashboards(Request $request): JsonResponse{
 
@@ -1993,7 +1993,7 @@ class AuthService extends BaseService
         $vital = Vital::query();
         $vital->where('user_id',$request->get('user_id'));
         $vital->whereIn('vitals.slug', $getVitalslug);
-        
+
 
         if($request->get('from') && $request->get('to')){
             $from = date('Y-m-d',strtotime($request->get('from')));
@@ -2003,18 +2003,18 @@ class AuthService extends BaseService
 
         if ($request->get('searchkey') && $request->get('searchkey') != 'undefined') {
             $vital->Where('details->created_app', 'LIKE',"%".$request->get('searchkey')."%");
-        }  
+        }
 
         $vital = $vital->orderBy('id','DESC')
                         ->get()->unique('slug')->flatten();
-                        
-        return $this->httpResponse->setHttpData($vital)  
+
+        return $this->httpResponse->setHttpData($vital)
                 ->jsonResponse();
     }
 
 
     public function ConsultCache(Request $request): JsonResponse{
-        
+
 
         if($request->get('cache_type') == "create"){
             $consult_status = '';
@@ -2036,12 +2036,12 @@ class AuthService extends BaseService
         if($request->get('cache_type') == "delete"){
             Cache::forget($request->get('user_id'));
         }
-                        
-        return $this->httpResponse->setHttpMessage('Updated')  
+
+        return $this->httpResponse->setHttpMessage('Updated')
                 ->jsonResponse();
     }
 
-    public function downloadReport($id, Request $request){        
+    public function downloadReport($id, Request $request){
 
         $patientHealth = PatientHealth::find($id);
 

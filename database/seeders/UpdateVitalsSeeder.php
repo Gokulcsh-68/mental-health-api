@@ -13,7 +13,7 @@ class UpdateVitalsSeeder extends Seeder
     * @return void
     */
     public function run()
-    {  
+    {
         $master_types = [
             [ 'master_type_slug' => 'vitals',
         		'name' => 'Respiration Rate', 'slug' => 'respiration'],
@@ -25,9 +25,10 @@ class UpdateVitalsSeeder extends Seeder
             [ 'master_type_slug' => 'vitals', 'name' => 'Uric Acid', 'slug' => 'uric_acid'],
             [ 'master_type_slug' => 'vitals', 'name' => 'Spirometer', 'slug' => 'spirometer'],
             [ 'master_type_slug' => 'health', 'name' => 'Dental', 'slug' => 'dental'],
+            [ 'master_type_slug' => 'vitals', 'name' => 'ECG', 'slug' => 'ecg'],
         ];
-        
+
         DB::table('masters')->insertOrIgnore($master_types);
     }
 
-} 
+}

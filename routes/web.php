@@ -142,7 +142,7 @@ $router->group(['prefix' => 'v1/', 'middleware' => 'clientAuth'], function ($rou
 
         // Patch Periperal OTP
         $router->patch('/getOtp/{id:[0-9]+}', 'AuthService@getPeriperalOtp');
-        
+
         // Get Document File URL
         $router->get('/get-document-url', 'UtilService@getSignedUrl');
 

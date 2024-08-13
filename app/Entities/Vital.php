@@ -36,7 +36,7 @@ class Vital extends BaseModel
      */
     protected $casts = [
         'details' => 'object'
-        
+
     ];
 
     /**
@@ -45,7 +45,7 @@ class Vital extends BaseModel
      * @var array
      */
     protected $hidden = [
-        
+
     ];
 
     /**
@@ -54,7 +54,7 @@ class Vital extends BaseModel
      * @var array
     */
     protected $partialFillable = [
-        
+
     ];
 
     /**
@@ -63,7 +63,7 @@ class Vital extends BaseModel
      * @var array
     */
     protected $dates = [
-        
+
     ];
 
     /**
@@ -72,7 +72,7 @@ class Vital extends BaseModel
      * @var array
     */
     protected $dispatchesEvents = [
-        
+
     ];
 
 
@@ -90,7 +90,7 @@ class Vital extends BaseModel
     {
         if(empty($data)){
             $data = $this->getModelAttributes($request);
-        }            
+        }
 
 
         if(!$request->get('consult_id')){
@@ -99,7 +99,7 @@ class Vital extends BaseModel
             if(!empty($Cachevalue)){
                 $data['consult_id'] = $Cachevalue['consult_id'];
                 $data['details']['updated_by'] = "user";
-            }            
+            }
         }
 
         if(isset($data['details']['date'])){
@@ -148,9 +148,23 @@ class Vital extends BaseModel
             $years  = Carbon::parse($dateOfBirth)->diff(Carbon::now())->format('%y');
             $months = Carbon::parse($dateOfBirth)->diff(Carbon::now())->format('%m');
             $days   = Carbon::parse($dateOfBirth)->diff(Carbon::now())->format('%d');
-           
+
            $data['details'] += self::heart_rate_flag($data['details'], $years, $months, $days);
-           
+
+           if(isset($data['image'])){
+            $data['details']['doc_id'] = (new BluetoothPeripheralService)->uploadECGFile($data);
+           }
+        }
+
+        if($data['slug'] == 'ecg'){
+            $dateOfBirth = User::Where('id', $data['user_id'])->value('dob');
+
+            $years  = Carbon::parse($dateOfBirth)->diff(Carbon::now())->format('%y');
+            $months = Carbon::parse($dateOfBirth)->diff(Carbon::now())->format('%m');
+            $days   = Carbon::parse($dateOfBirth)->diff(Carbon::now())->format('%d');
+
+           $data['details'] += self::heart_rate_flag($data['details'], $years, $months, $days);
+
            if(isset($data['image'])){
             $data['details']['doc_id'] = (new BluetoothPeripheralService)->uploadECGFile($data);
            }
@@ -252,7 +266,7 @@ class Vital extends BaseModel
             $years = Carbon::parse($dateOfBirth)->diff(Carbon::now())->format('%y');
             $months = Carbon::parse($dateOfBirth)->diff(Carbon::now())->format('%m');
             $days = Carbon::parse($dateOfBirth)->diff(Carbon::now())->format('%d');
-           
+
            $data['details'] += self::heart_rate_flag($data['details'], $years, $months, $days);
         }
 
@@ -295,12 +309,12 @@ class Vital extends BaseModel
                     $data['details']['sugar_flag'],
                     $data['details']['sugar_range_code']
                 );
-            
+
 
             $data['details'] += self::urine_flag($data['details']);
         }
 
-        
+
         if($data['slug'] == 'keytone'){
             unset($data['details']['keytoneFlag'], $data['details']['keytoneFlagColor'], $data['details']['range_code']);
             $data['details'] += self::keytone_flag($data['details']);
@@ -336,7 +350,7 @@ class Vital extends BaseModel
         return $instance;
     }
 
-    
+
     public function applyFilters($model, $isPluck)
     {
         $model = parent::applyFilters($model, $isPluck);
@@ -345,7 +359,7 @@ class Vital extends BaseModel
         if($request->get('user_id')){
             $model->where('vitals.user_id', $request->get('user_id'));
         }
-        
+
         if($request->get('slug')){
             $model->where('vitals.slug', $request->get('slug'));
         }
@@ -353,7 +367,7 @@ class Vital extends BaseModel
         if($request->get('slug_array')){
             $model->whereIn('vitals.slug', explode(',',$request->get('slug_array')));
         }
-        
+
         if ($request->get('consult_id') || $request->get('consult_id') == '-1') {
             $model->where('vitals.consult_id', $request->get('consult_id') == '-1'? null: $request->get('consult_id'));
         }
@@ -366,7 +380,7 @@ class Vital extends BaseModel
         }
 
         if ($request->get('searchkey') && $request->get('searchkey') != 'undefined') {
-            
+
             $model->Where('details->created_app', 'LIKE',"%".$request->get('searchkey')."%");
         }
 
@@ -392,25 +406,25 @@ class Vital extends BaseModel
                 $input_data['bmiFlagColor'] = 'primary';
                 $input_data['range_code']   = '#0000ff';
             }
-            
+
             if (($bmi_value >= 18.5) && ($bmi_value < 25)) {
                 $input_data['bmiFlag']      = 'Normal weight';
                 $input_data['bmiFlagColor'] = 'success';
                 $input_data['range_code']   = '#008000';
             }
-            
+
             if (($bmi_value >= 25) && ($bmi_value < 30)) {
                 $input_data['bmiFlag']      = 'Overweight';
                 $input_data['bmiFlagColor'] = 'danger';
                 $input_data['range_code']   = '#ff0000';
             }
-            
+
             if (($bmi_value >= 30) && ($bmi_value < 35)) {
                 $input_data['bmiFlag']      = 'Class I Obesity';
                 $input_data['bmiFlagColor'] = 'danger';
                 $input_data['range_code']   = '#ff0000';
             }
-            
+
             if (($bmi_value >= 35) && ($bmi_value < 40)) {
                 $input_data['bmiFlag']      = 'Class II Obesity';
                 $input_data['bmiFlagColor'] = 'danger';
@@ -423,38 +437,38 @@ class Vital extends BaseModel
                 $input_data['range_code']   = '#ff0000';
             }
         }
-        
+
         return $input_data;
     }
-    
-   
-    
+
+
+
     public static function temp_flag($input_data, $years, $dob)
     {
         if (!empty($input_data['unit']) && !empty($input_data['temperature'])) {
             $input_data['temperatureFlag']      = '';
             $input_data['temperatureFlagColor'] = '';
             $input_data['range_code'] = '';
-            
+
             if(empty($dob) || $dob == '0000-00-00'){
                 $years = 20;
             }
 
             switch ($input_data['unit']) {
                 case 'Fahrenheit':
-                    
+
                     if ($input_data['temperature'] <= 97.6) {
                         $input_data['temperatureFlag']      = 'Hypothermia';
                         $input_data['temperatureFlagColor'] = 'primary';
                         $input_data['range_code']    = '#0000ff';
                     }
-                    
+
                     if (($input_data['temperature'] >= 98) && ($input_data['temperature'] <= 100.9)) {
                         $input_data['temperatureFlag']      = 'Fever / Hyperthermia';
                         $input_data['temperatureFlagColor'] = 'danger';
                         $input_data['range_code']    = '#ff0000';
                     }
-                    
+
                     if (($input_data['temperature'] > 100.9) && ($input_data['temperature'] <= 106.7)) {
                         $input_data['temperatureFlag']      = 'Very High Fever';
                         $input_data['temperatureFlagColor'] = 'danger';
@@ -468,7 +482,7 @@ class Vital extends BaseModel
                     }
 
 
-                    if($years < 1){                    
+                    if($years < 1){
                         if (($input_data['temperature'] >= 95.8) && ($input_data['temperature'] <= 99.3)) {
                             $input_data['temperatureFlag']      = 'Normal';
                             $input_data['temperatureFlagColor'] = 'success';
@@ -476,7 +490,7 @@ class Vital extends BaseModel
                         }
                     }
 
-                    if($years >= 1 && $years <= 17){                    
+                    if($years >= 1 && $years <= 17){
                         if (($input_data['temperature'] >= 97.6) && ($input_data['temperature'] <= 99.3)) {
                             $input_data['temperatureFlag']      = 'Normal';
                             $input_data['temperatureFlagColor'] = 'success';
@@ -484,7 +498,7 @@ class Vital extends BaseModel
                         }
                     }
 
-                    if($years >= 18 && $years <= 64){                    
+                    if($years >= 18 && $years <= 64){
                         if (($input_data['temperature'] >= 96) && ($input_data['temperature'] <= 98)) {
                             $input_data['temperatureFlag']      = 'Normal';
                             $input_data['temperatureFlagColor'] = 'success';
@@ -492,7 +506,7 @@ class Vital extends BaseModel
                         }
                     }
 
-                    if($years >= 65){                    
+                    if($years >= 65){
                         if (($input_data['temperature'] >= 93) && ($input_data['temperature'] <= 98.6)) {
                             $input_data['temperatureFlag']      = 'Normal';
                             $input_data['temperatureFlagColor'] = 'success';
@@ -501,7 +515,7 @@ class Vital extends BaseModel
                     }
 
                     break;
-                
+
                 case 'Celsius':
                     if ($input_data['temperature'] <= 36.7) {
                         $input_data['temperatureFlag']      = 'Hypothermia';
@@ -514,7 +528,7 @@ class Vital extends BaseModel
                         $input_data['temperatureFlagColor'] = 'danger';
                         $input_data['range_code']    = '#ff0000';
                     }
-                    
+
                     if ($input_data['temperature'] > 41.5) {
                         $input_data['temperatureFlag']      = 'Hyperpyrexia';
                         $input_data['temperatureFlagColor'] = 'danger';
@@ -523,7 +537,7 @@ class Vital extends BaseModel
 
 
 
-                    if($years < 1){                    
+                    if($years < 1){
                         if (($input_data['temperature'] >= 36.7) && ($input_data['temperature'] <= 37.3)) {
                             $input_data['temperatureFlag']      = 'Normal';
                             $input_data['temperatureFlagColor'] = 'success';
@@ -531,7 +545,7 @@ class Vital extends BaseModel
                         }
                     }
 
-                    if($years >= 1 && $years <= 17){                    
+                    if($years >= 1 && $years <= 17){
                         if (($input_data['temperature'] >= 36.4) && ($input_data['temperature'] <= 37.4)) {
                             $input_data['temperatureFlag']      = 'Normal';
                             $input_data['temperatureFlagColor'] = 'success';
@@ -539,7 +553,7 @@ class Vital extends BaseModel
                         }
                     }
 
-                    if($years >= 18 && $years <= 64){                    
+                    if($years >= 18 && $years <= 64){
                         if (($input_data['temperature'] >= 35.6) && ($input_data['temperature'] <= 36.7)) {
                             $input_data['temperatureFlag']      = 'Normal';
                             $input_data['temperatureFlagColor'] = 'success';
@@ -547,7 +561,7 @@ class Vital extends BaseModel
                         }
                     }
 
-                    if($years >= 65){                    
+                    if($years >= 65){
                         if (($input_data['temperature'] >= 33.9) && ($input_data['temperature'] <= 37)) {
                             $input_data['temperatureFlag']      = 'Normal';
                             $input_data['temperatureFlagColor'] = 'success';
@@ -557,22 +571,22 @@ class Vital extends BaseModel
 
                     break;
             }
-            
+
         }
-        
-        
+
+
         return $input_data;
     }
-    
-   
-    
+
+
+
     public static function blood_sugar_flag($input_data)
     {
         $input_data['bsFlag']      = '';
         $input_data['bsFlagColor'] = '';
         $input_data['range_code']  = '';
         if (!empty($input_data['blood_sugar'])) {
-            
+
         if ($input_data['unit'] == 'mg/dL') {
 
 
@@ -663,37 +677,37 @@ class Vital extends BaseModel
 
 
         }
-        
+
         return $input_data;
     }
-    
-    
-    
+
+
+
     public static function spo2_flag($input_data)
     {
         $input_data['spo2Flag']      = '';
         $input_data['spo2FlagColor'] = '';
         $input_data['range_code']    = '';
         if (!empty($input_data['spo2'])) {
-            
+
             if ($input_data['spo2'] < 75) {
                 $input_data['spo2Flag']      = 'Severe Hypoxemia';
                 $input_data['spo2FlagColor'] = 'danger';
                 $input_data['range_code']    = '#ff0000';
             }
-            
+
             if (($input_data['spo2'] >= 75) && ($input_data['spo2'] <= 89)) {
                 $input_data['spo2Flag']      = 'Moderate Hypoxemia';
                 $input_data['spo2FlagColor'] = 'warning';
                 $input_data['range_code']    = '#ffc107';
             }
-            
+
             if (($input_data['spo2'] >= 90) && ($input_data['spo2'] <= 94)) {
                 $input_data['spo2Flag']      = 'Mild Hypoxemia';
                 $input_data['spo2FlagColor'] = 'primary';
                 $input_data['range_code']    = '#0000ff';
             }
-            
+
             if ($input_data['spo2'] >= 95) {
                 $input_data['spo2Flag']      = 'Normal';
                 $input_data['spo2FlagColor'] = 'success';
@@ -703,7 +717,7 @@ class Vital extends BaseModel
 
         return $input_data;
     }
-    
+
     public static function respiration_flag($input_data, $years, $dob)
     {
         $input_data['respirationFlag']      = '';
@@ -715,100 +729,100 @@ class Vital extends BaseModel
         }
 
         if (!empty($input_data['respiration'])) {
-            
+
             if($years <= 1){
                 if ($input_data['respiration'] < 30) {
                     $input_data['respirationFlag']      = 'Low';
                     $input_data['respirationFlagColor'] = 'warning';
                     $input_data['range_code']    = '#ffc107';
                 }
-                
+
                 if (($input_data['respiration'] >= 30) && ($input_data['respiration'] <= 40)) {
                     $input_data['respirationFlag']      = 'Normal';
                     $input_data['respirationFlagColor'] = 'success';
                     $input_data['range_code']    = '#008000';
                 }
-                
+
                 if ($input_data['respiration'] > 40) {
                     $input_data['respirationFlag']      = 'High';
                     $input_data['respirationFlagColor'] = 'danger';
                     $input_data['range_code']    = '#ff0000';
                 }
             }
-            
+
             if($years >= 2 && $years <= 5){
                 if ($input_data['respiration'] < 20) {
                     $input_data['respirationFlag']      = 'Low';
                     $input_data['respirationFlagColor'] = 'warning';
                     $input_data['range_code']    = '#ffc107';
                 }
-                
+
                 if (($input_data['respiration'] >= 20) && ($input_data['respiration'] <= 40)) {
                     $input_data['respirationFlag']      = 'Normal';
                     $input_data['respirationFlagColor'] = 'success';
                     $input_data['range_code']    = '#008000';
                 }
-                
+
                 if ($input_data['respiration'] > 40) {
                     $input_data['respirationFlag']      = 'High';
                     $input_data['respirationFlagColor'] = 'danger';
                     $input_data['range_code']    = '#ff0000';
                 }
             }
-            
+
             if($years >= 6 && $years <= 10){
                 if ($input_data['respiration'] < 15) {
                     $input_data['respirationFlag']      = 'Low';
                     $input_data['respirationFlagColor'] = 'warning';
                     $input_data['range_code']    = '#ffc107';
                 }
-                
+
                 if (($input_data['respiration'] >= 15) && ($input_data['respiration'] <= 25)) {
                     $input_data['respirationFlag']      = 'Normal';
                     $input_data['respirationFlagColor'] = 'success';
                     $input_data['range_code']    = '#008000';
                 }
-                
+
                 if ($input_data['respiration'] > 25) {
                     $input_data['respirationFlag']      = 'High';
                     $input_data['respirationFlagColor'] = 'danger';
                     $input_data['range_code']    = '#ff0000';
                 }
             }
-            
+
             if(($years >= 11 && $years <= 18) || ($years > 70)){
                 if ($input_data['respiration'] < 15) {
                     $input_data['respirationFlag']      = 'Low';
                     $input_data['respirationFlagColor'] = 'warning';
                     $input_data['range_code']    = '#ffc107';
                 }
-                
+
                 if (($input_data['respiration'] >= 15) && ($input_data['respiration'] <= 20)) {
                     $input_data['respirationFlag']      = 'Normal';
                     $input_data['respirationFlagColor'] = 'success';
                     $input_data['range_code']    = '#008000';
                 }
-                
+
                 if ($input_data['respiration'] > 20) {
                     $input_data['respirationFlag']      = 'High';
                     $input_data['respirationFlagColor'] = 'danger';
                     $input_data['range_code']    = '#ff0000';
                 }
             }
-            
+
             if($years >= 18 && $years <= 70){
                 if ($input_data['respiration'] < 12) {
                     $input_data['respirationFlag']      = 'Low';
                     $input_data['respirationFlagColor'] = 'warning';
                     $input_data['range_code']    = '#ffc107';
                 }
-                
+
                 if (($input_data['respiration'] >= 12) && ($input_data['respiration'] <= 20)) {
                     $input_data['respirationFlag']      = 'Normal';
                     $input_data['respirationFlagColor'] = 'success';
                     $input_data['range_code']    = '#008000';
                 }
-                
+
                 if ($input_data['respiration'] > 20) {
                     $input_data['respirationFlag']      = 'High';
                     $input_data['respirationFlagColor'] = 'danger';
@@ -819,9 +833,9 @@ class Vital extends BaseModel
 
         return $input_data;
     }
-    
-   
-    
+
+
+
     public static function urine_flag($input_data)
     {
         $input_data['leukocytes_message']    = '';
@@ -843,9 +857,9 @@ class Vital extends BaseModel
         $input_data['sugar_message']    = '';
         $input_data['sugar_flag']       = '';
         $input_data['sugar_range_code'] = '';
-        
+
         if (!empty($input_data['leukocytes'])) {
-            
+
             switch ($input_data['leukocytes']) {
                 case '+':
                     $input_data['leukocytes_message']            = 'Small';
@@ -864,9 +878,9 @@ class Vital extends BaseModel
                     break;
             }
         }
-        
+
         if (!empty($input_data['protein'])) {
-            
+
             switch ($input_data['protein']) {
                 case '+':
                     $input_data['protein_message']    = 'Small';
@@ -885,9 +899,9 @@ class Vital extends BaseModel
                     break;
             }
         }
-        
+
         if (!empty($input_data['rbc'])) {
-            
+
             switch ($input_data['rbc']) {
                 case '+':
                     $input_data['rbc_message']            = 'Small';
@@ -913,7 +927,7 @@ class Vital extends BaseModel
             $input_data['sugar_message']    = 'Low';
             $input_data['sugar_flag']       = 'danger';
             $input_data['sugar_range_code'] = '#ff0000';
-        
+
             if ($input_data['sugar_unit'] == 'mg/dL') {
 
                 if ($input_data['sugar'] >= 100 && $input_data['sugar'] <= 249) {
@@ -982,7 +996,7 @@ class Vital extends BaseModel
         }
 
         if (!empty($input_data['urine'])) {
-        
+
             if ($input_data['urine'] > 0) {
                 if ($input_data['urine'] < 6.0) {
                     $input_data['value']            = 'Very Acidic';
@@ -995,7 +1009,7 @@ class Vital extends BaseModel
                     $input_data['value_flag']       = 'danger';
                     $input_data['value_range_code'] = '#ff0000';
                 }
-                
+
                 if (($input_data['urine'] >= 6.5) && ($input_data['urine'] < 7)) {
                     $input_data['value']            = 'Moderate';
                     $input_data['value_flag']       = 'warning';
@@ -1014,14 +1028,14 @@ class Vital extends BaseModel
                     $input_data['value_flag']       = 'danger';
                     $input_data['value_range_code'] = '#ff0000';
                 }
-                
+
             }
         }
 
         return $input_data;
     }
-    
-    
+
+
     public static function blood_pressure_flag($input_data)
     {
        $input_data['bpFlag']      = 'LOW BLOOD PRESSURE';
@@ -1033,125 +1047,125 @@ class Vital extends BaseModel
                 $input_data['bpFlagColor'] = 'success';
                 $input_data['range_code']  = '#008000';
             }
-            
+
             if ((($input_data['systolic'] > 120) && ($input_data['systolic'] <= 129)) && ($input_data['diastolic'] < 80)) {
                 $input_data['bpFlag']      = 'Elevated';
                 $input_data['bpFlagColor'] = 'success';
                 $input_data['range_code']  = '#008000';
             }
-            
+
             if ((($input_data['systolic'] >= 130) && ($input_data['systolic'] <= 139)) || (($input_data['diastolic'] >= 80) && ($input_data['diastolic'] <= 89))) {
                 $input_data['bpFlag']      = 'HIGH BLOOD PRESSURE(HYPERTENSION) STAGE 1';
                 $input_data['bpFlagColor'] = 'danger';
                 $input_data['range_code']  = '#ff0000';
             }
-            
+
             if (($input_data['systolic'] >= 140) || ($input_data['diastolic'] >= 90)) {
                 $input_data['bpFlag']      = 'HIGH BLOOD PRESSURE(HYPERTENSION) STAGE 2';
                 $input_data['bpFlagColor'] = 'danger';
                 $input_data['range_code']  = '#ff0000';
             }
-            
+
             if (($input_data['systolic'] >= 180) || ($input_data['diastolic'] >= 120)) {
                 $input_data['bpFlag']      = 'HYPERTENSIVE CRISIS(consult your doctor immediately)';
                 $input_data['bpFlagColor'] = 'danger';
                 $input_data['range_code']  = '#ff0000';
             }
 
-           
+
         }
-        
+
         return $input_data;
     }
-    
-        
-         
+
+
+
     public static function heart_rate_flag($input_data, $years, $months, $days)
     {
         $input_data['heartRateFlag']      = '';
         $input_data['heartRateFlagColor'] = '';
         $input_data['range_code'] = '';
-        
+
         if (!empty($input_data['heart'])) {
-            
+
             if ($years <= 12) {
-                
+
                 if (($years >= 1) && ($years <= 2)) {
-                    
+
                     if (($input_data['heart'] < 98)) {
                         $input_data['heartRateFlag']      = 'Low';
                         $input_data['heartRateFlagColor'] = 'primary';
                         $input_data['range_code']         = '#0000ff';
                     }
-                    
+
                     if (($input_data['heart'] >= 98) && ($input_data['heart'] <= 140)) {
                         $input_data['heartRateFlag']      = 'Toddler';
                         $input_data['heartRateFlagColor'] = 'success';
                         $input_data['range_code']         = '#008000';
                     }
-                    
+
                     if (($input_data['heart'] > 140)) {
                         $input_data['heartRateFlag']      = 'High';
                         $input_data['heartRateFlagColor'] = 'danger';
                         $input_data['range_code']         = '#ff0000';
                     }
                 }
-                
+
                 if (($years >= 3) && ($years <= 5)) {
                     if (($input_data['heart'] < 80)) {
                         $input_data['heartRateFlag']      = 'Low';
                         $input_data['heartRateFlagColor'] = 'primary';
                         $input_data['range_code']         = '#0000ff';
                     }
-                    
+
                     if (($input_data['heart'] >= 80) && ($input_data['heart'] <= 120)) {
                         $input_data['heartRateFlag']      = 'Pre-School';
                         $input_data['heartRateFlagColor'] = 'success';
                         $input_data['range_code']         = '#008000';
                         // return "Pre-School"; // green 90 - 140
                     }
-                    
+
                     if (($input_data['heart'] > 120)) {
                         $input_data['heartRateFlag']      = 'High';
                         $input_data['heartRateFlagColor'] = 'danger';
                         $input_data['range_code']         = '#ff0000';
                     }
                 }
-                
+
                 if (($years >= 6) && ($years <= 11)) {
                     if (($input_data['heart'] < 75)) {
                         $input_data['heartRateFlag']      = 'Low';
                         $input_data['heartRateFlagColor'] = 'primary';
                         $input_data['range_code']         = '#0000ff';
                     }
-                    
+
                     if (($input_data['heart'] >= 75) && ($input_data['heart'] <= 118)) {
                         $input_data['heartRateFlag']      = 'Normal';
                         $input_data['heartRateFlagColor'] = 'success';
                         $input_data['range_code']         = '#008000';
                         // return "Normal"; // green
                     }
-                    
+
                     if (($input_data['heart'] > 118)) {
                         $input_data['heartRateFlag']      = 'High';
                         $input_data['heartRateFlagColor'] = 'danger';
                         $input_data['range_code']         = '#ff0000';
                     }
                 }
-                
+
                 if (($years == 12)) {
                     if (($input_data['heart'] < 60)) {
                         $input_data['heartRateFlag']      = 'Low';
                         $input_data['heartRateFlagColor'] = 'primary';
                         $input_data['range_code']         = '#0000ff';
                     }
-                    
+
                     if (($input_data['heart'] >= 60) && ($input_data['heart'] <= 100)) {
                         $input_data['heartRateFlag']      = 'Normal';
                         $input_data['heartRateFlagColor'] = 'success';
                         $input_data['range_code']         = '#008000';
                     }
-                    
+
                     if (($input_data['heart'] > 100)) {
                         $input_data['heartRateFlag']      = 'High';
                         $input_data['heartRateFlagColor'] = 'danger';
@@ -1167,13 +1181,13 @@ class Vital extends BaseModel
                         $input_data['heartRateFlagColor'] = 'primary';
                         $input_data['range_code']         = '#0000ff';
                     }
-                    
+
                     if (($input_data['heart'] >= 60) && ($input_data['heart'] <= 100)) {
                         $input_data['heartRateFlag']      = 'Normal';
                         $input_data['heartRateFlagColor'] = 'success';
                         $input_data['range_code']         = '#008000';
                     }
-                    
+
                     if (($input_data['heart'] > 100)) {
                         $input_data['heartRateFlag']      = 'High';
                         $input_data['heartRateFlagColor'] = 'danger';
@@ -1185,26 +1199,26 @@ class Vital extends BaseModel
                     //     $input_data['heartRateFlagColor'] = 'primary';
                     //     $input_data['range_code']         = '#0000ff';
                     // }
-                    
+
                     // if (($input_data['heart'] >= 40) && ($input_data['heart'] <= 60)) {
                     //     $input_data['heartRateFlag']      = 'Athlete';
                     //     $input_data['heartRateFlagColor'] = 'success';
                     //     $input_data['range_code']         = '#008000';
                     // }
-                    
+
                     // if (($input_data['heart'] > 60)) {
                     //     $input_data['heartRateFlag']      = 'High';
                     //     $input_data['heartRateFlagColor'] = 'danger';
                     //     $input_data['range_code']         = '#ff0000';
                     // }
-                    
+
                     // if (($input_data['heart'] >= 40)) {
                     //     $input_data['heartRateFlag']      = 'High';
                     //     $input_data['heartRateFlagColor'] = 'danger';
                     //     $input_data['range_code']         = '#ff0000';
                     // }
             }
-             
+
             if ($years == 0 && $months > 0) {
                 if (($months >= 1) && ($months < 12)) {
                     if (($input_data['heart'] < 100)) {
@@ -1212,13 +1226,13 @@ class Vital extends BaseModel
                         $input_data['heartRateFlagColor'] = 'primary';
                         $input_data['range_code']         = '#0000ff';
                     }
-                    
+
                     if (($input_data['heart'] >= 100) && ($input_data['heart'] <= 190)) {
                         $input_data['heartRateFlag']      = 'Low';
                         $input_data['heartRateFlagColor'] = 'primary';
                         $input_data['range_code']         = '#0000ff';
                     }
-                    
+
                     if (($input_data['heart'] > 190)) {
                         $input_data['heartRateFlag']      = 'High';
                         $input_data['heartRateFlagColor'] = 'danger';
@@ -1226,7 +1240,7 @@ class Vital extends BaseModel
                     }
                 }
             }
-            
+
             if ($years == 0 && $months == 0) {
                 if ($days <= 28) {
                     if (($input_data['heart'] < 100)) {
@@ -1234,13 +1248,13 @@ class Vital extends BaseModel
                         $input_data['heartRateFlagColor'] = 'primary';
                         $input_data['range_code']         = '#0000ff';
                     }
-                    
+
                     if (($input_data['heart'] >= 100) && ($input_data['heart'] <= 205)) {
                         $input_data['heartRateFlag']      = 'Neonate';
                         $input_data['heartRateFlagColor'] = 'success';
                         $input_data['range_code']         = '#008000';
                     }
-                    
+
                     if (($input_data['heart'] > 205)) {
                         $input_data['heartRateFlag']      = 'High';
                         $input_data['heartRateFlagColor'] = 'danger';
@@ -1249,11 +1263,11 @@ class Vital extends BaseModel
                 }
             }
         }
-        
+
         return $input_data;
     }
-        
-    
+
+
     public static function cholesterol_flag($input_data)
     {
         $input_data['ldl_message']      = '';
@@ -1263,28 +1277,28 @@ class Vital extends BaseModel
         $input_data['vldl_message']      = '';
         $input_data['vldl_message_flag'] = '';
         $input_data['vldl_range_code'] = '';
-        
+
         $input_data['hdl_message']      = '';
         $input_data['hdl_message_flag'] = '';
         $input_data['hdl_range_code'] = '';
-        
+
         $input_data['triglycerides_message']      = '';
         $input_data['triglycerides_message_flag'] = '';
         $input_data['triglycerides_range_code'] = '';
-        
+
         $input_data['hdl_ldl_message']      = '';
         $input_data['hdl_ldl_message_flag'] = '';
         $input_data['hdl_ldl_range_code'] = '';
-        
+
         $input_data['total_message']      = '';
         $input_data['total_message_flag'] = '';
         $input_data['total_range_code'] = '';
-        
-        
+
+
         if (!empty($input_data['total']) && !empty($input_data['total_unit'])) {
-            
+
             if ($input_data['total_unit'] == 'mg/dL') {
-                
+
                 if ($input_data['total'] < 200) {
                     $input_data['total_message'] = 'Optimal'; // green
                 }
@@ -1297,9 +1311,9 @@ class Vital extends BaseModel
                     $input_data['total_message'] = 'High'; // red
                 }
             }
-            
+
             if ($input_data['total_unit'] == 'mmol/L') {
-                
+
                 if ($input_data['total'] < 5.3) {
                     $input_data['total_message'] = 'Optimal';
                 }
@@ -1312,7 +1326,7 @@ class Vital extends BaseModel
                     $input_data['total_message'] = 'High';
                 }
             }
-            
+
             switch ($input_data['total_message']) {
                 case 'Optimal':
                     $input_data['total_message_flag'] = 'success';
@@ -1330,11 +1344,11 @@ class Vital extends BaseModel
         }
 
 
-        
+
         if (!empty($input_data['vldl']) && !empty($input_data['vldl_unit'])) {
-            
+
             if ($input_data['vldl_unit'] == 'mg/dL') {
-                
+
                 if ($input_data['vldl'] <= 30) {
                     $input_data['vldl_message'] = 'Optimal';
                 }
@@ -1344,9 +1358,9 @@ class Vital extends BaseModel
                     $input_data['vldl_message'] = 'High';
                 }
             }
-            
+
             if ($input_data['vldl_unit'] == 'mmol/L') {
-                
+
                 if ($input_data['vldl'] <= 0.76) {
                     $input_data['vldl_message'] = 'Optimal';
                 }
@@ -1355,7 +1369,7 @@ class Vital extends BaseModel
                     $input_data['vldl_message'] = 'High';
                 }
             }
-            
+
             switch ($input_data['vldl_message']) {
                 case 'Optimal':
                     $input_data['vldl_message_flag'] = 'success';
@@ -1371,11 +1385,11 @@ class Vital extends BaseModel
                     break;
             }
         }
-        
+
         if (!empty($input_data['ldl']) && !empty($input_data['ldl_unit'])) {
-            
+
             if ($input_data['ldl_unit'] == 'mg/dL') {
-                
+
                 if ($input_data['ldl'] < 130) {
                     $input_data['ldl_message'] = 'Optimal';
                 }
@@ -1388,9 +1402,9 @@ class Vital extends BaseModel
                     $input_data['ldl_message'] = 'High';
                 }
             }
-            
+
             if ($input_data['ldl_unit'] == 'mmol/L') {
-                
+
                 if ($input_data['ldl'] < 3.36) {
                     $input_data['ldl_message'] = 'Optimal';
                 }
@@ -1403,7 +1417,7 @@ class Vital extends BaseModel
                     $input_data['ldl_message'] = 'High';
                 }
             }
-            
+
             switch ($input_data['ldl_message']) {
                 case 'Optimal':
                     $input_data['ldl_message_flag'] = 'success';
@@ -1419,11 +1433,11 @@ class Vital extends BaseModel
                     break;
             }
         }
-        
+
         if (!empty($input_data['hdl']) && !empty($input_data['hdl_unit'])) {
-            
+
             if ($input_data['hdl_unit'] == 'mg/dL') {
-                
+
                 if ($input_data['hdl'] < 40) {
                     $input_data['hdl_message'] = 'High';
                 }
@@ -1436,9 +1450,9 @@ class Vital extends BaseModel
                     $input_data['hdl_message'] = 'Optimal';
                 }
             }
-            
+
             if ($input_data['hdl_unit'] == 'mmol/L') {
-                
+
                 if ($input_data['hdl'] < 1.03) {
                     $input_data['hdl_message'] = 'High';
                 }
@@ -1451,7 +1465,7 @@ class Vital extends BaseModel
                     $input_data['hdl_message'] = 'Optimal';
                 }
             }
-            
+
             switch ($input_data['hdl_message']) {
                 case 'Optimal':
                     $input_data['hdl_message_flag'] = 'success';
@@ -1467,10 +1481,10 @@ class Vital extends BaseModel
                     break;
             }
         }
-        
+
         if (!empty($input_data['triglycerides']) && !empty($input_data['triglycerides_unit'])) {
             if ($input_data['triglycerides_unit'] == 'mg/dL') {
-                
+
                 if ($input_data['triglycerides'] < 150) {
                     $input_data['triglycerides_message'] = 'Optimal';
                 }
@@ -1483,9 +1497,9 @@ class Vital extends BaseModel
                     $input_data['triglycerides_message'] = 'High';
                 }
             }
-            
+
             if ($input_data['triglycerides_unit'] == 'mmol/L') {
-                
+
                 if ($input_data['triglycerides'] < 1.69) {
                     $input_data['triglycerides_message'] = 'Optimal';
                 }
@@ -1498,7 +1512,7 @@ class Vital extends BaseModel
                     $input_data['triglycerides_message'] = 'High';
                 }
             }
-            
+
             switch ($input_data['triglycerides_message']) {
                 case 'Optimal':
                     $input_data['triglycerides_message_flag'] = 'success';
@@ -1514,9 +1528,9 @@ class Vital extends BaseModel
                     break;
             }
         }
-        
+
         if (!empty($input_data['hdl_ldl'])) {
-            
+
         if ($input_data['hdl_ldl_unit'] == 'mg/dL') {
             if ($input_data['hdl_ldl'] <= 3) {
                 $input_data['hdl_ldl_message'] = 'Optimal';
@@ -1544,7 +1558,7 @@ class Vital extends BaseModel
                 $input_data['hdl_ldl_message'] = 'High';
             }
         }
-            
+
             switch ($input_data['hdl_ldl_message']) {
                 case 'Optimal':
                     $input_data['hdl_ldl_message_flag'] = 'success';
@@ -1563,7 +1577,7 @@ class Vital extends BaseModel
 
         return $input_data;
     }
-    
+
 
 
     public static function keytone_flag($input_data)
@@ -1572,19 +1586,19 @@ class Vital extends BaseModel
         $input_data['keytoneFlagColor'] = 'warning';
         $input_data['range_code']    = '#ffc107';
         if (!empty($input_data['keytone'])) {
-            
+
             if ($input_data['keytone'] < 0.6) {
                 $input_data['keytoneFlag']      = 'Normal';
                 $input_data['keytoneFlagColor'] = 'success';
                 $input_data['range_code']    = '#008000';
             }
-            
+
             if (($input_data['keytone'] >= 0.6) && ($input_data['keytone'] <= 1.5)) {
                 $input_data['keytoneFlag']      = 'Warning';
                 $input_data['keytoneFlagColor'] = 'warning';
                 $input_data['range_code']    = '#ffc107';
             }
-            
+
              if (($input_data['keytone'] >= 1.6)) {
                 $input_data['keytoneFlag']      = 'High';
                 $input_data['keytoneFlagColor'] = 'danger';
@@ -1603,7 +1617,7 @@ class Vital extends BaseModel
         if (!empty($input_data['hemoglobin'])) {
 
             if($gender == 'Male'){
-            
+
                 if (($input_data['hemoglobin'] >= '13.8') && ($input_data['hemoglobin'] <= '17.2')) {
                     $input_data['hemoglobinFlag']      = 'Normal';
                     $input_data['hemoglobinFlagColor'] = 'success';
@@ -1611,7 +1625,7 @@ class Vital extends BaseModel
                 }
             }
             if($gender == 'Female'){
-            
+
                 if (($input_data['hemoglobin'] >= '12.1') && ($input_data['hemoglobin'] <= '15.1')) {
                     $input_data['hemoglobinFlag']      = 'Normal';
                     $input_data['hemoglobinFlagColor'] = 'success';
@@ -1635,9 +1649,9 @@ class Vital extends BaseModel
                     $input_data['hctFlagColor'] = 'success';
                     $input_data['range_code']    = '#008000';
                 }
-                
+
             if($gender == 'Male'){
-            
+
                 if (($input_data['hct'] >= '41') && ($input_data['hct'] <= '50')) {
                     $input_data['hctFlag']      = 'Normal';
                     $input_data['hctFlagColor'] = 'success';
@@ -1645,7 +1659,7 @@ class Vital extends BaseModel
                 }
             }
             if($gender == 'Female'){
-            
+
                 if (($input_data['hct'] >= '36') && ($input_data['hct'] <= '48')) {
                     $input_data['hctFlag']      = 'Normal';
                     $input_data['hctFlagColor'] = 'success';
@@ -1666,7 +1680,7 @@ class Vital extends BaseModel
         if (!empty($input_data['uric_acid'])) {
 
             if($gender == 'Male'){
-            
+
                 if (($input_data['uric_acid'] >= '4.0') && ($input_data['uric_acid'] <= '8.5')) {
                     $input_data['uricFlag']      = 'Normal';
                     $input_data['uricFlagColor'] = 'success';
@@ -1674,7 +1688,7 @@ class Vital extends BaseModel
                 }
             }
             if($gender == 'Female'){
-            
+
                 if (($input_data['uric_acid'] >= '2.7') && ($input_data['uric_acid'] <= '7.3')) {
                     $input_data['uricFlag']      = 'Normal';
                     $input_data['uricFlagColor'] = 'success';
@@ -1691,7 +1705,7 @@ class Vital extends BaseModel
         $input_data['spirometerFlag']      = 'Normal';
         $input_data['spirometerFlagColor'] = 'primary';
         $input_data['range_code']    = '#0000ff';
-        
+
 
         return $input_data;
     }
