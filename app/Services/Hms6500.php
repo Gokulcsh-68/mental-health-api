@@ -126,7 +126,7 @@ class Hms6500 extends BaseService
                     $days   = Carbon::parse($dateOfBirth)->diff(Carbon::now())->format('%d');
 
                      $vital_data = array();
-                     $vital_data['slug'] = 'ecg';
+                     $vital_data['slug'] = 'heart-rate';
                      $vital_data['user_id'] = $patient_details->id;
                      $vital_data['details']['date'] = Carbon::now()->format('Y-m-d');
                      $vital_data['details']['time'] = Carbon::now()->format('H:i:s');

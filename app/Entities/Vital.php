@@ -153,6 +153,10 @@ class Vital extends BaseModel
 
            if(isset($data['image'])){
             $data['details']['doc_id'] = (new BluetoothPeripheralService)->uploadECGFile($data);
+
+            if(!isset($data['details']['device_type'])){
+                $data['details']['device_type'] = '1 Lead ECG';
+            }
            }
         }
 
@@ -1755,7 +1759,7 @@ class Vital extends BaseModel
                 $input_data['ureaFlagColor'] = 'warning';
                 $input_data['range_code']    = '#ffc107';
             }
-            
+
             if ($input_data['urea'] > 30) {
                 $input_data['ureaFlag']      = 'Severe';
                 $input_data['ureaFlagColor'] = 'danger';
@@ -1784,7 +1788,7 @@ class Vital extends BaseModel
                 $input_data['creatinineFlagColor'] = 'warning';
                 $input_data['range_code']    = '#ffc107';
             }
-            
+
             if ($input_data['creatinine'] > 1.5) {
                 $input_data['creatinineFlag']      = 'Severe';
                 $input_data['creatinineFlagColor'] = 'danger';
@@ -1813,7 +1817,7 @@ class Vital extends BaseModel
                 $input_data['gfrFlagColor'] = 'warning';
                 $input_data['range_code']    = '#ffc107';
             }
-            
+
             if ($input_data['gfr'] < 60) {
                 $input_data['gfrFlag']      = 'Severe';
                 $input_data['gfrFlagColor'] = 'danger';
