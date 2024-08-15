@@ -170,6 +170,7 @@ class Vital extends BaseModel
            $data['details'] += self::heart_rate_flag($data['details'], $years, $months, $days);
 
            if(isset($data['image'])){
+            $data['details']['device_type'] = '1 Lead ECG';
             $data['details']['doc_id'] = (new BluetoothPeripheralService)->uploadECGFile($data);
            }
         }

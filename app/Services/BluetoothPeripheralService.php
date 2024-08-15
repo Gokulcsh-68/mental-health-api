@@ -8,6 +8,7 @@ use App\Traits\S3;
 use App\Utils\AuthHelper;
 use Illuminate\Http\Request;
 use Log;
+use Carbon\Carbon;
 
 class BluetoothPeripheralService extends BaseService
 {
@@ -87,7 +88,7 @@ class BluetoothPeripheralService extends BaseService
     }
 
     public function capture(Request $request)
-    {          
+    {
         Log::channel('evaitals')->debug('EVITALZ', ['data' => $request->all()]);
         $this->_user_id = $request->user()->id;
 
@@ -104,7 +105,7 @@ class BluetoothPeripheralService extends BaseService
                     case 'Blood Pressure':
                         $this->saveBP($vital_data);
                         break;
-                    
+
                     case 'Temperature':
                         $this->saveTemperature($vital_data);
                         break;
@@ -208,31 +209,91 @@ class BluetoothPeripheralService extends BaseService
     */
     public function uploadECGFile($data)
     {
+        $mime = '';
+
         $image = $data['image'];
-        
-        $temp_file_name = time() . '.png';
-        \Storage::disk('public')->put($temp_file_name, base64_decode($image)); 
+
+
+        if(substr( $data['image'], 0, 5 ) === "data:"){
+            $mime = mime_content_type($image);
+            if($mime == 'image/webp'){
+                $image = str_replace('data:image/jpg;base64,','',$image);
+                $extension = '.png';
+            }
+            if($mime == 'audio/mpeg'){
+                $extension = '.mp3';
+            }
+            if($mime == 'application/pdf'){
+                $image = str_replace('data:application/pdf;base64,','',$image);
+                $extension = '.pdf';
+            }
+            if($mime == 'video/mpeg'){
+                $extension = '.mpg';
+            }
+        }else{
+            $extension = '.png';
+        }
+
+        $temp_file_name = time() . $extension;
+        \Storage::disk('public')->put($temp_file_name, base64_decode($image));
         $file_location = \Storage::disk('public')->path($temp_file_name);
 
         $path_parts = pathinfo($file_location);
 
+        if($path_parts['extension'] == 'png'){
+            $mime = getimagesize($file_location)['mime'];
+        }
+
         $file = new \Illuminate\Http\UploadedFile(
             $file_location,
             $path_parts['basename'],
-            getimagesize($file_location)['mime'],
+            $mime,
             filesize($file_location),
             TRUE,
             TRUE
         );
 
+        if(!isset($data['placement'])){
+            $data['placement'] = 'HEART';
+        }
+
+        if(!isset($data['date_time'])){
+            $data['date_time'] = Carbon::now()->format('Y-m-d H:i:s');
+        }
+
+        if(!isset($data['case'])){
+            $data['case'] = '';
+        }
+
+        if(!isset($data['PR'])){
+            $data['PR'] = $data['details']['heart'];
+        }
+
         $prefix = 'EV_' . $data['placement'];
         $path = config('api.fileSystem.peripheral') . 'ECG';
 
-        $response = $this->diskStorage($file, $path, $prefix, 'private');
+        // $response = $this->diskStorage($file, $path, $prefix, 'private');
 
-        if($response['success']) {
+        // if($response['success']) {
+        if(true) {
 
             $uid = !empty($data['user_id']) ? $data['user_id']:$this->_user_id;
+
+            // $insert_data = [
+            //     'user_id' => $uid,
+            //     'created_by' => $uid,
+            //     'document_source' => 'imaging',
+            //     'addition_info' => [
+            //         'date' => $data['date_time'],
+            //         'title' => 'ECG - ' . $data['placement'],
+            //         'notes' => $data['case'],
+            //         'pulse_rate' => $data['PR'],
+            //     ],
+            //     'properties' => [
+            //         'file_path' => $response['fullPath'],
+            //         'file_name' => $response['filename'],
+            //     ],
+            // ];
 
             $insert_data = [
                 'user_id' => $uid,
@@ -245,14 +306,14 @@ class BluetoothPeripheralService extends BaseService
                     'pulse_rate' => $data['PR'],
                 ],
                 'properties' => [
-                    'file_path' => $response['fullPath'],
-                    'file_name' => $response['filename'],
+                    'file_path' => '---------------------',
+                    'file_name' => '---------------------',
                 ],
             ];
 
            $resDoc = Doc::create($insert_data);
 
-            \Storage::disk('public')->delete($temp_file_name);
+            // \Storage::disk('public')->delete($temp_file_name);
 
             return $resDoc->id;
         }
