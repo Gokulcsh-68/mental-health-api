@@ -209,6 +209,9 @@ class BluetoothPeripheralService extends BaseService
     */
     public function uploadECGFile($data)
     {
+        try{
+
+        Log::channel('daily')->info('uploadECGFile Enters');
         $mime = '';
 
         $image = $data['image'];
@@ -233,6 +236,9 @@ class BluetoothPeripheralService extends BaseService
         }else{
             $extension = '.png';
         }
+
+        Log::channel('daily')->info('uploadECGFile mime', [$mime]);
+        Log::channel('daily')->info('uploadECGFile extension', [$extension]);
 
         $temp_file_name = time() . $extension;
         \Storage::disk('public')->put($temp_file_name, base64_decode($image));
@@ -273,6 +279,7 @@ class BluetoothPeripheralService extends BaseService
         $path = config('api.fileSystem.peripheral') . 'ECG';
 
         // $response = $this->diskStorage($file, $path, $prefix, 'private');
+        // Log::channel('daily')->info('uploadECGFile diskStorage response', [$response]);
 
         // if($response['success']) {
         if(true) {
@@ -315,7 +322,12 @@ class BluetoothPeripheralService extends BaseService
 
             // \Storage::disk('public')->delete($temp_file_name);
 
+            Log::channel('daily')->info('uploadECGFile EXIT', [$resDoc]);
             return $resDoc->id;
+        }
+
+        }catch(\Exception $e){
+            Log::error($e->getMessage()); die;
         }
     }
 
