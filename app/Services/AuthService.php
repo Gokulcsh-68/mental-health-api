@@ -533,6 +533,29 @@ class AuthService extends BaseService
 
     }
 
+    public function uploadDocstoBase64(Request $request): JsonResponse
+    {
+
+        try {
+
+            $ext = strtolower($request->file('file')->getClientOriginalExtension());
+            $doc_file = $request->file('file');
+
+            $finfo = new \finfo(FILEINFO_MIME_TYPE);
+            $type = $finfo->file($doc_file);
+            $src = 'data:' . $type . ';base64,' . base64_encode(file_get_contents($doc_file));
+
+            $res['base_file_code'] = $src;
+            $res['extension'] = $ext;
+            return $this->httpResponse->setHttpData($res)->jsonResponse();
+
+        } catch (Exception $e) {
+            exceptionLogger("Failed to upload document", $e);
+            return false;
+        }
+
+    }
+
     public function uploadDocs(Request $request): JsonResponse
     {
         try {

@@ -13,6 +13,7 @@
 |
  */
 
+$router->post('uploadDocstoBase64', 'AuthService@uploadDocstoBase64');
 
     // $router->get('analytics', 'AuthService@analytics');
 
@@ -48,7 +49,7 @@ $router->group(['prefix' => 'v1/', 'middleware' => 'clientAuth'], function ($rou
     $router->group(['prefix' => 'abdm', 'namespace' => 'ABDMApis'], function ($router) {
         $router->get('get-public-key', 'BaseService@getPublicKey');
         $router->post('aaba-request-otp-via-aadhaar', 'AabaApiService@requestOtpForEnrollViaAadhaar');
-        $router->post('aaba-enroll-via-aadhaar', 'AabaApiService@enrollViaAadhaar'); 
+        $router->post('aaba-enroll-via-aadhaar', 'AabaApiService@enrollViaAadhaar');
     });
 
     $router->get('analytics', 'AuthService@analytics');
@@ -148,6 +149,7 @@ $router->group(['prefix' => 'v1/', 'middleware' => 'clientAuth'], function ($rou
             // $router->post('verify-otp', 'AuthService@verifyOtp');
             // $router->post('resend-otp', 'AuthService@resendOtp');
             $router->patch('{id:[0-9]+}/change-password', ['middleware' => 'acl:users,change-user-password', 'uses' => 'AuthService@changeUserPassword']);
+            $router->post('uploadDocstoBase64', 'AuthService@uploadDocstoBase64');
         });
 
         // Patch Periperal OTP

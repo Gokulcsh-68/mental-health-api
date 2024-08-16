@@ -219,19 +219,24 @@ class BluetoothPeripheralService extends BaseService
 
         if(substr( $data['image'], 0, 5 ) === "data:"){
             $mime = mime_content_type($image);
+            $extension = '.'.$data['extension'];
             if($mime == 'image/webp'){
-                $image = str_replace('data:image/jpg;base64,','',$image);
-                $extension = '.png';
+                $image = str_replace('data:image/webp;base64,','',$image);
             }
-            if($mime == 'audio/mpeg'){
-                $extension = '.mp3';
+            if($mime == 'image/png'){
+                $image = str_replace('data:image/png;base64,','',$image);
+            }
+            if($mime == 'image/jpeg'){
+                $image = str_replace('data:image/jpeg;base64,','',$image);
+            }
+            if($mime == 'image/jpg'){
+                $image = str_replace('data:image/jpg;base64,','',$image);
             }
             if($mime == 'application/pdf'){
                 $image = str_replace('data:application/pdf;base64,','',$image);
-                $extension = '.pdf';
             }
-            if($mime == 'video/mpeg'){
-                $extension = '.mpg';
+            if($mime == 'video/mp4'){
+                $image = str_replace('data:video/mp4;base64,','',$image);
             }
         }else{
             $extension = '.png';
@@ -246,7 +251,7 @@ class BluetoothPeripheralService extends BaseService
 
         $path_parts = pathinfo($file_location);
 
-        if($path_parts['extension'] == 'png'){
+        if(!substr( $data['image'], 0, 5 ) === "data:"){
             $mime = getimagesize($file_location)['mime'];
         }
 
