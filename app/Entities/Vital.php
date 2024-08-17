@@ -447,6 +447,23 @@ class Vital extends BaseModel
             $model->whereBetween('details->date', [$from,$to]);
         }
 
+        if($request->get('from_heart') && $request->get('to_heart')){
+
+            $from_heart = $request->get('from_heart');
+                $to_heart = $request->get('to_heart');
+            $model->whereBetween('details->heart', [$from_heart,$to_heart]);
+        }
+
+        if($request->get('interpretation')){
+
+            $model->Where('details->interpretation', 'LIKE',"%".$request->get('interpretation')."%");
+        }
+
+        if($request->get('device_type')){
+
+            $model->Where('details->device_type', 'LIKE',"%".$request->get('device_type')."%");
+        }
+
         if ($request->get('searchkey') && $request->get('searchkey') != 'undefined') {
 
             $model->Where('details->created_app', 'LIKE',"%".$request->get('searchkey')."%");
