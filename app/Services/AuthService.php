@@ -594,6 +594,10 @@ class AuthService extends BaseService
             $res['file_path'] = $status['file_tmp'];
             $res['s3_upload'] = 1; // for s3 signed url upload in angular
 
+            // $res['s3_signed_url'] = '-----';
+            // $res['file_name'] = '-----';
+            // $res['file_path'] ='-----';
+
 
             // $request['type'] = Role::Where('id',$user->role_id)->value('code');
             // $request['file_name'] = rand(9999,9999999).rand(100,1999).time().'.'.$request->file('file')->getClientOriginalExtension();

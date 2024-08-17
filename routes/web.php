@@ -13,7 +13,6 @@
 |
  */
 
-$router->post('uploadDocstoBase64', 'AuthService@uploadDocstoBase64');
 
     // $router->get('analytics', 'AuthService@analytics');
 

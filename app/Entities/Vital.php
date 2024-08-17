@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use DB;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
+use App\Entities\Doc;
 
 class Vital extends BaseModel
 {
@@ -158,6 +159,23 @@ class Vital extends BaseModel
                 $data['details']['device_type'] = '1 Lead ECG';
             }
            }
+
+           if(isset($data['create_doc'])){
+            $insert_data = array();
+            $insert_data['created_by']      = $data['user_id'];
+            $insert_data['user_id']         = $data['user_id'];
+            $insert_data['document_source'] = 'imaging';
+
+            $insert_data['addition_info']['title'] = 'Heart';
+            $insert_data['addition_info']['notes'] = 'Heart';
+            $insert_data['addition_info']['device_type'] = $data['details']['device_type'];
+            $insert_data['properties']['file_path'] = $data['properties']['file_path'];
+            $insert_data['properties']['file_name'] = $data['properties']['file_name'];
+
+
+            $doc_id = Doc::create($insert_data);
+            $data['details']['doc_id'] = $doc_id->id;
+           }
         }
 
         if($data['slug'] == 'ecg'){
@@ -285,6 +303,24 @@ class Vital extends BaseModel
             $days = Carbon::parse($dateOfBirth)->diff(Carbon::now())->format('%d');
 
            $data['details'] += self::heart_rate_flag($data['details'], $years, $months, $days);
+
+
+           if(isset($data['create_doc'])){
+            $insert_data = array();
+            $insert_data['created_by']      = $data['user_id'];
+            $insert_data['user_id']         = $data['user_id'];
+            $insert_data['document_source'] = 'imaging';
+
+            $insert_data['addition_info']['title'] = 'Heart';
+            $insert_data['addition_info']['notes'] = 'Heart';
+            $insert_data['addition_info']['device_type'] = $data['details']['device_type'];
+            $insert_data['properties']['file_path'] = $data['properties']['file_path'];
+            $insert_data['properties']['file_name'] = $data['properties']['file_name'];
+
+
+            $doc_id = Doc::create($insert_data);
+            $data['details']['doc_id'] = $doc_id->id;
+           }
         }
 
         if($data['slug'] == 'spO2'){

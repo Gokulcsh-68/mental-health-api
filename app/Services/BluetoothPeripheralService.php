@@ -217,43 +217,50 @@ class BluetoothPeripheralService extends BaseService
         $image = $data['image'];
 
 
-        if(substr( $data['image'], 0, 5 ) === "data:"){
-            $mime = mime_content_type($image);
-            $extension = '.'.$data['extension'];
-            if($mime == 'image/webp'){
-                $image = str_replace('data:image/webp;base64,','',$image);
-            }
-            if($mime == 'image/png'){
-                $image = str_replace('data:image/png;base64,','',$image);
-            }
-            if($mime == 'image/jpeg'){
-                $image = str_replace('data:image/jpeg;base64,','',$image);
-            }
-            if($mime == 'image/jpg'){
-                $image = str_replace('data:image/jpg;base64,','',$image);
-            }
-            if($mime == 'application/pdf'){
-                $image = str_replace('data:application/pdf;base64,','',$image);
-            }
-            if($mime == 'video/mp4'){
-                $image = str_replace('data:video/mp4;base64,','',$image);
-            }
-        }else{
-            $extension = '.png';
-        }
+        // if(substr( $data['image'], 0, 5 ) === "data:"){
+        //     $mime = mime_content_type($image);
+        //     $extension = '.'.$data['extension'];
+        //     if($mime == 'image/webp'){
+        //         $image = str_replace('data:image/webp;base64,','',$image);
+        //     }
+        //     if($mime == 'image/png'){
+        //         $image = str_replace('data:image/png;base64,','',$image);
+        //     }
+        //     if($mime == 'image/jpeg'){
+        //         $image = str_replace('data:image/jpeg;base64,','',$image);
+        //     }
+        //     if($mime == 'image/jpg'){
+        //         $image = str_replace('data:image/jpg;base64,','',$image);
+        //     }
+        //     if($mime == 'application/pdf'){
+        //         $image = str_replace('data:application/pdf;base64,','',$image);
+        //     }
+        //     if($mime == 'video/mp4'){
+        //         $image = str_replace('data:video/mp4;base64,','',$image);
+        //     }
+        // }else{
+        //     $extension = '.png';
+        // }
 
-        Log::channel('daily')->info('uploadECGFile mime', [$mime]);
+        $extension = '.png';
+
         Log::channel('daily')->info('uploadECGFile extension', [$extension]);
 
         $temp_file_name = time() . $extension;
+
         \Storage::disk('public')->put($temp_file_name, base64_decode($image));
+
         $file_location = \Storage::disk('public')->path($temp_file_name);
 
         $path_parts = pathinfo($file_location);
 
-        if(!substr( $data['image'], 0, 5 ) === "data:"){
-            $mime = getimagesize($file_location)['mime'];
-        }
+        // if(!substr( $data['image'], 0, 5 ) === "data:"){
+        //     $mime = getimagesize($file_location)['mime'];
+        // }
+
+        $mime = getimagesize($file_location)['mime'];
+
+        Log::channel('daily')->info('uploadECGFile mime', [$mime]);
 
         $file = new \Illuminate\Http\UploadedFile(
             $file_location,
@@ -264,48 +271,31 @@ class BluetoothPeripheralService extends BaseService
             TRUE
         );
 
-        if(!isset($data['placement'])){
-            $data['placement'] = 'HEART';
-        }
+        // if(!isset($data['placement'])){
+        //     $data['placement'] = 'HEART';
+        // }
 
-        if(!isset($data['date_time'])){
-            $data['date_time'] = Carbon::now()->format('Y-m-d H:i:s');
-        }
+        // if(!isset($data['date_time'])){
+        //     $data['date_time'] = Carbon::now()->format('Y-m-d H:i:s');
+        // }
 
-        if(!isset($data['case'])){
-            $data['case'] = '';
-        }
+        // if(!isset($data['case'])){
+        //     $data['case'] = '';
+        // }
 
-        if(!isset($data['PR'])){
-            $data['PR'] = $data['details']['heart'];
-        }
+        // if(!isset($data['PR'])){
+        //     $data['PR'] = $data['details']['heart'];
+        // }
 
         $prefix = 'EV_' . $data['placement'];
         $path = config('api.fileSystem.peripheral') . 'ECG';
 
-        // $response = $this->diskStorage($file, $path, $prefix, 'private');
-        // Log::channel('daily')->info('uploadECGFile diskStorage response', [$response]);
+        $response = $this->diskStorage($file, $path, $prefix, 'private');
+        Log::channel('daily')->info('uploadECGFile diskStorage response', [$response]);
 
-        // if($response['success']) {
-        if(true) {
+        if($response['success']) {
 
             $uid = !empty($data['user_id']) ? $data['user_id']:$this->_user_id;
-
-            // $insert_data = [
-            //     'user_id' => $uid,
-            //     'created_by' => $uid,
-            //     'document_source' => 'imaging',
-            //     'addition_info' => [
-            //         'date' => $data['date_time'],
-            //         'title' => 'ECG - ' . $data['placement'],
-            //         'notes' => $data['case'],
-            //         'pulse_rate' => $data['PR'],
-            //     ],
-            //     'properties' => [
-            //         'file_path' => $response['fullPath'],
-            //         'file_name' => $response['filename'],
-            //     ],
-            // ];
 
             $insert_data = [
                 'user_id' => $uid,
@@ -318,14 +308,14 @@ class BluetoothPeripheralService extends BaseService
                     'pulse_rate' => $data['PR'],
                 ],
                 'properties' => [
-                    'file_path' => '---------------------',
-                    'file_name' => '---------------------',
+                    'file_path' => $response['fullPath'],
+                    'file_name' => $response['filename'],
                 ],
             ];
 
            $resDoc = Doc::create($insert_data);
 
-            // \Storage::disk('public')->delete($temp_file_name);
+            \Storage::disk('public')->delete($temp_file_name);
 
             Log::channel('daily')->info('uploadECGFile EXIT', [$resDoc]);
             return $resDoc->id;

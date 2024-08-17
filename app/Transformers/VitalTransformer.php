@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Transformers;
+use App\Entities\Doc;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -15,6 +16,10 @@ class VitalTransformer extends JsonResource
 
     public function toArray($request): array
     {
+        $doc_id = null;
+        if(isset($this->details->doc_id)){
+            $doc_id = $this->details->doc_id;
+        }
         return [
             'id' =>  $this->id,
             'user_id' =>  $this->user_id,
@@ -22,7 +27,8 @@ class VitalTransformer extends JsonResource
             'peripheral_id' =>  $this->peripheral_id,
             'slug' =>  $this->slug,
             'details' =>  $this->details,
-            'freeze' =>  $this->freeze
+            'freeze' =>  $this->freeze,
+            'document' => Doc::where('id',$doc_id)->first()
         ];
     }
 }
