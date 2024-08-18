@@ -443,20 +443,21 @@ class Vital extends BaseModel
         if($request->get('from') && $request->get('to')){
 
             $from = date('Y-m-d',strtotime($request->get('from')));
-                $to = date('Y-m-d',strtotime($request->get('to')));
+            $to = date('Y-m-d',strtotime($request->get('to')));
             $model->whereBetween('details->date', [$from,$to]);
         }
 
         if($request->get('from_heart') && $request->get('to_heart')){
 
-            $from_heart = $request->get('from_heart');
-                $to_heart = $request->get('to_heart');
-            $model->whereBetween('details->heart', [$from_heart,$to_heart]);
+            $from_heart = (int) $request->get('from_heart');
+            $to_heart = (int) $request->get('to_heart');
+            $model->whereBetween('details->heart', [$from_heart, $to_heart]);
         }
 
         if($request->get('interpretation')){
 
-            $model->Where('details->interpretation', 'LIKE',"%".$request->get('interpretation')."%");
+            $search_interpretation = strtolower(trim($request->get('interpretation')));
+            $model->whereRaw('LOWER(`details`->>"$.interpretation") LIKE ?', ["%".$search_interpretation."%"]);
         }
 
         if($request->get('device_type')){
