@@ -8,3 +8,4 @@ Homestead.yaml
 *.pdf
 *.jpeg
 *.jpg
+.DS_Store
