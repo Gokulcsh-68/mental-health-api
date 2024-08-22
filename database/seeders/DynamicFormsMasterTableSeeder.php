@@ -39,10 +39,21 @@ class DynamicFormsMasterTableSeeder extends Seeder
             ['master_type_slug' => 'ros', 'slug' => 'endocrinologic', 'name' => 'Endocrinologic', 'is_active' => $is_active],
             ['master_type_slug' => 'ros', 'slug' => 'hematologic', 'name' => 'Hematologic', 'is_active' => $is_active],
             ['master_type_slug' => 'ros', 'slug' => 'allergic_immunologic', 'name' => 'Allergic / Immunologic', 'is_active' => $is_active],
+            
+            ['master_type_slug' => 'ros', 'slug' => 'general', 'name' => 'General', 'is_active' => $is_active],
+            ['master_type_slug' => 'ros', 'slug' => 'allergy', 'name' => 'Allergy', 'is_active' => $is_active],
+            ['master_type_slug' => 'ros', 'slug' => 'mouth_throat', 'name' => 'Mouth & Throat', 'is_active' => $is_active],
+            ['master_type_slug' => 'ros', 'slug' => 'neck', 'name' => 'Neck', 'is_active' => $is_active],
+            ['master_type_slug' => 'ros', 'slug' => 'genito_urinary', 'name' => 'Genito Urinary', 'is_active' => $is_active],
+            ['master_type_slug' => 'ros', 'slug' => 'peripheral_vascular_disease', 'name' => 'Peripheral Vascular Disease', 'is_active' => $is_active],
+            ['master_type_slug' => 'ros', 'slug' => 'neurology', 'name' => 'Neurology', 'is_active' => $is_active],
+            ['master_type_slug' => 'ros', 'slug' => 'hematology', 'name' => 'Hematology', 'is_active' => $is_active],
+            ['master_type_slug' => 'ros', 'slug' => 'psychiatry', 'name' => 'Psychiatry', 'is_active' => $is_active],
+            ['master_type_slug' => 'ros', 'slug' => 'endocrine', 'name' => 'Endocrine', 'is_active' => $is_active],
 
     	];
 
-        DB::table('masters')->insert($ros);
+        DB::table('masters')->insertOrIgnore($ros);
 
         $physical_examination = [['master_type_slug' => 'physical-examination', 'slug' => 'neck', 'name' => 'Neck', 'is_active' => $is_active],
         ['master_type_slug' => 'physical-examination', 'slug' => 'heart', 'name' => 'Heart', 'is_active' => $is_active],
@@ -60,13 +71,13 @@ class DynamicFormsMasterTableSeeder extends Seeder
         ['master_type_slug' => 'physical-examination', 'slug' => 'rectal', 'name' => 'Rectal', 'is_active' => $is_active],
         ];
 
-        DB::table('masters')->insert($physical_examination);
+        DB::table('masters')->insertOrIgnore($physical_examination);
 
          $stroke_scale = [
             ['master_type_slug' => 'stroke-scale', 'slug' => 'stroke-scale', 'name' => 'Stroke Scale', 'is_active' => $is_active],
         ];
 
-        DB::table('masters')->insert($stroke_scale);
+        DB::table('masters')->insertOrIgnore($stroke_scale);
 
 
     }

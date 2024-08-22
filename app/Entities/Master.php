@@ -53,6 +53,8 @@ class Master extends BaseModel
         $model = parent::applyFilters($model, $isPluck);
         $request = app('request');
 
+        $model->where('masters.is_active', 1);
+
         if ($request->get('master_type')) {
             $model->where('masters.master_type_slug', $request->get('master_type'));
         }
