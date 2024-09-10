@@ -42,7 +42,7 @@ class FundusCameraApiService extends BaseService
 			$patient_model = Patient::with('user')
 			->whereHas('user', function($q) use ($patient) {
 				$q->where('first_name', $patient['firstName'])
-				->where('last_name', $patient['lastName']);
+				->where('last_name', $patient['lastName'] ?? '');
 			})
 			->where('additional_info->mrn_number', $patient['mrn'])
 			->first();
