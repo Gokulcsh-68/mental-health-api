@@ -392,7 +392,7 @@ class Vital extends BaseModel
         }
 
         if($data['slug'] == 'spirometer'){
-            unset($data['details']['spirometerFlag'], $data['details']['spirometerFlagColor'], $data['details']['range_code']);
+            unset($data['details']['spirometerFlag'], $data['details']['spirometerFlagColor'], $data['details']['range_code'], $data['details']['flags']);
             $data['details'] += self::spirometer_flag($data['details']);
         }
 
@@ -1792,6 +1792,101 @@ class Vital extends BaseModel
         $input_data['spirometerFlagColor'] = 'primary';
         $input_data['range_code']    = '#0000ff';
 
+        $fvcFlag = $fev1Flag = $fev1FvcFlag = $pefFlag = '';
+
+        $flags = ['fvcFlag' => '', 'fvcFlagColor' => '', 'fvcRangeCode' => '', 'fev1Flag' => '', 'fev1FlagColor' => '', 'fev1RangeCode' => '', 'fev1FvcFlag' => '', 'fev1FvcFlagColor' => '', 'fev1FvcRangeCode' => '', 'pefFlag' => '', 'pefFlagColor' => '', 'pefRangeCode' => ''];
+
+        if(!empty($input_data['fvc'])) {
+            $value = $input_data['fvc'];
+
+            if ($value >= 4) {
+                $flags['fvcFlag']      = 'Normal';
+                $flags['fvcFlagColor'] = 'success';
+                $flags['fvcRangeCode']    = '#008000';
+            } else if ($value >= 3) {
+                $flags['fvcFlag']      = 'Slightly Below Normal';
+                $flags['fvcFlagColor'] = 'primary';
+                $flags['fvcRangeCode']    = '#0000ff';
+            } else if ($value < 3) {
+                $flags['fvcFlag']      = 'Potential Concern';
+                $flags['fvcFlagColor'] = 'danger';
+                $flags['fvcRangeCode']    = '#ff0000';
+            }
+            $pefFlag = $flags['fvcFlag'];
+        }
+
+        if(!empty($input_data['fev1'])) {
+            $value = $input_data['fev1'];
+
+            if ($value >= 3) {
+                $flags['fev1Flag']      = 'Normal';
+                $flags['fev1FlagColor'] = 'success';
+                $flags['fev1RangeCode']    = '#008000';
+            } else if ($value >= 2) {
+                $flags['fev1Flag']      = 'Slightly Below Normal';
+                $flags['fev1FlagColor'] = 'primary';
+                $flags['fev1RangeCode']    = '#0000ff';
+            } else if ($value < 2) {
+                $flags['fev1Flag']      = 'Potential Concern';
+                $flags['fev1FlagColor'] = 'danger';
+                $flags['fev1RangeCode']    = '#ff0000';
+            }
+            $fev1Flag = $flags['fev1Flag'];
+        }
+
+        if(!empty($input_data['fev1_fvc'])){
+            $value = $input_data['fev1_fvc'];
+
+            if ($value >= 70) {
+                $flags['fev1FvcFlag']      = 'Normal';
+                $flags['fev1FvcFlagColor'] = 'success';
+                $flags['fev1FvcRangeCode']    = '#008000';
+            } else if ($value >= 60) {
+                $flags['fev1FvcFlag']      = 'Slightly Below Normal';
+                $flags['fev1FvcFlagColor'] = 'primary';
+                $flags['fev1FvcRangeCode']    = '#0000ff';
+            } else if ($value < 60) {
+                $flags['fev1FvcFlag']      = 'Potential Concern';
+                $flags['fev1FvcFlagColor'] = 'danger';
+                $flags['fev1FvcRangeCode']    = '#ff0000';
+            }
+            $fev1FvcFlag = $flags['fev1FvcFlag'];
+        }
+
+        if(!empty($input_data['pef'])) {
+            $value = $input_data['pef'];
+
+            if ($value >= 500) {
+                $flags['pefFlag']      = 'Normal';
+                $flags['pefFlagColor'] = 'success';
+                $flags['pefRangeCode']    = '#008000';
+            } else if ($value >= 300) {
+                $flags['pefFlag']      = 'Slightly Below Normal';
+                $flags['pefFlagColor'] = 'primary';
+                $flags['pefRangeCode']    = '#0000ff';
+            } else if ($value < 300) {
+                $flags['pefFlag']      = 'Potential Concern';
+                $flags['pefFlagColor'] = 'danger';
+                $flags['pefRangeCode']    = '#ff0000';
+            }
+            $pefFlag = $flags['pefFlag'];
+        }
+
+        if($fvcFlag == 'Normal' && $fev1Flag == 'Normal' && $fev1FvcFlag == 'Normal' && $pefFlag == 'Normal') {
+            $input_data['spirometerFlag']      = 'Normal';
+            $input_data['spirometerFlagColor'] = 'success';
+            $input_data['range_code']    = '#008000';
+        } else if(in_array('Potential Concern', [$fvcFlag, $fev1Flag, $fev1FvcFlag, $pefFlag])) {
+            $input_data['spirometerFlag']      = 'Potential Concern';
+            $input_data['spirometerFlagColor'] = 'danger';
+            $input_data['range_code']    = '#ff0000';
+        } else if(!empty($fvcFlag) && !empty($fev1Flag) && !empty($fev1FvcFlag) && !empty($pefFlag)) {
+            $input_data['spirometerFlag']      = 'Slightly Below Normal';
+            $input_data['spirometerFlagColor'] = 'primary';
+            $input_data['range_code']    = '#0000ff';
+        }
+
+        $input_data['flags'] = $flags;
 
         return $input_data;
     }

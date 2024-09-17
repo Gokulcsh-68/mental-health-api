@@ -19,8 +19,8 @@ class NextAppointmentTransformer extends JsonResource
             'id' => $this->id,
             'patient_id' =>  $this->patient_id,
             'provider_id' =>  $this->provider_id,
-            'date' =>  $this->is_admin,
-            'reason' =>  $this->additional_info,
+            'date' =>  $this->date,
+            'reason' =>  $this->reason,
             'provider' => (new UserTransformer($this->provider))->only('first_name', 'last_name')
         ];
     }
