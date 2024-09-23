@@ -88,9 +88,10 @@ class PatientHealth extends BaseModel
     {
         $data = $this->getModelAttributes($request);
 
-        if($data['slug'] == 'allergy'){
+        // Not useing this anymore
+        /* if($data['slug'] == 'allergy'){
             $data['values'] += self::allergy_flag($data['values']);
-        }
+        } */
 
         if($data['slug'] == 'diet'){
 
@@ -135,10 +136,11 @@ class PatientHealth extends BaseModel
     protected function updateModel($id, $request, $only = []){
         $data = $this->getModelAttributes($request);
 
-        if($data['slug'] == 'allergy'){
+        // Not useing this anymore
+        /* if($data['slug'] == 'allergy'){
             unset($data['values']['severityFlagColor'],$data['values']['range_code']);
             $data['values'] += self::allergy_flag($data['values']);
-        }
+        } */
 
         if($data['slug'] == 'diet'){
 
