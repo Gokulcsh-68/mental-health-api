@@ -21,6 +21,14 @@
 					    @component('pdf_m.pdf_components.patient_details',['patient_details'=> $patient_details])
 					    @endcomponent
 			    	@break
+			    @case('b_patient')
+					<?php
+						$b_patient_details = (array) [$v];
+					?>
+				   
+					    @component('pdf_m.pdf_components.b_patient_details',['b_patient_details'=> $b_patient_details])
+					    @endcomponent
+			    	@break
 			    @case('c_provider_details')
 			    		<?php
 							$provider_details = (array) [(array)$v];

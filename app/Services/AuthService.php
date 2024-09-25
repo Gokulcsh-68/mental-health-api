@@ -1533,6 +1533,7 @@ class AuthService extends BaseService
         // $summary['1_profile'] = $request->user()->Where('id',$patient_id)->first(['first_name','last_name','dob','gender','blood_group']);
 
         $summary['a_profile'] = User::Where('id',$patient_id)->first();
+        $summary['b_patient'] = Patient::Where('user_id',$patient_id)->first();
 
 
         if($request->get('pdf_for') == 'consult_report'){
