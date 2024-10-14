@@ -1803,7 +1803,7 @@ class Vital extends BaseModel
                 $flags['fvcFlag']      = 'Normal';
                 $flags['fvcFlagColor'] = 'success';
                 $flags['fvcRangeCode']    = '#008000';
-            } else if ($value >= 3) {
+            } else if ($value >= 3 && $value <= 3.9) {
                 $flags['fvcFlag']      = 'Slightly Below Normal';
                 $flags['fvcFlagColor'] = 'primary';
                 $flags['fvcRangeCode']    = '#0000ff';
@@ -1822,7 +1822,7 @@ class Vital extends BaseModel
                 $flags['fev1Flag']      = 'Normal';
                 $flags['fev1FlagColor'] = 'success';
                 $flags['fev1RangeCode']    = '#008000';
-            } else if ($value >= 2) {
+            } else if ($value >= 2 && $value <= 2.9) {
                 $flags['fev1Flag']      = 'Slightly Below Normal';
                 $flags['fev1FlagColor'] = 'primary';
                 $flags['fev1RangeCode']    = '#0000ff';
@@ -1841,7 +1841,7 @@ class Vital extends BaseModel
                 $flags['fev1FvcFlag']      = 'Normal';
                 $flags['fev1FvcFlagColor'] = 'success';
                 $flags['fev1FvcRangeCode']    = '#008000';
-            } else if ($value >= 60) {
+            } else if ($value >= 60 && $value <= 69) {
                 $flags['fev1FvcFlag']      = 'Slightly Below Normal';
                 $flags['fev1FvcFlagColor'] = 'primary';
                 $flags['fev1FvcRangeCode']    = '#0000ff';
@@ -1860,7 +1860,7 @@ class Vital extends BaseModel
                 $flags['pefFlag']      = 'Normal';
                 $flags['pefFlagColor'] = 'success';
                 $flags['pefRangeCode']    = '#008000';
-            } else if ($value >= 300) {
+            } else if ($value >= 300 && $value >= 499) {
                 $flags['pefFlag']      = 'Slightly Below Normal';
                 $flags['pefFlagColor'] = 'primary';
                 $flags['pefRangeCode']    = '#0000ff';
