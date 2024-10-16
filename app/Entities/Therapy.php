@@ -29,7 +29,7 @@ class Therapy extends BaseModel
      * @var array
      */
     protected $casts = [
-        
+
     ];
 
     /**
@@ -38,7 +38,7 @@ class Therapy extends BaseModel
      * @var array
      */
     protected $hidden = [
-        
+
     ];
 
     /**
@@ -47,7 +47,7 @@ class Therapy extends BaseModel
      * @var array
     */
     protected $partialFillable = [
-        
+
     ];
 
     /**
@@ -56,7 +56,7 @@ class Therapy extends BaseModel
      * @var array
     */
     protected $dates = [
-        
+
     ];
 
     /**
@@ -65,7 +65,7 @@ class Therapy extends BaseModel
      * @var array
     */
     protected $dispatchesEvents = [
-        
+
     ];
 
     public function patient()
@@ -78,8 +78,16 @@ class Therapy extends BaseModel
         $model = parent::applyFilters($model, $isPluck);
         $request = app('request');
 
-        if ($request->get('patient_id')) { 
+        if ($request->get('patient_id')) {
             $model->Where('patient_id', $request->get('patient_id'));
+        }
+
+        if($request->get('from') && $request->get('to')){
+            $from   = date('Y-m-d',strtotime($request->get('from')));
+            $to     = date('Y-m-d',strtotime($request->get('to')));
+
+            $model->whereBetween('date', [$from,$to]);
+
         }
 
         return $model;

@@ -33,7 +33,7 @@ class PatientHistory extends BaseModel
      * @var array
      */
     protected $hidden = [
-        
+
     ];
 
     /**
@@ -42,7 +42,7 @@ class PatientHistory extends BaseModel
      * @var array
     */
     protected $partialFillable = [
-        
+
     ];
 
     /**
@@ -51,7 +51,7 @@ class PatientHistory extends BaseModel
      * @var array
     */
     protected $dates = [
-        
+
     ];
 
     /**
@@ -60,7 +60,7 @@ class PatientHistory extends BaseModel
      * @var array
     */
     protected $dispatchesEvents = [
-        
+
     ];
 
     public function scopeOpen($query)
@@ -70,7 +70,7 @@ class PatientHistory extends BaseModel
 
     protected function createModel($request){
         $data = $this->getModelAttributes($request);
-            
+
             if($request->get('additional')){
                 $values = $data['values'];
                 unset($data['values']);
@@ -80,12 +80,12 @@ class PatientHistory extends BaseModel
 
             if(isset($data['values']['date'])){
                 $data['values']['date'] = date('Y-m-d',strtotime($data['values']['date']));
-                
+
             }
-            
+
             if(isset($data['values']['surgery_date'])){
                 $data['values']['surgery_date'] = date('Y-m-d',strtotime($data['values']['surgery_date']));
-                
+
             }
 
             if($data['slug'] == 'student-history'){
@@ -104,11 +104,11 @@ class PatientHistory extends BaseModel
 
         if(isset($data['values']['date'])){
             $data['values']['date'] = date('Y-m-d',strtotime($data['values']['date']));
-            
-        } 
+
+        }
         if(isset($data['values']['surgery_date'])){
             $data['values']['surgery_date'] = date('Y-m-d',strtotime($data['values']['surgery_date']));
-            
+
         }
 
         unset($request['patient_id']);
@@ -131,7 +131,7 @@ class PatientHistory extends BaseModel
             $model->where('patient_histories.consult_id', $request->get('consult_id') == '-1'? null: $request->get('consult_id'));
         }
 
-        
+
         if($request->get('user_id')){
             $model->where('patient_id', $request->get('user_id'));
         }
@@ -148,10 +148,13 @@ class PatientHistory extends BaseModel
                 $model->whereBetween('values->surgery_date', [$from,$to]);
             }else if($request->get('slug') == 'medical-history'){
                 $model->whereBetween('values->onset_date', [$from,$to]);
-            }else{
+            }else if($request->get('slug') == 'obstetric-history'){
+                $model->whereBetween('created_at', [$from,$to]);
+            }
+            else{
                 $model->whereBetween('values->date', [$from,$to]);
             }
-            
+
         }
 
         if ($request->get('searchkey')) {
@@ -159,7 +162,7 @@ class PatientHistory extends BaseModel
             if($request->get('slug') == 'medical-health'){
 
                 $status_key = $request->get('searchkey');
-                if(strtolower($request->get('searchkey')) == "inactive" 
+                if(strtolower($request->get('searchkey')) == "inactive"
                     || strtolower($request->get('searchkey')) == "active"){
                     $status_key = (strtolower($request->get('searchkey')) == "inactive")?"0":"1";
                 }
@@ -170,6 +173,13 @@ class PatientHistory extends BaseModel
                     ->orWhere('values->reaction', 'LIKE',"%".$request->get('searchkey')."%")
                     ->orWhere('values->severity', 'LIKE',"%".$request->get('searchkey')."%")
                     ->orWhere('values->is_active', 'LIKE',"%".$status_key."%");
+            }
+
+            if($request->get('slug') == 'obstetric-history'){
+
+                $model->Where('values->boh_desc', 'LIKE',"%".$request->get('searchkey')."%")
+                    ->orWhere('values->fertility_treatment_desc', 'LIKE',"%".$request->get('searchkey')."%");
+
             }
         }
 
