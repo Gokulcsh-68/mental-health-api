@@ -21,7 +21,9 @@ class PatientHistoryTransformer extends JsonResource
             'consult_id'    =>  $this->consult_id,
             'slug'          =>  $this->slug,
             'values'        =>  $this->values,
-            'freeze'        =>  $this->freeze
+            'freeze'        =>  $this->freeze,
+            'created_at'    =>  $this->created_at,
+            'updated_at'    =>  $this->updated_at
         ];
 
         if(!empty($this->consult)){
