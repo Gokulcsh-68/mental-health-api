@@ -1713,18 +1713,42 @@ class Vital extends BaseModel
 
             if($gender == 'Male'){
 
+                if (($input_data['hemoglobin'] < '13.8')) {
+                    $input_data['hemoglobinFlag']      = 'Low';
+                    $input_data['hemoglobinFlagColor'] = 'primary';
+                    $input_data['range_code']    = '#0000ff';
+                }
+
                 if (($input_data['hemoglobin'] >= '13.8') && ($input_data['hemoglobin'] <= '17.2')) {
                     $input_data['hemoglobinFlag']      = 'Normal';
                     $input_data['hemoglobinFlagColor'] = 'success';
                     $input_data['range_code']    = '#008000';
                 }
+
+                if (($input_data['hemoglobin'] > '17.2')) {
+                    $input_data['hemoglobinFlag']      = 'Warning';
+                    $input_data['hemoglobinFlagColor'] = 'warning';
+                    $input_data['range_code']    = '#ff0000';
+                }
             }
             if($gender == 'Female'){
+
+                if (($input_data['hemoglobin'] < '12.1')) {
+                    $input_data['hemoglobinFlag']      = 'Low';
+                    $input_data['hemoglobinFlagColor'] = 'primary';
+                    $input_data['range_code']    = '#0000ff';
+                }
 
                 if (($input_data['hemoglobin'] >= '12.1') && ($input_data['hemoglobin'] <= '15.1')) {
                     $input_data['hemoglobinFlag']      = 'Normal';
                     $input_data['hemoglobinFlagColor'] = 'success';
                     $input_data['range_code']    = '#008000';
+                }
+
+                if (($input_data['hemoglobin'] > '15.1')) {
+                    $input_data['hemoglobinFlag']      = 'Danger';
+                    $input_data['hemoglobinFlagColor'] = 'danger';
+                    $input_data['range_code']    = '#ff0000';
                 }
             }
         }
@@ -1800,18 +1824,42 @@ class Vital extends BaseModel
 
             if($gender == 'Male'){
 
+                if (($input_data['uric_acid'] < '4.0')) {
+                    $input_data['uricFlag']      = 'Low';
+                    $input_data['uricFlagColor'] = 'primary';
+                    $input_data['range_code']    = '#0000ff';
+                }
+
                 if (($input_data['uric_acid'] >= '4.0') && ($input_data['uric_acid'] <= '8.5')) {
                     $input_data['uricFlag']      = 'Normal';
                     $input_data['uricFlagColor'] = 'success';
                     $input_data['range_code']    = '#008000';
                 }
+
+                if (($input_data['uric_acid'] > '8.5')) {
+                    $input_data['uricFlag']      = 'High';
+                    $input_data['uricFlagColor'] = 'danger';
+                    $input_data['range_code']    = '#ff0000';
+                }
             }
             if($gender == 'Female'){
+
+                if (($input_data['uric_acid'] < '2.7')) {
+                    $input_data['uricFlag']      = 'Low';
+                    $input_data['uricFlagColor'] = 'primary';
+                    $input_data['range_code']    = '#0000ff';
+                }
 
                 if (($input_data['uric_acid'] >= '2.7') && ($input_data['uric_acid'] <= '7.3')) {
                     $input_data['uricFlag']      = 'Normal';
                     $input_data['uricFlagColor'] = 'success';
                     $input_data['range_code']    = '#008000';
+                }
+
+                if (($input_data['uric_acid'] > '7.3')) {
+                    $input_data['uricFlag']      = 'High';
+                    $input_data['uricFlagColor'] = 'danger';
+                    $input_data['range_code']    = '#ff0000';
                 }
             }
         }
