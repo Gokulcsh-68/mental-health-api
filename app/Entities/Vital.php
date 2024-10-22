@@ -685,7 +685,7 @@ class Vital extends BaseModel
 
 
             if ($input_data['blood_sugar'] >= 20 && $input_data['blood_sugar'] <= 70) {
-                $input_data['bsFlag']      = 'Low';
+                $input_data['bsFlag']      = 'Low (Hypoglycemia)';
                 $input_data['bsFlagColor'] = 'primary';
                 $input_data['range_code']  = '#0000ff';
             }
@@ -699,20 +699,20 @@ class Vital extends BaseModel
             }
 
             if (($type == 'Fasting' && $input_data['blood_sugar'] >= 100 && $input_data['blood_sugar'] <= 125) || ($type == 'Random' && $input_data['blood_sugar'] >= 140 && $input_data['blood_sugar'] <= 199) || ($type == 'Post Prandial' && $input_data['blood_sugar'] >= 140 && $input_data['blood_sugar'] <= 199)) {
-                $input_data['bsFlag']      = 'Mildly Elevated';
+                $input_data['bsFlag']      = 'Mildly Elevated (Pre-diabetes)';
                 $input_data['bsFlagColor'] = 'warning';
                 $input_data['range_code']  = '#fff707';
             }
 
 
             if (($type == 'Fasting' && $input_data['blood_sugar'] >= 126 && $input_data['blood_sugar'] <= 160) || ($type == 'Random' && $input_data['blood_sugar'] >= 200 && $input_data['blood_sugar'] <= 300) || ($type == 'Post Prandial' && $input_data['blood_sugar'] >= 200 && $input_data['blood_sugar'] <= 300)) {
-                $input_data['bsFlag']      = 'Moderately Elevated';
+                $input_data['bsFlag']      = 'Moderately Elevated (High blood sugar)';
                 $input_data['bsFlagColor'] = 'warning';
                 $input_data['range_code']  = '#ffc107';
             }
 
             if (($type == 'Fasting' && $input_data['blood_sugar'] > 160) || ($type == 'Random' && $input_data['blood_sugar'] > 300) || ($type == 'Post Prandial' && $input_data['blood_sugar'] > 300)) {
-                $input_data['bsFlag']      = 'Severely Elevated';
+                $input_data['bsFlag']      = 'Severely Elevated (Severe Hyperglycemia)';
                 $input_data['bsFlagColor'] = 'danger';
                 $input_data['range_code']  = '#ff0000';
             }
@@ -730,7 +730,7 @@ class Vital extends BaseModel
 
 
             if ($input_data['blood_sugar'] >= 1.1 && $input_data['blood_sugar'] <= 3.9) {
-                $input_data['bsFlag']      = 'Low';
+                $input_data['bsFlag']      = 'Low (Hypoglycemia)';
                 $input_data['bsFlagColor'] = 'primary';
                 $input_data['range_code']  = '#0000ff';
             }
@@ -743,20 +743,20 @@ class Vital extends BaseModel
             }
 
             if ($input_data['blood_sugar'] >= 7.1 && $input_data['blood_sugar'] <= 10) {
-                $input_data['bsFlag']      = 'Mildly Elevated';
+                $input_data['bsFlag']      = 'Mildly Elevated (Pre-diabetes)';
                 $input_data['bsFlagColor'] = 'warning';
                 $input_data['range_code']  = '#fff707';
             }
 
 
             if ($input_data['blood_sugar'] >= 10.1 && $input_data['blood_sugar'] <= 13.8) {
-                $input_data['bsFlag']      = 'Moderately Elevated';
+                $input_data['bsFlag']      = 'Moderately Elevated (High blood sugar)';
                 $input_data['bsFlagColor'] = 'warning';
                 $input_data['range_code']  = '#ffc107';
             }
 
             if ($input_data['blood_sugar'] >= 13.9) {
-                $input_data['bsFlag']      = 'Severely Elevated';
+                $input_data['bsFlag']      = 'Severely Elevated (Severe Hyperglycemia)';
                 $input_data['bsFlagColor'] = 'danger';
                 $input_data['range_code']  = '#ff0000';
             }
@@ -1444,35 +1444,54 @@ class Vital extends BaseModel
 
             if ($input_data['vldl_unit'] == 'mg/dL') {
 
-                if ($input_data['vldl'] <= 30) {
+                if($input_data['vldl'] < 2) {
+                    $input_data['vldl_message'] = 'Low';
+                }
+
+                if ($input_data['vldl'] >= 2 && $input_data['vldl'] <= 30) {
                     $input_data['vldl_message'] = 'Optimal';
                 }
 
+                if ($input_data['vldl'] > 30 && $input_data['vldl'] <= 40) {
+                    $input_data['vldl_message'] = 'Borderline elevated';
+                }
 
-                if ($input_data['vldl'] > 30) {
+                if ($input_data['vldl'] > 40) {
                     $input_data['vldl_message'] = 'High';
                 }
             }
 
             if ($input_data['vldl_unit'] == 'mmol/L') {
 
-                if ($input_data['vldl'] <= 0.76) {
+                if($input_data['vldl'] < 0.1) {
+                    $input_data['vldl_message'] = 'Low';
+                }
+
+                if ($input_data['vldl'] >= 0.1 && $input_data['vldl'] <= 0.8) {
                     $input_data['vldl_message'] = 'Optimal';
                 }
 
-                if ($input_data['vldl'] > 0.76) {
+                if ($input_data['vldl'] > 0.8 && $input_data['vldl'] <= 1.0) {
+                    $input_data['vldl_message'] = 'Borderline elevated';
+                }
+
+                if ($input_data['vldl'] > 1.0) {
                     $input_data['vldl_message'] = 'High';
                 }
             }
 
             switch ($input_data['vldl_message']) {
+                case 'Low':
+                    $input_data['vldl_message_flag'] = 'primary';
+                    $input_data['vldl_range_code']   = '#0000ff';
+                    break;
                 case 'Optimal':
                     $input_data['vldl_message_flag'] = 'success';
                     $input_data['vldl_range_code']   = '#008000';
                     break;
-                case 'Intermediate':
-                    $input_data['vldl_message_flag'] = 'success';
-                    $input_data['vldl_range_code']   = '#008000';
+                case 'Borderline elevated':
+                    $input_data['vldl_message_flag'] = 'warning';
+                    $input_data['vldl_range_code']   = '#ffc107';
                     break;
                 case 'High':
                     $input_data['vldl_message_flag'] = 'danger';
@@ -1519,8 +1538,8 @@ class Vital extends BaseModel
                     $input_data['ldl_range_code']   = '#008000';
                     break;
                 case 'Intermediate':
-                    $input_data['ldl_message_flag'] = 'success';
-                    $input_data['ldl_range_code']   = '#008000';
+                    $input_data['ldl_message_flag'] = 'warning';
+                    $input_data['ldl_range_code']   = '#ffc107';
                     break;
                 case 'High':
                     $input_data['ldl_message_flag'] = 'danger';
@@ -1567,8 +1586,8 @@ class Vital extends BaseModel
                     $input_data['hdl_range_code']   = '#008000';
                     break;
                 case 'Intermediate':
-                    $input_data['hdl_message_flag'] = 'success';
-                    $input_data['hdl_range_code']   = '#008000';
+                    $input_data['hdl_message_flag'] = 'warning';
+                    $input_data['hdl_range_code']   = '#ffc107';
                     break;
                 case 'High':
                     $input_data['hdl_message_flag'] = 'danger';
@@ -1614,8 +1633,8 @@ class Vital extends BaseModel
                     $input_data['triglycerides_range_code']   = '#008000';
                     break;
                 case 'Intermediate':
-                    $input_data['triglycerides_message_flag'] = 'success';
-                    $input_data['triglycerides_range_code']   = '#008000';
+                    $input_data['triglycerides_message_flag'] = 'warning';
+                    $input_data['triglycerides_range_code']   = '#ffc107';
                     break;
                 case 'High':
                     $input_data['triglycerides_message_flag'] = 'danger';
@@ -1660,8 +1679,8 @@ class Vital extends BaseModel
                     $input_data['hdl_ldl_range_code']   = '#008000';
                 break;
                 case 'Intermediate':
-                    $input_data['hdl_ldl_message_flag'] = 'success';
-                    $input_data['hdl_ldl_range_code']   = '#008000';
+                    $input_data['hdl_ldl_message_flag'] = 'warning';
+                    $input_data['hdl_ldl_range_code']   = '#ffc107';
                 break;
                 case 'High':
                     $input_data['hdl_ldl_message_flag'] = 'danger';
@@ -1706,7 +1725,7 @@ class Vital extends BaseModel
 
     public static function hemoglobin_flag($input_data, $gender)
     {
-        $input_data['hemoglobinFlag']      = 'Danger';
+        $input_data['hemoglobinFlag']      = 'High';
         $input_data['hemoglobinFlagColor'] = 'danger';
         $input_data['range_code']    = '#ff0000';
         if (!empty($input_data['hemoglobin'])) {
@@ -1726,8 +1745,8 @@ class Vital extends BaseModel
                 }
 
                 if (($input_data['hemoglobin'] > '17.2')) {
-                    $input_data['hemoglobinFlag']      = 'Warning';
-                    $input_data['hemoglobinFlagColor'] = 'warning';
+                    $input_data['hemoglobinFlag']      = 'High';
+                    $input_data['hemoglobinFlagColor'] = 'danger';
                     $input_data['range_code']    = '#ff0000';
                 }
             }
@@ -1746,7 +1765,7 @@ class Vital extends BaseModel
                 }
 
                 if (($input_data['hemoglobin'] > '15.1')) {
-                    $input_data['hemoglobinFlag']      = 'Danger';
+                    $input_data['hemoglobinFlag']      = 'High';
                     $input_data['hemoglobinFlagColor'] = 'danger';
                     $input_data['range_code']    = '#ff0000';
                 }
