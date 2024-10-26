@@ -150,6 +150,12 @@ class PatientHistory extends BaseModel
                 $model->whereBetween('values->onset_date', [$from,$to]);
             }else if($request->get('slug') == 'obstetric-history'){
                 $model->whereBetween('created_at', [$from,$to]);
+            }else if($request->get('slug') == 'menstrual-history'){
+                $model->whereBetween('values->lmp', [$from,$to]);
+            }else if($request->get('slug') == 'screening-diagnostic-history'){
+                $model->whereBetween('values->last_pap_smear_at', [$from,$to])
+                ->orWhereBetween('values->last_mamogram_at', [$from,$to])
+                ->orWhereBetween('values->last_breast_exam_at', [$from,$to]);
             }
             else{
                 $model->whereBetween('values->date', [$from,$to]);
