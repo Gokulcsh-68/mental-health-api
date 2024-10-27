@@ -20,7 +20,7 @@ class NextAppointment extends BaseModel
      * @var array
      */
     protected $fillable = [
-        "patient_id", "provider_id", "date", "reason",
+        "patient_id", "provider_id", "date", "reason", "consult_id"
     ];
 
     /**

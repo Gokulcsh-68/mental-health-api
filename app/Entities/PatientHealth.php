@@ -39,7 +39,7 @@ class PatientHealth extends BaseModel
      * @var array
      */
     protected $hidden = [
-        
+
     ];
 
     /**
@@ -48,7 +48,7 @@ class PatientHealth extends BaseModel
      * @var array
     */
     protected $partialFillable = [
-        
+
     ];
 
     /**
@@ -57,7 +57,7 @@ class PatientHealth extends BaseModel
      * @var array
     */
     protected $dates = [
-        
+
     ];
 
     /**
@@ -66,7 +66,7 @@ class PatientHealth extends BaseModel
      * @var array
     */
     protected $dispatchesEvents = [
-        
+
     ];
 
     public function user()
@@ -96,9 +96,9 @@ class PatientHealth extends BaseModel
         if($data['slug'] == 'diet'){
 
             $dietmaster = $data['values']['nutritian_values'];
-            
+
             foreach ($dietmaster as $key => $value) {
-                if(is_numeric($value)){ 
+                if(is_numeric($value)){
                     $data['values']['nutritian_values'][$key] = round($value * $data['values']['intake'],2);
                  }
                  else{
@@ -110,9 +110,9 @@ class PatientHealth extends BaseModel
 
         if(isset($data['values']['date'])){
             $data['values']['date'] = date('Y-m-d',strtotime($data['values']['date']));
-            
+
         }
-        
+
         if(!empty($data['up_create'])){
 
 
@@ -145,9 +145,9 @@ class PatientHealth extends BaseModel
         if($data['slug'] == 'diet'){
 
             $dietmaster = $data['values']['nutritian_values'];
-            
+
             foreach ($dietmaster as $key => $value) {
-                if(is_numeric($value)){ 
+                if(is_numeric($value)){
                     $data['values']['nutritian_values'][$key] = round($value * $data['values']['intake'],2);
                  }
                  else{
@@ -195,13 +195,13 @@ class PatientHealth extends BaseModel
             } else {
                 $model->groupBy('values->date');
             }
-            
+
         }
 
         if ($request->get('consult_id') || $request->get('consult_id') == '-1') {
             $model->where('patient_health.consult_id', $request->get('consult_id') == '-1'? null: $request->get('consult_id'));
         }
-        
+
         if($request->get('user_id')){
             $model->where('patient_id', $request->get('user_id'));
         }
@@ -214,7 +214,16 @@ class PatientHealth extends BaseModel
                 $model->whereBetween('values->start_date', [$from, $to]);
             }
             else if($request->get('slug') == 'prescription') {
-                $model->whereBetween('created_at', [$from." 00:00:00", $to." 23:59:59"]);
+
+                if($request->get('filter_as') == 'medicine_date'){
+                    $model->whereRaw("`values`->'$[*].start_date' BETWEEN json_array(?) AND json_array(?)",[$from,$to])
+                    ->orwhereRaw("`values`->'$[*].end_date' BETWEEN json_array(?) AND json_array(?)",[$from,$to]);
+
+                }else{
+                    $model->whereBetween('created_at', [$from." 00:00:00", $to." 23:59:59"]);
+                }
+
+
             }
             else if($request->get('slug') == 'prescription_glasses') {
                 $model->whereBetween('created_at', [$from." 00:00:00", $to." 23:59:59"]);
@@ -230,7 +239,7 @@ class PatientHealth extends BaseModel
             if($request->get('slug') == 'allergy'){
 
                 $status_key = $request->get('searchkey');
-                if(strtolower($request->get('searchkey')) == "inactive" 
+                if(strtolower($request->get('searchkey')) == "inactive"
                     || strtolower($request->get('searchkey')) == "active"){
                     $status_key = (strtolower($request->get('searchkey')) == "inactive")?"0":"1";
                 }
@@ -255,7 +264,7 @@ class PatientHealth extends BaseModel
             if($request->get('slug') == 'medicine'){
 
                 $status_key = $request->get('searchkey');
-                if(strtolower($request->get('searchkey')) == "inactive" 
+                if(strtolower($request->get('searchkey')) == "inactive"
                     || strtolower($request->get('searchkey')) == "active"){
                     $status_key = (strtolower($request->get('searchkey')) == "inactive")?"0":"1";
                 }
@@ -274,9 +283,9 @@ class PatientHealth extends BaseModel
     protected function deleteModel($id, $request)
     {
         $data = $this->getModelAttributes($request);
-        
+
         if($request->get('patient_id') && $request->get('del_date')){
-            
+
             $del_date = date('Y-m-d',strtotime($request->get('del_date')));
 
             return $this->Where('values->date',$del_date)->Where('patient_id',$request->get('patient_id'))->delete();
@@ -307,14 +316,14 @@ class PatientHealth extends BaseModel
                 $input_data['severityFlagColor']    = 'primary';
                 $input_data['severity_range_code']  = '#0000ff';
             break;
-            
+
             default:
                 $input_data['severityFlagColor']    = 'success';
                 $input_data['severity_range_code']  = '#008000';
             break;
         }
-        
+
         return $input_data;
     }
-    
+
 }
