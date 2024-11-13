@@ -149,13 +149,20 @@ class PatientHistory extends BaseModel
             }else if($request->get('slug') == 'medical-history'){
                 $model->whereBetween('values->onset_date', [$from,$to]);
             }else if($request->get('slug') == 'obstetric-history'){
-                $model->whereBetween('created_at', [$from,$to]);
+
+                $model->where(function ($query) use ($from,$to) {
+                    $query->orWhereBetween('created_at', [$from,$to])
+                    ->orWhereBetween('values->lmp', [$from,$to]);
+                });
+
             }else if($request->get('slug') == 'menstrual-history'){
                 $model->whereBetween('values->lmp', [$from,$to]);
             }else if($request->get('slug') == 'screening-diagnostic-history'){
-                $model->whereBetween('values->last_pap_smear_at', [$from,$to])
-                ->orWhereBetween('values->last_mamogram_at', [$from,$to])
-                ->orWhereBetween('values->last_breast_exam_at', [$from,$to]);
+                $model->where(function ($query) use ($from,$to) {
+                    $query->orWhereBetween('values->last_pap_smear_at', [$from,$to])
+                    ->orWhereBetween('values->last_mamogram_at', [$from,$to])
+                    ->orWhereBetween('values->last_breast_exam_at', [$from,$to]);
+                });
             }
             else{
                 $model->whereBetween('values->date', [$from,$to]);
@@ -173,18 +180,29 @@ class PatientHistory extends BaseModel
                     $status_key = (strtolower($request->get('searchkey')) == "inactive")?"0":"1";
                 }
 
-                $model->Where('values->name', 'LIKE',"%".$request->get('searchkey')."%")
+                $model->where(function ($query) use ($request,$status_key) {
+                    $query->orWhere('values->name', 'LIKE',"%".$request->get('searchkey')."%")
                     ->orWhere('values->type', 'LIKE',"%".$request->get('searchkey')."%")
                     ->orWhere('values->category', 'LIKE',"%".$request->get('searchkey')."%")
                     ->orWhere('values->reaction', 'LIKE',"%".$request->get('searchkey')."%")
                     ->orWhere('values->severity', 'LIKE',"%".$request->get('searchkey')."%")
                     ->orWhere('values->is_active', 'LIKE',"%".$status_key."%");
+                });
+
+                // $model->Where('values->name', 'LIKE',"%".$request->get('searchkey')."%")
+                //     ->orWhere('values->type', 'LIKE',"%".$request->get('searchkey')."%")
+                //     ->orWhere('values->category', 'LIKE',"%".$request->get('searchkey')."%")
+                //     ->orWhere('values->reaction', 'LIKE',"%".$request->get('searchkey')."%")
+                //     ->orWhere('values->severity', 'LIKE',"%".$request->get('searchkey')."%")
+                //     ->orWhere('values->is_active', 'LIKE',"%".$status_key."%");
             }
 
             if($request->get('slug') == 'obstetric-history'){
 
-                $model->Where('values->boh_desc', 'LIKE',"%".$request->get('searchkey')."%")
+                $model->where(function ($query) use ($request) {
+                    $query->orWhere('values->boh_desc', 'LIKE',"%".$request->get('searchkey')."%")
                     ->orWhere('values->fertility_treatment_desc', 'LIKE',"%".$request->get('searchkey')."%");
+                });
 
             }
         }
