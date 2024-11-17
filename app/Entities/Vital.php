@@ -1645,47 +1645,22 @@ class Vital extends BaseModel
 
         if (!empty($input_data['hdl_ldl'])) {
 
-        if ($input_data['hdl_ldl_unit'] == 'mg/dL') {
-            if ($input_data['hdl_ldl'] <= 3) {
+            if ($input_data['hdl_ldl'] < 2.5) {
                 $input_data['hdl_ldl_message'] = 'Optimal';
+                $input_data['hdl_ldl_message_flag'] = 'success';
+                $input_data['hdl_ldl_range_code']   = '#008000';
             }
 
-            if (($input_data['hdl_ldl'] >= 3.1) && ($input_data['hdl_ldl'] <= 3.8)) {
-                $input_data['hdl_ldl_message'] = 'Intermediate';
+            if (($input_data['hdl_ldl'] >= 2.5) && ($input_data['hdl_ldl'] <= 3.5)) {
+                $input_data['hdl_ldl_message'] = 'Moderate';
+                $input_data['hdl_ldl_message_flag'] = 'warning';
+                $input_data['hdl_ldl_range_code']   = '#ffc107';
             }
 
-            if ($input_data['hdl_ldl'] > 3.8) {
+            if ($input_data['hdl_ldl'] > 3.5) {
                 $input_data['hdl_ldl_message'] = 'High';
-            }
-        }
-
-        if ($input_data['hdl_ldl_unit'] == 'mmol/L') {
-            if ($input_data['hdl_ldl'] <= 1.33) {
-                $input_data['hdl_ldl_message'] = 'Optimal';
-            }
-
-            if (($input_data['hdl_ldl'] >= 1.34) && ($input_data['hdl_ldl'] <= 1.68)) {
-                $input_data['hdl_ldl_message'] = 'Intermediate';
-            }
-
-            if ($input_data['hdl_ldl'] > 1.68) {
-                $input_data['hdl_ldl_message'] = 'High';
-            }
-        }
-
-            switch ($input_data['hdl_ldl_message']) {
-                case 'Optimal':
-                    $input_data['hdl_ldl_message_flag'] = 'success';
-                    $input_data['hdl_ldl_range_code']   = '#008000';
-                break;
-                case 'Intermediate':
-                    $input_data['hdl_ldl_message_flag'] = 'warning';
-                    $input_data['hdl_ldl_range_code']   = '#ffc107';
-                break;
-                case 'High':
-                    $input_data['hdl_ldl_message_flag'] = 'danger';
-                    $input_data['hdl_ldl_range_code']   = '#ff0000';
-                break;
+                $input_data['hdl_ldl_message_flag'] = 'danger';
+                $input_data['hdl_ldl_range_code']   = '#ff0000';
             }
         }
 
