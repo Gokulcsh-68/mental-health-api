@@ -173,7 +173,17 @@ class Consult extends BaseModel
                 $hospital_id = $request->user()->staff->hospital_id;
                 $consult_additional_info['organization_id'] = $request->user()->staff->hospital_id;
             }
-           
+
+            // Added Additional info for Consult
+            $patient_addition_value = $addition_value;
+
+            if (!empty($data['patient_name']['additional_info'])) {
+                $patient_addition_value = array_merge($patient_addition_value, $data['patient_name']['additional_info']);
+            }
+
+            if (!empty($data['patient_name']['peripheral_credentials'])) {
+                $patient_addition_value['peripheral_credentials'] = $data['patient_name']['peripheral_credentials'];
+            }
 
             $payload = [
                 'consult_date_time' => $data['consult_date_time'],
@@ -181,8 +191,6 @@ class Consult extends BaseModel
                 'consult_reason' => $data['reason_for_consult'],
                 'service_provider' => $teleconsult_config['default_service_provider'],
                 'additional_info' => $consult_additional_info,
-
-                
                 'patient' => [
                     'id' => $patient->id,
                     'name' => $patient->getFullName(),
@@ -190,13 +198,12 @@ class Consult extends BaseModel
                     'phone' => $patient->mobile_number,
                     'gender' => $patient->gender,
                     'profile_pic' => $patient->profile_image,
-                    'additional_info' => $addition_value
+                    'additional_info' => $patient_addition_value
                 ],
             ];
 
            
             if($request->get('teleType') == '1'){
-
 
                $payload['provider'] =  [
                         'id' => $request->get('provider_id'),
