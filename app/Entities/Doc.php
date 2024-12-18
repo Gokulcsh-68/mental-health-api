@@ -171,21 +171,21 @@ class Doc extends BaseModel
                 if ($request->get('slug') != 'documents') {
 
                     $model->where(function ($query) use ($request) {
-                        $searchKey = $request->get('searchkey');
-                        $query->where(DB::raw("JSON_UNQUOTE(JSON_EXTRACT(addition_info, '$.notes'))"), 'LIKE', "%{$searchKey}%")
-                              ->orWhere(DB::raw("JSON_UNQUOTE(JSON_EXTRACT(addition_info, '$.title'))"), 'LIKE', "%{$searchKey}%")
-                              ->orWhere(DB::raw("JSON_UNQUOTE(JSON_EXTRACT(addition_info, '$.insurance_company'))"), 'LIKE', "%{$searchKey}%")
-                              ->orWhere(DB::raw("JSON_UNQUOTE(JSON_EXTRACT(addition_info, '$.policy_number'))"), 'LIKE', "%{$searchKey}%")
-                              ->orWhere(DB::raw("JSON_UNQUOTE(JSON_EXTRACT(addition_info, '$.insured_amount'))"), 'LIKE', "%{$searchKey}%");
+                        $searchKey = strtolower($request->get('searchkey'));
+                        $query->whereRaw("LOWER(JSON_UNQUOTE(JSON_EXTRACT(addition_info, '$.notes'))) LIKE ?", ["%{$searchKey}%"])
+                              ->orWhereRaw("LOWER(JSON_UNQUOTE(JSON_EXTRACT(addition_info, '$.title'))) LIKE ?", ["%{$searchKey}%"])
+                              ->orWhereRaw("LOWER(JSON_UNQUOTE(JSON_EXTRACT(addition_info, '$.insurance_company'))) LIKE ?", ["%{$searchKey}%"])
+                              ->orWhereRaw("LOWER(JSON_UNQUOTE(JSON_EXTRACT(addition_info, '$.policy_number'))) LIKE ?", ["%{$searchKey}%"])
+                              ->orWhereRaw("LOWER(JSON_UNQUOTE(JSON_EXTRACT(addition_info, '$.insured_amount'))) LIKE ?", ["%{$searchKey}%"]);
                     });
 
                     // $model->where(function ($query) use ($request) {
-                    //     $query->Where('addition_info->notes', 'LIKE',"%".$request->get('searchkey')."%")
-                    //     ->orWhere('addition_info->title', 'LIKE',"%".$request->get('searchkey')."%")
-                    //     ->orWhere('addition_info->insurance_company', 'LIKE',"%".$request->get('searchkey')."%")
-                    //     ->orWhere('addition_info->policy_number', 'LIKE',"%".$request->get('searchkey')."%")
-                    //     ->orWhere('addition_info->insured_amount', 'LIKE',"%".$request->get('searchkey')."%");
-                    // });
+                    //         $query->Where('addition_info->notes', 'LIKE',"%".$request->get('searchkey')."%")
+                    //         ->orWhere('addition_info->title', 'LIKE',"%".$request->get('searchkey')."%")
+                    //         ->orWhere('addition_info->insurance_company', 'LIKE',"%".$request->get('searchkey')."%")
+                    //         ->orWhere('addition_info->policy_number', 'LIKE',"%".$request->get('searchkey')."%")
+                    //         ->orWhere('addition_info->insured_amount', 'LIKE',"%".$request->get('searchkey')."%");
+                    //     });
                 }
             }
 
