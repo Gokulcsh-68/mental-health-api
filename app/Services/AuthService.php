@@ -151,7 +151,7 @@ class AuthService extends BaseService
                 $this->otpNotification($data, $user);
                 return $this->httpResponse->setHttpCode(200)
                     ->setHttpData(['is_2fa' => $user->is_2fa, 'status' => 'OTP_SENT'])
-                    // ->setHttpData(['reference_otp' => $this->generateOtp($user->secret)])
+                    ->setHttpData(['reference_otp' => $this->generateOtp($user->secret)])
                     ->setHttpMessage("Otp sent to your registered mobile and email.")
                     ->jsonResponse();
             }
