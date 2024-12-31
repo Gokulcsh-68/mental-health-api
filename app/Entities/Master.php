@@ -114,11 +114,13 @@ class Master extends BaseModel
 
                  // ['apgar', 'adhd', 'healthy-heart', 'psychiatric-exam', 'stroke-scale'];
                 if($logged_in_role_code == 'folio'){
-                    $form_slug = ['healthy-heart', 'psychiatric-exam', 'stroke-scale', 'covid', 'vision'];
-
+                    $form_slug = ['healthy-heart', 'psychiatric-exam', 'covid'];
                 }else{
                     $form_slug = ['healthy-heart', 'psychiatric-exam', 'stroke-scale', 'covid', 'vision', 'apgar'];
+                }
 
+                if(!empty($request->get('consult'))){
+                    $form_slug = ['stroke-scale', 'vision'];
                 }
 
                 if(!empty($form_slug)){
