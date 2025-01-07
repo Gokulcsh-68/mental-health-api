@@ -692,7 +692,7 @@ class AuthService extends BaseService
         if (!empty($user)) {
             $data['otp_type'] = "forgotPassword";
             $this->otpNotification($data, $user);
-            // $this->httpResponse->setHttpData(['reference_otp' => $this->generateOtp($user->secret)]);
+            $this->httpResponse->setHttpData(['reference_otp' => $this->generateOtp($user->secret)]);
             $this->httpResponse->setHttpMessage("Otp sent to your registered mobile and email based on your communication preference.");
         } else {
             $this->httpResponse->setHttpMessage("Email not found")->setHttpCode(404);
