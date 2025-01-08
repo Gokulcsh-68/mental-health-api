@@ -47,7 +47,7 @@ trait GetEntity
 
             // $model = $model->orderBy($this->getTable() . "." . $request->get("order_by"), $dir);
             $model = $model->orderBy($this->getTable() . "." . $request->get("order_by"), $dir)
-            ->orderBy($this->getTable() . "." . $this->getKeyName(), $dir);
+            ->orderBy($this->getTable() . "." . $this->getKeyName(),'desc');
         } else {
             $model = $model->orderBy($this->getTable() . "." . $this->getKeyName(), "desc" );
         }
