@@ -234,6 +234,7 @@ class PatientHealth extends BaseModel
         }
 
 
+        // Search area for all the health data by values
         if ($request->get('searchkey')) {
             // Allergy
             if($request->get('slug') == 'allergy'){
@@ -273,6 +274,13 @@ class PatientHealth extends BaseModel
 
                     ->orWhere('values->type', 'LIKE',"%".$request->get('searchkey')."%")
                     ->orWhere('values->is_active', 'LIKE',"%".$status_key."%");
+
+            }
+
+            // Prescription
+            if($request->get('slug') == 'prescription'){
+                $model->whereRaw("`values`->'$[*].medicine_name' LIKE ?", ['%' . $request->get('searchkey'). '%'])
+                    ->orWhereRaw("`values`->'$[*].medicine_name' LIKE ?", ['%' . $request->get('searchkey'). '%']);
 
             }
         }
