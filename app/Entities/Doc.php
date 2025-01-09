@@ -222,10 +222,14 @@ class Doc extends BaseModel
             ->where('properties', '!=', '')            // Equivalent to "properties != ''"
             ->whereRaw('JSON_LENGTH(properties) > 0');  // Equivalent to "JSON_LENGTH(properties) > 0"
 
-            $model->whereRaw("JSON_UNQUOTE(JSON_EXTRACT(addition_info, '$.notes')) NOT IN (?, ?)", [
-                    'lead1 - NSR, lead2 - SinTachy + IVCD, ',
-                    'lead1 - NSR, '
-            ]);
+            $model->whereRaw("REPLACE(JSON_UNQUOTE(JSON_EXTRACT(addition_info, '$.notes')), '\\n', '') NOT IN (
+                'lead1 - NSR, lead2 - SinTachy + IVCD,',
+                'lead1 - NSR,',
+                'lead1 - , ',
+                'lead1 - NSR, lead2 - ,'
+            )");
+
+{"notes": "lead1 - NSR, lead2 - , ", "title": "ECG - Rijuven", "document_link": "https://login.cardiosleeve.com/api/sessions/report/47593/170896"}
         }
         return $model;
     }
