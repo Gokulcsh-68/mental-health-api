@@ -228,9 +228,8 @@ class Doc extends BaseModel
                 'lead1 - , ',
                 'lead1 - NSR, lead2 - ,'
             )");
-
-{"notes": "lead1 - NSR, lead2 - , ", "title": "ECG - Rijuven", "document_link": "https://login.cardiosleeve.com/api/sessions/report/47593/170896"}
         }
+        
         return $model;
     }
 }
