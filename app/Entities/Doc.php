@@ -221,6 +221,11 @@ class Doc extends BaseModel
             $model->whereNotNull('properties')         // Equivalent to "properties IS NOT NULL"
             ->where('properties', '!=', '')            // Equivalent to "properties != ''"
             ->whereRaw('JSON_LENGTH(properties) > 0');  // Equivalent to "JSON_LENGTH(properties) > 0"
+
+            $model->whereRaw("JSON_UNQUOTE(JSON_EXTRACT(addition_info, '$.notes')) NOT IN (?, ?)", [
+                    'lead1 - NSR, lead2 - SinTachy + IVCD, ',
+                    'lead1 - NSR, '
+            ]);
         }
         return $model;
     }
