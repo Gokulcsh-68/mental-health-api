@@ -118,12 +118,8 @@ class Doc extends BaseModel
 
         if($request->user()){
             if($request->user()->role->code == 'scancentre'){
-                   
-
                 $model->whereIn('docs.document_source', ['imaging','lab']);
                 $model->whereJsonContains('docs.addition_info', ['scan_centre_id'=>$request->user()->id]);
-                    
-
             }
         }
 
@@ -219,6 +215,12 @@ class Doc extends BaseModel
             if ($request->get('scanstatus') != 'All') {
                 $model->Where('addition_info->scan_status', $request->get('scanstatus'));
             }
+        }
+
+        if(!empty($request->get('onlyDocs'))){
+            $model->whereNotNull('properties')         // Equivalent to "properties IS NOT NULL"
+            ->where('properties', '!=', '')            // Equivalent to "properties != ''"
+            ->whereRaw('JSON_LENGTH(properties) > 0')  // Equivalent to "JSON_LENGTH(properties) > 0"
         }
         return $model;
     }
