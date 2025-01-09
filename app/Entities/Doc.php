@@ -220,7 +220,7 @@ class Doc extends BaseModel
         if(!empty($request->get('onlyDocs'))){
             $model->whereNotNull('properties')         // Equivalent to "properties IS NOT NULL"
             ->where('properties', '!=', '')            // Equivalent to "properties != ''"
-            ->whereRaw('JSON_LENGTH(properties) > 0')  // Equivalent to "JSON_LENGTH(properties) > 0"
+            ->whereRaw('JSON_LENGTH(properties) > 0');  // Equivalent to "JSON_LENGTH(properties) > 0"
         }
         return $model;
     }
