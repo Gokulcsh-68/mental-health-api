@@ -279,8 +279,13 @@ class PatientHealth extends BaseModel
 
             // Prescription
             if($request->get('slug') == 'prescription'){
+                // $model->whereRaw(
+                //     "JSON_EXTRACT(`values`, '$[*].medicine_name') LIKE ?",
+                //     ['%' . $request->get('searchkey') . '%']
+                // );
+
                 $model->whereRaw(
-                    "JSON_EXTRACT(`values`, '$[*].medicine_name') LIKE ?",
+                    "JSON_UNQUOTE(JSON_EXTRACT(`values`, '$[*].medicine_name')) LIKE ?",
                     ['%' . $request->get('searchkey') . '%']
                 );
             }
