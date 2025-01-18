@@ -218,13 +218,21 @@ class Doc extends BaseModel
         }
 
         if(!empty($request->get('onlyDocs'))){
-            $model->whereNotNull('properties') // Equivalent to "properties IS NOT NULL"
-                ->where('properties', '!=', '') // Equivalent to "properties != ''"
-                ->whereRaw('JSON_LENGTH(properties) > 0') // Ensure JSON array is not empty
-                ->orWhere(function ($query) {
-                    $query->whereNotNull('addition_info->document_link');
+            // $model->whereNotNull('properties')         // Equivalent to "properties IS NOT NULL"
+            // ->where('properties', '!=', '')            // Equivalent to "properties != ''"
+            // ->whereRaw('JSON_LENGTH(properties) > 0');  // Equivalent to "JSON_LENGTH(properties) > 0"
+
+            $model->where(function ($query) {
+                $query->whereNotNull('properties')
+                      ->where('properties', '!=', '')
+                      ->whereRaw('JSON_LENGTH(properties) > 0')
+                      ->orWhere(function ($subQuery) {
+                          $subQuery->whereRaw('json_extract(addition_info, \'$."document_link"\') IS NOT NULL')
+                                   ->whereRaw('json_type(json_extract(addition_info, \'$."document_link"\')) != \'NULL\'')
+                                   ->whereRaw('json_unquote(json_extract(addition_info, \'$."document_link"\')) != ""');
+                      });
             });
-            
+
             $model->whereRaw("REPLACE(JSON_UNQUOTE(JSON_EXTRACT(addition_info, '$.notes')), '\\n', '') NOT IN (
                 'lead1 - NSR, lead2 - SinTachy + IVCD,',
                 'lead1 - NSR,',
