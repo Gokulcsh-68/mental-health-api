@@ -222,8 +222,7 @@ class Doc extends BaseModel
                 ->where('properties', '!=', '') // Equivalent to "properties != ''"
                 ->whereRaw('JSON_LENGTH(properties) > 0') // Ensure JSON array is not empty
                 ->orWhere(function ($query) {
-                    $query->whereNotNull('addition_info->document_link')
-                            ->where('addition_info->document_link', '!=', '');
+                    $query->whereNotNull('addition_info->document_link');
             });
             
             $model->whereRaw("REPLACE(JSON_UNQUOTE(JSON_EXTRACT(addition_info, '$.notes')), '\\n', '') NOT IN (
