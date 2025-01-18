@@ -218,18 +218,12 @@ class Doc extends BaseModel
         }
 
         if(!empty($request->get('onlyDocs'))){
-            // $model->whereNotNull('properties')         // Equivalent to "properties IS NOT NULL"
-            // ->where('properties', '!=', '')            // Equivalent to "properties != ''"
-            // ->whereRaw('JSON_LENGTH(properties) > 0');  // Equivalent to "JSON_LENGTH(properties) > 0"
-
-            $model->where(function ($query) {
-                $query->whereNotNull('properties')
-                      ->where('properties', '!=', '')
+            $model->where(function($query) use ($request) {
+                $query->whereNotNull('properties')         // Equivalent to "properties IS NOT NULL"
+                      ->where('properties', '!=', '')      // Equivalent to "properties != ''"
                       ->whereRaw('JSON_LENGTH(properties) > 0')
-                      ->orWhere(function ($subQuery) {
-                          $subQuery->whereRaw('json_extract(addition_info, \'$."document_link"\') IS NOT NULL')
-                                   ->whereRaw('json_type(json_extract(addition_info, \'$."document_link"\')) != \'NULL\'')
-                                   ->whereRaw('json_unquote(json_extract(addition_info, \'$."document_link"\')) != ""');
+                      ->orWhere(function ($squery) use ($request) {
+                          $squery->where('addition_info->document_link', '!=', ''); // Check if document_link is not empty
                       });
             });
 
