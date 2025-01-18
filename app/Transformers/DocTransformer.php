@@ -33,6 +33,8 @@ class DocTransformer extends JsonResource
             'properties'        =>  $this->properties,
             'user_id'           =>  $this->user_id,
             'freeze'            =>  $this->freeze,
+            'created_at'        =>  $this->created_at,
+            'updated_at'        =>  $this->updated_at,
             'user' => (new UserTransformer($this->user))
         ];
 
