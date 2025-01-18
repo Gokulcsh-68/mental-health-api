@@ -285,8 +285,8 @@ class PatientHealth extends BaseModel
                 // );
 
                 $model->whereRaw(
-                    "JSON_UNQUOTE(JSON_EXTRACT(`values`, '$[*].medicine_name')) LIKE ?",
-                    ['%' . $request->get('searchkey') . '%']
+                    "LOWER(JSON_UNQUOTE(JSON_EXTRACT(`values`, '$[*].medicine_name'))) LIKE LOWER(?)",
+                    ['%' . strtolower($request->get('searchkey')) . '%']
                 );
             }
         }
