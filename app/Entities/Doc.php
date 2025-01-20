@@ -223,7 +223,8 @@ class Doc extends BaseModel
                       ->where('properties', '!=', '')      // Equivalent to "properties != ''"
                       ->whereRaw('JSON_LENGTH(properties) > 0')
                       ->orWhere(function ($squery) use ($request) {
-                          $squery->where('addition_info->document_link', '!=', ''); // Check if document_link is not empty
+                          $squery->whereNotNull('addition_info->document_link') // Check if document_link is not null
+                                 ->where('addition_info->document_link', '!=', ''); // Check if document_link is not empty
                       });
             });
 
