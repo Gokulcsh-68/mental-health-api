@@ -216,8 +216,14 @@ class PatientHealth extends BaseModel
             else if($request->get('slug') == 'prescription') {
 
                 if($request->get('filter_as') == 'medicine_date'){
-                    $model->whereRaw("`values`->'$[*].start_date' BETWEEN json_array(?) AND json_array(?)",[$from,$to])
-                    ->orwhereRaw("`values`->'$[*].end_date' BETWEEN json_array(?) AND json_array(?)",[$from,$to]);
+                    // $model->whereRaw("`values`->'$[*].start_date' BETWEEN json_array(?) AND json_array(?)",[$from,$to])
+                    // ->orwhereRaw("`values`->'$[*].end_date' BETWEEN json_array(?) AND json_array(?)",[$from,$to]);
+
+                    $model->where(function ($subquery) use ($request, $from, $to) {
+                        $subquery->whereRaw("JSON_UNQUOTE(JSON_EXTRACT(`values`, '$[0].additional_info.start_date')) BETWEEN ? AND ?", [$from, $to])
+                        ->orWhereRaw("JSON_UNQUOTE(JSON_EXTRACT(`values`, '$[0].additional_info.end_date')) BETWEEN ? AND ?", [$from, $to]);
+                    });
+
 
                 }else{
                     $model->whereBetween('created_at', [$from." 00:00:00", $to." 23:59:59"]);
