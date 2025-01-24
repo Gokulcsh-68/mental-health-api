@@ -177,3 +177,21 @@ $router->group(['prefix' => 'v1/', 'middleware' => 'clientAuth'], function ($rou
         });
     });
 });
+
+$router->get('/run-seeder/{seeder}', function ($seeder) {
+    try {
+        ini_set('max_execution_time', 300); // Set maximum execution time
+        $exitCode = \Illuminate\Support\Facades\Artisan::call('db:seed', ['--class' => $seeder]);
+
+        // Check if seeder was executed successfully
+        if ($exitCode === 0) {
+            return response()->json(['message' => "$seeder executed successfully!"]);
+        }
+
+        return response()->json(['error' => 'Seeder execution failed.'], 400);
+    } catch (\Exception $e) {
+        // Return the actual error message in case of an exception
+        return response()->json(['error' => 'Seeder not found or failed to execute: ' . $e->getMessage()], 400);
+    }
+});
+
