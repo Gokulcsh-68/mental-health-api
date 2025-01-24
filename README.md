@@ -13,3 +13,6 @@
 	peripheral/{access_token}/basicInfo
 	peripheral/{access_token}/controlFile
 	peripheral/{access_token}/trendData 
+	
+# Seeder Referesh command
+php artisan db:seed --class=CountriesSeeder->(your seeder class name)
