@@ -292,9 +292,10 @@ class PatientHealth extends BaseModel
                     $status_key = (strtolower($request->get('searchkey')) == "inactive")?"0":"1";
                 }
 
-                $model->Where('values->name', 'LIKE',"%".strtolower($request->get('searchkey'))."%")
-                    ->orWhere('values->code', 'LIKE',"%".strtolower($request->get('searchkey'))."%")
-                    ->orWhere('values->is_active', 'LIKE',"%".$status_key."%");
+                $model->whereRaw("LOWER(JSON_UNQUOTE(JSON_EXTRACT(`values`, '$.name'))) LIKE ?", ["%".strtolower($request->get('searchkey'))."%"])
+                        ->orWhereRaw("LOWER(JSON_UNQUOTE(JSON_EXTRACT(`values`, '$.code'))) LIKE ?", ["%".strtolower($request->get('searchkey'))."%"])
+                        ->orWhereRaw("JSON_UNQUOTE(JSON_EXTRACT(`values`, '$.is_active')) LIKE ?", ["%".$status_key."%"]);
+
 
             }
 
