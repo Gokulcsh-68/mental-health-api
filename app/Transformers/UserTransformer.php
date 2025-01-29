@@ -2,6 +2,8 @@
 
 namespace App\Transformers;
 
+use App\Services\CureselectApis\PeripheralApiService;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserTransformer extends JsonResource
@@ -49,6 +51,19 @@ class UserTransformer extends JsonResource
             if($request->user()->role->code == 'hospital'){
                 $return_val['hospital_name'] = $request->get('staff')->hospital->name;
                 $return_val['hospital_address'] = $request->get('staff')->hospital;
+
+                if($this->patient){
+                    $peripheral_credentials = Cache::rememberForever('PERIPHERAL_CREDENTIALS_USER_' . $this->user_id, function() {
+                        return (new PeripheralApiService)->get($this->user_id);
+                    });
+                    $return_val['patient'] = $this->patient;
+                    $return_val['peripheral_credentials'] = [
+                        'username' => $peripheral_credentials['username'] ?? '',
+                        'otp' => $peripheral_credentials['otp'] ?? '',
+                        'salt_key' => $peripheral_credentials['access_secret'] ?? '',
+                    ];
+                    
+                }
             }
         }
 
