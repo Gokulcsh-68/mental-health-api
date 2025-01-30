@@ -537,6 +537,8 @@ class AuthService extends BaseService
     {
 
         try {
+            ini_set('post_max_size', '4M');
+            ini_set('upload_max_filesize', '4M');
 
             $ext = strtolower($request->file('file')->getClientOriginalExtension());
             $doc_file = $request->file('file');
