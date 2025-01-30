@@ -327,15 +327,20 @@ class Vital extends BaseModel
 
         if($data['slug'] == 'blood-sugar'){
             unset($data['details']['bsFlag'], $data['details']['bsFlagColor'], $data['details']['range_code']);
-
+            $dateOfBirth = user::Where('id',$data['user_id'])->first(['dob','gender']);
+            $years = Carbon::parse($dateOfBirth->dob)->diff(Carbon::now())->format('%y');
             $data['details'] += self::blood_sugar_flag($data['details']);
         }
 
 
         if($data['slug'] == 'blood-pressure'){
             unset($data['details']['bpFlag'], $data['details']['bpFlagColor'], $data['details']['range_code']);
+            $dateOfBirth = User::Where('id', $data['user_id'])->value('dob');
 
-            $data['details'] += self::blood_pressure_flag($data['details']);
+            $years  = Carbon::parse($dateOfBirth)->diff(Carbon::now())->format('%y');
+            $months = Carbon::parse($dateOfBirth)->diff(Carbon::now())->format('%m');
+            $days   = Carbon::parse($dateOfBirth)->diff(Carbon::now())->format('%d');
+            $data['details'] += self::blood_pressure_flag($data['details'], $years, $months, $days);
         }
 
         if($data['slug'] == 'lipid-profile'){
@@ -396,8 +401,12 @@ class Vital extends BaseModel
             unset($data['details']['spo2Flag'],
                 $data['details']['spo2FlagColor'],
                 $data['details']['range_code']);
+                $dateOfBirth = User::Where('id', $data['user_id'])->value('dob');
 
-            $data['details'] += self::spo2_flag($data['details']);
+                $years  = Carbon::parse($dateOfBirth)->diff(Carbon::now())->format('%y');
+                $months = Carbon::parse($dateOfBirth)->diff(Carbon::now())->format('%m');
+                $days   = Carbon::parse($dateOfBirth)->diff(Carbon::now())->format('%d');
+            $data['details'] += self::spo2_flag($data['details'], $years, $months, $days);
         }
 
         if($data['slug'] == 'respiration'){
@@ -451,13 +460,23 @@ class Vital extends BaseModel
         if($data['slug'] == 'hct'){
             unset($data['details']['hctFlag'], $data['details']['hctFlagColor'], $data['details']['range_code']);
             $gender = User::Where('id', $data['user_id'])->value('gender');
-            $data['details'] += self::hct_flag($data['details'],$gender);
+            $dateOfBirth = User::Where('id', $data['user_id'])->value('dob');
+
+            $years = Carbon::parse($dateOfBirth)->diff(Carbon::now())->format('%y');
+            $months = Carbon::parse($dateOfBirth)->diff(Carbon::now())->format('%m');
+            $days   = Carbon::parse($dateOfBirth)->diff(Carbon::now())->format('%d');
+            $data['details'] += self::hct_flag($data['details'],$gender,$years,$months,$days);
         }
 
         if($data['slug'] == 'uric_acid'){
             unset($data['details']['uricFlag'], $data['details']['uricFlagColor'], $data['details']['range_code']);
             $gender = User::Where('id', $data['user_id'])->value('gender');
-            $data['details'] += self::uric_acid_flag($data['details'],$gender);
+            $dateOfBirth = User::Where('id', $data['user_id'])->value('dob');
+
+            $years = Carbon::parse($dateOfBirth)->diff(Carbon::now())->format('%y');
+            $months = Carbon::parse($dateOfBirth)->diff(Carbon::now())->format('%m');
+            $days   = Carbon::parse($dateOfBirth)->diff(Carbon::now())->format('%d');
+            $data['details'] += self::uric_acid_flag($data['details'],$gender,$years,$months,$days);
         }
 
         if($data['slug'] == 'spirometer'){
@@ -600,11 +619,11 @@ class Vital extends BaseModel
                     // 2-5 years
                     if (($years >= 2) && ($years <= 5)) {
                         if ($bmi_value < 14.9) {
-                            $input_data['bmiFlag']      = 'Underweight';
+                            $input_data['bmiFlag']      = 'Underweight1';
                             $input_data['bmiFlagColor'] = 'primary';
                             $input_data['range_code']   = '#0000ff';
                         }
-                        if (($bmi_value >= 15.0) && ($bmi_value < 18.5)) {
+                        if (($bmi_value >= 15.0) && ($bmi_value <= 18.5)) {
                             $input_data['bmiFlag']      = 'Normal';
                             $input_data['bmiFlagColor'] = 'success';
                             $input_data['range_code']   = '#008000';
@@ -637,7 +656,7 @@ class Vital extends BaseModel
                     $input_data['bmiFlagColor'] = 'primary';
                     $input_data['range_code']   = '#0000ff';
                 }
-                if (($bmi_value >= 15.5) && ($bmi_value < 18.5)) {
+                if (($bmi_value >= 15.5) && ($bmi_value <= 18.5)) {
                     $input_data['bmiFlag']      = 'Normal';
                     $input_data['bmiFlagColor'] = 'success';
                     $input_data['range_code']   = '#008000';
@@ -664,9 +683,9 @@ class Vital extends BaseModel
                 }     
     }
       // 12-19 years
-      if (($years >= 6) && ($years <= 11)) {
+      if (($years >= 12) && ($years <= 19)) {
         if ($bmi_value < 17.0) {
-            $input_data['bmiFlag']      = 'Underweight';
+            $input_data['bmiFlag']      = 'Underweight3';
             $input_data['bmiFlagColor'] = 'primary';
             $input_data['range_code']   = '#0000ff';
         }
@@ -698,7 +717,7 @@ class Vital extends BaseModel
 }
     if(($years > 18)){
         if ($bmi_value < 18.5) {
-            $input_data['bmiFlag']      = 'Underweight';
+            $input_data['bmiFlag']      = 'Underweight4';
             $input_data['bmiFlagColor'] = 'primary';
             $input_data['range_code']   = '#0000ff';
         }
@@ -718,12 +737,12 @@ class Vital extends BaseModel
             $input_data['range_code']   = '#FFC107';
         }
         if (($bmi_value >= 35.0) && ($bmi_value < 40.0)) {
-            $input_data['bmiFlag']      = 'Severely Obese (Class 2) ';
+            $input_data['bmiFlag']      = 'Severely Obese (Class 2)';
             $input_data['bmiFlagColor'] = 'danger';
             $input_data['range_code']   = '#ff0000';
         }
         if (($bmi_value >= 40.0)) {
-            $input_data['bmiFlag']      = 'Extremely Obese (Class 3) ';
+            $input_data['bmiFlag']      = 'Extremely Obese (Class 3)';
             $input_data['bmiFlagColor'] = 'danger';
             $input_data['range_code']   = '#FF0000';
         } 
@@ -781,21 +800,96 @@ class Vital extends BaseModel
                             $input_data['temperatureFlagColor'] = 'success';
                             $input_data['range_code']    = '#008000';
                         }
+                        elseif(($input_data['temperature'] < 97)){
+                            $input_data['temperatureFlag']      = 'Low (Hypothermia)';
+                            $input_data['temperatureFlagColor'] = 'primary';
+                            $input_data['range_code']    = '#0000ff';
+                        }
+                        elseif(($input_data['temperature'] >= 97) && ($input_data['temperature'] <= 100)){
+                            $input_data['temperatureFlag']      = 'Normal (Normothermia)';
+                            $input_data['temperatureFlagColor'] = 'success';
+                            $input_data['range_code']    = '#008000';
+                        }
+                        elseif(($input_data['temperature'] >= 100.2) && ($input_data['temperature'] <= 101.4)){
+                            $input_data['temperatureFlag']      = 'Slightly Increased (Mild Fever)';
+                            $input_data['temperatureFlagColor'] = 'success';
+                            $input_data['range_code']    = '#fff707';
+                        }
+                        elseif(($input_data['temperature'] >= 101.5) && ($input_data['temperature'] <= 103)){
+                            $input_data['temperatureFlag']      = 'Moderately Increased (Moderate Fever)';
+                            $input_data['temperatureFlagColor'] = 'success';
+                            $input_data['range_code']    = '#FFC107';
+                        }
+                        elseif(($input_data['temperature'] > 103)){
+                            $input_data['temperatureFlag']      = 'Severely High (Hyperpyrexia)';
+                            $input_data['temperatureFlagColor'] = 'primary';
+                            $input_data['range_code']    = '#FF0000';
+                        }
                     }
 
-                    if($years >= 1 && $years <= 17){
+                    if($years >= 1 && $years <= 18){
                         if (($input_data['temperature'] >= 97.6) && ($input_data['temperature'] <= 99.3)) {
                             $input_data['temperatureFlag']      = 'Normal';
                             $input_data['temperatureFlagColor'] = 'success';
                             $input_data['range_code']    = '#008000';
                         }
+                        elseif(($input_data['temperature'] < 97.7)){
+                            $input_data['temperatureFlag']      = 'Low (Hypothermia)';
+                            $input_data['temperatureFlagColor'] = 'primary';
+                            $input_data['range_code']    = '#0000ff';
+                        }
+                        elseif(($input_data['temperature'] >= 97.7) && ($input_data['temperature'] <= 99.5)){
+                            $input_data['temperatureFlag']      = 'Normal (Normothermia)';
+                            $input_data['temperatureFlagColor'] = 'success';
+                            $input_data['range_code']    = '#008000';
+                        }
+                        elseif(($input_data['temperature'] >= 99.7) && ($input_data['temperature'] <= 101.4)){
+                            $input_data['temperatureFlag']      = 'Slightly Increased (Mild Fever)';
+                            $input_data['temperatureFlagColor'] = 'success';
+                            $input_data['range_code']    = '#fff707';
+                        }
+                        elseif(($input_data['temperature'] >= 101.5) && ($input_data['temperature'] <= 103)){
+                            $input_data['temperatureFlag']      = 'Moderately Increased (Moderate Fever)';
+                            $input_data['temperatureFlagColor'] = 'success';
+                            $input_data['range_code']    = '#FFC107';
+                        }
+                        elseif(($input_data['temperature'] > 103)){
+                            $input_data['temperatureFlag']      = 'Severely High (Hyperpyrexia)';
+                            $input_data['temperatureFlagColor'] = 'primary';
+                            $input_data['range_code']    = '#FF0000';
+                        }
                     }
 
-                    if($years >= 18 && $years <= 64){
+                    if($years >= 19 && $years <= 65){
                         if (($input_data['temperature'] >= 96) && ($input_data['temperature'] <= 98)) {
                             $input_data['temperatureFlag']      = 'Normal';
                             $input_data['temperatureFlagColor'] = 'success';
                             $input_data['range_code']    = '#008000';
+                        }
+                        elseif(($input_data['temperature'] < 97)){
+                            $input_data['temperatureFlag']      = 'Low (Hypothermia)';
+                            $input_data['temperatureFlagColor'] = 'primary';
+                            $input_data['range_code']    = '#0000ff';
+                        }
+                        elseif(($input_data['temperature'] >= 97) && ($input_data['temperature'] <= 99)){
+                            $input_data['temperatureFlag']      = 'Normal (Normothermia)';
+                            $input_data['temperatureFlagColor'] = 'success';
+                            $input_data['range_code']    = '#008000';
+                        }
+                        elseif(($input_data['temperature'] >= 99.1) && ($input_data['temperature'] <= 100.6)){
+                            $input_data['temperatureFlag']      = 'Slightly Increased (Mild Fever)';
+                            $input_data['temperatureFlagColor'] = 'success';
+                            $input_data['range_code']    = '#fff707';
+                        }
+                        elseif(($input_data['temperature'] >= 100.8) && ($input_data['temperature'] <= 103)){
+                            $input_data['temperatureFlag']      = 'Moderately Increased (Moderate Fever)';
+                            $input_data['temperatureFlagColor'] = 'success';
+                            $input_data['range_code']    = '#FFC107';
+                        }
+                        elseif(($input_data['temperature'] > 103)){
+                            $input_data['temperatureFlag']      = 'Severely High (Hyperpyrexia)';
+                            $input_data['temperatureFlagColor'] = 'primary';
+                            $input_data['range_code']    = '#FF0000';
                         }
                     }
 
@@ -804,6 +898,31 @@ class Vital extends BaseModel
                             $input_data['temperatureFlag']      = 'Normal';
                             $input_data['temperatureFlagColor'] = 'success';
                             $input_data['range_code']    = '#008000';
+                        }
+                            elseif(($input_data['temperature'] < 96.8)){
+                            $input_data['temperatureFlag']      = 'Low (Hypothermia)';
+                            $input_data['temperatureFlagColor'] = 'primary';
+                            $input_data['range_code']    = '#0000ff';
+                        }
+                        elseif(($input_data['temperature'] >= 96.8) && ($input_data['temperature'] <= 98.6)){
+                            $input_data['temperatureFlag']      = 'Normal (Normothermia)';
+                            $input_data['temperatureFlagColor'] = 'success';
+                            $input_data['range_code']    = '#008000';
+                        }
+                        elseif(($input_data['temperature'] >= 98.8) && ($input_data['temperature'] <= 100.2)){
+                            $input_data['temperatureFlag']      = 'Slightly Increased (Mild Fever)';
+                            $input_data['temperatureFlagColor'] = 'success';
+                            $input_data['range_code']    = '#fff707';
+                        }
+                        elseif(($input_data['temperature'] >= 100.4) && ($input_data['temperature'] <= 102.2)){
+                            $input_data['temperatureFlag']      = 'Moderately Increased (Moderate Fever)';
+                            $input_data['temperatureFlagColor'] = 'success';
+                            $input_data['range_code']    = '#FFC107';
+                        }
+                        elseif(($input_data['temperature'] > 102.2 )){
+                            $input_data['temperatureFlag']      = 'Severely High (Hyperpyrexia)';
+                            $input_data['temperatureFlagColor'] = 'primary';
+                            $input_data['range_code']    = '#FF0000';
                         }
                     }
 
@@ -842,21 +961,97 @@ class Vital extends BaseModel
                             $input_data['temperatureFlagColor'] = 'success';
                             $input_data['range_code']    = '#008000';
                         }
+                        elseif(($input_data['temperature'] < 36.1)){
+                            $input_data['temperatureFlag']      = 'Low (Hypothermia)';
+                            $input_data['temperatureFlagColor'] = 'primary';
+                            $input_data['range_code']    = '#0000ff';
+                        }
+                        elseif(($input_data['temperature'] >= 36.1) && ($input_data['temperature'] <= 37.8)){
+                            $input_data['temperatureFlag']      = 'Normal (Normothermia)';
+                            $input_data['temperatureFlagColor'] = 'success';
+                            $input_data['range_code']    = '#008000';
+                        }
+                        elseif(($input_data['temperature'] >= 37.9) && ($input_data['temperature'] <= 38.5)){
+                            $input_data['temperatureFlag']      = 'Slightly Increased (Mild Fever)';
+                            $input_data['temperatureFlagColor'] = 'success';
+                            $input_data['range_code']    = '#fff707';
+                        }
+                        elseif(($input_data['temperature'] >= 38.6) && ($input_data['temperature'] <= 39.4)){
+                            $input_data['temperatureFlag']      = 'Moderately Increased (Moderate Fever)';
+                            $input_data['temperatureFlagColor'] = 'success';
+                            $input_data['range_code']    = '#FFC107';
+                        }
+                        elseif(($input_data['temperature'] > 39.4)){
+                            $input_data['temperatureFlag']      = 'Severely High (Hyperpyrexia)';
+                            $input_data['temperatureFlagColor'] = 'primary';
+                            $input_data['range_code']    = '#FF0000';
+                        }
                     }
 
-                    if($years >= 1 && $years <= 17){
+                    if($years >= 1 && $years <= 18){
                         if (($input_data['temperature'] >= 36.4) && ($input_data['temperature'] <= 37.4)) {
                             $input_data['temperatureFlag']      = 'Normal';
                             $input_data['temperatureFlagColor'] = 'success';
                             $input_data['range_code']    = '#008000';
                         }
+                        elseif(($input_data['temperature'] < 36.5)){
+                            $input_data['temperatureFlag']      = 'Low (Hypothermia)';
+                            $input_data['temperatureFlagColor'] = 'primary';
+                            $input_data['range_code']    = '#0000ff';
+                        }
+                        elseif(($input_data['temperature'] >= 36.5) && ($input_data['temperature'] <= 37.5)){
+                            $input_data['temperatureFlag']      = 'Normal (Normothermia)';
+                            $input_data['temperatureFlagColor'] = 'success';
+                            $input_data['range_code']    = '#008000';
+                        }
+                        elseif(($input_data['temperature'] >= 37.6) && ($input_data['temperature'] <= 38.5)){
+                            $input_data['temperatureFlag']      = 'Slightly Increased (Mild Fever)';
+                            $input_data['temperatureFlagColor'] = 'success';
+                            $input_data['range_code']    = '#fff707';
+                        }
+                        elseif(($input_data['temperature'] >= 38.6) && ($input_data['temperature'] <= 39.4)){
+                            $input_data['temperatureFlag']      = 'Moderately Increased (Moderate Fever)';
+                            $input_data['temperatureFlagColor'] = 'success';
+                            $input_data['range_code']    = '#FFC107';
+                        }
+                        elseif(($input_data['temperature'] > 39.4)){
+                            $input_data['temperatureFlag']      = 'Severely High (Hyperpyrexia)';
+                            $input_data['temperatureFlagColor'] = 'primary';
+                            $input_data['range_code']    = '#FF0000';
+                        }
+                        
                     }
 
-                    if($years >= 18 && $years <= 64){
+                    if($years >= 19 && $years <= 65){
                         if (($input_data['temperature'] >= 35.6) && ($input_data['temperature'] <= 36.7)) {
                             $input_data['temperatureFlag']      = 'Normal';
                             $input_data['temperatureFlagColor'] = 'success';
                             $input_data['range_code']    = '#008000';
+                        }
+                        elseif(($input_data['temperature'] < 36.1)){
+                            $input_data['temperatureFlag']      = 'Low (Hypothermia)';
+                            $input_data['temperatureFlagColor'] = 'primary';
+                            $input_data['range_code']    = '#0000ff';
+                        }
+                        elseif(($input_data['temperature'] >= 36.1) && ($input_data['temperature'] <= 38.1)){
+                            $input_data['temperatureFlag']      = 'Normal (Normothermia)';
+                            $input_data['temperatureFlagColor'] = 'success';
+                            $input_data['range_code']    = '#008000';
+                        }
+                        elseif(($input_data['temperature'] >= 37.3) && ($input_data['temperature'] <= 38.1)){
+                            $input_data['temperatureFlag']      = 'Slightly Increased (Mild Fever)';
+                            $input_data['temperatureFlagColor'] = 'success';
+                            $input_data['range_code']    = '#fff707';
+                        }
+                        elseif(($input_data['temperature'] >= 38.2) && ($input_data['temperature'] <= 39.4)){
+                            $input_data['temperatureFlag']      = 'Moderately Increased (Moderate Fever)';
+                            $input_data['temperatureFlagColor'] = 'success';
+                            $input_data['range_code']    = '#FFC107';
+                        }
+                        elseif(($input_data['temperature'] > 39.4)){
+                            $input_data['temperatureFlag']      = 'Severely High (Hyperpyrexia)';
+                            $input_data['temperatureFlagColor'] = 'primary';
+                            $input_data['range_code']    = '#FF0000';
                         }
                     }
 
@@ -866,10 +1061,37 @@ class Vital extends BaseModel
                             $input_data['temperatureFlagColor'] = 'success';
                             $input_data['range_code']    = '#008000';
                         }
+                        elseif(($input_data['temperature'] < 36.0)){
+                            $input_data['temperatureFlag']      = 'Low (Hypothermia)';
+                            $input_data['temperatureFlagColor'] = 'primary';
+                            $input_data['range_code']    = '#0000ff';
+                        }
+                        elseif(($input_data['temperature'] >= 36.0) && ($input_data['temperature'] <= 37.0)){
+                            $input_data['temperatureFlag']      = 'Normal (Normothermia)';
+                            $input_data['temperatureFlagColor'] = 'success';
+                            $input_data['range_code']    = '#008000';
+                        }
+                        elseif(($input_data['temperature'] >= 37.1) && ($input_data['temperature'] <= 37.9)){
+                            $input_data['temperatureFlag']      = 'Slightly Increased (Mild Fever)';
+                            $input_data['temperatureFlagColor'] = 'success';
+                            $input_data['range_code']    = '#fff707';
+                        }
+                        elseif(($input_data['temperature'] >= 38.0) && ($input_data['temperature'] <= 39.0)){
+                            $input_data['temperatureFlag']      = 'Moderately Increased (Moderate Fever)';
+                            $input_data['temperatureFlagColor'] = 'success';
+                            $input_data['range_code']    = '#FFC107';
+                        }
+                        elseif(($input_data['temperature'] > 39.0)){
+                            $input_data['temperatureFlag']      = 'Severely High (Hyperpyrexia)';
+                            $input_data['temperatureFlagColor'] = 'primary';
+                            $input_data['range_code']    = '#FF0000';
+                        }
                     }
 
                     break;
             }
+
+
 
         }
 
@@ -893,8 +1115,6 @@ class Vital extends BaseModel
                 //0-5  year
 
                 if (($years >= 0) && ($years <= 5)) {
-
-                if ($input_data['unit'] == 'mg/dL') {
 
                     // low
                     if(( $type == 'Fasting Blood Sugar' && $input_data['blood_sugar'] < 50) || ( $type == 'Postprandial Blood Sugar' && $input_data['blood_sugar'] < 70) || ( $type == 'HbA1c (%)' && $input_data['blood_sugar'] < 3.5) || ( $type == 'Random Blood Sugar' && $input_data['blood_sugar'] <50) ){
@@ -930,14 +1150,10 @@ class Vital extends BaseModel
                         $input_data['range_code']  = '#ff0000';
                     }
         
-        
-                }
-        
             }
             // 6 -19 year
             if (($years >= 6) && ($years <= 19)) {
 
-                if ($input_data['unit'] == 'mg/dL') {
 
                     // low
                     if(( $type == 'Fasting Blood Sugar' && $input_data['blood_sugar'] < 60) || ( $type == 'Postprandial Blood Sugar' && $input_data['blood_sugar'] < 80) || ( $type == 'HbA1c (%)' && $input_data['blood_sugar'] < 4.0) || ( $type == 'Random Blood Sugar' && $input_data['blood_sugar'] <60) ){
@@ -974,13 +1190,13 @@ class Vital extends BaseModel
                     }
         
         
-                }
+         
         
             }
             //20-59 year
             if (($years >= 20) && ($years <= 59)) {
 
-                if ($input_data['unit'] == 'mg/dL') {
+          
 
                     // low
                     if(( $type == 'Fasting Blood Sugar' && $input_data['blood_sugar'] < 60) || ( $type == 'Postprandial Blood Sugar' && $input_data['blood_sugar'] < 80) || ( $type == 'HbA1c (%)' && $input_data['blood_sugar'] < 4.0) || ( $type == 'Random Blood Sugar' && $input_data['blood_sugar'] <60) ){
@@ -1017,13 +1233,13 @@ class Vital extends BaseModel
                     }
         
         
-                }
+             
         
             }
         }
 
         if ($years >= 60) {
-            if ($input_data['unit'] == 'mg/dL') {
+      
 
                 // low
                 if(( $type == 'Fasting Blood Sugar' && $input_data['blood_sugar'] < 70) || ( $type == 'Postprandial Blood Sugar' && $input_data['blood_sugar'] < 90) || ( $type == 'HbA1c (%)' && $input_data['blood_sugar'] < 4.5) || ( $type == 'Random Blood Sugar' && $input_data['blood_sugar'] <70) ){
@@ -1058,101 +1274,99 @@ class Vital extends BaseModel
                     $input_data['bsFlagColor'] = 'danger';
                     $input_data['range_code']  = '#ff0000';
                 }
-    
-    
+
+        }
+    }
+        if (!empty($input_data['blood_sugar'])) {
+        // old 
+        if ($input_data['unit'] == 'mg/dL') {
+
+
+            if ($input_data['blood_sugar'] >= 20 && $input_data['blood_sugar'] <= 70) {
+                $input_data['bsFlag']      = 'Low (Hypoglycemia)';
+                $input_data['bsFlagColor'] = 'primary';
+                $input_data['range_code']  = '#0000ff';
             }
+
+
+            // if ($input_data['blood_sugar'] >= 71 && $input_data['blood_sugar'] <= 127) {
+            if (($type == 'Fasting' && $input_data['blood_sugar'] >= 71 && $input_data['blood_sugar'] <= 99) || ($type == 'Random' && $input_data['blood_sugar'] >= 71 && $input_data['blood_sugar'] <= 140) || ($type == 'Post Prandial' && $input_data['blood_sugar'] >= 71 && $input_data['blood_sugar'] <= 140)) {
+                $input_data['bsFlag']      = 'Normal';
+                $input_data['bsFlagColor'] = 'success';
+                $input_data['range_code']  = '#008000';
+            }
+
+            if (($type == 'Fasting' && $input_data['blood_sugar'] >= 100 && $input_data['blood_sugar'] <= 125) || ($type == 'Random' && $input_data['blood_sugar'] >= 140 && $input_data['blood_sugar'] <= 199) || ($type == 'Post Prandial' && $input_data['blood_sugar'] >= 140 && $input_data['blood_sugar'] <= 199)) {
+                $input_data['bsFlag']      = 'Mildly Elevated (Pre-diabetes)';
+                $input_data['bsFlagColor'] = 'warning';
+                $input_data['range_code']  = '#fff707';
+            }
+
+
+            if (($type == 'Fasting' && $input_data['blood_sugar'] >= 126 && $input_data['blood_sugar'] <= 160) || ($type == 'Random' && $input_data['blood_sugar'] >= 200 && $input_data['blood_sugar'] <= 300) || ($type == 'Post Prandial' && $input_data['blood_sugar'] >= 200 && $input_data['blood_sugar'] <= 300)) {
+                $input_data['bsFlag']      = 'Moderately Elevated (High blood sugar)';
+                $input_data['bsFlagColor'] = 'warning';
+                $input_data['range_code']  = '#ffc107';
+            }
+
+            if (($type == 'Fasting' && $input_data['blood_sugar'] > 160) || ($type == 'Random' && $input_data['blood_sugar'] > 300) || ($type == 'Post Prandial' && $input_data['blood_sugar'] > 300)) {
+                $input_data['bsFlag']      = 'Severely Elevated (Severe Hyperglycemia)';
+                $input_data['bsFlagColor'] = 'danger';
+                $input_data['range_code']  = '#ff0000';
+            }
+
+            if ($input_data['blood_sugar'] < 20) {
+                $input_data['bsFlag']      = 'Dangerously low';
+                $input_data['bsFlagColor'] = 'danger';
+                $input_data['range_code']  = '#ff0000';
+            }
+
 
         }
 
-
-        // if ($input_data['unit'] == 'mg/dL') {
-
-
-        //     if ($input_data['blood_sugar'] >= 20 && $input_data['blood_sugar'] <= 70) {
-        //         $input_data['bsFlag']      = 'Low (Hypoglycemia)';
-        //         $input_data['bsFlagColor'] = 'primary';
-        //         $input_data['range_code']  = '#0000ff';
-        //     }
+        if ($input_data['unit'] == 'mmol/L') {
 
 
-        //     // if ($input_data['blood_sugar'] >= 71 && $input_data['blood_sugar'] <= 127) {
-        //     if (($type == 'Fasting' && $input_data['blood_sugar'] >= 71 && $input_data['blood_sugar'] <= 99) || ($type == 'Random' && $input_data['blood_sugar'] >= 71 && $input_data['blood_sugar'] <= 140) || ($type == 'Post Prandial' && $input_data['blood_sugar'] >= 71 && $input_data['blood_sugar'] <= 140)) {
-        //         $input_data['bsFlag']      = 'Normal';
-        //         $input_data['bsFlagColor'] = 'success';
-        //         $input_data['range_code']  = '#008000';
-        //     }
-
-        //     if (($type == 'Fasting' && $input_data['blood_sugar'] >= 100 && $input_data['blood_sugar'] <= 125) || ($type == 'Random' && $input_data['blood_sugar'] >= 140 && $input_data['blood_sugar'] <= 199) || ($type == 'Post Prandial' && $input_data['blood_sugar'] >= 140 && $input_data['blood_sugar'] <= 199)) {
-        //         $input_data['bsFlag']      = 'Mildly Elevated (Pre-diabetes)';
-        //         $input_data['bsFlagColor'] = 'warning';
-        //         $input_data['range_code']  = '#fff707';
-        //     }
+            if ($input_data['blood_sugar'] >= 1.1 && $input_data['blood_sugar'] <= 3.9) {
+                $input_data['bsFlag']      = 'Low (Hypoglycemia)';
+                $input_data['bsFlagColor'] = 'primary';
+                $input_data['range_code']  = '#0000ff';
+            }
 
 
-        //     if (($type == 'Fasting' && $input_data['blood_sugar'] >= 126 && $input_data['blood_sugar'] <= 160) || ($type == 'Random' && $input_data['blood_sugar'] >= 200 && $input_data['blood_sugar'] <= 300) || ($type == 'Post Prandial' && $input_data['blood_sugar'] >= 200 && $input_data['blood_sugar'] <= 300)) {
-        //         $input_data['bsFlag']      = 'Moderately Elevated (High blood sugar)';
-        //         $input_data['bsFlagColor'] = 'warning';
-        //         $input_data['range_code']  = '#ffc107';
-        //     }
+            if ($input_data['blood_sugar'] >= 4.0 && $input_data['blood_sugar'] <= 7.0) {
+                $input_data['bsFlag']      = 'Normal';
+                $input_data['bsFlagColor'] = 'success';
+                $input_data['range_code']  = '#008000';
+            }
 
-        //     if (($type == 'Fasting' && $input_data['blood_sugar'] > 160) || ($type == 'Random' && $input_data['blood_sugar'] > 300) || ($type == 'Post Prandial' && $input_data['blood_sugar'] > 300)) {
-        //         $input_data['bsFlag']      = 'Severely Elevated (Severe Hyperglycemia)';
-        //         $input_data['bsFlagColor'] = 'danger';
-        //         $input_data['range_code']  = '#ff0000';
-        //     }
-
-        //     if ($input_data['blood_sugar'] < 20) {
-        //         $input_data['bsFlag']      = 'Dangerously low';
-        //         $input_data['bsFlagColor'] = 'danger';
-        //         $input_data['range_code']  = '#ff0000';
-        //     }
+            if ($input_data['blood_sugar'] >= 7.1 && $input_data['blood_sugar'] <= 10) {
+                $input_data['bsFlag']      = 'Mildly Elevated (Pre-diabetes)';
+                $input_data['bsFlagColor'] = 'warning';
+                $input_data['range_code']  = '#fff707';
+            }
 
 
-        // }
+            if ($input_data['blood_sugar'] >= 10.1 && $input_data['blood_sugar'] <= 13.8) {
+                $input_data['bsFlag']      = 'Moderately Elevated (High blood sugar)';
+                $input_data['bsFlagColor'] = 'warning';
+                $input_data['range_code']  = '#ffc107';
+            }
 
-        // if ($input_data['unit'] == 'mmol/L') {
+            if ($input_data['blood_sugar'] >= 13.9) {
+                $input_data['bsFlag']      = 'Severely Elevated (Severe Hyperglycemia)';
+                $input_data['bsFlagColor'] = 'danger';
+                $input_data['range_code']  = '#ff0000';
+            }
 
-
-        //     if ($input_data['blood_sugar'] >= 1.1 && $input_data['blood_sugar'] <= 3.9) {
-        //         $input_data['bsFlag']      = 'Low (Hypoglycemia)';
-        //         $input_data['bsFlagColor'] = 'primary';
-        //         $input_data['range_code']  = '#0000ff';
-        //     }
-
-
-        //     if ($input_data['blood_sugar'] >= 4.0 && $input_data['blood_sugar'] <= 7.0) {
-        //         $input_data['bsFlag']      = 'Normal';
-        //         $input_data['bsFlagColor'] = 'success';
-        //         $input_data['range_code']  = '#008000';
-        //     }
-
-        //     if ($input_data['blood_sugar'] >= 7.1 && $input_data['blood_sugar'] <= 10) {
-        //         $input_data['bsFlag']      = 'Mildly Elevated (Pre-diabetes)';
-        //         $input_data['bsFlagColor'] = 'warning';
-        //         $input_data['range_code']  = '#fff707';
-        //     }
+            if ($input_data['blood_sugar'] < 1.1) {
+                $input_data['bsFlag']      = 'Dangerously low';
+                $input_data['bsFlagColor'] = 'danger';
+                $input_data['range_code']  = '#ff0000';
+            }
 
 
-        //     if ($input_data['blood_sugar'] >= 10.1 && $input_data['blood_sugar'] <= 13.8) {
-        //         $input_data['bsFlag']      = 'Moderately Elevated (High blood sugar)';
-        //         $input_data['bsFlagColor'] = 'warning';
-        //         $input_data['range_code']  = '#ffc107';
-        //     }
-
-        //     if ($input_data['blood_sugar'] >= 13.9) {
-        //         $input_data['bsFlag']      = 'Severely Elevated (Severe Hyperglycemia)';
-        //         $input_data['bsFlagColor'] = 'danger';
-        //         $input_data['range_code']  = '#ff0000';
-        //     }
-
-        //     if ($input_data['blood_sugar'] < 1.1) {
-        //         $input_data['bsFlag']      = 'Dangerously low';
-        //         $input_data['bsFlagColor'] = 'danger';
-        //         $input_data['range_code']  = '#ff0000';
-        //     }
-
-
-        // }
+        }
 
 
         }
@@ -1167,13 +1381,73 @@ class Vital extends BaseModel
         $input_data['spo2Flag']      = '';
         $input_data['spo2FlagColor'] = '';
         $input_data['range_code']    = '';
+
+        if (!empty($input_data['spo2'])) {
+            
+            if ($input_data['spo2'] < 75) {
+                $input_data['spo2Flag']      = 'Severe Hypoxemia';
+                $input_data['spo2FlagColor'] = 'danger';
+                $input_data['range_code']    = '#ff0000';
+            }
+            
+            if (($input_data['spo2'] >= 75) && ($input_data['spo2'] <= 89)) {
+                $input_data['spo2Flag']      = 'Moderate Hypoxemia';
+                $input_data['spo2FlagColor'] = 'warning';
+                $input_data['range_code']    = '#ffc107';
+            }
+            
+            if (($input_data['spo2'] >= 90) && ($input_data['spo2'] <= 94)) {
+                $input_data['spo2Flag']      = 'Mild Hypoxemia';
+                $input_data['spo2FlagColor'] = 'primary';
+                $input_data['range_code']    = '#0000ff';
+            }
+            
+            if ($input_data['spo2'] >= 95) {
+                $input_data['spo2Flag']      = 'Normal';
+                $input_data['spo2FlagColor'] = 'success';
+                $input_data['range_code']    = '#008000';
+            }
+        }
         if (!empty($input_data['spo2'])) {
 
             if ($years <= 65) {
 
+                    // 0 - 12 Months
+      
+            if (($years >= 0) && ($years < 1)) {
+
+                if ($input_data['spo2'] < 88) {
+                    $input_data['spo2Flag']      = 'Low (Hypoxemia)  ';
+                    $input_data['spo2FlagColor'] = 'danger';
+                    $input_data['range_code']    = '#0000ff';
+                }
+                if (($input_data['spo2'] >= 90) && ($input_data['spo2'] <= 100)) {
+                    $input_data['spo2Flag']      = 'Normal';
+                    $input_data['spo2FlagColor'] = 'success';
+                    $input_data['range_code']    = '#008000';
+                }
+                if (($input_data['spo2'] >= 89) && ($input_data['spo2'] <= 85)) {
+                    $input_data['spo2Flag']      = 'Slightly Decreased(Mild Hypoxemia)  ';
+                    $input_data['spo2FlagColor'] = 'warning';
+                    $input_data['range_code']    = '#fff707';
+                }
+                if (($input_data['spo2'] >= 84) && ($input_data['spo2'] <= 80)) {
+                    $input_data['spo2Flag']      = 'Moderately Decreased (Moderate Hypoxemia)  ';
+                    $input_data['spo2FlagColor'] = 'primary';
+                    $input_data['range_code']    = '#FFC107';
+                }
+                if ($input_data['spo2'] < 80) {
+                    $input_data['spo2Flag']      = 'Severely Low (Severe Hypoxemia)  ';
+                    $input_data['spo2FlagColor'] = 'danger';
+                    $input_data['range_code']    = '#ff0000';
+                }
+                
+            }
+      
+
                 if (($years >= 1) && ($years <= 3)) {
                     if ($input_data['spo2'] < 88) {
-                        $input_data['spo2Flag']      = 'Low (Hypoxemia)  ';
+                        $input_data['spo2Flag']      = 'Low (Hypoxemia)';
                         $input_data['spo2FlagColor'] = 'danger';
                         $input_data['range_code']    = '#0000ff';
                     }
@@ -1183,17 +1457,17 @@ class Vital extends BaseModel
                         $input_data['range_code']    = '#008000';
                     }
                     if (($input_data['spo2'] >= 89) && ($input_data['spo2'] <= 85)) {
-                        $input_data['spo2Flag']      = 'Slightly Decreased(Mild Hypoxemia)  ';
+                        $input_data['spo2Flag']      = 'Slightly Decreased(Mild Hypoxemia)';
                         $input_data['spo2FlagColor'] = 'warning';
                         $input_data['range_code']    = '#fff707';
                     }
                     if (($input_data['spo2'] >= 84) && ($input_data['spo2'] <= 80)) {
-                        $input_data['spo2Flag']      = 'Moderately Decreased (Moderate Hypoxemia)  ';
+                        $input_data['spo2Flag']      = 'Moderately Decreased (Moderate Hypoxemia)';
                         $input_data['spo2FlagColor'] = 'primary';
                         $input_data['range_code']    = '#FFC107';
                     }
                     if ($input_data['spo2'] < 80) {
-                        $input_data['spo2Flag']      = 'Severely Low (Severe Hypoxemia)  ';
+                        $input_data['spo2Flag']      = 'Severely Low (Severe Hypoxemia)';
                         $input_data['spo2FlagColor'] = 'danger';
                         $input_data['range_code']    = '#ff0000';
                     }
@@ -1206,7 +1480,7 @@ class Vital extends BaseModel
                         $input_data['range_code']    = '#0000ff';
                     }
                     if (($input_data['spo2'] >= 91) && ($input_data['spo2'] <= 100)) {
-                        $input_data['spo2Flag']      = 'Normal  ';
+                        $input_data['spo2Flag']      = 'Normal';
                         $input_data['spo2FlagColor'] = 'success';
                         $input_data['range_code']    = '#008000';
                     }
@@ -1221,7 +1495,7 @@ class Vital extends BaseModel
                         $input_data['range_code']    = '#FFC107';
                     }
                     if ($input_data['spo2'] < 80) {
-                        $input_data['spo2Flag']      = 'Severely Low (Severe Hypoxemia)  ';
+                        $input_data['spo2Flag']      = 'Severely Low (Severe Hypoxemia)';
                         $input_data['spo2FlagColor'] = 'danger';
                         $input_data['range_code']    = '#ff0000';
                     }
@@ -1305,69 +1579,16 @@ class Vital extends BaseModel
                     $input_data['spo2FlagColor'] = 'primary';
                     $input_data['range_code']    = '#FFC107';
                 }
-                if ($input_data['spo2'] < 85) {
-                    $input_data['spo2Flag']      = 'Severely Low (Severe Hypoxemia)  ';
-                    $input_data['spo2FlagColor'] = 'danger';
-                    $input_data['range_code']    = '#ff0000';
-                }
-            }
-
-         // 0 - 12 Months
-         if ($years == 0 && $months > 0) {
-            if (($months >= 1) && ($months < 12)) {
-
-                if ($input_data['spo2'] < 88) {
-                    $input_data['spo2Flag']      = 'Low (Hypoxemia)  ';
-                    $input_data['spo2FlagColor'] = 'danger';
-                    $input_data['range_code']    = '#0000ff';
-                }
-                if (($input_data['spo2'] >= 90) && ($input_data['spo2'] <= 100)) {
-                    $input_data['spo2Flag']      = 'Normal  ';
-                    $input_data['spo2FlagColor'] = 'success';
-                    $input_data['range_code']    = '#008000';
-                }
-                if (($input_data['spo2'] >= 89) && ($input_data['spo2'] <= 85)) {
-                    $input_data['spo2Flag']      = 'Slightly Decreased(Mild Hypoxemia)  ';
-                    $input_data['spo2FlagColor'] = 'warning';
-                    $input_data['range_code']    = '#fff707';
-                }
-                if (($input_data['spo2'] >= 84) && ($input_data['spo2'] <= 80)) {
-                    $input_data['spo2Flag']      = 'Moderately Decreased (Moderate Hypoxemia)  ';
-                    $input_data['spo2FlagColor'] = 'primary';
-                    $input_data['range_code']    = '#FFC107';
-                }
                 if ($input_data['spo2'] < 80) {
                     $input_data['spo2Flag']      = 'Severely Low (Severe Hypoxemia)  ';
                     $input_data['spo2FlagColor'] = 'danger';
                     $input_data['range_code']    = '#ff0000';
                 }
-                
             }
-        }
 
-            // if ($input_data['spo2'] < 75) {
-            //     $input_data['spo2Flag']      = 'Severe Hypoxemia';
-            //     $input_data['spo2FlagColor'] = 'danger';
-            //     $input_data['range_code']    = '#ff0000';
-            // }
+     
 
-            // if (($input_data['spo2'] >= 75) && ($input_data['spo2'] <= 89)) {
-            //     $input_data['spo2Flag']      = 'Moderate Hypoxemia';
-            //     $input_data['spo2FlagColor'] = 'warning';
-            //     $input_data['range_code']    = '#ffc107';
-            // }
-
-            // if (($input_data['spo2'] >= 90) && ($input_data['spo2'] <= 94)) {
-            //     $input_data['spo2Flag']      = 'Mild Hypoxemia';
-            //     $input_data['spo2FlagColor'] = 'primary';
-            //     $input_data['range_code']    = '#0000ff';
-            // }
-
-            // if ($input_data['spo2'] >= 95) {
-            //     $input_data['spo2Flag']      = 'Normal';
-            //     $input_data['spo2FlagColor'] = 'success';
-            //     $input_data['range_code']    = '#008000';
-            // }
+   
         }
 
         return $input_data;
@@ -1480,6 +1701,202 @@ class Vital extends BaseModel
 
                 if ($input_data['respiration'] > 20) {
                     $input_data['respirationFlag']      = 'High';
+                    $input_data['respirationFlagColor'] = 'danger';
+                    $input_data['range_code']    = '#ff0000';
+                }
+            }
+        }
+
+        // 
+        if (!empty($input_data['respiration'])) {
+
+            if($years <= 0 && $years >= 1){
+                if ($input_data['respiration'] < 30) {
+                    $input_data['respirationFlag']      = 'Low (Bradypnea)';
+                    $input_data['respirationFlagColor'] = 'primary';
+                    $input_data['range_code']    = '#0000ff';
+                }
+
+                if (($input_data['respiration'] >= 30) && ($input_data['respiration'] <= 60)) {
+                    $input_data['respirationFlag']      = 'Normal (Eupnea)';
+                    $input_data['respirationFlagColor'] = 'success';
+                    $input_data['range_code']    = '#008000';
+                }
+
+                if (($input_data['respiration'] >= 61) && ($input_data['respiration'] <= 70)) {
+                    $input_data['respirationFlag']      = 'Slightly Increased (Mild Tachypnea)';
+                    $input_data['respirationFlagColor'] = 'success';
+                    $input_data['range_code']    = '#fff707';
+                }
+
+                if (($input_data['respiration'] >= 71) && ($input_data['respiration'] <= 80)) {
+                    $input_data['respirationFlag']      = 'Moderately Increased (Moderate Tachypnea)';
+                    $input_data['respirationFlagColor'] = 'success';
+                    $input_data['range_code']    = '#FFC107';
+                }
+
+                if ($input_data['respiration'] > 40) {
+                    $input_data['respirationFlag']      = 'Severely High (Severe Tachypnea)';
+                    $input_data['respirationFlagColor'] = 'danger';
+                    $input_data['range_code']    = '#ff0000';
+                }
+            }
+
+            if($years >= 1 && $years <= 3){
+                if ($input_data['respiration'] < 24) {
+                    $input_data['respirationFlag']      = 'Low (Bradypnea)';
+                    $input_data['respirationFlagColor'] = 'primary';
+                    $input_data['range_code']    = '#0000ff';
+                }
+
+                if (($input_data['respiration'] >= 24) && ($input_data['respiration'] <= 40)) {
+                    $input_data['respirationFlag']      = 'Normal (Eupnea)';
+                    $input_data['respirationFlagColor'] = 'success';
+                    $input_data['range_code']    = '#008000';
+                }
+
+                if (($input_data['respiration'] >= 41) && ($input_data['respiration'] <= 50)) {
+                    $input_data['respirationFlag']      = 'Slightly Increased (Mild Tachypnea)';
+                    $input_data['respirationFlagColor'] = 'success';
+                    $input_data['range_code']    = '#fff707';
+                }
+
+                if (($input_data['respiration'] >= 51) && ($input_data['respiration'] <= 60)) {
+                    $input_data['respirationFlag']      = 'Moderately Increased (Moderate Tachypnea)';
+                    $input_data['respirationFlagColor'] = 'success';
+                    $input_data['range_code']    = '#FFC107';
+                }
+
+                if ($input_data['respiration'] > 60) {
+                    $input_data['respirationFlag']      = 'Severely High (Severe Tachypnea)';
+                    $input_data['respirationFlagColor'] = 'danger';
+                    $input_data['range_code']    = '#ff0000';
+                }
+            }
+
+            if($years >= 4 && $years <= 5){
+                if ($input_data['respiration'] < 20) {
+                    $input_data['respirationFlag']      = 'Low (Bradypnea)';
+                    $input_data['respirationFlagColor'] = 'primary';
+                    $input_data['range_code']    = '#0000ff';
+                }
+
+                if (($input_data['respiration'] >= 20) && ($input_data['respiration'] <= 30)) {
+                    $input_data['respirationFlag']      = 'Normal (Eupnea)';
+                    $input_data['respirationFlagColor'] = 'success';
+                    $input_data['range_code']    = '#008000';
+                }
+
+                if (($input_data['respiration'] >= 31) && ($input_data['respiration'] <= 40)) {
+                    $input_data['respirationFlag']      = 'Slightly Increased (Mild Tachypnea)';
+                    $input_data['respirationFlagColor'] = 'success';
+                    $input_data['range_code']    = '#fff707';
+                }
+
+                if (($input_data['respiration'] >= 41) && ($input_data['respiration'] <= 50)) {
+                    $input_data['respirationFlag']      = 'Moderately Increased (Moderate Tachypnea)';
+                    $input_data['respirationFlagColor'] = 'success';
+                    $input_data['range_code']    = '#FFC107';
+                }
+
+                if ($input_data['respiration'] > 50) {
+                    $input_data['respirationFlag']      = 'Severely High (Severe Tachypnea)';
+                    $input_data['respirationFlagColor'] = 'danger';
+                    $input_data['range_code']    = '#ff0000';
+                }
+            }
+
+            if($years >= 6 && $years <= 12){
+                if ($input_data['respiration'] < 18) {
+                    $input_data['respirationFlag']      = 'Low (Bradypnea)';
+                    $input_data['respirationFlagColor'] = 'primary';
+                    $input_data['range_code']    = '#0000ff';
+                }
+
+                if (($input_data['respiration'] >= 18) && ($input_data['respiration'] <= 30)) {
+                    $input_data['respirationFlag']      = 'Normal (Eupnea)';
+                    $input_data['respirationFlagColor'] = 'success';
+                    $input_data['range_code']    = '#008000';
+                }
+
+                if (($input_data['respiration'] >= 31) && ($input_data['respiration'] <= 40)) {
+                    $input_data['respirationFlag']      = 'Slightly Increased (Mild Tachypnea)';
+                    $input_data['respirationFlagColor'] = 'success';
+                    $input_data['range_code']    = '#fff707';
+                }
+
+                if (($input_data['respiration'] >= 41) && ($input_data['respiration'] <= 50)) {
+                    $input_data['respirationFlag']      = 'Moderately Increased (Moderate Tachypnea)';
+                    $input_data['respirationFlagColor'] = 'success';
+                    $input_data['range_code']    = '#FFC107';
+                }
+
+                if ($input_data['respiration'] > 50) {
+                    $input_data['respirationFlag']      = 'Severely High (Severe Tachypnea)';
+                    $input_data['respirationFlagColor'] = 'danger';
+                    $input_data['range_code']    = '#ff0000';
+                }
+            }
+
+            if($years >= 13 && $years <= 65){
+                if ($input_data['respiration'] < 12) {
+                    $input_data['respirationFlag']      = 'Low (Bradypnea)';
+                    $input_data['respirationFlagColor'] = 'primary';
+                    $input_data['range_code']    = '#0000ff';
+                }
+
+                if (($input_data['respiration'] >= 12) && ($input_data['respiration'] <= 20)) {
+                    $input_data['respirationFlag']      = 'Normal (Eupnea)';
+                    $input_data['respirationFlagColor'] = 'success';
+                    $input_data['range_code']    = '#008000';
+                }
+
+                if (($input_data['respiration'] >= 21) && ($input_data['respiration'] <= 25)) {
+                    $input_data['respirationFlag']      = 'Slightly Increased (Mild Tachypnea)';
+                    $input_data['respirationFlagColor'] = 'success';
+                    $input_data['range_code']    = '#fff707';
+                }
+
+                if (($input_data['respiration'] >= 26) && ($input_data['respiration'] <= 30)) {
+                    $input_data['respirationFlag']      = 'Moderately Increased (Moderate Tachypnea)';
+                    $input_data['respirationFlagColor'] = 'success';
+                    $input_data['range_code']    = '#FFC107';
+                }
+
+                if ($input_data['respiration'] > 30) {
+                    $input_data['respirationFlag']      = 'Severely High (Severe Tachypnea)';
+                    $input_data['respirationFlagColor'] = 'danger';
+                    $input_data['range_code']    = '#ff0000';
+                }
+            }
+            
+            if($years >= 65){
+                if ($input_data['respiration'] < 12) {
+                    $input_data['respirationFlag']      = 'Low (Bradypnea)';
+                    $input_data['respirationFlagColor'] = 'primary';
+                    $input_data['range_code']    = '#0000ff';
+                }
+
+                if (($input_data['respiration'] >= 12) && ($input_data['respiration'] <= 22)) {
+                    $input_data['respirationFlag']      = 'Normal (Eupnea)';
+                    $input_data['respirationFlagColor'] = 'success';
+                    $input_data['range_code']    = '#008000';
+                }
+
+                if (($input_data['respiration'] >= 23) && ($input_data['respiration'] <= 26)) {
+                    $input_data['respirationFlag']      = 'Slightly Increased (Mild Tachypnea)';
+                    $input_data['respirationFlagColor'] = 'success';
+                    $input_data['range_code']    = '#fff707';
+                }
+
+                if (($input_data['respiration'] >= 27) && ($input_data['respiration'] <= 30)) {
+                    $input_data['respirationFlag']      = 'Moderately Increased (Moderate Tachypnea)';
+                    $input_data['respirationFlagColor'] = 'success';
+                    $input_data['range_code']    = '#FFC107';
+                }
+
+                if ($input_data['respiration'] > 30) {
+                    $input_data['respirationFlag']      = 'Severely High (Severe Tachypnea)';
                     $input_data['respirationFlagColor'] = 'danger';
                     $input_data['range_code']    = '#ff0000';
                 }
@@ -1700,6 +2117,88 @@ class Vital extends BaseModel
         if (!empty($input_data['systolic']) && !empty($input_data['diastolic']))
          {
             if ($years <= 60) {
+
+                  // 1 - 12 Months
+
+            if (($years >= 0) && ($years <= 1)) {
+                if (($input_data['systolic'] <= 69) || ($input_data['diastolic'] <= 39)) {
+                    $input_data['bpFlag']      = 'Low BP (Hypotension)';
+                    $input_data['bpFlagColor'] = 'warning';
+                    $input_data['range_code']  = '#0000ff';
+                }
+
+                if ((($input_data['systolic'] >= 70) && ($input_data['systolic'] <= 100)) && (($input_data['diastolic'] >= 40) && ($input_data['diastolic'] <= 60))) {
+                    $input_data['bpFlag']      = 'Normal BP';
+                    $input_data['bpFlagColor'] = 'success';
+                    $input_data['range_code']  = '#008000';
+                }
+                if ((($input_data['systolic'] >= 101) && ($input_data['systolic'] <= 110)) && (($input_data['diastolic'] >= 61) && ($input_data['diastolic'] <= 70))) {
+                    $input_data['bpFlag']      = 'Elevated BP (Pre Hypertension )';
+                    $input_data['bpFlagColor'] = 'warning';
+                    $input_data['range_code']  = '#fff707';
+                }
+                if ((($input_data['systolic'] >= 111) && ($input_data['systolic'] <= 120)) && (($input_data['diastolic'] >= 71) && ($input_data['diastolic'] <= 80))) {
+                    $input_data['bpFlag']      = 'Hypertension Stage 1';
+                    $input_data['bpFlagColor'] = 'Pre Hypertension ';
+                    $input_data['range_code']  = '#fff707';
+                }
+                if ((($input_data['systolic'] >= 121) && ($input_data['systolic'] <= 129)) && (($input_data['diastolic'] >= 81) && ($input_data['diastolic'] <= 90))) {
+                    $input_data['bpFlag']      = 'Hypertension Stage 2';
+                    $input_data['bpFlagColor'] = 'Pre Hypertension ';
+                    $input_data['range_code']  = '#fff707';
+                }
+                if ((($input_data['systolic'] >= 130) && ($input_data['systolic'] <= 179)) && (($input_data['diastolic'] >= 91) && ($input_data['diastolic'] <= 119))) {
+                    $input_data['bpFlag']      = 'Severely High BP';
+                    $input_data['bpFlagColor'] = 'Pre Hypertension ';
+                    $input_data['range_code']  = '#fff707';
+                }
+                if (($input_data['systolic'] >= 180) || ($input_data['diastolic'] >= 120)) {
+                    $input_data['bpFlag']      = 'Hypertensive Crisis';
+                    $input_data['bpFlagColor'] = 'danger';
+                    $input_data['range_code']  = '#ff0000';
+                }
+            }
+    
+   
+        // 0 - 29 Days
+            if ($days >= 0 && $days <= 29) {
+                if (($input_data['systolic'] <= 59) || ($input_data['diastolic'] <= 29)) {
+                    $input_data['bpFlag']      = 'Low BP (Hypotension)';
+                    $input_data['bpFlagColor'] = 'warning';
+                    $input_data['range_code']  = '#0000ff';
+                }
+
+                if ((($input_data['systolic'] >= 60) && ($input_data['systolic'] <= 90)) && (($input_data['diastolic'] >= 30) && ($input_data['diastolic'] <= 60))) {
+                    $input_data['bpFlag']      = 'Normal BP';
+                    $input_data['bpFlagColor'] = 'success';
+                    $input_data['range_code']  = '#008000';
+                }
+                if ((($input_data['systolic'] >= 91) && ($input_data['systolic'] <= 100)) && (($input_data['diastolic'] >= 61) && ($input_data['diastolic'] <= 65))) {
+                    $input_data['bpFlag']      = 'Elevated BP (Pre Hypertension )';
+                    $input_data['bpFlagColor'] = 'warning';
+                    $input_data['range_code']  = '#fff707';
+                }
+                if ((($input_data['systolic'] >= 101) && ($input_data['systolic'] <= 110)) && (($input_data['diastolic'] >= 66) && ($input_data['diastolic'] <= 75))) {
+                    $input_data['bpFlag']      = 'Hypertension Stage 1';
+                    $input_data['bpFlagColor'] = 'warning';
+                    $input_data['range_code']  = '#fff707';
+                }
+                if ((($input_data['systolic'] >= 111) && ($input_data['systolic'] <= 119)) && (($input_data['diastolic'] >= 76) && ($input_data['diastolic'] <= 84))) {
+                    $input_data['bpFlag']      = 'Hypertension Stage 2';
+                    $input_data['bpFlagColor'] = 'warning';
+                    $input_data['range_code']  = '#fff707';
+                }
+                if ((($input_data['systolic'] >= 120) && ($input_data['systolic'] <= 179)) && (($input_data['diastolic'] >= 85) && ($input_data['diastolic'] <= 119))) {
+                    $input_data['bpFlag']      = 'Severely High BP';
+                    $input_data['bpFlagColor'] = 'warning';
+                    $input_data['range_code']  = '#fff707';
+                }
+                if (($input_data['systolic'] >= 180) || ($input_data['diastolic'] >= 120)) {
+                    $input_data['bpFlag']      = 'Hypertensive Crisis';
+                    $input_data['bpFlagColor'] = 'danger';
+                    $input_data['range_code']  = '#ff0000';
+                }
+            }
                      // 1 - 5 Years
                      if (($years >= 1) && ($years <= 5)) {
                 if (($input_data['systolic'] <= 79) || ($input_data['diastolic'] <= 49)) {
@@ -1865,7 +2364,7 @@ class Vital extends BaseModel
                             }
             
                             if ((($input_data['systolic'] >= 90) && ($input_data['systolic'] <= 125)) && (($input_data['diastolic'] >= 60) && ($input_data['diastolic'] <= 85))) {
-                                $input_data['bpFlag']      = 'Normal BP ';
+                                $input_data['bpFlag']      = 'Normal BP';
                                 $input_data['bpFlagColor'] = 'success';
                                 $input_data['range_code']  = '#008000';
                             }
@@ -1904,7 +2403,7 @@ class Vital extends BaseModel
                                 }
                 
                                 if ((($input_data['systolic'] >= 90) && ($input_data['systolic'] <= 130)) && (($input_data['diastolic'] >= 60) && ($input_data['diastolic'] <= 80))) {
-                                    $input_data['bpFlag']      = 'Normal BP ';
+                                    $input_data['bpFlag']      = 'Normal BP';
                                     $input_data['bpFlagColor'] = 'success';
                                     $input_data['range_code']  = '#008000';
                                 }
@@ -1943,7 +2442,7 @@ class Vital extends BaseModel
                             }
             
                             if ((($input_data['systolic'] >= 90) && ($input_data['systolic'] <= 135)) && (($input_data['diastolic'] >= 60) && ($input_data['diastolic'] <= 90))) {
-                                $input_data['bpFlag']      = 'Normal BP ';
+                                $input_data['bpFlag']      = 'Normal BP';
                                 $input_data['bpFlagColor'] = 'success';
                                 $input_data['range_code']  = '#008000';
                             }
@@ -1984,7 +2483,7 @@ class Vital extends BaseModel
         }
 
         if ((($input_data['systolic'] >= 90) && ($input_data['systolic'] <= 140)) && (($input_data['diastolic'] >= 60) && ($input_data['diastolic'] <= 90))) {
-            $input_data['bpFlag']      = 'Normal BP ';
+            $input_data['bpFlag']      = 'Normal BP';
             $input_data['bpFlagColor'] = 'success';
             $input_data['range_code']  = '#008000';
         }
@@ -2015,133 +2514,229 @@ class Vital extends BaseModel
         }
     }
 
-        // 1 - 12 Months
-        if ($years == 0 && $months > 0) {
-            if (($months >= 1) && ($months < 12)) {
-                if (($input_data['systolic'] <= 69) || ($input_data['diastolic'] <= 39)) {
-                    $input_data['bpFlag']      = 'Low BP (Hypotension)';
-                    $input_data['bpFlagColor'] = 'warning';
-                    $input_data['range_code']  = '#0000ff';
-                }
-
-                if ((($input_data['systolic'] >= 70) && ($input_data['systolic'] <= 100)) && (($input_data['diastolic'] >= 40) && ($input_data['diastolic'] <= 60))) {
-                    $input_data['bpFlag']      = 'Normal BP ';
-                    $input_data['bpFlagColor'] = 'success';
-                    $input_data['range_code']  = '#008000';
-                }
-                if ((($input_data['systolic'] >= 101) && ($input_data['systolic'] <= 110)) && (($input_data['diastolic'] >= 61) && ($input_data['diastolic'] <= 70))) {
-                    $input_data['bpFlag']      = 'Elevated BP (Pre Hypertension )';
-                    $input_data['bpFlagColor'] = 'warning';
-                    $input_data['range_code']  = '#fff707';
-                }
-                if ((($input_data['systolic'] >= 111) && ($input_data['systolic'] <= 120)) && (($input_data['diastolic'] >= 71) && ($input_data['diastolic'] <= 80))) {
-                    $input_data['bpFlag']      = 'Hypertension Stage 1';
-                    $input_data['bpFlagColor'] = 'Pre Hypertension ';
-                    $input_data['range_code']  = '#fff707';
-                }
-                if ((($input_data['systolic'] >= 121) && ($input_data['systolic'] <= 129)) && (($input_data['diastolic'] >= 81) && ($input_data['diastolic'] <= 90))) {
-                    $input_data['bpFlag']      = 'Hypertension Stage 2';
-                    $input_data['bpFlagColor'] = 'Pre Hypertension ';
-                    $input_data['range_code']  = '#fff707';
-                }
-                if ((($input_data['systolic'] >= 130) && ($input_data['systolic'] <= 179)) && (($input_data['diastolic'] >= 91) && ($input_data['diastolic'] <= 119))) {
-                    $input_data['bpFlag']      = 'Severely High BP';
-                    $input_data['bpFlagColor'] = 'Pre Hypertension ';
-                    $input_data['range_code']  = '#fff707';
-                }
-                if (($input_data['systolic'] >= 180) || ($input_data['diastolic'] >= 120)) {
-                    $input_data['bpFlag']      = 'Hypertensive Crisis';
-                    $input_data['bpFlagColor'] = 'danger';
-                    $input_data['range_code']  = '#ff0000';
-                }
-            }
-        }
-   
-        // 0 - 29 Days
-            if ($days >= 0 && $days <= 29) {
-                if (($input_data['systolic'] <= 59) || ($input_data['diastolic'] <= 29)) {
-                    $input_data['bpFlag']      = 'Low BP (Hypotension)';
-                    $input_data['bpFlagColor'] = 'warning';
-                    $input_data['range_code']  = '#0000ff';
-                }
-
-                if ((($input_data['systolic'] >= 60) && ($input_data['systolic'] <= 90)) && (($input_data['diastolic'] >= 30) && ($input_data['diastolic'] <= 60))) {
-                    $input_data['bpFlag']      = 'Normal BP ';
-                    $input_data['bpFlagColor'] = 'success';
-                    $input_data['range_code']  = '#008000';
-                }
-                if ((($input_data['systolic'] >= 91) && ($input_data['systolic'] <= 100)) && (($input_data['diastolic'] >= 61) && ($input_data['diastolic'] <= 65))) {
-                    $input_data['bpFlag']      = 'Elevated BP (Pre Hypertension )';
-                    $input_data['bpFlagColor'] = 'warning';
-                    $input_data['range_code']  = '#fff707';
-                }
-                if ((($input_data['systolic'] >= 101) && ($input_data['systolic'] <= 110)) && (($input_data['diastolic'] >= 66) && ($input_data['diastolic'] <= 75))) {
-                    $input_data['bpFlag']      = 'Hypertension Stage 1';
-                    $input_data['bpFlagColor'] = 'warning';
-                    $input_data['range_code']  = '#fff707';
-                }
-                if ((($input_data['systolic'] >= 111) && ($input_data['systolic'] <= 119)) && (($input_data['diastolic'] >= 76) && ($input_data['diastolic'] <= 84))) {
-                    $input_data['bpFlag']      = 'Hypertension Stage 2';
-                    $input_data['bpFlagColor'] = 'warning';
-                    $input_data['range_code']  = '#fff707';
-                }
-                if ((($input_data['systolic'] >= 120) && ($input_data['systolic'] <= 179)) && (($input_data['diastolic'] >= 85) && ($input_data['diastolic'] <= 119))) {
-                    $input_data['bpFlag']      = 'Severely High BP';
-                    $input_data['bpFlagColor'] = 'warning';
-                    $input_data['range_code']  = '#fff707';
-                }
-                if (($input_data['systolic'] >= 180) || ($input_data['diastolic'] >= 120)) {
-                    $input_data['bpFlag']      = 'Hypertensive Crisis';
-                    $input_data['bpFlagColor'] = 'danger';
-                    $input_data['range_code']  = '#ff0000';
-                }
-            }
+      
          }
 
-        // if (!empty($input_data['systolic']) && !empty($input_data['diastolic'])) {
-        //     if ((($input_data['systolic'] >= 90) && ($input_data['systolic'] <= 120)) && (($input_data['diastolic'] >= 60) && ($input_data['diastolic'] <= 80))) {
-        //         $input_data['bpFlag']      = 'NORMAL';
-        //         $input_data['bpFlagColor'] = 'success';
-        //         $input_data['range_code']  = '#008000';
-        //     }
+        if (!empty($input_data['systolic']) && !empty($input_data['diastolic'])) {
+            if ((($input_data['systolic'] >= 90) && ($input_data['systolic'] <= 120)) && (($input_data['diastolic'] >= 60) && ($input_data['diastolic'] <= 80))) {
+                $input_data['bpFlag']      = 'NORMAL';
+                $input_data['bpFlagColor'] = 'success';
+                $input_data['range_code']  = '#008000';
+            }
             
-        //     if ((($input_data['systolic'] > 120) && ($input_data['systolic'] <= 129)) && ($input_data['diastolic'] < 80)) {
-        //         $input_data['bpFlag']      = 'Elevated';
-        //         $input_data['bpFlagColor'] = 'success';
-        //         $input_data['range_code']  = '#008000';
-        //     }
+            if ((($input_data['systolic'] > 120) && ($input_data['systolic'] <= 129)) && ($input_data['diastolic'] < 80)) {
+                $input_data['bpFlag']      = 'Elevated';
+                $input_data['bpFlagColor'] = 'success';
+                $input_data['range_code']  = '#008000';
+            }
             
-        //     if ((($input_data['systolic'] >= 130) && ($input_data['systolic'] <= 139)) || (($input_data['diastolic'] >= 80) && ($input_data['diastolic'] <= 89))) {
-        //         $input_data['bpFlag']      = 'HIGH BLOOD PRESSURE(HYPERTENSION) STAGE 1';
-        //         $input_data['bpFlagColor'] = 'danger';
-        //         $input_data['range_code']  = '#ff0000';
-        //     }
+            if ((($input_data['systolic'] >= 130) && ($input_data['systolic'] <= 139)) || (($input_data['diastolic'] >= 80) && ($input_data['diastolic'] <= 89))) {
+                $input_data['bpFlag']      = 'HIGH BLOOD PRESSURE(HYPERTENSION) STAGE 1';
+                $input_data['bpFlagColor'] = 'danger';
+                $input_data['range_code']  = '#ff0000';
+            }
             
-        //     if (($input_data['systolic'] >= 140) || ($input_data['diastolic'] >= 90)) {
-        //         $input_data['bpFlag']      = 'HIGH BLOOD PRESSURE(HYPERTENSION) STAGE 2';
-        //         $input_data['bpFlagColor'] = 'danger';
-        //         $input_data['range_code']  = '#ff0000';
-        //     }
+            if (($input_data['systolic'] >= 140) || ($input_data['diastolic'] >= 90)) {
+                $input_data['bpFlag']      = 'HIGH BLOOD PRESSURE(HYPERTENSION) STAGE 2';
+                $input_data['bpFlagColor'] = 'danger';
+                $input_data['range_code']  = '#ff0000';
+            }
             
-        //     if (($input_data['systolic'] >= 180) || ($input_data['diastolic'] >= 120)) {
-        //         $input_data['bpFlag']      = 'HYPERTENSIVE CRISIS(consult your doctor immediately)';
-        //         $input_data['bpFlagColor'] = 'danger';
-        //         $input_data['range_code']  = '#ff0000';
-        //     }
+            if (($input_data['systolic'] >= 180) || ($input_data['diastolic'] >= 120)) {
+                $input_data['bpFlag']      = 'HYPERTENSIVE CRISIS(consult your doctor immediately)';
+                $input_data['bpFlagColor'] = 'danger';
+                $input_data['range_code']  = '#ff0000';
+            }
 
            
-        // }
+        }
 
         return $input_data;
     }
-
-
 
     public static function heart_rate_flag($input_data, $years, $months, $days)
     {
         $input_data['heartRateFlag']      = '';
         $input_data['heartRateFlagColor'] = '';
         $input_data['range_code'] = '';
+
+        if (!empty($input_data['heart'])) {
+            
+            if ($years <= 12) {
+                
+                if (($years >= 1) && ($years <= 2)) {
+                    
+                    if (($input_data['heart'] < 98)) {
+                        $input_data['heartRateFlag']      = 'Low';
+                        $input_data['heartRateFlagColor'] = 'primary';
+                        $input_data['range_code']         = '#0000ff';
+                    }
+                    
+                    if (($input_data['heart'] >= 98) && ($input_data['heart'] <= 140)) {
+                        $input_data['heartRateFlag']      = 'Toddler';
+                        $input_data['heartRateFlagColor'] = 'success';
+                        $input_data['range_code']         = '#008000';
+                    }
+                    
+                    if (($input_data['heart'] > 140)) {
+                        $input_data['heartRateFlag']      = 'High';
+                        $input_data['heartRateFlagColor'] = 'danger';
+                        $input_data['range_code']         = '#ff0000';
+                    }
+                }
+                
+                if (($years >= 3) && ($years <= 5)) {
+                    if (($input_data['heart'] < 80)) {
+                        $input_data['heartRateFlag']      = 'Low';
+                        $input_data['heartRateFlagColor'] = 'primary';
+                        $input_data['range_code']         = '#0000ff';
+                    }
+                    
+                    if (($input_data['heart'] >= 80) && ($input_data['heart'] <= 120)) {
+                        $input_data['heartRateFlag']      = 'Pre-School';
+                        $input_data['heartRateFlagColor'] = 'success';
+                        $input_data['range_code']         = '#008000';
+                        // return "Pre-School"; // green 90 - 140
+                    }
+                    
+                    if (($input_data['heart'] > 120)) {
+                        $input_data['heartRateFlag']      = 'High';
+                        $input_data['heartRateFlagColor'] = 'danger';
+                        $input_data['range_code']         = '#ff0000';
+                    }
+                }
+                
+                if (($years >= 6) && ($years <= 11)) {
+                    if (($input_data['heart'] < 75)) {
+                        $input_data['heartRateFlag']      = 'Low';
+                        $input_data['heartRateFlagColor'] = 'primary';
+                        $input_data['range_code']         = '#0000ff';
+                    }
+                    
+                    if (($input_data['heart'] >= 75) && ($input_data['heart'] <= 118)) {
+                        $input_data['heartRateFlag']      = 'Normal';
+                        $input_data['heartRateFlagColor'] = 'success';
+                        $input_data['range_code']         = '#008000';
+                        // return "Normal"; // green
+                    }
+                    
+                    if (($input_data['heart'] > 118)) {
+                        $input_data['heartRateFlag']      = 'High';
+                        $input_data['heartRateFlagColor'] = 'danger';
+                        $input_data['range_code']         = '#ff0000';
+                    }
+                }
+                
+                if (($years == 12)) {
+                    if (($input_data['heart'] < 60)) {
+                        $input_data['heartRateFlag']      = 'Low';
+                        $input_data['heartRateFlagColor'] = 'primary';
+                        $input_data['range_code']         = '#0000ff';
+                    }
+                    
+                    if (($input_data['heart'] >= 60) && ($input_data['heart'] <= 100)) {
+                        $input_data['heartRateFlag']      = 'Normal';
+                        $input_data['heartRateFlagColor'] = 'success';
+                        $input_data['range_code']         = '#008000';
+                    }
+                    
+                    if (($input_data['heart'] > 100)) {
+                        $input_data['heartRateFlag']      = 'High';
+                        $input_data['heartRateFlagColor'] = 'danger';
+                        $input_data['range_code']         = '#ff0000';
+                    }
+                }
+            }
+
+            if ($years > 12) {
+
+                    if (($input_data['heart'] < 60)) {
+                        $input_data['heartRateFlag']      = 'Low';
+                        $input_data['heartRateFlagColor'] = 'primary';
+                        $input_data['range_code']         = '#0000ff';
+                    }
+                    
+                    if (($input_data['heart'] >= 60) && ($input_data['heart'] <= 100)) {
+                        $input_data['heartRateFlag']      = 'Normal';
+                        $input_data['heartRateFlagColor'] = 'success';
+                        $input_data['range_code']         = '#008000';
+                    }
+                    
+                    if (($input_data['heart'] > 100)) {
+                        $input_data['heartRateFlag']      = 'High';
+                        $input_data['heartRateFlagColor'] = 'danger';
+                        $input_data['range_code']         = '#ff0000';
+                    }
+
+                    // if (($input_data['heart'] < 40)) {
+                    //     $input_data['heartRateFlag']      = 'Low';
+                    //     $input_data['heartRateFlagColor'] = 'primary';
+                    //     $input_data['range_code']         = '#0000ff';
+                    // }
+                    
+                    // if (($input_data['heart'] >= 40) && ($input_data['heart'] <= 60)) {
+                    //     $input_data['heartRateFlag']      = 'Athlete';
+                    //     $input_data['heartRateFlagColor'] = 'success';
+                    //     $input_data['range_code']         = '#008000';
+                    // }
+                    
+                    // if (($input_data['heart'] > 60)) {
+                    //     $input_data['heartRateFlag']      = 'High';
+                    //     $input_data['heartRateFlagColor'] = 'danger';
+                    //     $input_data['range_code']         = '#ff0000';
+                    // }
+                    
+                    // if (($input_data['heart'] >= 40)) {
+                    //     $input_data['heartRateFlag']      = 'High';
+                    //     $input_data['heartRateFlagColor'] = 'danger';
+                    //     $input_data['range_code']         = '#ff0000';
+                    // }
+            }
+             
+            if ($years == 0 && $months > 0) {
+                if (($months >= 1) && ($months < 12)) {
+                    if (($input_data['heart'] < 100)) {
+                        $input_data['heartRateFlag']      = 'Low';
+                        $input_data['heartRateFlagColor'] = 'primary';
+                        $input_data['range_code']         = '#0000ff';
+                    }
+                    
+                    if (($input_data['heart'] >= 100) && ($input_data['heart'] <= 190)) {
+                        $input_data['heartRateFlag']      = 'Low';
+                        $input_data['heartRateFlagColor'] = 'primary';
+                        $input_data['range_code']         = '#0000ff';
+                    }
+                    
+                    if (($input_data['heart'] > 190)) {
+                        $input_data['heartRateFlag']      = 'High';
+                        $input_data['heartRateFlagColor'] = 'danger';
+                        $input_data['range_code']         = '#ff0000';
+                    }
+                }
+            }
+            
+            if ($years == 0 && $months == 0) {
+                if ($days <= 28) {
+                    if (($input_data['heart'] < 100)) {
+                        $input_data['heartRateFlag']      = 'Low';
+                        $input_data['heartRateFlagColor'] = 'primary';
+                        $input_data['range_code']         = '#0000ff';
+                    }
+                    
+                    if (($input_data['heart'] >= 100) && ($input_data['heart'] <= 205)) {
+                        $input_data['heartRateFlag']      = 'Neonate';
+                        $input_data['heartRateFlagColor'] = 'success';
+                        $input_data['range_code']         = '#008000';
+                    }
+                    
+                    if (($input_data['heart'] > 205)) {
+                        $input_data['heartRateFlag']      = 'High';
+                        $input_data['heartRateFlagColor'] = 'danger';
+                        $input_data['range_code']         = '#ff0000';
+                    }
+                }
+            }
+        }
 
         if (!empty($input_data['heart'])) {
 
@@ -2156,23 +2751,23 @@ class Vital extends BaseModel
                         $input_data['range_code']         = '#0000ff';
                     }
 
-                    if (($input_data['heart'] >= 100) && ($input_data['heart'] <= 160)) {
+                    if (($input_data['heart'] >= 80) && ($input_data['heart'] <= 130)) {
                         $input_data['heartRateFlag']      = 'Normal Heart Rate(Normal Sinus Rhythm)';
                         $input_data['heartRateFlagColor'] = 'success';
                         $input_data['range_code']         = '#008000';
                     }
-                    if (($input_data['heart'] >= 161) && ($input_data['heart'] <= 180)) {
+                    if (($input_data['heart'] >= 131) && ($input_data['heart'] <= 150)) {
                         $input_data['heartRateFlag']      = 'Elevated Heart Rate';
                         $input_data['heartRateFlagColor'] = 'success';
                         $input_data['range_code']         = '#fff707';
                     }
-                    if (($input_data['heart'] >= 181) && ($input_data['heart'] <= 200)) {
+                    if (($input_data['heart'] >= 151) && ($input_data['heart'] <= 170)) {
                         $input_data['heartRateFlag']      = 'Mild Tachycardia';
                         $input_data['heartRateFlagColor'] = 'success';
                         $input_data['range_code']         = '#FFC107';
                     }
 
-                    if (($input_data['heart'] > 200)) {
+                    if (($input_data['heart'] > 170)) {
                         $input_data['heartRateFlag']      = 'Severe Tachycardia';
                         $input_data['heartRateFlagColor'] = 'danger';
                         $input_data['range_code']         = '#FF0000';
@@ -2246,72 +2841,7 @@ class Vital extends BaseModel
                     }
                 }
 
-                     // 13-19years
-                     if (($years >= 13) && ($years <= 19)) {
-                        if (($input_data['heart'] < 59)) {
-                            $input_data['heartRateFlag']      = 'Low Heart Rate (Bradycardia) ';
-                            $input_data['heartRateFlagColor'] = 'primary';
-                            $input_data['range_code']         = '#0000ff';
-                        }
-    
-                        if (($input_data['heart'] >= 60) && ($input_data['heart'] <= 100)) {
-                            $input_data['heartRateFlag']      = 'Normal Heart Rate(Normal Sinus Rhythm)';
-                            $input_data['heartRateFlagColor'] = 'success';
-                            $input_data['range_code']         = '#008000';
-                            // return "Normal"; // green
-                        }
-                        if (($input_data['heart'] >= 101) && ($input_data['heart'] <= 120)) {
-                            $input_data['heartRateFlag']      = 'Elevated Heart Rate';
-                            $input_data['heartRateFlagColor'] = 'success';
-                            $input_data['range_code']         = '#fff707';
-                            // return "Normal"; // green
-                        }
-                        if (($input_data['heart'] >= 121) && ($input_data['heart'] <= 140)) {
-                            $input_data['heartRateFlag']      = 'Mild Tachycardia';
-                            $input_data['heartRateFlagColor'] = 'success';
-                            $input_data['range_code']         = '#FFC107';
-                            // return "Normal"; // green
-                        }
-    
-                        if (($input_data['heart'] > 140)) {
-                            $input_data['heartRateFlag']      = 'Severe Tachycardia';
-                            $input_data['heartRateFlagColor'] = 'danger';
-                            $input_data['range_code']         = '#ff0000';
-                        }
-                    }
-                         // 20-59years
-                         if (($years >= 20) && ($years <= 59 )) {
-                            if (($input_data['heart'] < 59)) {
-                                $input_data['heartRateFlag']      = 'Low Heart Rate (Bradycardia) ';
-                                $input_data['heartRateFlagColor'] = 'primary';
-                                $input_data['range_code']         = '#0000ff';
-                            }
-        
-                            if (($input_data['heart'] >= 60) && ($input_data['heart'] <= 100)) {
-                                $input_data['heartRateFlag']      = 'Normal Heart Rate(Normal Sinus Rhythm)';
-                                $input_data['heartRateFlagColor'] = 'success';
-                                $input_data['range_code']         = '#008000';
-                                // return "Normal"; // green
-                            }
-                            if (($input_data['heart'] >= 101) && ($input_data['heart'] <= 120)) {
-                                $input_data['heartRateFlag']      = 'Elevated Heart Rate';
-                                $input_data['heartRateFlagColor'] = 'success';
-                                $input_data['range_code']         = '#fff707';
-                                // return "Normal"; // green
-                            }
-                            if (($input_data['heart'] >= 121) && ($input_data['heart'] <= 140)) {
-                                $input_data['heartRateFlag']      = 'Mild Tachycardia';
-                                $input_data['heartRateFlagColor'] = 'success';
-                                $input_data['range_code']         = '#FFC107';
-                                // return "Normal"; // green
-                            }
-        
-                            if (($input_data['heart'] > 140)) {
-                                $input_data['heartRateFlag']      = 'Severe Tachycardia';
-                                $input_data['heartRateFlagColor'] = 'danger';
-                                $input_data['range_code']         = '#ff0000';
-                            }
-                        }
+                   
 
                 // if (($years == 12)) {
                 //     if (($input_data['heart'] < 60)) {
@@ -2333,6 +2863,72 @@ class Vital extends BaseModel
                 //     }
                 // }
             }
+              // 13-19years
+              if (($years >= 13) && ($years <= 59)) {
+                if (($input_data['heart'] < 59)) {
+                    $input_data['heartRateFlag']      = 'Low Heart Rate (Bradycardia) ';
+                    $input_data['heartRateFlagColor'] = 'primary';
+                    $input_data['range_code']         = '#0000ff';
+                }
+
+                if (($input_data['heart'] >= 60) && ($input_data['heart'] <= 100)) {
+                    $input_data['heartRateFlag']      = 'Normal Heart Rate(Normal Sinus Rhythm)';
+                    $input_data['heartRateFlagColor'] = 'success';
+                    $input_data['range_code']         = '#008000';
+                    // return "Normal"; // green
+                }
+                if (($input_data['heart'] >= 101) && ($input_data['heart'] <= 120)) {
+                    $input_data['heartRateFlag']      = 'Elevated Heart Rate';
+                    $input_data['heartRateFlagColor'] = 'success';
+                    $input_data['range_code']         = '#fff707';
+                    // return "Normal"; // green
+                }
+                if (($input_data['heart'] >= 121) && ($input_data['heart'] <= 140)) {
+                    $input_data['heartRateFlag']      = 'Mild Tachycardia';
+                    $input_data['heartRateFlagColor'] = 'success';
+                    $input_data['range_code']         = '#FFC107';
+                    // return "Normal"; // green
+                }
+
+                if (($input_data['heart'] > 140)) {
+                    $input_data['heartRateFlag']      = 'Severe Tachycardia';
+                    $input_data['heartRateFlagColor'] = 'danger';
+                    $input_data['range_code']         = '#ff0000';
+                }
+            }
+                 // 20-59years
+                //  if (($years >= 20) && ($years <= 59 )) {
+                //     if (($input_data['heart'] < 59)) {
+                //         $input_data['heartRateFlag']      = 'Low Heart Rate (Bradycardia) ';
+                //         $input_data['heartRateFlagColor'] = 'primary';
+                //         $input_data['range_code']         = '#0000ff';
+                //     }
+
+                //     if (($input_data['heart'] >= 60) && ($input_data['heart'] <= 100)) {
+                //         $input_data['heartRateFlag']      = 'Normal Heart Rate(Normal Sinus Rhythm)';
+                //         $input_data['heartRateFlagColor'] = 'success';
+                //         $input_data['range_code']         = '#008000';
+                //         // return "Normal"; // green
+                //     }
+                //     if (($input_data['heart'] >= 101) && ($input_data['heart'] <= 120)) {
+                //         $input_data['heartRateFlag']      = 'Elevated Heart Rate';
+                //         $input_data['heartRateFlagColor'] = 'success';
+                //         $input_data['range_code']         = '#fff707';
+                //         // return "Normal"; // green
+                //     }
+                //     if (($input_data['heart'] >= 121) && ($input_data['heart'] <= 140)) {
+                //         $input_data['heartRateFlag']      = 'Mild Tachycardia';
+                //         $input_data['heartRateFlagColor'] = 'success';
+                //         $input_data['range_code']         = '#FFC107';
+                //         // return "Normal"; // green
+                //     }
+
+                //     if (($input_data['heart'] > 140)) {
+                //         $input_data['heartRateFlag']      = 'Severe Tachycardia';
+                //         $input_data['heartRateFlagColor'] = 'danger';
+                //         $input_data['range_code']         = '#ff0000';
+                //     }
+                // }
 
             if ($years > 60) {
 
@@ -3513,56 +4109,57 @@ class Vital extends BaseModel
         // if(empty($dob) || $dob == '0000-00-00'){
         //     $years = 20;
         // }
-        // if (!empty($input_data['hct'])) {
+        if (!empty($input_data['hct'])) {
 
-        //     if (($input_data['hct'] >= '41') && ($input_data['hct'] <= '50')) {
-        //             $input_data['hctFlag']      = 'Normal';
-        //             $input_data['hctFlagColor'] = 'success';
-        //             $input_data['range_code']    = '#008000';
-        //         }
+            if (($input_data['hct'] >= '41') && ($input_data['hct'] <= '50')) {
+                    $input_data['hctFlag']      = 'Normal';
+                    $input_data['hctFlagColor'] = 'success';
+                    $input_data['range_code']    = '#008000';
+                }
 
-        //     if($gender == 'Male'){
+            if($gender == 'Male'){
 
-        //         if (($input_data['hct'] < '41')) {
-        //             $input_data['hctFlag']      = 'Low';
-        //             $input_data['hctFlagColor'] = 'primary';
-        //             $input_data['range_code']    = '#0000ff';
-        //         }
+                if (($input_data['hct'] < '41')) {
+                    $input_data['hctFlag']      = 'Low';
+                    $input_data['hctFlagColor'] = 'primary';
+                    $input_data['range_code']    = '#0000ff';
+                }
 
-        //         if (($input_data['hct'] >= '41') && ($input_data['hct'] <= '50')) {
-        //             $input_data['hctFlag']      = 'Normal';
-        //             $input_data['hctFlagColor'] = 'success';
-        //             $input_data['range_code']    = '#008000';
-        //         }
+                if (($input_data['hct'] >= '41') && ($input_data['hct'] <= '50')) {
+                    $input_data['hctFlag']      = 'Normal';
+                    $input_data['hctFlagColor'] = 'success';
+                    $input_data['range_code']    = '#008000';
+                }
 
-        //         if (($input_data['hct'] > '50')) {
-        //             $input_data['hctFlag']      = 'High';
-        //             $input_data['hctFlagColor'] = 'danger';
-        //             $input_data['range_code']    = '#ff0000';
-        //         }
-        //     }
-        //     if($gender == 'Female'){
+                if (($input_data['hct'] > '50')) {
+                    $input_data['hctFlag']      = 'High';
+                    $input_data['hctFlagColor'] = 'danger';
+                    $input_data['range_code']    = '#ff0000';
+                }
+            }
+            if($gender == 'Female'){
 
-        //         if (($input_data['hct'] < '36')) {
-        //             $input_data['hctFlag']      = 'Low';
-        //             $input_data['hctFlagColor'] = 'primary';
-        //             $input_data['range_code']    = '#0000ff';
-        //         }
+                if (($input_data['hct'] < '36')) {
+                    $input_data['hctFlag']      = 'Low';
+                    $input_data['hctFlagColor'] = 'primary';
+                    $input_data['range_code']    = '#0000ff';
+                }
 
-        //         if (($input_data['hct'] >= '36') && ($input_data['hct'] <= '48')) {
-        //             $input_data['hctFlag']      = 'Normal';
-        //             $input_data['hctFlagColor'] = 'success';
-        //             $input_data['range_code']    = '#008000';
-        //         }
+                if (($input_data['hct'] >= '36') && ($input_data['hct'] <= '48')) {
+                    $input_data['hctFlag']      = 'Normal';
+                    $input_data['hctFlagColor'] = 'success';
+                    $input_data['range_code']    = '#008000';
+                }
 
-        //         if (($input_data['hct'] > '48')) {
-        //             $input_data['hctFlag']      = 'High';
-        //             $input_data['hctFlagColor'] = 'danger';
-        //             $input_data['range_code']    = '#ff0000';
-        //         }
-        //     }
-        // }
+                if (($input_data['hct'] > '48')) {
+                    $input_data['hctFlag']      = 'High';
+                    $input_data['hctFlagColor'] = 'danger';
+                    $input_data['range_code']    = '#ff0000';
+                }
+            }
+        }
 
+         if (!empty($input_data['hct'])) {
         if($years >= 0 && $years <= 1){
             if (($input_data['hct'] < '33')) {
                 $input_data['hctFlag']      = 'Low (Anemia/Deficiency) ';
@@ -3577,7 +4174,7 @@ class Vital extends BaseModel
             }
 
             if (($input_data['hct'] > '39')) {
-                $input_data['hctFlag']      = 'High (Polycythemia) ';
+                $input_data['hctFlag']      = 'High (Polycythemia)';
                 $input_data['hctFlagColor'] = 'danger';
                 $input_data['range_code']    = '#FFC107';
             }
@@ -3590,13 +4187,13 @@ class Vital extends BaseModel
             }
 
             if (($input_data['hct'] >= '34') && ($input_data['hct'] <= '40')) {
-                $input_data['hctFlag']      = 'Normal';
+                $input_data['hctFlag']      = 'Normald';
                 $input_data['hctFlagColor'] = 'success';
                 $input_data['range_code']    = '#008000';
             }
 
             if (($input_data['hct'] > '40')) {
-                $input_data['hctFlag']      = 'High (Polycythemia) ';
+                $input_data['hctFlag']      = 'High (Polycythemia)s';
                 $input_data['hctFlagColor'] = 'danger';
                 $input_data['range_code']    = '#FFC107';
             }
@@ -3609,7 +4206,7 @@ class Vital extends BaseModel
             }
 
             if (($input_data['hct'] >= '36') && ($input_data['hct'] <= '46')) {
-                $input_data['hctFlag']      = 'Normal';
+                $input_data['hctFlag']      = 'Normalh';
                 $input_data['hctFlagColor'] = 'success';
                 $input_data['range_code']    = '#008000';
             }
@@ -3631,7 +4228,7 @@ class Vital extends BaseModel
                 }
 
                 if (($input_data['hct'] >= '37') && ($input_data['hct'] <= '47')) {
-                    $input_data['hctFlag']      = 'Normal';
+                    $input_data['hctFlag']      = 'Normalk';
                     $input_data['hctFlagColor'] = 'success';
                     $input_data['range_code']    = '#008000';
                 }
@@ -3651,7 +4248,7 @@ class Vital extends BaseModel
                 }
 
                 if (($input_data['hct'] >= '36') && ($input_data['hct'] <= '44')) {
-                    $input_data['hctFlag']      = 'Normal';
+                    $input_data['hctFlag']      = 'Normale';
                     $input_data['hctFlagColor'] = 'success';
                     $input_data['range_code']    = '#008000';
                 }
@@ -3674,7 +4271,7 @@ class Vital extends BaseModel
                 }
 
                 if (($input_data['hct'] >= '39') && ($input_data['hct'] <= '50')) {
-                    $input_data['hctFlag']      = 'Normal';
+                    $input_data['hctFlag']      = 'Normall';
                     $input_data['hctFlagColor'] = 'success';
                     $input_data['range_code']    = '#008000';
                 }
@@ -3694,7 +4291,7 @@ class Vital extends BaseModel
                 }
 
                 if (($input_data['hct'] >= '36') && ($input_data['hct'] <= '46')) {
-                    $input_data['hctFlag']      = 'Normal';
+                    $input_data['hctFlag']      = 'Normalz';
                     $input_data['hctFlagColor'] = 'success';
                     $input_data['range_code']    = '#008000';
                 }
@@ -3717,7 +4314,7 @@ class Vital extends BaseModel
                 }
 
                 if (($input_data['hct'] >= '38') && ($input_data['hct'] <= '50')) {
-                    $input_data['hctFlag']      = 'Normal';
+                    $input_data['hctFlag']      = 'Normala';
                     $input_data['hctFlagColor'] = 'success';
                     $input_data['range_code']    = '#008000';
                 }
@@ -3740,7 +4337,7 @@ class Vital extends BaseModel
                 }
 
                 if (($input_data['hct'] >= '37') && ($input_data['hct'] <= '47')) {
-                    $input_data['hctFlag']      = 'Normal';
+                    $input_data['hctFlag']      = 'Normalu';
                     $input_data['hctFlagColor'] = 'success';
                     $input_data['range_code']    = '#008000';
                 }
@@ -3752,7 +4349,7 @@ class Vital extends BaseModel
                 } 
             }
         }
- 
+    }
 
         return $input_data;
     }
@@ -3764,178 +4361,178 @@ class Vital extends BaseModel
         $input_data['uricFlagColor'] = 'danger';
         $input_data['range_code']    = '#ff0000';
 
-        if (!empty($input_data['uric_acid'])) {
-            if($years >= 0 && $years <= 5){
-                if (($input_data['uric_acid'] < '2.0')) {
-                    $input_data['uricFlag']      = 'Low (Hypouricemia)';
+       if (!empty($input_data['uric_acid'])) {
+
+            if($gender == 'Male'){
+
+                if (($input_data['uric_acid'] < '4.0')) {
+                    $input_data['uricFlag']      = 'Low';
                     $input_data['uricFlagColor'] = 'primary';
                     $input_data['range_code']    = '#0000ff';
                 }
 
-                if (($input_data['uric_acid'] >= '2.0') && ($input_data['uric_acid'] <= '5.5')) {
+                if (($input_data['uric_acid'] >= '4.0') && ($input_data['uric_acid'] <= '8.5')) {
                     $input_data['uricFlag']      = 'Normal';
                     $input_data['uricFlagColor'] = 'success';
                     $input_data['range_code']    = '#008000';
                 }
 
-                if (($input_data['uric_acid'] > '5.5')) {
-                    $input_data['uricFlag']      = 'High (Hyperuricemia)';
+                if (($input_data['uric_acid'] > '8.5')) {
+                    $input_data['uricFlag']      = 'High';
                     $input_data['uricFlagColor'] = 'danger';
-                    $input_data['range_code']    = '#FFC107';
-                }
-            }  
-            if($years >= 6 && $years <= 19){
-                if (($input_data['uric_acid'] < '2.0')) {
-                    $input_data['uricFlag']      = 'Low (Hypouricemia)';
-                    $input_data['uricFlagColor'] = 'primary';
-                    $input_data['range_code']    = '#0000ff';
-                }
-
-                if (($input_data['uric_acid'] >= '2.0') && ($input_data['uric_acid'] <= '6.0')) {
-                    $input_data['uricFlag']      = 'Normal';
-                    $input_data['uricFlagColor'] = 'success';
-                    $input_data['range_code']    = '#008000';
-                }
-
-                if (($input_data['uric_acid'] > '6.0')) {
-                    $input_data['uricFlag']      = 'High (Hyperuricemia)';
-                    $input_data['uricFlagColor'] = 'danger';
-                    $input_data['range_code']    = '#FFC107';
-                }
-            } 
-            if($years >= 20 && $years <= 59) 
-            {
-             if($gender == 'Male'){
-
-                if (($input_data['uric_acid'] < '3.0')) {
-                    $input_data['uricFlag']      = 'Low (Hypouricemia)';
-                    $input_data['uricFlagColor'] = 'primary';
-                    $input_data['range_code']    = '#0000ff';
-                }
-
-                if (($input_data['uric_acid'] >= '3.0') && ($input_data['uric_acid'] <= '7.0')) {
-                    $input_data['uricFlag']      = 'Normal';
-                    $input_data['uricFlagColor'] = 'success';
-                    $input_data['range_code']    = '#008000';
-                }
-
-                if (($input_data['uric_acid'] > '7.0')) {
-                    $input_data['uricFlag']      = 'High (Hyperuricemia)';
-                    $input_data['uricFlagColor'] = 'danger';
-                    $input_data['range_code']    = '#FFC107';
+                    $input_data['range_code']    = '#ff0000';
                 }
             }
-            }
-            if($years >= 20 && $years <= 59) 
-            {
-             if($gender == 'female'){
+            if($gender == 'Female'){
 
-                if (($input_data['uric_acid'] < '3.0')) {
-                    $input_data['uricFlag']      = 'Low (Hypouricemia)';
+                if (($input_data['uric_acid'] < '2.7')) {
+                    $input_data['uricFlag']      = 'Low';
                     $input_data['uricFlagColor'] = 'primary';
                     $input_data['range_code']    = '#0000ff';
                 }
 
-                if (($input_data['uric_acid'] >= '3.0') && ($input_data['uric_acid'] <= '6.0')) {
+                if (($input_data['uric_acid'] >= '2.7') && ($input_data['uric_acid'] <= '7.3')) {
                     $input_data['uricFlag']      = 'Normal';
                     $input_data['uricFlagColor'] = 'success';
                     $input_data['range_code']    = '#008000';
                 }
 
-                if (($input_data['uric_acid'] > '6.0')) {
-                    $input_data['uricFlag']      = 'High (Hyperuricemia)';
+                if (($input_data['uric_acid'] > '7.3')) {
+                    $input_data['uricFlag']      = 'High';
                     $input_data['uricFlagColor'] = 'danger';
-                    $input_data['range_code']    = '#FFC107';
+                    $input_data['range_code']    = '#ff0000';
                 }
             }
+        } else {
+            if (!empty($input_data['uric_acid'])) {
+                if($years >= 0 && $years <= 5){
+                    if (($input_data['uric_acid'] < '2.0')) {
+                        $input_data['uricFlag']      = 'Low (Hypouricemia)';
+                        $input_data['uricFlagColor'] = 'primary';
+                        $input_data['range_code']    = '#0000ff';
+                    }
+    
+                    if (($input_data['uric_acid'] >= '2.0') && ($input_data['uric_acid'] <= '5.5')) {
+                        $input_data['uricFlag']      = 'Normal';
+                        $input_data['uricFlagColor'] = 'success';
+                        $input_data['range_code']    = '#008000';
+                    }
+    
+                    if (($input_data['uric_acid'] > '5.5')) {
+                        $input_data['uricFlag']      = 'High (Hyperuricemia)';
+                        $input_data['uricFlagColor'] = 'danger';
+                        $input_data['range_code']    = '#FFC107';
+                    }
+                }  
+                if($years >= 6 && $years <= 19){
+                    if (($input_data['uric_acid'] < '2.0')) {
+                        $input_data['uricFlag']      = 'Low (Hypouricemia)';
+                        $input_data['uricFlagColor'] = 'primary';
+                        $input_data['range_code']    = '#0000ff';
+                    }
+    
+                    if (($input_data['uric_acid'] >= '2.0') && ($input_data['uric_acid'] <= '6.0')) {
+                        $input_data['uricFlag']      = 'Normal';
+                        $input_data['uricFlagColor'] = 'success';
+                        $input_data['range_code']    = '#008000';
+                    }
+    
+                    if (($input_data['uric_acid'] > '6.0')) {
+                        $input_data['uricFlag']      = 'High (Hyperuricemia)';
+                        $input_data['uricFlagColor'] = 'danger';
+                        $input_data['range_code']    = '#FFC107';
+                    }
+                } 
+                if($years >= 20 && $years <= 59) 
+                {
+                 if($gender == 'Male'){
+    
+                    if (($input_data['uric_acid'] < '3.0')) {
+                        $input_data['uricFlag']      = 'Low (Hypouricemia)';
+                        $input_data['uricFlagColor'] = 'primary';
+                        $input_data['range_code']    = '#0000ff';
+                    }
+    
+                    if (($input_data['uric_acid'] >= '3.0') && ($input_data['uric_acid'] <= '7.0')) {
+                        $input_data['uricFlag']      = 'Normal';
+                        $input_data['uricFlagColor'] = 'success';
+                        $input_data['range_code']    = '#008000';
+                    }
+    
+                    if (($input_data['uric_acid'] > '7.0')) {
+                        $input_data['uricFlag']      = 'High (Hyperuricemia)';
+                        $input_data['uricFlagColor'] = 'danger';
+                        $input_data['range_code']    = '#FFC107';
+                    }
+                }
+                }
+                if($years >= 20 && $years <= 59) 
+                {
+                 if($gender == 'female'){
+    
+                    if (($input_data['uric_acid'] < '3.0')) {
+                        $input_data['uricFlag']      = 'Low (Hypouricemia)';
+                        $input_data['uricFlagColor'] = 'primary';
+                        $input_data['range_code']    = '#0000ff';
+                    }
+    
+                    if (($input_data['uric_acid'] >= '3.0') && ($input_data['uric_acid'] <= '6.0')) {
+                        $input_data['uricFlag']      = 'Normal';
+                        $input_data['uricFlagColor'] = 'success';
+                        $input_data['range_code']    = '#008000';
+                    }
+    
+                    if (($input_data['uric_acid'] > '6.0')) {
+                        $input_data['uricFlag']      = 'High (Hyperuricemia)';
+                        $input_data['uricFlagColor'] = 'danger';
+                        $input_data['range_code']    = '#FFC107';
+                    }
+                }
+                }
+                if($years >= 60) 
+                {
+                 if($gender == 'male'){
+                    if (($input_data['uric_acid'] < '3.0')) {
+                        $input_data['uricFlag']      = 'Low (Hypouricemia)';
+                        $input_data['uricFlagColor'] = 'primary';
+                        $input_data['range_code']    = '#0000ff';
+                    }
+    
+                    if (($input_data['uric_acid'] >= '3.0') && ($input_data['uric_acid'] <= '7.5')) {
+                        $input_data['uricFlag']      = 'Normal';
+                        $input_data['uricFlagColor'] = 'success';
+                        $input_data['range_code']    = '#008000';
+                    }
+    
+                    if (($input_data['uric_acid'] > '7.5')) {
+                        $input_data['uricFlag']      = 'High (Hyperuricemia)';
+                        $input_data['uricFlagColor'] = 'danger';
+                        $input_data['range_code']    = '#FFC107';
+                    }
+                 }}
+                 if($years >= 60) 
+                 {
+                  if($gender == 'female'){
+                     if (($input_data['uric_acid'] < '3.0')) {
+                         $input_data['uricFlag']      = 'Low (Hypouricemia)';
+                         $input_data['uricFlagColor'] = 'primary';
+                         $input_data['range_code']    = '#0000ff';
+                     }
+     
+                     if (($input_data['uric_acid'] >= '3.0') && ($input_data['uric_acid'] <= '7.0')) {
+                         $input_data['uricFlag']      = 'Normal';
+                         $input_data['uricFlagColor'] = 'success';
+                         $input_data['range_code']    = '#008000';
+                     }
+     
+                     if (($input_data['uric_acid'] > '7.0')) {
+                         $input_data['uricFlag']      = 'High (Hyperuricemia)';
+                         $input_data['uricFlagColor'] = 'danger';
+                         $input_data['range_code']    = '#FFC107';
+                     }
+                  }}
             }
-            if($years >= 60) 
-            {
-             if($gender == 'male'){
-                if (($input_data['uric_acid'] < '3.0')) {
-                    $input_data['uricFlag']      = 'Low (Hypouricemia)';
-                    $input_data['uricFlagColor'] = 'primary';
-                    $input_data['range_code']    = '#0000ff';
-                }
-
-                if (($input_data['uric_acid'] >= '3.0') && ($input_data['uric_acid'] <= '7.5')) {
-                    $input_data['uricFlag']      = 'Normal';
-                    $input_data['uricFlagColor'] = 'success';
-                    $input_data['range_code']    = '#008000';
-                }
-
-                if (($input_data['uric_acid'] > '7.5')) {
-                    $input_data['uricFlag']      = 'High (Hyperuricemia)';
-                    $input_data['uricFlagColor'] = 'danger';
-                    $input_data['range_code']    = '#FFC107';
-                }
-             }}
-             if($years >= 60) 
-             {
-              if($gender == 'female'){
-                 if (($input_data['uric_acid'] < '3.0')) {
-                     $input_data['uricFlag']      = 'Low (Hypouricemia)';
-                     $input_data['uricFlagColor'] = 'primary';
-                     $input_data['range_code']    = '#0000ff';
-                 }
- 
-                 if (($input_data['uric_acid'] >= '3.0') && ($input_data['uric_acid'] <= '7.0')) {
-                     $input_data['uricFlag']      = 'Normal';
-                     $input_data['uricFlagColor'] = 'success';
-                     $input_data['range_code']    = '#008000';
-                 }
- 
-                 if (($input_data['uric_acid'] > '7.0')) {
-                     $input_data['uricFlag']      = 'High (Hyperuricemia)';
-                     $input_data['uricFlagColor'] = 'danger';
-                     $input_data['range_code']    = '#FFC107';
-                 }
-              }}
         }
-
-        // if (!empty($input_data['uric_acid'])) {
-
-        //     if($gender == 'Male'){
-
-        //         if (($input_data['uric_acid'] < '4.0')) {
-        //             $input_data['uricFlag']      = 'Low';
-        //             $input_data['uricFlagColor'] = 'primary';
-        //             $input_data['range_code']    = '#0000ff';
-        //         }
-
-        //         if (($input_data['uric_acid'] >= '4.0') && ($input_data['uric_acid'] <= '8.5')) {
-        //             $input_data['uricFlag']      = 'Normal';
-        //             $input_data['uricFlagColor'] = 'success';
-        //             $input_data['range_code']    = '#008000';
-        //         }
-
-        //         if (($input_data['uric_acid'] > '8.5')) {
-        //             $input_data['uricFlag']      = 'High';
-        //             $input_data['uricFlagColor'] = 'danger';
-        //             $input_data['range_code']    = '#ff0000';
-        //         }
-        //     }
-        //     if($gender == 'Female'){
-
-        //         if (($input_data['uric_acid'] < '2.7')) {
-        //             $input_data['uricFlag']      = 'Low';
-        //             $input_data['uricFlagColor'] = 'primary';
-        //             $input_data['range_code']    = '#0000ff';
-        //         }
-
-        //         if (($input_data['uric_acid'] >= '2.7') && ($input_data['uric_acid'] <= '7.3')) {
-        //             $input_data['uricFlag']      = 'Normal';
-        //             $input_data['uricFlagColor'] = 'success';
-        //             $input_data['range_code']    = '#008000';
-        //         }
-
-        //         if (($input_data['uric_acid'] > '7.3')) {
-        //             $input_data['uricFlag']      = 'High';
-        //             $input_data['uricFlagColor'] = 'danger';
-        //             $input_data['range_code']    = '#ff0000';
-        //         }
-        //     }
-        // }
 
         return $input_data;
     }
