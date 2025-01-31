@@ -2167,7 +2167,7 @@ class AssementFormSeeder extends Seeder
 		 ['question_id' => $current_question_id, 
 		 	'answer_id' => $answers["Partial paralysis (lower face)"],'jump_to_question_id' => null,'score' => 2],
 		 ['question_id' => $current_question_id, 
-		 	'answer_id' => $answers["Unilateral complete paralysis (upper/lower face)"],'jump_to_question_id' => null,'score' => 2],
+		 	'answer_id' => $answers["Unilateral complete paralysis (upper/lower face)"],'jump_to_question_id' => null,'score' => 3],
 		 ['question_id' => $current_question_id, 
 		 	'answer_id' => $answers["Bilateral complete paralysis (upper/lower face)"],'jump_to_question_id' => null,'score' => 3]
 		 ];

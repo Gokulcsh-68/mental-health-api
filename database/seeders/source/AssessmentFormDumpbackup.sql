@@ -2594,7 +2594,7 @@ insert into `form_question_answers` (`form_question_id`,`answer_id`,`jump_to_que
  ((SELECT current_question.id FROM questions as current_question WHERE current_question.name="Facial palsy" LIMIT 1), 
  	(SELECT id FROM answers WHERE name="Partial paralysis (lower face)" LIMIT 1), null,2),
  ((SELECT current_question.id FROM questions as current_question WHERE current_question.name="Facial palsy" LIMIT 1), 
- 	(SELECT id FROM answers WHERE name="Unilateral complete paralysis (upper/lower face)" LIMIT 1), null,2),
+ 	(SELECT id FROM answers WHERE name="Unilateral complete paralysis (upper/lower face)" LIMIT 1), null,3),
  ((SELECT current_question.id FROM questions as current_question WHERE current_question.name="Facial palsy" LIMIT 1), 
  	(SELECT id FROM answers WHERE name="Bilateral complete paralysis (upper/lower face)" LIMIT 1), null,3);
 
