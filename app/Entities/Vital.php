@@ -118,7 +118,7 @@ class Vital extends BaseModel
         }
 
         if($data['slug'] == 'temperature'){
-            $dateOfBirth = user::Where('id',$data['user_id'])->first(['dob','gender']);
+            $dateOfBirth = User::Where('id',$data['user_id'])->first(['dob','gender']);
             $years = Carbon::parse($dateOfBirth->dob)->diff(Carbon::now())->format('%y');
             $data['details'] += self::temp_flag($data['details'], $years, $dateOfBirth->dob);
         }
@@ -165,7 +165,7 @@ class Vital extends BaseModel
         }
 
         if($data['slug'] == 'respiration'){
-            $dateOfBirth = user::Where('id',$data['user_id'])->first(['dob','gender']);
+            $dateOfBirth = User::Where('id',$data['user_id'])->first(['dob','gender']);
             $years = Carbon::parse($dateOfBirth->dob)->diff(Carbon::now())->format('%y');
             $data['details'] += self::respiration_flag($data['details'], $years, $dateOfBirth->dob);
         }
@@ -320,7 +320,7 @@ class Vital extends BaseModel
         if($data['slug'] == 'temperature'){
             unset($data['details']['temperatureFlag'], $data['details']['temperatureFlagColor'], $data['details']['range_code']);
 
-            $dateOfBirth = user::Where('id',$data['user_id'])->first(['dob','gender']);
+            $dateOfBirth = User::Where('id',$data['user_id'])->first(['dob','gender']);
             $years = Carbon::parse($dateOfBirth->dob)->diff(Carbon::now())->format('%y');
             $data['details'] += self::temp_flag($data['details'], $years, $dateOfBirth->dob);
         }
@@ -382,7 +382,7 @@ class Vital extends BaseModel
                 $data['details']['heartRateFlagColor'],
                 $data['details']['range_code']);
 
-            $dateOfBirth = user::Where('id',$data['user_id'])->value('dob');
+            $dateOfBirth = User::Where('id',$data['user_id'])->value('dob');
 
             $years = Carbon::parse($dateOfBirth)->diff(Carbon::now())->format('%y');
             $months = Carbon::parse($dateOfBirth)->diff(Carbon::now())->format('%m');
@@ -427,7 +427,7 @@ class Vital extends BaseModel
                 $data['details']['respirationFlagColor'],
                 $data['details']['range_code']);
 
-            $dateOfBirth = user::Where('id',$data['user_id'])->first(['dob','gender']);
+            $dateOfBirth = User::Where('id',$data['user_id'])->first(['dob','gender']);
             $years = Carbon::parse($dateOfBirth->dob)->diff(Carbon::now())->format('%y');
             $data['details'] += self::respiration_flag($data['details'], $years, $dateOfBirth->dob);
         }
