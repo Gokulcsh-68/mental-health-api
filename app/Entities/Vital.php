@@ -1113,7 +1113,7 @@ class Vital extends BaseModel
                 if ($input_data['unit'] == 'mg/dL') {
 
                     // low
-                    if(( $type == 'Fasting' && $input_data['blood_sugar'] < 50) || ( $type == 'Post prandial' && $input_data['blood_sugar'] < 70) || ( $type == 'HbA1c (%)' && $input_data['blood_sugar'] < 3.5) || ( $type == 'Random' && $input_data['blood_sugar'] <50) ){
+                    if(( $type == 'Fasting' && $input_data['blood_sugar'] < 50) || ( $type == 'Postprandial' && $input_data['blood_sugar'] < 70) || ( $type == 'HbA1c (%)' && $input_data['blood_sugar'] < 3.5) || ( $type == 'Random' && $input_data['blood_sugar'] <50) ){
                         $input_data['bsFlag']      = 'Low (Hypoglycemia)';
                         $input_data['bsFlagColor'] = 'primary';
                         $input_data['range_code']  = '#0000ff';
@@ -1121,26 +1121,26 @@ class Vital extends BaseModel
         
                     // normal
                     // if ($input_data['blood_sugar'] >= 71 && $input_data['blood_sugar'] <= 127) {
-                    if (($type == 'Fasting' && $input_data['blood_sugar'] >= 50 && $input_data['blood_sugar'] <= 90) || ($type == 'Post prandial ' && $input_data['blood_sugar'] >= 70 && $input_data['blood_sugar'] <= 130) || ($type == ' HbA1c (%)' && $input_data['blood_sugar'] >= 3.5 && $input_data['blood_sugar'] <= 5.5) || (($type == 'Random' && $input_data['blood_sugar'] >= 50 && $input_data['blood_sugar'] <= 90))) {
+                    if (($type == 'Fasting' && $input_data['blood_sugar'] >= 50 && $input_data['blood_sugar'] <= 90) || ($type == 'Postprandial ' && $input_data['blood_sugar'] >= 70 && $input_data['blood_sugar'] <= 130) || ($type == ' HbA1c (%)' && $input_data['blood_sugar'] >= 3.5 && $input_data['blood_sugar'] <= 5.5) || (($type == 'Random' && $input_data['blood_sugar'] >= 50 && $input_data['blood_sugar'] <= 90))) {
                         $input_data['bsFlag']      = 'Normal';
                         $input_data['bsFlagColor'] = 'success';
                         $input_data['range_code']  = '#008000';
                     }
                     // Mildly Reduced (Early Signs of Insulin Resistance)
-                    if (($type == 'Fasting' && $input_data['blood_sugar'] >= 91 && $input_data['blood_sugar'] <= 100) || ($type == 'Post prandial ' && $input_data['blood_sugar'] >= 131 && $input_data['blood_sugar'] <= 150) || ($type == ' HbA1c (%)' && $input_data['blood_sugar'] >= 5.6 && $input_data['blood_sugar'] <= 6.0) || (($type == 'Random' && $input_data['blood_sugar'] >= 91 && $input_data['blood_sugar'] <= 100))) {
+                    if (($type == 'Fasting' && $input_data['blood_sugar'] >= 91 && $input_data['blood_sugar'] <= 100) || ($type == 'Postprandial ' && $input_data['blood_sugar'] >= 131 && $input_data['blood_sugar'] <= 150) || ($type == ' HbA1c (%)' && $input_data['blood_sugar'] >= 5.6 && $input_data['blood_sugar'] <= 6.0) || (($type == 'Random' && $input_data['blood_sugar'] >= 91 && $input_data['blood_sugar'] <= 100))) {
                         $input_data['bsFlag']      = 'Mildly Elevated (Pre-diabetes)';
                         $input_data['bsFlagColor'] = 'warning';
                         $input_data['range_code']  = '#fff707';
                     }
         
                     // Moderately Reduced (Impaired Glucose Tolerance/Pre-Diabetes)
-                    if (($type == 'Fasting' && $input_data['blood_sugar'] >= 101 && $input_data['blood_sugar'] <= 110) || ($type == 'Post prandial' && $input_data['blood_sugar'] >= 151 && $input_data['blood_sugar'] <= 170) || ($type == ' HbA1c (%)' && $input_data['blood_sugar'] >= 6.1 && $input_data['blood_sugar'] <= 6.4) || (($type == 'Random' && $input_data['blood_sugar'] >= 101 && $input_data['blood_sugar'] <= 110))) {
+                    if (($type == 'Fasting' && $input_data['blood_sugar'] >= 101 && $input_data['blood_sugar'] <= 110) || ($type == 'Postprandial' && $input_data['blood_sugar'] >= 151 && $input_data['blood_sugar'] <= 170) || ($type == ' HbA1c (%)' && $input_data['blood_sugar'] >= 6.1 && $input_data['blood_sugar'] <= 6.4) || (($type == 'Random' && $input_data['blood_sugar'] >= 101 && $input_data['blood_sugar'] <= 110))) {
                         $input_data['bsFlag']      = 'Moderately Elevated (High blood sugar)';
                         $input_data['bsFlagColor'] = 'warning';
                         $input_data['range_code']  = '#ffc107';
                     }
                     // Severely Reduced(Diabetes/Severe Hyperglycemia)
-                    if (($type == 'Fasting' && $input_data['blood_sugar'] >= 111) || ($type == 'Post prandial ' && $input_data['blood_sugar'] >+ 171) || ($type == 'HbA1c (%)' && $input_data['blood_sugar'] >= 6.5) || ($type == 'Random' && $input_data['blood_sugar'] > 111)) {
+                    if (($type == 'Fasting' && $input_data['blood_sugar'] >= 111) || ($type == 'Postprandial ' && $input_data['blood_sugar'] >+ 171) || ($type == 'HbA1c (%)' && $input_data['blood_sugar'] >= 6.5) || ($type == 'Random' && $input_data['blood_sugar'] > 111)) {
                         $input_data['bsFlag']      = 'Severely Elevated (Severe Hyperglycemia)';
                         $input_data['bsFlagColor'] = 'danger';
                         $input_data['range_code']  = '#ff0000';
@@ -1156,7 +1156,7 @@ class Vital extends BaseModel
                 if ($input_data['unit'] == 'mg/dL') {
 
                     // low
-                    if(( $type == 'Fasting' && $input_data['blood_sugar'] < 60) || ( $type == 'Post prandial' && $input_data['blood_sugar'] < 80) || ( $type == 'HbA1c (%)' && $input_data['blood_sugar'] < 4.0) || ( $type == 'Random' && $input_data['blood_sugar'] <60) ){
+                    if(( $type == 'Fasting' && $input_data['blood_sugar'] < 60) || ( $type == 'Postprandial' && $input_data['blood_sugar'] < 80) || ( $type == 'HbA1c (%)' && $input_data['blood_sugar'] < 4.0) || ( $type == 'Random' && $input_data['blood_sugar'] <60) ){
                         $input_data['bsFlag']      = 'Low (Hypoglycemia)';
                         $input_data['bsFlagColor'] = 'primary';
                         $input_data['range_code']  = '#0000ff';
@@ -1164,26 +1164,26 @@ class Vital extends BaseModel
         
                     // normal
                     // if ($input_data['blood_sugar'] >= 71 && $input_data['blood_sugar'] <= 127) {
-                    if (($type == 'Fasting' && $input_data['blood_sugar'] >= 60 && $input_data['blood_sugar'] <= 100) || ($type == 'Post prandial' && $input_data['blood_sugar'] >= 80 && $input_data['blood_sugar'] <= 140) || ($type == 'HbA1c (%)' && $input_data['blood_sugar'] >= 4.0 && $input_data['blood_sugar'] <= 5.6) || (($type == 'Random' && $input_data['blood_sugar'] >= 60 && $input_data['blood_sugar'] <= 100))) {
+                    if (($type == 'Fasting' && $input_data['blood_sugar'] >= 60 && $input_data['blood_sugar'] <= 100) || ($type == 'Postprandial' && $input_data['blood_sugar'] >= 80 && $input_data['blood_sugar'] <= 140) || ($type == 'HbA1c (%)' && $input_data['blood_sugar'] >= 4.0 && $input_data['blood_sugar'] <= 5.6) || (($type == 'Random' && $input_data['blood_sugar'] >= 60 && $input_data['blood_sugar'] <= 100))) {
                         $input_data['bsFlag']      = 'Normal';
                         $input_data['bsFlagColor'] = 'success';
                         $input_data['range_code']  = '#008000';
                     }
                     // Mildly Reduced (Early Signs of Insulin Resistance)
-                    if (($type == 'Fasting' && $input_data['blood_sugar'] >= 101 && $input_data['blood_sugar'] <= 110) || ($type == 'Post prandial' && $input_data['blood_sugar'] >= 141 && $input_data['blood_sugar'] <= 160) || ($type == 'HbA1c (%)' && $input_data['blood_sugar'] >= 5.7 && $input_data['blood_sugar'] <= 6.0) || (($type == 'Random' && $input_data['blood_sugar'] >= 101 && $input_data['blood_sugar'] <= 110))) {
+                    if (($type == 'Fasting' && $input_data['blood_sugar'] >= 101 && $input_data['blood_sugar'] <= 110) || ($type == 'Postprandial' && $input_data['blood_sugar'] >= 141 && $input_data['blood_sugar'] <= 160) || ($type == 'HbA1c (%)' && $input_data['blood_sugar'] >= 5.7 && $input_data['blood_sugar'] <= 6.0) || (($type == 'Random' && $input_data['blood_sugar'] >= 101 && $input_data['blood_sugar'] <= 110))) {
                         $input_data['bsFlag']      = 'Mildly Elevated (Pre-diabetes)';
                         $input_data['bsFlagColor'] = 'warning';
                         $input_data['range_code']  = '#fff707';
                     }
         
                     // Moderately Reduced (Impaired Glucose Tolerance/Pre-Diabetes)
-                    if (($type == 'Fasting' && $input_data['blood_sugar'] >= 111 && $input_data['blood_sugar'] <= 125) || ($type == 'Post prandial' && $input_data['blood_sugar'] >= 161 && $input_data['blood_sugar'] <= 180) || ($type == 'HbA1c (%)' && $input_data['blood_sugar'] >= 6.1 && $input_data['blood_sugar'] <= 6.4) || (($type == 'Random' && $input_data['blood_sugar'] >= 111 && $input_data['blood_sugar'] <= 125))) {
+                    if (($type == 'Fasting' && $input_data['blood_sugar'] >= 111 && $input_data['blood_sugar'] <= 125) || ($type == 'Postprandial' && $input_data['blood_sugar'] >= 161 && $input_data['blood_sugar'] <= 180) || ($type == 'HbA1c (%)' && $input_data['blood_sugar'] >= 6.1 && $input_data['blood_sugar'] <= 6.4) || (($type == 'Random' && $input_data['blood_sugar'] >= 111 && $input_data['blood_sugar'] <= 125))) {
                         $input_data['bsFlag']      = 'Moderately Elevated (High blood sugar)';
                         $input_data['bsFlagColor'] = 'warning';
                         $input_data['range_code']  = '#ffc107';
                     }
                     // Severely Reduced(Diabetes/Severe Hyperglycemia)
-                    if (($type == 'Fasting' && $input_data['blood_sugar'] >= 126) || ($type == 'Post prandial' && $input_data['blood_sugar'] >= 181) || ($type == 'HbA1c (%)' && $input_data['blood_sugar'] >= 6.5) || ($type == 'Random' && $input_data['blood_sugar'] > 126)) {
+                    if (($type == 'Fasting' && $input_data['blood_sugar'] >= 126) || ($type == 'Postprandial' && $input_data['blood_sugar'] >= 181) || ($type == 'HbA1c (%)' && $input_data['blood_sugar'] >= 6.5) || ($type == 'Random' && $input_data['blood_sugar'] > 126)) {
                         $input_data['bsFlag']      = 'Severely Elevated (Severe Hyperglycemia)';
                         $input_data['bsFlagColor'] = 'danger';
                         $input_data['range_code']  = '#ff0000';
@@ -1199,7 +1199,7 @@ class Vital extends BaseModel
                 if ($input_data['unit'] == 'mg/dL') {
 
                     // low
-                    if(( $type == 'Fasting' && $input_data['blood_sugar'] < 60) || ( $type == 'Post prandial ' && $input_data['blood_sugar'] < 80) || ( $type == 'HbA1c (%)' && $input_data['blood_sugar'] < 4.0) || ( $type == 'Random ' && $input_data['blood_sugar'] <60) ){
+                    if(( $type == 'Fasting' && $input_data['blood_sugar'] <= 60) || ( $type == 'Postprandial' && $input_data['blood_sugar'] <= 80) || ( $type == 'HbA1c (%)' && $input_data['blood_sugar'] <= 4.0) || ( $type == 'Random' && $input_data['blood_sugar'] <= 60) ){
                         $input_data['bsFlag']      = 'Low (Hypoglycemia)';
                         $input_data['bsFlagColor'] = 'primary';
                         $input_data['range_code']  = '#0000ff';
@@ -1207,26 +1207,26 @@ class Vital extends BaseModel
         
                     // normal
                     // if ($input_data['blood_sugar'] >= 71 && $input_data['blood_sugar'] <= 127) {
-                    if (($type == 'Fasting' && $input_data['blood_sugar'] >= 60 && $input_data['blood_sugar'] <= 100) || ($type == 'Post prandial ' && $input_data['blood_sugar'] >= 80 && $input_data['blood_sugar'] <= 140) || ($type == ' HbA1c (%)' && $input_data['blood_sugar'] >= 4.0 && $input_data['blood_sugar'] <= 5.6) || (($type == 'Random' && $input_data['blood_sugar'] >= 60 && $input_data['blood_sugar'] <= 100))) {
+                    if (($type == 'Fasting' && $input_data['blood_sugar'] >= 60 && $input_data['blood_sugar'] <= 100) || ($type == 'Postprandial' && $input_data['blood_sugar'] >= 80 && $input_data['blood_sugar'] <= 140) || ($type == ' HbA1c (%)' && $input_data['blood_sugar'] >= 4.0 && $input_data['blood_sugar'] <= 5.6) || (($type == 'Random' && $input_data['blood_sugar'] >= 60 && $input_data['blood_sugar'] <= 100))) {
                         $input_data['bsFlag']      = 'Normal';
                         $input_data['bsFlagColor'] = 'success';
                         $input_data['range_code']  = '#008000';
                     }
                     // Mildly Reduced (Early Signs of Insulin Resistance)
-                    if (($type == 'Fasting' && $input_data['blood_sugar'] >= 101 && $input_data['blood_sugar'] <= 110) || ($type == 'Post prandial' && $input_data['blood_sugar'] >= 141 && $input_data['blood_sugar'] <= 160) || ($type == 'HbA1c (%)' && $input_data['blood_sugar'] >= 5.7 && $input_data['blood_sugar'] <= 6.0) || (($type == 'Random' && $input_data['blood_sugar'] >= 101 && $input_data['blood_sugar'] <= 110))) {
+                    if (($type == 'Fasting' && $input_data['blood_sugar'] >= 101 && $input_data['blood_sugar'] <= 110) || ($type == 'Postprandial' && $input_data['blood_sugar'] >= 141 && $input_data['blood_sugar'] <= 160) || ($type == 'HbA1c (%)' && $input_data['blood_sugar'] >= 5.7 && $input_data['blood_sugar'] <= 6.0) || (($type == 'Random' && $input_data['blood_sugar'] >= 101 && $input_data['blood_sugar'] <= 110))) {
                         $input_data['bsFlag']      = 'Mildly Elevated (Pre-diabetes)';
                         $input_data['bsFlagColor'] = 'warning';
                         $input_data['range_code']  = '#fff707';
                     }
         
                     // Moderately Reduced (Impaired Glucose Tolerance/Pre-Diabetes)
-                    if (($type == 'Fasting' && $input_data['blood_sugar'] >= 111 && $input_data['blood_sugar'] <= 125) || ($type == 'Post prandial' && $input_data['blood_sugar'] >= 111 && $input_data['blood_sugar'] <= 125) || ($type == 'HbA1c (%)' && $input_data['blood_sugar'] >= 6.1 && $input_data['blood_sugar'] <= 6.4) || (($type == 'Random' && $input_data['blood_sugar'] >= 111 && $input_data['blood_sugar'] <= 125))) {
+                    if (($type == 'Fasting' && $input_data['blood_sugar'] >= 111 && $input_data['blood_sugar'] <= 125) || ($type == 'Postprandial' && $input_data['blood_sugar'] >= 111 && $input_data['blood_sugar'] <= 125) || ($type == 'HbA1c (%)' && $input_data['blood_sugar'] >= 6.1 && $input_data['blood_sugar'] <= 6.4) || (($type == 'Random' && $input_data['blood_sugar'] >= 111 && $input_data['blood_sugar'] <= 125))) {
                         $input_data['bsFlag']      = 'Moderately Elevated (High blood sugar)';
                         $input_data['bsFlagColor'] = 'warning';
                         $input_data['range_code']  = '#ffc107';
                     }
                     // Severely Reduced(Diabetes/Severe Hyperglycemia)
-                    if (($type == 'Fasting' && $input_data['blood_sugar'] >= 126) || ($type == 'Post prandial' && $input_data['blood_sugar'] >= 181) || ($type == 'HbA1c (%)' && $input_data['blood_sugar'] >= 6.5) || ($type == 'Random' && $input_data['blood_sugar'] > 126)) {
+                    if (($type == 'Fasting' && $input_data['blood_sugar'] >= 126) || ($type == 'Postprandial' && $input_data['blood_sugar'] >= 181) || ($type == 'HbA1c (%)' && $input_data['blood_sugar'] >= 6.5) || ($type == 'Random' && $input_data['blood_sugar'] >= 126)) {
                         $input_data['bsFlag']      = 'Severely Elevated (Severe Hyperglycemia)';
                         $input_data['bsFlagColor'] = 'danger';
                         $input_data['range_code']  = '#ff0000';
@@ -1242,7 +1242,7 @@ class Vital extends BaseModel
             if ($input_data['unit'] == 'mg/dL') {
 
                 // low
-                if(( $type == 'Fasting' && $input_data['blood_sugar'] < 70) || ( $type == 'Post prandial' && $input_data['blood_sugar'] < 90) || ( $type == 'HbA1c (%)' && $input_data['blood_sugar'] < 4.5) || ( $type == 'Random' && $input_data['blood_sugar'] <70) ){
+                if(( $type == 'Fasting' && $input_data['blood_sugar'] < 70) || ( $type == 'Postprandial' && $input_data['blood_sugar'] < 90) || ( $type == 'HbA1c (%)' && $input_data['blood_sugar'] < 4.5) || ( $type == 'Random' && $input_data['blood_sugar'] <70) ){
                     $input_data['bsFlag']      = 'Low (Hypoglycemia)';
                     $input_data['bsFlagColor'] = 'primary';
                     $input_data['range_code']  = '#0000ff';
@@ -1250,26 +1250,26 @@ class Vital extends BaseModel
     
                 // normal
                 // if ($input_data['blood_sugar'] >= 71 && $input_data['blood_sugar'] <= 127) {
-                if (($type == 'Fasting' && $input_data['blood_sugar'] >= 70 && $input_data['blood_sugar'] <= 110) || ($type == 'Post prandial' && $input_data['blood_sugar'] >= 90 && $input_data['blood_sugar'] <= 150 ) || ($type == 'HbA1c (%)' && $input_data['blood_sugar'] >= 4.0 && $input_data['blood_sugar'] <= 6.0) || (($type == 'Random' && $input_data['blood_sugar'] >= 70 && $input_data['blood_sugar'] <= 110))) {
+                if (($type == 'Fasting' && $input_data['blood_sugar'] >= 70 && $input_data['blood_sugar'] <= 110) || ($type == 'Postprandial' && $input_data['blood_sugar'] >= 90 && $input_data['blood_sugar'] <= 150 ) || ($type == 'HbA1c (%)' && $input_data['blood_sugar'] >= 4.0 && $input_data['blood_sugar'] <= 6.0) || (($type == 'Random' && $input_data['blood_sugar'] >= 70 && $input_data['blood_sugar'] <= 110))) {
                     $input_data['bsFlag']      = 'Normal';
                     $input_data['bsFlagColor'] = 'success';
                     $input_data['range_code']  = '#008000';
                 }
                 // Mildly Reduced (Early Signs of Insulin Resistance)
-                if (($type == 'Fasting' && $input_data['blood_sugar'] >= 101 && $input_data['blood_sugar'] <= 110) || ($type == 'Post prandial' && $input_data['blood_sugar'] >= 141 && $input_data['blood_sugar'] <= 160) || ($type == 'HbA1c (%)' && $input_data['blood_sugar'] >= 5.7 && $input_data['blood_sugar'] <= 6.0) || (($type == 'Random' && $input_data['blood_sugar'] >= 101 && $input_data['blood_sugar'] <= 110))) {
+                if (($type == 'Fasting' && $input_data['blood_sugar'] >= 101 && $input_data['blood_sugar'] <= 110) || ($type == 'Postprandial' && $input_data['blood_sugar'] >= 141 && $input_data['blood_sugar'] <= 160) || ($type == 'HbA1c (%)' && $input_data['blood_sugar'] >= 5.7 && $input_data['blood_sugar'] <= 6.0) || (($type == 'Random' && $input_data['blood_sugar'] >= 101 && $input_data['blood_sugar'] <= 110))) {
                     $input_data['bsFlag']      = 'Mildly Elevated (Pre-diabetes)';
                     $input_data['bsFlagColor'] = 'warning';
                     $input_data['range_code']  = '#fff707';
                 }
     
                 // Moderately Reduced (Impaired Glucose Tolerance/Pre-Diabetes)
-                if (($type == 'Fasting' && $input_data['blood_sugar'] >= 121 && $input_data['blood_sugar'] <= 135) || ($type == 'Post prandial' && $input_data['blood_sugar'] >= 171 && $input_data['blood_sugar'] <= 190) || ($type == 'HbA1c (%)' && $input_data['blood_sugar'] >= 6.1 && $input_data['blood_sugar'] <= 7.0) || (($type == 'Random' && $input_data['blood_sugar'] >= 111 && $input_data['blood_sugar'] <= 125))) {
+                if (($type == 'Fasting' && $input_data['blood_sugar'] >= 121 && $input_data['blood_sugar'] <= 135) || ($type == 'Postprandial' && $input_data['blood_sugar'] >= 171 && $input_data['blood_sugar'] <= 190) || ($type == 'HbA1c (%)' && $input_data['blood_sugar'] >= 6.1 && $input_data['blood_sugar'] <= 7.0) || (($type == 'Random' && $input_data['blood_sugar'] >= 111 && $input_data['blood_sugar'] <= 125))) {
                     $input_data['bsFlag']      = 'Moderately Elevated (High blood sugar)';
                     $input_data['bsFlagColor'] = 'warning';
                     $input_data['range_code']  = '#ffc107';
                 }
                 // Severely Reduced(Diabetes/Severe Hyperglycemia)
-                if (($type == 'Fasting' && $input_data['blood_sugar'] >= 126) || ($type == 'Post prandial' && $input_data['blood_sugar'] >= 181) || ($type == 'HbA1c (%)' && $input_data['blood_sugar'] >= 6.5) || ($type == 'Random' && $input_data['blood_sugar'] > 126)) {
+                if (($type == 'Fasting' && $input_data['blood_sugar'] >= 126) || ($type == 'Postprandial' && $input_data['blood_sugar'] >= 181) || ($type == 'HbA1c (%)' && $input_data['blood_sugar'] >= 6.5) || ($type == 'Random' && $input_data['blood_sugar'] > 126)) {
                     $input_data['bsFlag']      = 'Severely Elevated (Severe Hyperglycemia)';
                     $input_data['bsFlagColor'] = 'danger';
                     $input_data['range_code']  = '#ff0000';
@@ -1292,26 +1292,26 @@ class Vital extends BaseModel
 
 
         //     // if ($input_data['blood_sugar'] >= 71 && $input_data['blood_sugar'] <= 127) {
-        //     if (($type == 'Fasting' && $input_data['blood_sugar'] >= 71 && $input_data['blood_sugar'] <= 99) || ($type == 'Random' && $input_data['blood_sugar'] >= 71 && $input_data['blood_sugar'] <= 140) || ($type == 'Post Prandial' && $input_data['blood_sugar'] >= 71 && $input_data['blood_sugar'] <= 140)) {
+        //     if (($type == 'Fasting' && $input_data['blood_sugar'] >= 71 && $input_data['blood_sugar'] <= 99) || ($type == 'Random' && $input_data['blood_sugar'] >= 71 && $input_data['blood_sugar'] <= 140) || ($type == 'Postprandial' && $input_data['blood_sugar'] >= 71 && $input_data['blood_sugar'] <= 140)) {
         //         $input_data['bsFlag']      = 'Normal';
         //         $input_data['bsFlagColor'] = 'success';
         //         $input_data['range_code']  = '#008000';
         //     }
 
-        //     if (($type == 'Fasting' && $input_data['blood_sugar'] >= 100 && $input_data['blood_sugar'] <= 125) || ($type == 'Random' && $input_data['blood_sugar'] >= 140 && $input_data['blood_sugar'] <= 199) || ($type == 'Post Prandial' && $input_data['blood_sugar'] >= 140 && $input_data['blood_sugar'] <= 199)) {
+        //     if (($type == 'Fasting' && $input_data['blood_sugar'] >= 100 && $input_data['blood_sugar'] <= 125) || ($type == 'Random' && $input_data['blood_sugar'] >= 140 && $input_data['blood_sugar'] <= 199) || ($type == 'Postprandial' && $input_data['blood_sugar'] >= 140 && $input_data['blood_sugar'] <= 199)) {
         //         $input_data['bsFlag']      = 'Mildly Elevated (Pre-diabetes)';
         //         $input_data['bsFlagColor'] = 'warning';
         //         $input_data['range_code']  = '#fff707';
         //     }
 
 
-        //     if (($type == 'Fasting' && $input_data['blood_sugar'] >= 126 && $input_data['blood_sugar'] <= 160) || ($type == 'Random' && $input_data['blood_sugar'] >= 200 && $input_data['blood_sugar'] <= 300) || ($type == 'Post Prandial' && $input_data['blood_sugar'] >= 200 && $input_data['blood_sugar'] <= 300)) {
+        //     if (($type == 'Fasting' && $input_data['blood_sugar'] >= 126 && $input_data['blood_sugar'] <= 160) || ($type == 'Random' && $input_data['blood_sugar'] >= 200 && $input_data['blood_sugar'] <= 300) || ($type == 'Postprandial' && $input_data['blood_sugar'] >= 200 && $input_data['blood_sugar'] <= 300)) {
         //         $input_data['bsFlag']      = 'Moderately Elevated (High blood sugar)';
         //         $input_data['bsFlagColor'] = 'warning';
         //         $input_data['range_code']  = '#ffc107';
         //     }
 
-        //     if (($type == 'Fasting' && $input_data['blood_sugar'] > 160) || ($type == 'Random' && $input_data['blood_sugar'] > 300) || ($type == 'Post Prandial' && $input_data['blood_sugar'] > 300)) {
+        //     if (($type == 'Fasting' && $input_data['blood_sugar'] > 160) || ($type == 'Random' && $input_data['blood_sugar'] > 300) || ($type == 'Postprandial' && $input_data['blood_sugar'] > 300)) {
         //         $input_data['bsFlag']      = 'Severely Elevated (Severe Hyperglycemia)';
         //         $input_data['bsFlagColor'] = 'danger';
         //         $input_data['range_code']  = '#ff0000';
@@ -1390,27 +1390,27 @@ class Vital extends BaseModel
          if ($years == 0 && $months > 0) {
             if (($months >= 1) && ($months < 12)) {
 
-                if ($input_data['spo2'] < 88) {
-                    $input_data['spo2Flag']      = 'Low (Hypoxemia)  ';
-                    $input_data['spo2FlagColor'] = 'danger';
-                    $input_data['range_code']    = '#0000ff';
-                }
-                if (($input_data['spo2'] > 90) && ($input_data['spo2'] < 100)) {
+                // if ($input_data['spo2'] <= 88) {
+                //     $input_data['spo2Flag']      = 'Low (Hypoxemia)';
+                //     $input_data['spo2FlagColor'] = 'danger';
+                //     $input_data['range_code']    = '#0000ff';
+                // }
+                if (($input_data['spo2'] >= 90) && ($input_data['spo2'] <= 100)) {
                     $input_data['spo2Flag']      = 'Normal  ';
                     $input_data['spo2FlagColor'] = 'success';
                     $input_data['range_code']    = '#008000';
                 }
-                if (($input_data['spo2'] > 89) && ($input_data['spo2'] < 85)) {
+                if (($input_data['spo2'] >= 86) && ($input_data['spo2'] <= 89)) {
                     $input_data['spo2Flag']      = 'Slightly Decreased(Mild Hypoxemia)  ';
                     $input_data['spo2FlagColor'] = 'warning';
                     $input_data['range_code']    = '#fff707';
                 }
-                if (($input_data['spo2'] > 84) && ($input_data['spo2'] < 80)) {
+                if (($input_data['spo2'] >= 80) && ($input_data['spo2'] <= 85)) {
                     $input_data['spo2Flag']      = 'Moderately Decreased (Moderate Hypoxemia)  ';
                     $input_data['spo2FlagColor'] = 'primary';
                     $input_data['range_code']    = '#FFC107';
                 }
-                if ($input_data['spo2'] < 80) {
+                if ($input_data['spo2'] <= 79) {
                     $input_data['spo2Flag']      = 'Severely Low (Severe Hypoxemia)  ';
                     $input_data['spo2FlagColor'] = 'danger';
                     $input_data['range_code']    = '#ff0000';
@@ -1420,27 +1420,27 @@ class Vital extends BaseModel
         }
 
                 if (($years >= 1) && ($years <= 3)) {
-                    if ($input_data['spo2'] < 88) {
-                        $input_data['spo2Flag']      = 'Low (Hypoxemia)';
-                        $input_data['spo2FlagColor'] = 'danger';
-                        $input_data['range_code']    = '#0000ff';
-                    }
-                    if (($input_data['spo2'] > 90) && ($input_data['spo2'] < 100)) {
+                    // if ($input_data['spo2'] <= 88) {
+                    //     $input_data['spo2Flag']      = 'Low (Hypoxemia)';
+                    //     $input_data['spo2FlagColor'] = 'danger';
+                    //     $input_data['range_code']    = '#0000ff';
+                    // }
+                    if (($input_data['spo2'] >= 90) && ($input_data['spo2'] <= 100)) {
                         $input_data['spo2Flag']      = 'Normal  ';
                         $input_data['spo2FlagColor'] = 'success';
                         $input_data['range_code']    = '#008000';
                     }
-                    if (($input_data['spo2'] > 89) && ($input_data['spo2'] <= 85)) {
+                    if (($input_data['spo2'] >= 86) && ($input_data['spo2'] <= 89)) {
                         $input_data['spo2Flag']      = 'Slightly Decreased(Mild Hypoxemia)';
                         $input_data['spo2FlagColor'] = 'warning';
                         $input_data['range_code']    = '#fff707';
                     }
-                    if (($input_data['spo2'] > 84) && ($input_data['spo2'] < 80)) {
+                    if (($input_data['spo2'] >= 80) && ($input_data['spo2'] <= 85)) {
                         $input_data['spo2Flag']      = 'Moderately Decreased (Moderate Hypoxemia)';
                         $input_data['spo2FlagColor'] = 'primary';
                         $input_data['range_code']    = '#FFC107';
                     }
-                    if ($input_data['spo2'] < 80) {
+                    if ($input_data['spo2'] <= 79) {
                         $input_data['spo2Flag']      = 'Severely Low (Severe Hypoxemia)';
                         $input_data['spo2FlagColor'] = 'danger';
                         $input_data['range_code']    = '#ff0000';
@@ -1448,27 +1448,27 @@ class Vital extends BaseModel
                 }
                 // 4–12 years
                 if (($years >= 4) && ($years <= 12)) {
-                    if ($input_data['spo2'] < 90) {
-                        $input_data['spo2Flag']      = 'Low (Hypoxemia)';
-                        $input_data['spo2FlagColor'] = 'danger';
-                        $input_data['range_code']    = '#0000ff';
-                    }
-                    if (($input_data['spo2'] > 91) && ($input_data['spo2'] < 100)) {
+                    // if ($input_data['spo2'] <= 90) {
+                    //     $input_data['spo2Flag']      = 'Low (Hypoxemia)';
+                    //     $input_data['spo2FlagColor'] = 'danger';
+                    //     $input_data['range_code']    = '#0000ff';
+                    // }
+                    if (($input_data['spo2'] >= 91) && ($input_data['spo2'] <= 100)) {
                         $input_data['spo2Flag']      = 'Normal';
                         $input_data['spo2FlagColor'] = 'success';
                         $input_data['range_code']    = '#008000';
                     }
-                    if (($input_data['spo2'] > 90) && ($input_data['spo2'] <85)) {
+                    if (($input_data['spo2'] >= 87) && ($input_data['spo2'] <= 89)) {
                         $input_data['spo2Flag']      = 'Slightly Decreased(Mild Hypoxemia)';
                         $input_data['spo2FlagColor'] = 'warning';
                         $input_data['range_code']    = '#fff707';
                     }
-                    if (($input_data['spo2'] >= 84) && ($input_data['spo2'] <= 80)) {
+                    if (($input_data['spo2'] >= 82) && ($input_data['spo2'] <= 86)) {
                         $input_data['spo2Flag']      = 'Moderately Decreased (Moderate Hypoxemia)';
                         $input_data['spo2FlagColor'] = 'primary';
                         $input_data['range_code']    = '#FFC107';
                     }
-                    if ($input_data['spo2'] < 80) {
+                    if ($input_data['spo2'] <= 81) {
                         $input_data['spo2Flag']      = 'Severely Low (Severe Hypoxemia)';
                         $input_data['spo2FlagColor'] = 'danger';
                         $input_data['range_code']    = '#ff0000';
@@ -1476,27 +1476,27 @@ class Vital extends BaseModel
                 }
                     // 13–18 years
                     if (($years >= 13) && ($years <= 18)) {
-                        if ($input_data['spo2'] < 92) {
-                            $input_data['spo2Flag']      = 'Low (Hypoxemia)';
-                            $input_data['spo2FlagColor'] = 'danger';
-                            $input_data['range_code']    = '#0000ff';
-                        }
+                        // if ($input_data['spo2'] <= 92) {
+                        //     $input_data['spo2Flag']      = 'Low (Hypoxemia)';
+                        //     $input_data['spo2FlagColor'] = 'danger';
+                        //     $input_data['range_code']    = '#0000ff';
+                        // }
                         if (($input_data['spo2'] >= 93) && ($input_data['spo2'] <= 100)) {
                             $input_data['spo2Flag']      = 'Normal  ';
                             $input_data['spo2FlagColor'] = 'success';
                             $input_data['range_code']    = '#008000';
                         }
-                        if (($input_data['spo2'] >= 92) && ($input_data['spo2'] <= 89)) {
+                        if (($input_data['spo2'] >= 89) && ($input_data['spo2'] <= 92)) {
                             $input_data['spo2Flag']      = 'Slightly Decreased(Mild Hypoxemia)  ';
                             $input_data['spo2FlagColor'] = 'warning';
                             $input_data['range_code']    = '#fff707';
                         }
-                        if (($input_data['spo2'] >= 88) && ($input_data['spo2'] <= 85)) {
+                        if (($input_data['spo2'] >= 84) && ($input_data['spo2'] <= 88)) {
                             $input_data['spo2Flag']      = 'Moderately Decreased (Moderate Hypoxemia)  ';
                             $input_data['spo2FlagColor'] = 'primary';
                             $input_data['range_code']    = '#FFC107';
                         }
-                        if ($input_data['spo2'] < 85) {
+                        if ($input_data['spo2'] <= 83) {
                             $input_data['spo2Flag']      = 'Severely Low (Severe Hypoxemia)';
                             $input_data['spo2FlagColor'] = 'danger';
                             $input_data['range_code']    = '#ff0000';
@@ -1504,27 +1504,27 @@ class Vital extends BaseModel
                     }
                             // 19–65 years
                             if (($years >= 19) && ($years <= 65)) {
-                                if ($input_data['spo2'] < 92) {
-                                    $input_data['spo2Flag']      = 'Low (Hypoxemia)';
-                                    $input_data['spo2FlagColor'] = 'danger';
-                                    $input_data['range_code']    = '#0000ff';
-                                }
-                                if (($input_data['spo2'] > 94) && ($input_data['spo2'] < 100)) {
+                                // if ($input_data['spo2'] < 92) {
+                                //     $input_data['spo2Flag']      = 'Low (Hypoxemia)';
+                                //     $input_data['spo2FlagColor'] = 'danger';
+                                //     $input_data['range_code']    = '#0000ff';
+                                // }
+                                if (($input_data['spo2'] >= 94) && ($input_data['spo2'] <= 100)) {
                                     $input_data['spo2Flag']      = 'Normal';
                                     $input_data['spo2FlagColor'] = 'success';
                                     $input_data['range_code']    = '#008000';
                                 }
-                                if (($input_data['spo2'] >= 93) && ($input_data['spo2'] <= 90)) {
+                                if (($input_data['spo2'] >= 90) && ($input_data['spo2'] <= 92)) {
                                     $input_data['spo2Flag']      = 'Slightly Decreased(Mild Hypoxemia)';
                                     $input_data['spo2FlagColor'] = 'warning';
                                     $input_data['range_code']    = '#fff707';
                                 }
-                                if (($input_data['spo2'] >= 89) && ($input_data['spo2'] <= 85)) {
+                                if (($input_data['spo2'] >= 85) && ($input_data['spo2'] <= 89)) {
                                     $input_data['spo2Flag']      = 'Moderately Decreased (Moderate Hypoxemia)';
                                     $input_data['spo2FlagColor'] = 'primary';
                                     $input_data['range_code']    = '#FFC107';
                                 }
-                                if ($input_data['spo2'] < 85) {
+                                if ($input_data['spo2'] <= 83) {
                                     $input_data['spo2Flag']      = 'Severely Low (Severe Hypoxemia)';
                                     $input_data['spo2FlagColor'] = 'danger';
                                     $input_data['range_code']    = '#ff0000';
@@ -1533,27 +1533,27 @@ class Vital extends BaseModel
             }
 
             if ($years > 65) {
-                if ($input_data['spo2'] < 90) {
-                    $input_data['spo2Flag']      = 'Low (Hypoxemia)  ';
-                    $input_data['spo2FlagColor'] = 'danger';
-                    $input_data['range_code']    = '#0000ff';
-                }
+                // if ($input_data['spo2'] < 90) {
+                //     $input_data['spo2Flag']      = 'Low (Hypoxemia)  ';
+                //     $input_data['spo2FlagColor'] = 'danger';
+                //     $input_data['range_code']    = '#0000ff';
+                // }
                 if (($input_data['spo2'] >= 91) && ($input_data['spo2'] <= 100)) {
                     $input_data['spo2Flag']      = 'Normal  ';
                     $input_data['spo2FlagColor'] = 'success';
                     $input_data['range_code']    = '#008000';
                 }
-                if (($input_data['spo2'] >= 90) && ($input_data['spo2'] <= 85)) {
+                if (($input_data['spo2'] >= 87) && ($input_data['spo2'] <= 89)) {
                     $input_data['spo2Flag']      = 'Slightly Decreased(Mild Hypoxemia)  ';
                     $input_data['spo2FlagColor'] = 'warning';
                     $input_data['range_code']    = '#fff707';
                 }
-                if (($input_data['spo2'] >= 84) && ($input_data['spo2'] <= 80)) {
+                if (($input_data['spo2'] >= 82) && ($input_data['spo2'] <= 86)) {
                     $input_data['spo2Flag']      = 'Moderately Decreased (Moderate Hypoxemia)  ';
                     $input_data['spo2FlagColor'] = 'primary';
                     $input_data['range_code']    = '#FFC107';
                 }
-                if ($input_data['spo2'] < 80) {
+                if ($input_data['spo2'] <= 81) {
                     $input_data['spo2Flag']      = 'Severely Low (Severe Hypoxemia)';
                     $input_data['spo2FlagColor'] = 'danger';
                     $input_data['range_code']    = '#ff0000';
@@ -2354,7 +2354,7 @@ class Vital extends BaseModel
 
 
     public static function blood_pressure_flag($input_data,  $years, $months, $days){
-        $input_data['bpFlag']      = 'LOW BLOOD PRESSURE(D)';
+        $input_data['bpFlag']      = 'LOW BLOOD PRESSURE()';
         $input_data['bpFlagColor'] = 'primary';
         $input_data['range_code']  = '#0000ff';
 
@@ -4269,9 +4269,9 @@ class Vital extends BaseModel
 
     public static function hct_flag($input_data, $years, $months, $days, $gender)
     {
-        $input_data['hctFlag']      = 'Danger';
-        $input_data['hctFlagColor'] = 'danger';
-        $input_data['range_code']    = '#ff0000';
+        $input_data['hctFlag']      = '';
+        $input_data['hctFlagColor'] = '';
+        $input_data['range_code']    = '';
         // if(empty($dob) || $dob == '0000-00-00'){
         //     $years = 20;
         // }
@@ -4326,7 +4326,7 @@ class Vital extends BaseModel
         // }
 
         if($years >= 0 && $years <= 1){
-            if (($input_data['hct'] < '33')) {
+            if (($input_data['hct'] <= '33')) {
                 $input_data['hctFlag']      = 'Low (Anemia/Deficiency)';
                 $input_data['hctFlagColor'] = 'primary';
                 $input_data['range_code']    = '#0000ff';
@@ -4386,7 +4386,7 @@ class Vital extends BaseModel
         if($years >= 13 && $years <= 18){
             if($gender == 'Male'){
 
-                if (($input_data['hct'] < '37')) {
+                if (($input_data['hct'] <= '37')) {
                     $input_data['hctFlag']      = 'Low (Anemia/Deficiency)';
                     $input_data['hctFlagColor'] = 'primary';
                     $input_data['range_code']    = '#0000ff';
@@ -4398,7 +4398,7 @@ class Vital extends BaseModel
                     $input_data['range_code']    = '#008000';
                 }
 
-                if (($input_data['hct'] > '47')) {
+                if (($input_data['hct'] >= '47')) {
                     $input_data['hctFlag']      = 'High (Polycythemia)';
                     $input_data['hctFlagColor'] = 'danger';
                     $input_data['range_code']    = '#FF0000';
@@ -4406,7 +4406,7 @@ class Vital extends BaseModel
             }
             if($gender == 'Female'){
 
-                if (($input_data['hct'] < '36')) {
+                if (($input_data['hct'] <= '36')) {
                     $input_data['hctFlag']      = 'Low (Anemia/Deficiency)';
                     $input_data['hctFlagColor'] = 'primary';
                     $input_data['range_code']    = '#0000ff';
@@ -4418,7 +4418,7 @@ class Vital extends BaseModel
                     $input_data['range_code']    = '#008000';
                 }
 
-                if (($input_data['hct'] > '44')) {
+                if (($input_data['hct'] >= '44')) {
                     $input_data['hctFlag']      = 'High (Polycythemia)';
                     $input_data['hctFlagColor'] = 'danger';
                     $input_data['range_code']    = '#FF0000';
@@ -4429,7 +4429,7 @@ class Vital extends BaseModel
         if($years >= 19 && $years <= 59){
             if($gender == 'Male'){
 
-                if (($input_data['hct'] < '39')) {
+                if (($input_data['hct'] <= '39')) {
                     $input_data['hctFlag']      = 'Low (Anemia/Deficiency)';
                     $input_data['hctFlagColor'] = 'primary';
                     $input_data['range_code']    = '#0000ff';
@@ -4441,7 +4441,7 @@ class Vital extends BaseModel
                     $input_data['range_code']    = '#008000';
                 }
 
-                if (($input_data['hct'] > '50')) {
+                if (($input_data['hct'] >= '50')) {
                     $input_data['hctFlag']      = 'High (Polycythemias)';
                     $input_data['hctFlagColor'] = 'danger';
                     $input_data['range_code']    = '#FF0000';
@@ -4449,7 +4449,7 @@ class Vital extends BaseModel
             }
             if($gender == 'female'){
 
-                if (($input_data['hct'] < '36')) {
+                if (($input_data['hct'] <= '36')) {
                     $input_data['hctFlag']      = 'Low (Anemia/Deficiency)';
                     $input_data['hctFlagColor'] = 'primary';
                     $input_data['range_code']    = '#0000ff';
@@ -4461,7 +4461,7 @@ class Vital extends BaseModel
                     $input_data['range_code']    = '#008000';
                 }
 
-                if (($input_data['hct'] > '46')) {
+                if (($input_data['hct'] >= '46')) {
                     $input_data['hctFlag']      = 'High (Polycythemia)';
                     $input_data['hctFlagColor'] = 'danger';
                     $input_data['range_code']    = '#FF0000';
@@ -4472,7 +4472,7 @@ class Vital extends BaseModel
         if($years >60){
             if($gender == 'male'){
                
-                if (($input_data['hct'] < '38')) {
+                if (($input_data['hct'] <= '38')) {
                     $input_data['hctFlag']      = 'Low (Anemia/Deficiency)';
                     $input_data['hctFlagColor'] = 'primary';
                     $input_data['range_code']    = '#0000ff';
@@ -4484,7 +4484,7 @@ class Vital extends BaseModel
                     $input_data['range_code']    = '#008000';
                 }
 
-                if (($input_data['hct'] > '50')) {
+                if (($input_data['hct'] >= '50')) {
                     $input_data['hctFlag']      = 'High (Polycythemia) ';
                     $input_data['hctFlagColor'] = 'danger';
                     $input_data['range_code']    = '#FF0000';
@@ -4495,7 +4495,7 @@ class Vital extends BaseModel
         if($years >60){
             if($gender == 'female'){
                
-                if (($input_data['hct'] < '37')) {
+                if (($input_data['hct'] <= '37')) {
                     $input_data['hctFlag']      = 'Low (Anemia/Deficiency)';
                     $input_data['hctFlagColor'] = 'primary';
                     $input_data['range_code']    = '#0000ff';
@@ -4507,7 +4507,7 @@ class Vital extends BaseModel
                     $input_data['range_code']    = '#008000';
                 }
 
-                if (($input_data['hct'] > '47')) {
+                if (($input_data['hct'] >= '47')) {
                     $input_data['hctFlag']      = 'High (Polycythemia)';
                     $input_data['hctFlagColor'] = 'danger';
                     $input_data['range_code']    = '#FF0000';
@@ -4769,7 +4769,7 @@ class Vital extends BaseModel
             if($years >= 5 && $years <= 12){
 
         if ($input_data['fvc'] >= 1.5) {
-            $input_data['fvcFlag']      = 'Normal6';
+            $input_data['fvcFlag']      = 'Normal';
             $input_data['fvcFlagColor'] = 'success';
             $input_data['fvcRangeCode']    = '#008000';
         } else if ($input_data['fvc'] >= 1.2 && $input_data['fvc'] <= 1.49) {
@@ -4907,6 +4907,7 @@ $input_data['fvcRangeCode']    = '#FF0000';
     $input_data['fvcRangeCode']    = '#FF0000';
     }
     }
+}
     
             // }fvc(l/s)
             if($years >= 60){
@@ -4931,7 +4932,8 @@ $input_data['fvcRangeCode']    = '#FF0000';
             $input_data['fvcRangeCode']    = '#FF0000';
         }
         }
-        }
+        
+    }
 
         
         // fev1(l/s)
@@ -4962,7 +4964,7 @@ $input_data['fvcRangeCode']    = '#FF0000';
             if($years >= 5 && $years <= 12){
 
         if ($input_data['fev1'] >= 1.2) {
-            $input_data['fev1Flag']      = 'Normal6';
+            $input_data['fev1Flag']      = 'Normal';
             $input_data['fvcFlagColor'] = 'success';
             $input_data['fvcRangeCode']    = '#008000';
         } else if ($input_data['fev1'] >= 0.9 && $input_data['fev1'] <= 1.9) {
@@ -5156,7 +5158,7 @@ $input_data['fev1RangeCode']    = '#FF0000';
              
                 if($years >=5 && $years <= 12 ){
                     if ($input_data['fev1_fvc'] >= 85) {
-                                $input_data['fev1FvcFlag']      = 'Normal6';
+                                $input_data['fev1FvcFlag']      = 'Normal';
                                 $input_data['fev1FvcFlagColor'] = 'success';
                                 $input_data['fev1FvcRangeCode']    = '#008000';
                             } else if ($input_data['fev1_fvc'] >= 75 && $input_data['fev1_fvc'] <= 84) {
@@ -5295,7 +5297,7 @@ $input_data['fev1RangeCode']    = '#FF0000';
             if($years >= 5 && $years <= 12){
                 $input_data['pef'] = $input_data['pef'];
         if ($input_data['pef'] >= 4.0) {
-            $input_data['pefFlag']      = 'Normal6';
+            $input_data['pefFlag']      = 'Normal';
             $input_data['pefFlagColor'] = 'success';
             $input_data['pefRangeCode']    = '#008000';
         } else if ($input_data['pef'] >= 3.0 && $input_data['pef'] <= 3.99) {
@@ -5436,7 +5438,7 @@ if(!empty($input_data['fef25'])) {
     if($years >= 5 && $years <= 12){
 
 if ($input_data['fef25'] >= 2.5) {
-    $input_data['fef25Flag']      = 'Normal6';
+    $input_data['fef25Flag']      = 'Normal';
     $input_data['fef25FlagColor'] = 'success';
     $input_data['fef25RangeCode']    = '#008000';
 } else if ($input_data['fef25'] >= 2.0 && $input_data['fef25'] <= 2.49) {
@@ -5585,7 +5587,7 @@ if($years >= 5 && $years <= 12){
 
 
 if ($input_data['fef50'] >= 1.8) {
-$input_data['fef50Flag']      = 'Normal6';
+$input_data['fef50Flag']      = 'Normal';
 $input_data['fef50FlagColor'] = 'success';
 $input_data['fef50RangeCode']    = '#008000';
 } else if ($input_data['fef50'] >= 1.4 && $input_data['fef50'] <= 1.79) {
@@ -5707,7 +5709,7 @@ if($years >= 5 && $years <= 12){
 
 
 if ($input_data['fef75'] >= 0.9) {
-$input_data['fef75Flag']      = 'Normal6';
+$input_data['fef75Flag']      = 'Normal';
 $input_data['fef75FlagColor'] = 'success';
 $input_data['fef75RangeCode']    = '#008000';
 } else if ($input_data['fef75'] >= 0.7 && $input_data['fef75'] <= 0.89) {
@@ -5918,6 +5920,10 @@ $input_data['fef2575FlagColor'] = 'danger';
 $input_data['fef2575RangeCode']    = '#FF0000';
 }
 }
+}
+}
+        
+return $input_data;
 }
         // fvc(%)
 //         if(!empty($input_data['fvc(%)'])) {
@@ -7035,10 +7041,10 @@ $input_data['fef2575RangeCode']    = '#FF0000';
 
     //    
     // }
-     return $input_data;
-}
-        }
-    }
+//      return $input_data;
+// }
+    
+
     public static function urea_flag($input_data, $years, $months, $days)
     {
         $input_data['ureaFlag']      = '';
