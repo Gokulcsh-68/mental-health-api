@@ -87,7 +87,7 @@ class Doc extends BaseModel
 
             if(isset($data['addition_info']['scan_centre_id'])) {
                 $addition_info = $data['addition_info'];
-                $addition_info['scan_status'] = 'Not Uploaded';
+                $addition_info['scan_status'] = (!empty($data['addition_info']['scan_status']) ? $data['addition_info']['scan_status'] : 'Not Uploaded');
                 $data['addition_info'] = $addition_info;
             }
 
