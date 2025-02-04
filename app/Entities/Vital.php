@@ -227,7 +227,12 @@ class Vital extends BaseModel
 
         if($data['slug'] == 'hemoglobin'){
             $gender = User::Where('id', $data['user_id'])->value('gender');
-            $data['details'] += self::hemoglobin_flag($data['details'],$gender);
+            $dateOfBirth = User::Where('id', $data['user_id'])->value('dob');
+
+            $years = Carbon::parse($dateOfBirth)->diff(Carbon::now())->format('%y');
+            $months = Carbon::parse($dateOfBirth)->diff(Carbon::now())->format('%m');
+            $days   = Carbon::parse($dateOfBirth)->diff(Carbon::now())->format('%d');
+            $data['details'] += self::hemoglobin_flag($data['details'],$gender,$years,$months,$days);
         }
 
         if($data['slug'] == 'hct'){
@@ -467,7 +472,12 @@ class Vital extends BaseModel
         if($data['slug'] == 'hemoglobin'){
             unset($data['details']['hemoglobinFlag'], $data['details']['hemoglobinFlagColor'], $data['details']['range_code']);
             $gender = User::Where('id', $data['user_id'])->value('gender');
-            $data['details'] += self::hemoglobin_flag($data['details'],$gender);
+            $dateOfBirth = User::Where('id', $data['user_id'])->value('dob');
+
+            $years = Carbon::parse($dateOfBirth)->diff(Carbon::now())->format('%y');
+            $months = Carbon::parse($dateOfBirth)->diff(Carbon::now())->format('%m');
+            $days   = Carbon::parse($dateOfBirth)->diff(Carbon::now())->format('%d');
+            $data['details'] += self::hemoglobin_flag($data['details'],$gender,$years,$months,$days);
         }
 
         if($data['slug'] == 'hct'){
@@ -4215,54 +4225,229 @@ class Vital extends BaseModel
         return $input_data;
     }
 
-    public static function hemoglobin_flag($input_data, $gender)
+    public static function hemoglobin_flag($input_data, $gender,$years, $months, $days)
     {
         $input_data['hemoglobinFlag']      = 'High';
         $input_data['hemoglobinFlagColor'] = 'danger';
         $input_data['range_code']    = '#ff0000';
+
         if (!empty($input_data['hemoglobin'])) {
+            if($years >= 0 && $years <= 1){
+                if (($input_data['hemoglobin'] < '10')) {
+                                $input_data['hemoglobinFlag']      = 'Anemia (Low)';
+                                $input_data['hemoglobinFlagColor'] = 'primary';
+                                $input_data['range_code']    = '#0000ff';
+                            }
+            
+                            if (($input_data['hemoglobin'] >= '10') && ($input_data['hemoglobin'] <= '24.9')) {
+                                $input_data['hemoglobinFlag']      = 'Normal';
+                                $input_data['hemoglobinFlagColor'] = 'success';
+                                $input_data['range_code']    = '#008000';
+                            }
+            
+                            if (($input_data['hemoglobin'] >= '25')) {
+                                $input_data['hemoglobinFlag']      = 'Polycythemia (High)';
+                                $input_data['hemoglobinFlagColor'] = 'danger';
+                                $input_data['range_code']    = '#ff0000';
+                            }
 
-            if($gender == 'Male'){
-
-                if (($input_data['hemoglobin'] < '13.8')) {
-                    $input_data['hemoglobinFlag']      = 'Low';
-                    $input_data['hemoglobinFlagColor'] = 'primary';
-                    $input_data['range_code']    = '#0000ff';
-                }
-
-                if (($input_data['hemoglobin'] >= '13.8') && ($input_data['hemoglobin'] <= '17.2')) {
-                    $input_data['hemoglobinFlag']      = 'Normal';
-                    $input_data['hemoglobinFlagColor'] = 'success';
-                    $input_data['range_code']    = '#008000';
-                }
-
-                if (($input_data['hemoglobin'] > '17.2')) {
-                    $input_data['hemoglobinFlag']      = 'High';
-                    $input_data['hemoglobinFlagColor'] = 'danger';
-                    $input_data['range_code']    = '#ff0000';
-                }
             }
-            if($gender == 'Female'){
 
-                if (($input_data['hemoglobin'] < '12.1')) {
-                    $input_data['hemoglobinFlag']      = 'Low';
-                    $input_data['hemoglobinFlagColor'] = 'primary';
-                    $input_data['range_code']    = '#0000ff';
-                }
+            if($years >= 2 && $years <= 5){
+                if (($input_data['hemoglobin'] < '10')) {
+                                $input_data['hemoglobinFlag']      = 'Anemia (Low)';
+                                $input_data['hemoglobinFlagColor'] = 'primary';
+                                $input_data['range_code']    = '#0000ff';
+                            }
+            
+                            if (($input_data['hemoglobin'] >= '10') && ($input_data['hemoglobin'] <= '18.5')) {
+                                $input_data['hemoglobinFlag']      = 'Normal';
+                                $input_data['hemoglobinFlagColor'] = 'success';
+                                $input_data['range_code']    = '#008000';
+                            }
+            
+                            if (($input_data['hemoglobin'] >= '18.5')) {
+                                $input_data['hemoglobinFlag']      = 'Polycythemia (High)';
+                                $input_data['hemoglobinFlagColor'] = 'danger';
+                                $input_data['range_code']    = '#ff0000';
+                            }
 
-                if (($input_data['hemoglobin'] >= '12.1') && ($input_data['hemoglobin'] <= '15.1')) {
-                    $input_data['hemoglobinFlag']      = 'Normal';
-                    $input_data['hemoglobinFlagColor'] = 'success';
-                    $input_data['range_code']    = '#008000';
-                }
-
-                if (($input_data['hemoglobin'] > '15.1')) {
-                    $input_data['hemoglobinFlag']      = 'High';
-                    $input_data['hemoglobinFlagColor'] = 'danger';
-                    $input_data['range_code']    = '#ff0000';
-                }
             }
+
+            if($years >= 6 && $years <= 11){
+                if (($input_data['hemoglobin'] < '9')) {
+                                $input_data['hemoglobinFlag']      = 'Anemia (Low)';
+                                $input_data['hemoglobinFlagColor'] = 'primary';
+                                $input_data['range_code']    = '#0000ff';
+                            }
+            
+                            if (($input_data['hemoglobin'] >= '9') && ($input_data['hemoglobin'] <= '15')) {
+                                $input_data['hemoglobinFlag']      = 'Normal';
+                                $input_data['hemoglobinFlagColor'] = 'success';
+                                $input_data['range_code']    = '#008000';
+                            }
+            
+                            if (($input_data['hemoglobin'] >= '25')) {
+                                $input_data['hemoglobinFlag']      = 'Polycythemia (High)';
+                                $input_data['hemoglobinFlagColor'] = 'danger';
+                                $input_data['range_code']    = '#ff0000';
+                            }
+
+            }
+
+            if($years >=12  && $years <= 19){
+                if (($input_data['hemoglobin'] < '10')) {
+                                $input_data['hemoglobinFlag']      = 'Anemia (Low)';
+                                $input_data['hemoglobinFlagColor'] = 'primary';
+                                $input_data['range_code']    = '#0000ff';
+                            }
+            
+                            if (($input_data['hemoglobin'] >= '10') && ($input_data['hemoglobin'] <= '16')) {
+                                $input_data['hemoglobinFlag']      = 'Normal';
+                                $input_data['hemoglobinFlagColor'] = 'success';
+                                $input_data['range_code']    = '#008000';
+                            }
+            
+                            if (($input_data['hemoglobin'] >= '16')) {
+                                $input_data['hemoglobinFlag']      = 'Polycythemia (High)';
+                                $input_data['hemoglobinFlagColor'] = 'danger';
+                                $input_data['range_code']    = '#ff0000';
+                            }
+
+            }
+
+            if($years >=20  && $years <= 59){
+                if($gender == 'Male'){
+
+                            if (($input_data['hemoglobin'] < '11.5')) {
+                                $input_data['hemoglobinFlag']      = 'Anemia (Low)';
+                                $input_data['hemoglobinFlagColor'] = 'primary';
+                                $input_data['range_code']    = '#0000ff';
+                            }
+            
+                            if (($input_data['hemoglobin'] >= '11.5') && ($input_data['hemoglobin'] <= '17.5')) {
+                                $input_data['hemoglobinFlag']      = 'Normal';
+                                $input_data['hemoglobinFlagColor'] = 'success';
+                                $input_data['range_code']    = '#008000';
+                            }
+            
+                            if (($input_data['hemoglobin'] > '17.5')) {
+                                $input_data['hemoglobinFlag']      = 'Polycythemia (High)';
+                                $input_data['hemoglobinFlagColor'] = 'danger';
+                                $input_data['range_code']    = '#ff0000';
+                            }
+                        }
+                        if($gender == 'Female'){
+            
+                            if (($input_data['hemoglobin'] <= '10.0')) {
+                                $input_data['hemoglobinFlag']      = 'Anemia (Low)';
+                                $input_data['hemoglobinFlagColor'] = 'primary';
+                                $input_data['range_code']    = '#0000ff';
+                            }
+            
+                            if (($input_data['hemoglobin'] >= '10.5') && ($input_data['hemoglobin'] <= '17.5')) {
+                                $input_data['hemoglobinFlag']      = 'Normal';
+                                $input_data['hemoglobinFlagColor'] = 'success';
+                                $input_data['range_code']    = '#008000';
+                            }
+            
+                            if (($input_data['hemoglobin'] > '17.5')) {
+                                $input_data['hemoglobinFlag']      = 'Polycythemia (High)';
+                                $input_data['hemoglobinFlagColor'] = 'danger';
+                                $input_data['range_code']    = '#ff0000';
+                            }
+                        }
+            }
+
+            if($years >=60 ){
+                if($gender == 'Male'){
+
+                            if (($input_data['hemoglobin'] < '11.5')) {
+                                $input_data['hemoglobinFlag']      = 'Anemia (Low)';
+                                $input_data['hemoglobinFlagColor'] = 'primary';
+                                $input_data['range_code']    = '#0000ff';
+                            }
+            
+                            if (($input_data['hemoglobin'] >= '11.5') && ($input_data['hemoglobin'] <= '17.5')) {
+                                $input_data['hemoglobinFlag']      = 'Normal';
+                                $input_data['hemoglobinFlagColor'] = 'success';
+                                $input_data['range_code']    = '#008000';
+                            }
+            
+                            if (($input_data['hemoglobin'] > '17.5')) {
+                                $input_data['hemoglobinFlag']      = 'Polycythemia (High)';
+                                $input_data['hemoglobinFlagColor'] = 'danger';
+                                $input_data['range_code']    = '#ff0000';
+                            }
+                        }
+                        if($gender == 'Female'){
+            
+                            if (($input_data['hemoglobin'] <= '10.0')) {
+                                $input_data['hemoglobinFlag']      = 'Anemia (Low)';
+                                $input_data['hemoglobinFlagColor'] = 'primary';
+                                $input_data['range_code']    = '#0000ff';
+                            }
+            
+                            if (($input_data['hemoglobin'] >= '10.5') && ($input_data['hemoglobin'] <= '17.5')) {
+                                $input_data['hemoglobinFlag']      = 'Normal';
+                                $input_data['hemoglobinFlagColor'] = 'success';
+                                $input_data['range_code']    = '#008000';
+                            }
+            
+                            if (($input_data['hemoglobin'] > '17.5')) {
+                                $input_data['hemoglobinFlag']      = 'Polycythemia (High)';
+                                $input_data['hemoglobinFlagColor'] = 'danger';
+                                $input_data['range_code']    = '#ff0000';
+                            }
+                        }
+            }
+
         }
+
+
+        // if (!empty($input_data['hemoglobin'])) {
+
+        //     if($gender == 'Male'){
+
+        //         if (($input_data['hemoglobin'] < '13.8')) {
+        //             $input_data['hemoglobinFlag']      = 'Low';
+        //             $input_data['hemoglobinFlagColor'] = 'primary';
+        //             $input_data['range_code']    = '#0000ff';
+        //         }
+
+        //         if (($input_data['hemoglobin'] >= '13.8') && ($input_data['hemoglobin'] <= '17.2')) {
+        //             $input_data['hemoglobinFlag']      = 'Normal';
+        //             $input_data['hemoglobinFlagColor'] = 'success';
+        //             $input_data['range_code']    = '#008000';
+        //         }
+
+        //         if (($input_data['hemoglobin'] > '17.2')) {
+        //             $input_data['hemoglobinFlag']      = 'High';
+        //             $input_data['hemoglobinFlagColor'] = 'danger';
+        //             $input_data['range_code']    = '#ff0000';
+        //         }
+        //     }
+        //     if($gender == 'Female'){
+
+        //         if (($input_data['hemoglobin'] < '12.1')) {
+        //             $input_data['hemoglobinFlag']      = 'Low';
+        //             $input_data['hemoglobinFlagColor'] = 'primary';
+        //             $input_data['range_code']    = '#0000ff';
+        //         }
+
+        //         if (($input_data['hemoglobin'] >= '12.1') && ($input_data['hemoglobin'] <= '15.1')) {
+        //             $input_data['hemoglobinFlag']      = 'Normal';
+        //             $input_data['hemoglobinFlagColor'] = 'success';
+        //             $input_data['range_code']    = '#008000';
+        //         }
+
+        //         if (($input_data['hemoglobin'] > '15.1')) {
+        //             $input_data['hemoglobinFlag']      = 'High';
+        //             $input_data['hemoglobinFlagColor'] = 'danger';
+        //             $input_data['range_code']    = '#ff0000';
+        //         }
+        //     }
+        // }
 
         return $input_data;
     }
