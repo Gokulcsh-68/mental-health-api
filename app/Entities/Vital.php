@@ -805,9 +805,9 @@ class Vital extends BaseModel
     public static function temp_flag($input_data, $years, $dob)
     {
         if (!empty($input_data['unit']) && !empty($input_data['temperature'])) {
-            $input_data['temperatureFlag']      = '';
-            $input_data['temperatureFlagColor'] = '';
-            $input_data['range_code'] = '';
+            // $input_data['temperatureFlag']      = '';
+            // $input_data['temperatureFlagColor'] = '';
+            // $input_data['range_code'] = '';
 
             if(empty($dob) || $dob == '0000-00-00'){
                 $years = 20;
@@ -841,13 +841,13 @@ class Vital extends BaseModel
                     // }
 
 
-                    if($years < 1){
-                        if (($input_data['temperature'] >= 97)) {
+                    if($years <= 1){
+                        if (($input_data['temperature'] <= 97)) {
                             $input_data['temperatureFlag']      = 'Low (Hypothermia)';
                             $input_data['temperatureFlagColor'] = 'success';
                             $input_data['range_code']    = '#0000ff';
                         }
-                        if (($input_data['temperature'] >= 97) && ($input_data['temperature'] <= 100)) {
+                        if (($input_data['temperature'] > 97) && ($input_data['temperature'] <= 100)) {
                             $input_data['temperatureFlag']      = 'Normal (Normothermia)';
                             $input_data['temperatureFlagColor'] = 'success';
                             $input_data['range_code']    = '#008000';
@@ -869,8 +869,8 @@ class Vital extends BaseModel
                         }
                     }
 
-                    if($years >= 1 && $years <= 18){
-                        if (($input_data['temperature'] >= 97)) {
+                    if($years > 1 && $years <= 18){
+                        if (($input_data['temperature'] <= 97)) {
                             $input_data['temperatureFlag']      = 'Low (Hypothermia)';
                             $input_data['temperatureFlagColor'] = 'success';
                             $input_data['range_code']    = '#0000ff';
@@ -885,7 +885,7 @@ class Vital extends BaseModel
                             $input_data['temperatureFlagColor'] = 'success';
                             $input_data['range_code']    = '#fff707';
                         }
-                        if (($input_data['temperature'] >= 101.5) && ($input_data['temperature'] < 103)) {
+                        if (($input_data['temperature'] >= 101.5) && ($input_data['temperature'] <= 103)) {
                             $input_data['temperatureFlag']      = 'Moderately Increased (Moderate Fever)';
                             $input_data['temperatureFlagColor'] = 'success';
                             $input_data['range_code']    = '#FFC107';
@@ -941,7 +941,7 @@ class Vital extends BaseModel
                             $input_data['temperatureFlagColor'] = 'success';
                             $input_data['range_code']    = '#fff707';
                         }
-                        if (($input_data['temperature'] >= 100.4) && ($input_data['temperature'] < 102)) {
+                        if (($input_data['temperature'] >= 100.4) && ($input_data['temperature'] < 102.2)) {
                             $input_data['temperatureFlag']      = 'Moderately Increased (Moderate Fever)';
                             $input_data['temperatureFlagColor'] = 'success';
                             $input_data['range_code']    = '#FFC107';
@@ -982,13 +982,13 @@ class Vital extends BaseModel
 
 
 
-                    if($years < 1){
-                        if (($input_data['temperature'] >= 36.1)) {
+                    if($years <= 1){
+                        if (($input_data['temperature'] <= 36.1)) {
                             $input_data['temperatureFlag']      = 'Low (Hypothermia)';
                             $input_data['temperatureFlagColor'] = 'success';
                             $input_data['range_code']    = '#0000ff';
                         }
-                        if (($input_data['temperature'] >= 36.1) && ($input_data['temperature'] <= 37.8)) {
+                        if (($input_data['temperature'] > 36.1) && ($input_data['temperature'] <= 37.8)) {
                             $input_data['temperatureFlag']      = 'Normal (Normothermia)';
                             $input_data['temperatureFlagColor'] = 'success';
                             $input_data['range_code']    = '#008000';
@@ -1010,8 +1010,8 @@ class Vital extends BaseModel
                         }
                     }
 
-                    if($years >= 1 && $years <= 18){
-                        if (($input_data['temperature'] >= 36.5)) {
+                    if($years > 1 && $years <= 18){
+                        if (($input_data['temperature'] <= 36.5)) {
                             $input_data['temperatureFlag']      = 'Low (Hypothermia)';
                             $input_data['temperatureFlagColor'] = 'success';
                             $input_data['range_code']    = '#0000ff';
