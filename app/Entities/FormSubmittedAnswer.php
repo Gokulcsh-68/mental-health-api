@@ -90,16 +90,59 @@ class FormSubmittedAnswer extends BaseModel
 
             $answers = [];
 
-            foreach ($data['answers'] as $key => $value) {
-              if(isset($value['score'])){
-               $data['score'] =  $data['score'] + $value['score'];
-              }
+            // foreach ($data['answers'] as $key => $value) {
+            //   if(isset($value['score'])){
+            //    $data['score'] =  $data['score'] + $value['score'];
+            //   }
 
-              if(isset($value['answer'])){
-               $value['answer']['score']  = $value['score']; 
-               $answers[$key]   = $value['answer'];
+            //   if(isset($value['answer'])){
+            //    $value['answer']['score']  = $value['score']; 
+            //    $answers[$key]   = $value['answer'];
+            //   } else {
+            //     $answers[$key]  =  $value;
+            //   }
+            // }
+
+            foreach ($data['answers'] as $key => &$value) { // Use reference to modify directly
+              if (is_array($value) && isset($value['score'])) {
+                  $data['score'] += $value['score'];
+              } elseif ($data['form_id'] == '10') {
+                  $score = 0; // Default score
+          
+                  if (!is_array($value)) {
+                      $value = ['name' => $value]; // Convert scalar to array
+                  }
+          
+                  if ($key == 127) { // Age
+                      if ($value['name'] <= 59) {
+                          $score = 0;
+                      } elseif ($value['name'] >= 60 && $value['name'] <= 79) {
+                          $score = 1;
+                      } elseif ($value['name'] >= 80) {
+                          $score = 2;
+                      }
+                  } elseif ($key == 128) {
+                      if ($value['name'] <= 10) {
+                          $score = 0;
+                      } elseif ($value['name'] >= 11 && $value['name'] <= 20) {
+                          $score = 2;
+                      } elseif ($value['name'] >= 21) {
+                          $score = 4;
+                      }
+                  }
+          
+                  $value['score'] = $score; // Assign score to value
+                  $data['score'] += $score; // Add to total score
+              }
+          
+              // Ensure value is treated as an array before assigning 'score'
+              $value['score'] = $value['score'] ?? 0;
+          
+              if (isset($value['answer'])) {
+                  $value['answer']['score'] = $value['score'];
+                  $answers[$key] = $value['answer'];
               } else {
-                $answers[$key]  =  $value;
+                  $answers[$key] = $value;
               }
             }
 
