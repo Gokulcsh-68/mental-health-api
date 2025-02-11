@@ -2376,27 +2376,27 @@ class Vital extends BaseModel
                         $input_data['range_code']  = '#0000ff';
                     }
 
-                    if ((($input_data['systolic'] >= 60) && ($input_data['systolic'] <= 90)) && (($input_data['diastolic'] >= 30) && ($input_data['diastolic'] <= 60))) {
+                    if ((($input_data['systolic'] >= 60) && ($input_data['systolic'] <= 90)) || (($input_data['diastolic'] >= 30) && ($input_data['diastolic'] <= 60))) {
                         $input_data['bpFlag']      = 'Normal BP ';
                         $input_data['bpFlagColor'] = 'success';
                         $input_data['range_code']  = '#008000';
                     }
-                    if ((($input_data['systolic'] >= 91) && ($input_data['systolic'] <= 100)) && (($input_data['diastolic'] >= 61) && ($input_data['diastolic'] <= 65))) {
+                    if ((($input_data['systolic'] >= 91) && ($input_data['systolic'] <= 100)) || (($input_data['diastolic'] >= 61) && ($input_data['diastolic'] <= 65))) {
                         $input_data['bpFlag']      = 'Elevated BP (Pre Hypertension )';
                         $input_data['bpFlagColor'] = 'warning';
                         $input_data['range_code']  = '#fff707';
                     }
-                    if ((($input_data['systolic'] >= 101) && ($input_data['systolic'] <= 110)) && (($input_data['diastolic'] >= 66) && ($input_data['diastolic'] <= 75))) {
+                    if ((($input_data['systolic'] >= 101) && ($input_data['systolic'] <= 110)) || (($input_data['diastolic'] >= 66) && ($input_data['diastolic'] <= 75))) {
                         $input_data['bpFlag']      = 'Hypertension Stage 1';
                         $input_data['bpFlagColor'] = 'warning';
                         $input_data['range_code']  = '#FFC107';
                     }
-                    if ((($input_data['systolic'] >= 111) && ($input_data['systolic'] <= 119)) && (($input_data['diastolic'] >= 76) && ($input_data['diastolic'] <= 84))) {
+                    if ((($input_data['systolic'] >= 111) && ($input_data['systolic'] <= 119)) || (($input_data['diastolic'] >= 76) && ($input_data['diastolic'] <= 84))) {
                         $input_data['bpFlag']      = 'Hypertension Stage 2';
                         $input_data['bpFlagColor'] = 'warning';
                         $input_data['range_code']  = '#FFC107';
                     }
-                    if ((($input_data['systolic'] >= 120) && ($input_data['systolic'] <= 179)) && (($input_data['diastolic'] >= 85) && ($input_data['diastolic'] <= 119))) {
+                    if ((($input_data['systolic'] >= 120) && ($input_data['systolic'] <= 179)) || (($input_data['diastolic'] >= 85) && ($input_data['diastolic'] <= 119))) {
                         $input_data['bpFlag']      = 'Severely High BP';
                         $input_data['bpFlagColor'] = 'warning';
                         $input_data['range_code']  = '#ff0000';
@@ -2410,33 +2410,33 @@ class Vital extends BaseModel
             
                 // 1 - 12 Months
                 if ($months <= 1 && $months >= 12) {
-                    if (($input_data['systolic'] <= 69) || ($input_data['diastolic'] <= 39)) {
+                    if (($input_data['systolic'] <= 69) && ($input_data['diastolic'] <= 39)) {
                         $input_data['bpFlag']      = 'Low BP (Hypotension)';
                         $input_data['bpFlagColor'] = 'warning';
                         $input_data['range_code']  = '#0000ff';
                     }
 
-                    if ((($input_data['systolic'] >= 70) && ($input_data['systolic'] <= 100)) && (($input_data['diastolic'] >= 40) && ($input_data['diastolic'] <= 60))) {
+                    if ((($input_data['systolic'] >= 70) && ($input_data['systolic'] <= 100)) || (($input_data['diastolic'] >= 40) && ($input_data['diastolic'] <= 60))) {
                         $input_data['bpFlag']      = 'Normal BPs';
                         $input_data['bpFlagColor'] = 'success';
                         $input_data['range_code']  = '#008000';
                     }
-                    if ((($input_data['systolic'] >= 101) && ($input_data['systolic'] <= 110)) && (($input_data['diastolic'] >= 61) && ($input_data['diastolic'] <= 70))) {
+                    if ((($input_data['systolic'] >= 101) && ($input_data['systolic'] <= 110)) || (($input_data['diastolic'] >= 61) && ($input_data['diastolic'] <= 70))) {
                         $input_data['bpFlag']      = 'Elevated BP (Pre Hypertension )';
                         $input_data['bpFlagColor'] = 'warning';
                         $input_data['range_code']  = '#fff707';
                     }
-                    if ((($input_data['systolic'] >= 111) && ($input_data['systolic'] <= 120)) && (($input_data['diastolic'] >= 71) && ($input_data['diastolic'] <= 80))) {
+                    if ((($input_data['systolic'] >= 111) && ($input_data['systolic'] <= 120)) || (($input_data['diastolic'] >= 71) && ($input_data['diastolic'] <= 80))) {
                         $input_data['bpFlag']      = 'Hypertension Stage 1';
                         $input_data['bpFlagColor'] = 'Pre Hypertension ';
                         $input_data['range_code']  = '#FFC107';
                     }
-                    if ((($input_data['systolic'] >= 121) && ($input_data['systolic'] <= 129)) && (($input_data['diastolic'] >= 81) && ($input_data['diastolic'] <= 90))) {
+                    if ((($input_data['systolic'] >= 121) && ($input_data['systolic'] <= 129)) || (($input_data['diastolic'] >= 81) && ($input_data['diastolic'] <= 90))) {
                         $input_data['bpFlag']      = 'Hypertension Stage 2';
                         $input_data['bpFlagColor'] = 'Pre Hypertension ';
                         $input_data['range_code']  = '#FFC107';
                     }
-                    if ((($input_data['systolic'] >= 130) && ($input_data['systolic'] <= 179)) && (($input_data['diastolic'] >= 91) && ($input_data['diastolic'] <= 119))) {
+                    if ((($input_data['systolic'] >= 130) && ($input_data['systolic'] <= 179)) || (($input_data['diastolic'] >= 91) && ($input_data['diastolic'] <= 119))) {
                         $input_data['bpFlag']      = 'Severely High BP';
                         $input_data['bpFlagColor'] = 'Pre Hypertension ';
                         $input_data['range_code']  = '#ff0000';
@@ -2457,27 +2457,27 @@ class Vital extends BaseModel
                         $input_data['range_code']  = '#0000ff';
                     }
 
-                    if ((($input_data['systolic'] >= 80) && ($input_data['systolic'] <= 110)) && (($input_data['diastolic'] >= 50) && ($input_data['diastolic'] <= 70))) {
+                    if ((($input_data['systolic'] >= 80) && ($input_data['systolic'] <= 110)) || (($input_data['diastolic'] >= 50) && ($input_data['diastolic'] <= 70))) {
                         $input_data['bpFlag']      = 'Normal BP';
                         $input_data['bpFlagColor'] = 'success';
                         $input_data['range_code']  = '#008000';
                     }
-                    if ((($input_data['systolic'] >= 111) && ($input_data['systolic'] <= 120)) && (($input_data['diastolic'] >= 71) && ($input_data['diastolic'] <= 80))) {
+                    if ((($input_data['systolic'] >= 111) && ($input_data['systolic'] <= 120)) || (($input_data['diastolic'] >= 71) && ($input_data['diastolic'] <= 80))) {
                         $input_data['bpFlag']      = 'Elevated BP (Pre Hypertension)';
                         $input_data['bpFlagColor'] = 'warning';
                         $input_data['range_code']  = '#fff707';
                     }
-                    if ((($input_data['systolic'] >= 121) && ($input_data['systolic'] <= 130)) && (($input_data['diastolic'] >= 81) && ($input_data['diastolic'] <= 90))) {
+                    if ((($input_data['systolic'] >= 121) && ($input_data['systolic'] <= 130)) || (($input_data['diastolic'] >= 81) && ($input_data['diastolic'] <= 90))) {
                         $input_data['bpFlag']      = 'Hypertension Stage 1';
                         $input_data['bpFlagColor'] = 'warning';
                         $input_data['range_code']  = '#FFC107';
                     }
-                    if ((($input_data['systolic'] >= 131) && ($input_data['systolic'] <= 139)) && (($input_data['diastolic'] >= 91) && ($input_data['diastolic'] <= 100))) {
+                    if ((($input_data['systolic'] >= 131) && ($input_data['systolic'] <= 139)) || (($input_data['diastolic'] >= 91) && ($input_data['diastolic'] <= 100))) {
                         $input_data['bpFlag']      = 'Hypertension Stage 2';
                         $input_data['bpFlagColor'] = 'warning';
                         $input_data['range_code']  = '#FFC107';
                     }
-                    if ((($input_data['systolic'] >= 140) && ($input_data['systolic'] <= 179)) && (($input_data['diastolic'] >= 91) && ($input_data['diastolic'] <= 119))) {
+                    if ((($input_data['systolic'] >= 140) && ($input_data['systolic'] <= 179)) || (($input_data['diastolic'] >= 101) && ($input_data['diastolic'] <= 119))) {
                         $input_data['bpFlag']      = 'Severely High BP';
                         $input_data['bpFlagColor'] = 'warning';
                         $input_data['range_code']  = '#ff0000';
@@ -2497,27 +2497,27 @@ class Vital extends BaseModel
                         $input_data['range_code']  = '#0000ff';
                     }
 
-                    if ((($input_data['systolic'] >= 90) && ($input_data['systolic'] <= 120)) && (($input_data['diastolic'] >= 60) && ($input_data['diastolic'] <= 80))) {
+                    if ((($input_data['systolic'] >= 90) && ($input_data['systolic'] <= 120)) || (($input_data['diastolic'] >= 60) && ($input_data['diastolic'] <= 80))) {
                         $input_data['bpFlag']      = 'Normal BP';
                         $input_data['bpFlagColor'] = 'success';
                         $input_data['range_code']  = '#008000';
                     }
-                    if ((($input_data['systolic'] >= 121) && ($input_data['systolic'] <= 130)) && (($input_data['diastolic'] >= 81) && ($input_data['diastolic'] <= 85))) {
+                    if ((($input_data['systolic'] >= 121) && ($input_data['systolic'] <= 130)) || (($input_data['diastolic'] >= 81) && ($input_data['diastolic'] <= 85))) {
                         $input_data['bpFlag']      = 'Elevated BP (Pre Hypertension)';
                         $input_data['bpFlagColor'] = 'warning';
                         $input_data['range_code']  = '#fff707';
                     }
-                    if ((($input_data['systolic'] >= 131) && ($input_data['systolic'] <= 140)) && (($input_data['diastolic'] >= 86) && ($input_data['diastolic'] <= 90))) {
+                    if ((($input_data['systolic'] >= 131) && ($input_data['systolic'] <= 140)) || (($input_data['diastolic'] >= 86) && ($input_data['diastolic'] <= 90))) {
                         $input_data['bpFlag']      = 'Hypertension Stage 1';
                         $input_data['bpFlagColor'] = 'warning';
                         $input_data['range_code']  = '#FFC107';
                     }
-                    if ((($input_data['systolic'] >= 141) && ($input_data['systolic'] <= 149)) && (($input_data['diastolic'] >= 91) && ($input_data['diastolic'] <= 100))) {
+                    if ((($input_data['systolic'] >= 141) && ($input_data['systolic'] <= 149)) || (($input_data['diastolic'] >= 91) && ($input_data['diastolic'] <= 100))) {
                         $input_data['bpFlag']      = 'Hypertension Stage 2';
                         $input_data['bpFlagColor'] = 'warning';
                         $input_data['range_code']  = '#FFC107';
                     }
-                    if ((($input_data['systolic'] >= 150) && ($input_data['systolic'] <= 179)) && (($input_data['diastolic'] >= 91) && ($input_data['diastolic'] <= 119))) {
+                    if ((($input_data['systolic'] >= 150) && ($input_data['systolic'] <= 179)) || (($input_data['diastolic'] >= 91) && ($input_data['diastolic'] <= 119))) {
                         $input_data['bpFlag']      = 'Severely High BP';
                         $input_data['bpFlagColor'] = 'warning';
                         $input_data['range_code']  = '#ff0000';
@@ -2537,27 +2537,27 @@ class Vital extends BaseModel
                         $input_data['range_code']  = '#0000ff';
                     }
     
-                    if ((($input_data['systolic'] >= 100) && ($input_data['systolic'] <= 120)) && (($input_data['diastolic'] >= 60) && ($input_data['diastolic'] <= 80))) {
+                    if ((($input_data['systolic'] >= 100) && ($input_data['systolic'] <= 120)) || (($input_data['diastolic'] >= 60) && ($input_data['diastolic'] <= 80))) {
                         $input_data['bpFlag']      = 'Normal BP';
                         $input_data['bpFlagColor'] = 'success';
                         $input_data['range_code']  = '#008000';
                     }
-                    if ((($input_data['systolic'] >= 121) && ($input_data['systolic'] <= 130)) && (($input_data['diastolic'] >= 81) && ($input_data['diastolic'] <= 85))) {
+                    if ((($input_data['systolic'] >= 121) && ($input_data['systolic'] <= 130)) || (($input_data['diastolic'] >= 81) && ($input_data['diastolic'] <= 85))) {
                         $input_data['bpFlag']      = 'Elevated BP (Pre Hypertension)';
                         $input_data['bpFlagColor'] = 'warning';
                         $input_data['range_code']  = '#fff707';
                     }
-                    if ((($input_data['systolic'] >= 131) && ($input_data['systolic'] <= 140)) && (($input_data['diastolic'] >= 86) && ($input_data['diastolic'] <= 90))) {
+                    if ((($input_data['systolic'] >= 131) && ($input_data['systolic'] <= 140)) || (($input_data['diastolic'] >= 86) && ($input_data['diastolic'] <= 90))) {
                         $input_data['bpFlag']      = 'Hypertension Stage 1';
                         $input_data['bpFlagColor'] = 'warning';
                         $input_data['range_code']  = '#FFC107';
                     }
-                    if ((($input_data['systolic'] >= 141) && ($input_data['systolic'] <= 149)) && (($input_data['diastolic'] >= 91) && ($input_data['diastolic'] <= 100))) {
+                    if ((($input_data['systolic'] >= 141) && ($input_data['systolic'] <= 149)) || (($input_data['diastolic'] >= 91) && ($input_data['diastolic'] <= 100))) {
                         $input_data['bpFlag']      = 'Hypertension Stage 2';
                         $input_data['bpFlagColor'] = 'warning';
                         $input_data['range_code']  = '#FFC107';
                     }
-                    if ((($input_data['systolic'] >= 150) && ($input_data['systolic'] <= 179)) && (($input_data['diastolic'] >= 91) && ($input_data['diastolic'] <= 119))) {
+                    if ((($input_data['systolic'] >= 150) && ($input_data['systolic'] <= 179)) || (($input_data['diastolic'] >= 91) && ($input_data['diastolic'] <= 119))) {
                         $input_data['bpFlag']      = 'Severely High BP';
                         $input_data['bpFlagColor'] = 'warning';
                         $input_data['range_code']  = '#ff0000';
@@ -2577,28 +2577,28 @@ class Vital extends BaseModel
                         $input_data['range_code']  = '#0000ff';
                     }
     
-                    if ((($input_data['systolic'] >= 90) && ($input_data['systolic'] <= 120)) && (($input_data['diastolic'] >= 60) 
+                    if ((($input_data['systolic'] >= 90) && ($input_data['systolic'] <= 120)) || (($input_data['diastolic'] >= 60) 
                         && ($input_data['diastolic'] <= 80))) {
                         $input_data['bpFlag']      = 'Normal BP';
                         $input_data['bpFlagColor'] = 'success';
                         $input_data['range_code']  = '#008000';
                     }
-                    if ((($input_data['systolic'] >= 121) && ($input_data['systolic'] <= 129)) && (($input_data['diastolic'] >= 81))) {
+                    if ((($input_data['systolic'] >= 121) && ($input_data['systolic'] <= 129)) || (($input_data['diastolic'] >= 81))) {
                         $input_data['bpFlag']      = 'Elevated BP (Pre Hypertension)';
                         $input_data['bpFlagColor'] = 'warning';
                         $input_data['range_code']  = '#fff707';
                     }
-                    if ((($input_data['systolic'] >= 130) && ($input_data['systolic'] <= 139)) && (($input_data['diastolic'] = 82) && ($input_data['diastolic'] <= 89))) {
+                    if ((($input_data['systolic'] >= 130) && ($input_data['systolic'] <= 139)) || (($input_data['diastolic'] = 82) && ($input_data['diastolic'] <= 89))) {
                         $input_data['bpFlag']      = 'Hypertension Stage 1';
                         $input_data['bpFlagColor'] = 'warning';
                         $input_data['range_code']  = '#FFC107';
                     }
-                    if ((($input_data['systolic'] >= 140) && ($input_data['systolic'] <= 159)) && (($input_data['diastolic'] >= 90) && ($input_data['diastolic'] <= 100))) {
+                    if ((($input_data['systolic'] >= 140) && ($input_data['systolic'] <= 159)) || (($input_data['diastolic'] >= 90) && ($input_data['diastolic'] <= 100))) {
                         $input_data['bpFlag']      = 'Hypertension Stage 2';
                         $input_data['bpFlagColor'] = 'warning';
                         $input_data['range_code']  = '#FFC107';
                     }
-                    if ((($input_data['systolic'] >= 160) && ($input_data['systolic'] <= 179)) && (($input_data['diastolic'] >= 101) && ($input_data['diastolic'] <= 119))) {
+                    if ((($input_data['systolic'] >= 160) && ($input_data['systolic'] <= 179)) || (($input_data['diastolic'] >= 101) && ($input_data['diastolic'] <= 119))) {
                         $input_data['bpFlag']      = 'Severely High BP';
                         $input_data['bpFlagColor'] = 'warning';
                         $input_data['range_code']  = '#ff0000';
@@ -2617,27 +2617,27 @@ class Vital extends BaseModel
                         $input_data['range_code']  = '#0000ff';
                     }
     
-                    if ((($input_data['systolic'] >= 90) && ($input_data['systolic'] <= 125)) && (($input_data['diastolic'] >= 60) && ($input_data['diastolic'] <= 85))) {
+                    if ((($input_data['systolic'] >= 90) && ($input_data['systolic'] <= 125)) || (($input_data['diastolic'] >= 60) && ($input_data['diastolic'] <= 85))) {
                         $input_data['bpFlag']      = 'Normal BP ';
                         $input_data['bpFlagColor'] = 'success';
                         $input_data['range_code']  = '#008000';
                     }
-                    if ((($input_data['systolic'] >= 126) && ($input_data['systolic'] <= 129)) && (($input_data['diastolic'] >= 86) && ($input_data['diastolic'] <= 89))) {
+                    if ((($input_data['systolic'] >= 126) && ($input_data['systolic'] <= 129)) || (($input_data['diastolic'] >= 86) && ($input_data['diastolic'] <= 89))) {
                         $input_data['bpFlag']      = 'Elevated BP (Pre Hypertension)';
                         $input_data['bpFlagColor'] = 'warning';
                         $input_data['range_code']  = '#fff707';
                     }
-                    if ((($input_data['systolic'] >= 130) && ($input_data['systolic'] <= 139)) && (($input_data['diastolic'] >= 90) && ($input_data['diastolic'] <= 95))) {
+                    if ((($input_data['systolic'] >= 130) && ($input_data['systolic'] <= 139)) || (($input_data['diastolic'] >= 90) && ($input_data['diastolic'] <= 95))) {
                         $input_data['bpFlag']      = 'Hypertension Stage 1';
                         $input_data['bpFlagColor'] = 'warning';
                         $input_data['range_code']  = '#FFC107';
                     }
-                    if ((($input_data['systolic'] >= 140) && ($input_data['systolic'] <= 159)) && (($input_data['diastolic'] >= 96) && ($input_data['diastolic'] <= 105))) {
+                    if ((($input_data['systolic'] >= 140) && ($input_data['systolic'] <= 159)) || (($input_data['diastolic'] >= 96) && ($input_data['diastolic'] <= 105))) {
                         $input_data['bpFlag']      = 'Hypertension Stage 2';
                         $input_data['bpFlagColor'] = 'warning';
                         $input_data['range_code']  = '#FFC107';
                     }
-                    if ((($input_data['systolic'] >= 160) && ($input_data['systolic'] <= 179)) && (($input_data['diastolic'] >= 106) && ($input_data['diastolic'] <= 119))) {
+                    if ((($input_data['systolic'] >= 160) && ($input_data['systolic'] <= 179)) || (($input_data['diastolic'] >= 106) && ($input_data['diastolic'] <= 119))) {
                         $input_data['bpFlag']      = 'Severely High BP';
                         $input_data['bpFlagColor'] = 'warning';
                         $input_data['range_code']  = '#ff0000';
@@ -2657,27 +2657,27 @@ class Vital extends BaseModel
                         $input_data['range_code']  = '#0000ff';
                     }
     
-                    if ((($input_data['systolic'] >= 90) && ($input_data['systolic'] <= 130)) && (($input_data['diastolic'] >= 60) && ($input_data['diastolic'] <= 80))) {
+                    if ((($input_data['systolic'] >= 90) && ($input_data['systolic'] <= 130)) || (($input_data['diastolic'] >= 60) && ($input_data['diastolic'] <= 80))) {
                         $input_data['bpFlag']      = 'Normal BP ';
                         $input_data['bpFlagColor'] = 'success';
                         $input_data['range_code']  = '#008000';
                     }
-                    if ((($input_data['systolic'] >= 131) && ($input_data['systolic'] <= 139)) && (($input_data['diastolic'] >= 90) && ($input_data['diastolic'] <= 94))) {
+                    if ((($input_data['systolic'] >= 131) && ($input_data['systolic'] <= 139)) || (($input_data['diastolic'] >= 90) && ($input_data['diastolic'] <= 94))) {
                         $input_data['bpFlag']      = 'Elevated BP (Pre Hypertension)';
                         $input_data['bpFlagColor'] = 'warning';
                         $input_data['range_code']  = '#fff707';
                     }
-                    if ((($input_data['systolic'] >= 140) && ($input_data['systolic'] <= 159)) && (($input_data['diastolic'] >= 95) && ($input_data['diastolic'] <= 100))) {
+                    if ((($input_data['systolic'] >= 140) && ($input_data['systolic'] <= 159)) || (($input_data['diastolic'] >= 95) && ($input_data['diastolic'] <= 100))) {
                         $input_data['bpFlag']      = 'Hypertension Stage 1';
                         $input_data['bpFlagColor'] = 'warning';
                         $input_data['range_code']  = '#FFC107';
                     }
-                    if ((($input_data['systolic'] >= 160) && ($input_data['systolic'] <= 169)) && (($input_data['diastolic'] >= 101) && ($input_data['diastolic'] <= 110))) {
+                    if ((($input_data['systolic'] >= 160) && ($input_data['systolic'] <= 169)) || (($input_data['diastolic'] >= 101) && ($input_data['diastolic'] <= 110))) {
                         $input_data['bpFlag']      = 'Hypertension Stage 2';
                         $input_data['bpFlagColor'] = 'warning';
                         $input_data['range_code']  = '#FFC107';
                     }
-                    if ((($input_data['systolic'] >= 170) && ($input_data['systolic'] <= 179)) && (($input_data['diastolic'] >= 111) && ($input_data['diastolic'] <= 119))) {
+                    if ((($input_data['systolic'] >= 170) && ($input_data['systolic'] <= 179)) || (($input_data['diastolic'] >= 111) && ($input_data['diastolic'] <= 119))) {
                         $input_data['bpFlag']      = 'Severely High BP';
                         $input_data['bpFlagColor'] = 'warning';
                         $input_data['range_code']  = '#ff0000';
@@ -2697,27 +2697,27 @@ class Vital extends BaseModel
                         $input_data['range_code']  = '#0000ff';
                     }
     
-                    if ((($input_data['systolic'] >= 90) && ($input_data['systolic'] <= 135)) && (($input_data['diastolic'] >= 60) && ($input_data['diastolic'] <= 90))) {
+                    if ((($input_data['systolic'] >= 90) && ($input_data['systolic'] <= 135)) || (($input_data['diastolic'] >= 60) && ($input_data['diastolic'] <= 90))) {
                         $input_data['bpFlag']      = 'Normal BP ';
                         $input_data['bpFlagColor'] = 'success';
                         $input_data['range_code']  = '#008000';
                     }
-                    if ((($input_data['systolic'] >= 136) && ($input_data['systolic'] <= 139)) && (($input_data['diastolic'] >= 91) && ($input_data['diastolic'] <= 94))) {
+                    if ((($input_data['systolic'] >= 136) && ($input_data['systolic'] <= 139)) || (($input_data['diastolic'] >= 91) && ($input_data['diastolic'] <= 94))) {
                         $input_data['bpFlag']      = 'Elevated BP (Pre Hypertension)';
                         $input_data['bpFlagColor'] = 'warning';
                         $input_data['range_code']  = '#fff707';
                     }
-                    if ((($input_data['systolic'] >= 140) && ($input_data['systolic'] <= 159)) && (($input_data['diastolic'] >= 95) && ($input_data['diastolic'] <= 100))) {
+                    if ((($input_data['systolic'] >= 140) && ($input_data['systolic'] <= 159)) || (($input_data['diastolic'] >= 95) && ($input_data['diastolic'] <= 100))) {
                         $input_data['bpFlag']      = 'Hypertension Stage 1';
                         $input_data['bpFlagColor'] = 'warning';
                         $input_data['range_code']  = '#FFC107';
                     }
-                    if ((($input_data['systolic'] >= 160) && ($input_data['systolic'] <= 169)) && (($input_data['diastolic'] >= 101) && ($input_data['diastolic'] <= 110))) {
+                    if ((($input_data['systolic'] >= 160) && ($input_data['systolic'] <= 169)) || (($input_data['diastolic'] >= 101) && ($input_data['diastolic'] <= 110))) {
                         $input_data['bpFlag']      = 'Hypertension Stage 2';
                         $input_data['bpFlagColor'] = 'warning';
                         $input_data['range_code']  = '#FFC107';
                     }
-                    if ((($input_data['systolic'] >= 170) && ($input_data['systolic'] <= 179)) && (($input_data['diastolic'] >= 111) && ($input_data['diastolic'] <= 119))) {
+                    if ((($input_data['systolic'] >= 170) && ($input_data['systolic'] <= 179)) || (($input_data['diastolic'] >= 111) && ($input_data['diastolic'] <= 119))) {
                         $input_data['bpFlag']      = 'Severely High BP';
                         $input_data['bpFlagColor'] = 'warning';
                         $input_data['range_code']  = '#ff0000';
@@ -2735,27 +2735,27 @@ class Vital extends BaseModel
                     $input_data['range_code']  = '#0000ff';
                 }
         
-                if ((($input_data['systolic'] >= 90) && ($input_data['systolic'] <= 140)) && (($input_data['diastolic'] >= 60) && ($input_data['diastolic'] <= 90))) {
+                if ((($input_data['systolic'] >= 90) && ($input_data['systolic'] <= 140)) || (($input_data['diastolic'] >= 60) && ($input_data['diastolic'] <= 90))) {
                     $input_data['bpFlag']      = 'Normal BP ';
                     $input_data['bpFlagColor'] = 'success';
                     $input_data['range_code']  = '#008000';
                 }
-                if ((($input_data['systolic'] >= 141) && ($input_data['systolic'] <= 149)) && (($input_data['diastolic'] >= 91) && ($input_data['diastolic'] <= 95))) {
+                if ((($input_data['systolic'] >= 141) && ($input_data['systolic'] <= 149)) || (($input_data['diastolic'] >= 91) && ($input_data['diastolic'] <= 95))) {
                     $input_data['bpFlag']      = 'Elevated BP (Pre Hypertension)';
                     $input_data['bpFlagColor'] = 'warning';
                     $input_data['range_code']  = '#fff707';
                 }
-                if ((($input_data['systolic'] >= 150) && ($input_data['systolic'] <= 159)) && (($input_data['diastolic'] >= 96) && ($input_data['diastolic'] <= 100))) {
+                if ((($input_data['systolic'] >= 150) && ($input_data['systolic'] <= 159)) || (($input_data['diastolic'] >= 96) && ($input_data['diastolic'] <= 100))) {
                     $input_data['bpFlag']      = 'Hypertension Stage 1';
                     $input_data['bpFlagColor'] = 'warning';
                     $input_data['range_code']  = '#FFC107';
                 }
-                if ((($input_data['systolic'] >= 160) && ($input_data['systolic'] <= 169)) && (($input_data['diastolic'] >= 101) && ($input_data['diastolic'] <= 110))) {
+                if ((($input_data['systolic'] >= 160) && ($input_data['systolic'] <= 169)) || (($input_data['diastolic'] >= 101) && ($input_data['diastolic'] <= 110))) {
                     $input_data['bpFlag']      = 'Hypertension Stage 2';
                     $input_data['bpFlagColor'] = 'warning';
                     $input_data['range_code']  = '#FFC107';
                 }
-                if ((($input_data['systolic'] >= 170) && ($input_data['systolic'] <= 179)) && (($input_data['diastolic'] >= 111) && ($input_data['diastolic'] <= 119))) {
+                if ((($input_data['systolic'] >= 170) && ($input_data['systolic'] <= 179)) || (($input_data['diastolic'] >= 111) && ($input_data['diastolic'] <= 119))) {
                     $input_data['bpFlag']      = 'Severely High BP';
                     $input_data['bpFlagColor'] = 'warning';
                     $input_data['range_code']  = '#ff0000';
