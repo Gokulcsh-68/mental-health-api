@@ -148,7 +148,8 @@ class PatientHistory extends BaseModel
                 $model->whereBetween('values->surgery_date', [$from,$to]);
             }else if($request->get('slug') == 'medical-history'){
                 $model->whereBetween('values->onset_date', [$from,$to]);
-            }else if($request->get('slug') == 'obstetric-history'){
+            }
+            else if($request->get('slug') == 'obstetric-history'){
 
                 $model->where(function ($query) use ($from,$to) {
                     $query->orWhereBetween('created_at', [$from,$to])
@@ -206,7 +207,20 @@ class PatientHistory extends BaseModel
 
             }
         }
-
+        if ($request->get('slug') == 'medical-history') {
+            $model->whereRaw(
+                "LOWER(JSON_UNQUOTE(JSON_EXTRACT(`values`, '$.\"condition\".\"name\"'))) LIKE LOWER(?)",
+                ['%' . strtolower($request->get('searchkey')) . '%']
+            );
+        }
+        
+        if ($request->get('slug') == 'surgical-history') {
+            $model->whereRaw(
+                "LOWER(JSON_UNQUOTE(JSON_EXTRACT(`values`, '$.\"surgical_name\".\"name\"'))) LIKE LOWER(?)",
+                ['%' . strtolower($request->get('searchkey')) . '%']
+            );
+        }
+            
         return $model;
     }
 
