@@ -1397,8 +1397,7 @@ class Vital extends BaseModel
 
             if ($years <= 65) {
                    // 0 - 12 Months
-         if ($years == 0 && $months > 0) {
-            if (($months >= 1) && ($months < 12)) {
+                   if($years < 1){
 
                 // if ($input_data['spo2'] <= 88) {
                 //     $input_data['spo2Flag']      = 'Low (Hypoxemia)';
@@ -1411,12 +1410,12 @@ class Vital extends BaseModel
                     $input_data['range_code']    = '#008000';
                 }
                 if (($input_data['spo2'] >= 86) && ($input_data['spo2'] <= 89)) {
-                    $input_data['spo2Flag']      = 'Slightly Decreased(Mild Hypoxemia)  ';
+                    $input_data['spo2Flag']      = 'Slightly Decreased(Mild Hypoxemia)';
                     $input_data['spo2FlagColor'] = 'warning';
                     $input_data['range_code']    = '#fff707';
                 }
                 if (($input_data['spo2'] >= 80) && ($input_data['spo2'] <= 85)) {
-                    $input_data['spo2Flag']      = 'Moderately Decreased (Moderate Hypoxemia)  ';
+                    $input_data['spo2Flag']      = 'Moderately Decreased (Moderate Hypoxemia)';
                     $input_data['spo2FlagColor'] = 'primary';
                     $input_data['range_code']    = '#FFC107';
                 }
@@ -1426,7 +1425,7 @@ class Vital extends BaseModel
                     $input_data['range_code']    = '#ff0000';
                 }
                 
-            }
+            
         }
 
                 if (($years >= 1) && ($years <= 3)) {
@@ -1571,7 +1570,6 @@ class Vital extends BaseModel
             }
 
       
-
             // if ($input_data['spo2'] < 75) {
             //     $input_data['spo2Flag']      = 'Severe Hypoxemia';
             //     $input_data['spo2FlagColor'] = 'danger';
@@ -2364,9 +2362,9 @@ class Vital extends BaseModel
 
 
     public static function blood_pressure_flag($input_data,  $years, $months, $days){
-        $input_data['bpFlag']      = 'LOW BLOOD PRESSURE()';
-        $input_data['bpFlagColor'] = 'primary';
-        $input_data['range_code']  = '#0000ff';
+        $input_data['bpFlag']      = '';
+        $input_data['bpFlagColor'] = '';
+        $input_data['range_code']  = '';
 
         if (!empty($input_data['systolic']) && !empty($input_data['diastolic'])){
             if ($years <= 60) {
@@ -2391,17 +2389,17 @@ class Vital extends BaseModel
                     if ((($input_data['systolic'] >= 101) && ($input_data['systolic'] <= 110)) && (($input_data['diastolic'] >= 66) && ($input_data['diastolic'] <= 75))) {
                         $input_data['bpFlag']      = 'Hypertension Stage 1';
                         $input_data['bpFlagColor'] = 'warning';
-                        $input_data['range_code']  = '#fff707';
+                        $input_data['range_code']  = '#FFC107';
                     }
                     if ((($input_data['systolic'] >= 111) && ($input_data['systolic'] <= 119)) && (($input_data['diastolic'] >= 76) && ($input_data['diastolic'] <= 84))) {
                         $input_data['bpFlag']      = 'Hypertension Stage 2';
                         $input_data['bpFlagColor'] = 'warning';
-                        $input_data['range_code']  = '#fff707';
+                        $input_data['range_code']  = '#FFC107';
                     }
                     if ((($input_data['systolic'] >= 120) && ($input_data['systolic'] <= 179)) && (($input_data['diastolic'] >= 85) && ($input_data['diastolic'] <= 119))) {
                         $input_data['bpFlag']      = 'Severely High BP';
                         $input_data['bpFlagColor'] = 'warning';
-                        $input_data['range_code']  = '#fff707';
+                        $input_data['range_code']  = '#ff0000';
                     }
                     if (($input_data['systolic'] >= 180) || ($input_data['diastolic'] >= 120)) {
                         $input_data['bpFlag']      = 'Hypertensive Crisis';
@@ -2411,7 +2409,7 @@ class Vital extends BaseModel
                 }
             
                 // 1 - 12 Months
-                if ($years == 0 && $months > 0) {
+                if ($months <= 1 && $months >= 12) {
                     if (($input_data['systolic'] <= 69) || ($input_data['diastolic'] <= 39)) {
                         $input_data['bpFlag']      = 'Low BP (Hypotension)';
                         $input_data['bpFlagColor'] = 'warning';
@@ -2419,7 +2417,7 @@ class Vital extends BaseModel
                     }
 
                     if ((($input_data['systolic'] >= 70) && ($input_data['systolic'] <= 100)) && (($input_data['diastolic'] >= 40) && ($input_data['diastolic'] <= 60))) {
-                        $input_data['bpFlag']      = 'Normal BP ';
+                        $input_data['bpFlag']      = 'Normal BPs';
                         $input_data['bpFlagColor'] = 'success';
                         $input_data['range_code']  = '#008000';
                     }
@@ -2431,17 +2429,17 @@ class Vital extends BaseModel
                     if ((($input_data['systolic'] >= 111) && ($input_data['systolic'] <= 120)) && (($input_data['diastolic'] >= 71) && ($input_data['diastolic'] <= 80))) {
                         $input_data['bpFlag']      = 'Hypertension Stage 1';
                         $input_data['bpFlagColor'] = 'Pre Hypertension ';
-                        $input_data['range_code']  = '#fff707';
+                        $input_data['range_code']  = '#FFC107';
                     }
                     if ((($input_data['systolic'] >= 121) && ($input_data['systolic'] <= 129)) && (($input_data['diastolic'] >= 81) && ($input_data['diastolic'] <= 90))) {
                         $input_data['bpFlag']      = 'Hypertension Stage 2';
                         $input_data['bpFlagColor'] = 'Pre Hypertension ';
-                        $input_data['range_code']  = '#fff707';
+                        $input_data['range_code']  = '#FFC107';
                     }
                     if ((($input_data['systolic'] >= 130) && ($input_data['systolic'] <= 179)) && (($input_data['diastolic'] >= 91) && ($input_data['diastolic'] <= 119))) {
                         $input_data['bpFlag']      = 'Severely High BP';
                         $input_data['bpFlagColor'] = 'Pre Hypertension ';
-                        $input_data['range_code']  = '#fff707';
+                        $input_data['range_code']  = '#ff0000';
                     }
                     if (($input_data['systolic'] >= 180) || ($input_data['diastolic'] >= 120)) {
                         $input_data['bpFlag']      = 'Hypertensive Crisis';
@@ -2472,17 +2470,17 @@ class Vital extends BaseModel
                     if ((($input_data['systolic'] >= 121) && ($input_data['systolic'] <= 130)) && (($input_data['diastolic'] >= 81) && ($input_data['diastolic'] <= 90))) {
                         $input_data['bpFlag']      = 'Hypertension Stage 1';
                         $input_data['bpFlagColor'] = 'warning';
-                        $input_data['range_code']  = '#fff707';
+                        $input_data['range_code']  = '#FFC107';
                     }
                     if ((($input_data['systolic'] >= 131) && ($input_data['systolic'] <= 139)) && (($input_data['diastolic'] >= 91) && ($input_data['diastolic'] <= 100))) {
                         $input_data['bpFlag']      = 'Hypertension Stage 2';
                         $input_data['bpFlagColor'] = 'warning';
-                        $input_data['range_code']  = '#fff707';
+                        $input_data['range_code']  = '#FFC107';
                     }
                     if ((($input_data['systolic'] >= 140) && ($input_data['systolic'] <= 179)) && (($input_data['diastolic'] >= 91) && ($input_data['diastolic'] <= 119))) {
                         $input_data['bpFlag']      = 'Severely High BP';
                         $input_data['bpFlagColor'] = 'warning';
-                        $input_data['range_code']  = '#fff707';
+                        $input_data['range_code']  = '#ff0000';
                     }
                     if (($input_data['systolic'] >= 180) || ($input_data['diastolic'] >= 120)) {
                         $input_data['bpFlag']      = 'Hypertensive Crisis';
@@ -2512,17 +2510,17 @@ class Vital extends BaseModel
                     if ((($input_data['systolic'] >= 131) && ($input_data['systolic'] <= 140)) && (($input_data['diastolic'] >= 86) && ($input_data['diastolic'] <= 90))) {
                         $input_data['bpFlag']      = 'Hypertension Stage 1';
                         $input_data['bpFlagColor'] = 'warning';
-                        $input_data['range_code']  = '#fff707';
+                        $input_data['range_code']  = '#FFC107';
                     }
                     if ((($input_data['systolic'] >= 141) && ($input_data['systolic'] <= 149)) && (($input_data['diastolic'] >= 91) && ($input_data['diastolic'] <= 100))) {
                         $input_data['bpFlag']      = 'Hypertension Stage 2';
                         $input_data['bpFlagColor'] = 'warning';
-                        $input_data['range_code']  = '#fff707';
+                        $input_data['range_code']  = '#FFC107';
                     }
                     if ((($input_data['systolic'] >= 150) && ($input_data['systolic'] <= 179)) && (($input_data['diastolic'] >= 91) && ($input_data['diastolic'] <= 119))) {
                         $input_data['bpFlag']      = 'Severely High BP';
                         $input_data['bpFlagColor'] = 'warning';
-                        $input_data['range_code']  = '#fff707';
+                        $input_data['range_code']  = '#ff0000';
                     }
                     if (($input_data['systolic'] >= 180) || ($input_data['diastolic'] >= 120)) {
                         $input_data['bpFlag']      = 'Hypertensive Crisis';
@@ -2552,17 +2550,17 @@ class Vital extends BaseModel
                     if ((($input_data['systolic'] >= 131) && ($input_data['systolic'] <= 140)) && (($input_data['diastolic'] >= 86) && ($input_data['diastolic'] <= 90))) {
                         $input_data['bpFlag']      = 'Hypertension Stage 1';
                         $input_data['bpFlagColor'] = 'warning';
-                        $input_data['range_code']  = '#fff707';
+                        $input_data['range_code']  = '#FFC107';
                     }
                     if ((($input_data['systolic'] >= 141) && ($input_data['systolic'] <= 149)) && (($input_data['diastolic'] >= 91) && ($input_data['diastolic'] <= 100))) {
                         $input_data['bpFlag']      = 'Hypertension Stage 2';
                         $input_data['bpFlagColor'] = 'warning';
-                        $input_data['range_code']  = '#fff707';
+                        $input_data['range_code']  = '#FFC107';
                     }
                     if ((($input_data['systolic'] >= 150) && ($input_data['systolic'] <= 179)) && (($input_data['diastolic'] >= 91) && ($input_data['diastolic'] <= 119))) {
                         $input_data['bpFlag']      = 'Severely High BP';
                         $input_data['bpFlagColor'] = 'warning';
-                        $input_data['range_code']  = '#fff707';
+                        $input_data['range_code']  = '#ff0000';
                     }
                     if (($input_data['systolic'] >= 180) || ($input_data['diastolic'] >= 120)) {
                         $input_data['bpFlag']      = 'Hypertensive Crisis';
@@ -2593,17 +2591,17 @@ class Vital extends BaseModel
                     if ((($input_data['systolic'] >= 130) && ($input_data['systolic'] <= 139)) && (($input_data['diastolic'] = 82) && ($input_data['diastolic'] <= 89))) {
                         $input_data['bpFlag']      = 'Hypertension Stage 1';
                         $input_data['bpFlagColor'] = 'warning';
-                        $input_data['range_code']  = '#fff707';
+                        $input_data['range_code']  = '#FFC107';
                     }
                     if ((($input_data['systolic'] >= 140) && ($input_data['systolic'] <= 159)) && (($input_data['diastolic'] >= 90) && ($input_data['diastolic'] <= 100))) {
                         $input_data['bpFlag']      = 'Hypertension Stage 2';
                         $input_data['bpFlagColor'] = 'warning';
-                        $input_data['range_code']  = '#fff707';
+                        $input_data['range_code']  = '#FFC107';
                     }
                     if ((($input_data['systolic'] >= 160) && ($input_data['systolic'] <= 179)) && (($input_data['diastolic'] >= 101) && ($input_data['diastolic'] <= 119))) {
                         $input_data['bpFlag']      = 'Severely High BP';
                         $input_data['bpFlagColor'] = 'warning';
-                        $input_data['range_code']  = '#fff707';
+                        $input_data['range_code']  = '#ff0000';
                     }
                     if (($input_data['systolic'] >= 180) || ($input_data['diastolic'] >= 120)) {
                         $input_data['bpFlag']      = 'Hypertensive Crisis';
@@ -2632,17 +2630,17 @@ class Vital extends BaseModel
                     if ((($input_data['systolic'] >= 130) && ($input_data['systolic'] <= 139)) && (($input_data['diastolic'] >= 90) && ($input_data['diastolic'] <= 95))) {
                         $input_data['bpFlag']      = 'Hypertension Stage 1';
                         $input_data['bpFlagColor'] = 'warning';
-                        $input_data['range_code']  = '#fff707';
+                        $input_data['range_code']  = '#FFC107';
                     }
                     if ((($input_data['systolic'] >= 140) && ($input_data['systolic'] <= 159)) && (($input_data['diastolic'] >= 96) && ($input_data['diastolic'] <= 105))) {
                         $input_data['bpFlag']      = 'Hypertension Stage 2';
                         $input_data['bpFlagColor'] = 'warning';
-                        $input_data['range_code']  = '#fff707';
+                        $input_data['range_code']  = '#FFC107';
                     }
                     if ((($input_data['systolic'] >= 160) && ($input_data['systolic'] <= 179)) && (($input_data['diastolic'] >= 106) && ($input_data['diastolic'] <= 119))) {
                         $input_data['bpFlag']      = 'Severely High BP';
                         $input_data['bpFlagColor'] = 'warning';
-                        $input_data['range_code']  = '#fff707';
+                        $input_data['range_code']  = '#ff0000';
                     }
                     if (($input_data['systolic'] >= 180) || ($input_data['diastolic'] >= 120)) {
                         $input_data['bpFlag']      = 'Hypertensive Crisis';
@@ -2672,17 +2670,17 @@ class Vital extends BaseModel
                     if ((($input_data['systolic'] >= 140) && ($input_data['systolic'] <= 159)) && (($input_data['diastolic'] >= 95) && ($input_data['diastolic'] <= 100))) {
                         $input_data['bpFlag']      = 'Hypertension Stage 1';
                         $input_data['bpFlagColor'] = 'warning';
-                        $input_data['range_code']  = '#fff707';
+                        $input_data['range_code']  = '#FFC107';
                     }
                     if ((($input_data['systolic'] >= 160) && ($input_data['systolic'] <= 169)) && (($input_data['diastolic'] >= 101) && ($input_data['diastolic'] <= 110))) {
                         $input_data['bpFlag']      = 'Hypertension Stage 2';
                         $input_data['bpFlagColor'] = 'warning';
-                        $input_data['range_code']  = '#fff707';
+                        $input_data['range_code']  = '#FFC107';
                     }
                     if ((($input_data['systolic'] >= 170) && ($input_data['systolic'] <= 179)) && (($input_data['diastolic'] >= 111) && ($input_data['diastolic'] <= 119))) {
                         $input_data['bpFlag']      = 'Severely High BP';
                         $input_data['bpFlagColor'] = 'warning';
-                        $input_data['range_code']  = '#fff707';
+                        $input_data['range_code']  = '#ff0000';
                     }
                     if (($input_data['systolic'] >= 180) || ($input_data['diastolic'] >= 120)) {
                         $input_data['bpFlag']      = 'Hypertensive Crisis';
@@ -2712,17 +2710,17 @@ class Vital extends BaseModel
                     if ((($input_data['systolic'] >= 140) && ($input_data['systolic'] <= 159)) && (($input_data['diastolic'] >= 95) && ($input_data['diastolic'] <= 100))) {
                         $input_data['bpFlag']      = 'Hypertension Stage 1';
                         $input_data['bpFlagColor'] = 'warning';
-                        $input_data['range_code']  = '#fff707';
+                        $input_data['range_code']  = '#FFC107';
                     }
                     if ((($input_data['systolic'] >= 160) && ($input_data['systolic'] <= 169)) && (($input_data['diastolic'] >= 101) && ($input_data['diastolic'] <= 110))) {
                         $input_data['bpFlag']      = 'Hypertension Stage 2';
                         $input_data['bpFlagColor'] = 'warning';
-                        $input_data['range_code']  = '#fff707';
+                        $input_data['range_code']  = '#FFC107';
                     }
                     if ((($input_data['systolic'] >= 170) && ($input_data['systolic'] <= 179)) && (($input_data['diastolic'] >= 111) && ($input_data['diastolic'] <= 119))) {
                         $input_data['bpFlag']      = 'Severely High BP';
                         $input_data['bpFlagColor'] = 'warning';
-                        $input_data['range_code']  = '#fff707';
+                        $input_data['range_code']  = '#ff0000';
                     }
                     if (($input_data['systolic'] >= 180) || ($input_data['diastolic'] >= 120)) {
                         $input_data['bpFlag']      = 'Hypertensive Crisis';
@@ -2730,7 +2728,7 @@ class Vital extends BaseModel
                         $input_data['range_code']  = '#ff0000';
                     }
                 }
-            } else if ($years == 60 && $years >= 60) {
+            } else if ( $years >= 60) {
                 if (($input_data['systolic'] <= 89) || ($input_data['diastolic'] <= 59)) {
                     $input_data['bpFlag']      = 'Low BP (Hypotension)';
                     $input_data['bpFlagColor'] = 'warning';
@@ -2747,20 +2745,20 @@ class Vital extends BaseModel
                     $input_data['bpFlagColor'] = 'warning';
                     $input_data['range_code']  = '#fff707';
                 }
-                if ((($input_data['systolic'] >= 150) && ($input_data['systolic'] <= 159)) && (($input_data['diastolic'] >= 95) && ($input_data['diastolic'] <= 100))) {
+                if ((($input_data['systolic'] >= 150) && ($input_data['systolic'] <= 159)) && (($input_data['diastolic'] >= 96) && ($input_data['diastolic'] <= 100))) {
                     $input_data['bpFlag']      = 'Hypertension Stage 1';
                     $input_data['bpFlagColor'] = 'warning';
-                    $input_data['range_code']  = '#fff707';
+                    $input_data['range_code']  = '#FFC107';
                 }
                 if ((($input_data['systolic'] >= 160) && ($input_data['systolic'] <= 169)) && (($input_data['diastolic'] >= 101) && ($input_data['diastolic'] <= 110))) {
                     $input_data['bpFlag']      = 'Hypertension Stage 2';
                     $input_data['bpFlagColor'] = 'warning';
-                    $input_data['range_code']  = '#fff707';
+                    $input_data['range_code']  = '#FFC107';
                 }
                 if ((($input_data['systolic'] >= 170) && ($input_data['systolic'] <= 179)) && (($input_data['diastolic'] >= 111) && ($input_data['diastolic'] <= 119))) {
                     $input_data['bpFlag']      = 'Severely High BP';
                     $input_data['bpFlagColor'] = 'warning';
-                    $input_data['range_code']  = '#fff707';
+                    $input_data['range_code']  = '#ff0000';
                 }
                 if (($input_data['systolic'] >= 180) || ($input_data['diastolic'] >= 120)) {
                     $input_data['bpFlag']      = 'Hypertensive Crisis';
@@ -2822,22 +2820,33 @@ class Vital extends BaseModel
 
                 if ($years == 0 && $months > 0) {
                     if (($months >= 1) && ($months < 12)) {
-                        if (($input_data['heart'] < 100)) {
-                            $input_data['heartRateFlag']      = 'Low';
+                        if (($input_data['heart'] < 79)) {
+                            $input_data['heartRateFlag']      = 'Low Heart Rate (Bradycardia)';
                             $input_data['heartRateFlagColor'] = 'primary';
                             $input_data['range_code']         = '#0000ff';
                         }
     
-                        if (($input_data['heart'] >= 100) && ($input_data['heart'] <= 190)) {
-                            $input_data['heartRateFlag']      = 'Low';
-                            $input_data['heartRateFlagColor'] = 'primary';
-                            $input_data['range_code']         = '#0000ff';
+                        if (($input_data['heart'] >= 80) && ($input_data['heart'] <= 130 )) {
+                            $input_data['heartRateFlag']      = 'Normal Heart Rate(Normal Sinus Rhythm)';
+                            $input_data['heartRateFlagColor'] = 'success';
+                            $input_data['range_code']         = '#008000';
+                        }
+                        if (($input_data['heart'] >= 131) && ($input_data['heart'] <= 150 )) {
+                            $input_data['heartRateFlag']      = 'Elevated Heart Rate';
+                            $input_data['heartRateFlagColor'] = 'success';
+                            $input_data['range_code']         = '#fff707';
                         }
     
-                        if (($input_data['heart'] > 190)) {
-                            $input_data['heartRateFlag']      = 'High';
+                        if (($input_data['heart'] >= 151) && ($input_data['heart'] <= 170 )) {
+                            $input_data['heartRateFlag']      = 'Mild Tachycardia';
+                            $input_data['heartRateFlagColor'] = 'success';
+                            $input_data['range_code']         = '#FFC107';
+                        }
+    
+                        if (($input_data['heart'] > 170)) {
+                            $input_data['heartRateFlag']      = 'Severe Tachycardia';
                             $input_data['heartRateFlagColor'] = 'danger';
-                            $input_data['range_code']         = '#ff0000';
+                            $input_data['range_code']         = '#FF0000';
                         }
                     }
                 }
@@ -2850,23 +2859,23 @@ class Vital extends BaseModel
                         $input_data['range_code']         = '#0000ff';
                     }
 
-                    if (($input_data['heart'] >= 100) && ($input_data['heart'] <= 160)) {
+                    if (($input_data['heart'] >= 80) && ($input_data['heart'] <= 130)) {
                         $input_data['heartRateFlag']      = 'Normal Heart Rate(Normal Sinus Rhythm)';
                         $input_data['heartRateFlagColor'] = 'success';
                         $input_data['range_code']         = '#008000';
                     }
-                    if (($input_data['heart'] >= 161) && ($input_data['heart'] <= 180)) {
+                    if (($input_data['heart'] >= 131) && ($input_data['heart'] <= 150)) {
                         $input_data['heartRateFlag']      = 'Elevated Heart Rate';
                         $input_data['heartRateFlagColor'] = 'success';
                         $input_data['range_code']         = '#fff707';
                     }
-                    if (($input_data['heart'] >= 181) && ($input_data['heart'] <= 200)) {
+                    if (($input_data['heart'] >= 151) && ($input_data['heart'] <= 170)) {
                         $input_data['heartRateFlag']      = 'Mild Tachycardia';
                         $input_data['heartRateFlagColor'] = 'success';
                         $input_data['range_code']         = '#FFC107';
                     }
 
-                    if (($input_data['heart'] > 200)) {
+                    if (($input_data['heart'] > 170)) {
                         $input_data['heartRateFlag']      = 'Severe Tachycardia';
                         $input_data['heartRateFlagColor'] = 'danger';
                         $input_data['range_code']         = '#FF0000';
@@ -2908,8 +2917,8 @@ class Vital extends BaseModel
 
                 // 6-12years
                 if (($years >= 6) && ($years <= 12)) {
-                    if (($input_data['heart'] < 69)) {
-                        $input_data['heartRateFlag']      = 'Low Heart Rate (Bradycardia) ';
+                    if (($input_data['heart'] <= 69)) {
+                        $input_data['heartRateFlag']      = 'Low Heart Rate (Bradycardia)';
                         $input_data['heartRateFlagColor'] = 'primary';
                         $input_data['range_code']         = '#0000ff';
                     }
@@ -2943,7 +2952,7 @@ class Vital extends BaseModel
 
                      // 13-19years
                      if (($years >= 13) && ($years <= 19)) {
-                        if (($input_data['heart'] < 59)) {
+                        if (($input_data['heart'] <= 59)) {
                             $input_data['heartRateFlag']      = 'Low Heart Rate (Bradycardia) ';
                             $input_data['heartRateFlagColor'] = 'primary';
                             $input_data['range_code']         = '#0000ff';
@@ -2976,7 +2985,7 @@ class Vital extends BaseModel
                     }
                          // 20-59years
                          if (($years >= 20) && ($years <= 59 )) {
-                            if (($input_data['heart'] < 59)) {
+                            if (($input_data['heart'] <= 59)) {
                                 $input_data['heartRateFlag']      = 'Low Heart Rate (Bradycardia) ';
                                 $input_data['heartRateFlagColor'] = 'primary';
                                 $input_data['range_code']         = '#0000ff';
@@ -3008,6 +3017,40 @@ class Vital extends BaseModel
                             }
                         }
 
+                        if ($years >= 60) {
+
+                            if (($input_data['heart'] <= 50)) {
+                                $input_data['heartRateFlag']      = 'Low Heart Rate (Bradycardia)';
+                                $input_data['heartRateFlagColor'] = 'primary';
+                                $input_data['range_code']         = '#0000ff';
+                            }
+        
+                            if (($input_data['heart'] >= 50) && ($input_data['heart'] <= 90)) {
+                                $input_data['heartRateFlag']      = 'Normal Heart Rate(Normal Sinus Rhythm)';
+                                $input_data['heartRateFlagColor'] = 'success';
+                                $input_data['range_code']         = '#008000';
+                            }
+                            if (($input_data['heart'] >= 91) && ($input_data['heart'] <= 110)) {
+                                $input_data['heartRateFlag']      = 'Elevated Heart Rate';
+                                $input_data['heartRateFlagColor'] = 'success';
+                                $input_data['range_code']         = '#fff707';
+                                // return "Normal"; // green
+                            }
+                            if (($input_data['heart'] >= 111) && ($input_data['heart'] <= 130)) {
+                                $input_data['heartRateFlag']      = 'Mild Tachycardia';
+                                $input_data['heartRateFlagColor'] = 'success';
+                                $input_data['range_code']         = '#FFC107';
+                                // return "Normal"; // green
+                            }
+        
+                            if (($input_data['heart'] > 130)) {
+                                $input_data['heartRateFlag']      = 'Severe Tachycardia';
+                                $input_data['heartRateFlagColor'] = 'danger';
+                                $input_data['range_code']         = '#ff0000';
+                            }
+        
+                        }
+
                 // if (($years == 12)) {
                 //     if (($input_data['heart'] < 60)) {
                 //         $input_data['heartRateFlag']      = 'Low';
@@ -3029,38 +3072,7 @@ class Vital extends BaseModel
                 // }
             
 
-            if ($years > 60) {
-
-                    if (($input_data['heart'] <= 50)) {
-                        $input_data['heartRateFlag']      = 'Low Heart Rate (Bradycardia)';
-                        $input_data['heartRateFlagColor'] = 'primary';
-                        $input_data['range_code']         = '#0000ff';
-                    }
-
-                    if (($input_data['heart'] >= 50) && ($input_data['heart'] <= 90)) {
-                        $input_data['heartRateFlag']      = 'Normal Heart Rate(Normal Sinus Rhythm)';
-                        $input_data['heartRateFlagColor'] = 'success';
-                        $input_data['range_code']         = '#008000';
-                    }
-                    if (($input_data['heart'] >= 91) && ($input_data['heart'] <= 110)) {
-                        $input_data['heartRateFlag']      = 'Elevated Heart Rate';
-                        $input_data['heartRateFlagColor'] = 'success';
-                        $input_data['range_code']         = '#fff707';
-                        // return "Normal"; // green
-                    }
-                    if (($input_data['heart'] >= 111) && ($input_data['heart'] <= 130)) {
-                        $input_data['heartRateFlag']      = 'Mild Tachycardia';
-                        $input_data['heartRateFlagColor'] = 'success';
-                        $input_data['range_code']         = '#FFC107';
-                        // return "Normal"; // green
-                    }
-
-                    if (($input_data['heart'] > 130)) {
-                        $input_data['heartRateFlag']      = 'Severe Tachycardia';
-                        $input_data['heartRateFlagColor'] = 'danger';
-                        $input_data['range_code']         = '#ff0000';
-                    }
-
+           
                     // if (($input_data['heart'] < 40)) {
                     //     $input_data['heartRateFlag']      = 'Low';
                     //     $input_data['heartRateFlagColor'] = 'primary';
@@ -3084,7 +3096,7 @@ class Vital extends BaseModel
                     //     $input_data['heartRateFlagColor'] = 'danger';
                     //     $input_data['range_code']         = '#ff0000';
                     // }
-            }
+            
 
             
         }
@@ -3521,7 +3533,7 @@ class Vital extends BaseModel
 
       
 
-        if (!empty($input_data['hdl_ldl']) ) {
+        if (!empty($input_data['hdl']) ) {
             if($years >= 0 && $years <= 5){
                 if ($input_data['hdl_unit'] == 'mg/dL') {
 
