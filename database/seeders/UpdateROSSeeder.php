@@ -27,6 +27,6 @@ class UpdateROSSeeder extends Seeder
         
         DB::table('dynamic_forms')->WhereIN('attributes->data', $slug_data)->delete();
 
-        DB::table('dynamic_forms')->insert($entity);
+        DB::table('dynamic_forms')->insertOrIgnore($entity);
     }
 }

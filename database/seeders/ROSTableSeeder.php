@@ -187,7 +187,7 @@ class ROSTableSeeder extends Seeder
         $slug = ['general', 'allergy', 'skin', 'head', 'eye', 'ears', 'nose', 'mouth_throat', 'neck', 'breast', 'respiratory', 'cardiovascular', 'gastrointestinal', 'genito_urinary', 'peripheral_vascular_disease', 'musculoskeletal', 'neurology', 'skin', 'hematology', 'hematology', 'Psychiatry', 'Endocrine'];
 
         DB::table('dynamic_forms')->WhereIN('slug', $slug)->delete();
-        DB::table('dynamic_forms')->insert($ros);
+        DB::table('dynamic_forms')->insertOrIgnore($ros);
 
         $this->call([
             UpdateROSSeeder::class,

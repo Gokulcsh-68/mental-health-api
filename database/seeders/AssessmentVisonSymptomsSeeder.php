@@ -27,7 +27,7 @@ class AssessmentVisonSymptomsSeeder extends Seeder
             ]
     	];
 
-        DB::table('masters')->insert($assessmentGroups);
+        DB::table('masters')->insertOrIgnore($assessmentGroups);
 
         $forms = [
             [
@@ -41,7 +41,7 @@ class AssessmentVisonSymptomsSeeder extends Seeder
             ]
         ];
 
-        DB::table('forms')->insert($forms);
+        DB::table('forms')->insertOrIgnore($forms);
 
         $insert_questions = [
             [
@@ -141,7 +141,7 @@ class AssessmentVisonSymptomsSeeder extends Seeder
             ]
         ];
 
-        DB::table('questions')->insert($insert_questions);
+        DB::table('questions')->insertOrIgnore($insert_questions);
 
         $questions  = json_decode(Question::pluck('id', 'name')->toJson(JSON_UNESCAPED_UNICODE), true);
         $answers    = json_decode(Answer::pluck('id', 'name')->toJson(JSON_UNESCAPED_UNICODE), true);
@@ -170,7 +170,7 @@ class AssessmentVisonSymptomsSeeder extends Seeder
             ['question_id' => $questions["Clumsy; bumps into things; knocks things over"],'form_id' => $current_form_id]
         ];
 
-        DB::table('form_questions')->insert($form_questions);
+        DB::table('form_questions')->insertOrIgnore($form_questions);
 
         $current_question_id    = $questions['As a teacher or parent are you concerned with this student’s vision?'];
          $form_question_answers = [
@@ -180,7 +180,7 @@ class AssessmentVisonSymptomsSeeder extends Seeder
             'answer_id' => $answers["No"], 'jump_to_question_id' => null]
             ];
 
-         DB::table('form_question_answers')->insert($form_question_answers);
+         DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
          $current_question_id    = $questions['Tilts head, squints, closes or covers one eye when reading?'];
          $form_question_answers = [
@@ -190,7 +190,7 @@ class AssessmentVisonSymptomsSeeder extends Seeder
             'answer_id' => $answers["No"], 'jump_to_question_id' => null]
             ];
 
-         DB::table('form_question_answers')->insert($form_question_answers);
+         DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
          $current_question_id    = $questions['Gaze issues, eyes turn in or out, crossed eyes, eyes wander'];
          $form_question_answers = [
@@ -200,7 +200,7 @@ class AssessmentVisonSymptomsSeeder extends Seeder
             'answer_id' => $answers["No"], 'jump_to_question_id' => null]
             ];
 
-         DB::table('form_question_answers')->insert($form_question_answers);
+         DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
          $current_question_id    = $questions['Different size pupils or eyes'];
          $form_question_answers = [
@@ -210,7 +210,7 @@ class AssessmentVisonSymptomsSeeder extends Seeder
             'answer_id' => $answers["No"], 'jump_to_question_id' => null]
             ];
 
-         DB::table('form_question_answers')->insert($form_question_answers);
+         DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
          $current_question_id    = $questions['Watery eyes, eyes appear hazy or clouded'];
          $form_question_answers = [
@@ -220,7 +220,7 @@ class AssessmentVisonSymptomsSeeder extends Seeder
             'answer_id' => $answers["No"], 'jump_to_question_id' => null]
             ];
 
-         DB::table('form_question_answers')->insert($form_question_answers);
+         DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
          $current_question_id    = $questions['Words float, move, or jump around when reading'];
          $form_question_answers = [
@@ -230,7 +230,7 @@ class AssessmentVisonSymptomsSeeder extends Seeder
             'answer_id' => $answers["No"], 'jump_to_question_id' => null]
             ];
 
-         DB::table('form_question_answers')->insert($form_question_answers);
+         DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
          $current_question_id    = $questions['Complains of headaches, dizziness, or nausea when reading (please specify)'];
          $form_question_answers = [
@@ -240,7 +240,7 @@ class AssessmentVisonSymptomsSeeder extends Seeder
             'answer_id' => $answers["No"], 'jump_to_question_id' => null]
             ];
 
-         DB::table('form_question_answers')->insert($form_question_answers);
+         DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
          $current_question_id    = $questions['Complains of itching, burning, or scratchy eyes (please specify)'];
          $form_question_answers = [
@@ -250,7 +250,7 @@ class AssessmentVisonSymptomsSeeder extends Seeder
             'answer_id' => $answers["No"], 'jump_to_question_id' => null]
             ];
 
-         DB::table('form_question_answers')->insert($form_question_answers);
+         DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
          $current_question_id    = $questions['Complains of blurred or double vision, unusual sensitivity to light, or difficulty seeing (please specify):'];
          $form_question_answers = [
@@ -260,7 +260,7 @@ class AssessmentVisonSymptomsSeeder extends Seeder
             'answer_id' => $answers["No"], 'jump_to_question_id' => null]
             ];
 
-         DB::table('form_question_answers')->insert($form_question_answers);
+         DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
          $current_question_id    = $questions['History of head injury with vision complaints'];
          $form_question_answers = [
@@ -270,7 +270,7 @@ class AssessmentVisonSymptomsSeeder extends Seeder
             'answer_id' => $answers["No"], 'jump_to_question_id' => null]
             ];
 
-         DB::table('form_question_answers')->insert($form_question_answers);
+         DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
          $current_question_id    = $questions['Loses place when reading'];
          $form_question_answers = [
@@ -280,7 +280,7 @@ class AssessmentVisonSymptomsSeeder extends Seeder
             'answer_id' => $answers["No"], 'jump_to_question_id' => null]
             ];
 
-         DB::table('form_question_answers')->insert($form_question_answers);
+         DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
          $current_question_id    = $questions['Skips over or leaves out small words when reading'];
          $form_question_answers = [
@@ -290,7 +290,7 @@ class AssessmentVisonSymptomsSeeder extends Seeder
             'answer_id' => $answers["No"], 'jump_to_question_id' => null]
             ];
 
-         DB::table('form_question_answers')->insert($form_question_answers);
+         DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
          $current_question_id    = $questions['Writes uphill or downhill; difficulty writing in a straight line'];
          $form_question_answers = [
@@ -300,7 +300,7 @@ class AssessmentVisonSymptomsSeeder extends Seeder
             'answer_id' => $answers["No"], 'jump_to_question_id' => null]
             ];
 
-         DB::table('form_question_answers')->insert($form_question_answers);
+         DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
          $current_question_id    = $questions['Has difficulty copying from the board'];
          $form_question_answers = [
@@ -310,7 +310,7 @@ class AssessmentVisonSymptomsSeeder extends Seeder
             'answer_id' => $answers["No"], 'jump_to_question_id' => null]
             ];
 
-         DB::table('form_question_answers')->insert($form_question_answers);
+         DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
          $current_question_id    = $questions['Avoids near work, such as reading or writing'];
          $form_question_answers = [
@@ -320,7 +320,7 @@ class AssessmentVisonSymptomsSeeder extends Seeder
             'answer_id' => $answers["No"], 'jump_to_question_id' => null]
             ];
 
-         DB::table('form_question_answers')->insert($form_question_answers);
+         DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
          $current_question_id    = $questions['Has difficulty lining up numbers when doing math'];
          $form_question_answers = [
@@ -330,7 +330,7 @@ class AssessmentVisonSymptomsSeeder extends Seeder
             'answer_id' => $answers["No"], 'jump_to_question_id' => null]
             ];
 
-         DB::table('form_question_answers')->insert($form_question_answers);
+         DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
          $current_question_id    = $questions['Has difficulty finishing assignments on time'];
          $form_question_answers = [
@@ -340,7 +340,7 @@ class AssessmentVisonSymptomsSeeder extends Seeder
             'answer_id' => $answers["No"], 'jump_to_question_id' => null]
             ];
 
-         DB::table('form_question_answers')->insert($form_question_answers);
+         DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
          $current_question_id    = $questions['Holds books too close; leans too close to a computer screen'];
          $form_question_answers = [
@@ -350,7 +350,7 @@ class AssessmentVisonSymptomsSeeder extends Seeder
             'answer_id' => $answers["No"], 'jump_to_question_id' => null]
             ];
 
-         DB::table('form_question_answers')->insert($form_question_answers);
+         DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 
          $current_question_id    = $questions['Clumsy; bumps into things; knocks things over'];
@@ -361,7 +361,7 @@ class AssessmentVisonSymptomsSeeder extends Seeder
             'answer_id' => $answers["No"], 'jump_to_question_id' => null]
             ];
 
-         DB::table('form_question_answers')->insert($form_question_answers);
+         DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 
     }

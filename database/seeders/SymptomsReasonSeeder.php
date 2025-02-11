@@ -42,11 +42,9 @@ class SymptomsReasonSeeder extends Seeder
             $chk = DB::table('masters')->where('slug',$value['slug'])->where('master_type_slug',$value['master_type_slug'])->value('id');
 
             if(!empty($chk)){
-            DB::table('masters')->where('id',$chk)->update($value);
-
+             DB::table('masters')->where('id',$chk)->update($value);
             }else{
-            DB::table('masters')->insert($value);
-
+                DB::table('masters')->insertOrIgnore($value);
             }
         }
     }

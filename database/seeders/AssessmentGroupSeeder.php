@@ -35,6 +35,6 @@ class AssessmentGroupSeeder extends Seeder
             ],
     	];
 
-        DB::table('masters')->insert($assessmentGroups);
+        DB::table('masters')->insertOrIgnore($assessmentGroups);
     }
 }

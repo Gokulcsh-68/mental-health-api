@@ -18,7 +18,7 @@ class SymptomSeeder extends Seeder
             ['slug' => 'symptom']
         ];
         
-        DB::table('master_types')->insert($master_types);
+        DB::table('master_types')->insertOrIgnore($master_types);
 
         $sypmtoms = [
             ['master_type_slug' => 'symptom', 'name' => 'Abdominal guarding', 'slug' => str_slug("Abdominal guarding"),  'attributes' => json_encode(['link' => "(s_1558)"])],
@@ -1268,6 +1268,6 @@ class SymptomSeeder extends Seeder
             ['master_type_slug' => 'symptom', 'name' => 'Yellow nail discoloration', 'slug' => str_slug("Yellow nail discoloration"),  'attributes' => json_encode(['link' => "(s_1789)"])]
     	];
 
-        DB::table('masters')->insert($sypmtoms);
+        DB::table('masters')->insertOrIgnore($sypmtoms);
     }
 }

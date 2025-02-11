@@ -59,7 +59,7 @@ class AssementFormSeeder extends Seeder
 					or more','type'=> $radio_type,'is_active' => 1]
 		];
 
-		DB::table('questions')->insert($new_sub_questions);
+		DB::table('questions')->insertOrIgnore($new_sub_questions);
 
 		$current_question_id = $questions['Please think about what you usually ate or drank during the past 30 days. Read each item carefully and indicate one response for each. How often did you...'];
 
@@ -128,7 +128,7 @@ class AssementFormSeeder extends Seeder
 			chimichangas/tacos)?', 'type' => $radio_type,'is_active' => 1]
 		];
 
-		DB::table('questions')->insert($new_sub_questions);
+		DB::table('questions')->insertOrIgnore($new_sub_questions);
 
 		$current_question_id = $questions['How often do you do the following things? Mark your answer with an X.'];
 
@@ -182,7 +182,7 @@ class AssementFormSeeder extends Seeder
 			contain large amounts of sugar?', 'type' => $radio_type,'is_active' => 1]
 		];
 
-		DB::table('questions')->insert($new_sub_questions);
+		DB::table('questions')->insertOrIgnore($new_sub_questions);
 
 		$current_question_id = $questions["During the past 7 days, how much have you been bothered by any of the following problems?"];
 
@@ -219,7 +219,7 @@ class AssementFormSeeder extends Seeder
 			 	'Trouble sleeping','type' => $radio_type,'is_active' => 1]
 		 ];
 
-		 DB::table('questions')->insert($new_sub_questions);
+		 DB::table('questions')->insertOrIgnore($new_sub_questions);
 
 		 $current_question_id = $questions["Anger In the past SEVEN (7) DAYS...."];
 
@@ -236,7 +236,7 @@ class AssementFormSeeder extends Seeder
 			 	'I felt annoyed.','type' => $radio_type,'is_active' => 1]
 		 ];
 
-		 DB::table('questions')->insert($new_sub_questions);
+		 DB::table('questions')->insertOrIgnore($new_sub_questions);
 
 		 $current_question_id = $questions["Anxiety In the past SEVEN (7) DAYS...."];
 
@@ -257,7 +257,7 @@ class AssementFormSeeder extends Seeder
 			 	'I felt tense.','type' => $radio_type,'is_active' => 1]
 		 ];
 
-		 DB::table('questions')->insert($new_sub_questions);
+		 DB::table('questions')->insertOrIgnore($new_sub_questions);
 
 		 $current_question_id = $questions["Depression In the past SEVEN (7) DAYS...."];
 
@@ -280,7 +280,7 @@ class AssementFormSeeder extends Seeder
 			 	'I felt hopeless.','type' => $radio_type,'is_active' => 1]
 		 ];
 
-		 DB::table('questions')->insert($new_sub_questions);
+		 DB::table('questions')->insertOrIgnore($new_sub_questions);
 
 		 $current_question_id = $questions["Eligibility for TPA"];
 
@@ -293,7 +293,7 @@ class AssementFormSeeder extends Seeder
 			 	'Time of symptom onset <4.5 hours See Additional Warnings to tPA at 3-4.5hr below','type' => $radio_type,'is_active' => 1]
 		 ];
 
-		DB::table('questions')->insert($new_sub_questions);
+		DB::table('questions')->insertOrIgnore($new_sub_questions);
 
 		$current_question_id = $questions["Absolute Contraindications to TPA"];
 
@@ -321,7 +321,7 @@ class AssementFormSeeder extends Seeder
 		 	'Abnormal blood glucose (<50 mg/dL)','type' => $radio_type,'is_active' => 1]
 		];
 
-		DB::table('questions')->insert($new_sub_questions);
+		DB::table('questions')->insertOrIgnore($new_sub_questions);
 
 		$current_question_id = $questions["Relative Contraindications/Warnings to TPA"];
 
@@ -344,7 +344,7 @@ class AssementFormSeeder extends Seeder
 		 	'Pregnancy','type' => $radio_type,'is_active' => 1]
 		];
 
-		DB::table('questions')->insert($new_sub_questions);
+		DB::table('questions')->insertOrIgnore($new_sub_questions);
 
 		$current_question_id = $questions["Additional Warnings to TPA >3hr Onset"];
 		$new_sub_questions = [
@@ -359,7 +359,7 @@ class AssementFormSeeder extends Seeder
 		 ['parent_id' => $current_question_id, 'name' =>
 		 	'CT shows multilobar infarction (hypodensity >1/3 cerebral hemisphere)','type' => $radio_type,'is_active' => 1]
 		];
-		DB::table('questions')->insert($new_sub_questions);
+		DB::table('questions')->insertOrIgnore($new_sub_questions);
 
 
 		# Question mapping
@@ -481,7 +481,7 @@ class AssementFormSeeder extends Seeder
 		 'form_id' => $current_form_id]
 		];
 
-		DB::table('form_questions')->insert($form_questions);
+		DB::table('form_questions')->insertOrIgnore($form_questions);
 
 		# Other physical 
 
@@ -532,7 +532,7 @@ class AssementFormSeeder extends Seeder
 		 ['question_id' => $questions["History of atrial fibrillation"],'form_id' => $forms["THRIVE Score for Stroke Outcome"]]
 		 ];
 
-		DB::table('form_questions')->insert($form_questions);
+		DB::table('form_questions')->insertOrIgnore($form_questions);
 
 
 		# Answers Mapping
@@ -560,7 +560,7 @@ class AssementFormSeeder extends Seeder
 		 	$questions["Blood cholesterol is a fatty substance found in the blood. Have you ever had your blood cholesterol checked?"]]
 		];
 
-		DB::table('form_question_answers')->insert($form_question_answers);
+		DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		#2
 		$current_question_id 	= $questions['The LAST time you had your blood pressure checked, was it normal or high?'];
@@ -571,7 +571,7 @@ class AssementFormSeeder extends Seeder
 			['question_id' => $current_question_id , 'answer_id' => $answers["Don’t Know/Not Sure"], 'jump_to_question_id' => null]
 		];
 
-		DB::table('form_question_answers')->insert($form_question_answers);
+		DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		#3
 		$current_question_id 	= $questions['Have you EVER been told by a doctor, nurse, or other health professional that you have high blood pressure?'];
@@ -585,7 +585,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Don’t Know/Not Sure"],'jump_to_question_id' => $questions["Blood cholesterol is a fatty substance found in the blood. Have you ever had your blood cholesterol checked?"]]
 		];
 
-		DB::table('form_question_answers')->insert($form_question_answers);
+		DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		#4
 		$current_question_id 	= $questions['If yes, and if you are female, was this only when you were pregnant?'];
@@ -599,7 +599,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Don’t Know/Not Sure"],'jump_to_question_id' => $questions["Blood cholesterol is a fatty substance found in the blood. Have you ever had your blood cholesterol checked?"]]
 		];
 
-		DB::table('form_question_answers')->insert($form_question_answers);
+		DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 #5
 		 $current_question_id 	= $questions['Are you currently taking medicine for your high blood pressure?'];
@@ -615,7 +615,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Don’t Know/Not Sure"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		#6
 		$current_question_id 	= $questions['Are you changing your eating habits to help lower or control your blood pressure?'];
@@ -629,7 +629,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Don’t Know/Not Sure"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		#7
 		$current_question_id 	= $questions['Are you cutting down on salt to help lower or control your blood pressure?'];
@@ -645,7 +645,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Don’t Know/Not Sure"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		#8
 		$current_question_id 	= $questions['Are you reducing alcohol use to help lower or control your blood pressure?'];
@@ -661,7 +661,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Don’t Know/Not Sure"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		#9
 		$current_question_id 	= $questions['Are you exercising to help lower or control your blood pressure?'];
@@ -675,7 +675,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Don’t Know/Not Sure"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		#10
 		$current_question_id 	= $questions['Blood cholesterol is a fatty substance found in the blood. Have you ever had your blood cholesterol checked?'];
@@ -690,7 +690,7 @@ class AssementFormSeeder extends Seeder
 		 	 $questions["If so, when were you told that your blood cholesterol was high?"]]
 		];
 
-		DB::table('form_question_answers')->insert($form_question_answers);
+		DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		#11
 		$current_question_id 	= $questions['About how long has it been since you last had your blood cholesterol checked?'];
@@ -707,7 +707,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Don’t Know"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		#12
 		$current_question_id 	= $questions['The last time you had your blood cholesterol checked, was it normal or high?'];
@@ -720,7 +720,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Don’t Know/Not Sure"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		#13
 		$current_question_id 	= $questions['Have you EVER been told by a doctor, nurse or other health professional that your blood cholesterol is high?'];
@@ -735,7 +735,7 @@ class AssementFormSeeder extends Seeder
 		  $questions["If so, when were you told that your blood cholesterol was high?"]]
 		 ];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		#14
 		$current_question_id 	= $questions['If so, when were you told that your blood cholesterol was high?'];
@@ -752,7 +752,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Don’t Know/Not Sure"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 
 		 #15
@@ -762,7 +762,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Days per week (Please write “0” if the answer is “none.”)"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		#16
 		$current_question_id 	= $questions['How many days per week do you do vigorous physical activities for at least 20 minutes?'];
@@ -772,7 +772,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Days per week (Please write “0” if the answer is “none.”)"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		#17
 		$current_question_id 	= $questions['Thinking back on the past 30 days, please check yes or no for each statement. You may choose “yes” for more than one statement.'];
@@ -783,7 +783,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["No"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		#18
 		$current_question_id 	= $questions['Over the past 30 days in general, how many hours per day did you usually spend watching television, sitting at a computer, playing video games, doing beadwork, or other activities that don’t require much physical activity?'];
@@ -810,7 +810,7 @@ class AssementFormSeeder extends Seeder
 		  'answer_id' => $answers["10 hours or more"], 'jump_to_question_id' => null]
 		  ];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 
 		#19
@@ -824,7 +824,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["No, and I do not intend to in the next 6 months"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		#20
 		$current_question_id 	= $questions['Please think about what you usually ate or drank during the past 30 days. Read each item carefully and indicate one response for each. How often did you...'];
@@ -843,7 +843,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Less than once a month"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		#21
 		$current_question_id 	= $questions['What kind of milk did you usually use? (Pick the one that you used most often in the past 30 days.) What kind of milk did you usually use? (Pick the one that you used most often in the past 30 days.)'];
@@ -868,7 +868,7 @@ class AssementFormSeeder extends Seeder
 			 	'answer_id' => $answers["Did not use milk in past 30 days"], 'jump_to_question_id' => null]
 		 ];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		#22
 		$current_question_id 	= $questions['What kinds of fat or oil did you usually use in cooking in the past 30 days (if more than one, choose the one used most often)?'];
@@ -885,7 +885,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Vegetable oil/olive oil/corn oil"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 
 		#23
@@ -903,7 +903,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Does Not Apply"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		#24
 		$current_question_id 	= $questions['Are you able to buy or grow low-cost vegetables?'];
@@ -914,7 +914,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["No"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		#25
 		$current_question_id 	= $questions['In the future, do you intend to reduce the amount of fat you eat so it is lower than it is now?'];
@@ -927,7 +927,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["No, and I do not intend to in the next 6 months"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 
 		 #26
@@ -939,7 +939,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["No"],'jump_to_question_id' => $questions["Do you think pain or discomfort in the jaw, neck, or back are symptoms of a heart attack?"]]
 		 ];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 #27
 		 $current_question_id 	= $questions['Thinking over the past 30 days, including today, how many days during this time did you smoke?'];
@@ -948,7 +948,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["days"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 #28
 		 $current_question_id 	= $questions['About how many cigarettes a day do you now smoke?'];
@@ -957,7 +957,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["cigarettes a day"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		#29
 		$current_question_id 	= $questions['About how many years have you been smoking?'];
@@ -966,7 +966,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["years"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 #30
 		 $current_question_id 	= $questions['In the past year, how many times have you quit smoking for at least 24 hours?'];
@@ -975,7 +975,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["times"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 #31
 		 $current_question_id 	= $questions['Are you seriously thinking of quitting smoking?'];
@@ -988,7 +988,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["No, not thinking of quitting"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 #32
 		 $current_question_id 	= $questions['Do you think pain or discomfort in the jaw, neck, or back are symptoms of a heart attack?'];
@@ -1001,7 +1001,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Don’t Know/Not Sure"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 #33
 		 $current_question_id 	= $questions['Do you think feeling weak, lightheaded, or faint are symptoms of a heart attack?'];
@@ -1014,7 +1014,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Don’t Know/Not Sure"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 #34
 		 $current_question_id 	= $questions['Do you think swelling of the feet and legs is a symptom of a heart attack?'];
@@ -1027,7 +1027,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Don’t Know/Not Sure"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 
 		 #35
@@ -1041,7 +1041,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Don’t Know/Not Sure"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 #36
 		 $current_question_id 	= $questions['Do you think sudden trouble seeing in one or both eyes is a symptom of a heart attack?'];
@@ -1054,7 +1054,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Don’t Know/Not Sure"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 #37
 		 $current_question_id 	= $questions['Do you think tingling in the fingers and toes are symptoms of a heart attack?'];
@@ -1067,7 +1067,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Don’t Know/Not Sure"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 #38
 		 $current_question_id 	= $questions['Do you think pain or discomfort in the arms or shoulder are symptoms of a heart attack?'];
@@ -1080,7 +1080,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Don’t Know/Not Sure"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 #39
 		 $current_question_id 	= $questions['Do you think shortness of breath is a symptom of a heart attack?'];
@@ -1093,7 +1093,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Don’t Know/Not Sure"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 #40
 		 $current_question_id 	= $questions['Do you think sudden confusion or trouble speaking are symptoms of a stroke?'];
@@ -1106,7 +1106,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Don’t Know/Not Sure"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 #41
 		 $current_question_id 	= $questions['Do you think sudden numbness or weakness of face, arm, or leg, especially on one side, are symptoms of a stroke?'];
@@ -1119,7 +1119,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Don’t Know/Not Sure"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 #42
 		 $current_question_id 	= $questions['Do you think feeling sick to your stomach is a symptom of a stroke?'];
@@ -1132,7 +1132,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Don’t Know/Not Sure"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 #43
 		 $current_question_id 	= $questions['Do you think sharp pain in the jaw or mouth is a symptom of a stroke?'];
@@ -1145,7 +1145,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Don’t Know/Not Sure"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 #44
 		 $current_question_id 	= $questions['Do you think sudden trouble seeing in one or both eyes is a symptom of a stroke?'];
@@ -1158,7 +1158,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Don’t Know/Not Sure"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 #45
 		 $current_question_id 	= $questions['Do you think sudden chest pain or discomfort are symptoms of a stroke?'];
@@ -1171,7 +1171,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Don’t Know/Not Sure"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 #46
 		 $current_question_id 	= $questions['Do you think sudden trouble walking, dizziness, or loss of balance are symptoms of a stroke?'];
@@ -1184,7 +1184,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Don’t Know/Not Sure"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 #47
 		 $current_question_id 	= $questions['Do you think severe headache with no known cause is a symptom of a stroke?'];
@@ -1197,7 +1197,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Don’t Know/Not Sure"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 #48
 		 $current_question_id 	= $questions['If you thought someone was having a heart attack or a stroke, what is the first thing you would do?'];
@@ -1216,7 +1216,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Don’t Know/Not Sure"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 #49
 		 $current_question_id 	= $questions['Can a large waist (>35 inches for women or >40 inches for men) increase your risk of heart disease?'];
@@ -1229,7 +1229,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Don’t Know/Not Sure"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 #50
 		 $current_question_id 	= $questions['Can the Body Mass Index (BMI) Chart tell you if you are overweight?'];
@@ -1242,7 +1242,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Don’t Know/Not Sure"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 #51
 		 $current_question_id 	= $questions['Does your liver make all the cholesterol your body needs to keep you healthy?'];
@@ -1255,7 +1255,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Don’t Know/Not Sure"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 #52
 		 $current_question_id 	= $questions['Can eating foods that are high in sodium increase your risk of high blood pressure?'];
@@ -1268,7 +1268,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Don’t Know/Not Sure"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 #53
 		 $current_question_id 	= $questions['Does lard have a low amount of saturated fat?'];
@@ -1281,7 +1281,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Don’t Know/Not Sure"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 #54
 		 $current_question_id 	= $questions['Can eating too much saturated fat and trans fat raise your cholesterol level?'];
@@ -1294,7 +1294,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Don’t Know/Not Sure"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 #55
 		 $current_question_id 	= $questions['Is a blood pressure of 140/90 mmHg considered high?'];
@@ -1307,7 +1307,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Don’t Know/Not Sure"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 #56
 		 $current_question_id 	= $questions['Can being overweight or obese put you at risk for developing high blood cholesterol?'];
@@ -1320,7 +1320,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Don’t Know/Not Sure"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 #57
 		 $current_question_id 	= $questions['Is being physically active a way to reduce your risk for heart disease?'];
@@ -1333,7 +1333,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Don’t Know/Not Sure"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 #58
 		 $current_question_id 	= $questions['Is it true that only people with high blood cholesterol should follow a heart healthy diet?'];
@@ -1346,7 +1346,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Don’t Know/Not Sure"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 #59
 		 $current_question_id 	= $questions['Can nonsmokers die from secondhand smoke?'];
@@ -1359,7 +1359,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Don’t Know/Not Sure"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 #60
 		 $current_question_id 	= $questions['How often do you have a hard time understanding written information about your health that you get from your clinic? (This might include information from a doctor or nurse.)'];
@@ -1376,7 +1376,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Never"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 
 		 #61
@@ -1394,7 +1394,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Not at all"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 #62
 		 $current_question_id 	= $questions['How often do you prefer that someone (like a family member or someone else) help you read medical materials?'];
@@ -1412,7 +1412,7 @@ class AssementFormSeeder extends Seeder
 			 	'answer_id' => $answers["Never"], 'jump_to_question_id' => null]
 		 ];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 #63
 		 $current_question_id 	= $questions["Which of the following numbers represents the lowest risk? For example, which would you most like to hear from a doctor about your risk for a medical condition?"];
@@ -1428,7 +1428,7 @@ class AssementFormSeeder extends Seeder
 			 	'answer_id' => $answers["Don’t Know"], 'jump_to_question_id' => null]
 		 ];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 #64
 		 $current_question_id 	= $questions['If the chance of getting a health condition is 20 out of 100 people, this would be the same as having a what percent (%) chance of getting the condition?'];
@@ -1443,7 +1443,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Don’t Know"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 #65
 		 $current_question_id 	= $questions['A prescription says “Take one tablet by mouth every 6 hours.” If you take your first tablet at 7 a.m., when should you take your second tablet?'];
@@ -1460,7 +1460,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["7 p.m"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		#66
 		$current_question_id 	= $questions['Normal fasting blood sugar is 70-100. If your blood sugar today is 140, is your blood sugar normal?'];
@@ -1473,7 +1473,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Don’t Know"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 #67
 		 $current_question_id 	= $questions['Do you have a TV?'];
@@ -1484,7 +1484,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["No"],'jump_to_question_id' => $questions["Do you have a personal computer in your home?"]]
 		 ];
 
-		DB::table('form_question_answers')->insert($form_question_answers);
+		DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 #68
 		 $current_question_id 	= $questions['Do you have a gaming system you hook up to your TV? By this we mean something like the Nintendo Wii, Xbox, or Sony Playstation?'];
@@ -1495,7 +1495,7 @@ class AssementFormSeeder extends Seeder
 			 	'answer_id' => $answers["No"],'jump_to_question_id' => $questions["Do you have a personal computer in your home?"]]
 		 ];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 #69
 		 $current_question_id 	= $questions['Which system do you have?'];
@@ -1510,7 +1510,7 @@ class AssementFormSeeder extends Seeder
 			 	'answer_id' => $answers["Other (Please specify:"], 'jump_to_question_id' => null]
 		 ];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		#70
 		$current_question_id 	= $questions['Do you have a personal computer in your home?'];
@@ -1521,7 +1521,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["No"],'jump_to_question_id' => $questions["Do you have a cell phone?"]]
 		 ];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 #71
 		 $current_question_id 	= $questions['Is it a Windows or Apple system?'];
@@ -1532,7 +1532,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Apple"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 #72
 		 $current_question_id 	= $questions['How confident are you in using your computer?'];
@@ -1545,7 +1545,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Not at all confident"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 #73
 		 $current_question_id 	= $questions['Do you have Internet access?'];
@@ -1556,7 +1556,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["No"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 #74
 		 $current_question_id 	= $questions['Do you have an e-mail account that you check regularly?'];
@@ -1567,7 +1567,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["No"], 'jump_to_question_id' => null]
 		 	];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 #75
 		 $current_question_id 	= $questions['Do you have a cell phone?'];
@@ -1579,7 +1579,7 @@ class AssementFormSeeder extends Seeder
 		 	$questions["How much do you currently weigh without shoes?"]]
 		 ];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 #76
 		 $current_question_id 	= $questions['Are you able to send and received text messages using your cell phone?'];
@@ -1591,7 +1591,7 @@ class AssementFormSeeder extends Seeder
 		 	$questions["How much do you currently weigh without shoes?"]]
 		 ];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 #77
 		 $current_question_id 	= $questions['Would you be willing to receive text messages about heart disease and heart-healthy living on your cell phone?'];
@@ -1603,7 +1603,7 @@ class AssementFormSeeder extends Seeder
 		 	 $questions["How much do you currently weigh without shoes?"]]
 		 ];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 #78
 		 $current_question_id 	= $questions['What are some of the reasons you would not be interested in getting text messages about heart health?'];
@@ -1616,7 +1616,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Other"], 'jump_to_question_id' => null]
 		 ];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 #79
 		 $current_question_id 	= $questions['How much do you currently weigh without shoes?'];
@@ -1625,7 +1625,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["pounds"], 'jump_to_question_id' => null]
 		 ];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		#80
 		$current_question_id 	= $questions['How tall are you without shoes?'];
@@ -1636,7 +1636,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["inches"], 'jump_to_question_id' => null]
 		 ];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 #81
 		 $current_question_id 	= $questions['Are you male or female?'];
@@ -1647,7 +1647,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Female"], 'jump_to_question_id' => null]
 		 ];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 #82
 		 $current_question_id 	= $questions['How old are you today?'];
@@ -1656,7 +1656,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["years old"], 'jump_to_question_id' => null]
 		 ];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 #83
 		 $current_question_id 	= $questions['What is your ethnicity?'];
@@ -1669,7 +1669,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Don’t Know"], 'jump_to_question_id' => null]
 		 ];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 #84
 		 $current_question_id 	= $questions['What is your race?'];
@@ -1690,7 +1690,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Don’t Know"], 'jump_to_question_id' => null]
 		 ];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		#85
 		$current_question_id 	= $questions['If you marked “American Indian or Alaska Native” in the previous question, what tribe do you most closely identify with?'];
@@ -1698,7 +1698,7 @@ class AssementFormSeeder extends Seeder
 			['question_id' => $current_question_id,'answer_id' => null, 'jump_to_question_id' => null]
 		];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 		 
 		 #86
 		 $current_question_id 	= $questions['What is the highest grade in school you completed?'];
@@ -1743,7 +1743,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Graduate/professional degree"], 'jump_to_question_id' => null]
 		 ];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 #87
 		 $current_question_id 	= $questions['Please fill in the category below that best fits the total combined income before taxes of all people who lived in your household last year. This should include not only wages, salaries, and tips but also income from social security, pension, unemployment, or disability compensation, alimony, child support, welfare, or any other money income received by all household members – by you or anyone else living with you.'];
@@ -1774,7 +1774,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["More than $100,000"], 'jump_to_question_id' => null]
 		 ];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		  # PsychiatricPhysicalSymptoms
 
@@ -1785,7 +1785,7 @@ class AssementFormSeeder extends Seeder
 		 ['question_id' => $current_question_id, 'answer_id' => $answers["Bothered a little"], 'jump_to_question_id' => null, 'score' => 1],
 		 ['question_id' => $current_question_id, 'answer_id' => $answers["Bothered a lot"], 'jump_to_question_id' => null, 'score' => 2]
 		];
-		DB::table('form_question_answers')->insert($form_question_answers);
+		DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		# PsychiatricAnger 
 
@@ -1799,7 +1799,7 @@ class AssementFormSeeder extends Seeder
 		 ['question_id' => $current_question_id, 'answer_id' => $answers["Always"], 'jump_to_question_id' => null,'score' => 5],
 		];
 		 
-		DB::table('form_question_answers')->insert($form_question_answers);
+		DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		# PsychiatricAnxiety
 
@@ -1814,7 +1814,7 @@ class AssementFormSeeder extends Seeder
 		];
 
 		 
-		DB::table('form_question_answers')->insert($form_question_answers);
+		DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		# PsychiatricDepression
 
@@ -1829,7 +1829,7 @@ class AssementFormSeeder extends Seeder
 		];
 
 		 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 # PsychiatricMania
 
@@ -1853,7 +1853,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["I feel happier of more cheerful than usual all of the time."], 'jump_to_question_id' => null, 'score' => 5]
 		 ];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 $current_question_id 	= $questions['Question 2'];
 
@@ -1874,7 +1874,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["I feel extremely self-confident all of the time."], 'jump_to_question_id' => null, 'score' => 5]
 		 ];
 
-		  DB::table('form_question_answers')->insert($form_question_answers);
+		  DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		$current_question_id 	= $questions['Question 3'];
 
@@ -1896,7 +1896,7 @@ class AssementFormSeeder extends Seeder
 		 	'jump_to_question_id' => null, 'score' => 5]
 		 ];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		$current_question_id 	= $questions['Question 4'];
 
@@ -1917,7 +1917,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["I talk constantly and cannot be interrupted."], 'jump_to_question_id' => null, 'score' => 5]
 		 ];
 
-		  DB::table('form_question_answers')->insert($form_question_answers);
+		  DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		$current_question_id 	= $questions['Question 5'];
 
@@ -1938,7 +1938,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["I am constantly more active or on the go all the time."], 'jump_to_question_id' => null, 'score' => 5]
 		 ];
 
-		DB::table('form_question_answers')->insert($form_question_answers);
+		DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		# Strokes Scale
 
@@ -1955,7 +1955,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["leg"], 'jump_to_question_id' => null]
 		 ];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		$current_question_id 	= $questions['Sudden Weakness'];
 
@@ -1968,7 +1968,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["leg"], 'jump_to_question_id' => null]
 		 ];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		$current_question_id 	= $questions['Sudden Disability'];
 
@@ -1981,7 +1981,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["leg"], 'jump_to_question_id' => null]
 		 ];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		$current_question_id 	= $questions['Vision'];
 
@@ -1996,7 +1996,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Loss of Vision"], 'jump_to_question_id' => null]
 		 ];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		$current_question_id 	= $questions['Gait / Posture'];
 
@@ -2007,7 +2007,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Unable to move"], 'jump_to_question_id' => null]
 		 ];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		$current_question_id 	= $questions['Seizure'];
 
@@ -2018,7 +2018,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["No"], 'jump_to_question_id' => null]
 		 ];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		$current_question_id 	= $questions['Sudden Pain / Ache'];
 
@@ -2031,7 +2031,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Other Parts of Body"], 'jump_to_question_id' => null]
 		 ];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		$current_question_id 	= $questions['F—Face: Ask the person to smile. Does one side of the face droop'];
 		 $form_question_answers = [
@@ -2041,7 +2041,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["No"], 'jump_to_question_id' => null]
 		 ];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		$current_question_id 	= $questions['A—Arms: Ask the person to raise both arms. Does one arm drift downward'];
 		 $form_question_answers = [
@@ -2051,7 +2051,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["No"], 'jump_to_question_id' => null]
 		 ];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 $current_question_id 	= $questions['S—Speech: Ask the person to repeat a simple phrase. Is the speech slurred or strange'];
 
@@ -2062,7 +2062,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["No"], 'jump_to_question_id' => null]
 		 ];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 $current_question_id 	= $questions['T—Time: If you see any of these signs, call +919840056700'];
 
@@ -2073,7 +2073,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["No"], 'jump_to_question_id' => null]
 		 ];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 # nih-stroke-scale-score-nihss
 
@@ -2092,7 +2092,7 @@ class AssementFormSeeder extends Seeder
 			 	'answer_id' => $answers["Postures or unresponsive"],'jump_to_question_id' => null,'score' => 3]
 		 ];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		$current_question_id 	= $questions['Ask month and age'];
 
@@ -2109,7 +2109,7 @@ class AssementFormSeeder extends Seeder
 			 	'answer_id' => $answers["Aphasic"],'jump_to_question_id' => null,'score' => 2]
 		 ];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		$current_question_id 	= $questions['Blink eyes & squeeze hands'];
 
@@ -2122,7 +2122,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Performs 0 tasks"],'jump_to_question_id' => null,'score' => 2]
 		 ];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 
 		$current_question_id 	= $questions['Horizontal extraocular movements'];
@@ -2138,7 +2138,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Forced gaze palsy: cannot be overcome"],'jump_to_question_id' => null,'score' => 2]
 		 ];
 
-		DB::table('form_question_answers')->insert($form_question_answers);
+		DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		$current_question_id 	= $questions['Visual fields'];
 
@@ -2155,7 +2155,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Bilateral hemianopia"],'jump_to_question_id' => null,'score' => 3]
 		 ];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		$current_question_id 	= $questions['Facial palsy'];
 
@@ -2172,7 +2172,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Bilateral complete paralysis (upper/lower face)"],'jump_to_question_id' => null,'score' => 3]
 		 ];
 
-		DB::table('form_question_answers')->insert($form_question_answers);
+		DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		$current_question_id 	= $questions['Left arm motor drift'];
 
@@ -2193,7 +2193,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Amputation/joint fusion"],'jump_to_question_id' => null,'score' => 0]
 		 ];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		$current_question_id 	= $questions['Right arm motor drift'];
 
@@ -2214,7 +2214,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Amputation/joint fusion"],'jump_to_question_id' => null,'score' => 0]
 		 ];
 
-		DB::table('form_question_answers')->insert($form_question_answers);
+		DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		$current_question_id 	= $questions['Left leg motor drift'];
 
@@ -2235,7 +2235,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Amputation/joint fusion"],'jump_to_question_id' => null,'score' => 0]
 		];
 
-		DB::table('form_question_answers')->insert($form_question_answers);
+		DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		$current_question_id 	= $questions['Right leg motor drift'];
 
@@ -2256,7 +2256,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Amputation/joint fusion"],'jump_to_question_id' => null,'score' => 0]
 		 ];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		$current_question_id 	= $questions['Limb Ataxia'];
 
@@ -2275,7 +2275,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Amputation/joint fusion"],'jump_to_question_id' => null,'score' => 0]
 		 ];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		$current_question_id 	= $questions['Sensation'];
 
@@ -2294,7 +2294,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Coma/unresponsive"],'jump_to_question_id' => null,'score' => 2]
 		 ];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		$current_question_id 	= $questions['Language/aphasia'];
 
@@ -2311,7 +2311,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Coma/unresponsive"],'jump_to_question_id' => null,'score' => 3]
 		 ];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		$current_question_id 	= $questions['Dysarthria'];
 
@@ -2328,7 +2328,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Intubated/unable to test"],'jump_to_question_id' => null,'score' => 0]
 		 ];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		$current_question_id 	= $questions['Extinction/inattention'];
 
@@ -2345,7 +2345,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Extinction to >1 modality"],'jump_to_question_id' => null,'score' => 2]
 		 ];
 
-		 DB::table('form_question_answers')->insert($form_question_answers);
+		 DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		 # tpa-contraindications-ischemic-stroke.sql
 
@@ -2360,7 +2360,7 @@ class AssementFormSeeder extends Seeder
 		  ['question_id' => $questions["Additional Warnings to TPA >3hr Onset"],'answer_id' => $answers["No"], 'jump_to_question_id' => null]
 		];
 
-		DB::table('form_question_answers')->insert($form_question_answers);
+		DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 		# thrive-score-stroke-outcome
  
@@ -2371,7 +2371,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["Norm: 0 - 42 points"],'jump_to_question_id' => null]
 		];
 
-		DB::table('form_question_answers')->insert($form_question_answers);
+		DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
 
 		$form_question_answers = [
@@ -2389,7 +2389,7 @@ class AssementFormSeeder extends Seeder
 		 	'answer_id' => $answers["No"],'jump_to_question_id' => null,'score' => 0]
 		];
 
-		DB::table('form_question_answers')->insert($form_question_answers);
+		DB::table('form_question_answers')->insertOrIgnore($form_question_answers);
 
     }
 }
