@@ -2011,7 +2011,7 @@ class Vital extends BaseModel
                 case 'Straw':
                     // $input_data['Color_message']            = 'Small';
                     // $input_data['Color_flag']       = 'success';
-                    $input_data['Color_range_code'] = '#F4C542';
+                    $input_data['Color_range_code'] = '#E4D96F';
                     break;
                 case 'Yellow':
                     // $input_data['Color_message']            = 'Small';
