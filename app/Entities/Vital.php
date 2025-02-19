@@ -1917,9 +1917,9 @@ class Vital extends BaseModel
         $input_data['leukocytes_flag']       = '';
         $input_data['leukocytes_range_code'] = '';
 
-        $input_data['Color_message']    = '';
-        $input_data['Color_flag']       = '';
-        $input_data['Color_range_code'] = '';
+        $input_data['color_message']    = '';
+        $input_data['color_flag']       = '';
+        $input_data['color_range_code'] = '';
 
         $input_data['Specific_gravity_message']    = '';
         $input_data['Specific_gravity_flag']       = '';
@@ -1965,6 +1965,10 @@ class Vital extends BaseModel
         $input_data['value_flag']         = '';
         $input_data['value_range_code']   = '';
 
+        $input_data['ph_message']              = '';
+        $input_data['ph_flag']         = '';
+        $input_data['ph_range_code']   = '';
+
         $input_data['sugar_message']    = '';
         $input_data['sugar_flag']       = '';
         $input_data['sugar_range_code'] = '';
@@ -1982,22 +1986,22 @@ class Vital extends BaseModel
                         $input_data['leukocytes_flag']       = 'success';
                         $input_data['leukocytes_range_code'] = '#008000';
                         break;
-                case '+':
+                case '+ (100 mg/dL)':
                     $input_data['leukocytes_message']            = 'Moderately High';
                     $input_data['leukocytes_flag']       = 'success';
                     $input_data['leukocytes_range_code'] = '#fff707';
                     break;
-                case '++':
+                case '++ (250 mg/dL)':
                     $input_data['leukocytes_message']            = 'High';
                     $input_data['leukocytes_flag']       = 'warning';
                     $input_data['leukocytes_range_code'] = '#ffc107';
                     break;
-                case '+++':
+                case '+++ (500 mg/dL)':
                     $input_data['leukocytes_message']            = 'Very High';
                     $input_data['leukocytes_flag']       = 'danger';
                     $input_data['leukocytes_range_code'] = '#ff0000';
                     break;
-                case '++++':
+                case '++++ (1000 mg/dL)':
                         $input_data['leukocytes_message']            = 'Extremely High';
                         $input_data['leukocytes_flag']       = 'danger';
                         $input_data['leukocytes_range_code'] = '#8B0000';
@@ -2011,27 +2015,27 @@ class Vital extends BaseModel
                 case 'Straw':
                     // $input_data['Color_message']            = 'Small';
                     // $input_data['Color_flag']       = 'success';
-                    $input_data['Color_range_code'] = '#E4D96F';
+                    $input_data['color_range_code'] = '#E4D96F';
                     break;
                 case 'Yellow':
                     // $input_data['Color_message']            = 'Small';
                     // $input_data['Color_flag']       = 'success';
-                    $input_data['Color_range_code'] = '#FFC107';
+                    $input_data['color_range_code'] = '#FFC107';
                     break;
                 case 'Red':
                     // $input_data['Color_message']            = 'Moderate';
                     // $input_data['Color_flag']       = 'warning';
-                    $input_data['Color_range_code'] = '#FF0000';
+                    $input_data['color_range_code'] = '#FF0000';
                     break;
                 case 'Brown':
                     // $input_data['Color_message']            = 'Large';
                     // $input_data['Color_flag']       = 'danger';
-                    $input_data['Color_range_code'] = '#8B4513';
+                    $input_data['color_range_code'] = '#8B4513';
                     break;
                 case 'Green':
                         // $input_data['Color_message']            = 'Large';
                         // $input_data['Color_flag']       = 'danger';
-                        $input_data['Color_range_code'] = '#008000';
+                        $input_data['color_range_code'] = '#008000';
                         break;
             }
         }
@@ -2039,18 +2043,23 @@ class Vital extends BaseModel
         if (!empty($input_data['protein'])) {
 
             switch ($input_data['protein']) {
-                case '+':
+                case '+ (30 mg/dL)':
                     $input_data['protein_message']    = 'Small';
                     $input_data['protein_flag']       = 'success';
                     $input_data['protein_range_code'] = '#008000';
                     break;
-                case '++':
+                case '++ (100 mg/dL)':
                     $input_data['protein_message']            = 'Moderate';
                     $input_data['protein_flag']       = 'warning';
                     $input_data['protein_range_code'] = '#ffc107';
                     break;
-                case '+++':
+                case '+++ (300 mg/dL)':
                     $input_data['protein_message']            = 'Large';
+                    $input_data['protein_flag']       = 'danger';
+                    $input_data['protein_range_code'] = '#ff0000';
+                    break;
+                case '++++ (2000 mg/dL)':
+                    $input_data['protein_message']            = 'Very Large';
                     $input_data['protein_flag']       = 'danger';
                     $input_data['protein_range_code'] = '#ff0000';
                     break;
@@ -2162,26 +2171,26 @@ class Vital extends BaseModel
                 }
 
                 if (($input_data['urine'] >= 6.0) && ($input_data['urine'] < 6.5)) {
-                    $input_data['value']            = 'Acidic';
+                    // $input_data['value']            = 'Acidic';
                     $input_data['value_flag']       = 'danger';
                     $input_data['value_range_code'] = '#ff0000';
                 }
 
                 if (($input_data['urine'] >= 6.5) && ($input_data['urine'] < 7)) {
-                    $input_data['value']            = 'Moderate';
+                    // $input_data['value']            = 'Moderate';
                     $input_data['value_flag']       = 'warning';
                     $input_data['value_range_code'] = '#ffc107';
                 }
 
 
                 if (($input_data['urine'] >= 7) && ($input_data['urine'] < 8)) {
-                    $input_data['value']            = 'Optimal';
+                    // $input_data['value']            = 'Optimal';
                     $input_data['value_flag']       = 'success';
                     $input_data['value_range_code'] = '#008000';
                 }
 
                 if ($input_data['urine'] >= 8) {
-                    $input_data['value']            = 'Too Alkaline';
+                    // $input_data['value']            = 'Too Alkaline';
                     $input_data['value_flag']       = 'danger';
                     $input_data['value_range_code'] = '#ff0000';
                 }
@@ -2190,26 +2199,26 @@ class Vital extends BaseModel
         }
         if (!empty($input_data['ph'])) {
 
-            if ($input_data['ph'] > 0) {
+       
                 if ($input_data['ph'] < 6) {
-                    $input_data['value']            = 'Acidic';
-                    $input_data['value_flag']       = 'danger';
-                    $input_data['value_range_code'] = '#FF0000';
+                     $input_data['ph_message']            = 'Acidic';
+                    $input_data['ph_flag']       = 'danger';
+                    $input_data['ph_range_code'] = '#FF0000';
                 }
 
                 if (($input_data['ph'] >= 6) && ($input_data['urine'] < 7)) {
-                    $input_data['value']            = 'Normal';
-                    $input_data['value_flag']       = 'danger';
-                    $input_data['value_range_code'] = '#008000';
+                     $input_data['ph_message']            = 'Normal';
+                    $input_data['ph_flag']       = 'danger';
+                    $input_data['ph_range_code'] = '#008000';
                 }
 
                 if ($input_data['ph'] >= 7) {
-                    $input_data['value']            = 'Alkaline';
-                    $input_data['value_flag']       = 'danger';
-                    $input_data['value_range_code'] = '#0000ff';
+                     $input_data['ph_message']            = 'Alkaline';
+                    $input_data['ph_flag']       = 'danger';
+                    $input_data['ph_range_code'] = '#0000ff';
                 }
 
-            }
+            
         }
         if (!empty($input_data['Specific_gravity'])) {
 
@@ -2265,22 +2274,22 @@ class Vital extends BaseModel
                         $input_data['glucose_flag']       = 'success';
                         $input_data['glucose_range_code'] = '#89d4f5';
                         break;
-                case '+':
+                case '+ (100 mg/dL)':
                     $input_data['glucose_message']    = 'Moderately High';
                     $input_data['glucose_flag']       = 'success';
                     $input_data['glucose_range_code'] = '#fff707';
                     break;
-                case '++':
+                case '++ (250 mg/dL)':
                     $input_data['glucose_message']            = 'High';
                     $input_data['glucose_flag']       = 'warning';
                     $input_data['glucose_range_code'] = '#ffc107';
                     break;
-                case '+++':
+                case '+++ (500 mg/dL)':
                     $input_data['glucose_message']            = 'Very High';
                     $input_data['glucose_flag']       = 'danger';
                     $input_data['glucose_range_code'] = '#ff0000';
                     break;
-                case '++++':
+                case '++++ (1000 mg/dL)':
                         $input_data['glucose_message']            = 'Extremely High';
                         $input_data['glucose_flag']       = 'danger';
                         $input_data['glucose_range_code'] = '#8B0000';
@@ -2300,22 +2309,22 @@ class Vital extends BaseModel
                         $input_data['Ketones_flag']       = 'success';
                         $input_data['Ketones_range_code'] = '#89d4f5';
                         break;
-                case '+':
+                case '+ (100 mg/dL)':
                     $input_data['Ketones_message']    = 'Moderately High';
                     $input_data['Ketones_flag']       = 'success';
                     $input_data['Ketones_range_code'] = '#fff707';
                     break;
-                case '++':
+                case '++ (250 mg/dL)':
                     $input_data['Ketones_message']            = 'High';
                     $input_data['Ketones_flag']       = 'warning';
                     $input_data['Ketones_range_code'] = '#ffc107';
                     break;
-                case '+++':
+                case '+++ (500 mg/dL)':
                     $input_data['Ketones_message']            = 'Very High';
                     $input_data['Ketones_flag']       = 'danger';
                     $input_data['Ketones_range_code'] = '#ff0000';
                     break;
-                case '++++':
+                case '++++ (1000 mg/dL)':
                         $input_data['Ketones_message']            = 'Extremely High';
                         $input_data['Ketones_flag']       = 'danger';
                         $input_data['Ketones_range_code'] = '#8B0000';
@@ -2331,27 +2340,27 @@ class Vital extends BaseModel
                     $input_data['blood_in_urine_range_code'] = '#008000';
                     break;
                 case 'Trace':
-                        $input_data['blood_in_urine_message']    = 'Below';
+                        $input_data['blood_in_urine_message']    = 'Below Normal';
                         $input_data['blood_in_urine_flag']       = 'success';
                         $input_data['blood_in_urine_range_code'] = '#89d4f5';
                         break;
-                case '+':
-                    $input_data['blood_in_urine_message']    = 'Moderately High';
+                case '+ 100 mg/dL':
+                    $input_data['blood_in_urine_message']    = 'Mild';
                     $input_data['blood_in_urine_flag']       = 'success';
                     $input_data['blood_in_urine_range_code'] = '#fff707';
                     break;
-                case '++':
-                    $input_data['blood_in_urine_message']            = 'High';
+                case '++ 250 mg/dL':
+                    $input_data['blood_in_urine_message']            = 'Moderate ';
                     $input_data['blood_in_urine_flag']       = 'warning';
                     $input_data['blood_in_urine_range_code'] = '#ffc107';
                     break;
-                case '+++':
-                    $input_data['blood_in_urine_message']            = 'Very High';
+                case '+++ 500 mg/dL':
+                    $input_data['blood_in_urine_message']            = 'High';
                     $input_data['blood_in_urine_flag']       = 'danger';
                     $input_data['blood_in_urine_range_code'] = '#ff0000';
                     break;
-                case '++++':
-                        $input_data['blood_in_urine_message']            = 'Extremely High';
+                case '++++ 1000 mg/dL':
+                        $input_data['blood_in_urine_message']            = 'Very High';
                         $input_data['blood_in_urine_flag']       = 'danger';
                         $input_data['blood_in_urine_range_code'] = '#8B0000';
                         break;
@@ -3386,7 +3395,7 @@ class Vital extends BaseModel
                     $input_data['ldl_message_flag'] = 'warning';
                     $input_data['ldl_range_code']   = '#fff707';
                 break;
-                case ' High (Increased Risk)':
+                case 'High (Increased Risk)':
                 $input_data['ldl_message_flag'] = 'warning';
                 $input_data['ldl_range_code']   = '#FFC107';
                 break;
@@ -3483,24 +3492,24 @@ class Vital extends BaseModel
             if($years >= 60){
                 if ($input_data['total_unit'] == 'mg/dL') {
 
-                    if ($input_data['total'] < 150) {
+                    if ($input_data['total'] < 140) {
                         $input_data['total_message'] = 'Low (Hypo/Deficient)'; 
                     }
     
-                    if (($input_data['total'] >= 150) && ($input_data['total'] <= 200)) {
+                    if (($input_data['total'] >= 140) && ($input_data['total'] <= 220)) {
                         $input_data['total_message'] = 'Normal (Desirable)'; 
                     }
 
 
-                    if (($input_data['total'] >= 201) && ($input_data['total'] <= 240)) {
+                    if (($input_data['total'] >= 221) && ($input_data['total'] <= 250)) {
                         $input_data['total_message'] = 'Borderline High (Elevated Risk)'; 
                     }
 
-                    if (($input_data['total'] >= 241) && ($input_data['total'] <= 270)) {
+                    if (($input_data['total'] >= 251) && ($input_data['total'] <= 280)) {
                         $input_data['total_message'] = 'High (Increased Risk)'; 
                     }
 
-                    if ($input_data['total'] >= 271) {
+                    if ($input_data['total'] >= 281) {
                         $input_data['total_message'] = 'Very High (Severe Risk)'; 
                     }
                 } 
@@ -3520,7 +3529,7 @@ class Vital extends BaseModel
                     $input_data['total_message_flag'] = 'warning';
                     $input_data['total_range_code']   = '#fff707';
                 break;
-                case ' High (Increased Risk)':
+                case 'High (Increased Risk)':
                 $input_data['total_message_flag'] = 'warning';
                 $input_data['total_range_code']   = '#FFC107';
                 break;
@@ -3653,7 +3662,7 @@ class Vital extends BaseModel
                     $input_data['vldl_message_flag'] = 'warning';
                     $input_data['vldl_range_code']   = '#fff707';
                 break;
-                case ' High (Increased Risk)':
+                case 'High (Increased Risk)':
                 $input_data['vldl_message_flag'] = 'warning';
                 $input_data['vldl_range_code']   = '#FFC107';
                 break;
@@ -3670,24 +3679,24 @@ class Vital extends BaseModel
             if($years >= 0 && $years <= 5){
                 if ($input_data['hdl_unit'] == 'mg/dL') {
 
-                    if ($input_data['hdl'] < 30) {
+                    if ($input_data['hdl'] < 35) {
                         $input_data['hdl_message'] = 'Low (Hypo/Deficient)'; 
                     }
     
-                    if (($input_data['hdl'] >= 30) && ($input_data['hdl'] <= 90)) {
+                    if (($input_data['hdl'] >= 35) && ($input_data['hdl'] <= 55)) {
                         $input_data['hdl_message'] = 'Normal (Desirable)'; 
                     }
 
 
-                    if (($input_data['hdl'] >= 91) && ($input_data['hdl'] <= 110)) {
+                    if (($input_data['hdl'] >= 56) && ($input_data['hdl'] <= 60)) {
                         $input_data['hdl_message'] = 'Borderline High (Elevated Risk)'; 
                     }
 
-                    if (($input_data['hdl'] >= 111) && ($input_data['hdl'] <= 130)) {
+                    if (($input_data['hdl'] >= 61) && ($input_data['hdl'] <= 70)) {
                         $input_data['hdl_message'] = 'High (Increased Risk)'; 
                     }
 
-                    if ($input_data['hdl'] >= 131) {
+                    if ($input_data['hdl'] > 70) {
                         $input_data['hdl_message'] = 'Very High (Severe Risk)'; 
                     }
                 } 
@@ -3697,24 +3706,24 @@ class Vital extends BaseModel
             if($years >= 6 && $years <= 19){
                 if ($input_data['hdl_unit'] == 'mg/dL') {
 
-                    if ($input_data['hdl'] < 50) {
+                    if ($input_data['hdl'] < 40) {
                         $input_data['hdl_message'] = 'Low (Hypo/Deficient)'; 
                     }
     
-                    if (($input_data['hdl'] >= 50) && ($input_data['hdl'] <= 110)) {
+                    if (($input_data['hdl'] >= 40) && ($input_data['hdl'] <= 60)) {
                         $input_data['hdl_message'] = 'Normal (Desirable)'; 
                     }
 
 
-                    if (($input_data['hdl'] >= 111) && ($input_data['hdl'] <= 130)) {
+                    if (($input_data['hdl'] >= 61) && ($input_data['hdl'] <= 65)) {
                         $input_data['hdl_message'] = 'Borderline High (Elevated Risk)'; 
                     }
 
-                    if (($input_data['hdl'] >= 131) && ($input_data['hdl'] <= 160)) {
+                    if (($input_data['hdl'] >= 66) && ($input_data['hdl'] <= 75)) {
                         $input_data['hdl_message'] = 'High (Increased Risk)'; 
                     }
 
-                    if ($input_data['hdl'] >= 161) {
+                    if ($input_data['hdl'] > 75) {
                         $input_data['hdl_message'] = 'Very High (Severe Risk)'; 
                     }
                 } 
@@ -3724,24 +3733,24 @@ class Vital extends BaseModel
             if($years >= 20 && $years <= 59){
                 if ($input_data['hdl_unit'] == 'mg/dL') {
 
-                    if ($input_data['hdl'] < 50) {
+                    if ($input_data['hdl'] < 40) {
                         $input_data['hdl_message'] = 'Low (Hypo/Deficient)'; 
                     }
     
-                    if (($input_data['hdl'] >= 50) && ($input_data['hdl'] <= 130)) {
+                    if (($input_data['hdl'] >= 40) && ($input_data['hdl'] <= 60)) {
                         $input_data['hdl_message'] = 'Normal (Desirable)'; 
                     }
 
 
-                    if (($input_data['hdl'] >= 131) && ($input_data['hdl'] <= 160)) {
+                    if (($input_data['hdl'] >= 61) && ($input_data['hdl'] <= 65)) {
                         $input_data['hdl_message'] = 'Borderline High (Elevated Risk)'; 
                     }
 
-                    if (($input_data['hdl'] >= 161) && ($input_data['hdl'] <= 190)) {
+                    if (($input_data['hdl'] >= 66) && ($input_data['hdl'] <= 75)) {
                         $input_data['hdl_message'] = 'High (Increased Risk)'; 
                     }
 
-                    if ($input_data['hdl'] >= 191) {
+                    if ($input_data['hdl'] >= 75) {
                         $input_data['hdl_message'] = 'Very High (Severe Risk)'; 
                     }
                 } 
@@ -3751,24 +3760,24 @@ class Vital extends BaseModel
             if($years >= 60){
                 if ($input_data['hdl_unit'] == 'mg/dL') {
 
-                    if ($input_data['hdl'] < 50) {
+                    if ($input_data['hdl'] < 40) {
                         $input_data['hdl_message'] = 'Low (Hypo/Deficient)'; 
                     }
     
-                    if (($input_data['hdl'] >= 50) && ($input_data['hdl'] <= 140)) {
+                    if (($input_data['hdl'] >= 40) && ($input_data['hdl'] <= 60)) {
                         $input_data['hdl_message'] = 'Normal (Desirable)'; 
                     }
 
 
-                    if (($input_data['hdl'] >= 141) && ($input_data['hdl'] <= 170)) {
+                    if (($input_data['hdl'] >= 61) && ($input_data['hdl'] <= 65)) {
                         $input_data['hdl_message'] = 'Borderline High (Elevated Risk)'; 
                     }
 
-                    if (($input_data['hdl'] >= 171) && ($input_data['hdl'] <= 200)) {
+                    if (($input_data['hdl'] >= 66) && ($input_data['hdl'] <= 75)) {
                         $input_data['hdl_message'] = 'High (Increased Risk)'; 
                     }
 
-                    if ($input_data['hdl'] >= 201) {
+                    if ($input_data['hdl'] >= 75) {
                         $input_data['hdl_message'] = 'Very High (Severe Risk)'; 
                     }
                 } 
@@ -3788,7 +3797,7 @@ class Vital extends BaseModel
                     $input_data['hdl_message_flag'] = 'warning';
                     $input_data['hdl_range_code']   = '#fff707';
                 break;
-                case ' High (Increased Risk)':
+                case 'High (Increased Risk)':
                 $input_data['hdl_message_flag'] = 'warning';
                 $input_data['hdl_range_code']   = '#FFC107';
                 break;
