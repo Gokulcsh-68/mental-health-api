@@ -2020,6 +2020,11 @@ class Vital extends BaseModel
                 case 'Yellow':
                     // $input_data['Color_message']            = 'Small';
                     // $input_data['Color_flag']       = 'success';
+                    $input_data['color_range_code'] = '#fff707';
+                    break;
+                case 'Amber':
+                        // $input_data['Color_message']            = 'Small';
+                        // $input_data['Color_flag']       = 'success';
                     $input_data['color_range_code'] = '#FFC107';
                     break;
                 case 'Red':
