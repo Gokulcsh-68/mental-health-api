@@ -2009,8 +2009,8 @@ class Vital extends BaseModel
 
             switch ($input_data['color']) {
                 case 'Straw':
-                    $input_data['Color_message']            = 'Small';
-                    $input_data['Color_flag']       = 'success';
+                    // $input_data['Color_message']            = 'Small';
+                    // $input_data['Color_flag']       = 'success';
                     $input_data['Color_range_code'] = '#F4C542';
                     break;
                 case 'Yellow':
@@ -3915,7 +3915,7 @@ class Vital extends BaseModel
                     $input_data['hdl_ldl_message_flag'] = 'warning';
                     $input_data['hdl_ldl_range_code']   = '#fff707';
                 break;
-                case ' High (Increased Risk)':
+                case 'High (Increased Risk)':
                 $input_data['hdl_ldl_message_flag'] = 'warning';
                 $input_data['hdl_ldl_range_code']   = '#FFC107';
                 break;
