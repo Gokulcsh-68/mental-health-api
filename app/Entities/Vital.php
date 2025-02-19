@@ -890,7 +890,7 @@ class Vital extends BaseModel
                             $input_data['temperatureFlagColor'] = 'success';
                             $input_data['range_code']    = '#FFC107';
                         }
-                        if (($input_data['temperature'] >= 103)) {
+                        if (($input_data['temperature'] > 103)) {
                             $input_data['temperatureFlag']      = 'Severely High (Hyperpyrexia)';
                             $input_data['temperatureFlagColor'] = 'success';
                             $input_data['range_code']    = '#FF0000';
@@ -1949,9 +1949,9 @@ class Vital extends BaseModel
         $input_data['Urobilinogen_flag']          = '';
         $input_data['Urobilinogen_range_code']    = '';
         
-        $input_data['Bilirubin_message']               = '';
-        $input_data['Bilirubin_flag']          = '';
-        $input_data['Bilirubin_range_code']    = '';
+        $input_data['bilirubin_message']               = '';
+        $input_data['bilirubin_flag']          = '';
+        $input_data['bilirubin_range_code']    = '';
 
         $input_data['rbc_message']              = '';
         $input_data['rbc_flag']         = '';
@@ -1979,12 +1979,12 @@ class Vital extends BaseModel
                 case 'Negative':
                     $input_data['leukocytes_message']            = 'Normal';
                     $input_data['leukocytes_flag']       = 'success';
-                    $input_data['leukocytes_range_code'] = '#89d4f5';
+                    $input_data['leukocytes_range_code'] = '#008000';
                     break;
                     case 'Trace':
                         $input_data['leukocytes_message']            = 'Below Normal';
                         $input_data['leukocytes_flag']       = 'success';
-                        $input_data['leukocytes_range_code'] = '#008000';
+                        $input_data['leukocytes_range_code'] = '#89d4f5';
                         break;
                 case '+ (100 mg/dL)':
                     $input_data['leukocytes_message']            = 'Moderately High';
@@ -2020,6 +2020,11 @@ class Vital extends BaseModel
                 case 'Yellow':
                     // $input_data['Color_message']            = 'Small';
                     // $input_data['Color_flag']       = 'success';
+                    $input_data['color_range_code'] = '#fff707';
+                    break;
+                case 'Amber': 
+                        // $input_data['Color_message']            = 'Small';
+                        // $input_data['Color_flag']       = 'success';
                     $input_data['color_range_code'] = '#FFC107';
                     break;
                 case 'Red':
@@ -2261,6 +2266,19 @@ class Vital extends BaseModel
             }
         }
 
+        if (!empty($input_data['bilirubin'])) {
+
+            switch ($input_data['bilirubin']) {
+                case 'Negative':
+                    $input_data['bilirubin_message']    = 'Normal';
+                    $input_data['bilirubin_flag']       = 'success';
+                    $input_data['bilirubin_range_code'] = '#008000';
+                    break;
+                case 'Positive':
+                        $input_data['bilirubin_message']    = 'Below';
+                        $input_data['bilirubin_flag']       = 'success';
+                        $input_data['bilirubin_range_code'] = '#FF0000';
+                        break;}}
         if (!empty($input_data['glucose'])) {
 
             switch ($input_data['glucose']) {
@@ -2432,7 +2450,7 @@ class Vital extends BaseModel
                 }
             
                 // 1 - 12 Months
-                if ($months <= 1 && $months >= 12) {
+                if ($months >= 1 && $months <= 12) {
                     if (($input_data['systolic'] <= 69) ) 
                     // && ($input_data['diastolic'] <= 39)
                 {
@@ -2444,7 +2462,7 @@ class Vital extends BaseModel
                     if ((($input_data['systolic'] >= 70) && ($input_data['systolic'] <= 100)) )
                     // || (($input_data['diastolic'] >= 40) && ($input_data['diastolic'] <= 60))
                  {
-                        $input_data['bpFlag']      = 'Normal BPs';
+                        $input_data['bpFlag']      = 'Normal BP';
                         $input_data['bpFlagColor'] = 'success';
                         $input_data['range_code']  = '#008000';
                     }
@@ -2960,6 +2978,38 @@ class Vital extends BaseModel
                             
                         }
 
+                        if (($months >= 1) && ($months <= 12)) {
+
+                            if (($input_data['heart'] < 90)) {
+                                $input_data['heartRateFlag']      = 'Low Heart Rate (Bradycardia)';
+                                $input_data['heartRateFlagColor'] = 'primary';
+                                $input_data['range_code']         = '#0000ff';
+                            }
+        
+                            if (($input_data['heart'] >= 90) && ($input_data['heart'] <= 150)) {
+                                $input_data['heartRateFlag']      = 'Normal Heart Rate(Normal Sinus Rhythm)';
+                                $input_data['heartRateFlagColor'] = 'success';
+                                $input_data['range_code']         = '#008000';
+                            }
+                            if (($input_data['heart'] >= 151) && ($input_data['heart'] <= 170)) {
+                                $input_data['heartRateFlag']      = 'Elevated Heart Rate';
+                                $input_data['heartRateFlagColor'] = 'success';
+                                $input_data['range_code']         = '#fff707';
+                            }
+                            if (($input_data['heart'] >= 171) && ($input_data['heart'] <= 190)) {
+                                $input_data['heartRateFlag']      = 'Mild Tachycardia';
+                                $input_data['heartRateFlagColor'] = 'success';
+                                $input_data['range_code']         = '#FFC107';
+                            }
+        
+                            if (($input_data['heart'] > 190)) {
+                                $input_data['heartRateFlag']      = 'Severe Tachycardia';
+                                $input_data['heartRateFlagColor'] = 'danger';
+                                $input_data['range_code']         = '#FF0000';
+                            }
+                        }
+                        
+
                 // if ($years == 0 && $months > 0) {
                 //     if (($months >= 1) && ($months < 12)) {
                 //         if (($input_data['heart'] < 79)) {
@@ -3011,7 +3061,7 @@ class Vital extends BaseModel
                         $input_data['heartRateFlagColor'] = 'success';
                         $input_data['range_code']         = '#fff707';
                     }
-                    if (($input_data['heart'] > 151) && ($input_data['heart'] <= 170)) {
+                    if (($input_data['heart'] >= 151) && ($input_data['heart'] <= 170)) {
                         $input_data['heartRateFlag']      = 'Mild Tachycardia';
                         $input_data['heartRateFlagColor'] = 'success';
                         $input_data['range_code']         = '#FFC107';
