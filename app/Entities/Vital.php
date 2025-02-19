@@ -2462,7 +2462,7 @@ class Vital extends BaseModel
                     if ((($input_data['systolic'] >= 70) && ($input_data['systolic'] <= 100)) )
                     // || (($input_data['diastolic'] >= 40) && ($input_data['diastolic'] <= 60))
                  {
-                        $input_data['bpFlag']      = 'Normal BPs';
+                        $input_data['bpFlag']      = 'Normal BP';
                         $input_data['bpFlagColor'] = 'success';
                         $input_data['range_code']  = '#008000';
                     }
