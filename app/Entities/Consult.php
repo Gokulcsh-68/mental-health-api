@@ -174,6 +174,14 @@ class Consult extends BaseModel
                 $consult_additional_info['organization_id'] = $request->user()->staff->hospital_id;
             }
 
+            if(isset($data['payment'])) {
+                $consult_additional_info['payment'] = [
+                    'name' => 'Consultation Charges',
+                    'price' => $data['payment']['amount'],
+                    'taxes' => [],
+                ];
+            }
+
             // Added Additional info for Consult
             $patient_addition_value = $addition_value;
 
