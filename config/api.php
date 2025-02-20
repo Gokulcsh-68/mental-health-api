@@ -32,6 +32,10 @@ return [
         'default_service_provider' => env('DEFAULT_SERVICE_PROVIDER', 'tokbox'),
         'api_return_url' => env('TELECONSULT_API_RETURN_URL'),
         'api_return_url_version' => env('TELECONSULT_API_RETURN_URL_VERSION', 'v1'),
+        'is_payment_enabled' => env('TELECONSULT_ENABLE_PAYMENT_MODULE', true),
+        'statuses' => [
+            'consult_approval_pending' => 'pending',
+        ]
     ]
 
 ];
