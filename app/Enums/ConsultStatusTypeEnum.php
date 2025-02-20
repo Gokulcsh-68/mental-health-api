@@ -15,4 +15,8 @@ class ConsultStatusTypeEnum extends EnumAbstract
     const STARTED = "Started";
 
     const CANCELLED = "Cancelled";
+
+    // payment gateway status
+    const PAID      = "paid";
+    const UNPAID    = "unpaid";
 }

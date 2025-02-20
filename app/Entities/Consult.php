@@ -7,6 +7,7 @@ use App\Enums\ConsultStatusTypeEnum;
 use App\Services\CureselectApis\TeleConsultApiService;
 use Carbon\Carbon;
 use DB;
+use Illuminate\Validation\ValidationException;
 
 class Consult extends BaseModel
 {
@@ -255,6 +256,14 @@ class Consult extends BaseModel
                 $payload['additional_info'] += ['camera'=>$data['cart_camera']];
             }
 
+               /**
+             * Patient Consult Creation
+             * To send request to provider for approval if payment module is enabled
+             */
+            if($teleconsult_config['is_payment_enabled'] && !isset($data['payment'])) {
+                $payload['consult_status'] = $teleconsult_config['statuses']['consult_approval_pending'];
+            }
+
             $teleconsult_response = $this->_teleconsult_service->create($payload);
             // dd($teleconsult_response);
 
@@ -300,6 +309,28 @@ class Consult extends BaseModel
             }
             if ($request->get('status')) {
                 switch (strtoupper($data['status'])) {
+
+                    case 'APPROVED':
+                        if(!isset($data['payment'])) {
+                            throw ValidationException::withMessages(['payment' => ['Please enter valid amount']]);
+                        } else {
+                            $merge_data = [
+                                'status' => isset($data['payment']['amount']) ? ConsultStatusTypeEnum::UNPAID : ConsultStatusTypeEnum::FRESH,
+                            ];
+
+                            if(isset($data['payment']['amount'])) {
+                                $merge_data['additional_info'] = [
+                                    'payment' => [
+                                        'name' => 'Consultation Charges',
+                                        'price' => $data['payment']['amount'],
+                                        'taxes' => [],
+                                    ]
+                                ];
+                            }
+                        }
+
+                        $request->merge($merge_data);
+                    break;
 
                     case 'STARTED':
                         $request->merge(['status' => ConsultStatusTypeEnum::STARTED]);
