@@ -260,9 +260,9 @@ class Consult extends BaseModel
              * Patient Consult Creation
              * To send request to provider for approval if payment module is enabled
              */
-            if($teleconsult_config['is_payment_enabled'] && !isset($data['payment'])) {
-                $payload['consult_status'] = $teleconsult_config['statuses']['consult_approval_pending'];
-            }
+            // if($teleconsult_config['is_payment_enabled'] && !isset($data['payment'])) {
+            //     $payload['consult_status'] = $teleconsult_config['statuses']['consult_approval_pending'];
+            // }
 
             $teleconsult_response = $this->_teleconsult_service->create($payload);
             // dd($teleconsult_response);
