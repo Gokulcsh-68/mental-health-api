@@ -46,15 +46,10 @@ class OpenAIAudioService
             }
 
             // Ensure temp directory exists
-            Storage::makeDirectory('temp');
-
-            // Retrieve pet details
-            $patient = Patient::findOrFail($request->input('patient_id'));
-            
             // Since additional_info is cast to object, access it directly
             $patientInfo = $patient->additional_info ?? new \stdClass();
             
-            // Extract pet details safely
+            // Extract patient details safely
             $patientDetails = [
                 'id'                => $patient->id,
                 'patient_name'      => trim(($patient->user->first_name  ?? '') . ' ' . ($patient->user->last_name ?? '')) ?: 'Not provided',
@@ -98,7 +93,7 @@ class OpenAIAudioService
             }
 
             // Step 2: Store the audio file on S3
-            $s3Path = Storage::disk('s3')->putFileAs('pet_audio', new \Illuminate\Http\UploadedFile(
+            $s3Path = Storage::disk('s3')->putFileAs('human_audio', new \Illuminate\Http\UploadedFile(
                 $filePath,
                 $originalName,
                 $extension === 'aac' ? 'audio/mpeg' : $audioFile->getMimeType(),
@@ -166,7 +161,7 @@ class OpenAIAudioService
                 throw new \Exception('Empty transcription received from Whisper API');
             }
 
-            // Step 4: Prepare system prompt for veterinary SOAP note
+            // Step 4: Prepare system prompt for SOAP note
             $systemPrompt = $this->buildSystemPrompt($patientDetails, $transcription);
 
             // Step 5: Get structured SOAP note from GPT
@@ -286,7 +281,7 @@ class OpenAIAudioService
             // Ensure temp directory exists
             Storage::makeDirectory('temp');
 
-            // Retrieve pet details
+            // Retrieve patient details
             $patient = Patient::findOrFail($request->input('patient_id'));
 
 
@@ -325,7 +320,7 @@ class OpenAIAudioService
             }
 
             // Step 2: Store the audio file on S3
-            $s3Path = Storage::disk('s3')->putFileAs('pet_audio', new \Illuminate\Http\UploadedFile(
+            $s3Path = Storage::disk('s3')->putFileAs('human_audio', new \Illuminate\Http\UploadedFile(
                 $filePath,
                 $originalName,
                 $extension === 'aac' ? 'audio/mpeg' : $audioFile->getMimeType(),
@@ -471,17 +466,13 @@ class OpenAIAudioService
 
         try {
             // Ensure OpenAI API key is set
-            if (empty(env('OPENAI_API_KEY'))) {
-                throw new \Exception('OpenAI API key is not configured');
-            }
-
-            // Retrieve pet details
+            // Retrieve patient details
             $patient = Patient::findOrFail($request->input('patient_id'));
             
             // Since additional_info is cast to object, access it directly
             $patientInfo = $patient->additional_info ?? new \stdClass();
             
-            // Extract pet details safely
+            // Extract patient details safely
             $patientDetails = [
                 'id'                => $patient->id,
                 'patient_name'      => trim(($patient->user->first_name  ?? '') . ' ' . ($patient->user->last_name ?? '')) ?: 'Not provided',
@@ -490,7 +481,7 @@ class OpenAIAudioService
                 'blood_group'       => $patient->user->blood_group ?? 'Not provided',
             ];
 
-            // Prepare system prompt for veterinary SOAP note
+            // Prepare system prompt for SOAP note
             $systemPrompt = $this->buildSystemPrompt($patientDetails, $transcription);
 
             // Debug: Uncomment to inspect system prompt
@@ -597,41 +588,14 @@ class OpenAIAudioService
      */
     private function buildSystemPrompt(array $patientDetails, string $transcript): string
     {
-        // Step 1: Default values to prevent undefined index errors
+        // Step 1: Default values for patient details
         $patientDetails = array_merge([
             'id' => '',
-            'name' => '',
-            'species' => '',
-            'breed' => '',
-            'age' => '',
-            'owner_name' => '',
-            'dob' => '',
-            'gender' => '',
-            'weight' => '',
-            'size_of_home' => '',
-            'size_of_garden' => '',
-            'exercise' => '',
-            'activity' => '',
-            'grooming' => ''
+            'patient_name' => 'Not provided',
+            'dob' => 'Not provided',
+            'gender' => 'Not provided',
+            'blood_group' => 'Not provided',
         ], $patientDetails);
-
-        // Step 2: Format the social history only with non-empty values
-        $socialParts = [];
-        if (!empty($patientDetails['size_of_home']) || !empty($patientDetails['size_of_garden'])) {
-            $home = "size_of_home={$patientDetails['size_of_home']}";
-            $garden = "size_of_garden={$patientDetails['size_of_garden']}";
-            $socialParts[] = "Living environment: {$home}, {$garden}";
-        }
-        if (!empty($patientDetails['exercise'])) {
-            $socialParts[] = "Exercise: {$patientDetails['exercise']}";
-        }
-        if (!empty($patientDetails['activity'])) {
-            $socialParts[] = "Activity: {$patientDetails['activity']}";
-        }
-        if (!empty($patientDetails['grooming'])) {
-            $socialParts[] = "Grooming: {$patientDetails['grooming']}";
-        }
-        $formattedSocialHistory = implode("; ", $socialParts) . ".";
 
         $vitalsHint = <<<VITALS
             "vitals": {
@@ -640,43 +604,37 @@ class OpenAIAudioService
                 "heart_rate": {"value": "", "unit": "bpm"},
                 "respiratory_rate": {"value": "", "unit": "breaths/min"},
                 "spo2": {"value": "", "unit": "%"},
-                "weight": {"value": "{$patientDetails['weight']}", "unit": "kg"},
-                "body_condition_score": {"value": "", "unit": ""}
+                "weight": {"value": "", "unit": "kg"},
+                "height": {"value": "", "unit": "cm"},
+                "bmi": {"value": "", "unit": "kg/m²"}
             },
         VITALS;
 
-        // Step 3: Insert everything into the system prompt template
+        // Step 2: Create the system prompt for a human patient
         $prompt = <<<PROMPT
-            You are a veterinary clinical documentation AI acting as a scribe. 
+            You are a clinical documentation AI acting as a scribe.
             Your task is to carefully listen to the transcript and RECORD only what is explicitly stated.
-            Do not interpret, exaggerate, or infer any medical reasoning. 
-            Simply map the observed details into the SOAP note JSON structure. 
+            Do not interpret, exaggerate, or infer any medical reasoning.
+            Simply map the observed details into the SOAP note JSON structure for a human patient.
 
             Transcript:
             "{$transcript}"
 
             Patient Details:
-            - Name: {$patientDetails['name']}
-            - Species: {$patientDetails['species']}
-            - Breed: {$patientDetails['breed']}
-            - Age: {$patientDetails['age']}
-            - Owner: {$patientDetails['owner_name']}
-            - DOB: {$patientDetails['dob']}
+            - ID: {$patientDetails['id']}
+            - Name: {$patientDetails['patient_name']}
+            - Date of Birth: {$patientDetails['dob']}
             - Gender: {$patientDetails['gender']}
-            - Weight: {$patientDetails['weight']}
-            - Social History: {$formattedSocialHistory}
+            - Blood Group: {$patientDetails['blood_group']}
 
             SOAP Format JSON:
             {
                 "patient_info": {
                     "id": "{$patientDetails['id']}",
-                    "name": "{$patientDetails['name']}",
-                    "species": "{$patientDetails['species']}",
-                    "breed": "{$patientDetails['breed']}",
-                    "age": "{$patientDetails['age']}",
-                    "owner_name": "{$patientDetails['owner_name']}",
+                    "name": "{$patientDetails['patient_name']}",
                     "dob": "{$patientDetails['dob']}",
                     "gender": "{$patientDetails['gender']}",
+                    "blood_group": "{$patientDetails['blood_group']}",
                     "encounter_type": "In Person"
                 },
                 "note_format": "SOAP",
@@ -718,14 +676,14 @@ class OpenAIAudioService
             }
 
             Instructions:
-            - Only record what is explicitly mentioned in the transcript or pet details.
+            - Only record what is explicitly mentioned in the transcript or patient details.
             - If not mentioned, leave as an empty string ("").
             - Family_history must be "Not provided" unless explicitly mentioned.
             - Do not add interpretations, summaries, or medical reasoning.
             - The output must be valid JSON in the SOAP format.
             PROMPT;
 
-        // Step 4: Return the prompt string
+        // Step 3: Return the prompt string
         return $prompt;
     }
 
