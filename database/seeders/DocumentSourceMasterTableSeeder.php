@@ -18,15 +18,7 @@ class DocumentSourceMasterTableSeeder extends Seeder
     		['slug' => 'document-source'],
         ];
 
-        DB::table('masters')
-            ->whereIn('master_type_slug', array_values(($master_types)) )
-            ->delete();
-        
-        DB::table('master_types')
-            ->whereIn('slug', array_values($master_types) )
-            ->delete();
-
-        DB::table('master_types')->insert($master_types);
+        DB::table('master_types')->insertOrIgnore($master_types);
 
         $document_types = [
             [
@@ -113,9 +105,15 @@ class DocumentSourceMasterTableSeeder extends Seeder
                 'name' => 'Others',
                 'is_active' => 1,
             ],
+            [
+                'master_type_slug' => 'document-source', 
+                'slug' => 'audio', 
+                'name' => 'Audio',
+                'is_active' => 1,
+            ],
         ];
 
-        DB::table('masters')->insert($document_types);
+        DB::table('masters')->insertOrIgnore($document_types);
 
     }
 }

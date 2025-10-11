@@ -44,6 +44,16 @@ $router->group(['prefix' => 'peripheral/', 'middleware' => 'peripheralAuth'], fu
 
 $router->group(['prefix' => 'v1/', 'middleware' => 'clientAuth'], function ($router) {
 
+    $router->post('diagnose', 'OpenAIService@diagnose');
+    $router->post('rxgpt', 'OpenAIRXGPTService@diagnose');
+    $router->post('image/diagnose', 'OpenAIImageService@diagnoseSinglePic');
+    $router->post('images/diagnose', 'OpenAIImageService@diagnose');
+
+    // SOAP from Audio Routes
+    $router->post('soap/diagnose', 'OpenAIAudioService@convertToSOAP');
+    $router->post('soap/diagnose/audio', 'OpenAIAudioService@convertToTranscript');
+    $router->post('soap/diagnose/text', 'OpenAIAudioService@convertToSOAPTEXT');
+
     // ABDM - AABA ROUTES
     $router->group(['prefix' => 'abdm', 'namespace' => 'ABDMApis'], function ($router) {
         $router->get('get-public-key', 'BaseService@getPublicKey');
