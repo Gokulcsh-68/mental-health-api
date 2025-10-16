@@ -52,6 +52,7 @@ $router->group(['prefix' => 'v1/', 'middleware' => 'clientAuth'], function ($rou
     // SOAP from Audio Routes
     $router->post('soap/diagnose', 'OpenAIAudioService@convertToSOAP');
     $router->post('soap/diagnose/audio', 'OpenAIAudioService@convertToTranscript');
+    $router->post('soap/diagnose/audio/converstation', 'OpenAIAudioService@convertToTranscriptBasedOnConversation');
     $router->post('soap/diagnose/text', 'OpenAIAudioService@convertToSOAPTEXT');
 
     // ABDM - AABA ROUTES
