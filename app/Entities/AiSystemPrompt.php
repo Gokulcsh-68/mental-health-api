@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Entities;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class AiSystemPrompt extends BaseModel
 {
