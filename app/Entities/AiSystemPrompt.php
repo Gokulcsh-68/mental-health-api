@@ -31,7 +31,7 @@ class AiSystemPrompt extends BaseModel
      * @var array
      */
     protected $casts = [
-        
+        'prompt_text' => 'object',
     ];
 
     /**
