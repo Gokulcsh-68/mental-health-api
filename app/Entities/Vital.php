@@ -678,7 +678,7 @@ class Vital extends BaseModel
                         if (($bmi_value >= 18.5) && ($bmi_value < 22.0)) {
                             $input_data['bmiFlag']      = 'Overweight';
                             $input_data['bmiFlagColor'] = 'success';
-                            $input_data['range_code']   = '#fff707';
+                            $input_data['range_code']   = '#BA8E23';
                         }
                         if (($bmi_value >= 22.0) && ($bmi_value < 25.0)) {
                             $input_data['bmiFlag']      = 'Obese ';
@@ -711,7 +711,7 @@ class Vital extends BaseModel
                 if (($bmi_value >= 18.5) && ($bmi_value < 22.0)) {
                     $input_data['bmiFlag']      = 'Overweight';
                     $input_data['bmiFlagColor'] = 'success';
-                    $input_data['range_code']   = '#fff707';
+                    $input_data['range_code']   = '#BA8E23';
                 }
                 if (($bmi_value >= 25.0) && ($bmi_value < 30.0)) {
                     $input_data['bmiFlag']      = 'Obese ';
@@ -744,7 +744,7 @@ class Vital extends BaseModel
         if (($bmi_value >= 21.5) && ($bmi_value < 30.0)) {
             $input_data['bmiFlag']      = 'Overweight';
             $input_data['bmiFlagColor'] = 'success';
-            $input_data['range_code']   = '#fff707';
+            $input_data['range_code']   = '#BA8E23';
         }
         if (($bmi_value >= 30.0) && ($bmi_value < 35.0)) {
             $input_data['bmiFlag']      = 'Obese ';
@@ -776,7 +776,7 @@ class Vital extends BaseModel
         if (($bmi_value >= 25.0) && ($bmi_value < 30.0)) {
             $input_data['bmiFlag']      = 'Overweight';
             $input_data['bmiFlagColor'] = 'success';
-            $input_data['range_code']   = '#fff707';
+            $input_data['range_code']   = '#BA8E23';
         }
         if (($bmi_value >= 30.0) && ($bmi_value < 35.0)) {
             $input_data['bmiFlag']      = 'Obese ';
@@ -855,7 +855,7 @@ class Vital extends BaseModel
                         if (($input_data['temperature'] >= 100.1) && ($input_data['temperature'] <= 101.3)) {
                             $input_data['temperatureFlag']      = 'Slightly Increased (Mild Fever)';
                             $input_data['temperatureFlagColor'] = 'success';
-                            $input_data['range_code']    = '#fff707';
+                            $input_data['range_code']    = '#BA8E23';
                         }
                         if (($input_data['temperature'] >= 101.4) && ($input_data['temperature'] < 103)) {
                             $input_data['temperatureFlag']      = 'Moderately Increased (Moderate Fever)'; 
@@ -883,7 +883,7 @@ class Vital extends BaseModel
                         if (($input_data['temperature'] >= 99.6) && ($input_data['temperature'] <= 101.3)) {
                             $input_data['temperatureFlag']      = 'Slightly Increased (Mild Fever)';
                             $input_data['temperatureFlagColor'] = 'success';
-                            $input_data['range_code']    = '#fff707';
+                            $input_data['range_code']    = '#BA8E23';
                         }
                         if (($input_data['temperature'] >= 101.4) && ($input_data['temperature'] <= 103)) {
                             $input_data['temperatureFlag']      = 'Moderately Increased (Moderate Fever)';
@@ -911,7 +911,7 @@ class Vital extends BaseModel
                         if (($input_data['temperature'] >= 99.1) && ($input_data['temperature'] <= 100.6)) {
                             $input_data['temperatureFlag']      = 'Slightly Increased (Mild Fever)';
                             $input_data['temperatureFlagColor'] = 'success';
-                            $input_data['range_code']    = '#fff707';
+                            $input_data['range_code']    = '#BA8E23';
                         }
                         if (($input_data['temperature'] >= 100.8) && ($input_data['temperature'] < 103)) {
                             $input_data['temperatureFlag']      = 'Moderately Increased (Moderate Fever)';
@@ -939,7 +939,7 @@ class Vital extends BaseModel
                         if (($input_data['temperature'] >= 98.8) && ($input_data['temperature'] <= 100.2)) {
                             $input_data['temperatureFlag']      = 'Slightly Increased (Mild Fever)';
                             $input_data['temperatureFlagColor'] = 'success';
-                            $input_data['range_code']    = '#fff707';
+                            $input_data['range_code']    = '#BA8E23';
                         }
                         if (($input_data['temperature'] >= 100.4) && ($input_data['temperature'] < 102.2)) {
                             $input_data['temperatureFlag']      = 'Moderately Increased (Moderate Fever)';
@@ -996,7 +996,7 @@ class Vital extends BaseModel
                         if (($input_data['temperature'] >= 37.9) && ($input_data['temperature'] <= 38.5)) {
                             $input_data['temperatureFlag']      = 'Slightly Increased (Mild Fever)';
                             $input_data['temperatureFlagColor'] = 'success';
-                            $input_data['range_code']    = '#fff707';
+                            $input_data['range_code']    = '#BA8E23';
                         }
                         if (($input_data['temperature'] >= 38.6) && ($input_data['temperature'] < 39.4)) {
                             $input_data['temperatureFlag']      = 'Moderately Increased (Moderate Fever)';
@@ -1024,7 +1024,7 @@ class Vital extends BaseModel
                         if (($input_data['temperature'] >= 37.6) && ($input_data['temperature'] <= 38.5)) {
                             $input_data['temperatureFlag']      = 'Slightly Increased (Mild Fever)';
                             $input_data['temperatureFlagColor'] = 'success';
-                            $input_data['range_code']    = '#fff707';
+                            $input_data['range_code']    = '#BA8E23';
                         }
                         if (($input_data['temperature'] >= 38.6) && ($input_data['temperature'] < 39.4)) {
                             $input_data['temperatureFlag']      = 'Moderately Increased (Moderate Fever)';
@@ -1052,7 +1052,7 @@ class Vital extends BaseModel
                         if (($input_data['temperature'] >= 37.3) && ($input_data['temperature'] <= 38.1)) {
                             $input_data['temperatureFlag']      = 'Slightly Increased (Mild Fever)';
                             $input_data['temperatureFlagColor'] = 'success';
-                            $input_data['range_code']    = '#fff707';
+                            $input_data['range_code']    = '#BA8E23';
                         }
                         if (($input_data['temperature'] >= 38.2 ) && ($input_data['temperature'] < 39.4)) {
                             $input_data['temperatureFlag']      = 'Moderately Increased (Moderate Fever)';
@@ -1080,7 +1080,7 @@ class Vital extends BaseModel
                         if (($input_data['temperature'] >= 37.1) && ($input_data['temperature'] <= 37.9)) {
                             $input_data['temperatureFlag']      = 'Slightly Increased (Mild Fever)';
                             $input_data['temperatureFlagColor'] = 'success';
-                            $input_data['range_code']    = '#fff707';
+                            $input_data['range_code']    = '#BA8E23';
                         }
                         if (($input_data['temperature'] >= 38.0) && ($input_data['temperature'] < 39.0)) {
                             $input_data['temperatureFlag']      = 'Moderately Increased (Moderate Fever)';
@@ -1140,7 +1140,7 @@ class Vital extends BaseModel
                     if (($type == 'Fasting' && $input_data['blood_sugar'] >= 91 && $input_data['blood_sugar'] <= 100) || ($type == 'Postprandial' && $input_data['blood_sugar'] >= 131 && $input_data['blood_sugar'] <= 150) || ($type == 'HbA1c (%)' && $input_data['blood_sugar'] >= 5.6 && $input_data['blood_sugar'] <= 6.0) || (($type == 'Random' && $input_data['blood_sugar'] >= 91 && $input_data['blood_sugar'] <= 100))) {
                         $input_data['bsFlag']      = 'Mildly Reduced (Early Signs of Insulin Resistance)';
                         $input_data['bsFlagColor'] = 'warning';
-                        $input_data['range_code']  = '#fff707';
+                        $input_data['range_code']  = '#BA8E23';
                     }
         
                     // Moderately Reduced (Impaired Glucose Tolerance/Pre-Diabetes)
@@ -1183,7 +1183,7 @@ class Vital extends BaseModel
                     if (($type == 'Fasting' && $input_data['blood_sugar'] >= 101 && $input_data['blood_sugar'] <= 110) || ($type == 'Postprandial' && $input_data['blood_sugar'] >= 141 && $input_data['blood_sugar'] <= 160) || ($type == 'HbA1c (%)' && $input_data['blood_sugar'] >= 5.7 && $input_data['blood_sugar'] <= 6.0) || (($type == 'Random' && $input_data['blood_sugar'] >= 101 && $input_data['blood_sugar'] <= 110))) {
                         $input_data['bsFlag']      = 'Mildly Reduced (Early Signs of Insulin Resistance)';
                         $input_data['bsFlagColor'] = 'warning';
-                        $input_data['range_code']  = '#fff707';
+                        $input_data['range_code']  = '#BA8E23';
                     }
         
                     // Moderately Reduced (Impaired Glucose Tolerance/Pre-Diabetes)
@@ -1226,7 +1226,7 @@ class Vital extends BaseModel
                     if (($type == 'Fasting' && $input_data['blood_sugar'] >= 101 && $input_data['blood_sugar'] <= 110) || ($type == 'Postprandial' && $input_data['blood_sugar'] >= 141 && $input_data['blood_sugar'] <= 160) || ($type == 'HbA1c (%)' && $input_data['blood_sugar'] >= 5.7 && $input_data['blood_sugar'] <= 6.0) || (($type == 'Random' && $input_data['blood_sugar'] >= 101 && $input_data['blood_sugar'] <= 110))) {
                         $input_data['bsFlag']      = 'Mildly Reduced (Early Signs of Insulin Resistance)';
                         $input_data['bsFlagColor'] = 'warning';
-                        $input_data['range_code']  = '#fff707';
+                        $input_data['range_code']  = '#BA8E23';
                     }
         
                     // Moderately Reduced (Impaired Glucose Tolerance/Pre-Diabetes)
@@ -1269,7 +1269,7 @@ class Vital extends BaseModel
                 if (($type == 'Fasting' && $input_data['blood_sugar'] >= 111 && $input_data['blood_sugar'] <= 120) || ($type == 'Postprandial' && $input_data['blood_sugar'] >= 141 && $input_data['blood_sugar'] <= 160) || ($type == 'HbA1c (%)' && $input_data['blood_sugar'] >= 5.7 && $input_data['blood_sugar'] <= 6.0) || (($type == 'Random' && $input_data['blood_sugar'] >= 111 && $input_data['blood_sugar'] <= 120))) {
                     $input_data['bsFlag']      = 'Mildly Reduced (Early Signs of Insulin Resistance)';
                     $input_data['bsFlagColor'] = 'warning';
-                    $input_data['range_code']  = '#fff707';
+                    $input_data['range_code']  = '#BA8E23';
                 }
     
                 // Moderately Reduced (Impaired Glucose Tolerance/Pre-Diabetes)
@@ -1311,7 +1311,7 @@ class Vital extends BaseModel
         //     if (($type == 'Fasting' && $input_data['blood_sugar'] >= 100 && $input_data['blood_sugar'] <= 125) || ($type == 'Random' && $input_data['blood_sugar'] >= 140 && $input_data['blood_sugar'] <= 199) || ($type == 'Postprandial' && $input_data['blood_sugar'] >= 140 && $input_data['blood_sugar'] <= 199)) {
         //         $input_data['bsFlag']      = 'Mildly Elevated (Pre-diabetes)';
         //         $input_data['bsFlagColor'] = 'warning';
-        //         $input_data['range_code']  = '#fff707';
+        //         $input_data['range_code']  = '#BA8E23';
         //     }
 
 
@@ -1355,7 +1355,7 @@ class Vital extends BaseModel
         //     if ($input_data['blood_sugar'] >= 7.1 && $input_data['blood_sugar'] <= 10) {
         //         $input_data['bsFlag']      = 'Mildly Elevated (Pre-diabetes)';
         //         $input_data['bsFlagColor'] = 'warning';
-        //         $input_data['range_code']  = '#fff707';
+        //         $input_data['range_code']  = '#BA8E23';
         //     }
 
 
@@ -1412,7 +1412,7 @@ class Vital extends BaseModel
                 if (($input_data['spo2'] >= 86) && ($input_data['spo2'] <= 89)) {
                     $input_data['spo2Flag']      = 'Slightly Decreased(Mild Hypoxemia)';
                     $input_data['spo2FlagColor'] = 'warning';
-                    $input_data['range_code']    = '#fff707';
+                    $input_data['range_code']    = '#BA8E23';
                 }
                 if (($input_data['spo2'] >= 80) && ($input_data['spo2'] <= 85)) {
                     $input_data['spo2Flag']      = 'Moderately Decreased (Moderate Hypoxemia)';
@@ -1442,7 +1442,7 @@ class Vital extends BaseModel
                     if (($input_data['spo2'] >= 86) && ($input_data['spo2'] <= 89)) {
                         $input_data['spo2Flag']      = 'Slightly Decreased(Mild Hypoxemia)';
                         $input_data['spo2FlagColor'] = 'warning';
-                        $input_data['range_code']    = '#fff707';
+                        $input_data['range_code']    = '#BA8E23';
                     }
                     if (($input_data['spo2'] >= 80) && ($input_data['spo2'] <= 85)) {
                         $input_data['spo2Flag']      = 'Moderately Decreased (Moderate Hypoxemia)';
@@ -1470,7 +1470,7 @@ class Vital extends BaseModel
                     if (($input_data['spo2'] >= 87) && ($input_data['spo2'] <= 90)) {
                         $input_data['spo2Flag']      = 'Slightly Decreased(Mild Hypoxemia)';
                         $input_data['spo2FlagColor'] = 'warning';
-                        $input_data['range_code']    = '#fff707';
+                        $input_data['range_code']    = '#BA8E23';
                     }
                     if (($input_data['spo2'] >= 82) && ($input_data['spo2'] <= 86)) {
                         $input_data['spo2Flag']      = 'Moderately Decreased (Moderate Hypoxemia)';
@@ -1498,7 +1498,7 @@ class Vital extends BaseModel
                         if (($input_data['spo2'] >= 89) && ($input_data['spo2'] <= 92)) {
                             $input_data['spo2Flag']      = 'Slightly Decreased(Mild Hypoxemia)  ';
                             $input_data['spo2FlagColor'] = 'warning';
-                            $input_data['range_code']    = '#fff707';
+                            $input_data['range_code']    = '#BA8E23';
                         }
                         if (($input_data['spo2'] >= 84) && ($input_data['spo2'] <= 88)) {
                             $input_data['spo2Flag']      = 'Moderately Decreased (Moderate Hypoxemia)  ';
@@ -1526,7 +1526,7 @@ class Vital extends BaseModel
                                 if (($input_data['spo2'] >= 90) && ($input_data['spo2'] <= 93)) {
                                     $input_data['spo2Flag']      = 'Slightly Decreased(Mild Hypoxemia)';
                                     $input_data['spo2FlagColor'] = 'warning';
-                                    $input_data['range_code']    = '#fff707';
+                                    $input_data['range_code']    = '#BA8E23';
                                 }
                                 if (($input_data['spo2'] >= 85) && ($input_data['spo2'] <= 89)) {
                                     $input_data['spo2Flag']      = 'Moderately Decreased (Moderate Hypoxemia)';
@@ -1555,7 +1555,7 @@ class Vital extends BaseModel
                 if (($input_data['spo2'] >= 87) && ($input_data['spo2'] <= 89)) {
                     $input_data['spo2Flag']      = 'Slightly Decreased(Mild Hypoxemia)  ';
                     $input_data['spo2FlagColor'] = 'warning';
-                    $input_data['range_code']    = '#fff707';
+                    $input_data['range_code']    = '#BA8E23';
                 }
                 if (($input_data['spo2'] >= 82) && ($input_data['spo2'] <= 86)) {
                     $input_data['spo2Flag']      = 'Moderately Decreased (Moderate Hypoxemia)  ';
@@ -1626,7 +1626,7 @@ class Vital extends BaseModel
                 if (($input_data['respiration'] >= 61) && ($input_data['respiration'] <= 70)) {
                     $input_data['respirationFlag']      = 'Slightly Increased (Mild Tachypnea)';
                     $input_data['respirationFlagColor'] = 'danger';
-                    $input_data['range_code']    = '#fff707';
+                    $input_data['range_code']    = '#BA8E23';
                 }
 
                 if (($input_data['respiration'] >= 71) && ($input_data['respiration'] <= 80)) {
@@ -1658,7 +1658,7 @@ class Vital extends BaseModel
                 if (($input_data['respiration'] >= 41) && ($input_data['respiration'] <= 50)) {
                     $input_data['respirationFlag']      = 'Slightly Increased (Mild Tachypnea)';
                     $input_data['respirationFlagColor'] = 'danger';
-                    $input_data['range_code']    = '#fff707';
+                    $input_data['range_code']    = '#BA8E23';
                 }
 
                 if (($input_data['respiration'] >= 51) && ($input_data['respiration'] <= 60)) {
@@ -1690,7 +1690,7 @@ class Vital extends BaseModel
                 if (($input_data['respiration'] >= 31) && ($input_data['respiration'] <= 40)) {
                     $input_data['respirationFlag']      = 'Slightly Increased (Mild Tachypnea)';
                     $input_data['respirationFlagColor'] = 'danger';
-                    $input_data['range_code']    = '#fff707';
+                    $input_data['range_code']    = '#BA8E23';
                 }
 
                 if (($input_data['respiration'] >= 41) && ($input_data['respiration'] <= 50)) {
@@ -1722,7 +1722,7 @@ class Vital extends BaseModel
                 if (($input_data['respiration'] >= 31) && ($input_data['respiration'] <= 40)) {
                     $input_data['respirationFlag']      = 'Slightly Increased (Mild Tachypnea)';
                     $input_data['respirationFlagColor'] = 'danger';
-                    $input_data['range_code']    = '#fff707';
+                    $input_data['range_code']    = '#BA8E23';
                 }
 
                 if (($input_data['respiration'] >= 41) && ($input_data['respiration'] <= 50)) {
@@ -1754,7 +1754,7 @@ class Vital extends BaseModel
                 if (($input_data['respiration'] >= 21) && ($input_data['respiration'] <= 25)) {
                     $input_data['respirationFlag']      = 'Slightly Increased (Mild Tachypnea)';
                     $input_data['respirationFlagColor'] = 'danger';
-                    $input_data['range_code']    = '#fff707';
+                    $input_data['range_code']    = '#BA8E23';
                 }
 
                 if (($input_data['respiration'] >= 26) && ($input_data['respiration'] <= 30)) {
@@ -1786,7 +1786,7 @@ class Vital extends BaseModel
                 if (($input_data['respiration'] >= 23) && ($input_data['respiration'] <= 26)) {
                     $input_data['respirationFlag']      = 'Slightly Increased (Mild Tachypnea)';
                     $input_data['respirationFlagColor'] = 'danger';
-                    $input_data['range_code']    = '#fff707';
+                    $input_data['range_code']    = '#BA8E23';
                 }
 
                 if (($input_data['respiration'] >= 27) && ($input_data['respiration'] <= 30)) {
@@ -1989,7 +1989,7 @@ class Vital extends BaseModel
                 case '+ (100 mg/dL)':
                     $input_data['leukocytes_message']            = 'Moderately High';
                     $input_data['leukocytes_flag']       = 'success';
-                    $input_data['leukocytes_range_code'] = '#fff707';
+                    $input_data['leukocytes_range_code'] = '#BA8E23';
                     break;
                 case '++ (250 mg/dL)':
                     $input_data['leukocytes_message']            = 'High';
@@ -2020,7 +2020,7 @@ class Vital extends BaseModel
                 case 'Yellow':
                     // $input_data['Color_message']            = 'Small';
                     // $input_data['Color_flag']       = 'success';
-                    $input_data['color_range_code'] = '#fff707';
+                    $input_data['color_range_code'] = '#BA8E23';
                     break;
                 case 'Amber': 
                         // $input_data['Color_message']            = 'Small';
@@ -2250,7 +2250,7 @@ class Vital extends BaseModel
                 if (($input_data['Specific_gravity'] >= 1.016) && ($input_data['urine'] < 1.020)) {
                     $input_data['Specific_gravity_message']            = 'Concentrated';
                     // $input_data['Specific_gravity_flag']       = 'success';
-                    $input_data['Specific_gravity_range_code'] = '#fff707';
+                    $input_data['Specific_gravity_range_code'] = '#BA8E23';
                 }
                 if (($input_data['Specific_gravity'] >= 1.021) && ($input_data['urine'] < 1.025)) {
                     $input_data['Specific_gravity_message']            = 'Very Concentrated';
@@ -2295,7 +2295,7 @@ class Vital extends BaseModel
                 case '+ (100 mg/dL)':
                     $input_data['glucose_message']    = 'Moderately High';
                     $input_data['glucose_flag']       = 'success';
-                    $input_data['glucose_range_code'] = '#fff707';
+                    $input_data['glucose_range_code'] = '#BA8E23';
                     break;
                 case '++ (250 mg/dL)':
                     $input_data['glucose_message']            = 'High';
@@ -2330,7 +2330,7 @@ class Vital extends BaseModel
                 case '+ (100 mg/dL)':
                     $input_data['Ketones_message']    = 'Moderately High';
                     $input_data['Ketones_flag']       = 'success';
-                    $input_data['Ketones_range_code'] = '#fff707';
+                    $input_data['Ketones_range_code'] = '#BA8E23';
                     break;
                 case '++ (250 mg/dL)':
                     $input_data['Ketones_message']            = 'High';
@@ -2365,7 +2365,7 @@ class Vital extends BaseModel
                 case '+ 100 mg/dL':
                     $input_data['blood_in_urine_message']    = 'Mild';
                     $input_data['blood_in_urine_flag']       = 'success';
-                    $input_data['blood_in_urine_range_code'] = '#fff707';
+                    $input_data['blood_in_urine_range_code'] = '#BA8E23';
                     break;
                 case '++ 250 mg/dL':
                     $input_data['blood_in_urine_message']            = 'Moderate ';
@@ -2406,7 +2406,7 @@ class Vital extends BaseModel
                     $priority_order = [
                         '#ff0000' => 1,  // Hypertensive Crisis / Severely High
                         '#FFC107' => 2,  // Hypertension Stage 1 & 2
-                        '#fff707' => 3,  // Elevated (Pre Hypertension)
+                        '#BA8E23' => 3,  // Elevated (Pre Hypertension)
                         '#008000' => 4,  // Normal
                         '#0000ff' => 5   // Low (Hypotension)
                     ];
@@ -2423,7 +2423,7 @@ class Vital extends BaseModel
                     } elseif ($input_data['systolic'] >= 91 && $input_data['systolic'] <= 100) {
                         $systoleFlag = 'Systole - Elevated (Pre Hypertension)';
                         $flagColors[] = 'warning';
-                        $rangeCodes[] = '#fff707';
+                        $rangeCodes[] = '#BA8E23';
                     } elseif ($input_data['systolic'] >= 101 && $input_data['systolic'] <= 110) {
                         $systoleFlag = 'Systole - Hypertension Stage 1';
                         $flagColors[] = 'warning';
@@ -2454,7 +2454,7 @@ class Vital extends BaseModel
                     } elseif ($input_data['diastolic'] >= 61 && $input_data['diastolic'] <= 65) {
                         $diastoleFlag = 'Diastole - Elevated (Pre Hypertension)';
                         $flagColors[] = 'warning';
-                        $rangeCodes[] = '#fff707';
+                        $rangeCodes[] = '#BA8E23';
                     } elseif ($input_data['diastolic'] >= 66 && $input_data['diastolic'] <= 75) {
                         $diastoleFlag = 'Diastole - Hypertension Stage 1';
                         $flagColors[] = 'warning';
@@ -2518,7 +2518,7 @@ class Vital extends BaseModel
                     $priority_order = [
                         '#ff0000' => 1,  // Hypertensive Crisis / Severely High
                         '#FFC107' => 2,  // Hypertension Stage 1 & 2
-                        '#fff707' => 3,  // Elevated (Pre Hypertension)
+                        '#BA8E23' => 3,  // Elevated (Pre Hypertension)
                         '#008000' => 4,  // Normal
                         '#0000ff' => 5   // Low (Hypotension)
                     ];
@@ -2535,7 +2535,7 @@ class Vital extends BaseModel
                     } elseif ($input_data['systolic'] >= 101 && $input_data['systolic'] <= 110) {
                         $systoleFlag = 'Systole - Elevated (Pre Hypertension)';
                         $flagColors[] = 'warning';
-                        $rangeCodes[] = '#fff707';
+                        $rangeCodes[] = '#BA8E23';
                     } elseif ($input_data['systolic'] >= 111 && $input_data['systolic'] <= 120) {
                         $systoleFlag = 'Systole - Hypertension Stage 1';
                         $flagColors[] = 'warning';
@@ -2566,7 +2566,7 @@ class Vital extends BaseModel
                     } elseif ($input_data['diastolic'] >= 61 && $input_data['diastolic'] <= 70) {
                         $diastoleFlag = 'Diastole - Elevated (Pre Hypertension)';
                         $flagColors[] = 'warning';
-                        $rangeCodes[] = '#fff707';
+                        $rangeCodes[] = '#BA8E23';
                     }
                     elseif ($input_data['diastolic'] >= 71 && $input_data['diastolic'] <= 80) {
                         $diastoleFlag = 'Diastole - Hypertension Stage 1';
@@ -2630,7 +2630,7 @@ class Vital extends BaseModel
                     $priority_order = [
                         '#ff0000' => 1,  // Hypertensive Crisis / Severely High
                         '#FFC107' => 2,  // Hypertension Stage 1 & 2
-                        '#fff707' => 3,  // Elevated (Pre Hypertension)
+                        '#BA8E23' => 3,  // Elevated (Pre Hypertension)
                         '#008000' => 4,  // Normal
                         '#0000ff' => 5   // Low (Hypotension)
                     ];
@@ -2647,7 +2647,7 @@ class Vital extends BaseModel
                     } elseif ($input_data['systolic'] >= 111 && $input_data['systolic'] <= 120) {
                         $systoleFlag = 'Systole - Elevated (Pre Hypertension)';
                         $flagColors[] = 'warning';
-                        $rangeCodes[] = '#fff707';
+                        $rangeCodes[] = '#BA8E23';
                     } elseif ($input_data['systolic'] >= 121 && $input_data['systolic'] <= 130) {
                         $systoleFlag = 'Systole - Hypertension Stage 1';
                         $flagColors[] = 'warning';
@@ -2678,7 +2678,7 @@ class Vital extends BaseModel
                     } elseif ($input_data['diastolic'] >= 71 && $input_data['diastolic'] <= 80) {
                         $diastoleFlag = 'Diastole - Elevated (Pre Hypertension)';
                         $flagColors[] = 'warning';
-                        $rangeCodes[] = '#fff707';
+                        $rangeCodes[] = '#BA8E23';
                     } elseif ($input_data['diastolic'] >= 81 && $input_data['diastolic'] <= 90) {
                         $diastoleFlag = 'Diastole - Hypertension Stage 1';
                         $flagColors[] = 'warning';
@@ -2742,7 +2742,7 @@ class Vital extends BaseModel
                     $priority_order = [
                         '#ff0000' => 1,  // Hypertensive Crisis / Severely High
                         '#FFC107' => 2,  // Hypertension Stage 1 & 2
-                        '#fff707' => 3,  // Elevated (Pre Hypertension)
+                        '#BA8E23' => 3,  // Elevated (Pre Hypertension)
                         '#008000' => 4,  // Normal
                         '#0000ff' => 5   // Low (Hypotension)
                     ];
@@ -2759,7 +2759,7 @@ class Vital extends BaseModel
                     } elseif ($input_data['systolic'] >= 121 && $input_data['systolic'] <= 130) {
                         $systoleFlag = 'Systole - Elevated (Pre Hypertension)';
                         $flagColors[] = 'warning';
-                        $rangeCodes[] = '#fff707';
+                        $rangeCodes[] = '#BA8E23';
                     } elseif ($input_data['systolic'] >= 131 && $input_data['systolic'] <= 140) {
                         $systoleFlag = 'Systole - Hypertension Stage 1';
                         $flagColors[] = 'warning';
@@ -2790,7 +2790,7 @@ class Vital extends BaseModel
                     } elseif ($input_data['diastolic'] >= 81 && $input_data['diastolic'] <= 85) {
                         $diastoleFlag = 'Diastole - Elevated (Pre Hypertension)';
                         $flagColors[] = 'warning';
-                        $rangeCodes[] = '#fff707';
+                        $rangeCodes[] = '#BA8E23';
                     } elseif ($input_data['diastolic'] >= 86 && $input_data['diastolic'] <= 90) {
                         $diastoleFlag = 'Diastole - Hypertension Stage 1';
                         $flagColors[] = 'warning';
@@ -2866,7 +2866,7 @@ class Vital extends BaseModel
                  {
                         $input_data['bpFlag']      = 'Elevated (Pre Hypertension)';
                         $input_data['bpFlagColor'] = 'warning';
-                        $input_data['range_code']  = '#fff707';
+                        $input_data['range_code']  = '#BA8E23';
                     }
                     if ((($input_data['systolic'] >= 131) && ($input_data['systolic'] <= 140)) )
                     // || (($input_data['diastolic'] >= 86) && ($input_data['diastolic'] <= 90))
@@ -2908,7 +2908,7 @@ class Vital extends BaseModel
                     $priority_order = [
                         '#ff0000' => 1,  // Hypertensive Crisis / Severely High
                         '#FFC107' => 2,  // Hypertension Stage 1 & 2
-                        '#fff707' => 3,  // Elevated (Pre Hypertension)
+                        '#BA8E23' => 3,  // Elevated (Pre Hypertension)
                         '#008000' => 4,  // Normal
                         '#0000ff' => 5   // Low (Hypotension)
                     ];
@@ -2925,7 +2925,7 @@ class Vital extends BaseModel
                     } elseif ($input_data['systolic'] >= 121 && $input_data['systolic'] <= 129) {
                         $systoleFlag = 'Systole - Elevated (Pre Hypertension)';
                         $flagColors[] = 'warning';
-                        $rangeCodes[] = '#fff707';
+                        $rangeCodes[] = '#BA8E23';
                     } elseif ($input_data['systolic'] >= 130 && $input_data['systolic'] <= 139) {
                         $systoleFlag = 'Systole - Hypertension Stage 1';
                         $flagColors[] = 'warning';
@@ -2956,7 +2956,7 @@ class Vital extends BaseModel
                     } elseif ($input_data['diastolic'] >= 81 && $input_data['diastolic'] <= 89) {
                         $diastoleFlag = 'Diastole - Elevated (Pre Hypertension)';
                         $flagColors[] = 'warning';
-                        $rangeCodes[] = '#fff707';
+                        $rangeCodes[] = '#BA8E23';
                     } elseif ($input_data['diastolic'] >= 90 && $input_data['diastolic'] <= 100) {
                         $diastoleFlag = 'Diastole - Hypertension Stage 1';
                         $flagColors[] = 'warning';
@@ -3009,7 +3009,7 @@ class Vital extends BaseModel
                             $priority_order = [
                                 '#ff0000' => 1,  // Hypertensive Crisis / Severely High
                                 '#FFC107' => 2,  // Hypertension Stage 1 & 2
-                                '#fff707' => 3,  // Elevated (Pre Hypertension)
+                                '#BA8E23' => 3,  // Elevated (Pre Hypertension)
                                 '#008000' => 4,  // Normal
                                 '#0000ff' => 5   // Low (Hypotension)
                             ];
@@ -3026,7 +3026,7 @@ class Vital extends BaseModel
                             } elseif ($input_data['systolic'] >= 126 && $input_data['systolic'] <= 129) {
                                 $systoleFlag = 'Systole - Elevated (Pre Hypertension)';
                                 $flagColors[] = 'warning';
-                                $rangeCodes[] = '#fff707';
+                                $rangeCodes[] = '#BA8E23';
                             } elseif ($input_data['systolic'] >= 130 && $input_data['systolic'] <= 139) {
                                 $systoleFlag = 'Systole - Hypertension Stage 1';
                                 $flagColors[] = 'warning';
@@ -3057,7 +3057,7 @@ class Vital extends BaseModel
                             } elseif ($input_data['diastolic'] >= 86 && $input_data['diastolic'] <= 89) {
                                 $diastoleFlag = 'Diastole - Elevated (Pre Hypertension)';
                                 $flagColors[] = 'warning';
-                                $rangeCodes[] = '#fff707';
+                                $rangeCodes[] = '#BA8E23';
                             } elseif ($input_data['diastolic'] >= 90 && $input_data['diastolic'] <= 95) {
                                 $diastoleFlag = 'Diastole - Hypertension Stage 1';
                                 $flagColors[] = 'warning';
@@ -3115,7 +3115,7 @@ class Vital extends BaseModel
                     $priority_order = [
                         '#ff0000' => 1,  // Hypertensive Crisis / Severely High
                         '#FFC107' => 2,  // Hypertension Stage 1 & 2
-                        '#fff707' => 3,  // Elevated (Pre Hypertension)
+                        '#BA8E23' => 3,  // Elevated (Pre Hypertension)
                         '#008000' => 4,  // Normal
                         '#0000ff' => 5   // Low (Hypotension)
                     ];
@@ -3132,7 +3132,7 @@ class Vital extends BaseModel
                     } elseif ($input_data['systolic'] >= 131 && $input_data['systolic'] <= 139) {
                         $systoleFlag = 'Systole - Elevated (Pre Hypertension)';
                         $flagColors[] = 'warning';
-                        $rangeCodes[] = '#fff707';
+                        $rangeCodes[] = '#BA8E23';
                     } elseif ($input_data['systolic'] >= 140 && $input_data['systolic'] <= 159) {
                         $systoleFlag = 'Systole - Hypertension Stage 1';
                         $flagColors[] = 'warning';
@@ -3163,7 +3163,7 @@ class Vital extends BaseModel
                     } elseif ($input_data['diastolic'] >= 90 && $input_data['diastolic'] <= 94) {
                         $diastoleFlag = 'Diastole - Elevated (Pre Hypertension)';
                         $flagColors[] = 'warning';
-                        $rangeCodes[] = '#fff707';
+                        $rangeCodes[] = '#BA8E23';
                     } elseif ($input_data['diastolic'] >= 95 && $input_data['diastolic'] <= 100) {
                         $diastoleFlag = 'Diastole - Hypertension Stage 1';
                         $flagColors[] = 'warning';
@@ -3223,7 +3223,7 @@ class Vital extends BaseModel
                     $priority_order = [
                         '#ff0000' => 1,  // Hypertensive Crisis / Severely High
                         '#FFC107' => 2,  // Hypertension Stage 1 & 2
-                        '#fff707' => 3,  // Elevated (Pre Hypertension)
+                        '#BA8E23' => 3,  // Elevated (Pre Hypertension)
                         '#008000' => 4,  // Normal
                         '#0000ff' => 5   // Low (Hypotension)
                     ];
@@ -3240,7 +3240,7 @@ class Vital extends BaseModel
                     } elseif ($input_data['systolic'] >= 136 && $input_data['systolic'] <= 139) {
                         $systoleFlag = 'Systole - Elevated (Pre Hypertension)';
                         $flagColors[] = 'warning';
-                        $rangeCodes[] = '#fff707';
+                        $rangeCodes[] = '#BA8E23';
                     } elseif ($input_data['systolic'] >= 140 && $input_data['systolic'] <= 159) {
                         $systoleFlag = 'Systole - Hypertension Stage 1';
                         $flagColors[] = 'warning';
@@ -3271,7 +3271,7 @@ class Vital extends BaseModel
                     } elseif ($input_data['diastolic'] >= 91 && $input_data['diastolic'] <= 94) {
                         $diastoleFlag = 'Diastole - Elevated (Pre Hypertension)';
                         $flagColors[] = 'warning';
-                        $rangeCodes[] = '#fff707';
+                        $rangeCodes[] = '#BA8E23';
                     } elseif ($input_data['diastolic'] >= 95 && $input_data['diastolic'] <= 100) {
                         $diastoleFlag = 'Diastole - Hypertension Stage 1';
                         $flagColors[] = 'warning';
@@ -3332,7 +3332,7 @@ class Vital extends BaseModel
                 $priority_order = [
                     '#ff0000' => 1,  // Hypertensive Crisis / Severely High
                     '#FFC107' => 2,  // Hypertension Stage 1 & 2
-                    '#fff707' => 3,  // Elevated (Pre Hypertension)
+                    '#BA8E23' => 3,  // Elevated (Pre Hypertension)
                     '#008000' => 4,  // Normal
                     '#0000ff' => 5   // Low (Hypotension)
                 ];
@@ -3349,7 +3349,7 @@ class Vital extends BaseModel
                 } elseif ($input_data['systolic'] >= 141 && $input_data['systolic'] <= 149) {
                     $systoleFlag = 'Systole - Elevated (Pre Hypertension)';
                     $flagColors[] = 'warning';
-                    $rangeCodes[] = '#fff707';
+                    $rangeCodes[] = '#BA8E23';
                 } elseif ($input_data['systolic'] >= 150 && $input_data['systolic'] <= 159) {
                     $systoleFlag = 'Systole - Hypertension Stage 1';
                     $flagColors[] = 'warning';
@@ -3380,7 +3380,7 @@ class Vital extends BaseModel
                 } elseif ($input_data['diastolic'] >= 91 && $input_data['diastolic'] <= 95) {
                     $diastoleFlag = 'Diastole - Elevated (Pre Hypertension)';
                     $flagColors[] = 'warning';
-                    $rangeCodes[] = '#fff707';
+                    $rangeCodes[] = '#BA8E23';
                 } elseif ($input_data['diastolic'] >= 96 && $input_data['diastolic'] <= 100) {
                     $diastoleFlag = 'Diastole - Hypertension Stage 1';
                     $flagColors[] = 'warning';
@@ -3465,7 +3465,7 @@ class Vital extends BaseModel
                                 if (($input_data['heart'] >= 161) && ($input_data['heart'] <= 180 )) {
                                     $input_data['heartRateFlag']      = 'Elevated Heart Rate';
                                     $input_data['heartRateFlagColor'] = 'success';
-                                    $input_data['range_code']         = '#fff707';
+                                    $input_data['range_code']         = '#BA8E23';
                                 }
             
                                 if (($input_data['heart'] >= 181) && ($input_data['heart'] <= 200 )) {
@@ -3498,7 +3498,7 @@ class Vital extends BaseModel
                             if (($input_data['heart'] >= 151) && ($input_data['heart'] <= 170)) {
                                 $input_data['heartRateFlag']      = 'Elevated Heart Rate';
                                 $input_data['heartRateFlagColor'] = 'success';
-                                $input_data['range_code']         = '#fff707';
+                                $input_data['range_code']         = '#BA8E23';
                             }
                             if (($input_data['heart'] >= 171) && ($input_data['heart'] <= 190)) {
                                 $input_data['heartRateFlag']      = 'Mild Tachycardia';
@@ -3530,7 +3530,7 @@ class Vital extends BaseModel
                 //         if (($input_data['heart'] >= 131) && ($input_data['heart'] <= 150 )) {
                 //             $input_data['heartRateFlag']      = 'Elevated Heart Rate';
                 //             $input_data['heartRateFlagColor'] = 'success';
-                //             $input_data['range_code']         = '#fff707';
+                //             $input_data['range_code']         = '#BA8E23';
                 //         }
     
                 //         if (($input_data['heart'] >= 151) && ($input_data['heart'] <= 170 )) {
@@ -3563,7 +3563,7 @@ class Vital extends BaseModel
                     if (($input_data['heart'] >= 131) && ($input_data['heart'] <= 150)) {
                         $input_data['heartRateFlag']      = 'Elevated Heart Rate';
                         $input_data['heartRateFlagColor'] = 'success';
-                        $input_data['range_code']         = '#fff707';
+                        $input_data['range_code']         = '#BA8E23';
                     }
                     if (($input_data['heart'] >= 151) && ($input_data['heart'] <= 170)) {
                         $input_data['heartRateFlag']      = 'Mild Tachycardia';
@@ -3594,7 +3594,7 @@ class Vital extends BaseModel
                     if (($input_data['heart'] >= 121) && ($input_data['heart'] <= 140)) {
                         $input_data['heartRateFlag']      = 'Elevated Heart Rate';
                         $input_data['heartRateFlagColor'] = 'black';
-                        $input_data['range_code']         = '#fff707';
+                        $input_data['range_code']         = '#BA8E23';
                         // return "Pre-School"; // green 90 - 140
                     }
                     if (($input_data['heart'] >= 141) && ($input_data['heart'] <= 160)) {
@@ -3628,7 +3628,7 @@ class Vital extends BaseModel
                     if (($input_data['heart'] >= 111) && ($input_data['heart'] <= 130)) {
                         $input_data['heartRateFlag']      = 'Elevated Heart Rate';
                         $input_data['heartRateFlagColor'] = 'success';
-                        $input_data['range_code']         = '#fff707';
+                        $input_data['range_code']         = '#BA8E23';
                         // return "Normal"; // green
                     }
                     if (($input_data['heart'] >= 131) && ($input_data['heart'] <= 150)) {
@@ -3663,7 +3663,7 @@ class Vital extends BaseModel
                         if (($input_data['heart'] >= 101) && ($input_data['heart'] <= 120)) {
                             $input_data['heartRateFlag']      = 'Elevated Heart Rate';
                             $input_data['heartRateFlagColor'] = 'success';
-                            $input_data['range_code']         = '#fff707';
+                            $input_data['range_code']         = '#BA8E23';
                             // return "Normal"; // green
                         }
                         if (($input_data['heart'] >= 121) && ($input_data['heart'] <= 140)) {
@@ -3696,7 +3696,7 @@ class Vital extends BaseModel
                             if (($input_data['heart'] >= 101) && ($input_data['heart'] <= 120)) {
                                 $input_data['heartRateFlag']      = 'Elevated Heart Rate';
                                 $input_data['heartRateFlagColor'] = 'success';
-                                $input_data['range_code']         = '#fff707';
+                                $input_data['range_code']         = '#BA8E23';
                                 // return "Normal"; // green
                             }
                             if (($input_data['heart'] >= 121) && ($input_data['heart'] <= 140)) {
@@ -3729,7 +3729,7 @@ class Vital extends BaseModel
                             if (($input_data['heart'] >= 91) && ($input_data['heart'] <= 110)) {
                                 $input_data['heartRateFlag']      = 'Elevated Heart Rate';
                                 $input_data['heartRateFlagColor'] = 'success';
-                                $input_data['range_code']         = '#fff707';
+                                $input_data['range_code']         = '#BA8E23';
                                 // return "Normal"; // green
                             }
                             if (($input_data['heart'] >= 111) && ($input_data['heart'] <= 130)) {
@@ -3947,7 +3947,7 @@ class Vital extends BaseModel
                 break;
                 case 'Borderline High (Elevated Risk)':
                     $input_data['ldl_message_flag'] = 'warning';
-                    $input_data['ldl_range_code']   = '#fff707';
+                    $input_data['ldl_range_code']   = '#BA8E23';
                 break;
                 case 'High (Increased Risk)':
                 $input_data['ldl_message_flag'] = 'warning';
@@ -4081,7 +4081,7 @@ class Vital extends BaseModel
                 break;
                 case 'Borderline High (Elevated Risk)':
                     $input_data['total_message_flag'] = 'warning';
-                    $input_data['total_range_code']   = '#fff707';
+                    $input_data['total_range_code']   = '#BA8E23';
                 break;
                 case 'High (Increased Risk)':
                 $input_data['total_message_flag'] = 'warning';
@@ -4214,7 +4214,7 @@ class Vital extends BaseModel
                 break;
                 case 'Borderline High (Elevated Risk)':
                     $input_data['vldl_message_flag'] = 'warning';
-                    $input_data['vldl_range_code']   = '#fff707';
+                    $input_data['vldl_range_code']   = '#BA8E23';
                 break;
                 case 'High (Increased Risk)':
                 $input_data['vldl_message_flag'] = 'warning';
@@ -4349,7 +4349,7 @@ class Vital extends BaseModel
                 break;
                 case 'Borderline High (Elevated Risk)':
                     $input_data['hdl_message_flag'] = 'warning';
-                    $input_data['hdl_range_code']   = '#fff707';
+                    $input_data['hdl_range_code']   = '#BA8E23';
                 break;
                 case 'High (Increased Risk)':
                 $input_data['hdl_message_flag'] = 'warning';
@@ -4476,7 +4476,7 @@ class Vital extends BaseModel
                 break;
                 case 'Borderline High (Elevated Risk)':
                     $input_data['hdl_ldl_message_flag'] = 'warning';
-                    $input_data['hdl_ldl_range_code']   = '#fff707';
+                    $input_data['hdl_ldl_range_code']   = '#BA8E23';
                 break;
                 case 'High (Increased Risk)':
                 $input_data['hdl_ldl_message_flag'] = 'warning';
@@ -4609,7 +4609,7 @@ class Vital extends BaseModel
                 break;
                 case 'Borderline High (Elevated Risk)':
                     $input_data['triglycerides_message_flag'] = 'warning';
-                    $input_data['triglycerides_range_code']   = '#fff707';
+                    $input_data['triglycerides_range_code']   = '#BA8E23';
                 break;
                 case ' High (Increased Risk)':
                 $input_data['triglycerides_message_flag'] = 'warning';
@@ -5645,7 +5645,7 @@ class Vital extends BaseModel
             } else if ($input_data['fvc'] >= 0.6 && $input_data['fvc'] <= 0.79) {
                 $input_data['fvcFlag']      = 'Mildly Reduced';
                 $input_data['fvcFlagColor'] = 'primary';
-                $input_data['fvcRangeCode']    = '#fff707';
+                $input_data['fvcRangeCode']    = '#BA8E23';
             }
             else if ($input_data['fvc'] >= 0.4 && $input_data['fvc'] <= 0.59) {
                 $input_data['fvcFlag']      = 'Moderately Reduced';
@@ -5668,7 +5668,7 @@ class Vital extends BaseModel
         } else if ($input_data['fvc'] >= 1.2 && $input_data['fvc'] <= 1.49) {
             $input_data['fvcFlag']      = 'Mildly Reduced';
             $input_data['fvcFlagColor'] = 'primary';
-            $input_data['fvcRangeCode']    = '#fff707';
+            $input_data['fvcRangeCode']    = '#BA8E23';
         }
         else if ($input_data['fvc'] >= 0.8 && $input_data['fvc'] <= 1.19) {
             $input_data['fvcFlag']      = 'Moderately Reduced';
@@ -5691,7 +5691,7 @@ class Vital extends BaseModel
          } else if ($input_data['fvc'] >= 2.0 && $input_data['fvc'] <= 2.49) {
         $input_data['fvcFlag']      = 'Mildly Reduced';
         $input_data['fvcFlagColor'] = 'primary';
-        $input_data['fvcRangeCode']    = '#fff707';
+        $input_data['fvcRangeCode']    = '#BA8E23';
         }
         else if ($input_data['fvc'] >= 1.5 && $input_data['fvc'] <= 1.99) {
         $input_data['fvcFlag']      = 'Moderately Reduced';
@@ -5715,7 +5715,7 @@ class Vital extends BaseModel
 } else if ($input_data['fvc'] >= 3.5 && $input_data['fvc'] <= 3.99) {
     $input_data['fvcFlag']      = 'Mildly Reduced';
     $input_data['fvcFlagColor'] = 'primary';
-    $input_data['fvcRangeCode']    = '#fff707';
+    $input_data['fvcRangeCode']    = '#BA8E23';
 }
 else if ($input_data['fvc'] >= 2.5 && $input_data['fvc'] <= 3.49) {
     $input_data['fvcFlag']      = 'Moderately Reduced';
@@ -5738,7 +5738,7 @@ $input_data['fvcRangeCode']    = '#008000';
 } else if ($input_data['fvc'] >= 3.0 && $input_data['fvc'] <= 3.49) {
 $input_data['fvcFlag']      = 'Mildly Reduced';
 $input_data['fvcFlagColor'] = 'primary';
-$input_data['fvcRangeCode']    = '#fff707';
+$input_data['fvcRangeCode']    = '#BA8E23';
 }
 else if ($input_data['fvc'] >= 2.0 && $input_data['fvc'] <= 2.99) {
 $input_data['fvcFlag']      = 'Moderately Reduced';
@@ -5764,7 +5764,7 @@ $input_data['fvcRangeCode']    = '#FF0000';
     } else if ($input_data['fvc'] >= 3.0 && $input_data['fvc'] <= 3.49) {
         $input_data['fvcFlag']      = 'Mildly Reduced';
         $input_data['fvcFlagColor'] = 'primary';
-        $input_data['fvcRangeCode']    = '#fff707';
+        $input_data['fvcRangeCode']    = '#BA8E23';
     }
     else if ($input_data['fvc'] >= 2.0 && $input_data['fvc'] <= 2.99) {
         $input_data['fvcFlag']      = 'Moderately Reduced';
@@ -5787,7 +5787,7 @@ $input_data['fvcRangeCode']    = '#FF0000';
     } else if ($input_data['fvc'] >= 2.5 && $input_data['fvc'] <= 2.99) {
     $input_data['fvcFlag']      = 'Mildly Reduced';
     $input_data['fvcFlagColor'] = 'primary';
-    $input_data['fvcRangeCode']    = '#fff707';
+    $input_data['fvcRangeCode']    = '#BA8E23';
     }
     else if ($input_data['fvc'] >= 1.5 && $input_data['fvc'] <= 2.49) {
     $input_data['fvcFlag']      = 'Moderately Reduced';
@@ -5812,7 +5812,7 @@ $input_data['fvcRangeCode']    = '#FF0000';
         } else if ($input_data['fvc'] >= 2.5 && $input_data['fvc'] <= 2.99) {
             $input_data['fvcFlag']      = 'Mildly Reduced';
             $input_data['fvcFlagColor'] = 'primary';
-            $input_data['fvcRangeCode']    = '#fff707';
+            $input_data['fvcRangeCode']    = '#BA8E23';
         }
         else if ($input_data['fvc'] >= 2.0 && $input_data['fvc'] <= 2.49) {
             $input_data['fvcFlag']      = 'Moderately Reduced';
@@ -5840,7 +5840,7 @@ $input_data['fvcRangeCode']    = '#FF0000';
             } else if ($input_data['fev1'] >= 0.4 && $input_data['fev1'] <= 0.59) {
                 $input_data['fev1Flag']      = 'Mildly Reduced';
                 $input_data['fev1FlagColor'] = 'primary';
-                $input_data['fev1RangeCode']    = '#fff707';
+                $input_data['fev1RangeCode']    = '#BA8E23';
             }
             else if ($input_data['fev1'] >= 0.3 && $input_data['fev1'] <= 0.39) {
                 $input_data['fev1Flag']      = 'Moderately Reduced';
@@ -5863,7 +5863,7 @@ $input_data['fvcRangeCode']    = '#FF0000';
         } else if ($input_data['fev1'] >= 0.9 && $input_data['fev1'] <= 1.9) {
             $input_data['fev1Flag']      = 'Mildly Reduced';
             $input_data['fev1FlagColor'] = 'primary';
-            $input_data['fev1RangeCode']    = '#fff707';
+            $input_data['fev1RangeCode']    = '#BA8E23';
         }
         else if ($input_data['fev1'] >= 0.6 && $input_data['fev1'] <= 0.89) {
             $input_data['fev1Flag']      = 'Moderately Reduced';
@@ -5885,7 +5885,7 @@ $input_data['fvcRangeCode']    = '#FF0000';
          } else if ($input_data['fev1'] >= 1.5 && $input_data['fev1'] <= 1.99) {
         $input_data['fev1Flag']      = 'Mildly Reduced';
         $input_data['fev1FlagColor'] = 'primary';
-        $input_data['fev1RangeCode']    = '#fff707';
+        $input_data['fev1RangeCode']    = '#BA8E23';
         }
         else if ($input_data['fev1'] >= 1.0 && $input_data['fev1'] <= 1.49) {
         $input_data['fev1Flag']      = 'Moderately Reduced';
@@ -5908,7 +5908,7 @@ $input_data['fvcRangeCode']    = '#FF0000';
 } else if ($input_data['fev1'] >= 2.5 && $input_data['fev1'] <= 2.99) {
     $input_data['fev1Flag']      = 'Mildly Reduced';
     $input_data['fev1FlagColor'] = 'primary';
-    $input_data['fev1RangeCode']    = '#fff707';
+    $input_data['fev1RangeCode']    = '#BA8E23';
 }
 else if ($input_data['fev1'] >= 2.0 && $input_data['fev1'] <= 2.49) {
     $input_data['fev1Flag']      = 'Moderately Reduced';
@@ -5930,7 +5930,7 @@ $input_data['fev1RangeCode']    = '#008000';
 } else if ($input_data['fev1'] >= 2.0 && $input_data['fev1'] <= 2.49) {
 $input_data['fev1Flag']      = 'Mildly Reduced';
 $input_data['fev1FlagColor'] = 'primary';
-$input_data['fev1RangeCode']    = '#fff707';
+$input_data['fev1RangeCode']    = '#BA8E23';
 }
 else if ($input_data['fev1'] >= 1.5 && $input_data['fev1'] <= 1.99) {
 $input_data['fev1Flag']      = 'Moderately Reduced';
@@ -5956,7 +5956,7 @@ $input_data['fev1RangeCode']    = '#FF0000';
     } else if ($input_data['fev1'] >= 2.0 && $input_data['fev1'] <= 2.49) {
         $input_data['fev1Flag']      = 'Mildly Reduced';
         $input_data['fev1FlagColor'] = 'primary';
-        $input_data['fev1RangeCode']    = '#fff707';
+        $input_data['fev1RangeCode']    = '#BA8E23';
     }
     else if ($input_data['fev1'] >= 1.5 && $input_data['fev1'] <= 1.99) {
         $input_data['fev1Flag']      = 'Moderately Reduced';
@@ -5980,7 +5980,7 @@ $input_data['fev1RangeCode']    = '#FF0000';
     } else if ($input_data['fev1'] >= 1.5 && $input_data['fev1'] <= 1.99) {
     $input_data['fev1Flag']      = 'Mildly Reduced';
     $input_data['fev1FlagColor'] = 'primary';
-    $input_data['fev1RangeCode']    = '#fff707';
+    $input_data['fev1RangeCode']    = '#BA8E23';
     }
     else if ($input_data['fev1'] >= 1.0 && $input_data['fev1'] <= 1.49) {
     $input_data['fev1Flag']      = 'Moderately Reduced';
@@ -6006,7 +6006,7 @@ $input_data['fev1RangeCode']    = '#FF0000';
         } else if ($input_data['fev1'] >= 1.5 && $input_data['fev1'] <= 1.99) {
             $input_data['fev1Flag']      = 'Mildly Reduced';
             $input_data['fev1FlagColor'] = 'primary';
-            $input_data['fev1RangeCode']    = '#fff707';
+            $input_data['fev1RangeCode']    = '#BA8E23';
         }
         else if ($input_data['fev1'] >= 1.0 && $input_data['fev1'] <= 1.49) {
             $input_data['fev1Flag']      = 'Moderately Reduced';
@@ -6033,7 +6033,7 @@ $input_data['fev1RangeCode']    = '#FF0000';
                             } else if ($input_data['fev1_fvc'] >= 75 && $input_data['fev1_fvc'] <= 84) {
                                 $input_data['fev1FvcFlag']      = 'Mildly Reduced';
                                 $input_data['fev1FvcFlagColor'] = 'primary';
-                                $input_data['fev1FvcRangeCode']    = '#fff707';
+                                $input_data['fev1FvcRangeCode']    = '#BA8E23';
                             } else if ($input_data['fev1_fvc'] >= 50 && $input_data['fev1_fvc'] <= 74) {
                                 $input_data['fev1FvcFlag']      = 'Moderately Reduced ';
                                 $input_data['fev1FvcFlagColor'] = 'primary';
@@ -6057,7 +6057,7 @@ $input_data['fev1RangeCode']    = '#FF0000';
                             } else if ($input_data['fev1_fvc'] >= 75 && $input_data['fev1_fvc'] <= 84) {
                                 $input_data['fev1FvcFlag']      = 'Mildly Reduced';
                                 $input_data['fev1FvcFlagColor'] = 'primary';
-                                $input_data['fev1FvcRangeCode']    = '#fff707';
+                                $input_data['fev1FvcRangeCode']    = '#BA8E23';
                             } else if ($input_data['fev1_fvc'] >= 50 && $input_data['fev1_fvc'] <= 74) {
                                 $input_data['fev1FvcFlag']      = 'Moderately Reduced ';
                                 $input_data['fev1FvcFlagColor'] = 'primary';
@@ -6081,7 +6081,7 @@ $input_data['fev1RangeCode']    = '#FF0000';
                             } else if ($input_data['fev1_fvc'] >= 75 && $input_data['fev1_fvc'] <= 84) {
                                 $input_data['fev1FvcFlag']      = 'Mildly Reduced';
                                 $input_data['fev1FvcFlagColor'] = 'primary';
-                                $input_data['fev1FvcRangeCode']    = '#fff707';
+                                $input_data['fev1FvcRangeCode']    = '#BA8E23';
                             } else if ($input_data['fev1_fvc'] >= 50 && $input_data['fev1_fvc'] <= 74) {
                                 $input_data['fev1FvcFlag']      = 'Moderately Reduced ';
                                 $input_data['fev1FvcFlagColor'] = 'primary';
@@ -6104,7 +6104,7 @@ $input_data['fev1RangeCode']    = '#FF0000';
                             } else if ($input_data['fev1_fvc'] >= 60 && $input_data['fev1_fvc'] <= 74) {
                                 $input_data['fev1FvcFlag']      = 'Mildly Reduced';
                                 $input_data['fev1FvcFlagColor'] = 'primary';
-                                $input_data['fev1FvcRangeCode']    = '#fff707';
+                                $input_data['fev1FvcRangeCode']    = '#BA8E23';
                             } else if ($input_data['fev1_fvc'] >= 50 && $input_data['fev1_fvc'] <= 59) {
                                 $input_data['fev1FvcFlag']      = 'Moderately Reduced ';
                                 $input_data['fev1FvcFlagColor'] = 'primary';
@@ -6126,7 +6126,7 @@ $input_data['fev1RangeCode']    = '#FF0000';
                             } else if ($input_data['fev1_fvc'] >= 60 && $input_data['fev1_fvc'] <= 74) {
                                 $input_data['fev1FvcFlag']      = 'Mildly Reduced';
                                 $input_data['fev1FvcFlagColor'] = 'primary';
-                                $input_data['fev1FvcRangeCode']    = '#fff707';
+                                $input_data['fev1FvcRangeCode']    = '#BA8E23';
                             } else if ($input_data['fev1_fvc'] >= 50 && $input_data['fev1_fvc'] <= 59) {
                                 $input_data['fev1FvcFlag']      = 'Moderately Reduced ';
                                 $input_data['fev1FvcFlagColor'] = 'primary';
@@ -6148,7 +6148,7 @@ $input_data['fev1RangeCode']    = '#FF0000';
                             } else if ($input_data['fev1_fvc'] >= 55 && $input_data['fev1_fvc'] <= 64) {
                                 $input_data['fev1FvcFlag']      = 'Mildly Reduced';
                                 $input_data['fev1FvcFlagColor'] = 'primary';
-                                $input_data['fev1FvcRangeCode']    = '#fff707';
+                                $input_data['fev1FvcRangeCode']    = '#BA8E23';
                             } else if ($input_data['fev1_fvc'] >= 40 && $input_data['fev1_fvc'] <= 54) {
                                 $input_data['fev1FvcFlag']      = 'Moderately Reduced ';
                                 $input_data['fev1FvcFlagColor'] = 'primary';
@@ -6173,7 +6173,7 @@ $input_data['fev1RangeCode']    = '#FF0000';
             } else if ($input_data['pef'] >= 1.5 && $input_data['pef'] <= 1.99) {
                 $input_data['pefFlag']      = 'Mildly Reduced';
                 $input_data['pefFlagColor'] = 'primary';
-                $input_data['pefRangeCode']    = '#fff707';
+                $input_data['pefRangeCode']    = '#BA8E23';
             }
             else if ($input_data['pef'] >= 1.0 && $input_data['pef'] <= 1.49) {
                 $input_data['pefFlag']      = 'Moderately Reduced';
@@ -6196,7 +6196,7 @@ $input_data['fev1RangeCode']    = '#FF0000';
         } else if ($input_data['pef'] >= 3.0 && $input_data['pef'] <= 3.99) {
             $input_data['pefFlag']      = 'Mildly Reduced';
             $input_data['pefFlagColor'] = 'primary';
-            $input_data['pefRangeCode']    = '#fff707';
+            $input_data['pefRangeCode']    = '#BA8E23';
         }
         else if ($input_data['pef'] >= 2.0 && $input_data['pef'] <= 2.99) {
             $input_data['pefFlag']      = 'Moderately Reduced';
@@ -6219,7 +6219,7 @@ $input_data['fev1RangeCode']    = '#FF0000';
     } else if ($input_data['pef'] >= 5.0 && $input_data['pef'] <= 5.99) {
         $input_data['pefFlag']      = 'Mildly Reduced';
         $input_data['pefFlagColor'] = 'primary';
-        $input_data['pefRangeCode']    = '#fff707';
+        $input_data['pefRangeCode']    = '#BA8E23';
     }
     else if ($input_data['pef'] >= 3.0 && $input_data['pef'] <= 4.99) {
         $input_data['pefFlag']      = 'Moderately Reduced';
@@ -6243,7 +6243,7 @@ if ($input_data['pef'] >= 9.0) {
 } else if ($input_data['pef'] >= 7.5 && $input_data['pef'] <= 8.99) {
     $input_data['pefFlag']      = 'Mildly Reduced';
     $input_data['pefFlagColor'] = 'primary';
-    $input_data['pefRangeCode']    = '#fff707';
+    $input_data['pefRangeCode']    = '#BA8E23';
 }
 else if ($input_data['pef'] >= 6.0 && $input_data['pef'] <= 7.49) {
     $input_data['pefFlag']      = 'Moderately Reduced';
@@ -6266,7 +6266,7 @@ $input_data['pefRangeCode']    = '#008000';
 } else if ($input_data['pef'] >= 5.5 && $input_data['pef'] <= 6.99) {
 $input_data['pefFlag']      = 'Mildly Reduced';
 $input_data['pefFlagColor'] = 'primary';
-$input_data['pefRangeCode']    = '#fff707';
+$input_data['pefRangeCode']    = '#BA8E23';
 }
 else if ($input_data['pef'] >= 4.0 && $input_data['pef'] <= 5.49) {
 $input_data['pefFlag']      = 'Moderately Reduced';
@@ -6289,7 +6289,7 @@ $input_data['pefRangeCode']    = '#008000';
 } else if ($input_data['pef'] >= 4.0 && $input_data['pef'] <= 4.99) {
 $input_data['pefFlag']      = 'Mildly Reduced';
 $input_data['pefFlagColor'] = 'primary';
-$input_data['pefRangeCode']    = '#fff707';
+$input_data['pefRangeCode']    = '#BA8E23';
 }
 else if ($input_data['pef'] >= 3.0 && $input_data['pef'] <= 3.99) {
 $input_data['pefFlag']      = 'Moderately Reduced';
@@ -6314,7 +6314,7 @@ if(!empty($input_data['fef25'])) {
     } else if ($input_data['fef25'] >= 0.9 && $input_data['fef25'] <= 1.19) {
         $input_data['fef25Flag']      = 'Mildly Reduced';
         $input_data['fef25FlagColor'] = 'primary';
-        $input_data['fef25RangeCode']    = '#fff707';
+        $input_data['fef25RangeCode']    = '#BA8E23';
     }
     else if ($input_data['fef25'] >= 0.6 && $input_data['fef25'] <= 0.89) {
         $input_data['fef25Flag']      = 'Moderately Reduced';
@@ -6337,7 +6337,7 @@ if ($input_data['fef25'] >= 2.5) {
 } else if ($input_data['fef25'] >= 2.0 && $input_data['fef25'] <= 2.49) {
     $input_data['fef25Flag']      = 'Mildly Reduced';
     $input_data['fef25FlagColor'] = 'primary';
-    $input_data['fef25RangeCode']    = '#fff707';
+    $input_data['fef25RangeCode']    = '#BA8E23';
 }
 else if ($input_data['fef25'] >= 1.5 && $input_data['fef25'] <= 1.99) {
     $input_data['fef25Flag']      = 'Moderately Reduced';
@@ -6361,7 +6361,7 @@ $input_data['fef25RangeCode']    = '#008000';
 } else if ($input_data['fef25'] >= 2.4 && $input_data['fef25'] <= 2.99) {
 $input_data['fef25Flag']      = 'Mildly Reduced';
 $input_data['fef25FlagColor'] = 'primary';
-$input_data['fef25RangeCode']    = '#fff707';
+$input_data['fef25RangeCode']    = '#BA8E23';
 }
 else if ($input_data['fef25'] >= 1.8 && $input_data['fef25'] <= 2.39) {
 $input_data['fef25Flag']      = 'Moderately Reduced';
@@ -6385,7 +6385,7 @@ $input_data['fef25RangeCode']    = '#008000';
 } else if ($input_data['fef25'] >= 3.5 && $input_data['fef25'] <= 3.99) {
 $input_data['fef25Flag']      = 'Mildly Reduced';
 $input_data['fef25FlagColor'] = 'primary';
-$input_data['fef25RangeCode']    = '#fff707';
+$input_data['fef25RangeCode']    = '#BA8E23';
 }
 else if ($input_data['fef25'] >= 2.5 && $input_data['fef25'] <= 3.49) {
 $input_data['fef25Flag']      = 'Moderately Reduced';
@@ -6409,7 +6409,7 @@ $input_data['fef25RangeCode']    = '#008000';
 } else if ($input_data['fef25'] >= 3.0 && $input_data['fef25'] <= 3.49) {
 $input_data['fef25Flag']      = 'Mildly Reduced';
 $input_data['fef25FlagColor'] = 'primary';
-$input_data['fef25RangeCode']    = '#fff707';
+$input_data['fef25RangeCode']    = '#BA8E23';
 }
 else if ($input_data['fef25'] >= 2.0 && $input_data['fef25'] <= 2.99) {
 $input_data['fef25Flag']      = 'Moderately Reduced';
@@ -6433,7 +6433,7 @@ $input_data['fef25RangeCode']    = '#008000';
 } else if ($input_data['fef25'] >= 2.5 && $input_data['fef25'] <= 2.99) {
 $input_data['fef25Flag']      = 'Mildly Reduced';
 $input_data['fef25FlagColor'] = 'primary';
-$input_data['fef25RangeCode']    = '#fff707';
+$input_data['fef25RangeCode']    = '#BA8E23';
 }
 else if ($input_data['fef25'] >= 2.0 && $input_data['fef25'] <= 2.49) {
 $input_data['fef25Flag']      = 'Moderately Reduced';
@@ -6461,7 +6461,7 @@ if(!empty($input_data['fef50'])) {
     } else if ($input_data['fef50'] >= 0.6 && $input_data['fef50'] <= 0.79) {
         $input_data['fef50Flag']      = 'Mildly Reduced';
         $input_data['fef50FlagColor'] = 'primary';
-        $input_data['fef50RangeCode']    = '#fff707';
+        $input_data['fef50RangeCode']    = '#BA8E23';
     }
     else if ($input_data['fef50'] >= 0.4 && $input_data['fef50'] <= 0.59) {
         $input_data['fef50Flag']      = 'Moderately Reduced';
@@ -6486,7 +6486,7 @@ $input_data['fef50RangeCode']    = '#008000';
 } else if ($input_data['fef50'] >= 1.4 && $input_data['fef50'] <= 1.79) {
 $input_data['fef50Flag']      = 'Mildly Reduced';
 $input_data['fef50FlagColor'] = 'primary';
-$input_data['fef50RangeCode']    = '#fff707';
+$input_data['fef50RangeCode']    = '#BA8E23';
 }
 else if ($input_data['fef50'] >= 1.0 && $input_data['fef50'] <= 1.39) {
 $input_data['fef50Flag']      = 'Moderately Reduced';
@@ -6510,7 +6510,7 @@ $input_data['fef50RangeCode']    = '#008000';
 } else if ($input_data['fef50'] >= 1.6 && $input_data['fef50'] <= 1.99) {
 $input_data['fef50Flag']      = 'Mildly Reduced';
 $input_data['fef50FlagColor'] = 'primary';
-$input_data['fef50RangeCode']    = '#fff707';
+$input_data['fef50RangeCode']    = '#BA8E23';
 }
 else if ($input_data['fef50'] >= 1.2 && $input_data['fef50'] <= 1.59) {
 $input_data['fef50Flag']      = 'Moderately Reduced';
@@ -6534,7 +6534,7 @@ $input_data['fef50RangeCode']    = '#008000';
 } else if ($input_data['fef50'] >= 2.5 && $input_data['fef50'] <= 2.99) {
 $input_data['fef50Flag']      = 'Mildly Reduced';
 $input_data['fef50FlagColor'] = 'primary';
-$input_data['fef50RangeCode']    = '#fff707';
+$input_data['fef50RangeCode']    = '#BA8E23';
 }
 else if ($input_data['fef50'] >= 2.0 && $input_data['fef50'] <= 2.49) {
 $input_data['fef50Flag']      = 'Moderately Reduced';
@@ -6557,7 +6557,7 @@ $input_data['fef50RangeCode']    = '#008000';
 } else if ($input_data['fef50'] >= 2.0 && $input_data['fef50'] <= 2.49) {
 $input_data['fef50Flag']      = 'Mildly Reduced';
 $input_data['fef50FlagColor'] = 'primary';
-$input_data['fef50RangeCode']    = '#fff707';
+$input_data['fef50RangeCode']    = '#BA8E23';
 }
 else if ($input_data['fef50'] >= 1.5 && $input_data['fef50'] <= 1.99) {
 $input_data['fef50Flag']      = 'Moderately Reduced';
@@ -6583,7 +6583,7 @@ if(!empty($input_data['fef75'])) {
     } else if ($input_data['fef75'] >= 0.3 && $input_data['fef75'] <= 0.39) {
         $input_data['fef75Flag']      = 'Mildly Reduced';
         $input_data['fef75FlagColor'] = 'primary';
-        $input_data['fef75RangeCode']    = '#fff707';
+        $input_data['fef75RangeCode']    = '#BA8E23';
     }
     else if ($input_data['fef75'] >= 0.2 && $input_data['fef75'] <= 0.29) {
         $input_data['fef75Flag']      = 'Moderately Reduced';
@@ -6608,7 +6608,7 @@ $input_data['fef75RangeCode']    = '#008000';
 } else if ($input_data['fef75'] >= 0.7 && $input_data['fef75'] <= 0.89) {
 $input_data['fef75Flag']      = 'Mildly Reduced';
 $input_data['fef75FlagColor'] = 'primary';
-$input_data['fef75RangeCode']    = '#fff707';
+$input_data['fef75RangeCode']    = '#BA8E23';
 }
 else if ($input_data['fef75'] >= 0.5 && $input_data['fef75'] <= 0.69) {
 $input_data['fef75Flag']      = 'Moderately Reduced';
@@ -6632,7 +6632,7 @@ $input_data['fef75RangeCode']    = '#008000';
 } else if ($input_data['fef75'] >= 0.8 && $input_data['fef75'] <= 0.99) {
 $input_data['fef75Flag']      = 'Mildly Reduced';
 $input_data['fef75FlagColor'] = 'primary';
-$input_data['fef75RangeCode']    = '#fff707';
+$input_data['fef75RangeCode']    = '#BA8E23';
 }
 else if ($input_data['fef75'] >= 0.6 && $input_data['fef75'] <= 0.79) {
 $input_data['fef75Flag']      = 'Moderately Reduced';
@@ -6656,7 +6656,7 @@ $input_data['fef75RangeCode']    = '#008000';
 } else if ($input_data['fef75'] >= 2.0 && $input_data['fef75'] <= 2.49) {
 $input_data['fef75Flag']      = 'Mildly Reduced';
 $input_data['fef75FlagColor'] = 'primary';
-$input_data['fef75RangeCode']    = '#fff707';
+$input_data['fef75RangeCode']    = '#BA8E23';
 }
 else if ($input_data['fef75'] >= 1.5 && $input_data['fef75'] <= 1.99) {
 $input_data['fef75Flag']      = 'Moderately Reduced';
@@ -6679,7 +6679,7 @@ $input_data['fef75RangeCode']    = '#008000';
 } else if ($input_data['fef75'] >= 1.5 && $input_data['fef75'] <= 1.99) {
 $input_data['fef75Flag']      = 'Mildly Reduced';
 $input_data['fef75FlagColor'] = 'primary';
-$input_data['fef75RangeCode']    = '#fff707';
+$input_data['fef75RangeCode']    = '#BA8E23';
 }
 else if ($input_data['fef75'] >= 1.0 && $input_data['fef75'] <= 1.49) {
 $input_data['fef75Flag']      = 'Moderately Reduced';
@@ -6705,7 +6705,7 @@ if(!empty($input_data['fef2575'])) {
     } else if ($input_data['fef2575'] >= 0.5 && $input_data['fef2575'] <= 0.69) {
         $input_data['fef2575Flag']      = 'Mildly Reduced';
         $input_data['fef2575FlagColor'] = 'primary';
-        $input_data['fef2575RangeCode']    = '#fff707';
+        $input_data['fef2575RangeCode']    = '#BA8E23';
     }
     else if ($input_data['fef2575'] >= 0.3 && $input_data['fef2575'] <= 0.49) {
         $input_data['fef2575Flag']      = 'Moderately Reduced';
@@ -6730,7 +6730,7 @@ $input_data['fef2575RangeCode']    = '#008000';
 } else if ($input_data['fef2575'] >= 1.2 && $input_data['fef2575'] <= 1.49) {
 $input_data['fef2575Flag']      = 'Mildly Reduced';
 $input_data['fef2575FlagColor'] = 'primary';
-$input_data['fef2575RangeCode']    = '#fff707';
+$input_data['fef2575RangeCode']    = '#BA8E23';
 }
 else if ($input_data['fef2575'] >= 0.8 && $input_data['fef2575'] <= 1.19) {
 $input_data['fef2575Flag']      = 'Moderately Reduced';
@@ -6754,7 +6754,7 @@ $input_data['fef2575RangeCode']    = '#008000';
 } else if ($input_data['fef2575'] >= 1.5 && $input_data['fef2575'] <= 1.99) {
 $input_data['fef2575Flag']      = 'Mildly Reduced';
 $input_data['fef2575FlagColor'] = 'primary';
-$input_data['fef2575RangeCode']    = '#fff707';
+$input_data['fef2575RangeCode']    = '#BA8E23';
 }
 else if ($input_data['fef2575'] >= 1.0 && $input_data['fef2575'] <= 1.49) {
 $input_data['fef2575Flag']      = 'Moderately Reduced';
@@ -6777,7 +6777,7 @@ $input_data['fef2575RangeCode']    = '#008000';
 } else if ($input_data['fef2575'] >= 1.5 && $input_data['fef2575'] <= 1.99) {
 $input_data['fef2575Flag']      = 'Mildly Reduced';
 $input_data['fef2575FlagColor'] = 'primary';
-$input_data['fef2575RangeCode']    = '#fff707';
+$input_data['fef2575RangeCode']    = '#BA8E23';
 }
 else if ($input_data['fef2575'] >= 1.0 && $input_data['fef2575'] <= 1.49) {
 $input_data['fef2575Flag']      = 'Moderately Reduced';
@@ -6800,7 +6800,7 @@ $input_data['fef2575RangeCode']    = '#008000';
 } else if ($input_data['fef2575'] >= 1.0 && $input_data['fef2575'] <= 1.49) {
 $input_data['fef2575Flag']      = 'Mildly Reduced';
 $input_data['fef2575FlagColor'] = 'primary';
-$input_data['fef2575RangeCode']    = '#fff707';
+$input_data['fef2575RangeCode']    = '#BA8E23';
 }
 else if ($input_data['fef2575'] >= 0.5 && $input_data['fef2575'] <= 0.99) {
 $input_data['fef2575Flag']      = 'Moderately Reduced';
@@ -6830,7 +6830,7 @@ return $input_data;
 //             } else if ($value >= 70 && $value <= 79) {
 //                 $flags['fvcFlag']      = 'Mildly Reduced';
 //                 $flags['fvcFlagColor'] = 'primary';
-//                 $flags['fvcRangeCode']    = '#fff707';
+//                 $flags['fvcRangeCode']    = '#BA8E23';
 //             }
 //             else if ($value >= 50 && $value <= 69) {
 //                 $flags['fvcFlag']      = 'Moderately Reduced';
@@ -6855,7 +6855,7 @@ return $input_data;
 //         } else if ($value >= 70 && $value <= 79) {
 //             $flags['fvcFlag']      = 'Mildly Reduced';
 //             $flags['fvcFlagColor'] = 'primary';
-//             $flags['fvcRangeCode']    = '#fff707';
+//             $flags['fvcRangeCode']    = '#BA8E23';
 //         }
 //         else if ($value >= 50 && $value <= 69) {
 //             $flags['fvcFlag']      = 'Moderately Reduced';
@@ -6879,7 +6879,7 @@ return $input_data;
 //     } else if ($value >= 70 && $value <= 79) {
 //         $flags['fvcFlag']      = 'Mildly Reduced';
 //         $flags['fvcFlagColor'] = 'primary';
-//         $flags['fvcRangeCode']    = '#fff707';
+//         $flags['fvcRangeCode']    = '#BA8E23';
 //     }
 //     else if ($value >= 50 && $value <= 69) {
 //         $flags['fvcFlag']      = 'Moderately Reduced';
@@ -6904,7 +6904,7 @@ return $input_data;
 // } else if ($value >= 70 && $value <= 79) {
 //     $flags['fvcFlag']      = 'Mildly Reduced';
 //     $flags['fvcFlagColor'] = 'primary';
-//     $flags['fvcRangeCode']    = '#fff707';
+//     $flags['fvcRangeCode']    = '#BA8E23';
 // }
 // else if ($value >= 50 && $value <= 69) {
 //     $flags['fvcFlag']      = 'Moderately Reduced';
@@ -6931,7 +6931,7 @@ return $input_data;
 //     } else if ($value >= 70 && $value <= 79) {
 //         $flags['fvcFlag']      = 'Mildly Reduced';
 //         $flags['fvcFlagColor'] = 'primary';
-//         $flags['fvcRangeCode']    = '#fff707';
+//         $flags['fvcRangeCode']    = '#BA8E23';
 //     }
 //     else if ($value >= 50 && $value <= 69) {
 //         $flags['fvcFlag']      = 'Moderately Reduced';
@@ -6956,7 +6956,7 @@ return $input_data;
 //         } else if ($value >= 60 && $value <= 69) {
 //             $flags['fvcFlag']      = 'Mildly Reduced';
 //             $flags['fvcFlagColor'] = 'primary';
-//             $flags['fvcRangeCode']    = '#fff707';
+//             $flags['fvcRangeCode']    = '#BA8E23';
 //         }
 //         else if ($value >= 50 && $value <= 59) {
 //             $flags['fvcFlag']      = 'Moderately Reduced';
@@ -6985,7 +6985,7 @@ return $input_data;
 //             } else if ($value >= 60 && $value <= 69) {
 //                 $flags['fev1Flag']      = 'Mildly Reduced';
 //                 $flags['fev1FlagColor'] = 'primary';
-//                 $flags['fev1RangeCode']    = '#fff707';
+//                 $flags['fev1RangeCode']    = '#BA8E23';
 //             }
 //             else if ($value >= 50 && $value <= 59 ) {
 //                 $flags['fev1Flag']      = 'Moderately Reduced';
@@ -7010,7 +7010,7 @@ return $input_data;
 //         } else if ($value >= 70 && $value <= 79) {
 //             $flags['fev1Flag']      = 'Mildly Reduced';
 //             $flags['fev1FlagColor'] = 'primary';
-//             $flags['fev1RangeCode']    = '#fff707';
+//             $flags['fev1RangeCode']    = '#BA8E23';
 //         }
 //         else if ($value >= 50 && $value <= 69) {
 //             $flags['fev1Flag']      = 'Moderately Reduced';
@@ -7034,7 +7034,7 @@ return $input_data;
 //     } else if ($value >= 70 && $value <= 79) {
 //         $flags['fev1Flag']      = 'Mildly Reduced';
 //         $flags['fev1FlagColor'] = 'primary';
-//         $flags['fev1RangeCode']    = '#fff707';
+//         $flags['fev1RangeCode']    = '#BA8E23';
 //     }
 //     else if ($value >= 50 && $value <= 69) {
 //         $flags['fev1Flag']      = 'Moderately Reduced';
@@ -7059,7 +7059,7 @@ return $input_data;
 // } else if ($value >= 70 && $value <= 79) {
 //     $flags['fev1Flag']      = 'Mildly Reduced';
 //     $flags['fev1FlagColor'] = 'primary';
-//     $flags['fev1RangeCode']    = '#fff707';
+//     $flags['fev1RangeCode']    = '#BA8E23';
 // }
 // else if ($value >= 50 && $value <= 69) {
 //     $flags['fev1Flag']      = 'Moderately Reduced';
@@ -7086,7 +7086,7 @@ return $input_data;
 //     } else if ($value >= 70 && $value <= 79) {
 //         $flags['fev1Flag']      = 'Mildly Reduced';
 //         $flags['fev1FlagColor'] = 'primary';
-//         $flags['fev1RangeCode']    = '#fff707';
+//         $flags['fev1RangeCode']    = '#BA8E23';
 //     }
 //     else if ($value >= 50 && $value <= 69) {
 //         $flags['fev1Flag']      = 'Moderately Reduced';
@@ -7111,7 +7111,7 @@ return $input_data;
 //         } else if ($value >= 60 && $value <= 69) {
 //             $flags['fev1Flag']      = 'Mildly Reduced';
 //             $flags['fev1FlagColor'] = 'primary';
-//             $flags['fev1RangeCode']    = '#fff707';
+//             $flags['fev1RangeCode']    = '#BA8E23';
 //         }
 //         else if ($value >= 50 && $value <= 59) {
 //             $flags['fev1Flag']      = 'Moderately Reduced';
@@ -7140,7 +7140,7 @@ return $input_data;
 //             } else if ($value >= 60 && $value <= 79) {
 //                 $flags['pefFlag']      = 'Mildly Reduced';
 //                 $flags['pefFlagColor'] = 'primary';
-//                 $flags['pefRangeCode']    = '#fff707';
+//                 $flags['pefRangeCode']    = '#BA8E23';
 //             }
 //             else if ($value >= 40 && $value <= 59) {
 //                 $flags['pefFlag']      = 'Moderately Reduced';
@@ -7164,7 +7164,7 @@ return $input_data;
 //         } else if ($value >= 60 && $value <= 79) {
 //             $flags['pefFlag']      = 'Mildly Reduced';
 //             $flags['pefFlagColor'] = 'primary';
-//             $flags['pefRangeCode']    = '#fff707';
+//             $flags['pefRangeCode']    = '#BA8E23';
 //         }
 //         else if ($value >= 40 && $value <= 59) {
 //             $flags['pefFlag']      = 'Moderately Reduced';
@@ -7188,7 +7188,7 @@ return $input_data;
 //     } else if ($value >= 70 && $value <= 79) {
 //         $flags['pefFlag']      = 'Mildly Reduced';
 //         $flags['pefFlagColor'] = 'primary';
-//         $flags['pefRangeCode']    = '#fff707';
+//         $flags['pefRangeCode']    = '#BA8E23';
 //     }
 //     else if ($value >= 50 && $value <= 69) {
 //         $flags['pefFlag']      = 'Moderately Reduced';
@@ -7212,7 +7212,7 @@ return $input_data;
 // } else if ($value >= 60 && $value <= 69) {
 //     $flags['pefFlag']      = 'Mildly Reduced';
 //     $flags['pefFlagColor'] = 'primary';
-//     $flags['pefRangeCode']    = '#fff707';
+//     $flags['pefRangeCode']    = '#BA8E23';
 // }
 // else if ($value >= 50 && $value <= 59) {
 //     $flags['pefFlag']      = 'Moderately Reduced';
@@ -7240,7 +7240,7 @@ return $input_data;
 //             } else if ($value >= 60 && $value <= 79) {
 //                 $flags['Flag']      = 'Mildly Reduced';
 //                 $flags['fef25FlagColor'] = 'primary';
-//                 $flags['fef25RangeCode']    = '#fff707';
+//                 $flags['fef25RangeCode']    = '#BA8E23';
 //             }
 //             else if ($value >= 40 && $value <= 59) {
 //                 $flags['fef25Flag']      = 'Moderately Reduced';
@@ -7264,7 +7264,7 @@ return $input_data;
 //         } else if ($value >= 60 && $value <= 79) {
 //             $flags['fef25Flag']      = 'Mildly Reduced';
 //             $flags['fef25FlagColor'] = 'primary';
-//             $flags['fef25RangeCode']    = '#fff707';
+//             $flags['fef25RangeCode']    = '#BA8E23';
 //         }
 //         else if ($value >= 40 && $value <= 59) {
 //             $flags['fef25Flag']      = 'Moderately Reduced';
@@ -7288,7 +7288,7 @@ return $input_data;
 //     } else if ($value >=60 && $value <= 79) {
 //         $flags['fef25Flag']      = 'Mildly Reduced';
 //         $flags['fef25FlagColor'] = 'primary';
-//         $flags['fef25RangeCode']    = '#fff707';
+//         $flags['fef25RangeCode']    = '#BA8E23';
 //     }
 //     else if ($value >= 40  && $value <= 59) {
 //         $flags['fef25Flag']      = 'Moderately Reduced';
@@ -7312,7 +7312,7 @@ return $input_data;
 //     } else if ($value >= 70 && $value <= 79) {
 //         $flags['fef25Flag']      = 'Mildly Reduced';
 //         $flags['fef25FlagColor'] = 'primary';
-//         $flags['fef25RangeCode']    = '#fff707';
+//         $flags['fef25RangeCode']    = '#BA8E23';
 //     }
 //     else if ($value >= 50 && $value <= 69) {
 //         $flags['fef25Flag']      = 'Moderately Reduced';
@@ -7336,7 +7336,7 @@ return $input_data;
 // } else if ($value >= 70 && $value <= 79) {
 //     $flags['fef25Flag']      = 'Mildly Reduced';
 //     $flags['fef25FlagColor'] = 'primary';
-//     $flags['fef25RangeCode']    = '#fff707';
+//     $flags['fef25RangeCode']    = '#BA8E23';
 // }
 // else if ($value >= 50 && $value <= 69) {
 //     $flags['fef25Flag']      = 'Moderately Reduced';
@@ -7360,7 +7360,7 @@ return $input_data;
 // } else if ($value >= 60 && $value <= 69) {
 //     $flags['fef25Flag']      = 'Mildly Reduced';
 //     $flags['fef25FlagColor'] = 'primary';
-//     $flags['fef25RangeCode']    = '#fff707';
+//     $flags['fef25RangeCode']    = '#BA8E23';
 // }
 // else if ($value >= 50 && $value <= 59) {
 //     $flags['fef25Flag']      = 'Moderately Reduced';
@@ -7388,7 +7388,7 @@ return $input_data;
 //             } else if ($value >= 60 && $value <= 79) {
 //                 $flags['fef50 Flag']      = 'Mildly Reduced';
 //                 $flags['fef50 FlagColor'] = 'primary';
-//                 $flags['fef50 RangeCode']    = '#fff707';
+//                 $flags['fef50 RangeCode']    = '#BA8E23';
 //             }
 //             else if ($value >= 40 && $value <= 59) {
 //                 $flags['fef50 Flag']      = 'Moderately Reduced';
@@ -7413,7 +7413,7 @@ return $input_data;
 //         } else if ($value >= 60 && $value <= 79) {
 //             $flags['fef50 Flag']      = 'Mildly Reduced';
 //             $flags['fef50 FlagColor'] = 'primary';
-//             $flags['fef50 RangeCode']    = '#fff707';
+//             $flags['fef50 RangeCode']    = '#BA8E23';
 //         }
 //         else if ($value >= 40 && $value <= 50) {
 //             $flags['fef50 Flag']      = 'Moderately Reduced';
@@ -7437,7 +7437,7 @@ return $input_data;
 //     } else if ($value >= 60 && $value <= 79) {
 //         $flags['fef50 Flag']      = 'Mildly Reduced';
 //         $flags['fef50 FlagColor'] = 'primary';
-//         $flags['fef50 RangeCode']    = '#fff707';
+//         $flags['fef50 RangeCode']    = '#BA8E23';
 //     }
 //     else if ($value >= 40 && $value <= 59) {
 //         $flags['fef50 Flag']      = 'Moderately Reduced';
@@ -7462,7 +7462,7 @@ return $input_data;
 // } else if ($value >= 70 && $value <= 79) {
 //     $flags['fef50 Flag']      = 'Mildly Reduced';
 //     $flags['fef50 FlagColor'] = 'primary';
-//     $flags['fef50 RangeCode']    = '#fff707';
+//     $flags['fef50 RangeCode']    = '#BA8E23';
 // }
 // else if ($value >= 50 && $value <= 69) {
 //     $flags['fef50 Flag']      = 'Moderately Reduced';
@@ -7489,7 +7489,7 @@ return $input_data;
 //     } else if ($value >= 70 && $value <= 79) {
 //         $flags['fef50 Flag']      = 'Mildly Reduced';
 //         $flags['fef50 FlagColor'] = 'primary';
-//         $flags['fef50 RangeCode']    = '#fff707';
+//         $flags['fef50 RangeCode']    = '#BA8E23';
 //     }
 //     else if ($value >= 50 && $value <= 69) {
 //         $flags['fef50 Flag']      = 'Moderately Reduced';
@@ -7514,7 +7514,7 @@ return $input_data;
 //         } else if ($value >= 60 && $value <= 69) {
 //             $flags['fef50 Flag']      = 'Mildly Reduced';
 //             $flags['fef50 FlagColor'] = 'primary';
-//             $flags['fef50 RangeCode']    = '#fff707';
+//             $flags['fef50 RangeCode']    = '#BA8E23';
 //         }
 //         else if ($value >= 50 && $value <= 59) {
 //             $flags['fef50 Flag']      = 'Moderately Reduced';
@@ -7542,7 +7542,7 @@ return $input_data;
 //             } else if ($value >= 60 && $value <= 79) {
 //                 $flags['fef75 Flag']      = 'Mildly Reduced';
 //                 $flags['fef75 FlagColor'] = 'primary';
-//                 $flags['fef75 RangeCode']    = '#fff707';
+//                 $flags['fef75 RangeCode']    = '#BA8E23';
 //             }
 //             else if ($value >= 40 && $value <= 59) {
 //                 $flags['fef75 Flag']      = 'Moderately Reduced';
@@ -7567,7 +7567,7 @@ return $input_data;
 //         } else if ($value >= 60 && $value <= 79) {
 //             $flags['fef75 Flag']      = 'Mildly Reduced';
 //             $flags['fef75 FlagColor'] = 'primary';
-//             $flags['fef75 RangeCode']    = '#fff707';
+//             $flags['fef75 RangeCode']    = '#BA8E23';
 //         }
 //         else if ($value >= 40 && $value <= 59) {
 //             $flags['fef75 Flag']      = 'Moderately Reduced';
@@ -7591,7 +7591,7 @@ return $input_data;
 //     } else if ($value >= 60 && $value <= 79) {
 //         $flags['fef75 Flag']      = 'Mildly Reduced';
 //         $flags['fef75 FlagColor'] = 'primary';
-//         $flags['fef75 RangeCode']    = '#fff707';
+//         $flags['fef75 RangeCode']    = '#BA8E23';
 //     }
 //     else if ($value >= 40 && $value <= 59) {
 //         $flags['fef75 Flag']      = 'Moderately Reduced';
@@ -7616,7 +7616,7 @@ return $input_data;
 // } else if ($value >= 70 && $value <= 79) {
 //     $flags['fef75 Flag']      = 'Mildly Reduced';
 //     $flags['fef75 FlagColor'] = 'primary';
-//     $flags['fef75 RangeCode']    = '#fff707';
+//     $flags['fef75 RangeCode']    = '#BA8E23';
 // }
 // else if ($value >= 50 && $value <= 69) {
 //     $flags['fef75 Flag']      = 'Moderately Reduced';
@@ -7643,7 +7643,7 @@ return $input_data;
 //     } else if ($value >= 70 && $value <= 79) {
 //         $flags['fef75 Flag']      = 'Mildly Reduced';
 //         $flags['fef75 FlagColor'] = 'primary';
-//         $flags['fef75 RangeCode']    = '#fff707';
+//         $flags['fef75 RangeCode']    = '#BA8E23';
 //     }
 //     else if ($value >= 50 && $value <= 69) {
 //         $flags['fef75 Flag']      = 'Moderately Reduced';
@@ -7668,7 +7668,7 @@ return $input_data;
 //         } else if ($value >= 60 && $value <= 69) {
 //             $flags['fef75 Flag']      = 'Mildly Reduced';
 //             $flags['fef75 FlagColor'] = 'primary';
-//             $flags['fef75 RangeCode']    = '#fff707';
+//             $flags['fef75 RangeCode']    = '#BA8E23';
 //         }
 //         else if ($value >= 50 && $value <= 59) {
 //             $flags['fef75 Flag']      = 'Moderately Reduced';
@@ -7697,7 +7697,7 @@ return $input_data;
 //             } else if ($value >= 60 && $value <= 79) {
 //                 $flags['fef2575 Flag']      = 'Mildly Reduced';
 //                 $flags['fef2575 FlagColor'] = 'primary';
-//                 $flags['fef2575 RangeCode']    = '#fff707';
+//                 $flags['fef2575 RangeCode']    = '#BA8E23';
 //             }
 //             else if ($value >= 40 && $value <= 59) {
 //                 $flags['fef2575 Flag']      = 'Moderately Reduced';
@@ -7722,7 +7722,7 @@ return $input_data;
 //         } else if ($value >= 60 && $value <= 79) {
 //             $flags['fef2575 Flag']      = 'Mildly Reduced';
 //             $flags['fef2575 FlagColor'] = 'primary';
-//             $flags['fef2575 RangeCode']    = '#fff707';
+//             $flags['fef2575 RangeCode']    = '#BA8E23';
 //         }
 //         else if ($value >= 40 && $value <= 50) {
 //             $flags['fef2575 Flag']      = 'Moderately Reduced';
@@ -7746,7 +7746,7 @@ return $input_data;
 //     } else if ($value >= 60 && $value <= 79) {
 //         $flags['fef2575 Flag']      = 'Mildly Reduced';
 //         $flags['fef2575 FlagColor'] = 'primary';
-//         $flags['fef2575 RangeCode']    = '#fff707';
+//         $flags['fef2575 RangeCode']    = '#BA8E23';
 //     }
 //     else if ($value >= 40 && $value <= 59) {
 //         $flags['fef2575 Flag']      = 'Moderately Reduced';
@@ -7771,7 +7771,7 @@ return $input_data;
 // } else if ($value >= 70 && $value <= 79) {
 //     $flags['fef2575 Flag']      = 'Mildly Reduced';
 //     $flags['fef2575 FlagColor'] = 'primary';
-//     $flags['fef2575 RangeCode']    = '#fff707';
+//     $flags['fef2575 RangeCode']    = '#BA8E23';
 // }
 // else if ($value >= 50 && $value <= 69) {
 //     $flags['fef2575 Flag']      = 'Moderately Reduced';
@@ -7798,7 +7798,7 @@ return $input_data;
 //     } else if ($value >= 70 && $value <= 79) {
 //         $flags['fef2575 Flag']      = 'Mildly Reduced';
 //         $flags['fef2575 FlagColor'] = 'primary';
-//         $flags['fef2575 RangeCode']    = '#fff707';
+//         $flags['fef2575 RangeCode']    = '#BA8E23';
 //     }
 //     else if ($value >= 50 && $value <= 69) {
 //         $flags['fef2575 Flag']      = 'Moderately Reduced';
@@ -7823,7 +7823,7 @@ return $input_data;
 //         } else if ($value >= 60 && $value <= 69) {
 //             $flags['fef2575 Flag']      = 'Mildly Reduced';
 //             $flags['fef2575 FlagColor'] = 'primary';
-//             $flags['fef2575 RangeCode']    = '#fff707';
+//             $flags['fef2575 RangeCode']    = '#BA8E23';
 //         }
 //         else if ($value >= 50 && $value <= 59) {
 //             $flags['fef2575 Flag']      = 'Moderately Reduced';
