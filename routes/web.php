@@ -206,3 +206,6 @@ $router->get('/run-seeder/{seeder}', function ($seeder) {
     }
 });
 
+$router->get('/', function () {
+    return response()->json(['status' => 'Lumen API running']);
+});
