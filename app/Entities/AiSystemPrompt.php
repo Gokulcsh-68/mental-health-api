@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Entities;
-
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class AiSystemPrompt extends BaseModel
@@ -23,9 +22,7 @@ class AiSystemPrompt extends BaseModel
      * @var array
      */
     protected $fillable = [
-        "prompt_text",
-        "patient_id",
-        "created_by"
+        "prompt_text", "patient_id", "created_by"
     ];
 
     /**
@@ -34,7 +31,7 @@ class AiSystemPrompt extends BaseModel
      * @var array
      */
     protected $casts = [
-        'prompt_text' => 'string',
+        'prompt_text' => 'object',
     ];
 
     /**
@@ -42,28 +39,36 @@ class AiSystemPrompt extends BaseModel
      *
      * @var array
      */
-    protected $hidden = [];
+    protected $hidden = [
+        
+    ];
 
     /**
      * The attributes that should be updated on patch method.
      *
      * @var array
-     */
-    protected $partialFillable = [];
+    */
+    protected $partialFillable = [
+        
+    ];
 
     /**
      * The attributes that should be mutated to dates.
      *
      * @var array
-     */
-    protected $dates = [];
+    */
+    protected $dates = [
+        
+    ];
 
     /**
      * The event map for the model.
      *
      * @var array
-     */
-    protected $dispatchesEvents = [];
+    */
+    protected $dispatchesEvents = [
+        
+    ];
 
 
     public function user()
