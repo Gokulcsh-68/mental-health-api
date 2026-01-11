@@ -32,8 +32,9 @@ trait AuthHelper
             "data" => $data,
         ];
 
-        // JWT v6+: specify algorithm explicitly
-        return aesEncrypt(JWT::encode($token, $key, 'HS256'));
+        return aesEncrypt(
+            JWT::encode($token, $key, 'HS256')
+        );
     }
 
     /**
@@ -41,17 +42,15 @@ trait AuthHelper
      */
     public function refreshToken($request, $decoded_token)
     {
-        $key = config('app.jwt.key');
-        $ttl = config('app.jwt.ttl');
+        $key = app('config')->get('app.jwt.key');
+        $ttl = app('config')->get('app.jwt.ttl');
 
-        $expiration = Carbon::now()->addSeconds($ttl + 5)->timestamp;
-        $decoded_token->exp = $expiration;
-
-        // Convert object to array to avoid JWT v6 issues
-        $tokenArray = json_decode(json_encode($decoded_token), true);
+        $decoded_token->exp = Carbon::now()->addSeconds($ttl + 5)->timestamp;
 
         return [
-            'token' => aesEncrypt(JWT::encode($tokenArray, $key, 'HS256')),
+            'token' => aesEncrypt(
+                JWT::encode((array) $decoded_token, $key, 'HS256')
+            ),
             'token_expiration_time' => $decoded_token->exp
         ];
     }
@@ -61,29 +60,31 @@ trait AuthHelper
      */
     protected function decodeJwt($token, $keyConfig = 'key')
     {
-        $key = config("app.jwt.$keyConfig");
+        $key = app('config')->get("app.jwt.$keyConfig");
 
-        // ✅ Use Key object for JWT v6+
-        return JWT::decode(aesDecrypt($token), new Key($key, 'HS256'));
+        return JWT::decode(
+            aesDecrypt($token),
+            new Key($key, 'HS256')
+        );
     }
 
     /**
      * Generate OTP for a secret
      */
-    protected function generateOtp($secret, $startTime = null, $length = 6)
+    protected function generateOtp($secret, $startTime = 0, $length = 6)
     {
-        if ($startTime === null) {
-            $startTime = time(); // Use full UNIX timestamp
+        if ($startTime === 0) {
+            $startTime = Carbon::now()->second;
         }
 
         $otp = (new Totp('sha1', $startTime, $this->otpExpiry))
             ->GenerateToken($secret, null, $length);
 
-        // Store the start time in cache for future validation
         Cache::put($secret, $startTime, $this->otpExpiry);
 
         return $otp;
     }
+
 
     /**
      * Validate OTP for a secret
@@ -96,21 +97,18 @@ trait AuthHelper
 
         $startTime = Cache::get($secret);
 
-        // Compare OTP using the same start time
         return $this->generateOtp($secret, $startTime) === $otp;
     }
-
     /**
      * Handle successful login
      */
     protected function successLogin($user)
     {
-        $result = [];
         $user->captureEvent(UserEventTypeEnum::Login);
         $user->last_access = Carbon::now();
         $user->unsetEventDispatcher();
         $user->save();
 
-        return $result;
+        return [];
     }
 }
