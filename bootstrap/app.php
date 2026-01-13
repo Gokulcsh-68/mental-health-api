@@ -90,17 +90,13 @@ $app->configure('abdm');
 |
  */
 
-// $app->middleware([
-//     Fruitcake\Cors\HandleCors::class
-// ]);
+$app->middleware([
+    Fruitcake\Cors\HandleCors::class
+]);
 
 // $app->routeMiddleware([
 //     'auth' => App\Http\Middleware\Authenticate::class,
 // ]);
-$app->middleware([
-    App\Middleware\CorsMiddleware::class,
-]);
-
 $app->routeMiddleware([
     'resource' => App\Middleware\ResourceMiddleware::class,
     'auth' => App\Middleware\Authenticate::class,
@@ -127,7 +123,7 @@ $app->register(App\Providers\AuthServiceProvider::class);
 $app->register(App\Providers\EventServiceProvider::class);
 $app->register(Illuminate\Redis\RedisServiceProvider::class);
 $app->register(Pearl\RequestValidate\RequestServiceProvider::class);
-// $app->register(Fruitcake\Cors\CorsServiceProvider::class);
+$app->register(Fruitcake\Cors\CorsServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
