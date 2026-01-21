@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Entities\PatientHealth;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -32,7 +33,8 @@ class ResourceService extends BaseService
      * @return json
      */
 
-    function list(Request $request): JsonResponse{
+    function list(Request $request): JsonResponse
+    {
         $resource = $request->attributes->get('resource');
         $entity = $request->attributes->get('entity');
         $collection = callUserFuncArray([$entity, 'getModelList'], [])->paginate($entity->getResourceDataFetchLimit());
@@ -54,6 +56,22 @@ class ResourceService extends BaseService
     {
         $resource = $request->attributes->get('resource');
         $entity = $request->attributes->get('entity');
+        if ($request->get('latest') == 1) {
+            $patientId = $request->get('user_id');
+
+            if (!$patientId) {
+                return response()->json([
+                    'code'    => 400,
+                    'message' => 'user_id parameter is required when latest=1',
+                ], 400);
+            }
+
+            $data = PatientHealth::getLatestHealthSummary($patientId);
+
+            $result = [$this->getResourceName($request) => $data];
+
+            return $this->httpResponse->setHttpData($result)->jsonResponse();
+        }
         $collection = callUserFuncArray([$entity, 'getModelList'], [])->get();
 
         $result[$this->getResourceName($request)] = $collection->isNotEmpty() ? $this->collectionTransform($resource, $collection) : [];
@@ -126,7 +144,7 @@ class ResourceService extends BaseService
     {
         $resource = $request->attributes->get('resource');
         $entity = $request->attributes->get('entity');
-       
+
         $model = callUserFuncArray([$entity, 'modelUpdateProcess'], [$id, $request, $entity->getParitialFillable()]);
 
         return $this->httpResponse->setHttpData([$this->getResourceName($request) => $model["data"]])->setHttpCode($model["success"] ? 200 : 400)->setHttpMessage($model["success"] ? "" : "Unable to update model")->jsonResponse();
