@@ -303,25 +303,20 @@ class PatientHealth extends BaseModel
     }
     public static function getLatestHealthSummary(int $patientId): array
     {
-        // Get latest record IDs per slug for this patient
         $records = self::query()
             ->where('patient_id', $patientId)
             ->whereIn('id', function ($q) use ($patientId) {
                 $q->selectRaw('MAX(id)')
                     ->from('patient_health')
                     ->where('patient_id', $patientId)
-                    ->groupBy('slug'); // group by each slug
+                    ->groupBy('slug');
             })
             ->get();
 
         if ($records->isEmpty()) {
-            Log::info('No latest health records found for patient', ['patient_id' => $patientId]);
-            return [
-                'latest_values' => [], // empty array if no records
-            ];
+            return ['latest_values' => []];
         }
 
-        // Collect all slugs from records to load masters
         $slugs = $records->pluck('slug')->unique()->toArray();
 
         $masters = Master::whereIn('slug', $slugs)
@@ -333,32 +328,22 @@ class PatientHealth extends BaseModel
             ->get()
             ->keyBy('slug');
 
-        // Flatten all "values" into a single array
         $valuesArray = $records->flatMap(function ($record) use ($masters) {
             $values = (array) $record->values;
-
-            // Keep only true or string values
             $trueValues = array_filter($values, fn($v) => $v === true || is_string($v));
 
-            // Map slugs to names
-            return array_map(
-                fn($slug) => $masters->get($slug)?->name ?? $slug,
-                array_keys($trueValues)
-            );
+            return array_map(function ($slug) use ($masters) {
+                $master = $masters->get($slug);
+                return $master && isset($master->name) ? $master->name : $slug;
+            }, array_keys($trueValues));
         })->all();
 
-        // Remove any "date" entries
-        $valuesArray = array_filter($valuesArray, fn($v) => strtolower($v) !== 'date');
+        // Remove "date" entries and reindex
+        $valuesArray = array_values(array_filter($valuesArray, fn($v) => strtolower($v) !== 'date'));
 
-        Log::info('Latest health summary prepared', [
-            'patient_id'   => $patientId,
-            'value_count'  => count($valuesArray),
-        ]);
-
-        return [
-            'latest_values' => array_values($valuesArray), // reindex array
-        ];
+        return ['latest_values' => $valuesArray];
     }
+
 
 
 
