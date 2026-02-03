@@ -18,7 +18,7 @@ class AdminUserSeeder extends Seeder
         $users = [
             'first_name' => "CureSelect",
             'last_name' => "Admin",
-            'role_id' => 3,
+            'role_id' => 2,
             'email' => "support@a2z.health",
             'isd_code' => "+91",
             'mobile' => "9898989898",

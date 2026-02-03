@@ -13,56 +13,64 @@ class UserTransformer extends JsonResource
      *
      * @param  \Illuminate\Http\Request  $request
      * @return array
-    */
+     */
 
     public function toArray($request): array
     {
+        $return_val = [
+            'id' => $this->id,
+            'role_id' => $this->role_id,
+            'first_name' => $this->first_name,
+            'last_name' => $this->last_name,
+            'email' => $this->email,
+            'isd_code' => $this->isd_code,
+            'mobile' => $this->mobile,
+            'username' => $this->username,
+            'secret' => $this->secret,
+            'profile_image' => $this->profile_image_url,
+            'gender' => $this->gender,
+            'dob' => $this->dob,
+            'blood_group' => $this->blood_group,
+            'timezone' => $this->timezone,
+            'address' => $this->address,
+            'country_iso' => $this->country_iso,
+            'emergency_contact_info' => $this->emergency_contact_info,
+            'is_2fa' => $this->is_2fa,
+            'is_active' => $this->is_active,
+            'communication_channel' => $this->communication_channel,
+        ];
 
-        $return_val = ['id' =>  $this->id,
-            'role_id' =>  $this->role_id,
-            'first_name' =>  $this->first_name,
-            'last_name' =>  $this->last_name,
-            'email' =>  $this->email,
-            'isd_code' =>  $this->isd_code,
-            'mobile' =>  $this->mobile,
-            'username' =>  $this->username,
-            'secret' =>  $this->secret,
-            'profile_image' =>  $this->profile_image_url,
-            'gender' =>  $this->gender,
-            'dob' =>  $this->dob,
-            'blood_group' =>  $this->blood_group,
-            'timezone' =>  $this->timezone,
-            'address' =>  $this->address,
-            'country_iso' =>  $this->country_iso,
-            'emergency_contact_info' =>  $this->emergency_contact_info,
-            'is_2fa' =>  $this->is_2fa,
-            'is_active' =>  $this->is_active,
-            'communication_channel' =>  $this->communication_channel];
+        if ($request->user()) {
 
-        if($request->user()){
+            $staff = $request->get('staff');
 
-
-            if($request->user()->role->code == 'hospitalgroup'){
-                $return_val['hospital_group_name'] = $request->get('staff')->hospitalgroup->name;
-                $return_val['hospital_group_address'] = $request->get('staff')->hospitalgroup;
+            /** 🏥 Hospital Group */
+            if ($request->user()->role->code === 'hospitalgroup') {
+                $return_val['hospital_group_name'] = $staff?->hospitalgroup?->name;
+                $return_val['hospital_group_address'] = $staff?->hospitalgroup;
             }
 
+            /** 🏥 Hospital */
+            if ($request->user()->role->code === 'hospital') {
+                $return_val['hospital_name'] = $staff?->hospital?->name;
+                $return_val['hospital_address'] = $staff?->hospital;
 
-            if($request->user()->role->code == 'hospital'){
-                $return_val['hospital_name'] = $request->get('staff')->hospital->name;
-                $return_val['hospital_address'] = $request->get('staff')->hospital;
+                /** 🧑‍⚕️ Patient (optional) */
+                if ($this->patient) {
 
-                if($this->patient){
-                    $peripheral_credentials = Cache::rememberForever('PERIPHERAL_CREDENTIALS_USER_' . $this->user_id, function() {
-                        return (new PeripheralApiService)->get($this->user_id);
-                    });
+                    $peripheral_credentials = Cache::rememberForever(
+                        'PERIPHERAL_CREDENTIALS_USER_' . $this->user_id,
+                        function () {
+                            return (new PeripheralApiService)->get($this->user_id);
+                        }
+                    );
+
                     $return_val['patient'] = $this->patient;
                     $return_val['peripheral_credentials'] = [
                         'username' => $peripheral_credentials['username'] ?? '',
                         'otp' => $peripheral_credentials['otp'] ?? '',
                         'salt_key' => $peripheral_credentials['access_secret'] ?? '',
                     ];
-                    
                 }
             }
         }

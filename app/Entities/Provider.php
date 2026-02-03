@@ -22,7 +22,13 @@ class Provider extends BaseModel
      * @var array
      */
     protected $fillable = [
-        "user_id", "hospital_id", "practicing_since", "license_no", "additional_info", "availabilities","group_id"
+        "user_id",
+        "hospital_id",
+        "practicing_since",
+        "license_no",
+        "additional_info",
+        "availabilities",
+        "group_id"
     ];
 
     /**
@@ -41,9 +47,7 @@ class Provider extends BaseModel
      *
      * @var array
      */
-    protected $hidden = [
-
-    ];
+    protected $hidden = [];
 
     /**
      * The attributes that should be updated on patch method.
@@ -59,18 +63,14 @@ class Provider extends BaseModel
      *
      * @var array
      */
-    protected $dates = [
-
-    ];
+    protected $dates = [];
 
     /**
      * The event map for the model.
      *
      * @var array
      */
-    protected $dispatchesEvents = [
-
-    ];
+    protected $dispatchesEvents = [];
 
     public function user()
     {
@@ -79,7 +79,7 @@ class Provider extends BaseModel
 
     public function customAvailabilityDetail()
     {
-        return $this->hasMany(CustomAvailabilityDetail::class,'provider_id','user_id');
+        return $this->hasMany(CustomAvailabilityDetail::class, 'provider_id', 'user_id');
     }
 
 
@@ -95,17 +95,16 @@ class Provider extends BaseModel
 
     public function providerUnavailability()
     {
-        return $this->hasMany(ProviderUnavailability::class,'provider_id','user_id');
-        
+        return $this->hasMany(ProviderUnavailability::class, 'provider_id', 'user_id');
     }
 
     protected function createModel($request)
     {
         $data = $this->getModelAttributes($request);
-
+        $authUser = $request->user();
         DB::beginTransaction();
         try {
-            if(!empty($data['availabilities'])){
+            if (!empty($data['availabilities'])) {
                 $data['availabilities']  = json_encode($data['availabilities']);
             }
 
@@ -113,15 +112,19 @@ class Provider extends BaseModel
 
             $user = $this->user()->create($data['user']);
 
-             if(!$request->get('hospital_id')){
-                $data['hospital_id']  = $request->user()->staff->hospital_id;
+
+            if (!$request->get('hospital_id')) {
+                if ($authUser->staff) {
+                    $data['hospital_id'] = $authUser->staff->hospital_id;
+                } else {
+                    throw new \Exception('Hospital ID is required or user is not linked to a hospital');
+                }
             }
 
-            if($request->user()->role->code == 'hospitalgroup'){
+            if ($request->user()->role->code == 'hospitalgroup') {
                 $data['group_id'] = $request->user()->staff->group_id;
-            }
-            else{
-                $data['group_id'] = Hospital::Where('id',$request->user()->staff->hospital_id)->value('group_id');
+            } else {
+                $data['group_id'] = Hospital::Where('id', $request->user()->staff->hospital_id)->value('group_id');
             }
 
             $data['user_id'] = $user->id;
@@ -131,7 +134,7 @@ class Provider extends BaseModel
             //Provider specialities add
             $provider_speciality = [];
             foreach ($data['provider_speciality'] as $key => $value) {
-               $provider_speciality[$key] = ['speciality'=>$value];
+                $provider_speciality[$key] = ['speciality' => $value];
             }
 
             $model->providerSpeciality()->createMany($provider_speciality);
@@ -161,62 +164,59 @@ class Provider extends BaseModel
 
         $data = $this->getModelAttributes($request);
 
-        if(!empty($data['availabilities'])){
-                $data['availabilities']  = json_encode($data['availabilities']);
-            }
+        if (!empty($data['availabilities'])) {
+            $data['availabilities']  = json_encode($data['availabilities']);
+        }
 
         //remove strict fields
 
-            if($request->user()->role->code == 'hospitalgroup'){
-                $exceptKey = ['user_id'];
-            }
-            else{
-                $exceptKey = ['user_id', 'hospital_id'];
-            }
-            
+        if ($request->user()->role->code == 'hospitalgroup') {
+            $exceptKey = ['user_id'];
+        } else {
+            $exceptKey = ['user_id', 'hospital_id'];
+        }
+
         $exceptListKey = $this->multipleArraySearch($this->getFillable(), $exceptKey);
         $only = array_except($this->getFillable(), $exceptListKey);
-       
+
         DB::beginTransaction();
         try {
 
             $user = User::where('id', $request->get('user_id'))
-            ->first();
-            
+                ->first();
+
             $model = parent::updateModel($id, $request, $only);
 
-            if($request->method() == "PUT"){
+            if ($request->method() == "PUT") {
                 $data['user'] = array_except($data['user'], ['role_id']);
                 $model->user->fill($data['user'])
                     ->save(['touch' => false]);
 
                 if (!empty($data['provider_speciality'])) {
                     //Provider specialities delete and add
-                  
+
                     $model->providerSpeciality()->delete();
                     $provider_speciality = [];
                     foreach ($data['provider_speciality'] as $key => $value) {
-                       $provider_speciality[$key] = ['speciality'=>$value];
+                        $provider_speciality[$key] = ['speciality' => $value];
                     }
-                    
-                    if(!empty($provider_speciality)){
-                    $model->providerSpeciality()->createMany($provider_speciality);
 
+                    if (!empty($provider_speciality)) {
+                        $model->providerSpeciality()->createMany($provider_speciality);
                     }
                 }
             }
 
             DB::commit();
 
-            
+
             if (!empty($user)) {
-                if($user['is_active'] != 1){
-                    if($data['user']['is_active'] == 1){
+                if ($user['is_active'] != 1) {
+                    if ($data['user']['is_active'] == 1) {
                         $data['otp_type'] = "provider_activated";
 
                         $this->_communication_service = new AuthService;
                         $this->_communication_service->otpNotification($data, $user);
-
                     }
                 }
             }
@@ -235,54 +235,51 @@ class Provider extends BaseModel
         $model = parent::applyFilters($model, $isPluck);
         $request = app('request');
 
-        if($request->get('staff')){
+        if ($request->get('staff')) {
 
-            if ($request->get('staff')->hospital_id) { 
+            if ($request->get('staff')->hospital_id) {
                 $model->where('providers.hospital_id', $request->get('staff')->hospital_id);
-            }       
-            if ($request->get('staff')->group_id) { 
+            }
+            if ($request->get('staff')->group_id) {
                 $model->where('providers.group_id', $request->get('staff')->group_id);
-            }   
+            }
 
 
-            if ($request->get('user_id')) { 
+            if ($request->get('user_id')) {
                 $model->where('providers.user_id', $request->get('user_id'));
-            }         
-        }
-        else{ 
+            }
+        } else {
             $model->where('providers.user_id', $request->user()->id);
         }
 
-        if ($request->get('gender')) { 
+        if ($request->get('gender')) {
             $model->whereHas('user', function ($query) use ($request) {
                 $query->where('users.gender', $request->get('gender'));
             });
-        }  
+        }
 
-        if ($request->get('speciality')) { 
+        if ($request->get('speciality')) {
             $model->whereHas('providerSpeciality', function ($query) use ($request) {
                 $query->Where('provider_specialities.speciality', $request->get('speciality'));
             });
         }
 
         if ($request->get('searchkey')) {
-            $model->where(function($query) use ($request) {
+            $model->where(function ($query) use ($request) {
                 $query->whereHas('user', function ($subquery) use ($request) {
-                        $subquery->Where('users.email', 'LIKE',"%".$request->get('searchkey')."%")
-                        ->orWhere('users.mobile', 'LIKE',"%".$request->get('searchkey')."%")
-                        ->orWhere(DB::raw("CONCAT(`first_name`, ' ', `last_name`)"), 'LIKE',"%".$request->get('searchkey')."%")
-                        ->orWhere('users.address', 'LIKE',"%".$request->get('searchkey')."%")
-                        ->orWhere('users.gender', 'LIKE',"%".$request->get('searchkey')."%");
+                    $subquery->Where('users.email', 'LIKE', "%" . $request->get('searchkey') . "%")
+                        ->orWhere('users.mobile', 'LIKE', "%" . $request->get('searchkey') . "%")
+                        ->orWhere(DB::raw("CONCAT(`first_name`, ' ', `last_name`)"), 'LIKE', "%" . $request->get('searchkey') . "%")
+                        ->orWhere('users.address', 'LIKE', "%" . $request->get('searchkey') . "%")
+                        ->orWhere('users.gender', 'LIKE', "%" . $request->get('searchkey') . "%");
                 });
 
                 $query->orwhereHas('providerSpeciality', function ($subquery) use ($request) {
-                        $subquery->Where('provider_specialities.speciality', 'LIKE',"%".$request->get('searchkey')."%");
+                    $subquery->Where('provider_specialities.speciality', 'LIKE', "%" . $request->get('searchkey') . "%");
                 });
             });
-
         }
-        
+
         return $model;
     }
-
 }

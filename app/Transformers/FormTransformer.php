@@ -28,7 +28,7 @@ class FormTransformer extends JsonResource
             'images'                =>  $this->images,
             'is_active'             =>  $this->is_active,
             'order'             =>  $this->order,
-            'latest_form_submisson' =>  new FormSubmittedAnswerTransformer($this->FormSubmittedAnswer()->Where('patient_id',$request->get('user_id'))->latest()->first()),
+            'latest_form_submisson' =>  new FormSubmittedAnswerTransformer($this->FormSubmittedAnswer()->Where('patient_id',$request->get('patient_id'))->latest()->first()),
             'questions'             =>   FormQuestionTransformer::collection($this->formQuestions),
         ];
     }
