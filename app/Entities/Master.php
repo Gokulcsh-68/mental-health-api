@@ -142,13 +142,10 @@ class Master extends BaseModel
                 }
 
                 // Type-based filter: optional, e.g., 'self-report' or 'professional-assessment'
-                if ($request->filled('type') && $type = $request->get('type')) {
-                    $model->whereJsonContains('masters.attributes->type', $type);
+                if ($request->filled('reporter') && $reporter = $request->get('reporter')) {
+                    $model->whereJsonContains('masters.attributes->reporter', $reporter);
                 }
             }
-
-
-
 
 
             if ($request->get('slug') == 'vdx') {

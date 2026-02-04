@@ -17,7 +17,9 @@ class DatabaseSeeder extends Seeder
             RolesTableSeeder::class,
             MasterTypesTableSeeder::class,
             CountriesSeeder::class,
-            MoodBehaviorSeeder::class
+
+
+            
         ]);
     }
 }
