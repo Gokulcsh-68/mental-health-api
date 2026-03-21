@@ -118,7 +118,6 @@ exports.getRequestById = async (req, res, next) => {
         next(err);
     }
 };
-
 /**
  * @desc    Cancel a pending professional request
  * @route   PATCH /api/v1/professional-requests/:requestId/cancel
@@ -150,3 +149,4 @@ exports.cancelRequest = async (req, res, next) => {
         next(err);
     }
 };
+
