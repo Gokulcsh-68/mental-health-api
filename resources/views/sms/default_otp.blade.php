@@ -1,1 +1,0 @@
-Please enter following OTP {{ $otp }} for {{ config('app.name') }} School App

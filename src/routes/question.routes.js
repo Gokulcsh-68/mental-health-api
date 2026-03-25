@@ -1,0 +1,16 @@
+const express = require('express');
+const { getAssessmentQuestions, createQuestion, getAllQuestions, getPatientSelfAssessments } = require('../controllers/question.controller');
+const { protect, authorize } = require('../middleware/auth');
+
+const router = express.Router();
+
+router.use(protect);
+
+router.get('/assessment', getAssessmentQuestions);
+router.get('/self-assessments', authorize('patient', 'super_admin'), getPatientSelfAssessments);
+
+// Admin routes
+router.get('/', authorize('super_admin', 'admin', 'hospital'), getAllQuestions);
+router.post('/', authorize('super_admin', 'admin', 'hospital'), createQuestion);
+
+module.exports = router;
