@@ -231,9 +231,10 @@ UserSchema.methods.matchPassword = async function (enteredPassword) {
     return await bcrypt.compare(enteredPassword, this.password);
 };
 
-// Generate and hash password reset token
+// Generate and hash password reset OTP (6-digit)
 UserSchema.methods.getResetPasswordToken = function () {
-    const resetToken = crypto.randomBytes(20).toString('hex');
+    // Generate 6-digit numeric OTP
+    const resetToken = Math.floor(100000 + Math.random() * 900000).toString();
 
     this.resetPasswordToken = crypto.createHash('sha256').update(resetToken).digest('hex');
     this.resetPasswordExpire = Date.now() + 10 * 60 * 1000; // 10 minutes

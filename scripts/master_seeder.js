@@ -41,6 +41,8 @@ const seedTaxCodes = require('./seeders/taxCode.seeder');
 const seedRecommendations = require('./seeders/recommendations.seeder');
 const seedPortalContent = require('./seeders/portal_content.seeder');
 const seedTestData = require('./seeders/test_data.seeder');
+const seedFeedback = require('./seeders/feedback.seeder');
+const seedSystemSettings = require('./seeders/system_setting.seeder');
 
 dotenv.config();
 
@@ -109,12 +111,18 @@ const runAllSeeders = async () => {
         console.log('\n📦 Seeding Tax Codes...');
         await seedTaxCodes();
 
+        console.log('\n📦 Seeding System Settings...');
+        await seedSystemSettings();
+
         console.log('\n📦 Seeding Recommendations...');
         await seedRecommendations();
 
         console.log('\n📦 Seeding Portal Content & Test Data...');
         await seedPortalContent();
         await seedTestData();
+
+        console.log('\n📦 Seeding Feedback & Ratings...');
+        await seedFeedback();
 
         if (isFullReset) {
             console.log('\n📦 Seeding Default Users...');

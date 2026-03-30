@@ -5,6 +5,7 @@ const logger = require('../config/logger');
 const config = require('../config/config');
 const chatHandler = require('../handlers/chat.socket');
 const chatbotHandler = require('../handlers/chatbot.socket');
+const userHandler = require('../handlers/user.socket');
 
 class SocketService {
     constructor() {
@@ -59,6 +60,7 @@ class SocketService {
             // Register Handlers
             chatHandler(this.io, socket);
             chatbotHandler(this.io, socket);
+            userHandler(this.io, socket);
 
             // Ping test
             socket.on('ping_test', () => {

@@ -43,9 +43,12 @@ const sendEmail = async ({ to, subject, text, html }) => {
         }
     } else {
         // Log mode
-        console.log(`  📧 [LOG MODE] Email → ${to}`);
-        console.log(`     Subject: ${subject}`);
-        console.log(`     Body: ${text || '(HTML content)'}`);
+        console.log('\n' + '='.repeat(50));
+        console.log(`📧 [DEV EMAIL LOG]`);
+        console.log(`To:      ${to}`);
+        console.log(`Subject: ${subject}`);
+        console.log(`Body:    ${text || '(HTML content)'}`);
+        console.log('='.repeat(50) + '\n');
         return { success: true, mode: 'log' };
     }
 };

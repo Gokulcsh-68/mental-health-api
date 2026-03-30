@@ -17,7 +17,10 @@ exports.register = async (req, res, next) => {
             firstName, lastName, username, email, password, phone, role,
             dateOfBirth, gender, address, emergencyContact,
             isdCode, mobile, profileImage, bloodGroup, timezoneId, countryIso,
-            is2fa, secret, isActive, communicationPreferences, fcmTokens
+            is2fa, secret, isActive, communicationPreferences, fcmTokens,
+            // Professional fields
+            specialization, about, experienceYears, qualifications,
+            languages, consultationFee, skills
         } = req.body;
 
         if (role && !ALLOWED_REGISTER_ROLES.includes(role)) {
@@ -28,7 +31,9 @@ exports.register = async (req, res, next) => {
             firstName, lastName, username, email, password, phone, role,
             dateOfBirth, gender, address, emergencyContact,
             isdCode, mobile, profileImage, bloodGroup, timezoneId, countryIso,
-            is2fa, secret, isActive, communicationPreferences, fcmTokens
+            is2fa, secret, isActive, communicationPreferences, fcmTokens,
+            specialization, about, experienceYears, qualifications,
+            languages, consultationFee, skills
         });
 
         await sendTokenResponse(user, 201, 'User registered successfully', res);
@@ -143,15 +148,15 @@ exports.forgotPassword = async (req, res, next) => {
         const resetToken = user.getResetPasswordToken();
         await user.save({ validateBeforeSave: false });
 
-        // Send reset token via email (fire-and-forget)
+        // Send reset OTP via notification (fire-and-forget)
         notify({
             userId: user._id,
-            title: 'Password Reset Request',
-            message: `You requested a password reset. Your reset token is: ${resetToken}. This token expires in 10 minutes.`,
+            title: 'Password Reset OTP',
+            message: `You requested a password reset. Your OTP is: ${resetToken}. This code expires in 10 minutes.`,
             type: 'alert'
         });
 
-        sendSuccess(res, 200, 'Password reset token generated and sent', {
+        sendSuccess(res, 200, 'Password reset OTP generated and sent', {
             resetToken,
             expiresIn: '10 minutes'
         });
@@ -182,7 +187,7 @@ exports.resetPassword = async (req, res, next) => {
         });
 
         if (!user) {
-            return sendError(res, 400, 'Invalid or expired reset token');
+            return sendError(res, 400, 'Invalid or expired OTP');
         }
 
         user.password = password;
@@ -280,8 +285,8 @@ exports.refreshToken = async (req, res, next) => {
 
         // Optional: Rotate refresh token
         const newRefreshTokenStr = crypto.randomBytes(40).toString('hex');
-        const expiryDate = new Date();
-        expiryDate.setDate(expiryDate.getDate() + 7); // 7 days
+        const days = parseInt(config.REFRESH_TOKEN_EXPIRE) || 7;
+        expiryDate.setDate(expiryDate.getDate() + days);
 
         refreshToken.token = newRefreshTokenStr;
         refreshToken.expiryDate = expiryDate;

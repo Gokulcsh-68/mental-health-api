@@ -6,12 +6,14 @@ const { resolvePatient } = require('../utils/patientHelper');
 const logger = require('../config/logger');
 
 /**
- * @desc    Create HPI with AI extraction
- * @route   POST /api/v1/hpis
+ * @desc    Extract clinical info from narrative via AI — returns preview, does NOT save to DB
+ * @route   POST /api/v1/hpis/extract
+ * @access  Private
+ * @body    { patient_id, narrative }
  */
-exports.createHPI = async (req, res) => {
+exports.extractHPI = async (req, res) => {
     try {
-        const { patient_id, consult_id, narrative } = req.body;
+        const { patient_id, narrative } = req.body;
 
         if (!patient_id || !narrative) {
             return res.status(400).json({
@@ -24,17 +26,15 @@ exports.createHPI = async (req, res) => {
         // 1. Resolve patient + demographics
         const resolved = await resolvePatient(patient_id);
         if (!resolved) return res.status(404).json({ code: 404, message: `Patient ${patient_id} not found`, data: null });
-        const { resolvedId: resolvedPatientId, age, gender } = resolved;
+        const { age, gender } = resolved;
 
         // 2. AI Extraction with demographics
+        logger.info('HPI AI extraction (preview) started');
         const ai = await openAIService.extractClinicalInfo(narrative, { age, gender });
 
-        // 3. Create Record
-        const hpi = await HPI.create({
-            patient: resolvedPatientId,
-            consult_id: consult_id || null,
+        // 3. Build preview structure (same shape as HPI model)
+        const preview = {
             narrative,
-            status: 'completed',
             structured: {
                 onset: ai.hpi?.onset || null,
                 duration: ai.hpi?.duration || null,
@@ -53,44 +53,104 @@ exports.createHPI = async (req, res) => {
             dsm5_mapping: ai.hpi?.dsm5_mapping || [],
             severity_index: ai.hpi?.severity_index || 0,
             recommendations: ai.hpi?.recommendations || [],
-            color_code: ai.hpi?.color_code || autoColorCode(ai.hpi?.severity_index || 0),
+            color_code: ai.hpi?.color_code || autoColorCode(ai.hpi?.severity_index || 0)
+        };
 
+        res.status(200).json({
+            code: 200,
+            message: 'HPI extraction complete — review before saving',
+            data: preview
         });
 
-        // Trigger Red Flag Alerts if critical symptoms are detected
-        const redFlags = [];
-        if (doc.structured.suicidal_ideation && doc.structured.suicidal_ideation !== 'None') {
-            redFlags.push(`Suicidal Ideation (${doc.structured.suicidal_ideation})`);
+    } catch (err) {
+        logger.error('Extract HPI Error: %s', err.message);
+        res.status(500).json({
+            code: 500,
+            message: err.message,
+            data: null
+        });
+    }
+};
+
+/**
+ * @desc    Save the reviewed/confirmed HPI to the database
+ * @route   POST /api/v1/hpis
+ * @access  Private
+ * @body    { patient_id, consult_id, narrative, structured, dsm5_mapping, severity_index, recommendations, color_code }
+ */
+exports.confirmHPI = async (req, res) => {
+    try {
+        const {
+            patient_id,
+            consult_id,
+            narrative,
+            structured,
+            dsm5_mapping,
+            severity_index,
+            recommendations,
+            color_code
+        } = req.body;
+
+        if (!patient_id || !narrative) {
+            return res.status(400).json({
+                code: 400,
+                message: 'patient_id and narrative are required',
+                data: null
+            });
         }
-        if (doc.severity_index > 80) {
-            redFlags.push(`Critical Severity Index (${doc.severity_index}/100)`);
+
+        // 1. Resolve patient
+        const resolved = await resolvePatient(patient_id);
+        if (!resolved) return res.status(404).json({ code: 404, message: `Patient ${patient_id} not found`, data: null });
+        const { resolvedId: resolvedPatientId } = resolved;
+
+        // 2. Create Record
+        const hpi = await HPI.create({
+            patient: resolvedPatientId,
+            consult_id: consult_id || null,
+            narrative,
+            status: 'completed',
+            structured,
+            dsm5_mapping,
+            severity_index,
+            recommendations,
+            color_code
+        });
+
+        // 3. Trigger Red Flag Alerts if critical symptoms are detected
+        const redFlags = [];
+        if (hpi.structured?.suicidal_ideation && hpi.structured.suicidal_ideation !== 'None') {
+            redFlags.push(`Suicidal Ideation (${hpi.structured.suicidal_ideation})`);
+        }
+        if (hpi.severity_index > 80) {
+            redFlags.push(`Critical Severity Index (${hpi.severity_index}/100)`);
         }
 
         if (redFlags.length > 0) {
             const AlertService = require('../services/AlertService');
-            // User is already required at the top of the file
+            // User model is already required at the top of the file
 
             // Find patient to get their reportingTo (Psychiatrist)
-            const patientRecord = await User.findById(doc.patient);
+            const patientRecord = await User.findById(hpi.patient);
             if (patientRecord && patientRecord.reportingTo) {
                 await AlertService.triggerRedFlagAlert(
                     patientRecord.reportingTo,
                     { id: patientRecord._id, name: `${patientRecord.firstName} ${patientRecord.lastName}` },
                     redFlags
                 );
-                doc.redFlagNotified = true;
-                await doc.save();
+                hpi.redFlagNotified = true;
+                await hpi.save();
             }
         }
 
         res.status(201).json({
             code: 201,
-            message: 'HPI created with AI extraction',
+            message: 'HPI saved successfully',
             data: hpi
         });
 
     } catch (err) {
-        logger.error('Create HPI Error: %s', err.message);
+        logger.error('Confirm HPI Error: %s', err.message);
         res.status(500).json({
             code: 500,
             message: err.message,

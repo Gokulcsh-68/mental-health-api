@@ -64,6 +64,45 @@ exports.extractPastHistory = async (req, res) => {
 };
 
 /**
+ * @desc    AI-powered analysis of structured Past History (Manual Mode Preview)
+ * @route   POST /api/v1/past-history/analyze
+ */
+exports.analyzePastHistory = async (req, res) => {
+    try {
+        const {
+            patient_id,
+            psychiatric_history,
+            medical_history,
+            family_history,
+            substance_use,
+            trauma_history
+        } = req.body;
+
+        const resolved = await resolvePatient(patient_id);
+        if (!resolved) return res.status(404).json({ code: 404, message: 'Patient not found' });
+
+        // 🛡️ Security: Patient can only analyze for themselves
+        if (req.user.role === 'patient' && resolved.resolvedId.toString() !== req.user._id.toString()) {
+            return res.status(403).json({ code: 403, message: 'Not authorized to analyze history for this patient' });
+        }
+
+        const { age, gender } = resolved;
+        const analysis = await openAIService.analyzePastHistory(
+            psychiatric_history, medical_history, substance_use, family_history, trauma_history, { age, gender }
+        );
+
+        return res.status(200).json({
+            code: 200,
+            message: 'Clinical risk analysis completed for structured history',
+            data: analysis
+        });
+    } catch (err) {
+        logger.error('Analyze PastHistory Error: %s', err.message);
+        res.status(500).json({ code: 500, message: err.message, data: null });
+    }
+};
+
+/**
  * @desc    Create/Save A-Z Past History record
  * @route   POST /api/v1/past-history
  */

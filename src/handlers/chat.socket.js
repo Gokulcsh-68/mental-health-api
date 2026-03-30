@@ -75,7 +75,7 @@ const chatHandler = (io, socket) => {
             // Handle AI responses
             if (room_type === 'private_ai') {
                 triggerAI(room_id, room_type, session_id, io);
-            } else if (content.toLowerCase().includes('@skyheal')) {
+            } else if (content.toLowerCase().includes('@mindbalance')) {
                 triggerAI(room_id, room_type, session_id, io);
             }
 
@@ -139,7 +139,7 @@ async function triggerAI(room_id, room_type, session_id, io) {
         // 1. Show Typing Indicator
         io.to(room_id).emit('user_typing', {
             user_id: 'ai',
-            name: 'Skyheal AI'
+            name: 'MindBalance AI'
         });
 
         // 2. Fetch History for context (Session Aware)
@@ -179,7 +179,7 @@ async function triggerAI(room_id, room_type, session_id, io) {
             session_id,
             sender_id: null,
             sender_role: 'ai',
-            sender_name: 'Skyheal AI',
+            sender_name: 'MindBalance AI',
             content: aiResponse.content
         });
 
