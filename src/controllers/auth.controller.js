@@ -285,6 +285,7 @@ exports.refreshToken = async (req, res, next) => {
 
         // Optional: Rotate refresh token
         const newRefreshTokenStr = crypto.randomBytes(40).toString('hex');
+        const expiryDate = new Date();
         const days = parseInt(config.REFRESH_TOKEN_EXPIRE) || 7;
         expiryDate.setDate(expiryDate.getDate() + days);
 
@@ -350,5 +351,3 @@ const sendTokenResponse = async (user, statusCode, message, res) => {
         }
     });
 };
-
-module.exports = { register, login, getMe, forgotPassword, resetPassword, changePassword, refreshToken, logout };
