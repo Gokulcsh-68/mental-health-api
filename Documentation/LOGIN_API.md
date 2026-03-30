@@ -12,7 +12,7 @@ This document provides detailed information about the Login API for the MindBala
 > All requests must include the `x-api-key` header. If missing or invalid, the API will return a `401 Unauthorized` error.
 
 ### Base URL
-- **Local**: `http://localhost:5000`
+- **Local**: ``
 - **Staging/Production**: *To be provided by the DevOps team.*
 
 ---

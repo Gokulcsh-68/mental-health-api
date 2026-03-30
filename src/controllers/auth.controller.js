@@ -350,3 +350,5 @@ const sendTokenResponse = async (user, statusCode, message, res) => {
         }
     });
 };
+
+module.exports = { register, login, getMe, forgotPassword, resetPassword, changePassword, refreshToken, logout };
