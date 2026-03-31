@@ -1,20 +1,6 @@
 const openAIService = require('../services/OpenAIService');
 const { sendSuccess, sendError } = require('../utils/responseHelper');
-const { GetObjectCommand } = require('@aws-sdk/client-s3');
-const { s3 } = require('../services/S3Service');
 const logger = require('../config/logger');
-
-/**
- * Helper to convert stream to buffer (AWS SDK v3 returns Body as stream)
- */
-const streamToBuffer = async (stream) => {
-    return new Promise((resolve, reject) => {
-        const chunks = [];
-        stream.on('data', (chunk) => chunks.push(chunk));
-        stream.on('error', reject);
-        stream.on('end', () => resolve(Buffer.concat(chunks)));
-    });
-};
 
 /**
  * @desc    Transcribe audio file to text (Common Service)
@@ -23,6 +9,19 @@ const streamToBuffer = async (stream) => {
  */
 exports.transcribeAudio = async (req, res, next) => {
     try {
+        // Debug: Log info about the file and headers
+        console.log('[DEBUG] Content-Type:', req.headers['content-type']);
+        if (req.file) {
+            console.log('[DEBUG] File Received:', {
+                fieldname: req.file.fieldname,
+                originalname: req.file.originalname,
+                mimetype: req.file.mimetype,
+                size: req.file.size
+            });
+        } else {
+            console.log('[DEBUG] No file found in req.file');
+        }
+        
         if (!req.file) {
             return sendError(res, 400, 'Audio file is required');
         }

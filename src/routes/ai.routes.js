@@ -1,7 +1,22 @@
 const express = require('express');
+const multer = require('multer');
 const { transcribeAudio } = require('../controllers/ai.controller');
 const { protect } = require('../middleware/auth');
-const { memoryUpload } = require('../services/S3Service');
+
+// ── Local Multer Setup (No S3) ──────────────────────────────
+const memoryUpload = multer({
+    storage: multer.memoryStorage(),
+    fileFilter: (req, file, cb) => {
+        if (file.mimetype.startsWith('audio/')) {
+            cb(null, true);
+        } else {
+            cb(new Error('Invalid file type. Only audio files are allowed.'), false);
+        }
+    },
+    limits: {
+        fileSize: 25 * 1024 * 1024 // 25MB limit for transcription
+    }
+});
 
 const router = express.Router();
 
