@@ -1,56 +1,68 @@
-// Reset karthik's password and create super_admin if missing
-// Uses updateOne to bypass the pre-save bcrypt hook (avoids double-hashing)
-const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
+const axios = require('axios');
+const FormData = require('form-data');
+const fs = require('fs');
+const path = require('path');
 require('dotenv').config();
 
-async function main() {
-  await mongoose.connect(process.env.MONGO_URI);
-  console.log('Connected to MongoDB\n');
+const API_BASE_URL = `http://127.0.0.1:5000/api/v1`;
+const API_KEY = process.env.API_KEY || 'ygXk1R15vil+RD9Ix5c4cUPqND5i7+M3NRsEmxByDL8=';
 
-  const User = require('../src/models/User');
+/**
+ * @desc    Dedicated test for AI Transcription endpoint
+ *          Requirements: Local server must be running on port 5000
+ */
+async function runTranscriptionTest() {
+    console.log('🚀 Starting AI Transcribe Test...');
+    const tempAudioPath = path.join(__dirname, 'test_audio.wav');
 
-  // 1. Reset karthik's password (bypass pre-save hook with updateOne)
-  const salt = await bcrypt.genSalt(10);
+    try {
+        // 1. Generate a tiny valid silent WAV buffer (minimal header + 1kb silence)
+        const wavHeader = Buffer.from([
+            0x52, 0x49, 0x46, 0x46, 0x24, 0x00, 0x00, 0x00, 0x57, 0x41, 0x56, 0x45, 0x66, 0x6d, 0x74, 0x20,
+            0x10, 0x00, 0x00, 0x00, 0x01, 0x00, 0x01, 0x00, 0x40, 0x1f, 0x00, 0x00, 0x40, 0x1f, 0x00, 0x00,
+            0x01, 0x00, 0x08, 0x00, 0x64, 0x61, 0x74, 0x61, 0x00, 0x04, 0x00, 0x00
+        ]);
+        const silence = Buffer.alloc(1024, 128);
+        const audioBuffer = Buffer.concat([wavHeader, silence]);
 
-  const karthikHash = await bcrypt.hash('Karthik@123', salt);
-  const r1 = await User.updateOne(
-    { username: 'karthik' },
-    { $set: { password: karthikHash, loginAttempts: 0 }, $unset: { lockUntil: '' } }
-  );
-  console.log(r1.modifiedCount ? '✅ karthik password reset' : '⚠️  karthik not found or unchanged');
+        // 2. Login to get token
+        console.log('🔑 Authenticating as gokulgv...');
+        const loginRes = await axios.post(`${API_BASE_URL}/auth/login`, {
+            username: 'gokulgv',
+            password: 'Gokul@123',
+            role: 'super_admin'
+        }, { headers: { 'x-api-key': API_KEY } });
 
-  // 2. Ensure super_admin exists
-  let sa = await User.findOne({ role: 'super_admin' });
-  if (!sa) {
-    // Use User.create so the pre-save hook hashes it once
-    sa = await User.create({
-      firstName: 'Super', lastName: 'Admin', username: 'superadmin',
-      email: 'superadmin@mindbalance.com', password: 'Test12345!',
-      phone: '9840056700', role: 'super_admin', gender: 'male',
-      dateOfBirth: new Date('1960-04-02')
-    });
-    console.log('✅ super_admin created');
-  } else {
-    const saHash = await bcrypt.hash('Test12345!', salt);
-    await User.updateOne(
-      { _id: sa._id },
-      { $set: { password: saHash, loginAttempts: 0 }, $unset: { lockUntil: '' } }
-    );
-    console.log('✅ super_admin password reset');
-  }
+        const token = loginRes.data.data.token;
+        console.log('✅ Auth success. Token obtained.');
 
-  // 3. Quick verify
-  const karthik = await User.findOne({ username: 'karthik' }).select('+password');
-  const match = await bcrypt.compare('Karthik@123', karthik.password);
-  console.log(`\n🔍 Verify karthik password match: ${match ? '✅ YES' : '❌ NO'}`);
+        // 3. Send to AI transcribe
+        const form = new FormData();
+        form.append('audio', audioBuffer, { 
+            filename: 'test_audio.wav', 
+            contentType: 'audio/wav' 
+        });
 
-  const admin = await User.findOne({ role: 'super_admin' }).select('+password');
-  const match2 = await bcrypt.compare('Test12345!', admin.password);
-  console.log(`🔍 Verify superadmin password match: ${match2 ? '✅ YES' : '❌ NO'}`);
+        console.log('📡 Sending audio for transcription...');
+        const transcribeRes = await axios.post(`${API_BASE_URL}/ai/transcribe`, form, {
+            headers: {
+                ...form.getHeaders(),
+                'Authorization': `Bearer ${token}`,
+                'x-api-key': API_KEY
+            }
+        });
 
-  await mongoose.disconnect();
-  process.exit(0);
+        console.log('\n✨ AI Transcription result:', transcribeRes.data.data.text || '(Empty response)');
+
+    } catch (err) {
+        if (err.response) {
+            console.error('❌ API Error:', JSON.stringify(err.response.data, null, 2));
+        } else {
+            console.error('❌ Test Failed:', err.message);
+        }
+    } finally {
+        process.exit(0);
+    }
 }
 
-main().catch(e => { console.error(e); process.exit(1); });
+runTranscriptionTest();
