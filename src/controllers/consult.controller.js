@@ -138,28 +138,36 @@ exports.createConsult = async (req, res, next) => {
             consult_status: { id: 1, name: 'Scheduled', slug: 'scheduled' }
         });
 
-        // 5. Trigger Notifications
+        // 5. Trigger Notifications (Non-blocking background process)
         const consultTime = new Date(scheduled_at).toLocaleString();
         
-        // Notify Specialist
-        await notificationService.notify({
-            userId: specialistUser._id,
-            title: 'New Consultation Booked',
-            message: `You have a new consultation with ${patientUser.firstName} ${patientUser.lastName} scheduled for ${consultTime}.`,
-            type: 'appointment',
-            createdBy: req.user._id,
-            data: { consult_id: teleconsult_response.consult_id }
-        });
-
-        // Notify Patient
-        await notificationService.notify({
-            userId: patientUser._id,
-            title: 'Consultation Scheduled',
-            message: `Your consultation with ${specialistUser.firstName} ${specialistUser.lastName} is scheduled for ${consultTime}.`,
-            type: 'appointment',
-            createdBy: req.user._id,
-            data: { consult_id: teleconsult_response.consult_id }
-        });
+        // We fire-and-forget the notifications to keep the API response time low
+        (async () => {
+            try {
+                await Promise.all([
+                    // Notify Specialist
+                    notificationService.notify({
+                        userId: specialistUser._id,
+                        title: 'New Consultation Booked',
+                        message: `You have a new consultation with ${patientUser.firstName} ${patientUser.lastName} scheduled for ${consultTime}.`,
+                        type: 'appointment',
+                        createdBy: req.user._id,
+                        data: { consult_id: teleconsult_response.consult_id }
+                    }),
+                    // Notify Patient
+                    notificationService.notify({
+                        userId: patientUser._id,
+                        title: 'Consultation Scheduled',
+                        message: `Your consultation with ${specialistUser.firstName} ${specialistUser.lastName} is scheduled for ${consultTime}.`,
+                        type: 'appointment',
+                        createdBy: req.user._id,
+                        data: { consult_id: teleconsult_response.consult_id }
+                    })
+                ]);
+            } catch (notifyErr) {
+                logger.error(`Background notification failed: ${notifyErr.message}`);
+            }
+        })();
 
         sendSuccess(res, 201, 'Consultation booked successfully', {
             consult_id: teleconsult_response.consult_id

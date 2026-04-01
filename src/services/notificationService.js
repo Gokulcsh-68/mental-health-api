@@ -59,9 +59,14 @@ const notify = async ({ userId, title, message, type = 'general', createdBy = nu
         // 2. Real-time Socket.io emission for in-app popups/counters
         socketService.emitToUser(userId.toString(), 'notification', notification);
 
-        // 2. Send Email (if preference enabled and email exists)
+        // 3. Prepare concurrent delivery promises
+        const deliveryPromises = [];
+        const channelMap = [];
+
+        // Email Channel
         if (preferences.email !== false && user.email) {
-            const result = await sendEmail({
+            channelMap.push('email');
+            deliveryPromises.push(sendEmail({
                 to: user.email,
                 subject: title,
                 text: message,
@@ -74,38 +79,49 @@ const notify = async ({ userId, title, message, type = 'general', createdBy = nu
                         <p style="color: #999; font-size: 12px;">Mental Health Platform</p>
                     </div>
                 `
-            });
-            deliveryStatus.email = result.success ? 'sent' : 'failed';
+            }));
         }
 
-        // 3. Send SMS (if preference enabled and phone exists)
+        // SMS Channel
         if (preferences.sms !== false && user.phone) {
             const phoneNumber = user.isdCode ? `${user.isdCode}${user.phone}` : user.phone;
-            const result = await sendSMS({
+            channelMap.push('sms');
+            deliveryPromises.push(sendSMS({
                 to: phoneNumber,
                 message: `${title}: ${message}`
-            });
-            deliveryStatus.sms = result.success ? 'sent' : 'failed';
+            }));
         }
 
-        // 4. Send Push Notification (if preference enabled and tokens exist)
+        // Push Channel
         const hasPushToken = user.fcmTokens && user.fcmTokens.length > 0;
         const pushEnabled = preferences.push !== false;
-        
         if (pushEnabled && hasPushToken) {
             console.log(`  🔔 Sending push to ${user.fcmTokens.length} token(s)...`);
-            const result = await sendPushNotification({
+            channelMap.push('push');
+            deliveryPromises.push(sendPushNotification({
                 tokens: user.fcmTokens,
                 title,
                 body: message,
                 data,
                 imageUrl
-            });
-            deliveryStatus.push = result.success ? 'sent' : 'failed';
+            }));
         } else {
             console.log(`  🔔 Push skipped: enabled=${pushEnabled}, tokens=${hasPushToken ? user.fcmTokens.length : 0}`);
-            deliveryStatus.push = 'skipped';
         }
+
+        // Execute all deliveries in parallel
+        const results = await Promise.allSettled(deliveryPromises);
+        
+        // Update deliveryStatus based on results
+        results.forEach((result, index) => {
+            const channel = channelMap[index];
+            if (result.status === 'fulfilled') {
+                deliveryStatus[channel] = result.value && result.value.success ? 'sent' : 'failed';
+            } else {
+                console.error(`  ❌ Channel ${channel} delivery error:`, result.reason);
+                deliveryStatus[channel] = 'failed';
+            }
+        });
 
         // Update notification with delivery status
         notification.deliveryStatus = deliveryStatus;
