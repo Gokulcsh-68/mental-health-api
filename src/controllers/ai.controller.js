@@ -26,9 +26,15 @@ exports.transcribeAudio = async (req, res, next) => {
             return sendError(res, 400, 'Audio file is required');
         }
 
+        // 1. Check for API Key
+        if (!process.env.OPENAI_API_KEY) {
+            logger.error('Transcription failed: OPENAI_API_KEY is missing from environment');
+            return sendError(res, 503, 'AI Transcription service is currently misconfigured. Please contact support.');
+        }
+
         logger.info(`Common Transcription started for File: ${req.file.originalname}`);
 
-        // 1. Clear Whisper Transcription using the memory buffer directly
+        // 2. Clear Whisper Transcription using the memory buffer directly
         const text = await openAIService.transcribeAudio(req.file.buffer, req.file.originalname);
 
         sendSuccess(res, 200, 'Audio transcribed successfully', {

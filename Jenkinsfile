@@ -56,7 +56,7 @@ pipeline {
                         -e CURESELECT_API_CLIENT_SECRET=83fef8ec35f37968a9b684a5c400a54a \
                         -e CURESELECT_CATEGORY_ID=2 \
                         -e OPENAI_API_MODEL=gpt-4o \
-                        -e S3_KEY=AKIA3GRU7BB33WCCTN4V \
+                      -e S3_KEY=AKIA3GRU7BB33WCCTN4V \
                         -e S3_REGION=ap-south-1 \
                         -e S3_BUCKET=a2zschoolfolio \
                         -e S3_BASE_PATH=temp/ \

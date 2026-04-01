@@ -911,7 +911,8 @@ Return ONLY valid JSON:
 
             return response.data.text;
         } catch (error) {
-            logger.error('OpenAI Transcription Error: %s', error.response ? JSON.stringify(error.response.data) : error.message);
+            const errorData = error.response ? error.response.data : error.message;
+            logger.error('OpenAI Transcription Error: %o', errorData);
             throw error;
         }
     }
