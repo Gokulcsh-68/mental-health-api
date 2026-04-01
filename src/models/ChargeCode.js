@@ -60,7 +60,7 @@ ChargeCodeSchema.pre('save', async function () {
     const counter = await Counter.findByIdAndUpdate(
         { _id: 'chargeCodeId' },
         { $inc: { seq: 1 } },
-        { new: true, upsert: true }
+        { returnDocument: 'after', upsert: true }
     );
     this.chargeCodeId = counter.seq;
 });

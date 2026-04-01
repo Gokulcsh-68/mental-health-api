@@ -44,7 +44,7 @@ SymptomSchema.pre('save', async function () {
     const counter = await Counter.findByIdAndUpdate(
         { _id: 'symptomId' },
         { $inc: { seq: 1 } },
-        { new: true, upsert: true }
+        { returnDocument: 'after', upsert: true }
     );
     this.symptomId = counter.seq;
 });

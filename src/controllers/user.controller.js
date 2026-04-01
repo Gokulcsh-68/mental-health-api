@@ -55,7 +55,7 @@ exports.updateProfile = async (req, res, next) => {
         const user = await User.findByIdAndUpdate(
             req.user._id,
             fieldsToUpdate,
-            { new: true, runValidators: true }
+            { returnDocument: 'after', runValidators: true }
         );
 
         sendSuccess(res, 200, 'Profile updated successfully', user);
@@ -117,7 +117,7 @@ exports.updateUser = async (req, res, next) => {
         const user = await User.findOneAndUpdate(
             { userId: parseInt(req.params.id) },
             fieldsToUpdate,
-            { new: true, runValidators: true }
+            { returnDocument: 'after', runValidators: true }
         );
 
         if (!user) {
@@ -138,7 +138,7 @@ exports.deleteUser = async (req, res, next) => {
         const user = await User.findOneAndUpdate(
             { userId: parseInt(req.params.id) },
             { isActive: false, updatedBy: req.user._id },
-            { new: true }
+            { returnDocument: 'after' }
         );
 
         if (!user) {
@@ -547,7 +547,7 @@ exports.assignUser = async (req, res, next) => {
         const user = await User.findOneAndUpdate(
             { userId: parseInt(req.params.id) },
             updateData,
-            { new: true }
+            { returnDocument: 'after' }
         ).populate([
             { path: 'reportingTo', select: 'userId firstName lastName role' },
             { path: 'hospital', select: 'userId firstName lastName role' },

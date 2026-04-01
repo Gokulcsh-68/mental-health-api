@@ -66,8 +66,8 @@ exports.updateRole = async (req, res, next) => {
                     { code: req.params.id }
                 ].filter(q => q !== null)
             },
-            req.body,
-            { new: true, runValidators: true }
+                req.body,
+                { returnDocument: 'after', runValidators: true }
         );
 
         if (!role) {

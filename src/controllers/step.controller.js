@@ -38,7 +38,7 @@ exports.logSteps = async (req, res, next) => {
                 notes,
                 createdBy: req.user._id
             },
-            { upsert: true, new: true, runValidators: true }
+            { upsert: true, returnDocument: 'after', runValidators: true }
         );
 
         sendSuccess(res, 200, 'Steps logged successfully', stepLog);

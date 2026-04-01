@@ -375,7 +375,7 @@ exports.updateAssessment = async (req, res, next) => {
         }
 
         assessment = await Assessment.findByIdAndUpdate(req.params.id, req.body, {
-            new: true,
+            returnDocument: 'after',
             runValidators: true
         });
 

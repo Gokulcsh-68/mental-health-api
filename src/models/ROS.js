@@ -84,7 +84,7 @@ const ROSSchema = new mongoose.Schema({
 ROSSchema.pre('save', async function () {
     if (!this.isNew) return;
     const counter = await Counter.findByIdAndUpdate(
-        { _id: 'rosId' }, { $inc: { seq: 1 } }, { new: true, upsert: true }
+        { _id: 'rosId' }, { $inc: { seq: 1 } }, { returnDocument: 'after', upsert: true }
     );
     this.rosId = counter.seq;
 });

@@ -235,7 +235,7 @@ ConsultSchema.pre('save', async function () {
     const counter = await Counter.findByIdAndUpdate(
         { _id: 'consultId' },
         { $inc: { seq: 1 } },
-        { new: true, upsert: true }
+        { returnDocument: 'after', upsert: true }
     );
     this.consultId = counter.seq;
 });

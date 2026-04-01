@@ -150,7 +150,7 @@ exports.updateFeedback = async (req, res, next) => {
         const feedback = await Feedback.findByIdAndUpdate(
             req.params.id,
             updateData,
-            { new: true, runValidators: true }
+            { returnDocument: 'after', runValidators: true }
         );
 
         if (!feedback) {

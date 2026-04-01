@@ -195,7 +195,7 @@ exports.generateClinicalInference = async (req, res) => {
             const consult = await Consult.findOneAndUpdate(
                 { consult_id: consult_id },
                 { $set: { "clinical_record.ai_inference": aiInference } },
-                { new: true }
+                { returnDocument: 'after' }
             );
 
             // Trigger Automated Psychiatrist Alert if risk is High or Critical OR if Red Flags are found

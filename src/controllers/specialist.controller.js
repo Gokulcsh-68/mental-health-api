@@ -81,7 +81,7 @@ exports.updateSpecialistProfile = async (req, res, next) => {
         });
 
         const user = await User.findByIdAndUpdate(req.user._id, updateData, {
-            new: true,
+            returnDocument: 'after',
             runValidators: true
         }).select('-password -fcmTokens -secret');
 

@@ -54,7 +54,7 @@ exports.getApiAccessRule = async (req, res, next) => {
 exports.updateApiAccessRule = async (req, res, next) => {
     try {
         const rule = await ApiAccess.findByIdAndUpdate(req.params.id, req.body, {
-            new: true,
+            returnDocument: 'after',
             runValidators: true
         });
 

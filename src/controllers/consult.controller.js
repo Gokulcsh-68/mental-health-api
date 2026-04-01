@@ -419,7 +419,8 @@ exports.patchConsult = async (req, res, next) => {
             updateData.last_synced_at = new Date();
             await Consult.findOneAndUpdate(
                 { consult_id: parseInt(req.params.id) },
-                updateData
+                updateData,
+                { returnDocument: 'after' }
             );
         }
 
@@ -734,7 +735,7 @@ exports.addClinicalNotes = async (req, res, next) => {
         const consult = await Consult.findOneAndUpdate(
             { consult_code: `CONSULT-${consultId}` },
             { $set: updateData },
-            { new: true, runValidators: true }
+            { returnDocument: 'after', runValidators: true }
         );
 
         if (!consult) {
@@ -853,7 +854,7 @@ exports.updateChiefComplaints = async (req, res, next) => {
         const consult = await Consult.findOneAndUpdate(
             { consult_code: `CONSULT-${consultId}` },
             { $set: { 'clinical_record.chief_complaints': complaintsData } },
-            { new: true, runValidators: true }
+            { returnDocument: 'after', runValidators: true }
         );
 
         if (!consult) {

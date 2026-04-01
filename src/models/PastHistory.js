@@ -148,7 +148,7 @@ const PastHistorySchema = new mongoose.Schema({
 PastHistorySchema.pre('save', async function () {
     if (!this.isNew) return;
     const counter = await Counter.findByIdAndUpdate(
-        { _id: 'pastHistoryId' }, { $inc: { seq: 1 } }, { new: true, upsert: true }
+        { _id: 'pastHistoryId' }, { $inc: { seq: 1 } }, { returnDocument: 'after', upsert: true }
     );
     this.pastHistoryId = counter.seq;
 });

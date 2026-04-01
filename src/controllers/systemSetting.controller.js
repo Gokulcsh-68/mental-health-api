@@ -54,7 +54,7 @@ exports.updateSetting = async (req, res, next) => {
                 updatedBy: req.user._id,
                 updatedAt: Date.now()
             },
-            { upsert: true, new: true, runValidators: true }
+            { upsert: true, returnDocument: 'after', runValidators: true }
         );
 
         sendSuccess(res, 200, 'Setting updated successfully', setting);

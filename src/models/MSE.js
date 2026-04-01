@@ -109,7 +109,7 @@ const MSESchema = new mongoose.Schema({
 MSESchema.pre('save', async function () {
     if (!this.isNew) return;
     const counter = await Counter.findByIdAndUpdate(
-        { _id: 'mseId' }, { $inc: { seq: 1 } }, { new: true, upsert: true }
+        { _id: 'mseId' }, { $inc: { seq: 1 } }, { returnDocument: 'after', upsert: true }
     );
     this.mseId = counter.seq;
 });

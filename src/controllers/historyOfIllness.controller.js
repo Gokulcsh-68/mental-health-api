@@ -216,7 +216,7 @@ exports.updateHistoryOfIllness = async (req, res, next) => {
                     override_notes: updates.override_notes || 'Manual update'
                 }
             },
-            { new: true }
+            { returnDocument: 'after' }
         );
 
         if (!doc) return sendError(res, 404, 'HPI record not found');
