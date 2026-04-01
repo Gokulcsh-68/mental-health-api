@@ -44,7 +44,8 @@ class BaseService {
             const response = await axios.post(url, data, {
                 headers: {
                     'Content-Type': 'application/json'
-                }
+                },
+                timeout: 15000 // 15s timeout to prevent hanging
             });
 
             logger.info('Authentication Response Status: %d', response.status);

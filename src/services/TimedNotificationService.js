@@ -9,6 +9,7 @@ const openAIService = require('./OpenAIService');
 class TimedNotificationService {
     constructor() {
         this.jobs = {};
+        this.isProcessingRedFlags = false;
     }
 
     /**
@@ -170,6 +171,12 @@ class TimedNotificationService {
      */
     async processRedFlags() {
         try {
+            if (this.isProcessingRedFlags) {
+                console.log('🚩 [CRON] Red Flag Audit already in progress, skipping...');
+                return;
+            }
+            this.isProcessingRedFlags = true;
+
             console.log('🚩 [CRON] Checking for unprocessed red flags...');
             const ChiefComplaint = require('../models/ChiefComplaint');
             const ROS = require('../models/ROS');
@@ -197,7 +204,9 @@ class TimedNotificationService {
             ];
 
             for (const config of clinicalModels) {
-                const pending = await config.model.find(config.filter).populate('patient');
+                const pending = await config.model.find(config.filter)
+                    .limit(10) // Limit to 10 per cycle to prevent huge spikes
+                    .populate('patient');
                 for (const doc of pending) {
                     const flags = config.getFlags(doc);
                     if (flags.length > 0 && doc.patient && doc.patient.reportingTo) {
@@ -213,7 +222,9 @@ class TimedNotificationService {
                     await doc.save();
                 }
             }
+            this.isProcessingRedFlags = false;
         } catch (err) {
+            this.isProcessingRedFlags = false;
             console.error('❌ Red Flag Audit Error:', err.message);
         }
     }

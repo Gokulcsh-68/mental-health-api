@@ -56,10 +56,12 @@ exports.createConsult = async (req, res, next) => {
             return sendError(res, 400, 'Professional and patient cannot have the same ref_number');
         }
 
+        console.time(`[PERF] User Lookups (UIDs: ${specialistId}, ${patientPart.ref_number})`);
         const [specialistUser, patientUser] = await Promise.all([
             User.findOne({ userId: specialistId }),
             User.findOne({ userId: parseInt(patientPart.ref_number) })
         ]);
+        console.timeEnd(`[PERF] User Lookups (UIDs: ${specialistId}, ${patientPart.ref_number})`);
 
         if (!specialistUser) return sendError(res, 400, `Professional with userId ${specialistId} not found`);
         if (!patientUser) return sendError(res, 400, `Patient with userId ${patientPart.ref_number} not found`);
@@ -113,9 +115,12 @@ exports.createConsult = async (req, res, next) => {
         //     remotePayload.consult_status = 'consult_approval_pending';
         // }
 
+        console.time('[PERF] TeleConsult Remote API');
         const teleconsult_response = await teleConsultService.create(remotePayload);
+        console.timeEnd('[PERF] TeleConsult Remote API');
 
         // 4. Save to local DB for slot validation and history
+        console.time('[PERF] Local DB Save');
         await Consult.create({
             consult_code: `CONSULT-${teleconsult_response.consult_id}`,
             consult_id: teleconsult_response.consult_id,
@@ -137,6 +142,7 @@ exports.createConsult = async (req, res, next) => {
             hospital: specialistUser?.hospital || patientUser?.hospital || null,
             consult_status: { id: 1, name: 'Scheduled', slug: 'scheduled' }
         });
+        console.timeEnd('[PERF] Local DB Save');
 
         // 5. Trigger Notifications (Non-blocking background process)
         const consultTime = new Date(scheduled_at).toLocaleString();
