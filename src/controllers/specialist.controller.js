@@ -39,8 +39,13 @@ exports.getSpecialists = async (req, res, next) => {
  */
 exports.getSpecialistById = async (req, res, next) => {
     try {
+        const userId = parseInt(req.params.id);
+        if (isNaN(userId)) {
+            return sendError(res, 400, 'Invalid specialist userId: NaN');
+        }
+
         const specialist = await User.findOne({
-            userId: parseInt(req.params.id),
+            userId,
             role: { $in: ['psychiatrist', 'psychologist', 'nurse', 'social_worker', 'counselor'] }
         }).select('-password -fcmTokens -secret');
 

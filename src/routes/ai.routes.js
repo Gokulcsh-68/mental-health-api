@@ -1,6 +1,6 @@
 const express = require('express');
 const multer = require('multer');
-const { transcribeAudio } = require('../controllers/ai.controller');
+const { transcribeAudio, chatStream } = require('../controllers/ai.controller');
 const { protect } = require('../middleware/auth');
 
 // ── Local Multer Setup (No S3) ──────────────────────────────
@@ -26,5 +26,12 @@ const router = express.Router();
  * @access  Private
  */
 router.post('/transcribe', protect, memoryUpload.single('audio'), transcribeAudio);
+
+/**
+ * @route   POST /api/v1/ai/chat-stream
+ * @desc    Streaming AI Chat (SSE)
+ * @access  Private
+ */
+router.post('/chat-stream', protect, chatStream);
 
 module.exports = router;

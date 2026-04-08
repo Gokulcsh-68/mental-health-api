@@ -39,6 +39,13 @@ router.post('/', protect, authorize('super_admin', 'admin'), createChargeCode);
 router.put('/:id', protect, authorize('super_admin', 'admin'), updateChargeCode);
 
 /**
+ * @route   PATCH /api/v1/charge-codes/:id
+ * @desc    Update a charge code (partial)
+ * @access  Private (Admin)
+ */
+router.patch('/:id', protect, authorize('super_admin', 'admin'), updateChargeCode);
+
+/**
  * @route   DELETE /api/v1/charge-codes/:id
  * @desc    Delete a charge code
  * @access  Private (Admin)

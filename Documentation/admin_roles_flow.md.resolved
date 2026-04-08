@@ -1,0 +1,120 @@
+# Admin & Super Admin Flow / Mind Map
+
+This document outlines the capabilities and workflows for the **Admin** and **Super Admin** roles as implemented in the Mental Health API.
+
+## Administrative Mind Map
+
+```mermaid
+mindmap
+  root((Administrative Roles))
+    Super Admin (System Authority)
+        System Configuration
+            System Settings (Global)
+            API Access Rules
+            Scheduled Jobs (Automation)
+        Governance
+            Audit logs (System Activity)
+            Role & Permission Management
+        Content & Communication
+            Portal Content Updates
+            Broadcast Notifications
+        Operational Oversight
+            Global Dashboard (Statistics)
+            Feedback Management
+            Verification Control (toggleVerification)
+            Data Cleanup (Delete assessments/complaints)
+    Admin (Operations Manager)
+        User Lifecycle Management
+            User Creation (by role)
+            User Status (Activate/Deactivate)
+            User Profile Updates
+            Hierarchy & Subordinate Tracking
+        Financial/Operational Prep
+            Tax Code Management
+            Charge Code Management
+        Research & Planning
+            Question Management (Create/List)
+            Assessment Updates/Oversight
+        Analytics & Insights
+            Patient/Hospital Statistics
+            Professional History View
+            Past History Analysis
+```
+
+## Detailed Flow & Capabilities
+
+### Super Admin (SA) - System Governor
+The Super Admin is the highest authority, managing the system's infrastructure and core rules.
+
+| Area | Features/Endpoints |
+| :--- | :--- |
+| **System Rules** | Manage `apiAccess`, `systemSettings`, and `roles`. |
+| **Integrity** | View `auditLogs` for all system actions. |
+| **Communication** | `broadcastNotification` to all portal users. |
+| **Content** | `updatePortalContent` (Types: patient/specialist/etc.). |
+| **Verification** | Exclusively authorize users (`toggleVerification`). |
+| **Destruction** | Authorized to `deleteAssessment`, `deleteChiefComplaint`, etc. |
+| **Global View** | Specialized `super-admin` stats dashboard. |
+
+### Admin (A) - Operational Controller
+The Admin focuses on the day-to-day operations of the clinic or hospital system.
+
+| Area | Features/Endpoints |
+| :--- | :--- |
+| **User Management** | Create users by role, toggle status, manage hierarchy and list users. |
+| **Financials** | Set up `chargeCodes` and `taxCodes` for billing logic. |
+| **Knowledge Base** | Manage `questions` for assessments and view assessment history. |
+| **Analytics** | View hospital-level statistics and hierarchy reports. |
+| **Patient History** | Analyze and update patient past histories. |
+
+## Workflow Example: New User Onboarding
+
+```mermaid
+sequenceDiagram
+    participant SA as Super Admin
+    participant A as Admin
+    participant DB as System API
+    participant User as New Specialist
+
+    A->>DB: POST /api/v1/users/:role (Create Specialist)
+    DB-->>A: User Created (Inactive)
+    A->>DB: PUT /api/v1/users/:id/toggle-status (Activate)
+    SA->>DB: PUT /api/v1/users/:id/toggle-verification (Verify/Authorize)
+    Note over SA, User: User is now fully active and verified for clinical work
+```
+
+---
+*Generated based on current API route definitions and controller logic.*
+
+## Layman's Guide: Who does what?
+
+To make it simple, imagine this system is a **Large Private Hospital**.
+
+### 1. The Super Admin (The "System Owner")
+Think of the Super Admin as the **Owner of the Hospital Group**. They don't just manage one office; they control the entire building and all the rules.
+
+*   **Setting the Rules:** They decide who is even allowed to enter the digital building (API security).
+*   **Final Approval:** If a new doctor joins, the Super Admin is the one who does the final background check and "verifies" their account so they can start seeing patients.
+*   **The Security Camera:** They can see the "Audit Logs"—a list of every single thing that happened in the system (who logged in, what they changed).
+*   **Megaphone:** If there's an emergency, they can send a message to everyone in the hospital at once (Broadcast).
+*   **The Blueprint:** They can change the name of the hospital or the main contact email (System Settings).
+
+### 2. The Admin (The "Office Manager")
+Think of the Admin as the **General Manager of the Daily Operations**. They make sure everything is running smoothly so the doctors can focus on patients.
+
+*   **Hiring & Team:** They create accounts for the staff (Doctors, Nurses, Counsellors) and make sure everyone is in the right department (Hierarchy).
+*   **The Billing Office:** They set the prices for services (Charge Codes) and handle the tax rules (Tax Codes) so patients get the right bills.
+*   **Forms & Paperwork:** They manage the list of questions that patients have to fill out during their check-ups.
+*   **The Report Card:** they look at the statistics to see how many patients were seen and how the hospital is doing financially.
+
+---
+
+### Comparison at a Glance
+
+| Feature | Super Admin (Owner) | Admin (Manager) |
+| :--- | :--- | :--- |
+| **Who can they create?** | Anyone (including other Admins) | Staff and Patients |
+| **Can they see logs?** | Yes, they see EVERYTHING | No, they mostly see their own team's work |
+| **Can they verify users?**| Yes, they give the final "Green Light" | No, they only submit them for verification |
+| **Day-to-day work?** | Mostly system maintenance | High-level office management |
+| **Can they delete data?**| Yes, highly privileged | Limited (mostly just editing) |

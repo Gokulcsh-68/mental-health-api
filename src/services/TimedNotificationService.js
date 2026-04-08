@@ -1,6 +1,7 @@
 const cron = require('node-cron');
 const { notify } = require('./notificationService');
 const User = require('../models/User');
+const ScheduledJob = require('../models/ScheduledJob');
 const openAIService = require('./OpenAIService');
 
 /**
@@ -15,7 +16,7 @@ class TimedNotificationService {
     /**
      * Start all scheduled jobs
      */
-    init() {
+    async init() {
         console.log('  🕒 Timed Notification Service Initializing...');
 
         // 1. Morning Greeting & Medication (Daily at 08:00 AM)
@@ -63,7 +64,74 @@ class TimedNotificationService {
             this.sendDailyAIEngagementTip();
         });
 
+        // 10. Load Dynamic Custom Jobs from DB
+        await this.loadCustomJobs();
+
         console.log('  ✅ All Comprehensive Timed Notification Jobs Scheduled');
+    }
+
+    /**
+     * Load all active custom jobs from DB and register them
+     */
+    async loadCustomJobs() {
+        try {
+            const customJobs = await ScheduledJob.find({ isActive: true });
+            console.log(`  📂 Loading ${customJobs.length} custom automation jobs...`);
+            
+            for (const job of customJobs) {
+                this.registerCustomJob(job);
+            }
+        } catch (err) {
+            console.error('❌ Error loading custom jobs:', err.message);
+        }
+    }
+
+    /**
+     * Map a dynamic job to the node-cron scheduler
+     */
+    registerCustomJob(job) {
+        try {
+            // Stop existing if already in memory
+            if (this.jobs[job.name]) {
+                this.jobs[job.name].stop();
+            }
+
+            this.jobs[job.name] = cron.schedule(job.cron, async () => {
+                console.log(`🚀 [Automation] Executing ${job.name} (${job.actionType})...`);
+                await this.executeAction(job);
+                
+                // Update last run timestamp
+                await ScheduledJob.findByIdAndUpdate(job._id, { lastRunAt: new Date() });
+            });
+
+            console.log(`     ✅ Scheduled: ${job.name} [${job.cron}]`);
+        } catch (err) {
+            console.error(`❌ Failed to schedule job ${job.name}:`, err.message);
+        }
+    }
+
+    /**
+     * Execution dispatcher for custom jobs
+     */
+    async executeAction(job) {
+        const { actionType, payload } = job;
+
+        switch (actionType) {
+            case 'NOTIFICATION_BROADCAST':
+                await this.sendToRole(payload.role || 'all', payload.title, payload.message);
+                break;
+            case 'AI_TIP_BROADCAST':
+                await this.sendDailyAIEngagementTip();
+                break;
+            case 'DB_CLEANUP':
+                console.log('🧹 [Automation] DB Cleanup action triggered (Not yet implemented)');
+                break;
+            case 'RESEARCH_PULSE':
+                console.log('🧬 [Automation] Research Pulse action triggered (Not yet implemented)');
+                break;
+            default:
+                console.warn(`⚠️ Unknown action type: ${actionType}`);
+        }
     }
 
     /**
@@ -286,11 +354,15 @@ class TimedNotificationService {
      * Get status of all scheduled jobs
      */
     getJobStatus() {
-        return Object.keys(this.jobs).map(name => ({
-            name,
-            nextRun: this.jobs[name].nextDate()?.toISOString(),
-            status: this.jobs[name].status
-        }));
+        return Object.keys(this.jobs).map(name => {
+            const job = this.jobs[name];
+            return {
+                name,
+                // node-cron doesn't natively expose nextDate, so we'll just show status
+                status: typeof job.getStatus === 'function' ? job.getStatus() : 'scheduled',
+                isRunning: typeof job.isRunning === 'function' ? job.isRunning() : true
+            };
+        });
     }
 
     /**

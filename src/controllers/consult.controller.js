@@ -119,37 +119,38 @@ exports.createConsult = async (req, res, next) => {
         const teleconsult_response = await teleConsultService.create(remotePayload);
         console.timeEnd('[PERF] TeleConsult Remote API');
 
-        // 4. Save to local DB for slot validation and history
-        console.time('[PERF] Local DB Save');
-        await Consult.create({
-            consult_code: `CONSULT-${teleconsult_response.consult_id}`,
-            consult_id: teleconsult_response.consult_id,
-            scheduled_at: new Date(scheduled_at),
-            consult_type: remotePayload.consult_type,
-            reason: remotePayload.consult_reason,
-            participants: [
-                {
-                    ref_number: String(specialistId),
-                    role: 'publisher',
-                    participant_info: { name: remotePayload.provider.name }
-                },
-                {
-                    ref_number: String(patientPart.ref_number),
-                    role: 'subscriber',
-                    participant_info: { name: remotePayload.patient.name }
-                }
-            ],
-            hospital: specialistUser?.hospital || patientUser?.hospital || null,
-            consult_status: { id: 1, name: 'Scheduled', slug: 'scheduled' }
-        });
-        console.timeEnd('[PERF] Local DB Save');
-
-        // 5. Trigger Notifications (Non-blocking background process)
+        // 4. Background Side Effects (Local Save + Notifications)
         const consultTime = new Date(scheduled_at).toLocaleString();
         
-        // We fire-and-forget the notifications to keep the API response time low
+        // We fire-and-forget the local save and notifications to keep response time low
         (async () => {
             try {
+                // 4.1 Save to local DB
+                console.time('[PERF] Local DB Save (Background)');
+                await Consult.create({
+                    consult_code: `CONSULT-${teleconsult_response.consult_id}`,
+                    consult_id: teleconsult_response.consult_id,
+                    scheduled_at: new Date(scheduled_at),
+                    consult_type: remotePayload.consult_type,
+                    reason: remotePayload.consult_reason,
+                    participants: [
+                        {
+                            ref_number: String(specialistId),
+                            role: 'publisher',
+                            participant_info: { name: remotePayload.provider.name }
+                        },
+                        {
+                            ref_number: String(patientPart.ref_number),
+                            role: 'subscriber',
+                            participant_info: { name: remotePayload.patient.name }
+                        }
+                    ],
+                    hospital: specialistUser?.hospital || patientUser?.hospital || null,
+                    consult_status: { id: 1, name: 'Scheduled', slug: 'scheduled' }
+                });
+                console.timeEnd('[PERF] Local DB Save (Background)');
+
+                // 4.2 Trigger Notifications
                 await Promise.all([
                     // Notify Specialist
                     notificationService.notify({
@@ -170,8 +171,8 @@ exports.createConsult = async (req, res, next) => {
                         data: { consult_id: teleconsult_response.consult_id }
                     })
                 ]);
-            } catch (notifyErr) {
-                logger.error(`Background notification failed: ${notifyErr.message}`);
+            } catch (bgError) {
+                logger.error(`Background side-effect failed for Consult ${teleconsult_response.consult_id}: ${bgError.message}`);
             }
         })();
 

@@ -100,3 +100,7 @@ const response = await fetch('/api/v1/ai/transcribe', {
 - **401 Unauthorized**: "Invalid credentials" or "Not authorized to access this route".
 - **413 Payload Too Large**: File exceeds the 25MB limit.
 - **500 Internal Server Error**: Issues reaching OpenAI or processing the audio stream.
+---
+
+## Note
+For **AI Chat Streaming (SSE)** documentation, please refer to: [AI_CHAT_STREAM_API.md](./AI_CHAT_STREAM_API.md)

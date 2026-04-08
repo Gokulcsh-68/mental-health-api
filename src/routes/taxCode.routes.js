@@ -39,6 +39,13 @@ router.post('/', protect, authorize('super_admin', 'admin'), createTaxCode);
 router.put('/:id', protect, authorize('super_admin', 'admin'), updateTaxCode);
 
 /**
+ * @route   PATCH /api/v1/tax-codes/:id
+ * @desc    Update a tax code (partial)
+ * @access  Private (Admin)
+ */
+router.patch('/:id', protect, authorize('super_admin', 'admin'), updateTaxCode);
+
+/**
  * @route   DELETE /api/v1/tax-codes/:id
  * @desc    Delete a tax code
  * @access  Private (Admin)

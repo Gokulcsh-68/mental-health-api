@@ -5,6 +5,8 @@ const jwt = require('jsonwebtoken');
 const config = require('../config/config');
 const { sendSuccess, sendError } = require('../utils/responseHelper');
 const { notify } = require('../services/notificationService');
+const openAIService = require('../services/OpenAIService');
+const logger = require('../config/logger');
 
 // @desc    Register user (super_admin, admin, hospital only)
 // @route   POST /api/v1/auth/register
@@ -35,6 +37,22 @@ exports.register = async (req, res, next) => {
             specialization, about, experienceYears, qualifications,
             languages, consultationFee, skills
         });
+
+        // Send AI-generated welcome notification (background)
+        (async () => {
+            try {
+                const aiGreeting = await openAIService.generateWelcomeMessage(user, true); // true = isNewUser
+                notify({
+                    userId: user._id,
+                    title: aiGreeting?.title || 'Welcome Home! 🏠',
+                    message: aiGreeting?.message || `Welcome to MindBalance, ${user.firstName}! We are excited to support you on your journey.`,
+                    type: 'welcome',
+                    imageUrl: openAIService.getMentalHealthImages()[aiGreeting?.imageIndex || 2]
+                });
+            } catch (err) {
+                logger.error('Background New User Welcome Error: %s', err.message);
+            }
+        })();
 
         await sendTokenResponse(user, 201, 'User registered successfully', res);
     } catch (err) {
@@ -102,13 +120,21 @@ exports.login = async (req, res, next) => {
         await user.save({ validateBeforeSave: false });
 
 
-        // Send welcome notification via all channels (fire-and-forget)
-        notify({
-            userId: user._id,
-            title: 'Welcome Back! 👋',
-            message: `Hello ${user.firstName}, welcome back to Mental Health Platform. We're glad to see you!`,
-            type: 'welcome'
-        });
+        // Send AI-generated welcome notification (background)
+        (async () => {
+            try {
+                const aiGreeting = await openAIService.generateWelcomeMessage(user, false);
+                notify({
+                    userId: user._id,
+                    title: aiGreeting?.title || 'Welcome Back! 👋',
+                    message: aiGreeting?.message || `Hello ${user.firstName}, welcome back to Mental Health Platform.`,
+                    type: 'welcome',
+                    imageUrl: openAIService.getMentalHealthImages()[aiGreeting?.imageIndex || 6]
+                });
+            } catch (err) {
+                logger.error('Background Welcome Notification Error: %s', err.message);
+            }
+        })();
 
         await sendTokenResponse(user, 200, 'Login successful', res);
     } catch (err) {

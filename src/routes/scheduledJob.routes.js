@@ -7,6 +7,8 @@ router.use(protect);
 router.use(authorize('super_admin'));
 
 router.get('/', jobController.getJobs);
+router.post('/', jobController.createJob);
 router.put('/:name/toggle', jobController.toggleJob);
+router.delete('/:id', jobController.deleteJob);
 
 module.exports = router;

@@ -1155,7 +1155,7 @@ ${contextFragment}
     selectImageByText(text) {
         const images = this.getMentalHealthImages();
         const lowerText = text.toLowerCase();
-        
+
         // Find image with most keyword matches
         let bestIndex = 1; // Default to Nature
         let maxMatches = 0;
@@ -1176,7 +1176,7 @@ ${contextFragment}
      */
     async generateEngagementTip() {
         const images = this.getMentalHealthImages();
-        
+
         if (!this.apiKey) {
             return {
                 title: "Mindfulness Tip 🧘‍♂️",
@@ -1200,15 +1200,15 @@ ${contextFragment}
             }, { headers: { 'Authorization': `Bearer ${this.apiKey}` } });
 
             const result = JSON.parse(response.data.choices[0].message.content);
-            
+
             // Use improved keyword-based selection from expanded library
             result.imageUrl = this.selectImageByText(result.message);
-            
+
             return result;
         } catch (error) {
             logger.error('OpenAI Engagement Tip Error: %s', error.message);
-            return { 
-                title: "Daily Reminder 🌿", 
+            return {
+                title: "Daily Reminder 🌿",
                 message: "Small steps lead to big changes. Keep moving forward!",
                 imageUrl: images[1]
             };
@@ -1245,18 +1245,110 @@ ${contextFragment}
             }, { headers: { 'Authorization': `Bearer ${this.apiKey}` } });
 
             const result = JSON.parse(response.data.choices[0].message.content);
-            
+
             // Use improved keyword-based selection from expanded library
             result.imageUrl = this.selectImageByText(result.message);
-            
+
             return result;
         } catch (error) {
             logger.error('OpenAI Post-Assessment Encouragement Error: %s', error.message);
-            return { 
-                title: "Great Progress! 🌟", 
+            return {
+                title: "Great Progress! 🌟",
                 message: "You've completed your assessment. Proud of you for checking in with yourself today!",
                 imageUrl: images[6]
             };
+        }
+    }
+
+    /**
+     * @desc    Generate a streaming AI response for chat interactions (SSE)
+     * @param   {Array}  messages        - Historical messages [{role, content}]
+     * @param   {Object} clinicalContext - { chief_complaint, hpi } (optional)
+     * @returns {Stream} OpenAI response stream
+     */
+    async chatStream(messages = [], clinicalContext = {}) {
+        if (!this.apiKey) {
+            throw new Error('OpenAI API Key is missing for streaming');
+        }
+
+        const { chief_complaint, hpi } = clinicalContext;
+        const contextLine = (chief_complaint || hpi) ? `
+CONTEXT:
+Latest Chief Complaint: ${chief_complaint?.complaint_text || 'None recorded'}
+Brief HPI Summary: ${hpi?.hpi_summary || 'None recorded'}
+` : '';
+
+        const systemPrompt = `
+You are MindBalance AI, an empathetic and professional Mental Health Assistant.
+Your goal is to provide supportive, clear, and science-backed information.
+
+STRICT RULES:
+1. ONLY use information in the provided CLINICAL CONTEXT.
+2. NEVER diagnose or prescribe medications.
+3. If crisis (suicide/self-harm) is detected, provide the 988 Lifeline IMMEDIATELY.
+4. Keep responses concise (2-4 sentences max per message).
+5. Always end non-crisis responses with: "— MindBalance AI (For medical advice, please talk to a professional.)"
+
+${contextLine}
+`;
+
+        try {
+            const response = await axios.post(this.apiUrl, {
+                model: this.model,
+                messages: [
+                    { role: 'system', content: systemPrompt },
+                    ...messages
+                ],
+                stream: true,
+                temperature: 0.3
+            }, {
+                headers: {
+                    'Authorization': `Bearer ${this.apiKey}`,
+                    'Content-Type': 'application/json'
+                },
+                responseType: 'stream'
+            });
+
+            return response.data;
+        } catch (error) {
+            logger.error('OpenAI Streaming API Error: %s', error.message);
+            throw new Error('Failed to initiate AI stream');
+        }
+    }
+
+    /**
+     * @desc    Generate a personalized welcome notification (Login/Register)
+     * @param   {Object}  user      - User details { firstName }
+     * @param   {Boolean} isNewUser - True if first-time registration
+     * @returns {Object}  { title, message, imageIndex }
+     */
+    async generateWelcomeMessage(user, isNewUser = false) {
+        if (!this.apiKey) return null;
+
+        const prompt = isNewUser
+            ? `A new user named ${user.firstName} just joined MindBalance. 
+               Generate a warm, welcoming "Welcome" notification (max 20 words). 
+               Include JSON: title, message, imageIndex (0-9).`
+            : `User ${user.firstName} just logged back into MindBalance. 
+               Generate a short, friendly "Welcome Back" greeting (max 15 words). 
+               Include JSON: title, message, imageIndex (0-9).`;
+
+        try {
+            const response = await axios.post(this.apiUrl, {
+                model: this.model,
+                messages: [
+                    { role: 'system', content: 'You are a supportive mental health assistant. Return JSON only.' },
+                    { role: 'user', content: prompt }
+                ],
+                response_format: { type: 'json_object' }
+            }, {
+                headers: { 'Authorization': `Bearer ${this.apiKey}` }
+            });
+
+            return JSON.parse(response.data.choices[0].message.content);
+        } catch (error) {
+            logger.error('OpenAI Welcome Message Error: %s', error.message);
+            return null;
         }
     }
 }

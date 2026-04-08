@@ -325,7 +325,7 @@ exports.createUserByRole = async (req, res, next) => {
 // @access  Private
 exports.listUsers = async (req, res, next) => {
     try {
-        const { role, page = 1, limit = 10, search, isActive, hospitalId, professionalId } = req.query;
+        const { role, page = 1, limit = 10, search, isActive, isVerified, hospitalId, professionalId } = req.query;
 
         const query = {};
 
@@ -334,6 +334,9 @@ exports.listUsers = async (req, res, next) => {
 
         // Active status filter
         if (isActive !== undefined) query.isActive = isActive === 'true';
+
+        // Verification status filter
+        if (isVerified !== undefined) query.isVerified = isVerified === 'true';
 
         // Name search
         if (search) {
