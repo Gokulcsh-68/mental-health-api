@@ -66,17 +66,18 @@ class ScheduleService {
         });
 
         let allSlots = [];
-        // Current time and date check
+        // Current time and date check (anchored to Asia/Kolkata)
         const now = new Date();
-        // Use local date for "isToday" check to be timezone-aware
-        const localDate = new Date(now.getTime() - (now.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
-        const isToday = date === localDate;
+        const nowTz = this.getTzDate(now);
+        const isToday = date === nowTz.date;
         
-        // 30-minute buffer logic
+        // 30-minute buffer logic (anchored to Asia/Kolkata)
         const bufferWindow = 30; // 30 minutes
         const nowWithBuffer = new Date(now.getTime() + bufferWindow * 60000);
-        const bufferDateStr = new Date(nowWithBuffer.getTime() - (nowWithBuffer.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
-        const bufferTimeStr = this.formatTime(nowWithBuffer);
+        const bufferTz = this.getTzDate(nowWithBuffer);
+        
+        const bufferDateStr = bufferTz.date;
+        const bufferTimeStr = bufferTz.time;
 
         // Process each availability block
         for (const availability of availabilities) {
@@ -163,9 +164,31 @@ class ScheduleService {
     }
 
     formatTime(date) {
-        const h = String(date.getHours()).padStart(2, '0');
-        const m = String(date.getMinutes()).padStart(2, '0');
-        return `${h}:${m}`;
+        return new Intl.DateTimeFormat('en-GB', {
+            timeZone: 'Asia/Kolkata',
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false
+        }).format(date);
+    }
+
+    getTzDate(date, timeZone = 'Asia/Kolkata') {
+        const parts = new Intl.DateTimeFormat('en-GB', {
+            timeZone,
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: false
+        }).formatToParts(date);
+
+        const map = {};
+        parts.forEach(p => map[p.type] = p.value);
+        return {
+            date: `${map.year}-${map.month}-${map.day}`,
+            time: `${map.hour}:${map.minute}`
+        };
     }
 
     isOverlap(s1, e1, s2, e2) {
