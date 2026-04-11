@@ -66,8 +66,17 @@ class ScheduleService {
         });
 
         let allSlots = [];
+        // Current time and date check
         const now = new Date();
-        const isToday = date === now.toISOString().split('T')[0];
+        // Use local date for "isToday" check to be timezone-aware
+        const localDate = new Date(now.getTime() - (now.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
+        const isToday = date === localDate;
+        
+        // 30-minute buffer logic
+        const bufferWindow = 30; // 30 minutes
+        const nowWithBuffer = new Date(now.getTime() + bufferWindow * 60000);
+        const bufferDateStr = new Date(nowWithBuffer.getTime() - (nowWithBuffer.getTimezoneOffset() * 60000)).toISOString().split('T')[0];
+        const bufferTimeStr = this.formatTime(nowWithBuffer);
 
         // Process each availability block
         for (const availability of availabilities) {
@@ -88,9 +97,13 @@ class ScheduleService {
                     let available = true;
                     let reason = null;
 
-                    // Past check
+                    // Past check including 30-minute buffer
                     if (isToday) {
-                        if (this.compareTime(currentStartTime, this.formatTime(now)) <= 0) {
+                        // If the buffer window pushes us into the next day, all slots today are "past"
+                        if (date !== bufferDateStr) {
+                            available = false;
+                            reason = 'past';
+                        } else if (this.compareTime(currentStartTime, bufferTimeStr) < 0) {
                             available = false;
                             reason = 'past';
                         }
