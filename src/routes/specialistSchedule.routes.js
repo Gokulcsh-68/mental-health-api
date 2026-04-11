@@ -11,7 +11,7 @@ const {
     getAvailableSlots,
     getSpecialistDirectory
 } = require('../controllers/specialistSchedule.controller');
-const { protect, authorize } = require('../middleware/auth');
+const { protect, optionalProtect, authorize } = require('../middleware/auth');
 
 const clinicalRoles = ['psychiatrist', 'psychologist', 'nurse', 'social_worker', 'counselor'];
 const adminRoles = ['admin', 'super_admin'];
@@ -24,7 +24,7 @@ const router = express.Router();
  * @desc    Get all schedule entries
  * @access  Private
  */
-router.get('/', protect, getSchedules);
+router.get('/', optionalProtect, getSchedules);
 
 /**
  * @route   GET /api/v1/specialists/schedule/me
@@ -52,7 +52,7 @@ router.put('/me/weekly', protect, authorize(...clinicalRoles, ...adminRoles), up
  * @desc    Get available slots for a specialist
  * @access  Private
  */
-router.get('/slots', protect, getAvailableSlots);
+router.get('/slots', optionalProtect, getAvailableSlots);
 
 
 /**
@@ -60,14 +60,14 @@ router.get('/slots', protect, getAvailableSlots);
  * @desc    Get specialist directory (Convenience route)
  * @access  Private
  */
-router.get('/directory', protect, getSpecialistDirectory);
+router.get('/directory', optionalProtect, getSpecialistDirectory);
 
 /**
  * @route   GET /api/v1/specialists/schedule/:id
  * @desc    Get single schedule entry by ID
  * @access  Private
  */
-router.get('/:id', protect, getScheduleById);
+router.get('/:id', optionalProtect, getScheduleById);
 
 /**
  * @route   POST /api/v1/specialists/schedule
