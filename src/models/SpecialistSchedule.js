@@ -49,12 +49,12 @@ const SpecialistScheduleSchema = new mongoose.Schema({
     },
     slotDuration: {
         type: Number,
-        default: 30,
+        default: 15,
         description: 'Duration of each appointment slot in minutes.'
     },
     bufferTime: {
         type: Number,
-        default: 0,
+        default: 15,
         description: 'Gap between slots in minutes.'
     },
     maxAppointments: {
