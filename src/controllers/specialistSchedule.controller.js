@@ -505,10 +505,10 @@ exports.getAvailableSlots = async (req, res, next) => {
                     }
                 }
             }
-            
-            results[d] = pooledSlots.sort((a, b) => compareTime(a.startTime, b.startTime));
+            results[d] = pooledSlots;
         }
 
+        // Build the response object
         const responseData = {
             results: datesToProcess.length > 1 ? results : undefined,
             date: datesToProcess.length === 1 ? datesToProcess[0] : undefined,
@@ -517,6 +517,22 @@ exports.getAvailableSlots = async (req, res, next) => {
 
         if (specialist_id) responseData.specialist_id = parseInt(specialist_id);
         if (role) responseData.role = role;
+
+        // Convert slot times to decimal hour strings (e.g., 8, 8.15, 6.30)
+        const formatSlot = slot => {
+            const [h, m] = slot.startTime.split(':');
+            const hour = parseInt(h, 10);
+            const minute = parseInt(m, 10);
+            return minute ? `${hour}.${minute.toString().padStart(2, '0')}` : `${hour}`;
+        };
+        if (responseData.slots) {
+            responseData.slots = responseData.slots.map(formatSlot);
+        }
+        if (responseData.results) {
+            for (const d in responseData.results) {
+                responseData.results[d] = responseData.results[d].map(formatSlot);
+            }
+        }
 
         sendSuccess(res, 200, 'Available slots fetched successfully', responseData);
     } catch (err) {

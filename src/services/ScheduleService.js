@@ -146,13 +146,40 @@ class ScheduleService {
                         }
                     }
 
-                    allSlots.push({ startTime: currentStartTime, endTime: slotEndTime, available, reason });
+                    allSlots.push({ startTime: currentStartTime, endTime: slotEndTime, available, reason, buffer });
                 }
                 currentStartTime = this.addMinutes(slotEndTime, buffer);
             }
         }
 
-        return allSlots.sort((a, b) => this.compareTime(a.startTime, b.startTime));
+        // ---- Post‑process slots ----
+        // Remove any slots that are before the current time today (including buffer)
+        const todaySlots = isToday ? allSlots.filter(s => this.compareTime(s.startTime, bufferTimeStr) >= 0) : allSlots;
+        // 1️⃣ Keep only slots that are marked as available
+        const availableSlots = todaySlots.filter(s => s.available);
+        // 2️⃣ Remove the slot that falls within the buffer after a booked slot
+        const finalSlots = [];
+        let skipUntil = null; // time string (HH:mm) until which we skip slots
+        for (const slot of availableSlots) {
+          // If we are in a skip window, ignore this slot
+          if (skipUntil && this.compareTime(slot.startTime, skipUntil) < 0) continue;
+          
+          const idx = allSlots.findIndex(s => s.startTime === slot.startTime && s.endTime === slot.endTime);
+          // Check the slot just before this one in the original list
+          if (idx > 0) {
+            const prev = allSlots[idx - 1];
+            if (!prev.available && prev.reason === 'booked') {
+              // Apply the buffer defined on the availability that generated the booked slot.
+              const bufferMins = prev.buffer || 0;
+              skipUntil = this.addMinutes(prev.endTime, bufferMins);
+              // Since the current slot starts within the buffer, skip it
+              if (this.compareTime(slot.startTime, skipUntil) < 0) continue;
+            }
+          }
+          finalSlots.push(slot);
+        }
+        // Return only the cleaned list, sorted just in case
+        return finalSlots.sort((a, b) => this.compareTime(a.startTime, b.startTime));
     }
 
     // --- Helpers ---
