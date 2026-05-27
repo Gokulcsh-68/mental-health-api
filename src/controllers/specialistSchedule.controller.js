@@ -514,25 +514,28 @@ exports.getAvailableSlots = async (req, res, next) => {
             date: datesToProcess.length === 1 ? datesToProcess[0] : undefined,
             slots: datesToProcess.length === 1 ? results[datesToProcess[0]] : undefined
         };
-
         if (specialist_id) responseData.specialist_id = parseInt(specialist_id);
         if (role) responseData.role = role;
 
-        // Convert slot times to decimal hour strings (e.g., 8, 8.15, 6.30)
-        const formatSlot = slot => {
-            const [h, m] = slot.startTime.split(':');
-            const hour = parseInt(h, 10);
-            const minute = parseInt(m, 10);
-            return minute ? `${hour}.${minute.toString().padStart(2, '0')}` : `${hour}`;
-        };
-        if (responseData.slots) {
-            responseData.slots = responseData.slots.map(formatSlot);
-        }
-        if (responseData.results) {
-            for (const d in responseData.results) {
-                responseData.results[d] = responseData.results[d].map(formatSlot);
-            }
-        }
+// Convert slot times to 12‑hour decimal format with minutes and lowercase am/pm (e.g., "2.00 am", "2.15 pm")
+const formatSlot = slot => {
+    const [h, m] = slot.startTime.split(':');
+    let hour = parseInt(h, 10);
+    const minute = parseInt(m, 10);
+    const ampm = hour >= 12 ? 'pm' : 'am';
+    hour = hour % 12;
+    if (hour === 0) hour = 12;
+    const minuteStr = minute.toString().padStart(2, '0');
+    return `${hour}.${minuteStr} ${ampm}`;
+};
+if (responseData.slots) {
+    responseData.slots = responseData.slots.map(formatSlot);
+}
+if (responseData.results) {
+    for (const d in responseData.results) {
+        responseData.results[d] = responseData.results[d].map(formatSlot);
+    }
+}
 
         sendSuccess(res, 200, 'Available slots fetched successfully', responseData);
     } catch (err) {
