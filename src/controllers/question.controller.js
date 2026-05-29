@@ -2,6 +2,7 @@ const Question = require('../models/Question');
 const User = require('../models/User');
 const { sendSuccess, sendError } = require('../utils/responseHelper');
 const openAIService = require('../services/OpenAIService');
+const ChildAssessment = require('../models/ChildAssessment');
 // Helper to calculate age from DOB
 const calculateAge = (dob) => {
     if (!dob) return 25; // Default age if not provided
@@ -237,25 +238,124 @@ exports.getChildQuestions = async (req, res, next) => {
     }
 };
 
-// @desc    Submit answer for a child question and get AI-generated feedback
-// @route   POST /api/v1/questions/children/:id/answer
-// @access  Private (Patient)
+// @desc    Submit all child question answers and get AI-generated feedback
+// @route   POST /api/v1/questions/children/answers
+// @access  Private (All roles)
 exports.submitChildAnswer = async (req, res, next) => {
     try {
-        const age = calculateAge(req.user.dateOfBirth);
+        const { responses, patientId } = req.body; // expects { responses: [...], patientId?: "userId" }
+
+        // Determine the target patient
+        let targetPatient;
+        if (req.user.role === 'patient') {
+            targetPatient = req.user;
+        } else {
+            // Non-patient roles must provide a patientId
+            if (!patientId) {
+                return sendError(res, 400, 'patientId is required for non-patient roles');
+            }
+            targetPatient = await User.findOne({ userId: parseInt(patientId) });
+            if (!targetPatient) {
+                return sendError(res, 404, `Patient with userId ${patientId} not found`);
+            }
+            if (targetPatient.role !== 'patient') {
+                return sendError(res, 400, `User with userId ${patientId} is not a patient`);
+            }
+        }
+
+        const age = calculateAge(targetPatient.dateOfBirth);
         if (age > 12) {
             return sendError(res, 403, 'Only patients age 12 or below can submit child answers');
         }
-        const questionId = parseInt(req.params.id);
-        const { answer } = req.body; // expects the selected option text or index
-        const question = CHILD_QUESTIONS.find(q => q.id === questionId);
-        if (!question) {
-            return sendError(res, 404, 'Question not found');
+
+        if (!responses || !Array.isArray(responses) || responses.length === 0) {
+            return sendError(res, 400, 'responses array is required and must not be empty');
         }
-        // Build prompt for OpenAI
-        const prompt = `Question: ${question.question}\nOptions: ${question.options.join(', ')}\nUser answered: ${answer}\nProvide a brief supportive response based on the answer.`;
+
+        // Validate each response against CHILD_QUESTIONS
+        const validatedResponses = [];
+        for (const resp of responses) {
+            if (!resp.questionId || resp.answer === undefined || resp.answer === null) {
+                return sendError(res, 400, `Each response must have a questionId and an answer`);
+            }
+            const question = CHILD_QUESTIONS.find(q => q.id === resp.questionId);
+            if (!question) {
+                return sendError(res, 404, `Question with id ${resp.questionId} not found`);
+            }
+            validatedResponses.push({
+                questionId: resp.questionId,
+                answer: resp.answer
+            });
+        }
+
+        // Build prompt for OpenAI with all answers
+        const promptLines = validatedResponses.map(r => {
+            const q = CHILD_QUESTIONS.find(cq => cq.id === r.questionId);
+            return `Question: ${q.question}\nOptions: ${q.options.join(', ')}\nUser answered: ${r.answer}`;
+        });
+        const prompt = promptLines.join('\n\n') + '\n\nProvide a brief supportive overall response based on all the answers.';
         const aiResponse = await openAIService.chatWithPatient([{ role: 'user', content: prompt }]);
-        sendSuccess(res, 200, 'AI response generated', { questionId, answer, aiResponse });
+
+        // Save all answers in a single document with patient ID
+        await ChildAssessment.create({
+            patient: targetPatient._id,
+            responses: validatedResponses
+        });
+
+        sendSuccess(res, 200, 'AI response generated', { responses: validatedResponses, aiResponse });
+    } catch (err) {
+        next(err);
+    }
+};
+
+// @desc    Get child assessment history
+// @route   GET /api/v1/questions/children/history
+// @access  Private (All roles)
+exports.getChildAssessmentHistory = async (req, res, next) => {
+    try {
+        const { patientId } = req.query;
+
+        // Determine the target patient
+        let targetPatient;
+        if (req.user.role === 'patient') {
+            targetPatient = req.user;
+        } else {
+            if (!patientId) {
+                return sendError(res, 400, 'patientId query parameter is required for non-patient roles');
+            }
+            targetPatient = await User.findOne({ userId: parseInt(patientId) });
+            if (!targetPatient) {
+                return sendError(res, 404, `Patient with userId ${patientId} not found`);
+            }
+            if (targetPatient.role !== 'patient') {
+                return sendError(res, 400, `User with userId ${patientId} is not a patient`);
+            }
+        }
+
+        const assessments = await ChildAssessment.find({ patient: targetPatient._id })
+            .sort({ createdAt: -1 });
+
+        // Enrich responses with question text and feedback
+        const enriched = assessments.map(a => {
+            const obj = a.toObject();
+            obj.responses = obj.responses.map(r => {
+                const q = CHILD_QUESTIONS.find(cq => cq.id === r.questionId);
+                return {
+                    ...r,
+                    question: q ? q.question : null,
+                    emoji: q ? q.emoji : null,
+                    category: q ? q.category : null,
+                    options: q ? q.options : null,
+                    feedback: q ? q.feedback : null
+                };
+            });
+            return obj;
+        });
+
+        sendSuccess(res, 200, `Found ${enriched.length} assessment(s)`, {
+            count: enriched.length,
+            assessments: enriched
+        });
     } catch (err) {
         next(err);
     }
