@@ -131,83 +131,94 @@ const CHILD_QUESTIONS = [
     {
         "id": 1,
         "emoji": "😊",
-        "question": "How do you feel when you smile?",
-        "options": ["Happy", "Angry", "Sad", "Scared"],
+        "category": "Emotional Awareness",
+        "question": "How often do you feel happy at school?",
+        "options": ["Always", "Sometimes", "Rarely", "Never"],
         "correct_index": 0,
-        "feedback": "Smiling usually means we feel happy inside!"
+        "feedback": "Feeling happy at school is a sign of good emotional health. If you rarely feel happy, it is okay to talk to a trusted adult."
     },
     {
         "id": 2,
-        "emoji": "😢",
-        "question": "When you feel sad, what helps?",
-        "options": ["Talk to someone you trust", "Stay alone all day", "Shout at others", "Ignore the feeling"],
-        "correct_index": 0,
-        "feedback": "Talking to a parent, teacher, or friend really helps when we feel sad."
+        "emoji": "😟",
+        "category": "Anxiety",
+        "question": "Do you feel worried or nervous about things that might happen?",
+        "options": ["Never", "Sometimes, and I talk about it", "Yes, and I keep it to myself", "All the time and it bothers me a lot"],
+        "correct_index": 1,
+        "feedback": "Feeling worried sometimes is normal. Talking about your worries to someone you trust helps make them feel smaller."
     },
     {
         "id": 3,
-        "emoji": "😤",
-        "question": "When you feel angry, what should you do?",
-        "options": ["Hit someone", "Take deep breaths", "Break things", "Run away"],
-        "correct_index": 1,
-        "feedback": "Taking deep breaths helps your body calm down when you feel angry."
+        "emoji": "😴",
+        "category": "Sleep & Rest",
+        "question": "How do you feel when you wake up in the morning?",
+        "options": ["Rested and ready", "A little tired", "Very tired most days", "I do not want to get up at all"],
+        "correct_index": 0,
+        "feedback": "Waking up feeling rested means your body and brain got enough sleep. Children need 9 to 11 hours of sleep every night."
     },
     {
         "id": 4,
-        "emoji": "😨",
-        "question": "Feeling scared before a test is...?",
-        "options": ["Very normal", "Very bad", "Only for babies", "Wrong"],
+        "emoji": "👫",
+        "category": "Social Skills",
+        "question": "When you have a problem with a friend, what do you usually do?",
+        "options": ["Talk to them calmly", "Ignore them completely", "Get angry and fight", "Tell a teacher or parent"],
         "correct_index": 0,
-        "feedback": "Everyone feels nervous sometimes. It's totally normal!"
+        "feedback": "Talking calmly to a friend about a problem is the healthiest way to handle disagreements and keep friendships strong."
     },
     {
         "id": 5,
-        "emoji": "😴",
-        "question": "Why is sleep important?",
-        "options": ["It helps your brain rest", "It is not important", "Only for small kids", "It makes you taller"],
+        "emoji": "😢",
+        "category": "Coping Skills",
+        "question": "When something makes you very sad, what helps you the most?",
+        "options": ["Talking to someone I trust", "Staying quiet and alone for days", "Pretending I am fine", "Getting angry at everyone"],
         "correct_index": 0,
-        "feedback": "Sleep helps your brain and body feel better and ready for the day."
+        "feedback": "Opening up to a trusted person — a parent, teacher, or counselor — is the most healthy way to cope with sadness."
     },
     {
         "id": 6,
-        "emoji": "🏃",
-        "question": "Playing and running makes you feel...?",
-        "options": ["Worse", "Happier and healthier", "More tired only", "Bored"],
-        "correct_index": 1,
-        "feedback": "Exercise makes your brain release happy chemicals that improve your mood!"
+        "emoji": "🏠",
+        "category": "Home Environment",
+        "question": "How do you feel at home most of the time?",
+        "options": ["Safe and loved", "Okay but sometimes worried", "Unsafe or scared", "Lonely most of the time"],
+        "correct_index": 0,
+        "feedback": "Feeling safe and loved at home is very important for a child's mental health. If you feel unsafe, always tell a trusted adult."
     },
     {
         "id": 7,
-        "emoji": "👨‍👩‍👧",
-        "question": "Who should you tell if you feel unsafe?",
-        "options": ["Nobody", "A trusted adult", "Only your friend", "Your pet"],
-        "correct_index": 1,
-        "feedback": "Always tell a trusted adult — a parent, teacher, or school counselor — if you feel unsafe."
+        "emoji": "📚",
+        "category": "School Stress",
+        "question": "How do you feel when you have a lot of schoolwork or exams?",
+        "options": ["A little stressed but I manage", "Very stressed and I cannot cope", "I do not care at all", "I panic and cannot do anything"],
+        "correct_index": 0,
+        "feedback": "Feeling a little stressed about schoolwork is normal. Breaking work into small steps and asking for help makes it much easier."
     },
     {
         "id": 8,
-        "emoji": "💛",
-        "question": "Being kind to a sad friend is...?",
-        "options": ["A waste of time", "Very helpful", "Not your job", "Weird"],
-        "correct_index": 1,
-        "feedback": "Small acts of kindness can mean the world to someone who is feeling down."
+        "emoji": "🤝",
+        "category": "Self-Esteem",
+        "question": "What do you think about yourself most of the time?",
+        "options": ["I am good enough and I try my best", "I am not as good as others", "I am always wrong", "Nobody likes me"],
+        "correct_index": 0,
+        "feedback": "Believing in yourself and knowing you are good enough is a very important part of strong mental health."
     },
     {
         "id": 9,
-        "emoji": "🌈",
-        "question": "Is it okay to feel many emotions in one day?",
-        "options": ["Yes, it is normal", "No, pick one feeling", "Only on weekends", "Feelings are not real"],
+        "emoji": "😠",
+        "category": "Anger Management",
+        "question": "When something makes you very angry, what do you do first?",
+        "options": ["Take deep breaths and calm down", "Shout or hit immediately", "Cry and run away", "Break or throw things"],
         "correct_index": 0,
-        "feedback": "Feeling happy, sad, excited, and nervous all in one day is completely normal for everyone!"
+        "feedback": "Pausing and taking deep breaths before reacting helps your brain calm down and make better choices."
     },
     {
         "id": 10,
-        "emoji": "🧠",
-        "question": "Taking care of your mind means...?",
-        "options": ["Hiding your feelings", "Talking, resting, and playing", "Eating only sweets", "Watching TV all day"],
-        "correct_index": 1,
-        "feedback": "Talking about feelings, resting well, and playing keeps your mind healthy and strong."
+        "emoji": "🌟",
+        "category": "Help Seeking",
+        "question": "If you were feeling very low or unhappy for many days, what would you do?",
+        "options": ["Tell a trusted adult right away", "Hide it so nobody worries", "Pretend to be happy", "Stop eating and sleeping"],
+        "correct_index": 0,
+        "feedback": "Always speak up if you feel low for many days. Asking for help is a sign of strength, not weakness. You are never alone."
     }
+
 ];
 
 // @desc    Get child-friendly questions (age <=12)
