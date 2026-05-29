@@ -1,5 +1,5 @@
 const express = require('express');
-const { getAssessmentQuestions, createQuestion, getAllQuestions, getPatientSelfAssessments } = require('../controllers/question.controller');
+const { getAssessmentQuestions, createQuestion, getAllQuestions, getPatientSelfAssessments, getChildQuestions, submitChildAnswer } = require('../controllers/question.controller');
 const { protect, authorize } = require('../middleware/auth');
 const auditLog = require('../middleware/audit');
 
@@ -13,5 +13,7 @@ router.get('/self-assessments', authorize('patient', 'super_admin'), getPatientS
 // Admin routes
 router.get('/', authorize('super_admin', 'admin', 'hospital'), getAllQuestions);
 router.post('/', authorize('super_admin', 'admin', 'hospital'), auditLog('WRITE', 'Question'), createQuestion);
+router.get('/children', authorize('patient'), getChildQuestions);
+router.post('/children/:id/answer', authorize('patient'), submitChildAnswer);
 
 module.exports = router;

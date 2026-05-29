@@ -1,7 +1,7 @@
 const Question = require('../models/Question');
 const User = require('../models/User');
 const { sendSuccess, sendError } = require('../utils/responseHelper');
-
+const openAIService = require('../services/OpenAIService');
 // Helper to calculate age from DOB
 const calculateAge = (dob) => {
     if (!dob) return 25; // Default age if not provided
@@ -72,7 +72,7 @@ exports.getAssessmentQuestions = async (req, res, next) => {
 
         // Map questions to return the correct text variant
         const view = req.query.view || (req.user.role === 'patient' ? 'patient' : 'professional');
-        
+
         const mappedQuestions = questions.map(q => {
             const questionObj = q.toObject();
             let displayText = questionObj.text; // Default
@@ -117,6 +117,134 @@ exports.createQuestion = async (req, res, next) => {
         });
 
         sendSuccess(res, 201, 'Question created successfully', question);
+    } catch (err) {
+        next(err);
+    }
+};
+
+// ---------------------------------------------------------------------------
+// Child specific endpoints (age <= 12)
+// ---------------------------------------------------------------------------
+
+// Static list of child-friendly questions (subset)
+const CHILD_QUESTIONS = [
+    {
+        "id": 1,
+        "emoji": "😊",
+        "question": "How do you feel when you smile?",
+        "options": ["Happy", "Angry", "Sad", "Scared"],
+        "correct_index": 0,
+        "feedback": "Smiling usually means we feel happy inside!"
+    },
+    {
+        "id": 2,
+        "emoji": "😢",
+        "question": "When you feel sad, what helps?",
+        "options": ["Talk to someone you trust", "Stay alone all day", "Shout at others", "Ignore the feeling"],
+        "correct_index": 0,
+        "feedback": "Talking to a parent, teacher, or friend really helps when we feel sad."
+    },
+    {
+        "id": 3,
+        "emoji": "😤",
+        "question": "When you feel angry, what should you do?",
+        "options": ["Hit someone", "Take deep breaths", "Break things", "Run away"],
+        "correct_index": 1,
+        "feedback": "Taking deep breaths helps your body calm down when you feel angry."
+    },
+    {
+        "id": 4,
+        "emoji": "😨",
+        "question": "Feeling scared before a test is...?",
+        "options": ["Very normal", "Very bad", "Only for babies", "Wrong"],
+        "correct_index": 0,
+        "feedback": "Everyone feels nervous sometimes. It's totally normal!"
+    },
+    {
+        "id": 5,
+        "emoji": "😴",
+        "question": "Why is sleep important?",
+        "options": ["It helps your brain rest", "It is not important", "Only for small kids", "It makes you taller"],
+        "correct_index": 0,
+        "feedback": "Sleep helps your brain and body feel better and ready for the day."
+    },
+    {
+        "id": 6,
+        "emoji": "🏃",
+        "question": "Playing and running makes you feel...?",
+        "options": ["Worse", "Happier and healthier", "More tired only", "Bored"],
+        "correct_index": 1,
+        "feedback": "Exercise makes your brain release happy chemicals that improve your mood!"
+    },
+    {
+        "id": 7,
+        "emoji": "👨‍👩‍👧",
+        "question": "Who should you tell if you feel unsafe?",
+        "options": ["Nobody", "A trusted adult", "Only your friend", "Your pet"],
+        "correct_index": 1,
+        "feedback": "Always tell a trusted adult — a parent, teacher, or school counselor — if you feel unsafe."
+    },
+    {
+        "id": 8,
+        "emoji": "💛",
+        "question": "Being kind to a sad friend is...?",
+        "options": ["A waste of time", "Very helpful", "Not your job", "Weird"],
+        "correct_index": 1,
+        "feedback": "Small acts of kindness can mean the world to someone who is feeling down."
+    },
+    {
+        "id": 9,
+        "emoji": "🌈",
+        "question": "Is it okay to feel many emotions in one day?",
+        "options": ["Yes, it is normal", "No, pick one feeling", "Only on weekends", "Feelings are not real"],
+        "correct_index": 0,
+        "feedback": "Feeling happy, sad, excited, and nervous all in one day is completely normal for everyone!"
+    },
+    {
+        "id": 10,
+        "emoji": "🧠",
+        "question": "Taking care of your mind means...?",
+        "options": ["Hiding your feelings", "Talking, resting, and playing", "Eating only sweets", "Watching TV all day"],
+        "correct_index": 1,
+        "feedback": "Talking about feelings, resting well, and playing keeps your mind healthy and strong."
+    }
+];
+
+// @desc    Get child-friendly questions (age <=12)
+// @route   GET /api/v1/questions/children
+// @access  Private (Patient)
+exports.getChildQuestions = async (req, res, next) => {
+    try {
+        // Assuming the authenticated user is a patient; enforce age check
+        const age = calculateAge(req.user.dateOfBirth);
+        if (age > 12) {
+            return sendError(res, 403, 'Only patients age 12 or below can access child questions');
+        }
+        sendSuccess(res, 200, 'Child questions fetched', CHILD_QUESTIONS);
+    } catch (err) {
+        next(err);
+    }
+};
+
+// @desc    Submit answer for a child question and get AI-generated feedback
+// @route   POST /api/v1/questions/children/:id/answer
+// @access  Private (Patient)
+exports.submitChildAnswer = async (req, res, next) => {
+    try {
+        const age = calculateAge(req.user.dateOfBirth);
+        if (age > 12) {
+            return sendError(res, 403, 'Only patients age 12 or below can submit child answers');
+        }
+        const questionId = parseInt(req.params.id);
+        const { answer } = req.body; // expects the selected option text or index
+        const question = CHILD_QUESTIONS.find(q => q.id === questionId);
+        if (!question) {
+            return sendError(res, 404, 'Question not found');
+        }
+        // Build prompt for OpenAI
+        const prompt = `Question: ${question.question}\nOptions: ${question.options.join(', ')}\nUser answered: ${answer}\nProvide a brief supportive response based on the answer.`;
+        const aiResponse = await openAIService.chatWithPatient([{ role: 'user', content: prompt }]);
+        sendSuccess(res, 200, 'AI response generated', { questionId, answer, aiResponse });
     } catch (err) {
         next(err);
     }
@@ -199,7 +327,7 @@ exports.getPatientSelfAssessments = async (req, res, next) => {
         // 3. Group questions into these aspects
         const aspects = Object.entries(aspectMapping).map(([aspectName, config]) => {
             const aspectQuestions = questions.filter(q => config.categories.includes(q.category));
-            
+
             // Only return aspects that have questions
             if (aspectQuestions.length === 0) return null;
 
