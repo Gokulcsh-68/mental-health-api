@@ -13,7 +13,7 @@ router.get('/self-assessments', authorize('patient', 'super_admin'), getPatientS
 // Admin routes
 router.get('/', authorize('super_admin', 'admin', 'hospital'), getAllQuestions);
 router.post('/', authorize('super_admin', 'admin', 'hospital'), auditLog('WRITE', 'Question'), createQuestion);
-router.get('/children', authorize('patient'), getChildQuestions);
+router.get('/children', getChildQuestions);
 router.post('/children/answers', submitChildAnswer);
 router.get('/children/history', getChildAssessmentHistory);
 
