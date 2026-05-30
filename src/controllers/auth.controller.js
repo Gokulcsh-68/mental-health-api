@@ -42,12 +42,14 @@ exports.register = async (req, res, next) => {
         (async () => {
             try {
                 const aiGreeting = await openAIService.generateWelcomeMessage(user, true); // true = isNewUser
+                const images = openAIService.getMentalHealthImages();
+                const imageObj = images[aiGreeting?.imageIndex] || images[2];
                 notify({
                     userId: user._id,
                     title: aiGreeting?.title || 'Welcome Home! 🏠',
                     message: aiGreeting?.message || `Welcome to MindBalance, ${user.firstName}! We are excited to support you on your journey.`,
                     type: 'welcome',
-                    imageUrl: openAIService.getMentalHealthImages()[aiGreeting?.imageIndex || 2]
+                    imageUrl: imageObj ? imageObj.url : ''
                 });
             } catch (err) {
                 logger.error('Background New User Welcome Error: %s', err.message);
@@ -124,12 +126,14 @@ exports.login = async (req, res, next) => {
         (async () => {
             try {
                 const aiGreeting = await openAIService.generateWelcomeMessage(user, false);
+                const images = openAIService.getMentalHealthImages();
+                const imageObj = images[aiGreeting?.imageIndex] || images[6];
                 notify({
                     userId: user._id,
                     title: aiGreeting?.title || 'Welcome Back! 👋',
                     message: aiGreeting?.message || `Hello ${user.firstName}, welcome back to Mental Health Platform.`,
                     type: 'welcome',
-                    imageUrl: openAIService.getMentalHealthImages()[aiGreeting?.imageIndex || 6]
+                    imageUrl: imageObj ? imageObj.url : ''
                 });
             } catch (err) {
                 logger.error('Background Welcome Notification Error: %s', err.message);

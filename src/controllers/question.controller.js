@@ -227,8 +227,33 @@ const CHILD_QUESTIONS = [
 // @access  Private (Patient)
 exports.getChildQuestions = async (req, res, next) => {
     try {
-        // Assuming the authenticated user is a patient; enforce age check
-        const age = calculateAge(req.user.dateOfBirth);
+        const { patientId } = req.query;
+        let targetUser = req.user;
+
+        // Logic for Professionals vs Patients
+        if (req.user.role === 'patient') {
+            if (patientId && req.user.userId !== parseInt(patientId)) {
+                return sendError(res, 403, 'Not authorized to fetch questions for another patient');
+            }
+            targetUser = req.user;
+        } else {
+            // Staff members MUST provide a patientId
+            if (!patientId) {
+                return sendError(res, 400, 'Staff members must provide a patientId query parameter (e.g., ?patientId=9)');
+            }
+
+            targetUser = await User.findOne({ userId: parseInt(patientId) });
+
+            if (!targetUser) {
+                return sendError(res, 404, `User with userId ${patientId} not found`);
+            }
+
+            if (targetUser.role !== 'patient') {
+                return sendError(res, 400, `User with userId ${patientId} is not a patient.`);
+            }
+        }
+
+        const age = calculateAge(targetUser.dateOfBirth);
         if (age > 12) {
             return sendError(res, 403, 'Only patients age 12 or below can access child questions');
         }

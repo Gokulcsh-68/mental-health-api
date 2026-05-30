@@ -1181,7 +1181,7 @@ ${contextFragment}
             return {
                 title: "Mindfulness Tip 🧘‍♂️",
                 message: "Take 3 deep breaths. Inhale peace, exhale stress. You've got this!",
-                imageUrl: images[0]
+                imageUrl: images[0].url
             };
         }
 
@@ -1210,7 +1210,7 @@ ${contextFragment}
             return {
                 title: "Daily Reminder 🌿",
                 message: "Small steps lead to big changes. Keep moving forward!",
-                imageUrl: images[1]
+                imageUrl: images[1].url
             };
         }
     }
@@ -1225,7 +1225,7 @@ ${contextFragment}
             return {
                 title: "Assessment Complete! ✨",
                 message: `Thank you for completing your ${category} assessment. Taking this step is a great move for your well-being!`,
-                imageUrl: images[6]
+                imageUrl: images[6].url
             };
         }
 
@@ -1255,7 +1255,7 @@ ${contextFragment}
             return {
                 title: "Great Progress! 🌟",
                 message: "You've completed your assessment. Proud of you for checking in with yourself today!",
-                imageUrl: images[6]
+                imageUrl: images[6].url
             };
         }
     }
