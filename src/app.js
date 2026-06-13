@@ -17,6 +17,7 @@ const professionalAssessmentRoutes = require('./routes/professionalAssessment.ro
 const resourceRoutes = require('./routes/resource.routes');
 const roleRoutes = require('./routes/role.routes');
 const consultRoutes = require('./routes/consult.routes');
+const diagnosisRoutes = require('./routes/diagnosis.routes');
 const apiAccessRoutes = require('./routes/apiAccess.routes');
 const taxCodeRoutes = require('./routes/taxCode.routes');
 const chargeCodeRoutes = require('./routes/chargeCode.routes');
@@ -90,7 +91,8 @@ v1Router.use('/professional-assessments', professionalAssessmentRoutes);
 v1Router.use('/resource', resourceRoutes);
 v1Router.use('/consults', consultRoutes);
 v1Router.use('/roles', roleRoutes);
-v1Router.use('/api-access', apiAccessRoutes);
+v1Router.use('/diagnosis', diagnosisRoutes);
+    v1Router.use('/api-access', apiAccessRoutes);
 v1Router.use('/tax-codes', taxCodeRoutes);
 v1Router.use('/charge-codes', chargeCodeRoutes);
 v1Router.use('/specialists/schedule', specialistScheduleRoutes);
