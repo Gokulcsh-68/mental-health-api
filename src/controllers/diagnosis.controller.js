@@ -6,13 +6,21 @@ const { sendSuccess, sendError } = require('../utils/responseHelper');
 const notificationService = require('../services/notificationService');
 const logger = require('../config/logger');
 
+// Helper to find patient by user_id ObjectId or numeric patient_id
+const findPatient = async (targetId) => {
+  if (!targetId) return null;
+  const isObjectId = /^[0-9a-fA-F]{24}$/.test(String(targetId));
+  const query = isObjectId ? { user_id: targetId } : { patient_id: parseInt(targetId) };
+  return await Patient.findOne(query);
+};
+
 
 // POST /api/v1/diagnosis
 exports.getDiagnosis = async (req, res, next) => {
   try {
     const { user_id } = req.params;
 
-    const patient = await Patient.findOne({ user_id });
+    const patient = await findPatient(user_id);
     if (!patient) { return sendError(res, 404, 'Patient not found'); }
     const diagnosis = await Diagnosis.findOne({ patientId: patient._id }).sort({ createdAt: -1 });
 
@@ -61,7 +69,7 @@ exports.getFriendlyDiagnosis = async (req, res, next) => {
   try {
     const { user_id } = req.params;
 
-    const patient = await Patient.findOne({ user_id });
+    const patient = await findPatient(user_id);
     if (!patient) { return sendError(res, 404, 'Patient not found'); }
     const diagnosis = await Diagnosis.findOne({ patientId: patient._id }).sort({ createdAt: -1 });
 
@@ -93,10 +101,7 @@ exports.createDiagnosis = async (req, res, next) => {
       return sendError(res, 400, 'user_id is required');
     }
 
-    // const Patient = require('../models/Patient'); // Duplicate import removed
-    const patient = await Patient.findOne({
-      user_id: user_id
-    });
+    const patient = await findPatient(user_id);
 
     if (!patient) {
       return sendError(res, 404, 'Patient not found');
@@ -198,7 +203,7 @@ exports.getAIDiagnosis = async (req, res, next) => {
     }
 
 
-    const patient = await Patient.findOne({ user_id: targetUserId });
+    const patient = await findPatient(targetUserId);
 
     if (!patient) {
       return sendError(res, 404, 'Patient not found');
@@ -263,7 +268,7 @@ exports.aiDiagnose = async (req, res, next) => {
 
     let patient;
     try {
-      patient = await Patient.findOne({ user_id: targetUserId });
+      patient = await findPatient(targetUserId);
     } catch (e) {
       return sendError(res, 500, 'Patient model unavailable');
     }
