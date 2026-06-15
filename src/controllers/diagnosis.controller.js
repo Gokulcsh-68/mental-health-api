@@ -1,5 +1,5 @@
 const Diagnosis = require('../models/Diagnosis');
-const Patient = require('../models/Patient');
+// const Patient = require('../models/Patient'); // Removed to avoid missing module error
 const User = require('../models/User');
 const openAIService = require('../services/OpenAIService');
 const { sendSuccess, sendError } = require('../utils/responseHelper');
@@ -93,6 +93,7 @@ exports.createDiagnosis = async (req, res, next) => {
       return sendError(res, 400, 'patient_id is required');
     }
 
+    const Patient = require('../models/Patient');
     const patient = await Patient.findOne({
       patient_id: parseInt(patient_id)
     });
@@ -195,6 +196,7 @@ exports.getAIDiagnosis = async (req, res, next) => {
       );
     }
 
+    const Patient = require('../models/Patient');
     const patient = await Patient.findOne({
       patient_id: parseInt(patient_id)
     });
@@ -239,20 +241,33 @@ exports.getAIDiagnosis = async (req, res, next) => {
 /** AI-only diagnosis & prescription */
 exports.aiDiagnose = async (req, res, next) => {
   try {
-    const { patient_id, condition } = req.body || {};
+    const { patient_id, symptoms, condition } = req.body || {};
 
-    if (!patient_id) {
-      return sendError(
-        res,
-        400,
-        'patient_id is required'
-      );
+    // If symptoms are provided directly, use them for AI diagnosis
+    if (symptoms && (Array.isArray(symptoms) ? symptoms.length : symptoms.trim())) {
+      const clinicalData = {
+        symptoms: Array.isArray(symptoms) ? symptoms : [symptoms],
+        condition
+      };
+      const aiResult = await openAIService.analyzeClinicalInference(clinicalData, {});
+      return sendSuccess(res, 200, 'AI diagnosis generated', {
+        diagnosis: aiResult.diagnosis,
+        prescription: aiResult.prescription?.medications || []
+      });
     }
 
-    const patient = await Patient.findOne({
-      patient_id: parseInt(patient_id)
-    });
+    // Otherwise, require patient_id and fetch patient data
+    if (!patient_id) {
+      return sendError(res, 400, 'patient_id or symptoms is required');
+    }
 
+    let patient;
+    try {
+      const Patient = require('../models/Patient');
+      patient = await Patient.findOne({ patient_id: parseInt(patient_id) });
+    } catch (e) {
+      return sendError(res, 500, 'Patient model unavailable');
+    }
     if (!patient) {
       return sendError(res, 404, 'Patient not found');
     }
@@ -266,26 +281,14 @@ exports.aiDiagnose = async (req, res, next) => {
       assessments: patient.assessments || [],
       condition
     };
-
-    const aiResult =
-      await openAIService.analyzeClinicalInference(
-        clinicalData,
-        {
-          age: patient.age,
-          gender: patient.gender
-        }
-      );
-
-    return sendSuccess(
-      res,
-      200,
-      'AI diagnosis generated',
-      {
-        diagnosis: aiResult.diagnosis,
-        prescription:
-          aiResult.prescription?.medications || []
-      }
-    );
+    const aiResult = await openAIService.analyzeClinicalInference(clinicalData, {
+      age: patient.age,
+      gender: patient.gender
+    });
+    return sendSuccess(res, 200, 'AI diagnosis generated', {
+      diagnosis: aiResult.diagnosis,
+      prescription: aiResult.prescription?.medications || []
+    });
   } catch (err) {
     next(err);
   }
