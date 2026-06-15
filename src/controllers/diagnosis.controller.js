@@ -18,6 +18,35 @@ exports.getDiagnosis = async (req, res, next) => {
     next(err);
   }
 };
+// Helper to generate a user‑friendly summary
+function formatFriendly(diagnosis, prescription) {
+  let summary = `🩺 **Diagnosis:** ${diagnosis?.primary || 'N/A'}\n`;
+  if (diagnosis?.details) {
+    summary += `\n> ${diagnosis.details}\n`;
+  }
+  if (Array.isArray(prescription) && prescription.length) {
+    summary += `\n💊 **Prescribed Medications:**\n`;
+    prescription.forEach((med, i) => {
+      summary += `${i + 1}. ${med.name || med} - ${med.dosage || 'dosage not specified'}\n`;
+    });
+  } else {
+    summary += `\n💊 No prescription recommended.`;
+  }
+  return summary;
+}
+
+// GET friendly diagnosis for end‑users
+exports.getFriendlyDiagnosis = async (req, res, next) => {
+  try {
+    const { consult_id } = req.params;
+    const diagnosis = await Diagnosis.findOne({ consultId: parseInt(consult_id) });
+    if (!diagnosis) return sendError(res, 404, 'Diagnosis not found');
+    const friendly = formatFriendly(diagnosis.diagnosis, diagnosis.prescription);
+    sendSuccess(res, 200, 'Friendly diagnosis retrieved', { summary: friendly });
+  } catch (err) {
+    next(err);
+  }
+};
 
 exports.createDiagnosis = async (req, res, next) => {
   try {
@@ -104,10 +133,17 @@ exports.getAIDiagnosis = async (req, res, next) => {
 /** AI-only diagnosis & prescription */
 exports.aiDiagnose = async (req, res, next) => {
   try {
-    const { consult_id, condition } = req.body || {};
-    if (!consult_id) return sendError(res, 400, 'consult_id is required');
-
-    const consult = await Consult.findOne({ consult_id: parseInt(consult_id) });
+    const { consult_id, patient_id, condition } = req.body || {};
+    if (!consult_id && !patient_id) return sendError(res, 400, 'consult_id or patient_id is required');
+    let consult;
+    if (consult_id) {
+      consult = await Consult.findOne({ consult_id: parseInt(consult_id) });
+    } else {
+      // Find consult where a participant with role 'subscriber' matches patient_id
+      consult = await Consult.findOne({
+        participants: { $elemMatch: { role: 'subscriber', ref_number: String(patient_id) } }
+      });
+    }
     if (!consult) return sendError(res, 404, 'Consultation not found');
 
     const clinicalData = {
