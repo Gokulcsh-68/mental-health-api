@@ -9,6 +9,15 @@ const logger = require('../config/logger');
 // Helper to find patient by user_id ObjectId or numeric patient_id
 const findPatient = async (targetId) => {
   if (!targetId) return null;
+
+  // Normalize gender to match Patient schema enum: 'Male' | 'Female' | 'Other'
+  const normalizeGender = (g) => {
+    if (!g) return undefined;
+    const lower = g.toLowerCase();
+    if (lower === 'male') return 'Male';
+    if (lower === 'female') return 'Female';
+    return 'Other';
+  };
   // If targetId looks like a Mongo ObjectId, treat it as a user_id reference
   const isObjectId = /^[0-9a-fA-F]{24}$/.test(String(targetId));
   if (isObjectId) {
@@ -23,7 +32,7 @@ const findPatient = async (targetId) => {
         patient_id: user.userId || 1,
         user_id: user._id,
         age: age,
-        gender: user.gender,
+        gender: normalizeGender(user.gender),
         symptoms: [],
         vitals: {},
         allergies: [],
@@ -53,7 +62,7 @@ const findPatient = async (targetId) => {
     patient_id: user.userId,
     user_id: user._id,
     age: age,
-    gender: user.gender,
+    gender: normalizeGender(user.gender),
     symptoms: [],
     vitals: {},
     allergies: [],
@@ -314,11 +323,24 @@ exports.aiDiagnose = async (req, res, next) => {
       return sendError(res, 400, 'patient_id or symptoms is required');
     }
 
+    // Find existing patient only — do NOT auto-create
     let patient;
     try {
-      patient = await findPatient(targetUserId);
+      const isObjectId = /^[0-9a-fA-F]{24}$/.test(String(targetUserId));
+      if (isObjectId) {
+        patient = await Patient.findOne({ user_id: targetUserId });
+      } else {
+        const numericId = parseInt(targetUserId);
+        patient = await Patient.findOne({ patient_id: numericId });
+        if (!patient) {
+          const user = await User.findOne({ userId: numericId });
+          if (user) {
+            patient = await Patient.findOne({ user_id: user._id });
+          }
+        }
+      }
     } catch (e) {
-      logger.error('findPatient failed:', e);
+      logger.error('Patient lookup failed:', e);
       return sendError(res, 500, `Patient lookup failed: ${e.message}`);
     }
     if (!patient) {
