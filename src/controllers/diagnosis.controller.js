@@ -9,9 +9,58 @@ const logger = require('../config/logger');
 // Helper to find patient by user_id ObjectId or numeric patient_id
 const findPatient = async (targetId) => {
   if (!targetId) return null;
+  // If targetId looks like a Mongo ObjectId, treat it as a user_id reference
   const isObjectId = /^[0-9a-fA-F]{24}$/.test(String(targetId));
-  const query = isObjectId ? { user_id: targetId } : { patient_id: parseInt(targetId) };
-  return await Patient.findOne(query);
+  if (isObjectId) {
+    let patient = await Patient.findOne({ user_id: targetId });
+    if (patient) return patient;
+    const user = await User.findById(targetId);
+    if (user) {
+      const age = user.dateOfBirth
+        ? Math.floor((Date.now() - new Date(user.dateOfBirth).getTime()) / (1000 * 60 * 60 * 24 * 365.25))
+        : undefined;
+      return await Patient.create({
+        patient_id: user.userId || 1,
+        user_id: user._id,
+        age: age,
+        gender: user.gender,
+        symptoms: [],
+        vitals: {},
+        allergies: [],
+        medications: [],
+        medical_history: [],
+        assessments: []
+      });
+    }
+    return null;
+  }
+  // Numeric id could be either patient_id or the auto‑incremented userId
+  const numericId = parseInt(targetId);
+  // First try finding a patient by patient_id
+  let patient = await Patient.findOne({ patient_id: numericId });
+  if (patient) return patient;
+  // If not found, look up User by userId and then find patient by that user ObjectId
+  const user = await User.findOne({ userId: numericId });
+  if (!user) return null;
+  
+  patient = await Patient.findOne({ user_id: user._id });
+  if (patient) return patient;
+
+  const age = user.dateOfBirth
+    ? Math.floor((Date.now() - new Date(user.dateOfBirth).getTime()) / (1000 * 60 * 60 * 24 * 365.25))
+    : undefined;
+  return await Patient.create({
+    patient_id: user.userId,
+    user_id: user._id,
+    age: age,
+    gender: user.gender,
+    symptoms: [],
+    vitals: {},
+    allergies: [],
+    medications: [],
+    medical_history: [],
+    assessments: []
+  });
 };
 
 
@@ -53,9 +102,8 @@ function formatFriendly(diagnosis, prescription) {
     summary += `\n💊 Prescribed Medications:\n`;
 
     prescription.forEach((med, i) => {
-      summary += `${i + 1}. ${med.name || med} - ${
-        med.dosage || 'dosage not specified'
-      }\n`;
+      summary += `${i + 1}. ${med.name || med} - ${med.dosage || 'dosage not specified'
+        }\n`;
     });
   } else {
     summary += '\n💊 No prescription recommended.';
@@ -192,7 +240,7 @@ exports.createDiagnosis = async (req, res, next) => {
 exports.getAIDiagnosis = async (req, res, next) => {
   try {
     const { user_id, consult_id } = req.params;
-    const targetUserId = user_id || consult_id;
+    const targetUserId = user_id || consult_id || req.body.user_id;
 
     if (!targetUserId) {
       return sendError(
