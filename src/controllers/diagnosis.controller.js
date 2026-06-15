@@ -186,9 +186,10 @@ exports.createDiagnosis = async (req, res, next) => {
 /** GET AI diagnosis without persisting */
 exports.getAIDiagnosis = async (req, res, next) => {
   try {
-    const { user_id } = req.params;
+    const { user_id, consult_id } = req.params;
+    const targetUserId = user_id || consult_id;
 
-    if (!user_id) {
+    if (!targetUserId) {
       return sendError(
         res,
         400,
@@ -197,7 +198,7 @@ exports.getAIDiagnosis = async (req, res, next) => {
     }
 
 
-    const patient = await Patient.findOne({ user_id });
+    const patient = await Patient.findOne({ user_id: targetUserId });
 
     if (!patient) {
       return sendError(res, 404, 'Patient not found');
@@ -239,7 +240,8 @@ exports.getAIDiagnosis = async (req, res, next) => {
 /** AI-only diagnosis & prescription */
 exports.aiDiagnose = async (req, res, next) => {
   try {
-    const { user_id, symptoms, condition } = req.body || {};
+    const { user_id, patient_id, symptoms, condition } = req.body || {};
+    const targetUserId = user_id || patient_id;
 
     // If symptoms are provided directly, use them for AI diagnosis
     if (symptoms && (Array.isArray(symptoms) ? symptoms.length : symptoms.trim())) {
@@ -254,15 +256,14 @@ exports.aiDiagnose = async (req, res, next) => {
       });
     }
 
-    // Otherwise, require patient_id and fetch patient data
-    if (!user_id) {
+    // Otherwise, require patient_id/user_id and fetch patient data
+    if (!targetUserId) {
       return sendError(res, 400, 'patient_id or symptoms is required');
     }
 
     let patient;
     try {
-
-      patient = await Patient.findOne({ user_id });
+      patient = await Patient.findOne({ user_id: targetUserId });
     } catch (e) {
       return sendError(res, 500, 'Patient model unavailable');
     }
