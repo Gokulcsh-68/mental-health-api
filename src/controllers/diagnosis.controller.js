@@ -1,5 +1,5 @@
 const Diagnosis = require('../models/Diagnosis');
-// const Patient = require('../models/Patient'); // Removed to avoid missing module error
+const Patient = require('../models/Patient');
 const User = require('../models/User');
 const openAIService = require('../services/OpenAIService');
 const { sendSuccess, sendError } = require('../utils/responseHelper');
@@ -93,7 +93,7 @@ exports.createDiagnosis = async (req, res, next) => {
       return sendError(res, 400, 'patient_id is required');
     }
 
-    const Patient = require('../models/Patient');
+    // const Patient = require('../models/Patient'); // Duplicate import removed
     const patient = await Patient.findOne({
       patient_id: parseInt(patient_id)
     });
@@ -196,7 +196,7 @@ exports.getAIDiagnosis = async (req, res, next) => {
       );
     }
 
-    const Patient = require('../models/Patient');
+
     const patient = await Patient.findOne({
       patient_id: parseInt(patient_id)
     });
@@ -263,7 +263,7 @@ exports.aiDiagnose = async (req, res, next) => {
 
     let patient;
     try {
-      const Patient = require('../models/Patient');
+
       patient = await Patient.findOne({ patient_id: parseInt(patient_id) });
     } catch (e) {
       return sendError(res, 500, 'Patient model unavailable');
