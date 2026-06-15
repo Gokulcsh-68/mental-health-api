@@ -323,42 +323,50 @@ exports.aiDiagnose = async (req, res, next) => {
       return sendError(res, 400, 'patient_id or symptoms is required');
     }
 
-    // Find existing patient only — do NOT auto-create
+    // Find the User first by userId
+    let user;
     let patient;
     try {
       const isObjectId = /^[0-9a-fA-F]{24}$/.test(String(targetUserId));
       if (isObjectId) {
-        patient = await Patient.findOne({ user_id: targetUserId });
+        user = await User.findById(targetUserId);
       } else {
-        const numericId = parseInt(targetUserId);
-        patient = await Patient.findOne({ patient_id: numericId });
-        if (!patient) {
-          const user = await User.findOne({ userId: numericId });
-          if (user) {
-            patient = await Patient.findOne({ user_id: user._id });
-          }
-        }
+        user = await User.findOne({ userId: parseInt(targetUserId) });
       }
     } catch (e) {
-      logger.error('Patient lookup failed:', e);
-      return sendError(res, 500, `Patient lookup failed: ${e.message}`);
+      logger.error('User lookup failed:', e);
+      return sendError(res, 500, `User lookup failed: ${e.message}`);
     }
-    if (!patient) {
-      return sendError(res, 404, 'Patient not found');
+    if (!user) {
+      return sendError(res, 404, 'User not found');
     }
 
+    // Optionally fetch Patient record for extra clinical data
+    try {
+      patient = await Patient.findOne({ user_id: user._id });
+    } catch (e) {
+      logger.warn('Patient lookup failed, continuing without patient data:', e.message);
+    }
+
+    const narrative = req.body.narrative || '';
     const clinicalData = {
-      symptoms: patient.symptoms || [],
-      vitals: patient.vitals || {},
-      allergies: patient.allergies || [],
-      medications: patient.medications || [],
-      medical_history: patient.medical_history || [],
-      assessments: patient.assessments || [],
+      symptoms: patient?.symptoms || [],
+      vitals: patient?.vitals || {},
+      allergies: patient?.allergies || [],
+      medications: patient?.medications || [],
+      medical_history: patient?.medical_history || [],
+      assessments: patient?.assessments || [],
+      narrative,
       condition
     };
+
+    const age = patient?.age || (user.dateOfBirth
+      ? Math.floor((Date.now() - new Date(user.dateOfBirth).getTime()) / (1000 * 60 * 60 * 24 * 365.25))
+      : undefined);
+
     const aiResult = await openAIService.analyzeClinicalInference(clinicalData, {
-      age: patient.age,
-      gender: patient.gender
+      age,
+      gender: user.gender
     });
     return sendSuccess(res, 200, 'AI diagnosis generated', {
       diagnosis: aiResult.diagnosis,
