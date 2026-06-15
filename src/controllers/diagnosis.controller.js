@@ -318,7 +318,8 @@ exports.aiDiagnose = async (req, res, next) => {
     try {
       patient = await findPatient(targetUserId);
     } catch (e) {
-      return sendError(res, 500, 'Patient model unavailable');
+      logger.error('findPatient failed:', e);
+      return sendError(res, 500, `Patient lookup failed: ${e.message}`);
     }
     if (!patient) {
       return sendError(res, 404, 'Patient not found');
