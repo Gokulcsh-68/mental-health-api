@@ -368,10 +368,89 @@ exports.aiDiagnose = async (req, res, next) => {
       age,
       gender: user.gender
     });
+
+    const diagnosisData = aiResult.diagnosis;
+    const prescriptionData = aiResult.prescription?.medications || [];
+
+    // Persist the AI diagnosis to history
+    let saved;
+    try {
+      saved = await Diagnosis.create({
+        patientId: patient?._id || user._id,
+        patient_id: patient?.patient_id || user.userId || 0,
+        diagnosis: diagnosisData,
+        prescription: prescriptionData,
+        narrative,
+        aiGenerated: true,
+        createdBy: req.user?._id
+      });
+    } catch (saveErr) {
+      logger.warn('Failed to save AI diagnosis to history:', saveErr.message);
+    }
+
     return sendSuccess(res, 200, 'AI diagnosis generated', {
-      diagnosis: aiResult.diagnosis,
-      prescription: aiResult.prescription?.medications || []
+      id: saved?._id,
+      diagnosis: diagnosisData,
+      prescription: prescriptionData,
+      narrative,
+      created_at: saved?.createdAt || new Date().toISOString()
     });
+  } catch (err) {
+    next(err);
+  }
+};
+
+/** GET /api/v1/diagnosis/ai?user_id=... — Diagnosis history for a user */
+exports.getDiagnosisHistory = async (req, res, next) => {
+  try {
+    const { user_id } = req.query;
+    if (!user_id) {
+      return sendError(res, 400, 'user_id query parameter is required');
+    }
+
+    // Resolve user
+    let user;
+    const isObjectId = /^[0-9a-fA-F]{24}$/.test(String(user_id));
+    if (isObjectId) {
+      user = await User.findById(user_id);
+    } else {
+      user = await User.findOne({ userId: parseInt(user_id) });
+    }
+    if (!user) {
+      return sendError(res, 404, 'User not found');
+    }
+
+    // Find all diagnoses linked to this user directly via their user object id or numeric id
+    const patient = await Patient.findOne({ user_id: user._id });
+
+    const query = {
+      $or: [
+        { createdBy: user._id },
+        { patient_id: user.userId },
+        // Fallback to match where patientId might have been saved as user._id (which some routes do)
+        { patientId: user._id }
+      ]
+    };
+
+    if (patient) {
+      query.$or.push({ patientId: patient._id });
+      query.$or.push({ patient_id: patient.patient_id });
+    }
+
+    const diagnoses = await Diagnosis.find(query)
+      .sort({ createdAt: -1 })
+      .limit(50)
+      .lean();
+
+    const results = diagnoses.map(d => ({
+      id: d._id,
+      diagnosis: d.diagnosis,
+      prescription: d.prescription,
+      narrative: d.narrative || '',
+      created_at: d.createdAt
+    }));
+
+    return sendSuccess(res, 200, 'Diagnosis history retrieved', results);
   } catch (err) {
     next(err);
   }
