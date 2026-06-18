@@ -9,7 +9,8 @@
     "runAllSeeders": "node scripts/master_seeder.js",
     "seed:masters": "node scripts/run_masters.js",
     "seed:full-reset": "node scripts/master_seeder.js --reset",
-    "seed:seedUsers": "node scripts/seed_users_only.js"
+    "seed:seedUsers": "node scripts/seed_users_only.js",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
@@ -39,6 +40,7 @@
     "xss-clean": "^0.1.4"
   },
   "devDependencies": {
+    "jest": "^30.4.2",
     "nodemon": "^3.1.11",
     "socket.io-client": "^4.8.3",
     "supertest": "^7.2.2"
