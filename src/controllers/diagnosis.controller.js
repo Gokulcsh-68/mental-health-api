@@ -6,8 +6,7 @@ const { sendSuccess, sendError } = require('../utils/responseHelper');
 const notificationService = require('../services/notificationService');
 const logger = require('../config/logger');
 
-
-// POST /api/v1/diagnosis
+ // GET diagnosis by consult_id
 exports.getDiagnosis = async (req, res, next) => {
   try {
     const { consult_id } = req.params;
@@ -123,6 +122,84 @@ exports.aiDiagnose = async (req, res, next) => {
 
     // Return without persisting
     sendSuccess(res, 200, 'AI diagnosis generated', { diagnosis, prescription });
+  } catch (err) {
+    next(err);
+  }
+};
+
+/** GET diagnosis history for a user */
+exports.getDiagnosisHistory = async (req, res, next) => {
+  try {
+    const { user_id } = req.query;
+    if (!user_id) {
+      return sendError(res, 400, 'user_id query parameter is required');
+    }
+
+    // Resolve user directly – no Patient lookup needed
+    const isObjectId = /^[0-9a-fA-F]{24}$/.test(String(user_id));
+    const user = isObjectId ? await User.findById(user_id) : await User.findOne({ userId: parseInt(user_id) });
+    if (!user) {
+      return sendError(res, 404, 'User not found');
+    }
+
+    // Query diagnoses that belong to this user either by creator, numeric userId or direct reference
+    const query = {
+      $or: [
+        { createdBy: user._id },
+        { patient_id: user.userId },
+        { patientId: user._id }
+      ]
+    };
+
+    const diagnoses = await Diagnosis.find(query)
+      .sort({ createdAt: -1 })
+      .limit(50)
+      .lean();
+
+    const results = diagnoses.map(d => ({
+      id: d._id,
+      diagnosis: d.diagnosis,
+      prescription: d.prescription,
+      narrative: d.narrative || '',
+      created_at: d.createdAt
+    }));
+
+    return sendSuccess(res, 200, 'Diagnosis history retrieved', results);
+  } catch (err) {
+    next(err);
+  }
+};
+
+/** GET latest diagnosis for a user by user_id (protected) */
+exports.getLatestDiagnosisByUser = async (req, res, next) => {
+  try {
+    const { user_id } = req.params;
+    if (!user_id) {
+      return sendError(res, 400, 'user_id parameter is required');
+    }
+    const isObjectId = /^[0-9a-fA-F]{24}$/.test(String(user_id));
+    const user = isObjectId ? await User.findById(user_id) : await User.findOne({ userId: parseInt(user_id) });
+    if (!user) {
+      return sendError(res, 404, 'User not found');
+    }
+
+    // Fetch all diagnoses for this user, sorted newest first
+    const diagnoses = await Diagnosis.find({ patientId: user._id })
+      .sort({ createdAt: -1 })
+      .lean();
+
+    if (!diagnoses || diagnoses.length === 0) {
+      return sendError(res, 404, 'Diagnosis not found');
+    }
+
+    const results = diagnoses.map(d => ({
+      diagnosis: d.diagnosis,
+      prescription: d.prescription,
+      narrative: d.narrative || '',
+      created_at: d.createdAt
+    }));
+
+    return sendSuccess(res, 200, 'All diagnoses retrieved', results);
   } catch (err) {
     next(err);
   }
