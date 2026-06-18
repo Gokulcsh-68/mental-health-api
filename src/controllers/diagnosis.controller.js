@@ -73,12 +73,12 @@ const findPatient = async (targetId) => {
 };
 
 
-// POST /api/v1/diagnosis
+// GET /api/v1/diagnosis/:consult_id
 exports.getDiagnosis = async (req, res, next) => {
   try {
-    const { user_id } = req.params;
-
-    const patient = await findPatient(user_id);
+    const { consult_id } = req.params;
+    // The route is /:consult_id, but the function finds patient using this param
+    const patient = await findPatient(consult_id);
     if (!patient) { return sendError(res, 404, 'Patient not found'); }
     const diagnosis = await Diagnosis.findOne({ patientId: patient._id }).sort({ createdAt: -1 });
 
@@ -153,93 +153,52 @@ exports.getFriendlyDiagnosis = async (req, res, next) => {
 exports.createDiagnosis = async (req, res, next) => {
   try {
     const { user_id, condition } = req.body || {};
-
     if (!user_id) {
       return sendError(res, 400, 'user_id is required');
     }
 
-    const patient = await findPatient(user_id);
-
-    if (!patient) {
-      return sendError(res, 404, 'Patient not found');
+    // Find the user directly – no Patient document required
+    const user = await User.findById(user_id) || await User.findOne({ userId: parseInt(user_id) });
+    if (!user) {
+      return sendError(res, 404, 'User not found');
     }
 
-    const clinicalData = {
-      symptoms: patient.symptoms || [],
-      vitals: patient.vitals || {},
-      allergies: patient.allergies || [],
-      medications: patient.medications || [],
-      medical_history: patient.medical_history || [],
-      assessments: patient.assessments || [],
-      condition
-    };
+    const clinicalData = { condition };
 
-    const aiResult =
-      await openAIService.analyzeClinicalInference(
-        clinicalData,
-        {
-          age: patient.age,
-          gender: patient.gender
-        }
-      );
+    // Perform AI analysis using user demographics
+    const aiResult = await openAIService.analyzeClinicalInference(clinicalData, {
+      age: user.dateOfBirth
+        ? Math.floor((Date.now() - new Date(user.dateOfBirth).getTime()) / (1000 * 60 * 60 * 24 * 365.25))
+        : undefined,
+      gender: user.gender
+    });
 
     const diagnosis = aiResult.diagnosis;
-    const prescription =
-      aiResult.prescription?.medications || [];
+    const prescription = aiResult.prescription?.medications || [];
 
+    // Persist the diagnosis – link directly to the User ID
     const newDiagnosis = await Diagnosis.create({
-      patientId: patient._id,
-      patient_id: patient.patient_id,
+      patientId: user._id,
+      patient_id: user.userId || 0,
       diagnosis,
       prescription,
       createdBy: req.user?._id
     });
 
-    await Patient.updateOne(
-      {
-        _id: patient._id
-      },
-      {
-        $set: {
-          latestDiagnosis: diagnosis,
-          latestPrescription: prescription,
-          diagnosisUpdatedAt: new Date()
-        }
-      }
-    );
-
+    // Optional notification to the user
     try {
-      if (patient.user_id) {
-        const user = await User.findById(
-          patient.user_id
-        );
-
-        if (user) {
-          await notificationService.notify({
-            userId: user._id,
-            title: 'New Diagnosis Added',
-            message:
-              diagnosis?.primary ||
-              'New diagnosis generated',
-            type: 'clinical',
-            data: {
-              patient_id
-            }
-          });
-        }
-      }
+      await notificationService.notify({
+        userId: user._id,
+        title: 'New Diagnosis Added',
+        message: diagnosis?.primary || 'New diagnosis generated',
+        type: 'clinical',
+        data: { patient_id: user.userId }
+      });
     } catch (notificationError) {
-      logger.warn(
-        `Diagnosis notification failed: ${notificationError.message}`
-      );
+      logger.warn(`Diagnosis notification failed: ${notificationError.message}`);
     }
 
-    return sendSuccess(
-      res,
-      201,
-      'Diagnosis created successfully',
-      newDiagnosis
-    );
+    return sendSuccess(res, 201, 'Diagnosis created successfully', newDiagnosis);
   } catch (err) {
     next(err);
   }
@@ -408,34 +367,21 @@ exports.getDiagnosisHistory = async (req, res, next) => {
       return sendError(res, 400, 'user_id query parameter is required');
     }
 
-    // Resolve user
-    let user;
+    // Resolve user directly – no Patient lookup needed
     const isObjectId = /^[0-9a-fA-F]{24}$/.test(String(user_id));
-    if (isObjectId) {
-      user = await User.findById(user_id);
-    } else {
-      user = await User.findOne({ userId: parseInt(user_id) });
-    }
+    const user = isObjectId ? await User.findById(user_id) : await User.findOne({ userId: parseInt(user_id) });
     if (!user) {
       return sendError(res, 404, 'User not found');
     }
 
-    // Find all diagnoses linked to this user directly via their user object id or numeric id
-    const patient = await Patient.findOne({ user_id: user._id });
-
+    // Query diagnoses that belong to this user either by creator, numeric userId or direct reference
     const query = {
       $or: [
         { createdBy: user._id },
         { patient_id: user.userId },
-        // Fallback to match where patientId might have been saved as user._id (which some routes do)
         { patientId: user._id }
       ]
     };
-
-    if (patient) {
-      query.$or.push({ patientId: patient._id });
-      query.$or.push({ patient_id: patient.patient_id });
-    }
 
     const diagnoses = await Diagnosis.find(query)
       .sort({ createdAt: -1 })
@@ -451,6 +397,33 @@ exports.getDiagnosisHistory = async (req, res, next) => {
     }));
 
     return sendSuccess(res, 200, 'Diagnosis history retrieved', results);
+  } catch (err) {
+    next(err);
+  }
+};
+
+// GET latest diagnosis for a user by user_id (protected)
+exports.getLatestDiagnosisByUser = async (req, res, next) => {
+  try {
+    const { user_id } = req.params;
+    if (!user_id) {
+      return sendError(res, 400, 'user_id parameter is required');
+    }
+    const isObjectId = /^[0-9a-fA-F]{24}$/.test(String(user_id));
+    const user = isObjectId ? await User.findById(user_id) : await User.findOne({ userId: parseInt(user_id) });
+    if (!user) {
+      return sendError(res, 404, 'User not found');
+    }
+    const diagnosis = await Diagnosis.findOne({ patientId: user._id }).sort({ createdAt: -1 });
+    if (!diagnosis) {
+      return sendError(res, 404, 'Diagnosis not found');
+    }
+    return sendSuccess(res, 200, 'Latest diagnosis retrieved', {
+      diagnosis: diagnosis.diagnosis,
+      prescription: diagnosis.prescription,
+      narrative: diagnosis.narrative || '',
+      created_at: diagnosis.createdAt,
+    });
   } catch (err) {
     next(err);
   }
