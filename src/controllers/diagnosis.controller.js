@@ -6,7 +6,7 @@ const { sendSuccess, sendError } = require('../utils/responseHelper');
 const notificationService = require('../services/notificationService');
 const logger = require('../config/logger');
 
- // GET diagnosis by consult_id
+// GET diagnosis by consult_id
 exports.getDiagnosis = async (req, res, next) => {
   try {
     const { consult_id } = req.params;
