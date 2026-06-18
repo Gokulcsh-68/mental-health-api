@@ -17,12 +17,12 @@ const DiagnosisSchema = new mongoose.Schema(
 
     diagnosis: {
       primary: {
-        type: String,
+        type: mongoose.Schema.Types.Mixed,
         required: true
       },
 
       secondary: {
-        type: String
+        type: mongoose.Schema.Types.Mixed
       },
 
       severity: {

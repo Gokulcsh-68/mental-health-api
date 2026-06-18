@@ -103,25 +103,44 @@ exports.getAIDiagnosis = async (req, res, next) => {
 /** AI-only diagnosis & prescription */
 exports.aiDiagnose = async (req, res, next) => {
   try {
-    const { consult_id, condition } = req.body || {};
-    if (!consult_id) return sendError(res, 400, 'consult_id is required');
-
-    const consult = await Consult.findOne({ consult_id: parseInt(consult_id) });
-    if (!consult) return sendError(res, 404, 'Consultation not found');
-
-    const clinicalData = {
-      clinical_record: consult.clinical_record,
-      notes: consult.notes,
-      participants: consult.participants,
-      condition: condition
-    };
-
-    const aiResult = await openAIService.analyzeClinicalInference(clinicalData, { age: consult.age, gender: consult.gender });
+    const { consult_id, condition, user_id } = req.body || {};
+    // If consult_id provided, use consult path (existing behavior)
+    if (consult_id) {
+      const consult = await Consult.findOne({ consult_id: parseInt(consult_id) });
+      if (!consult) return sendError(res, 404, 'Consultation not found');
+      const clinicalData = {
+        clinical_record: consult.clinical_record,
+        notes: consult.notes,
+        participants: consult.participants,
+        condition: condition
+      };
+      const aiResult = await openAIService.analyzeClinicalInference(clinicalData, { age: consult.age, gender: consult.gender });
+      const diagnosis = aiResult.diagnosis;
+      const prescription = aiResult.prescription?.medications || [];
+      // Return without persisting
+      return sendSuccess(res, 200, 'AI diagnosis generated', { diagnosis, prescription });
+    }
+    // Fallback: handle user_id directly (no consult)
+    if (!user_id) return sendError(res, 400, 'consult_id or user_id is required');
+    const isObjectId = /^[0-9a-fA-F]{24}$/.test(String(user_id));
+    const user = isObjectId ? await User.findById(user_id) : await User.findOne({ userId: parseInt(user_id) });
+    if (!user) return sendError(res, 404, 'User not found');
+    // Use minimal clinical data (empty) for AI inference
+    const clinicalData = {};
+    const aiResult = await openAIService.analyzeClinicalInference(clinicalData, {
+      age: user.dateOfBirth ? Math.floor((Date.now() - new Date(user.dateOfBirth).getTime()) / (1000 * 60 * 60 * 24 * 365.25)) : undefined,
+      gender: user.gender
+    });
     const diagnosis = aiResult.diagnosis;
     const prescription = aiResult.prescription?.medications || [];
-
-    // Return without persisting
-    sendSuccess(res, 200, 'AI diagnosis generated', { diagnosis, prescription });
+    // Persist diagnosis linked to user
+    const newDiag = await Diagnosis.create({
+      patientId: user._id,
+      patient_id: user.userId || 0,
+      diagnosis,
+      prescription
+    });
+    return sendSuccess(res, 201, 'Diagnosis created successfully', newDiag);
   } catch (err) {
     next(err);
   }
@@ -193,13 +212,14 @@ exports.getLatestDiagnosisByUser = async (req, res, next) => {
     }
 
     const results = diagnoses.map(d => ({
+      id: d._id,
       diagnosis: d.diagnosis,
       prescription: d.prescription,
       narrative: d.narrative || '',
       created_at: d.createdAt
     }));
 
-    return sendSuccess(res, 200, 'All diagnoses retrieved', results);
+    return sendSuccess(res, 200, 'Diagnosis history retrieved', results);
   } catch (err) {
     next(err);
   }
