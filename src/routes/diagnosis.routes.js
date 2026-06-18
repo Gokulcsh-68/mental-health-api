@@ -1,6 +1,6 @@
 const express = require('express');
 const { protect } = require('../middleware/auth');
-const { createDiagnosis, aiDiagnose, getDiagnosis, getAIDiagnosis, getDiagnosisHistory } = require('../controllers/diagnosis.controller');
+const { createDiagnosis, aiDiagnose, getDiagnosis, getAIDiagnosis, getDiagnosisHistory, getLatestDiagnosisByUser } = require('../controllers/diagnosis.controller');
 
 const router = express.Router();
 
